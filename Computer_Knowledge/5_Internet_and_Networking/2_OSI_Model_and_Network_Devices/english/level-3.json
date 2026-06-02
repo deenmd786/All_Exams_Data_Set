@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): For streaming a live cricket match or conducting a VoIP video call, the UDP protocol is heavily preferred over the TCP protocol. Reason (R): UDP is a 'connectionless' protocol that does not guarantee packet delivery or wait for acknowledgements, which drastically reduces latency and prevents lag during live transmissions. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Live media streaming requires real-time data delivery where speed is prioritized over perfect accuracy. Step 2: TCP establishes a strict connection and requires an Acknowledgement (ACK) for every segment. Step 3: If a TCP segment is lost, transmission halts until it is retransmitted, causing severe buffering and lag. Step 4: UDP is connectionless and sends datagrams continuously without waiting for ACKs. Step 5: Dropping a few frames in UDP only causes a minor visual glitch, ensuring the live feed remains in real-time, validating both A and R.",
+    "trick": "Bank/IT Trap: Do not assume TCP is always 'better' because it is reliable. For time-sensitive applications like VoIP or gaming, UDP's lack of overhead makes it vastly superior.",
+    "tip": "UDP is fast and connectionless (best for live media); TCP is reliable and connection-oriented."
+  },
+  {
+    "id": 2,
+    "question": "An enterprise network topology consists of 1 Router. Port A of the Router is connected to a 10-port Switch. Port B of the Router is connected to a 5-port Hub. All available ports on the Switch and Hub are connected to individual PCs. How many Broadcast Domains and Collision Domains exist in this entire network?",
+    "options": ["2 Broadcast Domains, 11 Collision Domains", "2 Broadcast Domains, 15 Collision Domains", "1 Broadcast Domain, 15 Collision Domains", "3 Broadcast Domains, 12 Collision Domains"],
+    "answer": "2 Broadcast Domains, 11 Collision Domains",
+    "explanation": "Step 1: Identify the devices that break domains. Routers break Broadcast Domains. Switches break Collision Domains. Hubs break nothing. Step 2: The Router has 2 active interfaces (Port A and Port B). Each router interface creates 1 distinct Broadcast Domain. Total = 2 Broadcast Domains. Step 3: Analyze Port A's network: A 10-port Switch breaks collision domains per port. 10 ports to PCs + 1 port to the Router = 10 active links (wait, if 10 PCs are connected, the switch must have at least 11 ports. Assuming '10-port switch' means 9 PCs + 1 uplink, that is 10 Collision Domains. Let's assume standard count: each switch port is 1 CD. Port A's link is 1 CD, and the 10 PCs are 10 CDs. But typically, 'connected to a 10-port switch' implies 10 ports in use by PCs/Router. Let's define the hub first). Step 4: Analyze Port B's network: A Hub is 1 single Collision Domain, regardless of how many PCs are attached. Step 5: Therefore, the Switch side has 10 Collision Domains (one for each PC connection/uplink) and the Hub side has 1 Collision Domain. Total = 11 Collision Domains.",
+    "trick": "Bank/IT Trap: A Hub acts as a single giant wire. No matter how many PCs plug into a Hub, it always equals exactly ONE Collision Domain!",
+    "tip": "Router breaks Broadcast Domains. Switch breaks Collision Domains. Hub breaks neither."
+  },
+  {
+    "id": 3,
+    "question": "Assertion (A): Replacing all Layer 1 Hubs with Layer 2 Switches in a corporate network will eliminate Broadcast Storms. Reason (R): A Layer 2 Switch creates 'Microsegmentation' by assigning a separate collision domain to every single port, thereby isolating network traffic. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Understand what a Broadcast Storm is. It occurs when excessive broadcast frames (like ARP requests) flood the network. Step 2: A Layer 2 Switch forwards broadcast frames (Destination MAC FF:FF:FF:FF:FF:FF) out of all ports except the receiving port. Step 3: Therefore, a Switch DOES NOT break or eliminate Broadcast Domains or Broadcast Storms. Assertion A is false. Step 4: Reason R is completely true; Switches do create microsegmentation by breaking Collision Domains per port. Step 5: Because A is false and R is true, the correct code is identified.",
+    "trick": "Bank/IT Trap: Switches ONLY stop collisions. They do absolutely nothing to stop broadcasts! You MUST use a Layer 3 Router or VLANs to stop broadcast storms.",
+    "tip": "Switches stop collisions (microsegmentation) but forward all broadcasts. Routers stop broadcasts."
+  },
+  {
+    "id": 4,
+    "question": "During the data encapsulation process, at which specific layer of the OSI model does the Protocol Data Unit (PDU) officially become known as a 'Segment'?",
+    "options": ["Network Layer", "Data Link Layer", "Transport Layer", "Physical Layer"],
+    "answer": "Transport Layer",
+    "explanation": "Step 1: Encapsulation occurs as data moves down the OSI model from Application to Physical. Step 2: At the Application, Presentation, and Session layers, the PDU is simply called 'Data'. Step 3: When the data reaches the Transport Layer (Layer 4), a TCP or UDP header is added. The PDU is now termed a 'Segment' (or Datagram for UDP). Step 4: At the Network Layer (Layer 3), an IP header is added, becoming a 'Packet'. Step 5: At the Data Link Layer (Layer 2), MAC headers and trailers are added, becoming a 'Frame'. Thus, 'Segment' is strictly Transport layer.",
+    "trick": "Bank/IT Trap: Memorize the PDU names top-down: Data (L7-L5), Segment (L4), Packet (L3), Frame (L2), Bits (L1). Exam setters love to mix Packet and Segment!",
+    "tip": "Layer 4 PDU is a Segment. Layer 3 PDU is a Packet. Layer 2 PDU is a Frame."
+  },
+  {
+    "id": 5,
+    "question": "A host wants to communicate with a server on the same local network but only knows the server's IP address. Which protocol is utilized, and what is the exact destination MAC address of the initial request?",
+    "options": ["RARP; Destination MAC is the Server's Unicast MAC", "ARP; Destination MAC is FF:FF:FF:FF:FF:FF", "DNS; Destination MAC is 00:00:00:00:00:00", "ARP; Destination MAC is the Router's Gateway MAC"],
+    "answer": "ARP; Destination MAC is FF:FF:FF:FF:FF:FF",
+    "explanation": "Step 1: The host needs to map a known IP address to an unknown MAC address. This is the exact function of the Address Resolution Protocol (ARP). Step 2: Because the host does not know the server's MAC address, it cannot send a targeted unicast frame. Step 3: Instead, the host encapsulates the ARP Request inside an Ethernet frame with a Broadcast Destination MAC address. Step 4: The broadcast MAC address in hexadecimal is strictly FF:FF:FF:FF:FF:FF. Step 5: Every device on the local segment receives this broadcast, but only the server with the matching IP replies with its unicast MAC.",
+    "trick": "Bank/IT Trap: ARP Requests are ALWAYS Broadcasts (FF:FF:FF:FF:FF:FF). ARP Replies are ALWAYS Unicasts. Remember this directionality!",
+    "tip": "ARP Request = Broadcast (FF:FF:FF:FF:FF:FF). ARP Reply = Unicast back to sender."
+  },
+  {
+    "id": 6,
+    "question": "Assertion (A): The Transmission Control Protocol (TCP) header is significantly larger and more complex than the User Datagram Protocol (UDP) header. Reason (R): TCP incorporates Sequence Numbers, Acknowledgement Numbers, and Window Size fields to ensure guaranteed, ordered data delivery, whereas UDP omits these. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Analyze the standard header sizes. The default TCP header is 20 bytes long. The standard UDP header is only 8 bytes long. Therefore, A is true. Step 2: Look at the components of the TCP header. To provide reliable, connection-oriented service, TCP must track packet order and verify receipt. Step 3: This requires Sequence Numbers (to reorder packets), ACK numbers (to confirm receipt), and Window Size (for flow control). Step 4: UDP is connectionless and provides 'best-effort' delivery. It only contains Source Port, Destination Port, Length, and Checksum. Step 5: Reason R perfectly explains the architectural necessity for the larger TCP header stated in A.",
+    "trick": "Bank/IT Trap: Know the exact bytes! TCP minimum header = 20 Bytes. UDP header = 8 Bytes. This 12-byte difference is entirely due to reliability mechanisms.",
+    "tip": "TCP header is 20 bytes (includes Sequence/ACK/Window). UDP header is only 8 bytes."
+  },
+  {
+    "id": 7,
+    "question": "In a TCP Three-Way Handshake establishing a connection between a Client and a Server, what is the exact flag sequence of the second step transmitted from the Server back to the Client?",
+    "options": ["SYN", "ACK", "SYN-ACK", "FIN-ACK"],
+    "answer": "SYN-ACK",
+    "explanation": "Step 1: The TCP Three-Way Handshake synchronizes connections securely. Step 2: Step 1: The Client initiates the connection by sending a 'SYN' (Synchronize) packet to the Server. Step 3: Step 2: The Server receives the SYN. It must acknowledge the Client's SYN and simultaneously send its own SYN to establish the two-way path. Step 4: The Server accomplishes this by sending a single packet with both the 'SYN' and 'ACK' flags set (SYN-ACK). Step 5: Step 3: The Client receives the SYN-ACK and replies with a final 'ACK' (Acknowledgement), officially opening the connection.",
+    "trick": "Bank/IT Trap: The sequence is always SYN -> SYN-ACK -> ACK. Do not confuse connection establishment with connection termination, which uses FIN flags.",
+    "tip": "TCP 3-way handshake sequence: 1. SYN (Client) -> 2. SYN-ACK (Server) -> 3. ACK (Client)."
+  },
+  {
+    "id": 8,
+    "question": "An IT technician is auditing a network and runs a packet capture. They notice a device broadcasting an ARP Request where the Target IP address is identical to its own Source IP address. What is the specific functional purpose of this packet?",
+    "options": ["Proxy ARP to bypass a router", "Reverse ARP (RARP) to obtain an IP lease", "Gratuitous ARP to detect IP conflicts", "ARP Cache Poisoning attack"],
+    "answer": "Gratuitous ARP to detect IP conflicts",
+    "explanation": "Step 1: Normally, ARP asks 'Who has IP X? Tell IP Y'. Step 2: When a device asks 'Who has IP X? Tell IP X', it is querying the network for its own IP address. Step 3: This specific behavior is known as a 'Gratuitous ARP'. Step 4: It is primarily used when a device first boots up or connects to a network. Step 5: If another device replies to this broadcast, it proves that the IP address is already in use, allowing the OS to immediately flag an 'IP Address Conflict' error to the user.",
+    "trick": "Bank/IT Trap: Gratuitous ARP is a self-check mechanism. If nobody replies, the IP is safe to use. If someone replies, an IP conflict exists!",
+    "tip": "Gratuitous ARP (asking for your own IP) is used by operating systems to detect IP conflicts."
+  },
+  {
+    "id": 9,
+    "question": "Assertion (A): Virtual Local Area Networks (VLANs) allow network administrators to break up massive Broadcast Domains without requiring the purchase of additional physical Routers. Reason (R): VLANs operate at Layer 2 of the OSI model by logically segregating a single physical Switch into multiple isolated virtual switches, containing broadcast traffic within each VLAN. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: By hardware definition, only a Layer 3 Router can break a broadcast domain. Step 2: However, if a company has 500 PCs on one Switch, a single broadcast would cripple the network. Buying 10 physical routers is too expensive. Step 3: VLANs (Virtual LANs) solve this via software. Assertion A is true. Step 4: A managed Layer 2 Switch can be partitioned. Ports 1-10 become VLAN 10; Ports 11-20 become VLAN 20. Step 5: A broadcast sent in VLAN 10 will NEVER cross into VLAN 20. This logical segregation effectively creates multiple broadcast domains within a single piece of hardware, perfectly explained by Reason R.",
+    "trick": "Bank/IT Trap: While Routers break broadcast domains physically, VLANs break them logically. If an exam asks what breaks a broadcast domain, look for either Routers or VLANs.",
+    "tip": "VLANs logically partition a single physical switch into multiple isolated broadcast domains."
+  },
+  {
+    "id": 10,
+    "question": "During the decapsulation process at the receiving host, what specific action occurs immediately after the Data Link Layer (Layer 2) verifies the Frame Check Sequence (FCS) is mathematically correct?",
+    "options": ["The packet is routed to the next gateway.", "The payload is decrypted using SSL/TLS.", "The Layer 2 headers and trailers are stripped off, and the resulting Layer 3 Packet is passed up to the Network Layer.", "The TCP segment is acknowledged and reordered."],
+    "answer": "The Layer 2 headers and trailers are stripped off, and the resulting Layer 3 Packet is passed up to the Network Layer.",
+    "explanation": "Step 1: Decapsulation is the process of unpacking data as it moves bottom-up through the OSI model at the destination. Step 2: The Physical layer converts raw bits into a Layer 2 Frame. Step 3: The Data Link Layer inspects the Frame. It runs a mathematical hash on the data and compares it to the Frame Check Sequence (FCS) trailer to detect corruption. Step 4: If the FCS matches, the frame is valid. Step 5: The Data Link Layer strips away the MAC header and the FCS trailer. The remaining payload, which is a Layer 3 Packet (IP Packet), is then pushed upward to the Network Layer for IP routing analysis.",
+    "trick": "Bank/IT Trap: Encapsulation ADDS headers (top-down). Decapsulation STRIPS headers (bottom-up). Once Layer 2 verifies the data, its job is done, and it discards its own header/trailer.",
+    "tip": "In decapsulation, each layer verifies, strips its specific header/trailer, and passes the payload UP."
+  },
+  {
+    "id": 11,
+    "question": "In standard networking architectures, which of the following protocols requires the destination device to perform 'Proxy ARP' to function correctly?",
+    "options": ["A host attempting to communicate with a destination IP located on a completely different subnet, but configured with a misconfigured Subnet Mask that makes it believe the target is local.", "A host acquiring a dynamic IP address from a DHCP server.", "A host resolving a domain name like 'google.com' via a DNS server.", "A router sending routing table updates via OSPF."],
+    "answer": "A host attempting to communicate with a destination IP located on a completely different subnet, but configured with a misconfigured Subnet Mask that makes it believe the target is local.",
+    "explanation": "Step 1: Standard ARP is used when a target is on the SAME local subnet. Step 2: If a target is on a DIFFERENT subnet, the host sends the packet to its Default Gateway's MAC address instead. Step 3: If a host has a bad subnet mask (e.g., /8 instead of /24), it falsely believes remote IPs are on its local physical wire. Step 4: It sends out an ARP Broadcast asking for the MAC of the remote IP. Step 5: The local Router hears this. Realizing the host is confused, the Router intercepts the request and replies with its OWN MAC address on behalf of the remote device. This interception and spoofed reply is called 'Proxy ARP'.",
+    "trick": "Bank/IT Trap: Proxy ARP is effectively the router saying, 'You are confused, send the packet to me, and I will deliver it for you.' It masks subnet configuration errors.",
+    "tip": "Proxy ARP occurs when a Router replies to an ARP request on behalf of a remote device."
+  },
+  {
+    "id": 12,
+    "question": "Assertion (A): Hubs are classified as Layer 1 (Physical) devices, while unmanaged Switches are classified as Layer 2 (Data Link) devices. Reason (R): Hubs blindly regenerate electrical bit signals out of all ports, whereas Switches inspect the incoming Data Link Frame to extract the Source and Destination MAC addresses for intelligent forwarding. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The OSI model categorizes devices by the deepest header they can read. Step 2: A Hub cannot read headers. It only sees raw voltage/bits on the wire. If a signal comes in Port 1, it amplifies it and blasts it out all other ports. This pure hardware repetition makes it strictly Layer 1 (A is true). Step 3: A Switch actually decodes the incoming bitstream into a Frame. Step 4: It opens the Frame header, reads the Source MAC to learn network topology, and reads the Destination MAC to forward the frame exclusively to the correct port. Step 5: Because MAC addresses exist at the Data Link layer, Switches are Layer 2 devices. Reason R perfectly explains this architectural disparity.",
+    "trick": "Bank/IT Trap: A device's OSI layer is defined by what it UNDERSTANDS. Hubs only understand Bits (L1). Switches understand MACs (L2). Routers understand IPs (L3).",
+    "tip": "Hubs = Layer 1 (Bits/Voltages). Switches = Layer 2 (MAC Addresses/Frames)."
+  },
+  {
+    "id": 13,
+    "question": "What is the primary function of the 'Sliding Window' mechanism deployed in the Transmission Control Protocol (TCP)?",
+    "options": ["To encrypt the payload data to prevent man-in-the-middle attacks.", "To map private IP addresses to a single public IP address.", "To provide dynamic Flow Control, allowing the receiver to dictate how much unacknowledged data the sender can transmit before pausing.", "To route packets dynamically based on current network latency."],
+    "answer": "To provide dynamic Flow Control, allowing the receiver to dictate how much unacknowledged data the sender can transmit before pausing.",
+    "explanation": "Step 1: TCP ensures reliable delivery, meaning the sender cannot overwhelm the receiver's processing buffers. Step 2: In the TCP header, the receiver populates the 'Window Size' field. Step 3: This field tells the sender exactly how many bytes of data the receiver can currently accept without dropping packets. Step 4: If the receiver gets busy, it shrinks the 'window' (e.g., from 64KB to 10KB). The sender must slow down. Step 5: If the receiver buffers clear, it expands the window. This continuous dynamic adjustment of transmission speed is called 'Flow Control' via the Sliding Window.",
+    "trick": "Bank/IT Trap: Windowing = Flow Control (Receiver protects itself). Do not confuse this with Congestion Control (Sender protects the network via algorithms like Slow Start).",
+    "tip": "TCP Sliding Window provides end-to-end Flow Control by dynamically adjusting the permitted unacknowledged data size."
+  },
+  {
+    "id": 14,
+    "question": "A network features a Layer 3 Router connected to three different 24-port Layer 2 Switches. Each switch has 20 PCs active. What is the total number of Broadcast Domains in this specific topology?",
+    "options": ["1", "3", "60", "63"],
+    "answer": "3",
+    "explanation": "Step 1: Understand the rule of Broadcast Domains: Only Layer 3 devices (Routers) or VLAN configurations can break a broadcast domain. Step 2: Switches and Hubs forward broadcast frames, so everything connected to a single router interface is in the same broadcast domain. Step 3: The scenario describes a single Router with three separate connections, each leading to a switch. Step 4: Each physical interface on a Router creates exactly ONE isolated broadcast domain. Step 5: Since the router is connected to three distinct switches on three distinct interfaces, there are exactly 3 Broadcast Domains.",
+    "trick": "Bank/IT Trap: The number of PCs or switch ports is irrelevant for Broadcast Domains! Count the number of active Router interfaces (subnets).",
+    "tip": "The total number of Broadcast Domains equals the total number of active Router interfaces."
+  },
+  {
+    "id": 15,
+    "question": "Assertion (A): The UDP protocol natively checks for payload corruption using a Checksum field, but it lacks any mechanism to request retransmission if corruption is detected. Reason (R): UDP's connectionless architecture fundamentally lacks Sequence Numbers and Acknowledgement flags, leaving error-recovery entirely up to the Application Layer software. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Look at the UDP header. It contains exactly four fields: Source Port, Destination Port, Length, and Checksum. Step 2: The Checksum allows the receiving host to verify if the datagram was corrupted during transit (A is true). Step 3: However, if the checksum fails, UDP simply silently drops the packet. It does not inform the sender. Step 4: Why? Because UDP lacks the 'Sequence Number' and 'ACK' mechanisms found in TCP. Without sequence tracking, the receiver cannot tell the sender *which* packet to resend. Step 5: Therefore, any necessary retransmission must be handled by the application itself (e.g., a TFTP client requesting a block again), making R the exact architectural reason for A.",
+    "trick": "Bank/IT Trap: UDP is NOT entirely error-blind. It has a Checksum! It knows when data is broken, it just refuses to fix it or ask for a replacement.",
+    "tip": "UDP contains a Checksum for error detection, but relies on the Application Layer for error recovery."
+  },
+  {
+    "id": 16,
+    "question": "In the context of the OSI model encapsulation hierarchy, what unique identifiers are explicitly appended to the payload at Layer 4 (Transport Layer) to facilitate data multiplexing?",
+    "options": ["Source and Destination IP Addresses", "Source and Destination MAC Addresses", "Source and Destination Port Numbers", "VLAN Tags and Frame Check Sequences"],
+    "answer": "Source and Destination Port Numbers",
+    "explanation": "Step 1: Multiplexing allows a single computer with one IP address to run a web browser, a mail client, and a game simultaneously. Step 2: When data is generated by an application, it moves down to Layer 4 (Transport). Step 3: Layer 4 (TCP/UDP) encapsulates the data into a Segment. Step 4: To ensure returning data goes to the correct application, Layer 4 attaches Source and Destination Port Numbers (e.g., Port 80 for HTTP, Port 443 for HTTPS). Step 5: IPs are added at Layer 3, and MACs at Layer 2. Ports are the exclusive addressing mechanism of Layer 4.",
+    "trick": "Bank/IT Trap: Layer 2 uses MACs (Physical). Layer 3 uses IPs (Logical Network). Layer 4 uses Ports (Logical Application Multiplexing). Memorize this triad!",
+    "tip": "The Transport Layer (Layer 4) utilizes Port Numbers to multiplex and route data to specific applications."
+  },
+  {
+    "id": 17,
+    "question": "A Layer 2 Switch receives a frame with a Destination MAC address that is NOT currently listed in its internal MAC Address Table. What is the precise architectural response of the switch?",
+    "options": ["It instantly drops the frame to prevent network congestion.", "It floods the frame out of all active ports, EXCEPT the port on which the frame was received.", "It routes the frame directly to the Default Gateway router.", "It replies to the sender with an ICMP Destination Unreachable message."],
+    "answer": "It floods the frame out of all active ports, EXCEPT the port on which the frame was received.",
+    "explanation": "Step 1: A switch builds its MAC table dynamically by reading the Source MAC of incoming frames. Step 2: When a frame arrives, the switch reads the Destination MAC and checks its table. Step 3: If the MAC is found, the switch forwards the frame explicitly to that single port (unicast). Step 4: If the MAC is NOT found (Unknown Unicast), the switch cannot guess where the target is. Step 5: To ensure delivery, it copies the frame and blasts it out of EVERY active port (flooding) except the one it came from. When the target device replies, the switch learns its port and updates the MAC table for future use.",
+    "trick": "Bank/IT Trap: This behavior is called 'Unknown Unicast Flooding'. It acts exactly like a Hub temporarily, until the target replies and the switch learns the location.",
+    "tip": "Switches flood 'Unknown Unicast' frames out of all ports except the originating receiving port."
+  },
+  {
+    "id": 18,
+    "question": "Assertion (A): The Reverse Address Resolution Protocol (RARP) is heavily deployed in modern IPv4 local area networks to map dynamic IP addresses to hardware MAC addresses. Reason (R): RARP is a connectionless UDP protocol that operates identically to the modern DHCP protocol. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Standard ARP resolves IP to MAC. RARP (Reverse ARP) was historically used by diskless workstations to discover their own IP address by broadcasting their burned-in MAC address to a RARP server. Step 2: However, RARP is completely obsolete. It only provided an IP address, leaving the device without a Subnet Mask or Gateway. Step 3: Modern networks entirely replaced RARP with BOOTP, and subsequently DHCP (Dynamic Host Configuration Protocol), which provides complete IP configurations. Step 4: Therefore, Assertion A is false (it is NOT heavily deployed today). Step 5: Reason R is false because RARP operates directly at Layer 2 (Data Link) and does not use IP or UDP headers, whereas DHCP uses UDP Ports 67/68.",
+    "trick": "Bank/IT Trap: RARP is a legacy dinosaur. If a question asks how modern PCs get an IP dynamically, the answer is always DHCP. RARP is dead.",
+    "tip": "RARP is an obsolete Layer 2 protocol historically used to map MAC to IP, replaced by DHCP."
+  },
+  {
+    "id": 19,
+    "question": "Which specific TCP flag is transmitted to forcibly and abruptly terminate a connection when an unrecoverable error or an unauthorized port scan is detected, bypassing the standard graceful teardown process?",
+    "options": ["FIN (Finish)", "RST (Reset)", "URG (Urgent)", "PSH (Push)"],
+    "answer": "RST (Reset)",
+    "explanation": "Step 1: The TCP header contains several control flags (SYN, ACK, FIN, RST, URG, PSH). Step 2: Under normal conditions, closing a connection uses a graceful 4-way handshake initiated by the 'FIN' (Finish) flag, ensuring all buffered data is sent and acknowledged. Step 3: However, if a fatal error occurs, an application crashes, or a firewall blocks an unauthorized port scan (like Nmap), a graceful exit is impossible or undesired. Step 4: The system sets the 'RST' (Reset) flag. Step 5: An RST packet commands the receiving host to instantly drop the connection, dump all buffers, and close the socket without any closing acknowledgements.",
+    "trick": "Bank/IT Trap: FIN = Polite Goodbye (waiting for you to pack your bags). RST = Slamming the door in your face immediately. Firewalls use RST to block hackers.",
+    "tip": "The RST (Reset) TCP flag abruptly terminates a connection instantly, bypassing standard graceful teardown procedures."
+  },
+  {
+    "id": 20,
+    "question": "Assertion (A): Traditional Bridges and Layer 2 Switches both segment collision domains, but Switches are vastly superior in performance. Reason (R): Bridges process frames entirely via software algorithms utilizing the CPU, whereas modern Switches execute forwarding decisions at wire-speed using dedicated Application-Specific Integrated Circuit (ASIC) hardware. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Bridges were early network devices with 2 to 4 ports used to link hub networks. Like switches, they break collision domains (Assertion A is true). Step 2: However, a Bridge evaluates MAC addresses using its main microprocessor (Software-based processing). Under heavy load, the CPU bottlenecks, causing latency. Step 3: Switches were invented to solve this. They are essentially 'Multi-port Bridges' built with silicon chips called ASICs (Application-Specific Integrated Circuits). Step 4: ASICs process MAC lookups at the hardware electrical level, yielding near-zero latency (wire-speed forwarding). Step 5: Reason R perfectly explains the architectural hardware evolution that makes switches vastly superior to legacy bridges.",
+    "trick": "Bank/IT Trap: A switch is just a bridge on steroids. The fundamental difference is hardware (ASICs) vs software (CPU processing).",
+    "tip": "Switches outperform legacy Bridges by utilizing ASICs for hardware-based, wire-speed frame forwarding."
+  },
+  {
+    "id": 21,
+    "question": "A TCP sender transmits 4 segments (Sequence numbers 100, 200, 300, 400), each containing 100 bytes of data. If the receiver successfully receives segments 100, 200, and 400, but segment 300 is lost in transit, what exact Acknowledgement (ACK) number will the receiver send back to the sender?",
+    "options": ["ACK 500", "ACK 300", "ACK 400", "ACK 200"],
+    "answer": "ACK 300",
+    "explanation": "Step 1: TCP uses 'Cumulative Acknowledgements'. An ACK number indicates the NEXT expected byte the receiver needs. Step 2: Segment 1 (Seq 100, 100 bytes) arrives. The receiver has bytes 100-199. It expects byte 200. Step 3: Segment 2 (Seq 200, 100 bytes) arrives. The receiver has bytes 200-299. It expects byte 300. Step 4: Segment 3 (Seq 300) is LOST. Step 5: Segment 4 (Seq 400) arrives. Because TCP strictly requires sequential order, the receiver buffers segment 4 but recognizes a gap. It repeatedly sends 'ACK 300' back to the sender, demanding the missing bytes starting at 300 before it will acknowledge anything higher.",
+    "trick": "Bank/IT Trap: TCP ACKs are greedy but sequential. Even if segment 400 arrives perfectly, the receiver will blindly scream 'ACK 300' until that specific missing hole is filled.",
+    "tip": "TCP uses cumulative ACKs; the ACK number always represents the next expected contiguous byte in sequence."
+  },
+  {
+    "id": 22,
+    "question": "Assertion (A): Encapsulating a Layer 3 IP Packet into a Layer 2 Ethernet Frame requires the addition of both a Header and a Trailer, making Layer 2 unique in the OSI stack. Reason (R): The Data Link layer must append a Frame Check Sequence (FCS) trailer to the end of the payload to provide physical error detection via a Cyclic Redundancy Check (CRC). Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Review the OSI encapsulation process. L4 adds a TCP/UDP header. L3 adds an IP header. Step 2: When data hits Layer 2 (Data Link), it adds a MAC header (Source/Destination MACs) to the front. Step 3: Uniquely, Layer 2 also adds data to the END of the packet, called a Trailer (A is true). Step 4: This trailer contains the Frame Check Sequence (FCS). Step 5: The sending NIC calculates a math hash (CRC) of the frame and writes it into the FCS. The receiving NIC recalculates it. If the hashes don't match, the frame was corrupted by electrical noise and is dropped. Reason R perfectly explains the architectural necessity of the trailer.",
+    "trick": "Bank/IT Trap: Layer 2 is the ONLY OSI layer that adds a Trailer during encapsulation. All other layers only prepend Headers.",
+    "tip": "Layer 2 uniquely adds an FCS Trailer for Cyclic Redundancy Check (CRC) error detection."
+  },
+  {
+    "id": 23,
+    "question": "Which of the following scenarios best justifies the deployment of the User Datagram Protocol (UDP) rather than the Transmission Control Protocol (TCP) in enterprise network architectures?",
+    "options": ["Transferring highly sensitive financial database backups via FTP.", "Establishing an encrypted HTTPS tunnel for secure web browsing.", "Executing a DNS query to resolve 'www.rbi.org.in' to an IP address.", "Sending an email using the SMTP protocol."],
+    "answer": "Executing a DNS query to resolve 'www.rbi.org.in' to an IP address.",
+    "explanation": "Step 1: Evaluate the protocols. TCP guarantees delivery, making it mandatory for file transfers (FTP), secure web browsing (HTTPS), and emails (SMTP), where a single missing byte corrupts the entire file. Step 2: UDP does not guarantee delivery, but it has almost zero overhead, making it lightning fast. Step 3: A Domain Name System (DNS) query is typically a tiny, single-packet request ('What is the IP for google.com?'). Step 4: Setting up a strict TCP 3-way handshake just to ask one question would cause massive latency. Step 5: Therefore, DNS uses UDP Port 53. If the UDP packet drops, the client simply asks again a millisecond later.",
+    "trick": "Bank/IT Trap: While DNS *can* use TCP for massive zone transfers between servers, standard client DNS queries strictly use UDP to eliminate handshake latency.",
+    "tip": "Standard DNS queries utilize connectionless UDP (Port 53) to avoid TCP handshake latency overhead."
+  },
+  {
+    "id": 24,
+    "question": "Assertion (A): Half-Duplex Ethernet connections inherently possess a single collision domain, whereas Full-Duplex Ethernet connections entirely eliminate collision domains. Reason (R): Full-Duplex architecture utilizes physically separate wire pairs for Transmitting (TX) and Receiving (RX), rendering electrical collisions mathematically impossible. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In legacy Hubs, all data travels on a shared copper wire. Devices must take turns talking and listening (Half-Duplex). Step 2: If two devices talk simultaneously, the voltages crash, causing a collision. This creates a Collision Domain (Assertion A is true). Step 3: Modern Switches use point-to-point links. In a standard Cat5e/Cat6 cable, distinct twisted pairs are dedicated strictly to Transmit (TX) and Receive (RX). Step 4: In Full-Duplex mode, a PC can send data on the TX pair while simultaneously receiving data on the RX pair. Step 5: Because the signals travel on entirely different physical wires, they can never crash into each other. Reason R perfectly explains the elimination of collisions in A.",
+    "trick": "Bank/IT Trap: A switch port operating in Full-Duplex technically has NO collision domain. The concept of CSMA/CD is completely disabled on Full-Duplex links!",
+    "tip": "Full-Duplex eliminates collisions physically by using dedicated, separate wire pairs for Transmitting and Receiving."
+  },
+  {
+    "id": 25,
+    "question": "A network security analyst observes an attacker sending forged ARP replies to a target computer, claiming that the attacker's MAC address belongs to the Default Gateway's IP address. What is the technical name for this attack, and what is its primary objective?",
+    "options": ["MAC Flooding; to crash the Layer 2 switch.", "ARP Cache Poisoning (Spoofing); to intercept and route the target's internet traffic through the attacker's machine (Man-in-the-Middle).", "DHCP Starvation; to exhaust the IP address pool of the router.", "Gratuitous ARP; to force an IP conflict and knock the target offline."],
+    "answer": "ARP Cache Poisoning (Spoofing); to intercept and route the target's internet traffic through the attacker's machine (Man-in-the-Middle).",
+    "explanation": "Step 1: Computers store temporary IP-to-MAC mappings in an ARP Cache to save time. Step 2: ARP is a stateless, trusting protocol. If a computer receives an ARP Reply, it blindly believes it and updates its cache, even if it never sent an ARP Request. Step 3: An attacker abuses this by sending a forged reply to the victim: 'IP 192.168.1.1 (Gateway) is at MAC Address Hacker_MAC'. Step 4: The victim's PC updates its cache. Now, whenever the victim tries to access the internet, their PC encapsulates the packets with the Hacker's MAC address. Step 5: The Hacker receives the data, reads it, and forwards it to the real router. This is a classic Man-in-the-Middle (MitM) ARP Spoofing attack.",
+    "trick": "Bank/IT Trap: ARP has zero authentication. ARP Cache Poisoning exploits this blind trust to steal traffic destined for the Router.",
+    "tip": "ARP Spoofing/Poisoning alters a victim's ARP cache to execute Man-in-the-Middle (MitM) interception attacks."
+  },
+  {
+    "id": 26,
+    "question": "Assertion (A): During TCP connection termination, the initiator sends a FIN packet and transitions into the TIME_WAIT state, leaving the socket open for a duration typically equal to 2 Maximum Segment Lifetimes (2MSL). Reason (R): TIME_WAIT ensures that any delayed, wandering duplicate packets from the closed connection expire before the exact same IP/Port combination can be reused for a new connection. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Tearing down a TCP connection takes 4 steps (FIN, ACK, FIN, ACK). Step 2: The device that initiated the closure sends the final ACK and enters the TIME_WAIT state (A is true). Step 3: It sits in this state for 2 * Maximum Segment Lifetime (usually 1 to 4 minutes). Step 4: Why? Because IP networks can delay packets in router loops. If the socket closed instantly and a new app bound to that exact same Port, an old, delayed packet from the previous session might suddenly arrive and corrupt the new application's data. Step 5: TIME_WAIT prevents port reuse until the network is absolutely mathematically cleared of all ghost packets (R is true and explains A).",
+    "trick": "Bank/IT Trap: TIME_WAIT is a safety buffer. If a server has high traffic, thousands of sockets sitting in TIME_WAIT can temporarily exhaust available ports (Port Exhaustion).",
+    "tip": "TCP's TIME_WAIT state holds sockets open to let delayed network packets safely expire."
+  },
+  {
+    "id": 27,
+    "question": "Which of the following network devices operates strictly at the physical layer to extend the geographical range of a collision domain by cleaning and boosting degraded electrical signals without inspecting MAC addresses?",
+    "options": ["Layer 2 Switch", "Network Bridge", "Repeater", "Default Gateway"],
+    "answer": "Repeater",
+    "explanation": "Step 1: As electrical signals travel across copper cables, they suffer from 'Attenuation' (signal degradation/weakening over distance). Step 2: Ethernet cables typically max out at 100 meters. Step 3: To extend this range, a device is placed in the middle. Step 4: A Repeater (or a Hub, which is a multi-port repeater) receives the weak electrical bitstream, cleans it, amplifies it to original voltage, and pushes it out the other side. Step 5: Because it strictly operates on raw electrical bits without reading headers or MAC addresses, it is purely a Layer 1 Physical device that inherently extends the existing collision domain.",
+    "trick": "Bank/IT Trap: Repeaters do not stop collisions; they actually amplify and forward them! They simply extend the physical wire limit.",
+    "tip": "Repeaters operate at Layer 1, boosting electrical signals to combat attenuation without reading MAC addresses."
+  },
+  {
+    "id": 28,
+    "question": "Assertion (A): When calculating the Total Length field in an IPv4 Packet header, the value strictly represents the size of the Layer 4 payload (e.g., the TCP segment) and excludes the 20-byte IP header itself. Reason (R): Encapsulation boundaries require each OSI layer to maintain strict ignorance of the header sizes applied by preceding layers. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Review the structure of an IPv4 Header. It contains a 16-bit field called 'Total Length'. Step 2: The 'Total Length' field specifies the entire size of the IP Packet. Step 3: This mathematically includes BOTH the IP Header itself (usually 20 bytes) AND the entire encapsulated payload (the TCP segment and application data). Step 4: Therefore, Assertion A is completely false. Step 5: Reason R is also fundamentally flawed; layers do need to calculate payload sizes, and the Network Layer is explicitly aware of its own header size. Both statements are architecturally false.",
+    "trick": "Bank/IT Trap: IPv4 Total Length = IP Header + Payload. In contrast, IPv6 uses 'Payload Length', which actually DOES exclude the IPv6 header! Know the difference.",
+    "tip": "The IPv4 'Total Length' field encompasses the entire packet size (IP Header + encapsulated Payload)."
+  },
+  {
+    "id": 29,
+    "question": "During the TCP congestion control process, a sender executing the 'Slow Start' algorithm will exponentially increase its transmission window size until what specific event occurs?",
+    "options": ["Until the receiver's Flow Control window reaches exactly zero.", "Until a packet loss occurs or the predefined Slow Start Threshold (ssthresh) is reached.", "Until the sequence numbers roll over and reset to zero.", "Until the UDP checksum validation fails."],
+    "answer": "Until a packet loss occurs or the predefined Slow Start Threshold (ssthresh) is reached.",
+    "explanation": "Step 1: TCP ensures it does not overwhelm the network backbone. When a connection starts, it doesn't know the network capacity. Step 2: It enters the 'Slow Start' phase. The sender transmits 1 segment. If ACK'd, it sends 2, then 4, then 8. Step 3: This exponential growth probes the network's maximum bandwidth rapidly. Step 4: This exponential scaling continues until one of two things happens: 1) A packet is dropped (timeout/duplicate ACKs), meaning the network is officially congested. 2) The window hits the 'ssthresh' (Slow Start Threshold). Step 5: Once hit, TCP abandons exponential growth and shifts to 'Congestion Avoidance' (linear, cautious growth).",
+    "trick": "Bank/IT Trap: 'Slow Start' is a terrible name. It actually scales exponentially and very rapidly! It only starts 'slow' (1 segment) compared to blasting 1000 segments blindly on second one.",
+    "tip": "TCP Slow Start grows the congestion window exponentially until packet loss or the ssthresh is triggered."
+  },
+  {
+    "id": 30,
+    "question": "Assertion (A): Microsegmentation achieved by deploying Layer 2 Switches mathematically eliminates the need for the CSMA/CD protocol in a modern Full-Duplex network. Reason (R): By providing dedicated transmit and receive channels per port, Switches eradicate collision domains, rendering collision-detection algorithms architecturally obsolete. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: CSMA/CD (Carrier Sense Multiple Access with Collision Detection) is the band-aid protocol for shared-media Hubs. PCs must 'listen' to ensure the wire is quiet before talking, and detect if a crash happens. Step 2: Switches create Microsegmentation. Each port is an isolated pipe to exactly one PC. Step 3: Modern Switches use Full-Duplex (separate wires for TX and RX). Step 4: Because TX and RX are physically segregated wires, electrical collisions are mathematically impossible (Assertion A is true). Step 5: Because collisions cannot happen, the CSMA/CD logic is completely disabled at the hardware level in Full-Duplex links (Reason R perfectly explains A).",
+    "trick": "Bank/IT Trap: CSMA/CD is dead in modern networks! It only exists on legacy Half-Duplex hubs or legacy wireless (which uses CSMA/CA - Collision Avoidance).",
+    "tip": "Full-Duplex switching eliminates collision domains physically, rendering the legacy CSMA/CD protocol entirely obsolete."
+  },
+  {
+    "id": 31,
+    "question": "Which specific protocol relies heavily on UDP Port 67 and UDP Port 68 to broadcast requests and receive network configuration parameters dynamically upon client boot?",
+    "options": ["Domain Name System (DNS)", "Dynamic Host Configuration Protocol (DHCP)", "Simple Network Management Protocol (SNMP)", "File Transfer Protocol (FTP)"],
+    "answer": "Dynamic Host Configuration Protocol (DHCP)",
+    "explanation": "Step 1: When a PC boots up, it has no IP address. It cannot communicate via standard routing. Step 2: It must broadcast a plea to the network: 'I need an IP!'. Step 3: It encapsulates a 'DHCP Discover' message inside a UDP packet. Step 4: The Source Port is UDP 68 (DHCP Client). The Destination Port is UDP 67 (DHCP Server). Step 5: The DHCP server hears this broadcast and replies with a DORA sequence (Discover, Offer, Request, Acknowledge) assigning the IP, Subnet, and Gateway. Note: DNS uses Port 53, FTP uses TCP 20/21.",
+    "trick": "Bank/IT Trap: DHCP is a bootstrap protocol. Because the client lacks an IP, the entire DORA process heavily relies on Layer 2 MAC Broadcasts encapsulated in connectionless UDP.",
+    "tip": "DHCP utilizes UDP Ports 67 (Server) and 68 (Client) for dynamic IP address assignments."
+  },
+  {
+    "id": 32,
+    "question": "A network architect observes that an attacker is flooding a Layer 2 Switch with millions of fake, randomly generated Source MAC addresses. What is the ultimate goal of this 'MAC Flooding' attack?",
+    "options": ["To exhaust the IP address pool of the connected Router.", "To overload the switch's Content Addressable Memory (CAM) table, forcing it to fail-open and act as a Hub.", "To execute an ARP Cache Poisoning attack against the Default Gateway.", "To disable the Spanning Tree Protocol (STP) and create broadcast loops."],
+    "answer": "To overload the switch's Content Addressable Memory (CAM) table, forcing it to fail-open and act as a Hub.",
+    "explanation": "Step 1: A switch dynamically learns where PCs are by reading the Source MAC of incoming frames and saving it to its CAM (MAC Address) table. Step 2: The CAM table is a physical memory chip with limited space (e.g., it can only hold 8,000 MACs). Step 3: An attacker runs a tool (like Macof) to generate 100,000 fake frames per second with random Source MACs. Step 4: The switch blindly memorizes all of them, instantly filling the CAM table to 100% capacity. Step 5: Once full, the switch cannot learn new, legitimate MACs. When it receives a frame for a legitimate PC, it doesn't know the port, so it 'fails open'. It floods the frame out of ALL ports (acting exactly like a dumb Hub). The attacker can now intercept all network traffic.",
+    "trick": "Bank/IT Trap: Switches are designed for reliability. If their memory crashes, they don't shut down; they downgrade to a Hub to keep traffic flowing. Hackers exploit this 'fail-open' design.",
+    "tip": "MAC Flooding exhausts a switch's CAM table, forcing it to downgrade into a traffic-broadcasting Hub."
+  },
+  {
+    "id": 33,
+    "question": "Assertion (A): The UDP Checksum calculation includes a 'Pseudo-Header' that pulls the Source and Destination IP addresses from the underlying Layer 3 packet. Reason (R): Including Layer 3 routing information in a Layer 4 checksum violates strict OSI layer isolation but guarantees that the datagram reached the mathematically intended destination host. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The UDP checksum verifies payload integrity. Step 2: Curiously, before calculating the checksum hash, UDP (and TCP) builds a 'Pseudo-Header' in memory. Step 3: This pseudo-header contains the Source IP, Destination IP, and Protocol Number extracted from the IP Header (Layer 3). Step 4: Strict OSI models state L4 shouldn't touch L3 headers. This is a deliberate violation (Assertion A is true). Step 5: Why? If a faulty router accidentally changes the Destination IP, the packet goes to the wrong PC. If UDP only checked its own payload, the wrong PC would accept it. By hashing the IP addresses into the UDP checksum, the wrong PC's checksum math will fail, and it will drop the misrouted packet (Reason R is true and explains A).",
+    "trick": "Bank/IT Trap: The Pseudo-Header is a classic OSI violation. TCP and UDP explicitly cross layer boundaries to double-check the IP layer's routing accuracy.",
+    "tip": "TCP and UDP utilize a Layer 3 Pseudo-Header in their checksums to verify routing accuracy."
+  },
+  {
+    "id": 34,
+    "question": "During data encapsulation, an application transmits a 2000-byte payload. The Maximum Transmission Unit (MTU) of the underlying Ethernet network is strictly 1500 bytes. Which layer of the OSI model is architecturally responsible for 'Fragmenting' this data to fit the physical wire constraints?",
+    "options": ["Data Link Layer (Layer 2)", "Transport Layer (Layer 4)", "Network Layer (Layer 3)", "Application Layer (Layer 7)"],
+    "answer": "Network Layer (Layer 3)",
+    "explanation": "Step 1: The application generates 2000 bytes. Step 2: The Transport Layer (TCP) chunks this into segments based on MSS (Maximum Segment Size). But if UDP or ICMP is used, or a large datagram is forced down, it hits Layer 3. Step 3: The Network Layer (IP protocol) checks the MTU (Maximum Transmission Unit) of the outbound interface, which is 1500 bytes for standard Ethernet. Step 4: The 2000-byte packet cannot fit inside a single Ethernet Frame. Step 5: The Network Layer (Layer 3) is explicitly responsible for 'Fragmentation'. It chops the IP packet into two smaller fragments, attaches an IP header to both, and uses the 'Fragment Offset' field to allow the destination Network Layer to reassemble them.",
+    "trick": "Bank/IT Trap: While TCP handles 'Segmentation' at Layer 4 to avoid MTU issues proactively, the actual mechanism of 'Fragmentation' for oversized IP packets is strictly a Network Layer (Layer 3) IP function.",
+    "tip": "Packet Fragmentation to accommodate interface MTU limits is executed exclusively by the Network Layer (Layer 3)."
+  },
+  {
+    "id": 35,
+    "question": "Assertion (A): Address Resolution Protocol (ARP) tables must actively clear out cached MAC-to-IP mappings after a brief timeout period (e.g., 2 to 20 minutes). Reason (R): In dynamic networks utilizing DHCP, IP addresses are frequently reassigned to different hardware; an infinite cache would result in frames being sent to the incorrect physical MAC address. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: When a PC ARPs for an IP, it saves the MAC address in its local cache to prevent flooding the network with broadcast requests every second (A is true). Step 2: However, modern networks use DHCP, meaning IP addresses are 'leased'. Step 3: Phone A might have IP 192.168.1.50 at 9:00 AM. It leaves. At 1:00 PM, Phone B connects and gets assigned 192.168.1.50. Step 4: If a PC cached Phone A's MAC address infinitely, it would try to send traffic for 192.168.1.50 to Phone A's MAC, which is no longer there. Step 5: By expiring the cache (flushing), the PC is forced to send a fresh ARP request, ensuring it learns the new hardware MAC associated with the IP. R is the exact architectural reason for A.",
+    "trick": "Bank/IT Trap: Dynamic networks require dynamic caches. Stale ARP caches are the #1 cause of 'Destination Host Unreachable' errors when IP leases renew.",
+    "tip": "ARP caches feature short timeout durations to accommodate the reassignment of dynamic IP addresses."
+  },
+  {
+    "id": 36,
+    "question": "A network features two separate IP subnets (192.168.1.0/24 and 192.168.2.0/24) connected by a single Layer 3 Router. Host A (Subnet 1) pings Host B (Subnet 2). What is the Destination MAC Address of the Ethernet frame leaving Host A?",
+    "options": ["The MAC address of Host B.", "The MAC address of the Router's ingress interface on Subnet 1.", "The Broadcast MAC address (FF:FF:FF:FF:FF:FF).", "The MAC address of the Router's egress interface on Subnet 2."],
+    "answer": "The MAC address of the Router's ingress interface on Subnet 1.",
+    "explanation": "Step 1: Host A compares its own IP and Subnet Mask against Host B's IP. Step 2: It realizes Host B is on a DIFFERENT network. Step 3: Layer 2 MAC addresses cannot traverse routers; they are strictly for local network delivery. Step 4: Therefore, Host A cannot ARP for Host B's MAC address. Step 5: Instead, Host A builds a frame to send the data to its Default Gateway (the Router). The Source IP is Host A, Destination IP is Host B. But the Source MAC is Host A, and the Destination MAC is the Router's local interface on Subnet 1.",
+    "trick": "Bank/IT Trap: IP addresses never change end-to-end (usually). MAC addresses change at EVERY single router hop! The frame is rebuilt by every router in the path.",
+    "tip": "When communicating across subnets, the Destination MAC address is ALWAYS the local Default Gateway's MAC."
+  },
+  {
+    "id": 37,
+    "question": "Assertion (A): The sequence numbers in a TCP connection always start exactly at 0 or 1 for every new communication session to minimize header byte overhead. Reason (R): TCP utilizes Initial Sequence Numbers (ISNs) generated by predictable cryptographic algorithms to prevent session hijacking. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: TCP tracks data bytes using Sequence Numbers. Step 2: A common misconception is that Sequence Numbers start at 0 or 1. Step 3: In reality, during the SYN handshake, the OS generates a massive, pseudo-random 32-bit integer called the Initial Sequence Number (ISN) (e.g., 2,845,102,943). Therefore, Assertion A is completely false. Step 4: Why are they random? To prevent 'TCP Session Hijacking'. If an attacker could guess the next sequence number (which is trivial if they always start at 1), they could forge packets and inject malicious data into an active stream. Step 5: However, Reason R states ISNs are 'predictable' cryptographic algorithms. This is false. They must be explicitly UNPREDICTABLE to prevent hijacking. Both statements are false.",
+    "trick": "Bank/IT Trap: Wireshark often displays sequence numbers as '0' or '1' as a convenience feature ('Relative Sequence Numbers'). The actual raw ISNs are completely randomized 32-bit integers.",
+    "tip": "TCP Initial Sequence Numbers (ISNs) are highly randomized to prevent malicious session hijacking."
+  },
+  {
+    "id": 38,
+    "question": "In the TCP/IP suite, which specific Transport Layer mechanism guarantees that an overloaded web server can differentiate and process returning HTTP traffic for 50 different distinct tabs opened in a single user's web browser?",
+    "options": ["Multiplexing using ephemeral Source Ports.", "Encapsulation using distinct Source IP Addresses.", "Microsegmentation using distinct MAC Addresses.", "Windowing using fragmented Sequence Numbers."],
+    "answer": "Multiplexing using ephemeral Source Ports.",
+    "explanation": "Step 1: The user's PC has one IP address and one MAC address. Step 2: The user opens 50 tabs to 'www.rbi.org.in'. The server's IP and Port (443) are identical for all 50 tabs. Step 3: When the server replies, how does the user's PC know which data goes to Tab 1 vs Tab 50? Step 4: The OS utilizes Transport Layer Multiplexing. When Tab 1 makes a request, the OS assigns it a random, high-numbered 'Ephemeral Source Port' (e.g., Port 50100). Tab 2 gets Port 50101. Step 5: The server replies to these specific unique ports. The OS reads the destination port on the returning packet and routes the payload to the exact correct browser tab.",
+    "trick": "Bank/IT Trap: IP addresses route between computers. Ports route between specific applications/tabs INSIDE the computer. This is the definition of Transport Layer Multiplexing.",
+    "tip": "Ephemeral Source Ports enable Transport Layer multiplexing, distinguishing multiple sessions from a single host IP."
+  },
+  {
+    "id": 39,
+    "question": "Assertion (A): During TCP data transfer, if a sender transmits 3 segments and the receiver replies with 'ACK 5000', it mathematically implies that the receiver has successfully processed all bytes up to sequence number 5000. Reason (R): TCP Acknowledgements are strictly 'cumulative', meaning a single ACK inherently confirms the receipt of all contiguous data preceding that specific byte sequence number. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: TCP does not need to send an ACK for every single segment (which would waste bandwidth). Step 2: TCP uses 'Cumulative ACKs'. Step 3: If the sender transmits Segment 1 (bytes 1000-1999), Segment 2 (2000-2999), and Segment 3 (3000-4999), the receiver buffers them. Step 4: The receiver wants byte 5000 next. It sends a single packet back: 'ACK 5000'. Step 5: This single ACK explicitly tells the sender: 'I have perfectly received and reassembled every single byte up to 4999. Send me 5000.' Both Assertion A and Reason R accurately describe this highly efficient architecture.",
+    "trick": "Bank/IT Trap: Cumulative ACKs save massive bandwidth. One ACK can confirm the successful delivery of thousands of preceding packets simultaneously.",
+    "tip": "TCP ACKs are cumulative; an ACK confirms receipt of all contiguous bytes preceding the ACK number."
+  },
+  {
+    "id": 40,
+    "question": "An enterprise network engineer is troubleshooting a collision domain issue on a legacy network. They replace a 24-port Layer 1 Hub with a 24-port Layer 2 Switch. What is the exact mathematical change in the number of Collision Domains?",
+    "options": ["Decreases from 24 to 1.", "Increases from 1 to 24.", "Remains constant at 24.", "Remains constant at 1."],
+    "answer": "Increases from 1 to 24.",
+    "explanation": "Step 1: Analyze the initial architecture. A Hub is a Layer 1 device that physically connects all ports to a single electrical bus. Step 2: Therefore, a 24-port Hub constitutes exactly 1 giant Collision Domain. Step 3: A Switch is a Layer 2 device that isolates each port using internal buffers and ASICs. Step 4: By replacing the Hub with the Switch, every single port becomes its own isolated electrical environment. Step 5: Consequently, the number of Collision Domains expands from 1 (the Hub) to 24 (the individual switch ports).",
+    "trick": "Bank/IT Trap: Don't let the word 'Increases' trick you into thinking it's a bad thing. In networking, increasing the *number* of collision domains shrinks their *size* to just one PC, which eliminates collisions completely! Microsegmentation = More domains.",
+    "tip": "A Hub is 1 Collision Domain. A Switch provides 1 Collision Domain per port (Microsegmentation)."
+  },
+  {
+    "id": 41,
+    "question": "Assertion (A): The User Datagram Protocol (UDP) is mathematically incapable of executing the 'Three-Way Handshake' utilized by TCP. Reason (R): The UDP header entirely lacks the SYN and ACK flag fields required to synchronize sequence numbers and establish a stateful connection. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The Three-Way Handshake (SYN -> SYN/ACK -> ACK) is the mechanism used to establish a reliable connection. Step 2: To send these signals, the protocol header must have designated bits (flags) that can be flipped to 1 or 0. Step 3: The TCP header contains 6 primary control flags (URG, ACK, PSH, RST, SYN, FIN). Step 4: The UDP header is stripped down to bare minimums for speed: Source Port, Destination Port, Length, and Checksum. Step 5: Because the physical flags do not exist in the UDP architecture, it is structurally impossible for UDP to perform handshakes or track states. R accurately dictates the hardware/software limit causing A.",
+    "trick": "Bank/IT Trap: UDP doesn't just 'choose' not to handshake; it literally doesn't have the data fields (flags) in its header to make it mathematically possible.",
+    "tip": "UDP cannot perform a handshake because its 8-byte header lacks SYN and ACK control flags."
+  },
+  {
+    "id": 42,
+    "question": "A network administrator configures a Layer 2 switch with three separate Virtual LANs (VLAN 10, VLAN 20, VLAN 30). There is NO router connected to this switch. If a PC on VLAN 10 broadcasts an ARP Request, which devices will process it?",
+    "options": ["All PCs connected to the switch, regardless of VLAN.", "Only the PCs assigned to VLAN 10.", "The switch intercepts and drops the packet due to lack of routing.", "Only the Default Gateway."],
+    "answer": "Only the PCs assigned to VLAN 10.",
+    "explanation": "Step 1: Broadcast frames (Destination MAC FF:FF:FF:FF:FF:FF) are forwarded out of all switch ports by default. Step 2: However, VLANs (Virtual LANs) logically partition the physical switch into completely isolated virtual switches. Step 3: VLAN 10 acts as a totally independent broadcast domain from VLAN 20 and 30. Step 4: When a broadcast is sent on VLAN 10, the switch physically restricts the flooding of that frame to ONLY the ports assigned to VLAN 10. Step 5: Without a Layer 3 Router to route traffic between the VLANs (Inter-VLAN routing), the other VLANs will never see or hear the broadcast.",
+    "trick": "Bank/IT Trap: VLANs = Broadcast Domains. They trap broadcasts strictly within their assigned ports. No router is needed to *stop* the broadcast; a router is only needed to *route* between them.",
+    "tip": "VLANs logically partition switches, confining Layer 2 broadcasts strictly within their specific VLAN boundary."
+  },
+  {
+    "id": 43,
+    "question": "During data transmission across a network, which encapsulation layer is responsible for translating logical IP addresses into physical machine addresses, and what specific PDU is generated?",
+    "options": ["Network Layer; Packet", "Transport Layer; Segment", "Data Link Layer; Frame", "Physical Layer; Bits"],
+    "answer": "Data Link Layer; Frame",
+    "explanation": "Step 1: Logical IP addresses govern end-to-end delivery across the globe (Layer 3). Step 2: However, physical hardware switches only understand physical MAC addresses. Step 3: As data moves down the OSI model, Layer 3 (Network) hands the IP Packet down to Layer 2. Step 4: Layer 2 (Data Link) is responsible for resolving the Next-Hop IP into a physical MAC address (using ARP). Step 5: It then wraps the IP Packet in a MAC Header and an FCS Trailer, generating a Protocol Data Unit (PDU) known as a 'Frame' for local wire transmission.",
+    "trick": "Bank/IT Trap: Layer 3 contains the IPs, but it is Layer 2 that TRANSLATES that intent into physical MAC hardware addressing for local delivery.",
+    "tip": "The Data Link Layer (Layer 2) applies MAC addressing, encapsulating IP Packets into Frames."
+  },
+  {
+    "id": 44,
+    "question": "Assertion (A): UDP provides absolute zero error-checking capabilities, passing all corrupted payloads directly to the application layer. Reason (R): UDP prioritizes low latency and eliminates the 16-bit Checksum field present in the TCP header to save bandwidth. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: UDP is famous for lacking 'reliability' (no retransmissions or ACKs). Step 2: However, 'reliability' is different from 'error-checking'. Step 3: UDP DOES contain a 16-bit Checksum field in its header. Step 4: When a UDP datagram arrives, the receiver calculates the hash. If the payload is corrupted (checksum mismatch), UDP does NOT pass it to the application; it silently drops the corrupted datagram to protect the app. Step 5: Therefore, UDP does provide error-checking (A is false), and it does contain a Checksum field (R is false).",
+    "trick": "Bank/IT Trap: A massive misconception is that UDP is completely blind to errors. UDP detects corruption (via Checksum) and drops the bad data; it just refuses to FIX the error via retransmission.",
+    "tip": "UDP contains a 16-bit Checksum for error detection. It drops corrupted datagrams but does not request retransmissions."
+  },
+  {
+    "id": 45,
+    "question": "A network architect designs a topology consisting of 4 Routers, 10 Layer-2 Switches, and 100 PCs. The 4 Routers are connected to each other in a Full Mesh. How many individual Broadcast Domains are created EXCLUSIVELY by the Router-to-Router interconnect links?",
+    "options": ["1", "4", "6", "10"],
+    "answer": "6",
+    "explanation": "Step 1: Understand that every physical link between two router interfaces constitutes a distinct subnet, and therefore a distinct Broadcast Domain. Step 2: The question asks ONLY for the domains created by the Router-to-Router Full Mesh connections (ignoring the switches and PCs). Step 3: To find the number of links in a Full Mesh of 4 nodes, use the formula N(N-1)/2. Step 4: N = 4. 4(3)/2 = 12 / 2 = 6 physical point-to-point links. Step 5: Since each of these 6 dedicated router-to-router links requires its own isolated subnet, they create exactly 6 distinct Broadcast Domains.",
+    "trick": "Bank/IT Trap: Point-to-Point links between routers are isolated networks (usually /30 subnets). Just count the mesh links using the formula to find the broadcast domains!",
+    "tip": "Every point-to-point link between two Routers constitutes exactly one distinct Broadcast Domain."
+  },
+  {
+    "id": 46,
+    "question": "In the event of network congestion, which TCP mechanism actively shrinks the amount of data injected into the network to prevent catastrophic router buffer overflows?",
+    "options": ["Sliding Window Flow Control", "TCP Congestion Avoidance Algorithm (e.g., AIMD)", "Address Resolution Protocol timeout", "MTU Path Discovery"],
+    "answer": "TCP Congestion Avoidance Algorithm (e.g., AIMD)",
+    "explanation": "Step 1: Network bandwidth is finite. If senders transmit too fast, intermediate router buffers fill up and drop packets. Step 2: 'Flow Control' (Sliding Window) protects the RECEIVER'S buffers. Step 3: To protect the overall NETWORK, TCP uses 'Congestion Control' algorithms. Step 4: When TCP detects a dropped packet (via a timeout or 3 duplicate ACKs), it assumes the network is congested. Step 5: It employs AIMD (Additive Increase, Multiplicative Decrease). It aggressively shrinks its Congestion Window (cwnd) by half, massively slowing down transmission to let the network clear, then slowly increases speed again.",
+    "trick": "Bank/IT Trap: Flow Control protects the End-User (Receiver). Congestion Control protects the Middlemen (Routers). Do not confuse the two sliding windows!",
+    "tip": "Flow Control protects the Receiver. Congestion Control (AIMD) protects intermediate network Routers from buffer overflows."
+  },
+  {
+    "id": 47,
+    "question": "Assertion (A): When a router forwards a packet from one subnet to another, it leaves the Source and Destination IP addresses untouched, but completely strips and replaces the Source and Destination MAC addresses. Reason (R): IP addresses provide end-to-end logical routing across the internet, whereas MAC addresses only provide node-to-node physical delivery across a single local segment. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: When a PC sends data to Google, the Destination IP is Google's server. This IP must remain constant so the internet knows the final target (A is true regarding IPs). Step 2: The PC encapsulates this IP Packet inside a Layer 2 Frame. The Destination MAC is the local Router's MAC. Step 3: The Router receives the frame, decapsulates it, and looks at the IP. Step 4: To forward it to the next router, it encapsulates the packet in a BRAND NEW Layer 2 Frame. The new Source MAC is Router 1, the new Destination MAC is Router 2. Step 5: This hop-by-hop hardware delivery is the defining characteristic of Data Link Layer architecture, perfectly explained by Reason R.",
+    "trick": "Bank/IT Trap: IP addresses are like the addresses on an envelope (end-to-end). MAC addresses are like the delivery trucks passing it along the highway (hop-by-hop).",
+    "tip": "IP Addresses remain constant end-to-end. MAC Addresses are stripped and rewritten at every Router hop."
+  },
+  {
+    "id": 48,
+    "question": "Which of the following scenarios describes the architectural function of a 'Default Gateway' in IPv4 networking?",
+    "options": ["It translates the MAC address into an IP address using RARP.", "It is the router interface designated to process and forward packets when a host's subnet mask calculation determines the Destination IP resides on a foreign network.", "It acts as a Layer 2 switch to prevent internal collision domains.", "It negotiates the TCP 3-way handshake on behalf of a UDP client."],
+    "answer": "It is the router interface designated to process and forward packets when a host's subnet mask calculation determines the Destination IP resides on a foreign network.",
+    "explanation": "Step 1: A PC applies its Subnet Mask to its own IP and the Destination IP (via binary ANDing). Step 2: If the network portions match, the target is local. The PC ARPs for the target MAC. Step 3: If the network portions DO NOT match, the target is foreign (e.g., on the Internet). Step 4: A PC cannot talk directly to foreign networks. It requires a routing path. Step 5: The 'Default Gateway' is the IP address of the local router. The PC ARPs for the Default Gateway's MAC and sends all foreign-bound packets to this router, which acts as the 'gateway' out of the local subnet.",
+    "trick": "Bank/IT Trap: The Subnet Mask performs the math to decide IF the Default Gateway is needed. If the math says 'Foreign Network', the Default Gateway acts as the exit door.",
+    "tip": "The Default Gateway routes traffic destined for external networks outside the host's local subnet."
+  },
+  {
+    "id": 49,
+    "question": "Assertion (A): Voice over IP (VoIP) and real-time multiplayer gaming universally mandate the use of the Transmission Control Protocol (TCP) to ensure zero packet loss during execution. Reason (R): TCP's internal buffering and retransmission mechanics mathematically guarantee that corrupted audio frames or player movements are perfectly reconstructed at the destination. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: TCP provides guaranteed delivery by pausing the data stream and waiting for retransmissions if a packet drops (Reason R is technically true regarding TCP mechanics). Step 2: However, for VoIP (phone calls) or live gaming, this pause is catastrophic. Step 3: If you are talking on a VoIP call and a packet containing 50 milliseconds of audio drops, waiting 500 milliseconds for TCP to retransmit it causes massive audio lag and synchronization failure. Step 4: It is better to just drop the 50ms of audio (a minor static click) and keep the conversation in real-time. Step 5: Therefore, VoIP and live gaming strictly mandate UDP, making both Assertion A and the contextual application of Reason R completely false.",
+    "trick": "Bank/IT Trap: Retransmission is toxic for real-time applications. Old data is useless data. Always choose UDP for Voice, Video, and live Gaming.",
+    "tip": "Real-time applications (VoIP/Gaming) explicitly avoid TCP; they use UDP to eliminate retransmission lag."
+  },
+  {
+    "id": 50,
+    "question": "A data segment encapsulates a payload and attaches a header containing Source Port 443 and Destination Port 55320. Which protocol is facilitating this encapsulation, and what is the direction of the traffic?",
+    "options": ["UDP; from a DNS Server to a Client Browser.", "TCP; from a secure Web Server (HTTPS) responding to a Client Browser.", "TCP; from a Client Browser requesting a secure webpage.", "UDP; from an FTP Server sending a file to a Client."],
+    "answer": "TCP; from a secure Web Server (HTTPS) responding to a Client Browser.",
+    "explanation": "Step 1: Analyze the ports. Port 443 is universally recognized as the well-known port for HTTPS (Secure Web Traffic). HTTPS relies strictly on TCP for reliable delivery. Step 2: Port 55320 is a high-numbered 'Ephemeral Port'. Step 3: Clients generate random ephemeral ports (usually > 49152) as their Source Port when making a request. Step 4: When the Server responds, the ports flip. The Server's Source Port is its well-known service port (443), and the Destination Port is the client's ephemeral port (55320). Step 5: Since the Source Port here is 443, the traffic is definitely moving FROM the Web Server TO the Client.",
+    "trick": "Bank/IT Trap: Ports flip during a reply! Request: Src=55320, Dst=443. Reply: Src=443, Dst=55320. Tracing the well-known port (443) identifies the server.",
+    "tip": "Source Port 443 indicates traffic originating from an HTTPS Web Server replying to a client."
+  },
+  {
+    "id": 51,
+    "question": "Assertion (A): For streaming a live cricket match or conducting a VoIP video call, the UDP protocol is heavily preferred over the TCP protocol. Reason (R): UDP is a 'connectionless' protocol that does not guarantee packet delivery or wait for acknowledgements, which drastically reduces latency and prevents lag during live transmissions. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: TCP ensures reliable, ordered delivery by requiring acknowledgements (ACKs) for every packet. Step 2: If a TCP packet drops, it triggers retransmission, causing significant delays (buffering). Step 3: Live streaming applications prioritize real-time delivery over perfect data integrity. Step 4: UDP does not use ACKs or retransmissions, allowing continuous data flow. Step 5: Therefore, UDP prevents live stream lag, making both the assertion and reason entirely correct.",
+    "trick": "Bank/IT Trap: Do not assume TCP is 'always better' because it is reliable. For real-time applications like VoIP and gaming, TCP's reliability mechanism causes unacceptable latency!",
+    "tip": "UDP trades reliability for speed, making it ideal for live video and VoIP."
+  },
+  {
+    "id": 52,
+    "question": "A network comprises 1 Router connected to a 24-port Layer 2 Switch. The Switch has 20 PCs and 4 Hubs connected to its ports. Each Hub connects to 5 PCs. How many Collision Domains and Broadcast Domains exist in this entire network?",
+    "options": ["24 Collision Domains, 1 Broadcast Domain", "20 Collision Domains, 5 Broadcast Domains", "40 Collision Domains, 1 Broadcast Domain", "44 Collision Domains, 5 Broadcast Domains"],
+    "answer": "24 Collision Domains, 1 Broadcast Domain",
+    "explanation": "Step 1: A Router breaks broadcast domains. Since there is only one router interface serving this LAN, there is exactly 1 Broadcast Domain. Step 2: A Switch breaks collision domains on every port. The switch has 24 active ports. Step 3: 20 ports go to PCs, creating 20 collision domains. Step 4: 4 ports go to Hubs. Hubs DO NOT break collision domains, so all PCs on a single hub share the collision domain of that switch port. Step 5: Therefore, 20 (PCs) + 4 (Hubs) = 24 Collision Domains in total.",
+    "trick": "Bank/IT Trap: Hubs just extend existing collision domains. They never create new ones. Always count the active ports on a Switch to find the base number of collision domains!",
+    "tip": "Switches break collision domains per port; Hubs share one collision domain for all ports."
+  },
+  {
+    "id": 53,
+    "question": "Assertion (A): During the encapsulation process at the Transport Layer, the TCP header attaches sequence numbers to data segments, whereas the UDP header does not. Reason (R): UDP operates as a 'Fire and Forget' protocol and does not reassemble packets in order, rendering sequence numbers unnecessary. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Data encapsulation at Layer 4 divides data into segments (TCP) or datagrams (UDP). Step 2: TCP guarantees ordered delivery by assigning sequence numbers to each segment. Step 3: The receiving TCP uses these numbers to reassemble the data accurately. Step 4: UDP provides no such guarantee and sends datagrams independently without sequence tracking. Step 5: Thus, UDP headers lack sequence number fields to minimize overhead, proving both A and R true.",
+    "trick": "Bank/IT Trap: UDP headers are extremely lightweight (8 bytes) exactly because they lack flow control fields like Sequence Numbers, Acknowledgment Numbers, and Window Sizes!",
+    "tip": "TCP uses sequence numbers for ordered delivery; lightweight UDP does not track order."
+  },
+  {
+    "id": 54,
+    "question": "When a computer boots up and knows its own MAC address but needs to discover its assigned IP address from a server, which specific protocol is traditionally utilized?",
+    "options": ["Address Resolution Protocol (ARP)", "Reverse Address Resolution Protocol (RARP)", "Proxy ARP", "Gratuitous ARP"],
+    "answer": "Reverse Address Resolution Protocol (RARP)",
+    "explanation": "Step 1: ARP (Address Resolution Protocol) resolves a known IP address to an unknown MAC address. Step 2: In contrast, a diskless workstation booting up knows its physical MAC but lacks an IP. Step 3: It broadcasts a RARP request containing its MAC address. Step 4: A RARP server receives this broadcast and replies with the IP address assigned to that MAC. Step 5: Therefore, RARP works in the exact reverse direction of standard ARP.",
+    "trick": "Bank/IT Trap: While DHCP has largely replaced RARP in modern networks for IP assignment, RARP is still the technically correct legacy protocol for explicitly resolving MAC-to-IP!",
+    "tip": "ARP resolves IP to MAC; Reverse ARP (RARP) resolves MAC to IP."
+  },
+  {
+    "id": 55,
+    "question": "Assertion (A): An Ethernet Switch actively prevents broadcast storms by isolating broadcast domains on each of its physical ports. Reason (R): Switches operate at the Data Link Layer (Layer 2) and read MAC addresses, allowing them to drop FF:FF:FF:FF:FF:FF frames instead of flooding them. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Assertion (A) is completely false. A Switch breaks Collision Domains, but it DOES NOT break Broadcast Domains. Step 2: Reason (R) is also false. When a Switch receives a broadcast frame (Destination MAC FF:FF:FF:FF:FF:FF), it does not drop it. Step 3: By design, Layer 2 switches must flood broadcast frames out of all ports except the receiving port. Step 4: Only a Layer 3 device (Router) blocks and breaks broadcast domains.",
+    "trick": "Bank/IT Trap: When asked what breaks a 'Broadcast Domain', do not select 'Switch'! A Switch only stops collisions. A Router is the absolute boundary that stops a broadcast storm!",
+    "tip": "Switches flood broadcast frames to all ports. Only Routers break broadcast domains."
+  },
+  {
+    "id": 56,
+    "question": "During the data Decapsulation process on a receiving host, which of the following Protocol Data Unit (PDU) conversions represents the transition from the Network Layer to the Transport Layer?",
+    "options": ["Frame to Packet", "Packet to Segment", "Segment to Data", "Bit to Frame"],
+    "answer": "Packet to Segment",
+    "explanation": "Step 1: Encapsulation wraps data going down the OSI model, while Decapsulation strips headers going up. Step 2: At Layer 2 (Data Link), the PDU is a Frame. The NIC strips the frame header/trailer and passes the payload to Layer 3. Step 3: At Layer 3 (Network), the PDU is a Packet (or Datagram). The IP protocol strips the IP header and passes the payload to Layer 4. Step 4: At Layer 4 (Transport), the PDU is a Segment (TCP) or Datagram (UDP). Step 5: Therefore, moving from Layer 3 up to Layer 4 translates a Packet into a Segment.",
+    "trick": "Bank/IT Trap: Memorize the PDU names! Layer 4 = Segment, Layer 3 = Packet, Layer 2 = Frame, Layer 1 = Bits. Decapsulation moves UP the stack.",
+    "tip": "Decapsulation strips headers going up: Frame (L2) -> Packet (L3) -> Segment (L4)."
+  },
+  {
+    "id": 57,
+    "question": "In a TCP 3-Way Handshake between Host A and Host B, Host A initiates the connection by sending a SYN packet. Host B receives it. What specific packet combination does Host B send back to Host A in the second step?",
+    "options": ["SYN", "ACK", "SYN-ACK", "FIN-ACK"],
+    "answer": "SYN-ACK",
+    "explanation": "Step 1: The TCP 3-Way Handshake establishes a reliable connection. Step 2: Step one: Host A sends a SYN (Synchronize) segment to Host B to initiate communication. Step 3: Step two: Host B acknowledges Host A's request with an ACK flag AND sends its own synchronization request with a SYN flag. Step 4: These flags are combined into a single segment called a SYN-ACK. Step 5: Step three: Host A sends a final ACK back to Host B, completing the connection.",
+    "trick": "Bank/IT Trap: The handshake is SYN -> SYN-ACK -> ACK. Do not mistake the second step as just an 'ACK'; the server must also synchronize its own sequence numbers using SYN!",
+    "tip": "TCP 3-Way Handshake sequence is: SYN, then SYN-ACK, then final ACK."
+  },
+  {
+    "id": 58,
+    "question": "Assertion (A): Gratuitous ARP is primarily used to detect IP address conflicts on a local area network rather than resolving an unknown MAC address. Reason (R): A Gratuitous ARP is an ARP broadcast generated by a host where the Target IP address is the host's own IP address. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Standard ARP requests the MAC for a different IP address. Step 2: Gratuitous ARP is a special request where a device asks the network for the MAC address associated with its OWN IP address. Step 3: If no device replies, the IP is safe to use. Step 4: If another device replies, it means the IP is already in use, allowing the OS to immediately detect an IP conflict. Step 5: High Availability clusters also use it to update switch MAC tables instantly. Both A and R are accurate.",
+    "trick": "Bank/IT Trap: Gratuitous ARP is unprompted. If you see 'Target IP = Sender IP', it is always a Gratuitous ARP checking for IP duplication!",
+    "tip": "Gratuitous ARP targets its own IP address to detect network IP conflicts immediately."
+  },
+  {
+    "id": 59,
+    "question": "A network engineer replaces a 10 Mbps Hub with a 1 Gbps Layer 2 Switch. Assuming 10 computers are connected, how does this replacement mathematically alter the domains?",
+    "options": ["Collision domains increase from 1 to 10; Broadcast domains remain 1.", "Collision domains decrease from 10 to 1; Broadcast domains increase to 10.", "Collision domains remain 1; Broadcast domains increase from 1 to 10.", "Both Collision and Broadcast domains increase from 1 to 10."],
+    "answer": "Collision domains increase from 1 to 10; Broadcast domains remain 1.",
+    "explanation": "Step 1: A Hub creates a single massive collision domain because it operates at Layer 1, repeating signals everywhere. Step 2: Replacing it with a Switch (Layer 2) micro-segments the network. Step 3: Every port on a switch forms its own isolated collision domain. With 10 computers, there are now 10 separate collision domains. Step 4: However, switches forward broadcasts to all ports. Step 5: Therefore, the entire switch still operates within a single broadcast domain, meaning broadcast domains remain at 1.",
+    "trick": "Bank/IT Trap: 'Microsegmentation' is the keyword for switches. It multiplies collision domains (good for speed) but does absolutely nothing to stop broadcasts!",
+    "tip": "Switches microsegment networks: replacing a hub multiplies collision domains but leaves broadcasts unaffected."
+  },
+  {
+    "id": 60,
+    "question": "Assertion (A): Microsegmentation provided by modern Switches eliminates the need for the CSMA/CD protocol in Full-Duplex Ethernet networks. Reason (R): Full-Duplex links utilize separate dedicated wire pairs for transmitting and receiving data, mathematically reducing the chance of data collisions to zero. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: CSMA/CD (Carrier Sense Multiple Access with Collision Detection) is required in Half-Duplex links (like Hubs) where devices share a single communication channel. Step 2: Microsegmentation via Switches allocates a dedicated port per device. Step 3: When configured for Full-Duplex, the connection uses separate internal wire pairs (Tx and Rx) for sending and receiving simultaneously. Step 4: Because transmission and reception never share the same physical copper path, collisions are physically impossible. Step 5: Consequently, CSMA/CD is disabled in Full-Duplex links.",
+    "trick": "Bank/IT Trap: CSMA/CD is a legacy protocol! It is entirely turned off when a switch port negotiates a Full-Duplex connection because collisions cannot physically happen.",
+    "tip": "Full-Duplex switch connections use separate Tx/Rx wires, rendering collisions and CSMA/CD obsolete."
+  },
+  {
+    "id": 61,
+    "question": "When an application requires transferring an extremely large file, TCP utilizes a mechanism to send multiple packets before requiring an Acknowledgement (ACK). What is this Flow Control mechanism called?",
+    "options": ["Three-Way Handshake", "Sliding Window", "Checksum Offloading", "UDP Multiplexing"],
+    "answer": "Sliding Window",
+    "explanation": "Step 1: If TCP required an ACK for every single packet before sending the next, transfer speeds would be abysmal due to latency. Step 2: TCP implements Flow Control using a 'Sliding Window'. Step 3: The window size dictates how many bytes can be transmitted continuously without waiting for an ACK. Step 4: If the receiver can process data quickly, the window size dynamically expands (slides up), allowing more packets to be sent unacknowledged, drastically increasing throughput.",
+    "trick": "Bank/IT Trap: 'Sliding Window' handles Flow Control (speed adjustment based on receiver capacity). Do not confuse it with 'Congestion Window' which handles network traffic jams!",
+    "tip": "TCP Sliding Window allows multiple packets to be sent before requiring an acknowledgement."
+  },
+  {
+    "id": 62,
+    "question": "Assertion (A): Proxy ARP allows a router to answer ARP requests on behalf of a target host located on a completely different subnet. Reason (R): Standard ARP broadcasts (FF:FF:FF:FF:FF:FF) cannot cross router boundaries, so the router uses its own MAC address to fool the sender into transmitting data directly to it. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: ARP is a Layer 2 broadcast. Routers physically block Layer 2 broadcasts from passing to other networks. Step 2: If Host A wants to reach Host B on another subnet, and Host A lacks a default gateway configuration, it will mistakenly broadcast an ARP request for Host B. Step 3: The router intercepts this broadcast. Step 4: Using Proxy ARP, the router replies with its OWN MAC address. Step 5: Host A is 'fooled' into sending the packet to the router, which then successfully routes it to Host B.",
+    "trick": "Bank/IT Trap: Proxy ARP acts as a 'middleman liar'. The router says 'I am Host B, send the data to my MAC', allowing communication to survive poor host configuration.",
+    "tip": "Proxy ARP allows a router to reply with its own MAC for inter-subnet requests."
+  },
+  {
+    "id": 63,
+    "question": "Which specific field in the standard IPv4 header prevents packets from endlessly circling a network during a routing loop or broadcast storm?",
+    "options": ["Checksum", "Time To Live (TTL)", "Fragment Offset", "Protocol ID"],
+    "answer": "Time To Live (TTL)",
+    "explanation": "Step 1: Routing loops occur when misconfigured routers continually pass the same packet back and forth. Step 2: Without a control mechanism, these loops would eventually consume all network bandwidth. Step 3: The IPv4 header includes an 8-bit Time To Live (TTL) field. Step 4: Every time a packet passes through a router (a hop), the router decrements the TTL value by 1. Step 5: When the TTL reaches 0, the router automatically drops the packet and sends an ICMP 'Time Exceeded' message to the sender, killing the infinite loop.",
+    "trick": "Bank/IT Trap: Layer 2 frames (Ethernet) DO NOT have a TTL field. This is why Layer 2 broadcast storms are so deadly and require Spanning Tree Protocol (STP) to prevent!",
+    "tip": "The TTL field in IP headers decrements per hop, preventing infinite Layer 3 loops."
+  },
+  {
+    "id": 64,
+    "question": "Assertion (A): The UDP protocol header is significantly smaller than the TCP header, typically consuming only 8 bytes of data encapsulation overhead. Reason (R): UDP structurally lacks fields for Sequence Numbers, Acknowledgment Numbers, and Window Size, which are mandatory for TCP's reliable connection-oriented delivery. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A standard TCP header is 20 bytes long. It requires extensive tracking fields to guarantee delivery and order. Step 2: These fields include Sequence Number, Acknowledgment Number, and Flow Control Window. Step 3: UDP is a connectionless, best-effort protocol. It does not track order, guarantee delivery, or manage flow. Step 4: Therefore, UDP strips out all these complex tracking fields. Step 5: The resulting UDP header is a lightweight 8 bytes (Source Port, Destination Port, Length, Checksum), making A and R true and perfectly linked.",
+    "trick": "Bank/IT Trap: Memorize header sizes! UDP is exactly 8 bytes. Minimum TCP is 20 bytes. Minimal overhead is why UDP is inherently faster for simple data transfers.",
+    "tip": "UDP headers are only 8 bytes due to the absence of sequencing and acknowledgment fields."
+  },
+  {
+    "id": 65,
+    "question": "In the process of data encapsulation traversing down the OSI model, at which specific layer is the Frame Check Sequence (FCS) trailer appended to the Protocol Data Unit (PDU)?",
+    "options": ["Network Layer (Layer 3)", "Transport Layer (Layer 4)", "Data Link Layer (Layer 2)", "Physical Layer (Layer 1)"],
+    "answer": "Data Link Layer (Layer 2)",
+    "explanation": "Step 1: Encapsulation adds metadata headers as data moves down the stack. Step 2: Layer 4 adds Port numbers to create a Segment. Step 3: Layer 3 adds IP addresses to create a Packet. Step 4: Layer 2 (Data Link Layer) adds MAC addresses to the header. Step 5: Crucially, Layer 2 is the ONLY layer that also appends a 'Trailer' to the end of the data. This trailer contains the Frame Check Sequence (FCS), utilizing a CRC algorithm to detect physical corruption in the Frame.",
+    "trick": "Bank/IT Trap: Only Layer 2 adds a Trailer! All other OSI layers only add Headers. The FCS ensures the frame was not corrupted electrically over the wire.",
+    "tip": "The Data Link Layer adds an FCS trailer to detect data corruption during transit."
+  },
+  {
+    "id": 66,
+    "question": "Assertion (A): When a router forwards an IP packet from one network to another, it rewrites the Source and Destination IP addresses in the Network Layer header. Reason (R): IP addresses must be dynamically updated at every hop to ensure the packet can physically navigate the local Data Link topology. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The fundamental rule of routing is that Logical (IP) addresses signify end-to-end communication, while Physical (MAC) addresses signify hop-to-hop communication. Step 2: Assertion (A) is completely false. A router NEVER changes the original Source or Destination IP addresses (unless performing NAT). The IPs remain static from sender to final receiver. Step 3: Reason (R) is also false. To navigate the local physical topology, the router rewrites the Source and Destination MAC addresses at Layer 2 for every single hop.",
+    "trick": "Bank/IT Trap: IPs are your home address; MACs are the local taxi drivers. The home address never changes, but you switch taxis at every router hop!",
+    "tip": "Routers rewrite MAC addresses at every hop, but leave IP addresses completely unchanged."
+  },
+  {
+    "id": 67,
+    "question": "A malicious user initiates a 'SYN Flood' attack against a web server. How does this specific Transport Layer attack exploit the standard TCP connection establishment protocol?",
+    "options": ["It sends thousands of FIN packets, forcing the server to close active connections prematurely.", "It sends continuous SYN packets but intentionally ignores the server's SYN-ACK replies, exhausting the server's half-open connection queue.", "It manipulates UDP datagrams to bypass the TCP port filters on the firewall.", "It floods the ARP cache of the server, mapping the router's IP to a fake MAC address."],
+    "answer": "It sends continuous SYN packets but intentionally ignores the server's SYN-ACK replies, exhausting the server's half-open connection queue.",
+    "explanation": "Step 1: The TCP 3-way handshake is SYN -> SYN-ACK -> ACK. Step 2: When a server receives a SYN, it allocates memory to keep the connection 'half-open' and replies with SYN-ACK. Step 3: It then waits for the client's final ACK. Step 4: In a SYN Flood, the attacker sends massive amounts of spoofed SYN packets but never sends the final ACK. Step 5: The server's memory fills up with these pending half-open connections until it physically cannot accept any legitimate traffic, resulting in a Denial of Service (DoS).",
+    "trick": "Bank/IT Trap: SYN Floods weaponize the 3-way handshake itself. The server politely waits for a response that never comes, dying from memory exhaustion.",
+    "tip": "SYN floods exploit the TCP 3-way handshake by abandoning half-open connections to consume server memory."
+  },
+  {
+    "id": 68,
+    "question": "Assertion (A): Virtual Local Area Networks (VLANs) configured on a Layer 2 Switch effectively break Broadcast Domains, behaving functionally like a Router. Reason (R): VLANs logically partition the switch ports into distinct isolated subnets; broadcast frames generated in VLAN 10 cannot spill over into VLAN 20. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The golden rule states Switches do not break Broadcast Domains. Step 2: However, VLANs are the architectural exception. Step 3: Configuring a VLAN logically slices a single physical switch into multiple virtual switches. Step 4: If Port 1 is assigned to VLAN 10, any broadcast (FF:FF:FF:FF:FF:FF) received on Port 1 is ONLY flooded to other ports assigned to VLAN 10. Step 5: Therefore, VLANs act as logical routers at Layer 2, successfully breaking and isolating Broadcast Domains. Both A and R are valid.",
+    "trick": "Bank/IT Trap: While standard switches don't break broadcasts, VLANs absolutely do. Every distinct VLAN is its own separate Broadcast Domain!",
+    "tip": "Creating a VLAN on a switch logically segments the network, effectively creating a new Broadcast Domain."
+  },
+  {
+    "id": 69,
+    "question": "Which of the following scenarios describes the termination of a standard TCP connection, known as the Four-Way Teardown?",
+    "options": ["Client sends SYN, Server sends FIN, Client sends RST, Server drops connection.", "Client sends FIN, Server sends ACK, Server sends FIN, Client sends ACK.", "Client sends RST, Server sends ACK-RST, Client closes port.", "Server sends FIN-ACK, Client sends SYN-ACK, Server closes port."],
+    "answer": "Client sends FIN, Server sends ACK, Server sends FIN, Client sends ACK.",
+    "explanation": "Step 1: Unlike UDP which just stops sending, TCP gracefully terminates a connection to ensure no data is lost in transit. Step 2: This is a 4-step process. Step 3: The Client finishes sending data and transmits a FIN (Finish) segment. Step 4: The Server receives the FIN and sends an ACK (Acknowledgement). At this point, the connection is half-closed; the server can still send pending data. Step 5: Once the server finishes sending its data, it transmits its own FIN. The Client replies with a final ACK, fully terminating the session.",
+    "trick": "Bank/IT Trap: Establishing TCP takes 3 steps (SYN, SYN-ACK, ACK). Terminating TCP cleanly takes 4 steps (FIN, ACK, FIN, ACK) because both sides must explicitly agree to close their transmit queues.",
+    "tip": "TCP gracefully terminates connections via a 4-way FIN, ACK, FIN, ACK sequence."
+  },
+  {
+    "id": 70,
+    "question": "Assertion (A): Unlike TCP, the User Datagram Protocol (UDP) does not utilize a Checksum field for detecting data corruption. Reason (R): UDP prioritizes maximum transmission speed and assumes Data Link Layer protocols (like Ethernet FCS) will handle all necessary error checking. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Assertion (A) is completely false. The lightweight 8-byte UDP header DOES contain a Checksum field. Step 2: Reason (R) is also false. While Ethernet FCS checks for link-level corruption, end-to-end integrity still requires Transport Layer checks. Step 3: The UDP Checksum is used to detect corruption in the header and payload during transit. Step 4: The crucial difference is that if UDP detects an error via the checksum, it simply drops the corrupted packet silently without asking for retransmission.",
+    "trick": "Bank/IT Trap: UDP lacks ACKs and Sequence numbers, but it DOES have a Checksum field! It checks for errors, but it just doesn't bother fixing them.",
+    "tip": "UDP contains a checksum field for error detection but silently drops corrupted packets without retransmission."
+  },
+  {
+    "id": 71,
+    "question": "If an administrator executes a ping command to an entirely unknown IP address on the local subnet, what is the exact transmission sequence generated by the ARP protocol at the Data Link Layer?",
+    "options": ["The sender transmits a Unicast ARP Request; the target replies with a Broadcast ARP Reply.", "The sender transmits a Broadcast ARP Request; the target replies with a Unicast ARP Reply.", "The sender transmits a Multicast ARP Request; the target replies with a Multicast ARP Reply.", "The sender transmits an Anycast ARP Request; the default gateway replies with a Unicast ARP Reply."],
+    "answer": "The sender transmits a Broadcast ARP Request; the target replies with a Unicast ARP Reply.",
+    "explanation": "Step 1: To encapsulate the ping packet into an Ethernet Frame, the sender needs the target's MAC address. Step 2: The sender doesn't know who owns the IP, so it sends an ARP Request using the MAC Broadcast address (FF:FF:FF:FF:FF:FF). Step 3: Every device on the local switch receives this broadcast. Step 4: Only the device possessing the matching IP processes the request. Step 5: The target device replies directly to the sender's MAC address. Since the sender's MAC is known from the request, the ARP Reply is strictly a Unicast transmission.",
+    "trick": "Bank/IT Trap: Remember the flow: \"Who has this IP? Tell everyone!\" (Broadcast Request). \"I have this IP, I am telling you specifically.\" (Unicast Reply).",
+    "tip": "ARP Requests are always Layer 2 Broadcasts; ARP Replies are always Layer 2 Unicasts."
+  },
+  {
+    "id": 72,
+    "question": "Assertion (A): Increasing the TCP Window Size during a file transfer will proportionally increase the overall data throughput of a high-latency WAN link. Reason (R): A larger Window Size allows the sender to transmit a massive continuous stream of bytes before pausing to wait for an Acknowledgment (ACK) from the receiver. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The TCP Window Size dictates how much unacknowledged data can be in transit. Step 2: Over a high-latency link (like a satellite connection), waiting for an ACK after every small packet causes massive delays. Step 3: By scaling up the TCP Window Size (e.g., using TCP Window Scaling), the sender can push megabytes of data continuously onto the wire. Step 4: This maximizes the link's bandwidth utilization before the sender is forced to halt and wait for the remote ACK. Both A and R are true and perfectly linked.",
+    "trick": "Bank/IT Trap: 'Window Size' is the ultimate speed governor in TCP. Even on a 1 Gbps link, a small TCP Window will bottleneck the transfer to a crawl.",
+    "tip": "Increasing TCP Window Size boosts throughput by allowing more unacknowledged data in transit."
+  },
+  {
+    "id": 73,
+    "question": "Which of the following scenarios perfectly illustrates the concept of 'UDP Multiplexing' at the Transport Layer?",
+    "options": ["A router breaking a large UDP datagram into smaller fragments to cross an MTU boundary.", "A DNS server utilizing port 53 to simultaneously receive and process hundreds of distinct UDP requests from different clients via a single network interface.", "A switch combining multiple physical cables into one logical link to increase UDP throughput.", "A firewall translating private UDP IP addresses into a single public IP address."],
+    "answer": "A DNS server utilizing port 53 to simultaneously receive and process hundreds of distinct UDP requests from different clients via a single network interface.",
+    "explanation": "Step 1: Multiplexing at Layer 4 refers to the ability of a single machine to handle multiple simultaneous communication streams. Step 2: It achieves this using Port Numbers. Step 3: An incoming packet has an IP address (getting it to the machine) and a Destination Port (getting it to the specific application). Step 4: Because UDP uses port numbers (like port 53 for DNS), the OS can multiplex—funneling thousands of incoming datagrams from the network cable into the single DNS application seamlessly based on the port value.",
+    "trick": "Bank/IT Trap: Multiplexing at Layer 4 strictly relies on Port Numbers. Do not confuse it with Layer 2 Link Aggregation (combining cables) or Layer 3 NAT (translating IPs).",
+    "tip": "Transport Layer multiplexing uses Port Numbers to channel multiple network streams into specific applications."
+  },
+  {
+    "id": 74,
+    "question": "Assertion (A): When a Switch receives a standard Unicast Ethernet frame with an unknown Destination MAC address, it immediately drops the frame to conserve bandwidth. Reason (R): Layer 2 Switches are inherently designed to prevent unnecessary traffic flooding by referencing their MAC Address Table before forwarding any data. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Reason R states the general design intent of a switch: reading MAC tables to forward traffic efficiently. This statement is technically true. Step 2: However, Assertion A is completely false. Step 3: When a switch receives a frame destined for a MAC address that is NOT currently listed in its MAC table (Unknown Unicast), it does NOT drop the frame. Step 4: Instead, the switch employs a fail-safe mechanism: it floods the Unicast frame out of ALL active ports (except the receiving port), mimicking a Hub's behavior until it learns the target's location.",
+    "trick": "Bank/IT Trap: Unknown Unicast Flooding is heavily tested! A switch NEVER drops unknown unicasts; it broadcasts them everywhere to ensure the data reaches the intended target.",
+    "tip": "Switches flood 'Unknown Unicast' frames to all ports to ensure guaranteed data delivery."
+  },
+  {
+    "id": 75,
+    "question": "An IT administrator performs a packet capture on a network and observes an ARP frame where the 'Sender Protocol Address' and the 'Target Protocol Address' are absolutely identical. What is the explicit technical purpose of this specific ARP transmission?",
+    "options": ["To map a remote Router's MAC address for external WAN traffic.", "To announce the host's own IP-to-MAC mapping to actively detect and prevent Duplicate IP Address conflicts on the local subnet.", "To forcibly clear the MAC address table of the central Layer 2 Switch.", "To dynamically request an IP lease from an authoritative DHCP server."],
+    "answer": "To announce the host's own IP-to-MAC mapping to actively detect and prevent Duplicate IP Address conflicts on the local subnet.",
+    "explanation": "Step 1: Standard ARP requests the MAC of a DIFFERENT IP address. Step 2: When an OS first connects to a network and assigns an IP, it needs to ensure no other device is already using that IP. Step 3: It generates a 'Gratuitous ARP' broadcast. Step 4: The defining structural hallmark of a Gratuitous ARP is that the Sender IP and Target IP in the payload are exactly the same. Step 5: If another device replies to this broadcast, the OS instantly knows a Duplicate IP conflict exists and throws an error.",
+    "trick": "Bank/IT Trap: Gratuitous ARP serves two main functions: Detecting Duplicate IPs upon boot, and updating Switch MAC tables during High Availability failovers.",
+    "tip": "Gratuitous ARP frames feature identical Sender and Target IP addresses to check for IP duplication."
+  },
+  {
+    "id": 76,
+    "question": "Assertion (A): The UDP Checksum covers not only the UDP Header and Payload, but also incorporates a 'Pseudo-Header' derived from the Network Layer IP packet. Reason (R): Including the IP Pseudo-Header ensures that the UDP datagram has been delivered to the correct exact destination IP address, preventing misrouting errors. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: UDP operates at Layer 4, logically separated from Layer 3 (IP). Step 2: However, if a router suffers a glitch and misroutes a packet to the wrong IP, the UDP protocol needs to detect this catastrophic delivery error. Step 3: To achieve this, the UDP Checksum calculation borrows specific fields from the Layer 3 IP header (Source IP, Destination IP, Protocol, Length) to create a 'Pseudo-Header'. Step 4: By running the checksum against this Pseudo-Header alongside the payload, UDP guarantees both data integrity and delivery accuracy. Both A and R are deeply true.",
+    "trick": "Bank/IT Trap: It violates the strict OSI model separation, but TCP and UDP both use Layer 3 'Pseudo-Headers' in their checksum math specifically to protect against IP routing failures.",
+    "tip": "UDP checksums calculate over a Layer 3 'Pseudo-Header' to verify accurate IP destination delivery."
+  },
+  {
+    "id": 77,
+    "question": "In the context of standard Network Encapsulation, which Protocol Data Unit (PDU) acts as the payload container that physically traverses the copper or fiber-optic media, bearing both a header and a trailer?",
+    "options": ["The Network Packet", "The Transport Segment", "The Data Link Frame", "The Application Message"],
+    "answer": "The Data Link Frame",
+    "explanation": "Step 1: Application data is chopped into Segments (Layer 4). Step 2: Segments are encapsulated into Packets (Layer 3). Step 3: Packets are encapsulated into Frames (Layer 2). Step 4: The Layer 2 Frame is the final fully-assembled PDU structure before it is serialized into raw 1s and 0s (Bits) at Layer 1. Step 5: The Frame is uniquely distinct because it encapsulates the Packet with both a MAC addressing Header and a Frame Check Sequence (FCS) Trailer for physical error detection over the wire.",
+    "trick": "Bank/IT Trap: Bits travel the wire, but the 'Frame' is the final assembled PDU structure containing the trailer. Packets and Segments do not have trailers.",
+    "tip": "The Data Link Frame is the only PDU possessing both an encapsulation Header and Trailer."
+  },
+  {
+    "id": 78,
+    "question": "Assertion (A): When calculating the number of Broadcast Domains in an enterprise network, every active physical port on a Router represents one distinct Broadcast Domain. Reason (R): Routers strictly operate at the Network Layer (Layer 3) and are hard-coded to drop Layer 2 destination MAC broadcasts (FF:FF:FF:FF:FF:FF), preventing them from traversing interfaces. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Broadcast domains represent the boundary where a broadcast frame can reach. Step 2: Hubs and Switches blindly forward Layer 2 broadcasts, creating massive single domains. Step 3: Routers are specifically engineered to block this. When a router interface receives a frame addressed to FF:FF:FF:FF:FF:FF, it processes the packet but actively refuses to route it out of any other port. Step 4: Because broadcasts die at the router interface, every individual active port on a Router mathematically equates to a separate, isolated Broadcast Domain.",
+    "trick": "Bank/IT Trap: Counting Domains: Switch ports = Collision Domains. Router ports = Broadcast Domains. This is the golden rule of basic network architecture math.",
+    "tip": "Every active interface on a Router creates and isolates a distinctly separate Broadcast Domain."
+  },
+  {
+    "id": 79,
+    "question": "During a TCP connection, Host A receives a segment from Host B with the TCP Acknowledgment Number (ACK) set to '5000'. What does the integer '5000' explicitly communicate to Host A?",
+    "options": ["Host B has successfully received exactly 5000 packets from Host A.", "Host B is requesting Host A to set its sliding window size to 5000 bytes.", "Host B has successfully received all bytes up to 4999, and the next specific byte it expects to receive from Host A is byte number 5000.", "Host B is initializing a port connection on logical port 5000."],
+    "answer": "Host B has successfully received all bytes up to 4999, and the next specific byte it expects to receive from Host A is byte number 5000.",
+    "explanation": "Step 1: TCP uses Sequence and Acknowledgment numbers for reliable flow control. Step 2: The numbers track BYTES of data, not individual packets. Step 3: The Acknowledgment Number sent back is always 'forward-looking'. Step 4: It tells the sender: 'I have safely received all data prior to this number. The next consecutive byte of data I expect you to send me is [ACK Number]'. Step 5: Therefore, an ACK of 5000 means bytes 1-4999 arrived safely, and byte 5000 is requested next.",
+    "trick": "Bank/IT Trap: TCP Acknowledgments are 'Cumulative' and 'Expectational'. They don't report what arrived last; they report what is expected NEXT.",
+    "tip": "The TCP Acknowledgment Number always indicates the next specific byte expected by the receiver."
+  },
+  {
+    "id": 80,
+    "question": "Assertion (A): Subnetting a large Class B IP network into 16 smaller subnets inherently increases the number of Broadcast Domains while proportionally reducing the size of the Collision Domains. Reason (R): Each generated subnet requires a dedicated router interface or Layer 3 Virtual LAN (VLAN) gateway, which naturally acts as a hard boundary stopping broadcast storms. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A single flat Class B network (e.g., 65,000 hosts) forms one massive, unmanageable Broadcast Domain. Step 2: Subnetting mathematically slices this IP space into smaller logical networks. Step 3: By definition, separate subnets cannot communicate without a Layer 3 routing device (Router or L3 Switch). Step 4: Because routing devices strictly block broadcasts, breaking one network into 16 subnets creates 16 isolated Broadcast Domains. Step 5: This shrinks the pool of devices sharing broadcast traffic, validating both A and R as fundamentally linked architectural concepts.",
+    "trick": "Bank/IT Trap: Subnetting = creating more Broadcast Domains. Switching = creating more Collision Domains. Know the architectural distinction!",
+    "tip": "Subnetting a network creates smaller, isolated subnets, thereby increasing the number of Broadcast Domains."
+  },
+  {
+    "id": 81,
+    "question": "A hostile actor executes an 'ARP Cache Poisoning' (ARP Spoofing) attack on a local switch network. What is the fundamental mechanism allowing this Layer 2 exploit to succeed?",
+    "options": ["ARP relies on UDP port 53, which is unencrypted and easily intercepted by spoofed DNS servers.", "ARP requests bypass switch MAC tables and alter the router's hardware ROM.", "The ARP protocol lacks statefulness and authentication; a host will blindly accept and cache a forged ARP Reply even if it never sent an ARP Request.", "ARP operates at Layer 3, allowing attackers to overwrite the IP headers directly using ICMP redirects."],
+    "answer": "The ARP protocol lacks statefulness and authentication; a host will blindly accept and cache a forged ARP Reply even if it never sent an ARP Request.",
+    "explanation": "Step 1: The ARP protocol was designed in the 1980s for trust-based networks. Step 2: It is completely stateless. It does not track whether an ARP Request was actually sent. Step 3: It completely lacks authentication. Any device can claim to be any IP. Step 4: An attacker sends continuous, forged ARP Replies ('Gratuitous ARPs') to victims, falsely mapping the attacker's MAC address to the Default Gateway's IP. Step 5: The victims blindly accept this lie, updating their ARP caches. Traffic intended for the router now flows to the attacker (Man-in-the-Middle).",
+    "trick": "Bank/IT Trap: ARP has zero built-in security. It trusts every reply it receives blindly. Mitigation requires 'Dynamic ARP Inspection' (DAI) configured on the switch.",
+    "tip": "ARP Spoofing succeeds because legacy ARP lacks authentication and blindly accepts unprompted ARP replies."
+  },
+  {
+    "id": 82,
+    "question": "Assertion (A): The 'RST' (Reset) flag in a TCP header is utilized to gracefully pause a data transmission so the receiving buffer can empty. Reason (R): RST instructs the sender to dynamically shrink its Sliding Window size to zero until a subsequent ACK resumes the flow. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Assertion (A) is completely false. The 'RST' (Reset) flag is not polite or graceful; it is the nuclear option in TCP. It violently and immediately aborts the connection without closing queues. Step 2: Reason (R) describes Flow Control (Window Size = 0), which is handled by standard ACKs and Window sizing, not the RST flag. Step 3: An RST is typically sent when a packet arrives for an invalid port, a firewall blocks a session abruptly, or a severe protocol error occurs.",
+    "trick": "Bank/IT Trap: FIN is the graceful, polite closure. RST is the violent, immediate abortion of the connection. Never confuse the two termination flags.",
+    "tip": "The TCP RST (Reset) flag violently aborts a connection instantly; it is not for pausing."
+  },
+  {
+    "id": 83,
+    "question": "Which of the following scenarios best explains why a TCP sender implements the 'Slow Start' algorithm during the initial phase of connection-oriented data transmission?",
+    "options": ["To conserve the sender's CPU cycles by throttling packet creation.", "To probe the network's maximum bandwidth capacity and avoid immediately overwhelming intermediate routers with massive bursts of traffic.", "To ensure the UDP packets traversing the same wire are given priority QoS queues.", "To synchronize the 3-way handshake timers accurately before sending the payload."],
+    "answer": "To probe the network's maximum bandwidth capacity and avoid immediately overwhelming intermediate routers with massive bursts of traffic.",
+    "explanation": "Step 1: When a TCP connection starts, the sender doesn't know the bandwidth capacity of the path. Step 2: If it immediately blasts traffic at 1 Gbps, intermediate slow routers will instantly drop packets, causing crippling congestion. Step 3: TCP implements the 'Slow Start' congestion control algorithm. Step 4: The sender starts by transmitting a very small amount of data (small Congestion Window). Step 5: For every successful ACK received, it doubles the window size exponentially. It probes the network, ramping up speed safely until packet loss occurs, discovering the optimal speed.",
+    "trick": "Bank/IT Trap: Slow Start isn't about the receiver's limits (Flow Control), it's specifically about the intermediate network's limits (Congestion Control).",
+    "tip": "TCP Slow Start prevents initial network congestion by ramping up transmission speeds exponentially."
+  },
+  {
+    "id": 84,
+    "question": "An IP packet encapsulates a payload containing a UDP Datagram. During transit across a WAN link, the packet encounters a router interface with an MTU (Maximum Transmission Unit) smaller than the packet's total size. How does the architecture resolve this size conflict?",
+    "options": ["The router drops the UDP datagram because UDP does not support fragmentation.", "The router buffers the UDP datagram and compresses the payload using gzip.", "The router utilizes the Network Layer IP header properties to fragment the packet into smaller chunks that fit the MTU.", "The router uses the Transport Layer TCP window scaling to shrink the payload retroactively."],
+    "answer": "The router utilizes the Network Layer IP header properties to fragment the packet into smaller chunks that fit the MTU.",
+    "explanation": "Step 1: The MTU dictates the largest frame size a physical link can handle (typically 1500 bytes). Step 2: If a packet exceeds this, it cannot fit on the wire. Step 3: Fragmentation is handled exclusively at the Network Layer (Layer 3) via the IP Protocol. Step 4: Even though UDP itself lacks sequencing, the IP header wrapped around the UDP datagram contains fields ('Fragment Offset' and 'More Fragments' flag). Step 5: The router slices the packet into smaller IP fragments, which the destination host safely reassembles using the IP header metadata.",
+    "trick": "Bank/IT Trap: While UDP lacks sequencing, IP does not! IP fragmentation occurs entirely at Layer 3, safely bypassing UDP's Layer 4 limitations.",
+    "tip": "Packet fragmentation is strictly a Network Layer (IP) function, entirely independent of UDP limitations."
+  },
+  {
+    "id": 85,
+    "question": "Assertion (A): A Hub physically connects multiple devices into a Star topology, but logically organizes them to function as a Bus topology. Reason (R): Internally, a Hub connects all transmission lines to a single electrical backplane; any signal injected on one port is immediately flooded to all other ports simultaneously. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Physical topology is how cables look. Logical topology is how data flows. Step 2: A Hub has multiple ports, forming a physical Star wiring layout. Step 3: However, internally, a Hub is a 'multi-port repeater'. Step 4: The internal wiring connects all ports to a single, shared electrical wire (a bus). Step 5: When data enters port 1, the Hub blindly repeats the electrical signal out of ports 2, 3, 4, etc. Because they share one collision domain, it logically functions exactly like a legacy Bus network. Both A and R are correct.",
+    "trick": "Bank/IT Trap: Always distinguish Physical vs Logical. Hub = Physical Star, Logical Bus. Switch = Physical Star, Logical Star/Point-to-Point.",
+    "tip": "Hubs act as a Physical Star topology but route data as a single Logical Bus."
+  },
+  {
+    "id": 86,
+    "question": "Within the architecture of a standard Ethernet frame (Layer 2 Encapsulation), what is the explicitly defined purpose of the 'Preamble' field that precedes the Destination MAC address?",
+    "options": ["It encrypts the payload using a pre-shared 64-bit key.", "It dictates the logical IP routing path for the underlying packet.", "It provides a sequence of alternating 1s and 0s allowing the receiving NIC hardware to synchronize its timing clock before data processing begins.", "It determines the priority level of the frame for Quality of Service (QoS) bandwidth throttling."],
+    "answer": "It provides a sequence of alternating 1s and 0s allowing the receiving NIC hardware to synchronize its timing clock before data processing begins.",
+    "explanation": "Step 1: Data on a physical wire is just a stream of voltage pulses. Step 2: When a transmission starts, the receiving Network Interface Card (NIC) must lock onto the sender's transmission speed to read the bits accurately. Step 3: The Ethernet frame begins with a Preamble (7 bytes of alternating 1s and 0s, followed by a 1-byte Start Frame Delimiter). Step 4: This physical-layer preamble acts as a metronome. It allows the receiving hardware circuitry to synchronize its internal clock perfectly right before the actual MAC address data begins.",
+    "trick": "Bank/IT Trap: The Preamble is strictly a Layer 1 hardware timing mechanism. It is stripped away immediately and never seen by Wireshark or Layer 2 software logic.",
+    "tip": "The Ethernet Preamble provides bit synchronization timing for the receiving hardware's clock circuitry."
+  },
+  {
+    "id": 87,
+    "question": "Assertion (A): Deploying multiple cascaded unmanaged Switches in a daisy-chain layout inherently increases the number of Broadcast Domains on the network. Reason (R): Switches actively read the Layer 3 IP headers and isolate cross-switch traffic to minimize network-wide broadcast storms. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: An unmanaged Switch is a pure Layer 2 device. It reads MAC addresses, not Layer 3 IP headers. Reason (R) is fundamentally false. Step 2: As established, Switches flood broadcast frames (MAC FF:FF:FF:FF:FF:FF) out of all ports. Step 3: If Switch A is cascaded to Switch B, a broadcast on A flows down the uplink cable into B, and B floods it to all its ports. Step 4: Therefore, cascading switches creates one massive, interconnected Broadcast Domain. Assertion (A) is completely false.",
+    "trick": "Bank/IT Trap: Cascading switches without VLANs or Routers creates a single giant Broadcast Domain, which heavily risks devastating broadcast storms.",
+    "tip": "Cascading Layer 2 switches expands a single Broadcast Domain; only Routers can divide it."
+  },
+  {
+    "id": 88,
+    "question": "In the encapsulation of a UDP datagram, the 16-bit 'Length' field in the UDP header specifies the combined byte size of which specific components?",
+    "options": ["The Payload only.", "The UDP Header and the Payload.", "The IP Header, UDP Header, and the Payload.", "The Frame Header, UDP Header, and the Trailer."],
+    "answer": "The UDP Header and the Payload.",
+    "explanation": "Step 1: The UDP header is composed of four 16-bit fields: Source Port, Destination Port, Length, and Checksum. Totaling 8 bytes. Step 2: The 'Length' field defines the size of the entire Layer 4 PDU (the datagram). Step 3: It calculates the size of the 8-byte UDP header itself PLUS the size of the encapsulated application payload. Step 4: It strictly ignores Layer 3 (IP) and Layer 2 (Frame) headers, as encapsulation isolates layers. Minimum length is 8 (Header only, no payload).",
+    "trick": "Bank/IT Trap: PDU fields only calculate data for their specific layer and above. A Layer 4 UDP Length field is entirely blind to the Layer 3 IP envelope wrapped around it.",
+    "tip": "The UDP Length field counts the 8-byte UDP Header plus the encapsulated Application Payload."
+  },
+  {
+    "id": 89,
+    "question": "A network architect designs a branch office containing 1 Router, linking internally to a 48-port Layer 2 Switch. The switch connects to 40 PCs, 2 Network Printers, and 1 Wireless Access Point (WAP) functioning purely as a Layer 2 bridge. How many distinct Collision Domains populate this internal LAN architecture?",
+    "options": ["43", "44", "48", "1"],
+    "answer": "44",
+    "explanation": "Step 1: Every active port on a Switch constitutes exactly one isolated Collision Domain. Step 2: Let's count the active connections plugging into the 48-port Switch. Step 3: 40 ports connect to PCs (40 domains). Step 4: 2 ports connect to Printers (2 domains). Step 5: 1 port connects to the WAP (1 domain - wireless clients on the WAP share this domain like a hub). Step 6: Crucially, 1 port connects the Switch UP to the Router (1 domain). Total: 40 + 2 + 1 + 1 = 44 active switch ports, ergo 44 Collision Domains.",
+    "trick": "Bank/IT Trap: The uplink from the Switch to the Router is a physical connection occupying a switch port! Never forget to count the Router uplink as a collision domain.",
+    "tip": "Every active port on a switch, including the uplink to a router, creates one Collision Domain."
+  },
+  {
+    "id": 90,
+    "question": "Assertion (A): The TCP Transmission protocol guarantees that duplicated packets traversing redundant network paths will not corrupt the final reassembled data file. Reason (R): The TCP receiver uses the Sequence Number field in the header to identify and silently discard any duplicate segments arriving out of order. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: IP networks route packets dynamically. Sometimes a packet gets delayed, the sender assumes it was lost, and retransmits it. Both copies eventually arrive at the destination. Step 2: Because TCP guarantees accurate delivery, it must handle these duplicates. Step 3: Assertion (A) is true; TCP guarantees the file won't be corrupted by repeated data. Step 4: Reason (R) perfectly explains the mechanic. The TCP stack examines the Sequence Numbers. If it receives Seq 1000 twice, it accepts the first, buffers it, and instantly discards the second redundant segment.",
+    "trick": "Bank/IT Trap: Sequence numbers don't just put things in the correct order; they are the absolute identifier preventing redundant duplicate data from polluting the application payload.",
+    "tip": "TCP Sequence numbers allow receivers to assemble data in order and discard redundant duplicate packets."
+  },
+  {
+    "id": 91,
+    "question": "What is the specific architectural purpose of the 'Inverse ARP' (InARP) protocol within wide area network topologies?",
+    "options": ["To resolve an unknown local IP address from a known local MAC address.", "To resolve an unknown remote IP address associated with a known Frame Relay Data-Link Connection Identifier (DLCI).", "To block rogue DHCP servers from assigning unauthorized IP configurations.", "To translate a private IP address into a public routable IP address."],
+    "answer": "To resolve an unknown remote IP address associated with a known Frame Relay Data-Link Connection Identifier (DLCI).",
+    "explanation": "Step 1: Normal ARP maps a known IP to an unknown MAC in Ethernet LANs. Step 2: Frame Relay and ATM are legacy WAN protocols that do not use MAC addresses. They use virtual circuits identified by DLCIs. Step 3: When a router is connected to a Frame Relay network, it knows its physical DLCI connection but doesn't know the IP address of the router at the other end of the circuit. Step 4: Inverse ARP (InARP) queries the other side using the known DLCI to ask 'What is your IP address?', allowing dynamic routing table updates.",
+    "trick": "Bank/IT Trap: Inverse ARP (InARP) is for WANs (Frame Relay/ATM DLCIs). Reverse ARP (RARP) is for LANs (MAC addresses). Do not confuse them!",
+    "tip": "Inverse ARP (InARP) dynamically maps known WAN DLCI circuit numbers to unknown IP addresses."
+  },
+  {
+    "id": 92,
+    "question": "Assertion (A): UDP provides a highly secure encapsulation method by natively encrypting its payload using a 128-bit MD5 hashing algorithm. Reason (R): UDP operates purely at the Transport Layer and focuses entirely on the reliable encryption of data over hostile public networks. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Assertion (A) is completely false. Standard UDP is a plain-text transmission protocol. It possesses absolutely no native encryption, MD5 hashing, or security mechanisms. Step 2: Reason (R) is also completely false. UDP focuses entirely on SPEED and minimal overhead, expressly abandoning 'reliability' (no ACKs) and 'security'. Step 3: Any encryption for UDP traffic (like DTLS for VPNs or SRTP for WebRTC) must be explicitly applied by higher OSI layers or external tunneling protocols.",
+    "trick": "Bank/IT Trap: Neither TCP nor UDP inherently encrypts payloads. Security protocols (TLS/SSL, IPsec) operate above or around them.",
+    "tip": "Standard UDP natively lacks any form of payload encryption or reliability guarantees."
+  },
+  {
+    "id": 93,
+    "question": "Which field within the TCP header explicitly dictates the maximum amount of unacknowledged data the receiving host is currently willing to accept, facilitating dynamic Flow Control?",
+    "options": ["Acknowledgment Number", "Sequence Number", "Window Size", "Urgent Pointer"],
+    "answer": "Window Size",
+    "explanation": "Step 1: If a sender transmits data faster than a receiver's CPU/RAM can process it, packets drop. Step 2: TCP manages this via Flow Control. Step 3: In every TCP header returned to the sender, the receiver populates the 16-bit 'Window Size' field. Step 4: This integer explicitly states, 'I currently have X bytes of free buffer space available'. Step 5: If the receiver is overwhelmed, it shrinks the Window Size (potentially to 0). The sender instantly throttles its transmission speed to match this advertised capacity.",
+    "trick": "Bank/IT Trap: Congestion Control relies on the network (routers dropping packets). Flow Control relies purely on the Receiver's advertised 'Window Size' field in the TCP header.",
+    "tip": "The TCP Window Size field strictly controls Flow Control based on receiver buffer capacity."
+  },
+  {
+    "id": 94,
+    "question": "An enterprise network utilizes a core Router routing between VLAN 10 and VLAN 20. If PC-A (VLAN 10) transmits a frame containing an ICMP ping intended for PC-B (VLAN 20), what data populates the Destination MAC address of the Layer 2 frame as it leaves PC-A's network interface card?",
+    "options": ["The MAC address of PC-B.", "The Broadcast MAC address (FF:FF:FF:FF:FF:FF).", "The MAC address of the default gateway (the Router's interface on VLAN 10).", "The MAC address of the switch port connected directly to PC-A."],
+    "answer": "The MAC address of the default gateway (the Router's interface on VLAN 10).",
+    "explanation": "Step 1: PC-A analyzes the target IP (PC-B). Because they are on different VLANs (different subnets), PC-A knows the destination is outside its local network. Step 2: MAC addresses cannot traverse router boundaries. Therefore, PC-A CANNOT use PC-B's MAC address. Step 3: To reach a foreign network, PC-A must send the frame to its Default Gateway. Step 4: PC-A uses ARP to find the MAC address of the Router's interface on VLAN 10. Step 5: The outgoing frame encapsulates the IP of PC-B, but explicitly uses the MAC address of the Router as the destination.",
+    "trick": "Bank/IT Trap: When routing off-subnet, the Destination IP is the final target, but the Destination MAC is ALWAYS the local Default Gateway!",
+    "tip": "Frames routed off-subnet always use the Default Gateway's MAC address as the physical destination."
+  },
+  {
+    "id": 95,
+    "question": "Assertion (A): Utilizing a transparent Layer 2 Bridge between two busy Ethernet Hub segments successfully combines their separated Collision Domains into one larger, unified Collision Domain. Reason (R): Bridges operate at the Data Link Layer, actively forwarding electrical signals across all interfaces simultaneously to ensure continuous network transparency. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Hubs create collision domains. Step 2: A Bridge is an early predecessor to the Switch, operating at Layer 2. Step 3: A Bridge dynamically builds a MAC table. Step 4: Because it reads MAC addresses, a Bridge explicitly BLOCKS local collision domains from spilling over to the other side. It breaks them apart. Assertion (A) is completely reversed. Step 5: Reason (R) is false because forwarding pure electrical signals blindly is the definition of a Layer 1 Hub, not a Layer 2 Bridge.",
+    "trick": "Bank/IT Trap: Bridges and Switches do the exact same foundational job: breaking collision domains using MAC tables. Switches just have more ports and specialized ASIC hardware.",
+    "tip": "Layer 2 Bridges isolate and break Collision Domains, preventing collisions from crossing segments."
+  },
+  {
+    "id": 96,
+    "question": "In the TCP/IP protocol suite, 'Multiplexing' and 'Demultiplexing' rely heavily on socket pairs to map traffic correctly. What comprises a complete 'Socket' address definition?",
+    "options": ["The combination of a MAC address and an IP address.", "The combination of an IP address and a Transport Layer Port Number.", "The combination of a Sequence Number and an Acknowledgment Number.", "The combination of the host hostname and the DNS resolution record."],
+    "answer": "The combination of an IP address and a Transport Layer Port Number.",
+    "explanation": "Step 1: An IP packet delivers data to the correct computer (e.g., 192.168.1.10). Step 2: Once it arrives, the OS must deliver it to the correct application (e.g., Web browser vs Email client). Step 3: It uses the Port Number for this (e.g., Port 80 for HTTP). Step 4: The mathematical combination of the IP Address and the Port Number (e.g., 192.168.1.10:80) is formally defined as a 'Socket'. Step 5: Socket pairs (Source Socket + Destination Socket) uniquely define the entire end-to-end TCP connection.",
+    "trick": "Bank/IT Trap: IP gets you to the building. Port gets you to the specific apartment room. The combined mailing address is the Socket.",
+    "tip": "A 'Socket' is precisely defined as an IP address combined with a Port Number."
+  },
+  {
+    "id": 97,
+    "question": "Assertion (A): Standard Address Resolution Protocol (ARP) tables must be flushed periodically because static MAC addresses can dynamically jump between different physical devices without warning. Reason (R): ARP Caches are held in volatile RAM, meaning they are built dynamically via broadcasts; aging out entries ensures the table accurately reflects devices that have swapped IP assignments via DHCP. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: MAC addresses are 'Burned-In Addresses' physically coded onto the NIC hardware. They do NOT dynamically jump between devices. Therefore, Assertion A is completely false. Step 2: However, IP addresses DO jump between devices dynamically via DHCP leases. Step 3: The ARP cache maps IP -> MAC. Step 4: If a device disconnects and its IP is leased to a new laptop, the old IP->MAC mapping in the ARP cache is now invalid. Step 5: Reason R is true; ARP tables age out entries specifically to purge stale IP bindings, ensuring accurate delivery.",
+    "trick": "Bank/IT Trap: IPs change; MACs are (mostly) static hardware addresses. ARP tables expire entries precisely because the IP assignments are volatile.",
+    "tip": "ARP caches age out entries to update dynamic IP assignments, not changing MAC addresses."
+  },
+  {
+    "id": 98,
+    "question": "Which of the following specific TCP connection states indicates that the server has successfully received the initial SYN packet from a client and has replied with its own SYN-ACK, but is currently waiting in memory for the final client ACK?",
+    "options": ["ESTABLISHED", "SYN_SENT", "SYN_RECEIVED", "TIME_WAIT"],
+    "answer": "SYN_RECEIVED",
+    "explanation": "Step 1: TCP connections transition through explicit states. Step 2: The client sends a SYN and enters the 'SYN_SENT' state. Step 3: The server receives the SYN, allocates a transmission control block in memory, and replies with a SYN-ACK. Step 4: At this exact moment, the server transitions into the 'SYN_RECEIVED' state. Step 5: It remains in this half-open state until it receives the final ACK from the client, at which point both devices finally transition into the 'ESTABLISHED' state for full data transfer.",
+    "trick": "Bank/IT Trap: SYN_RECEIVED is the dangerous 'Half-Open' state exploited by SYN Floods. The server hangs in this state until memory is exhausted.",
+    "tip": "The 'SYN_RECEIVED' state represents a half-open TCP connection awaiting the final ACK."
+  },
+  {
+    "id": 99,
+    "question": "Assertion (A): Implementing a 'Router on a Stick' topology successfully connects multiple isolated Broadcast Domains using a single physical router interface. Reason (R): The single physical router interface utilizes 802.1Q encapsulation to terminate multiple logical sub-interfaces, mapping each one to a specific VLAN tag. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Normally, routing between 5 VLANs requires 5 physical router cables. This is inefficient. Step 2: A 'Router on a Stick' uses one physical cable (a Trunk link) connecting the Switch to the Router. Step 3: A single physical cable can only carry traffic for one subnet natively. Step 4: Reason R explains the solution: Sub-interfaces. The router's physical port is logically sliced into sub-interfaces (e.g., GigabitEthernet0/0.10). Step 5: By reading the 802.1Q VLAN tags embedded in the Ethernet frames, the router routes traffic between these isolated broadcast domains over the single wire.",
+    "trick": "Bank/IT Trap: 'Router on a Stick' relies entirely on 802.1Q tagging (Trunking). Without the tags, the router cannot differentiate which broadcast domain the incoming frame belongs to.",
+    "tip": "Router on a Stick routes multiple VLANs over a single cable via 802.1Q sub-interfaces."
+  },
+  {
+    "id": 100,
+    "question": "During the transport layer encapsulation process, how does the UDP protocol handle an application data block that is mathematically too large to fit entirely within the Maximum Transmission Unit (MTU) of the underlying physical network?",
+    "options": ["UDP assigns sequence numbers and fragments the data block into smaller, routable datagrams.", "UDP relies entirely on the Network Layer (IP) to fragment the datagram into smaller, MTU-compliant packets.", "UDP negotiates a larger TCP Window Size with the destination to force the network hardware to accept jumbo frames.", "UDP instantly drops the application data block and returns a 'Size Exceeded' error to the application."],
+    "answer": "UDP relies entirely on the Network Layer (IP) to fragment the datagram into smaller, MTU-compliant packets.",
+    "explanation": "Step 1: The application hands a massive block of data to UDP (Layer 4). Step 2: Unlike TCP, UDP has absolutely no native mechanism for segmenting or tracking data order. It simply slaps an 8-byte header on the giant data block, creating a massive datagram. Step 3: It hands this datagram to the IP layer (Layer 3). Step 4: IP recognizes that the datagram exceeds the physical link MTU (e.g., 1500 bytes). Step 5: The IP protocol forcefully fragments the massive UDP datagram into multiple smaller IP packets, utilizing IP fragment offsets to reassemble them at the destination, bypassing UDP's limitations.",
+    "trick": "Bank/IT Trap: TCP segments data at Layer 4 to avoid IP fragmentation. UDP throws massive data blindly down the stack, forcing Layer 3 IP to clean up the mess via fragmentation.",
+    "tip": "UDP natively lacks fragmentation capabilities; it relies entirely on Layer 3 IP Fragmentation."
+  }
+]

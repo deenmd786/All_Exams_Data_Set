@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): Application software such as a web browser cannot directly instruct the hard drive to save a downloaded file. Reason (R): Applications execute in restricted User Mode and must invoke a System Call to ask the Operating System Kernel to perform hardware-level tasks on their behalf. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Applications run in Ring 3 User Mode. Step 2: Direct hardware access requires Ring 0 Kernel Mode privileges. Step 3: To bridge this, the application triggers a software interrupt. Step 4: The OS intercepts this via a system call to execute disk I/O safely. Step 5: Thus, R perfectly maps the architectural constraint in A.",
+    "trick": "Bank/IT Trap: Never assume applications have direct hardware control. They must always submit a request to the OS Kernel.",
+    "tip": "Ring 3 dictates user mode; Ring 0 commands the hardware."
+  },
+  {
+    "id": 2,
+    "question": "Which of the following execution sequences strictly represents the correct Software Dependency Architecture during a bespoke software's database read operation?",
+    "options": ["User -> Hardware -> OS -> Bespoke App", "User -> Bespoke App -> Hardware -> OS", "User -> Bespoke App -> OS Kernel -> Hardware", "OS Kernel -> User -> Bespoke App -> Hardware"],
+    "answer": "User -> Bespoke App -> OS Kernel -> Hardware",
+    "explanation": "Step 1: User initiates the query in the bespoke software. Step 2: The Bespoke App creates a read request. Step 3: The App cannot read the disk, so it issues a System Call to the OS. Step 4: The OS Kernel shifts to privileged mode and communicates with the hardware. Step 5: Data flows back up the same chain.",
+    "trick": "Trap: Bypassing the OS is physically impossible in modern protected-mode architectures.",
+    "tip": "Software dependency flows top-down: User to App to OS to Hardware."
+  },
+  {
+    "id": 3,
+    "question": "Assertion (A): A context switch between two user-level threads is generally faster than a context switch between two distinct processes. Reason (R): User-level threads do not require the CPU to transition from User Mode to Kernel Mode for scheduling. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Process switching involves swapping memory spaces and TLB flushes. Step 2: Kernel intervention is mandatory for process switching. Step 3: User-level threads share the same memory space. Step 4: A thread library in user space can schedule them without trapping into the kernel. Step 5: Avoiding the mode switch saves significant CPU cycles.",
+    "trick": "Trap: Do not confuse kernel-level threads with user-level threads; kernel threads DO require mode switches.",
+    "tip": "Mode switches are expensive; user-level threads avoid them entirely."
+  },
+  {
+    "id": 4,
+    "question": "Consider a highly specialized Core Banking System (CBS) built exclusively for RBI. What architectural limitation inherently defines this as 'Bespoke Software' rather than off-the-shelf software?",
+    "options": ["It operates entirely in Kernel Mode for security.", "It is bound by specific organizational workflows and proprietary API system calls.", "It bypasses the system software layer to interact directly with mainframe hardware.", "It uses generalized hardware abstraction layers for cross-bank compatibility."],
+    "answer": "It is bound by specific organizational workflows and proprietary API system calls.",
+    "explanation": "Step 1: Bespoke software is custom-built for specific entities. Step 2: It is designed around the exact internal workflows of that organization. Step 3: Off-the-shelf software targets generalized use-cases. Step 4: Regardless of being bespoke, it still runs in User Mode. Step 5: Therefore, custom workflow binding is the defining architectural trait.",
+    "trick": "Trap: Bespoke means custom-designed for workflow, it DOES NOT mean it gets special kernel privileges.",
+    "tip": "Bespoke equals custom-tailored workflow, not custom hardware privileges."
+  },
+  {
+    "id": 5,
+    "question": "Assertion (A): A microkernel architecture is inherently more susceptible to system crashes from faulty device drivers than a monolithic kernel. Reason (R): In a monolithic kernel, device drivers execute in Ring 0, whereas in a microkernel, they execute in User Mode. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: A monolithic kernel runs all services, including drivers, in Ring 0. Step 2: A microkernel isolates drivers in User Mode (Ring 3). Step 3: If a driver crashes in Ring 0, the whole system panics (crashes). Step 4: If a driver crashes in Ring 3, only that service dies, keeping the OS stable. Step 5: Therefore, A is false because microkernels are LESS susceptible to crashes.",
+    "trick": "Trap: Microkernels sacrifice speed for stability. Monolithic kernels sacrifice stability for speed.",
+    "tip": "Microkernels isolate failures in user space for better stability."
+  },
+  {
+    "id": 6,
+    "question": "During the execution of a bespoke ERP application, a 'Trap' is generated. Which of the following accurately traces the architectural response mechanism?",
+    "options": ["Hardware fault -> User Mode suspends -> Bespoke App resolves -> Resumes execution", "Software instruction -> CPU switches to Kernel Mode -> OS handles exception -> Returns to User Mode", "External interrupt -> OS bypasses App -> CPU halts -> Kernel Mode triggers", "System Call -> CPU bypasses Kernel Mode -> Direct Hardware Access -> Memory dump"],
+    "answer": "Software instruction -> CPU switches to Kernel Mode -> OS handles exception -> Returns to User Mode",
+    "explanation": "Step 1: A trap is a synchronous software-generated interrupt. Step 2: It is caused by an error (divide by zero) or a specific request (system call). Step 3: The CPU immediately elevates from User Mode to Kernel Mode. Step 4: The OS executes the trap handler routine. Step 5: Upon resolution, control is returned to the user process.",
+    "trick": "Trap vs Interrupt Trap: Traps are internal/synchronous from software; Interrupts are external/asynchronous from hardware.",
+    "tip": "Traps are software-triggered exceptions requiring OS kernel intervention."
+  },
+  {
+    "id": 7,
+    "question": "Assertion (A): When an SBI PO terminal application executes a 'printf' statement, the CPU physically remains in User Mode for the entire duration of the text rendering. Reason (R): Standard library functions wrap System Calls to abstract hardware complexity from the bespoke application layer. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: 'printf' is a standard C library function running in user space. Step 2: However, it eventually calls 'write()' to output to the screen. Step 3: 'write()' is a System Call. Step 4: Executing a System Call forces a mode switch to Kernel Mode. Step 5: Therefore, A is false because the CPU does NOT remain in User Mode.",
+    "trick": "Trap: High-level functions disguise system calls. Printing to a screen is hardware I/O and strictly requires Kernel Mode.",
+    "tip": "Any I/O operation mathematically guarantees a switch to Kernel Mode."
+  },
+  {
+    "id": 8,
+    "question": "Identify the incorrect mapping regarding the transition between execution levels in a modern x86 architecture running a custom inventory system.",
+    "options": ["Ring 3 to Ring 0: Occurs via an Interrupt Descriptor Table (IDT) entry.", "Ring 0 to Ring 3: Occurs via an IRET (Interrupt Return) instruction.", "Ring 3 to Ring 3: Handled by Context Switching within the OS Kernel.", "Ring 3 to Ring 0: Can be triggered intentionally via a Software Interrupt (e.g., INT 0x80)."],
+    "answer": "Ring 3 to Ring 3: Handled by Context Switching within the OS Kernel.",
+    "explanation": "Step 1: Execution levels define privilege. User apps run in Ring 3. Step 2: System calls (Ring 3 to 0) use the IDT or specific instructions (SYSCALL). Step 3: Returning uses IRET or SYSRET. Step 4: Context switching is an OS function (Ring 0), swapping out one Ring 3 app for another. Step 5: Therefore, the OS itself must run in Ring 0 to facilitate this switch, making direct Ring 3 to Ring 3 management via the Kernel a contradictory statement.",
+    "trick": "Trap: The kernel cannot operate in Ring 3. Context switching fundamentally requires Ring 0 privileges.",
+    "tip": "Context switching always involves Ring 0 OS orchestration."
+  },
+  {
+    "id": 9,
+    "question": "Assertion (A): A bespoke state PSC examination portal built on Java relies on the JVM to translate System Calls for the underlying OS. Reason (R): The JVM acts as a middleware abstraction layer, allowing application software to be independent of the OS's specific System Call API. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Java apps are compiled to bytecode, not native machine code. Step 2: The JVM executes this bytecode. Step 3: When the Java app needs I/O, it asks the JVM. Step 4: The JVM, acting as a native process, translates this into the host OS's specific System Call. Step 5: Thus, R correctly explains how the JVM provides OS independence (A).",
+    "trick": "Trap: Java doesn't make direct OS system calls; the JVM makes them on Java's behalf.",
+    "tip": "JVM is the bridge between bytecode and OS native system calls."
+  },
+  {
+    "id": 10,
+    "question": "In the context of execution modes, what is the primary structural reason a 'fork()' system call is significantly heavier on CPU cycles than a simple library function call within a bespoke application?",
+    "options": ["fork() requires dynamic recompilation of application code.", "fork() bypasses the OS and interacts directly with the Memory Management Unit.", "fork() triggers a transition to Kernel Mode to duplicate the entire Process Control Block (PCB).", "fork() executes entirely in User Mode but must halt all other CPU cores."],
+    "answer": "fork() triggers a transition to Kernel Mode to duplicate the entire Process Control Block (PCB).",
+    "explanation": "Step 1: 'fork()' is used to create a new process. Step 2: A library call executes within the current process's user space memory. Step 3: Process creation requires OS intervention to allocate new memory and duplicate the PCB. Step 4: This mandates a costly context switch and Kernel Mode execution. Step 5: The overhead of setting up kernel structures makes fork() expensive.",
+    "trick": "Trap: System calls are always more expensive than library calls due to the mandatory mode switch overhead.",
+    "tip": "Mode switching to Kernel involves overhead that library functions skip."
+  },
+  {
+    "id": 11,
+    "question": "Assertion (A): Direct Memory Access (DMA) controllers completely eliminate the need for the CPU to enter Kernel Mode during bulk disk I/O operations. Reason (R): The DMA controller directly transfers data between the disk and RAM, bypassing the CPU entirely. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: It is true that DMA transfers data directly between hardware and RAM (R is true). Step 2: However, to initiate the DMA transfer, the application must make a system call. Step 3: The OS in Kernel Mode configures the DMA controller's registers. Step 4: The CPU then does other work, and the DMA sends an interrupt when done. Step 5: Thus, Kernel Mode is still initially required, making A false.",
+    "trick": "Trap: DMA saves CPU cycles during the transfer, but the setup still mandates Kernel Mode intervention.",
+    "tip": "DMA handles the heavy lifting, but Kernel sets up the DMA."
+  },
+  {
+    "id": 12,
+    "question": "An Advanced IT Teacher sets up a bespoke grading system. If a malicious student tries to execute a privileged machine instruction directly from the grading application, what architectural defense mechanism prevents systemic compromise?",
+    "options": ["The application's built-in bespoke firewall blocks the instruction.", "The CPU hardware detects the privilege mismatch and generates a Trap.", "The System Call interface automatically sanitizes and approves the instruction.", "The Operating System preemptively recompiles the instruction into User Mode."],
+    "answer": "The CPU hardware detects the privilege mismatch and generates a Trap.",
+    "explanation": "Step 1: The application runs in Ring 3 (User Mode). Step 2: Privileged instructions (like halting the CPU) require Ring 0. Step 3: When a Ring 3 process attempts a Ring 0 instruction, the CPU hardware flags a violation. Step 4: This physical hardware check triggers a trap/exception. Step 5: The OS catches the trap and terminates the rogue process.",
+    "trick": "Trap: The defense is primarily enforced by the CPU hardware (Rings), not just the software OS.",
+    "tip": "Hardware rings strictly enforce privilege separation at the silicon level."
+  },
+  {
+    "id": 13,
+    "question": "Assertion (A): In a strict monolithic kernel OS, the failure of a custom video driver will inevitably lead to a complete system crash (Kernel Panic). Reason (R): All device drivers in a monolithic architecture operate within the same shared kernel memory space. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Monolithic kernels load everything (VFS, IPC, drivers) into Ring 0. Step 2: They share a single, unprotected memory space for performance. Step 3: If a driver attempts an illegal memory access, there is no isolation boundary. Step 4: The entire kernel space is corrupted. Step 5: This causes a fatal system crash, perfectly explained by R.",
+    "trick": "Trap: Unlike microkernels, monolithic kernels lack internal sandboxing for drivers.",
+    "tip": "Monolithic means one shared memory space; one crash kills all."
+  },
+  {
+    "id": 14,
+    "question": "Which system call sequence is logically mandatory for a bespoke financial application to establish a network connection, send encrypted payload, and close the session?",
+    "options": ["socket() -> bind() -> connect() -> write() -> close()", "open() -> fork() -> write() -> exec() -> close()", "connect() -> read() -> socket() -> close() -> write()", "socket() -> ioctl() -> read() -> bind() -> close()"],
+    "answer": "socket() -> bind() -> connect() -> write() -> close()",
+    "explanation": "Step 1: A network endpoint must first be created via socket(). Step 2: bind() associates it with a local port (optional for clients, but structurally valid). Step 3: connect() establishes the TCP handshake with the remote server. Step 4: write() transmits the encrypted payload. Step 5: close() tears down the connection gracefully.",
+    "trick": "Trap: You cannot write() to a network without first establishing a socket and connection.",
+    "tip": "Socket programming follows: Create, Bind/Connect, Transfer, Close."
+  },
+  {
+    "id": 15,
+    "question": "Assertion (A): Off-the-shelf software like MS Office generally exhibits lower OS coupling than bespoke software tightly integrated with proprietary banking hardware. Reason (R): Bespoke software often utilizes undocumented or highly specific System Calls tailored to customized peripheral devices. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: COTS (Commercial Off-The-Shelf) software uses standard POSIX or Win32 APIs for broad compatibility. Step 2: Bespoke software is built for exact organizational hardware (e.g., custom ATM dispensers). Step 3: To interact with this hardware, custom kernel drivers and specific IOCTL system calls are used. Step 4: This creates a tight, highly coupled dependency on the specific OS configuration. Step 5: Hence, R accurately justifies A.",
+    "trick": "Trap: Bespoke systems prioritize absolute functionality for one client over broad market compatibility.",
+    "tip": "Bespoke means custom-fit, often resulting in tighter hardware/OS coupling."
+  },
+  {
+    "id": 16,
+    "question": "Analyze the following software dependency chain. If a bespoke payroll system needs to query an external time-clock device via USB, where does the execution formally cross the user-kernel boundary?",
+    "options": ["Between the User and the Payroll System Application.", "Between the Payroll System Application and the standard USB Library.", "Between the USB Library and the OS Kernel USB Driver.", "Between the OS Kernel USB Driver and the physical USB Hardware."],
+    "answer": "Between the USB Library and the OS Kernel USB Driver.",
+    "explanation": "Step 1: The User interacts with the App (Ring 3). Step 2: The App calls a User-Space USB library (still Ring 3). Step 3: The library formulates a request and issues a System Call. Step 4: The System Call traps into the OS Kernel (Boundary crossed: Ring 3 to Ring 0). Step 5: The OS Kernel interacts with the hardware.",
+    "trick": "Trap: Libraries like libusb run in user space. The actual boundary is when the library asks the OS for access.",
+    "tip": "The boundary is always crossed at the System Call interface."
+  },
+  {
+    "id": 17,
+    "question": "Assertion (A): Implementing a System Call interface via a software interrupt (e.g., INT 80h) is inherently slower than using modern CPU instructions like SYSCALL or SYSENTER. Reason (R): Software interrupts require the CPU to consult the Interrupt Descriptor Table (IDT) and perform multiple memory lookups before switching context. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Legacy systems used INT 80h to trigger system calls. Step 2: This required pushing state to the stack, reading the IDT, and calculating offsets in memory. Step 3: Memory lookups are notoriously slow compared to CPU register operations. Step 4: Modern instructions (SYSCALL) bypass the IDT, loading the target kernel address directly from specialized CPU registers. Step 5: This makes SYSCALL significantly faster, validating R as the explanation for A.",
+    "trick": "Trap: Understand that SYSCALL was invented specifically to bypass the heavy overhead of IDT lookups.",
+    "tip": "SYSCALL instructions bypass memory lookups for faster kernel transitions."
+  },
+  {
+    "id": 18,
+    "question": "A State PSC candidate encounters a question on Multiprogramming. In a system running multiple bespoke applications simultaneously, what guarantees that App A cannot overwrite App B's memory space?",
+    "options": ["System Calls validate every memory write dynamically.", "Applications are programmed to respect memory boundaries voluntarily.", "The OS Kernel configures the MMU (Memory Management Unit) to enforce hardware-level page boundaries.", "The Bespoke applications run in Ring 0, where memory sharing is inherently synchronized."],
+    "answer": "The OS Kernel configures the MMU (Memory Management Unit) to enforce hardware-level page boundaries.",
+    "explanation": "Step 1: Apps run in Ring 3 and use virtual memory addresses. Step 2: The MMU translates virtual addresses to physical RAM. Step 3: The OS Kernel sets up page tables for each app. Step 4: If App A tries to access a physical address mapped to App B, the MMU hardware blocks it. Step 5: The MMU then generates a segmentation fault, trapping into the OS to kill App A.",
+    "trick": "Trap: Memory protection is a hardware feature (MMU) configured by the software (OS Kernel). Software alone is too slow.",
+    "tip": "The MMU is the physical bouncer protecting process memory."
+  },
+  {
+    "id": 19,
+    "question": "Assertion (A): A bespoke application cannot utilize an open-source database backend like PostgreSQL. Reason (R): Bespoke software mandates that every tier of the Software Dependency Architecture must be custom-developed from scratch. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Bespoke software refers to custom-built application logic for a specific client. Step 2: It routinely integrates with standard OS, standard hardware, and standard off-the-shelf databases (like PostgreSQL). Step 3: The 'bespoke' nature applies to the business logic layer, not the entire stack. Step 4: Therefore, A is false. Step 5: R is also false because reinventing the OS and database is economically unviable and technically unnecessary.",
+    "trick": "Trap: Bespoke does not mean 'everything is built from scratch.' It means the final application layer is tailored.",
+    "tip": "Bespoke refers to custom application logic, not reinventing the wheel."
+  },
+  {
+    "id": 20,
+    "question": "During a context switch between two bespoke applications, which of the following is NOT preserved in the Process Control Block (PCB)?",
+    "options": ["Program Counter (PC) value.", "CPU Register states.", "The physical contents of the application's RAM.", "Process State (Running, Waiting, etc.)."],
+    "answer": "The physical contents of the application's RAM.",
+    "explanation": "Step 1: A context switch pauses one process to run another. Step 2: The OS must save the exact CPU state to resume later. Step 3: The PCB stores the Program Counter, Registers, and State. Step 4: The actual data in RAM is not moved or stored in the PCB; the PCB only stores the pointers (page tables) to that RAM. Step 5: Therefore, RAM contents remain in physical memory, untouched by the PCB.",
+    "trick": "Trap: The PCB stores metadata and CPU state, not the gigabytes of actual application data memory.",
+    "tip": "PCB holds the architectural state, not the raw memory payload."
+  },
+  {
+    "id": 21,
+    "question": "Assertion (A): The 'exec()' system call family completely replaces the current process's memory space with a new program. Reason (R): In UNIX-like systems, 'exec()' is typically called immediately after 'fork()' to launch a completely different bespoke application. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: 'fork()' duplicates the current process, creating a clone. Step 2: The clone is rarely useful as an exact duplicate. Step 3: 'exec()' is called within the child process. Step 4: 'exec()' asks the Kernel to wipe the clone's memory and load a new executable. Step 5: This two-step 'fork-exec' mechanism is the standard UNIX way to spawn new distinct applications, linking A and R logically.",
+    "trick": "Trap: fork() creates the shell, exec() fills it with a new program. They work as a pair.",
+    "tip": "fork() clones; exec() replaces. Together they launch apps."
+  },
+  {
+    "id": 22,
+    "question": "When an IT administrator uses a 'kill -9' command to terminate a hung bespoke application, how does the system process this command structurally?",
+    "options": ["The kill command modifies the application's internal code to trigger an exit.", "The kill command sends a system call to the Kernel, which dispatches a SIGKILL signal to the target process.", "The kill command directly flushes the RAM allocated to the bespoke application.", "The OS bypasses Kernel Mode and halts the CPU core running the application."],
+    "answer": "The kill command sends a system call to the Kernel, which dispatches a SIGKILL signal to the target process.",
+    "explanation": "Step 1: 'kill' is a user-space utility. Step 2: It invokes the 'kill()' system call, passing the target PID and signal number (9). Step 3: The CPU switches to Kernel Mode. Step 4: The Kernel receives the request, bypasses the application's signal handlers, and forcibly removes its PCB and memory mappings. Step 5: The application is structurally dismantled by the OS.",
+    "trick": "Trap: User apps cannot kill each other directly. They must petition the Kernel via signals.",
+    "tip": "Signals are Kernel-mediated messages used to manage process lifecycles."
+  },
+  {
+    "id": 23,
+    "question": "Assertion (A): System Software like compilers and debuggers execute exclusively in Kernel Mode because they manipulate application code. Reason (R): Any software that modifies or translates another software's instructions must bypass User Mode restrictions. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Compilers and debuggers are system software, but they DO NOT run in Kernel Mode. Step 2: They operate in Ring 3 (User Mode) just like normal applications. Step 3: A compiler simply reads text files and writes binary files using standard I/O system calls. Step 4: A debugger uses specific system calls (like ptrace) to inspect processes, but the debugger itself remains in User Mode. Step 5: Therefore, both A and R are completely false.",
+    "trick": "Trap: 'System Software' does not automatically mean 'Kernel Mode'. Only the OS Kernel and drivers run in Ring 0.",
+    "tip": "Compilers and most system utilities run strictly in User Mode."
+  },
+  {
+    "id": 24,
+    "question": "Consider a highly secure banking environment. Why might the RBI mandate 'Bespoke' software for a cryptographic module instead of an off-the-shelf solution?",
+    "options": ["Bespoke software runs inherently faster by bypassing system calls.", "Bespoke software allows for exact auditing, hidden proprietary algorithms, and removal of unnecessary attack surfaces.", "Off-the-shelf software cannot be installed on enterprise hardware.", "Bespoke software executes entirely in Ring 0, guaranteeing cryptographic safety."],
+    "answer": "Bespoke software allows for exact auditing, hidden proprietary algorithms, and removal of unnecessary attack surfaces.",
+    "explanation": "Step 1: Security relies on minimizing vulnerabilities (attack surface). Step 2: COTS software includes many features not needed by the bank, which could contain bugs. Step 3: Bespoke software is stripped down to exactly what is needed. Step 4: It allows the bank full code ownership for rigorous auditing and proprietary implementations. Step 5: This reduces reliance on third-party security patches.",
+    "trick": "Trap: Bespoke software does not magically run in Ring 0 or bypass system calls; its advantage is architectural control.",
+    "tip": "Bespoke security lies in minimal attack surface and total code control."
+  },
+  {
+    "id": 25,
+    "question": "Assertion (A): The transition from Application Software to System Software via a System Call involves a Context Switch. Reason (R): A mode switch (Ring 3 to Ring 0) is fundamentally the same architectural process as a Context Switch. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A mode switch changes privileges (User to Kernel) but keeps the SAME process running. Step 2: A Context Switch stops Process A and starts Process B. Step 3: A System Call causes a mode switch, NOT necessarily a context switch. Step 4: Context switches are much heavier because they flush the TLB and swap PCBs. Step 5: Therefore, A is false, and R is structurally incorrect.",
+    "trick": "Trap: Mode Switch ≠ Context Switch. A system call is just a mode switch unless the OS decides to schedule another app.",
+    "tip": "Mode switch changes privilege; Context switch changes the active process."
+  },
+  {
+    "id": 26,
+    "question": "In a bespoke Linux-based server environment, which system call is responsible for dynamically expanding the heap memory of an application at runtime?",
+    "options": ["mmap() / brk()", "alloc() / free()", "fork() / exec()", "mount() / unmount()"],
+    "answer": "mmap() / brk()",
+    "explanation": "Step 1: When an application uses 'malloc()' in C, it's a library call. Step 2: If the heap is exhausted, the library must ask the OS for more RAM. Step 3: It does this by invoking 'brk()' or 'sbrk()' to move the data segment boundary. Step 4: Alternatively, 'mmap()' is used to allocate large blocks of memory directly via page mapping. Step 5: Both are the fundamental System Calls for memory expansion.",
+    "trick": "Trap: 'malloc()' is a user-space library function, NOT a system call. It wraps brk()/mmap().",
+    "tip": "malloc() asks the library; brk() asks the Kernel."
+  },
+  {
+    "id": 27,
+    "question": "Assertion (A): Hardware abstraction layers (HAL) ensure that bespoke application software can remain unchanged even if the physical CPU architecture changes from x86 to ARM. Reason (R): The HAL operates strictly in User Mode, translating Application logic into universal machine code before execution. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: A HAL hides hardware differences from the OS and applications, making A true in theory (with recompilation or emulation). Step 2: However, HAL is a component of the System Software/Kernel layer. Step 3: It executes in Ring 0, interacting directly with hardware registers. Step 4: It does NOT operate in User Mode. Step 5: Therefore, R is architecturally false.",
+    "trick": "Trap: HAL is a deep OS component, not a user-space translation layer.",
+    "tip": "HAL lives in the Kernel layer to abstract hardware complexity."
+  },
+  {
+    "id": 28,
+    "question": "Which of the following scenarios perfectly illustrates the concept of 'Spooling' in the context of Software Dependency Architecture?",
+    "options": ["An OS bypassing the cache to write directly to a hard drive.", "A bespoke app writing print jobs to a disk buffer (via OS) while the slower printer hardware catches up.", "A CPU switching rapidly between User Mode and Kernel Mode.", "An application executing entirely in RAM without ever invoking a system call."],
+    "answer": "A bespoke app writing print jobs to a disk buffer (via OS) while the slower printer hardware catches up.",
+    "explanation": "Step 1: Spooling stands for Simultaneous Peripheral Operations On-Line. Step 2: It solves the speed mismatch between fast CPUs/Apps and slow I/O devices. Step 3: The App sends data via System Calls to the OS. Step 4: The OS writes it to a fast disk buffer (spool). Step 5: The OS then slowly feeds it to the printer, freeing the App to continue working.",
+    "trick": "Trap: Spooling requires OS intervention (System Calls) to manage the buffer; apps don't manage the spool directly.",
+    "tip": "Spooling buffers data to disk to decouple fast apps from slow hardware."
+  },
+  {
+    "id": 29,
+    "question": "Assertion (A): System calls represent a bottleneck in high-frequency trading (HFT) bespoke software. Reason (R): The transition from Ring 3 to Ring 0 incurs CPU cycle penalties and cache flushing overhead. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: HFT requires microsecond latency. Step 2: Standard network I/O requires system calls (socket, read, write). Step 3: Transitioning to Kernel Mode (Ring 0) requires saving registers and pipeline flushes. Step 4: This overhead is unacceptable in HFT. Step 5: R accurately explains the bottleneck described in A (leading HFT to use kernel-bypass technologies).",
+    "trick": "Trap: In extreme performance scenarios, the very architecture that provides security (Rings) becomes a liability.",
+    "tip": "Mode switches cost nanoseconds, which HFT systems desperately avoid."
+  },
+  {
+    "id": 30,
+    "question": "If a bespoke application utilizes an 'API' (Application Programming Interface) provided by Windows (Win32), what is the structural relationship between the API and System Calls?",
+    "options": ["The API completely replaces System Calls, executing hardware tasks in User Mode.", "The API is a set of System Calls hardcoded into the CPU silicon.", "The API acts as a User Mode wrapper that internally invokes the appropriate OS System Calls.", "The API elevates the application permanently to Kernel Mode."],
+    "answer": "The API acts as a User Mode wrapper that internally invokes the appropriate OS System Calls.",
+    "explanation": "Step 1: APIs like Win32 or POSIX are libraries provided for developers. Step 2: They run in User Space. Step 3: They abstract the ugly, architecture-specific details of direct System Calls. Step 4: When a developer calls 'CreateFile()' in Win32, the API does error checking in User Mode, then invokes the actual 'NtCreateFile' System Call. Step 5: The API is just a convenient wrapper.",
+    "trick": "Trap: APIs are not system calls themselves; they are the user-friendly envelope holding the system call.",
+    "tip": "APIs wrap System Calls to provide a standardized programming interface."
+  },
+  {
+    "id": 31,
+    "question": "Assertion (A): Microkernel operating systems heavily rely on Inter-Process Communication (IPC) to function. Reason (R): Because most system services (like file systems and drivers) run as separate User Mode processes in a microkernel, they must communicate via message passing managed by the minimal kernel. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A microkernel shrinks Ring 0 to bare essentials (IPC, scheduling). Step 2: It pushes file systems, networking, and drivers to Ring 3 (User Mode). Step 3: An app needing to read a file cannot make a direct system call to the VFS. Step 4: Instead, the app sends an IPC message to the VFS server process. Step 5: The microkernel routes this message, heavily relying on IPC as R states.",
+    "trick": "Trap: In monolithic kernels, services use direct function calls. In microkernels, they use IPC messaging.",
+    "tip": "Microkernels survive on IPC routing between isolated user-space servers."
+  },
+  {
+    "id": 32,
+    "question": "In a layered operating system architecture, why is it structurally impossible for Application Software to issue instructions directly to the Memory Controller Hub (Hardware)?",
+    "options": ["Application software lacks the necessary compiler flags.", "The Memory Controller Hub only understands Assembly language.", "The CPU's execution rings physically restrict hardware-addressing instructions to Ring 0.", "The BIOS intercepts all application instructions before they reach the CPU."],
+    "answer": "The CPU's execution rings physically restrict hardware-addressing instructions to Ring 0.",
+    "explanation": "Step 1: The architecture enforces a strict hierarchy: Hardware -> OS -> App. Step 2: This is enforced physically by CPU design (Rings). Step 3: Instructions that manipulate hardware controllers (like IN/OUT instructions on x86) are privileged. Step 4: If an App in Ring 3 tries to execute them, the CPU throws a General Protection Fault. Step 5: Thus, it's a physical hardware constraint, not just a software suggestion.",
+    "trick": "Trap: OS security is ultimately enforced by silicon (the CPU rings), not just software logic.",
+    "tip": "Execution rings are hardware-enforced privilege boundaries."
+  },
+  {
+    "id": 33,
+    "question": "Assertion (A): Dual-mode operation provides fundamental protection for the OS Kernel against errant bespoke software. Reason (R): By separating execution into User Mode and Kernel Mode, the OS ensures that a crash in a bespoke application's memory space does not overwrite kernel data structures. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Dual-mode means having at least two states (User and Kernel). Step 2: Bespoke apps run in User Mode with restricted memory access via the MMU. Step 3: Kernel space memory is flagged as inaccessible from User Mode. Step 4: If the app has a bug (e.g., wild pointer), it can only corrupt its own user space. Step 5: R flawlessly explains how this architectural split protects the OS (A).",
+    "trick": "Trap: Dual-mode is the cornerstone of modern OS stability. Without it, any app bug brings down the system.",
+    "tip": "Dual-mode isolates the fragile OS from unpredictable user applications."
+  },
+  {
+    "id": 34,
+    "question": "Which of the following accurately describes the role of the 'Trap Vector' in resolving a System Call from a bespoke application?",
+    "options": ["It converts high-level application code into low-level C code.", "It is an array of pointers in Kernel memory that directs the CPU to the specific OS routine for handling the interrupt.", "It bypasses the Kernel to establish a direct DMA channel to the hard drive.", "It maps the application's virtual memory to physical RAM."],
+    "answer": "It is an array of pointers in Kernel memory that directs the CPU to the specific OS routine for handling the interrupt.",
+    "explanation": "Step 1: When a System Call is executed, a software interrupt occurs. Step 2: The CPU needs to know exactly which kernel function to run (e.g., read, write, open). Step 3: The System Call number acts as an index. Step 4: The OS looks up this index in the Trap Vector (or Interrupt Descriptor Table). Step 5: The pointer directs the CPU to the correct Ring 0 handling routine.",
+    "trick": "Trap: The Trap Vector acts as a lookup table bridging generic interrupt signals to specific kernel functions.",
+    "tip": "Trap Vector = Directory of Kernel Functions indexed by System Call ID."
+  },
+  {
+    "id": 35,
+    "question": "Assertion (A): Caching intermediate computation results within a bespoke application is inherently faster than writing them to a temporary file on an SSD. Reason (R): Application caching utilizes CPU registers, completely bypassing both RAM and System Calls. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: Caching in-memory (RAM) is indeed faster than writing to an SSD, so A is True. Step 2: However, application-level caching uses heap memory, which lives in RAM. Step 3: It does not use CPU registers (which are volatile, tiny, and hardware-managed). Step 4: While it bypasses I/O System Calls, it still heavily relies on RAM. Step 5: Therefore, R is a false statement.",
+    "trick": "Trap: Don't confuse application-level software caching (RAM) with hardware-level CPU caching (L1/L2/Registers).",
+    "tip": "Software caching relies on RAM, not direct control of CPU registers."
+  },
+  {
+    "id": 36,
+    "question": "An IT Officer is analyzing a bespoke legacy system that uses 'Busy Waiting' (Spinlocks) for IPC synchronization. Why is this architecturally detrimental in a single-processor User Mode environment?",
+    "options": ["It forces the CPU into a permanent Kernel Panic.", "It wastes CPU cycles checking a condition while preventing the lock-holder from executing to release it.", "It causes the System Call interface to crash.", "It illegally bypasses the MMU."],
+    "answer": "It wastes CPU cycles checking a condition while preventing the lock-holder from executing to release it.",
+    "explanation": "Step 1: Busy waiting involves a loop checking if a lock is free. Step 2: In a single-core system, if Process A is spinning, Process B (the lock holder) cannot run. Step 3: Process A wastes its entire time slice doing nothing productive. Step 4: This starves the system until the OS forcefully context-switches. Step 5: It's an architectural flaw in User Mode synchronization without yielding.",
+    "trick": "Trap: Spinlocks are okay in multi-core Kernel Mode for very short waits, but terrible in single-core User Mode.",
+    "tip": "Spinlocks waste CPU cycles; yielding via System Calls saves them."
+  },
+  {
+    "id": 37,
+    "question": "Assertion (A): Virtual Machines (VMs) running multiple operating systems complicate the standard Ring 0/Ring 3 architectural model. Reason (R): The Hypervisor (VMM) must execute at a higher privilege level than the guest OS Kernels to manage physical hardware securely. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Traditionally, the OS runs in Ring 0 and apps in Ring 3. Step 2: In virtualization, a Guest OS thinks it's in Ring 0. Step 3: If multiple Guest OSs actually had Ring 0, they would clash over hardware. Step 4: The Hypervisor creates a 'Ring -1' (e.g., Intel VMX Root). Step 5: The Hypervisor intercepts privileged calls from the Guest OS, explaining why VMs complicate the legacy ring model.",
+    "trick": "Trap: Guest OSs in a VM are technically running in a modified unprivileged mode, trapped by the Hypervisor.",
+    "tip": "Hypervisors operate below Ring 0 (colloquially Ring -1) to manage Guest OSs."
+  },
+  {
+    "id": 38,
+    "question": "Which specific System Call paradigm allows a bespoke web server to handle thousands of concurrent connections efficiently without allocating a heavy thread for every single user?",
+    "options": ["Blocking I/O via read()", "Asynchronous/Event-driven I/O via epoll() or kqueue()", "Preemptive Multitasking via fork()", "Direct Memory Access (DMA) bypassing the OS"],
+    "answer": "Asynchronous/Event-driven I/O via epoll() or kqueue()",
+    "explanation": "Step 1: Traditional blocking I/O halts the thread until data arrives, limiting scalability. Step 2: Forking a process per user exhausts RAM and context-switch capacity. Step 3: epoll() (Linux) or kqueue() (BSD) allows a single thread to monitor thousands of sockets. Step 4: The OS Kernel notifies the application only when a socket is ready for reading/writing. Step 5: This event-driven architecture defines modern high-performance bespoke servers (like Nginx).",
+    "trick": "Trap: 'fork()' is archaic for massive concurrency. Event loops via epoll() are the modern architectural standard.",
+    "tip": "epoll/kqueue allows single threads to manage massive concurrent I/O."
+  },
+  {
+    "id": 39,
+    "question": "Assertion (A): In a POSIX-compliant OS, file descriptors are universally used to represent open files, network sockets, and pipes within a bespoke application. Reason (R): File descriptors are direct memory pointers to physical hardware sectors on the disk. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: POSIX systems treat 'everything as a file', so file descriptors (FDs) abstract files, sockets, and pipes (A is True). Step 2: However, an FD is merely an integer index (0, 1, 2...). Step 3: This index points to an entry in the kernel's File Descriptor Table for that process. Step 4: It does NOT point to physical hardware. Step 5: The OS translates the FD to internal data structures (inodes), making R false.",
+    "trick": "Trap: An FD is an integer abstraction, not a raw memory pointer. Applications never get raw disk pointers.",
+    "tip": "File Descriptors are integer abstractions managed by the Kernel, not raw pointers."
+  },
+  {
+    "id": 40,
+    "question": "When a bespoke Java application undergoes Garbage Collection (GC), how does this internal process interact with the Operating System's execution modes?",
+    "options": ["The JVM executes GC entirely in Ring 0 to freeze memory instantly.", "The JVM pauses application threads in User Mode, and may invoke System Calls to release freed memory pages back to the OS.", "The OS Kernel initiates the GC autonomously via a hardware interrupt.", "GC bypasses the System Call interface to format RAM directly."],
+    "answer": "The JVM pauses application threads in User Mode, and may invoke System Calls to release freed memory pages back to the OS.",
+    "explanation": "Step 1: The JVM operates in User Mode (Ring 3). Step 2: GC is an algorithm within the JVM that manages heap memory. Step 3: It runs in User Mode, pausing other Java threads (Stop-the-World). Step 4: If GC frees a massive amount of memory, the JVM might use System Calls (like madvise or munmap) to tell the OS the physical RAM can be reclaimed. Step 5: GC is primarily User Mode logic with occasional OS interactions.",
+    "trick": "Trap: Garbage Collection is an application-layer framework (JVM), not an OS Kernel feature.",
+    "tip": "JVM GC operates in User Mode, managing its pre-allocated heap."
+  },
+  {
+    "id": 41,
+    "question": "Assertion (A): Time-sharing systems depend heavily on hardware timer interrupts to enforce multiprogramming among bespoke applications. Reason (R): Without timer interrupts, a poorly written application containing an infinite loop in User Mode could monopolize the CPU indefinitely. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Preemptive multitasking requires the OS to forcibly take control from processes. Step 2: If an app is in an infinite loop, it will never voluntarily yield via a system call. Step 3: A programmable interval timer (hardware) sends periodic interrupts to the CPU. Step 4: This hardware interrupt forces the CPU into Kernel Mode. Step 5: The OS Scheduler then runs and can swap the rogue process out, proving R is the vital explanation for A.",
+    "trick": "Trap: Software cannot preempt itself if stuck; it requires a hardware timer to force OS intervention.",
+    "tip": "Hardware timer interrupts are the heartbeat of preemptive multitasking."
+  },
+  {
+    "id": 42,
+    "question": "Which of the following creates a 'Zombie Process' in the OS architecture, requiring administrative intervention?",
+    "options": ["A bespoke application that spawns a child process, which completes execution, but the parent fails to invoke the wait() system call.", "An application that attempts a divide-by-zero, triggering an unhandled trap.", "A system call that loops infinitely in Kernel Mode.", "A process whose parent has died, and is adopted by the init process."],
+    "answer": "A bespoke application that spawns a child process, which completes execution, but the parent fails to invoke the wait() system call.",
+    "explanation": "Step 1: A child process terminates via the exit() system call. Step 2: The OS frees its RAM but keeps its PCB in the process table. Step 3: This PCB holds the exit status for the parent process to read. Step 4: The parent is supposed to read it via the wait() system call. Step 5: If the parent ignores this, the dead child remains in the table forever as a 'Zombie'.",
+    "trick": "Trap: A process adopted by 'init' is an Orphan, not a Zombie. Zombies are dead but unacknowledged.",
+    "tip": "Zombies are dead child processes whose parents forgot to wait() for them."
+  },
+  {
+    "id": 43,
+    "question": "Assertion (A): The monolithic architecture of early OS designs was largely abandoned in high-security embedded systems in favor of microkernels. Reason (R): Microkernels minimize the Trusted Computing Base (TCB) by keeping only IPC, scheduling, and basic memory management in Ring 0. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: High-security systems require a minimal attack surface. Step 2: Monolithic kernels have massive codebases in Ring 0, meaning any exploit compromises the whole system. Step 3: Microkernels strip Ring 0 down to the absolute minimum (TCB). Step 4: A smaller codebase is mathematically easier to verify for security. Step 5: R logically provides the architectural justification for A.",
+    "trick": "Trap: Microkernels are slower but significantly more secure and verifiable than monolithic kernels.",
+    "tip": "Microkernels shrink Ring 0, minimizing the critical attack surface."
+  },
+  {
+    "id": 44,
+    "question": "A custom financial trading application suffers a 'Page Fault'. Trace the architectural hierarchy of how this is resolved.",
+    "options": ["App -> Kernel Mode -> Page retrieved from Disk -> Page mapped to RAM -> App Resumes", "App -> Trap -> OS bypasses MMU -> Disk feeds CPU directly -> App Resumes", "App halts -> System Administrator intervenes -> Process restarted in Ring 0", "MMU -> App retrieves page -> RAM is updated -> Kernel resumes App"],
+    "answer": "App -> Kernel Mode -> Page retrieved from Disk -> Page mapped to RAM -> App Resumes",
+    "explanation": "Step 1: The App requests memory swapped out to disk. Step 2: The MMU detects it's not in RAM and triggers a hardware trap (Page Fault). Step 3: CPU shifts to Kernel Mode and invokes the OS page fault handler. Step 4: The OS fetches the required page from the hard drive and loads it into RAM. Step 5: The OS updates the page table and resumes the App.",
+    "trick": "Trap: A Page Fault is a standard architectural event, not an error. The OS handles it invisibly via Kernel Mode.",
+    "tip": "Page Fault = requested memory is on disk; OS must fetch it silently."
+  },
+  {
+    "id": 45,
+    "question": "Assertion (A): Multi-threading a bespoke application inherently provides true parallelism across multiple CPU cores. Reason (R): User-level threads mapped completely 1:1 to Kernel-level threads allow the OS to schedule them independently across different hardware processors. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: R is structurally true: 1:1 Kernel mapping allows parallel scheduling. Step 2: However, A is False. Multi-threading does NOT inherently guarantee parallelism. Step 3: If an app uses Many-to-One threading (Green threads) or runs on a single-core CPU, it's concurrent, not parallel. Step 4: Therefore, simply writing multithreaded code doesn't guarantee true hardware parallelism.",
+    "trick": "Trap: Concurrency (handling many tasks) is not Parallelism (doing many tasks at the exact same physical nanosecond).",
+    "tip": "Multi-threading provides concurrency; multiple cores provide parallelism."
+  },
+  {
+    "id": 46,
+    "question": "Within the context of bespoke software communicating over a network, at which OSI layer does the transition from Application Software to System Software (OS Kernel) typically occur?",
+    "options": ["Between Layer 7 (Application) and Layer 6 (Presentation)", "Between Layer 4 (Transport) and Layer 3 (Network)", "At the interface between Layer 7/6/5 and the TCP/IP stack implementation in Layer 4", "Strictly at Layer 1 (Physical) when data leaves the NIC"],
+    "answer": "At the interface between Layer 7/6/5 and the TCP/IP stack implementation in Layer 4",
+    "explanation": "Step 1: The App handles HTTP/Data logic (OSI L7/6/5) in User Mode. Step 2: To send data, it invokes a socket system call (write/send). Step 3: The OS Kernel houses the actual TCP/IP stack (L4 Transport and L3 Network). Step 4: Therefore, the architectural boundary between User Software and OS Kernel happens when the data is handed down to the TCP sockets. Step 5: The OS handles routing and physical transmission.",
+    "trick": "Trap: The application doesn't build TCP packets; the OS Kernel builds them inside Ring 0.",
+    "tip": "Sockets are the threshold between User Apps and the OS TCP/IP stack."
+  },
+  {
+    "id": 47,
+    "question": "Assertion (A): Memory-mapped files (mmap) provide a mechanism for bespoke applications to perform file I/O without repeatedly invoking read() and write() system calls. Reason (R): mmap() maps the file directly into the application's virtual address space, allowing memory access instructions to act as file I/O. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Normally, file I/O requires a system call per chunk of data. Step 2: mmap() is a system call invoked once. Step 3: It maps physical file blocks on the disk directly to virtual memory addresses in User Space. Step 4: The App simply reads/writes to these memory addresses via standard pointers. Step 5: The OS handles syncing the RAM back to disk invisibly, validating both A and R.",
+    "trick": "Trap: mmap still uses system calls to set up, but avoids them for the ongoing read/write operations.",
+    "tip": "mmap turns disk files into RAM arrays, bypassing repetitive I/O system calls."
+  },
+  {
+    "id": 48,
+    "question": "Why is the architectural concept of 'Pipelining' in CPUs abstracted away from bespoke application developers?",
+    "options": ["Pipelining only functions in Ring 0.", "The Operating System disables pipelining during User Mode execution.", "Pipelining is a microarchitectural hardware feature that executes instructions inherently identically to sequential execution, managed entirely by silicon.", "System Calls explicitly forbid the pipelining of machine code."],
+    "answer": "Pipelining is a microarchitectural hardware feature that executes instructions inherently identically to sequential execution, managed entirely by silicon.",
+    "explanation": "Step 1: Pipelining splits instruction execution (Fetch, Decode, Execute, Write) into overlapping hardware stages. Step 2: It is managed internally by the CPU's control unit. Step 3: It does not require OS or Application involvement. Step 4: The CPU ensures that the logical outcome matches sequential execution (resolving hazards). Step 5: Therefore, it is invisible to the software hierarchy above it.",
+    "trick": "Trap: Not all hardware features need OS or software management. Silicon handles microarchitecture autonomously.",
+    "tip": "Pipelining is silicon-magic; invisible to both Kernel and User software."
+  },
+  {
+    "id": 49,
+    "question": "Assertion (A): A bespoke kernel module (like a custom driver) dynamically loaded into a monolithic kernel operates with less privilege than the core kernel code. Reason (R): Loadable Kernel Modules (LKMs) execute in Ring 1 to provide a sandbox against full system crashes. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Monolithic kernels, like Linux, allow Loadable Kernel Modules (LKMs) for flexibility. Step 2: However, once loaded, an LKM operates in the EXACT same memory space and privilege level as the core kernel. Step 3: It runs in Ring 0. Step 4: There is no Ring 1 sandbox in standard Linux/Windows architectures. Step 5: Therefore, A is false (it has equal privilege) and R is false (there is no sandbox).",
+    "trick": "Trap: LKMs are dynamic but incredibly dangerous. A bug in an LKM will crash the entire monolithic OS.",
+    "tip": "Kernel modules are fully privileged; they join Ring 0 without restrictions."
+  },
+  {
+    "id": 50,
+    "question": "Analyze the following sequence: A bespoke application attempts to access a protected memory segment. The MMU generates a Trap. The OS takes over. What is the most standard architectural outcome for this specific fault?",
+    "options": ["The OS allocates more memory to the application.", "The OS returns an error code via a System Call and lets the app continue.", "The OS sends a SIGSEGV signal, which typically results in core dumping and terminating the process.", "The CPU automatically drops to Ring 3 and ignores the instruction."],
+    "answer": "The OS sends a SIGSEGV signal, which typically results in core dumping and terminating the process.",
+    "explanation": "Step 1: Illegal memory access (like dereferencing a null pointer) triggers a hardware trap by the MMU. Step 2: The CPU switches to Kernel Mode. Step 3: The OS identifies the trap as a Segmentation Violation. Step 4: The OS generates a SIGSEGV signal directed at the offending process. Step 5: Unless the app has a specific (and rare) handler that can recover, the default action is immediate termination and a core dump.",
+    "trick": "Trap: The OS does not negotiate with rogue processes breaching memory boundaries; it terminates them.",
+    "tip": "SIGSEGV (Segfault) is the OS's fatal response to memory boundary violations."
+  },
+  {
+    "id": 51,
+    "question": "Assertion (A): Application software such as a web browser cannot directly instruct the hard drive to save a downloaded file. Reason (R): Applications execute in restricted User Mode and must invoke a 'System Call' to ask the Operating System's Kernel to perform hardware-level tasks on their behalf. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Application software operates in User Mode (Ring 3). Step 2: User Mode restricts direct hardware access to prevent system crashes. Step 3: To interact with hardware, applications trigger an interrupt. Step 4: This interrupt invokes a System Call, shifting execution to Kernel Mode (Ring 0). Step 5: The OS safely executes the hardware request.",
+    "trick": "Bank/IT Trap: Never assume applications have direct hardware control. They are just guests in the system.",
+    "tip": "Apps use User Mode; Kernel Mode accesses hardware via System Calls."
+  },
+  {
+    "id": 52,
+    "question": "Consider the following statements regarding Software Dependency Architecture: 1. Hardware requires System Software to interface with Applications. 2. Bespoke software operates entirely independently of the Kernel. 3. User interactions are parsed directly by the CPU bypassing the Application layer. Which of the statements given above is/are logically incorrect?",
+    "options": ["Only 1 and 2", "Only 2 and 3", "Only 1 and 3", "1, 2, and 3"],
+    "answer": "Only 2 and 3",
+    "explanation": "Step 1: Statement 1 is true; the OS acts as an intermediary. Step 2: Statement 2 is false; bespoke software, despite being custom-built, still relies on the OS Kernel for hardware execution. Step 3: Statement 3 is false; users interact with the UI of the Application Software, not directly with the CPU. Step 4: The hierarchy is strictly User -> Application -> OS -> Hardware.",
+    "trick": "Trap: Bespoke means custom, not autonomous. It still needs the OS to run.",
+    "tip": "Hierarchy: User > Application > OS Kernel > Physical Hardware."
+  },
+  {
+    "id": 53,
+    "question": "Assertion (A): A Context Switch triggered by a System Call is computationally expensive compared to a simple function call. Reason (R): A Context Switch requires saving the state of the current process, transitioning from User Mode to Kernel Mode, and flushing caches. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Function calls happen entirely within User Mode. Step 2: System calls mandate a privilege escalation. Step 3: This escalation forces a Context Switch. Step 4: The CPU registers, program counter, and sometimes TLB caches must be saved and updated. Step 5: This overhead makes context switches heavily resource-intensive.",
+    "trick": "Performance Trap: System calls are much slower than library function calls due to mode switching overhead.",
+    "tip": "Context switches require privilege jumps, causing heavy CPU overhead."
+  },
+  {
+    "id": 54,
+    "question": "In a banking environment, the core banking system is a 'Bespoke Software'. If a teller attempts to print a customer's passbook, which sequence correctly outlines the privilege transition?",
+    "options": ["Bespoke App (Ring 0) -> Printer Driver (Ring 3) -> Hardware", "Bespoke App (Ring 3) -> System Call -> OS Kernel (Ring 0) -> Hardware", "OS Kernel (Ring 3) -> Bespoke App (Ring 0) -> Hardware", "Printer Driver (Ring 0) -> System Call -> Bespoke App (Ring 3)"],
+    "answer": "Bespoke App (Ring 3) -> System Call -> OS Kernel (Ring 0) -> Hardware",
+    "explanation": "Step 1: The teller interacts with the Bespoke App running in User Mode (Ring 3). Step 2: Printing requires hardware access. Step 3: The app issues a System Call. Step 4: The OS catches the interrupt and escalates to Kernel Mode (Ring 0). Step 5: The OS instructs the printer via its device driver.",
+    "trick": "Custom software status does not elevate execution privileges. Bespoke apps still run in Ring 3.",
+    "tip": "Ring 3 = Application/User. Ring 0 = Kernel/Hardware Access."
+  },
+  {
+    "id": 55,
+    "question": "Assertion (A): The 'fork()' system call in UNIX-like operating systems creates a new process by duplicating the calling process. Reason (R): 'fork()' executes entirely in User Mode to optimize process creation speed for the application. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: The 'fork()' command is indeed a mechanism to spawn processes (A is true). Step 2: Process creation requires memory allocation and process control block (PCB) initialization. Step 3: These tasks involve direct hardware/memory management. Step 4: Therefore, 'fork()' must execute in Kernel Mode, making R completely false.",
+    "trick": "Trap: Any action modifying memory allocation or process states absolutely demands Kernel Mode.",
+    "tip": "Process creation (fork) is a privileged Kernel Mode operation."
+  },
+  {
+    "id": 56,
+    "question": "Which of the following scenarios definitively proves a transition from User Mode to Kernel Mode has occurred?",
+    "options": ["An integer variable is incremented inside a loop.", "A bespoke software calculates complex compound interest locally.", "An application triggers a software interrupt instruction (like INT 0x80 or SYSCALL).", "A user resizes a window drawn entirely in the local application buffer."],
+    "answer": "An application triggers a software interrupt instruction (like INT 0x80 or SYSCALL).",
+    "explanation": "Step 1: Local calculations (interest, loops) require no OS intervention. Step 2: Drawing in a local buffer is a User Mode memory operation. Step 3: To perform privileged operations, an app uses an interrupt. Step 4: INT 0x80 or SYSCALL are the explicit CPU instructions that flip the privilege bit and trap into the OS.",
+    "trick": "Look for explicit interrupts; mathematical operations do not trigger system calls.",
+    "tip": "Software interrupts (traps) are the gateway to Kernel Mode."
+  },
+  {
+    "id": 57,
+    "question": "Assertion (A): Microkernel architectures are generally more stable than Monolithic kernels when a device driver crashes. Reason (R): In a Microkernel, device drivers execute in User Mode rather than Kernel Mode, isolating their faults from the core system. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Monolithic kernels run everything (drivers, filesystems) in Ring 0. Step 2: A crash in a monolithic driver crashes the whole system. Step 3: Microkernels strip the kernel to bare minimums (IPC, basic scheduling). Step 4: Drivers are pushed to User Mode (Ring 3). Step 5: If a User Mode driver crashes, the core Kernel remains untouched, confirming high stability.",
+    "trick": "Architectural Trap: Microkernels sacrifice speed (more context switches) for massive stability gains.",
+    "tip": "Microkernels put drivers in User Mode for isolated crash protection."
+  },
+  {
+    "id": 58,
+    "question": "Read the statements: (I) Standard Commercial Off-The-Shelf (COTS) software requires system calls to access hardware. (II) Highly specialized Bespoke Software has direct Ring 0 access to bypass system latency. Which is correct?",
+    "options": ["Only I is correct", "Only II is correct", "Both I and II are correct", "Neither I nor II are correct"],
+    "answer": "Only I is correct",
+    "explanation": "Step 1: All user-facing applications, whether COTS or Bespoke, run in Ring 3. Step 2: COTS software uses standard APIs that translate to system calls. Step 3: Bespoke software also must use system calls. Step 4: Operating systems strictly prevent any user software from accessing Ring 0 directly to maintain security and stability. II is entirely false.",
+    "trick": "Trap: 'Specialized' or 'Custom' does not mean 'Privileged'. All apps are treated equally by the CPU.",
+    "tip": "Bespoke software runs in Ring 3, just like COTS software."
+  },
+  {
+    "id": 59,
+    "question": "When a Java application running on a JVM writes data to a socket, what is the correct sequence of execution boundaries crossed?",
+    "options": ["JVM (Kernel Mode) -> Network Interface (Kernel Mode) -> OS", "Application (User Mode) -> JVM (User Mode) -> OS Kernel (Kernel Mode) -> NIC", "Application (Kernel Mode) -> System Call -> JVM (User Mode)", "JVM (User Mode) -> Application (User Mode) -> CPU (User Mode)"],
+    "answer": "Application (User Mode) -> JVM (User Mode) -> OS Kernel (Kernel Mode) -> NIC",
+    "explanation": "Step 1: The Java app runs on the JVM. Step 2: Both the App and the JVM operate entirely in User Mode. Step 3: The JVM translates the socket write request into a native OS system call. Step 4: The system call forces a transition to Kernel Mode. Step 5: The Kernel accesses the Network Interface Card (NIC) driver to send data.",
+    "trick": "Virtual Machines like JVM are just another application to the host OS. They do not have kernel privileges.",
+    "tip": "JVM is User Mode software; it relies on Host OS kernels."
+  },
+  {
+    "id": 60,
+    "question": "Assertion (A): Direct Memory Access (DMA) completely bypasses the OS Kernel to speed up application data transfer. Reason (R): DMA allows hardware subsystems to access main system memory independently of the central processing unit (CPU). Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: R is true; DMA allows hardware to bypass the CPU for memory access. Step 2: However, A is false because DMA does NOT bypass the OS Kernel. Step 3: The Kernel is responsible for initiating, configuring, and securing the DMA transfer before stepping aside. Step 4: User apps cannot trigger DMA directly; they must use a System Call to ask the Kernel to set it up.",
+    "trick": "DMA bypasses the CPU for the transfer phase, but the Kernel must still authorize and set it up.",
+    "tip": "DMA bypasses CPU data handling, but Kernel configuration is mandatory."
+  },
+  {
+    "id": 61,
+    "question": "Match the following POSIX System Calls to their core functions: P. exec() Q. open() R. wait() S. chmod(). 1. File Access 2. Process Control 3. File Protection 4. Process Synchronization.",
+    "options": ["P-2, Q-1, R-4, S-3", "P-1, Q-2, R-3, S-4", "P-4, Q-3, R-2, S-1", "P-2, Q-4, R-1, S-3"],
+    "answer": "P-2, Q-1, R-4, S-3",
+    "explanation": "Step 1: exec() replaces the current process image, making it Process Control (2). Step 2: open() interacts with the file system to provide File Access (1). Step 3: wait() pauses execution until a child process ends, meaning Process Synchronization (4). Step 4: chmod() alters file permissions, which is File Protection (3).",
+    "trick": "Don't confuse process synchronization (wait) with process creation (fork) or execution (exec).",
+    "tip": "exec() controls execution, wait() syncs processes, chmod() protects files."
+  },
+  {
+    "id": 62,
+    "question": "Assertion (A): A 'Trap' is an asynchronous event generated by external hardware to interrupt the processor. Reason (R): System calls rely on 'Traps' to intentionally shift execution from Ring 3 to Ring 0. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: An interrupt generated by external hardware (like a keyboard) is called a 'Hardware Interrupt' and is asynchronous. Step 2: A 'Trap' is a synchronous software-generated interrupt. Step 3: Therefore, A is false. Step 4: R is true because system calls specifically use these synchronous Traps (software interrupts) to deliberately escalate privileges.",
+    "trick": "Definitional Trap: Traps are synchronous and software-driven. Hardware interrupts are asynchronous.",
+    "tip": "Hardware interrupts are asynchronous; Traps are synchronous software interrupts."
+  },
+  {
+    "id": 63,
+    "question": "An enterprise requires a highly secure environment where users cannot install any unauthorized software. They implement a custom OS policy. Which layer is primarily responsible for enforcing that an unapproved application cannot execute?",
+    "options": ["The Application Layer", "The Kernel Scheduler", "The User Mode Execution Ring", "The Operating System Kernel"],
+    "answer": "The Operating System Kernel",
+    "explanation": "Step 1: The Application layer has no authority over other apps. Step 2: User Mode is just an execution state, not an enforcer. Step 3: The Scheduler only decides CPU time allocation. Step 4: The Kernel is the ultimate authority that manages process creation, memory allocation, and security policy enforcement (like executing a binary).",
+    "trick": "Security policies are managed by the kernel, as it controls process execution and memory rights.",
+    "tip": "Kernel handles absolute security enforcement and process execution rights."
+  },
+  {
+    "id": 64,
+    "question": "Assertion (A): If an application enters an infinite loop, it completely locks up the CPU, requiring a hard reboot because the Kernel cannot interrupt it. Reason (R): Applications in User Mode do not process hardware interrupts. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: R is true; User Mode apps do not handle hardware interrupts directly. Step 2: However, A is false. Modern operating systems use Preemptive Scheduling. Step 3: A hardware timer periodically sends an interrupt to the CPU. Step 4: This forces a switch to Kernel Mode, allowing the OS to pause the infinite loop and allocate CPU time elsewhere.",
+    "trick": "Preemptive multitasking relies on hardware timers to save the system from infinite User Mode loops.",
+    "tip": "Hardware timer interrupts allow the Kernel to preempt freezing apps."
+  },
+  {
+    "id": 65,
+    "question": "Consider a 'Bespoke' software system designed for missile telemetry. It requires extreme real-time processing. Which architectural decision is most likely implemented to minimize latency?",
+    "options": ["Moving the telemetry processing entirely to a web-based Application Server.", "Using a Real-Time Operating System (RTOS) with highly deterministic system call response times.", "Running the application in User Mode without any OS to avoid context switching.", "Replacing system calls with direct hardware manipulation via standard Linux distributions."],
+    "answer": "Using a Real-Time Operating System (RTOS) with highly deterministic system call response times.",
+    "explanation": "Step 1: Web-based servers introduce massive network latency. Step 2: You cannot easily run complex modern apps without an OS. Step 3: Standard Linux uses time-sharing, which isn't strictly deterministic. Step 4: An RTOS is specifically designed to guarantee system call execution within a strict timeframe, making it ideal for missile telemetry.",
+    "trick": "Trap: Standard OS distributions prioritize fairness, while RTOS prioritizes strict timing deadlines.",
+    "tip": "RTOS guarantees system call execution within strict time limits."
+  },
+  {
+    "id": 66,
+    "question": "Assertion (A): System calls are fundamentally uniform across all operating systems; a system call compiled for Windows will execute natively on Linux. Reason (R): Both Windows and Linux use the same hardware architectures (x86/x64), so the CPU interprets the execution levels identically. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: R is true; the underlying CPU architecture (like x86) provides the hardware rings (0 and 3) used by both OSs. Step 2: However, A is false. Step 3: System call APIs are entirely OS-specific. Windows uses the Win32 API, while Linux uses POSIX. Step 4: An interrupt instruction on Windows calls a completely different kernel function than on Linux.",
+    "trick": "Binary incompatibility is due to different Kernel APIs, not differing hardware execution rings.",
+    "tip": "APIs (Win32 vs POSIX) differ; system calls are OS-specific."
+  },
+  {
+    "id": 67,
+    "question": "Which transition properly maps the abstraction layers from lowest privilege to highest privilege?",
+    "options": ["Bespoke Application -> Win32 API -> Hardware CPU -> OS Kernel", "User Interface -> API -> OS Kernel -> Application", "User -> Bespoke Application -> OS Kernel -> Physical Hardware", "OS Kernel -> Physical Hardware -> User -> COTS Application"],
+    "answer": "User -> Bespoke Application -> OS Kernel -> Physical Hardware",
+    "explanation": "Step 1: The User initiates the action (lowest operational privilege). Step 2: The Bespoke Application processes it in Ring 3. Step 3: The App uses System Calls to reach the OS Kernel (Ring 0). Step 4: The Kernel directly manipulates the Physical Hardware (highest absolute privilege).",
+    "trick": "Follow the chain of command: from the abstract user request down to the silicon execution.",
+    "tip": "Privilege sequence: User > Application > OS Kernel > Physical Hardware."
+  },
+  {
+    "id": 68,
+    "question": "Assertion (A): Paging and Virtual Memory management are handled by application software to optimize local variable storage. Reason (R): Virtual memory isolates application memory spaces, preventing one bespoke software from overwriting another's data. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: R is true; Virtual memory maps distinct physical addresses to virtual spaces, providing isolation. Step 2: A is completely false. Step 3: Applications are entirely unaware of physical memory. Step 4: The OS Kernel and the hardware Memory Management Unit (MMU) exclusively handle Paging and Virtual Memory mapping.",
+    "trick": "Memory Management is a strict Ring 0 operation. Apps only see a continuous illusion of memory.",
+    "tip": "Paging and Virtual Memory are exclusive Kernel and MMU responsibilities."
+  },
+  {
+    "id": 69,
+    "question": "If a banking application attempts to execute a privileged CPU instruction (like halting the processor) while running in User Mode, what will happen immediately?",
+    "options": ["The processor ignores the instruction and continues to the next line of code.", "The OS safely processes the halt command through a deferred system call.", "The CPU hardware generates a Trap (Exception), transferring control to the OS to terminate the application.", "The application successfully halts the processor, but only for its allocated time slice."],
+    "answer": "The CPU hardware generates a Trap (Exception), transferring control to the OS to terminate the application.",
+    "explanation": "Step 1: Halting the CPU is a privileged instruction reserved for Ring 0. Step 2: A User Mode (Ring 3) app trying this violates hardware security. Step 3: The CPU hardware instantly detects the privilege violation. Step 4: It generates an exception/trap. Step 5: The Kernel catches this trap and typically kills the offending process (Segmentation Fault/Access Violation).",
+    "trick": "The hardware enforces the rings. Privilege violations trigger immediate hardware exceptions.",
+    "tip": "Privileged instructions in User Mode cause instant hardware exception traps."
+  },
+  {
+    "id": 70,
+    "question": "Assertion (A): API (Application Programming Interface) is exactly the same as a System Call. Reason (R): Developers write explicit 'INT 0x80' assembly codes in high-level languages like Python to access the filesystem. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A is false. An API is a higher-level library (like standard C library libc) that wraps system calls. They are not the same. Step 2: R is false. High-level developers rarely write assembly interrupts. Step 3: Python uses standard library functions (like open()), which internally call C libraries, which then execute the actual system call (INT 0x80 or SYSCALL).",
+    "trick": "Trap: APIs act as user-friendly wrappers around complex, OS-specific System Calls.",
+    "tip": "APIs wrap system calls; developers rarely write direct interrupt assembly."
+  },
+  {
+    "id": 71,
+    "question": "In the context of execution modes, what is the primary function of the 'Mode Bit'?",
+    "options": ["To encrypt data passing between the Application and the Kernel.", "To track whether the CPU is currently executing in Kernel Mode or User Mode.", "To determine if a software is Bespoke or Commercial Off-The-Shelf.", "To switch a multi-core processor between single-thread and multi-thread modes."],
+    "answer": "To track whether the CPU is currently executing in Kernel Mode or User Mode.",
+    "explanation": "Step 1: The CPU uses hardware flags to manage privileges. Step 2: The 'Mode Bit' is a specific register flag in the CPU. Step 3: When set to 1, the CPU is typically in User Mode (restricted). Step 4: When an interrupt occurs, the hardware automatically flips the mode bit to 0 (Kernel Mode), enabling privileged instructions.",
+    "trick": "The mode bit is purely a hardware flag for privilege state, not an encryption or threading tool.",
+    "tip": "Mode Bit: 1 = User Mode, 0 = Kernel Mode (hardware flag)."
+  },
+  {
+    "id": 72,
+    "question": "Assertion (A): When an OS boots up, it initially starts executing in Kernel Mode. Reason (R): The bootloader must load the Kernel into memory and configure initial hardware parameters before any User Mode applications exist. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: At system power-on, the CPU starts in the highest privilege state (Ring 0 / Kernel Mode). Step 2: This is necessary because the bootloader and Kernel must initialize physical memory, CPU registers, and device drivers. Step 3: Only after the core OS is established does it switch to User Mode to spawn user login processes or applications.",
+    "trick": "Booting requires absolute hardware access, meaning the system inherently starts in Kernel Mode.",
+    "tip": "System boots in Kernel Mode to establish hardware control first."
+  },
+  {
+    "id": 73,
+    "question": "Consider three software applications: App X modifies system registry keys, App Y streams a video, App Z calculates factorial math. Which of these apps requires System Calls?",
+    "options": ["Only App X", "Only App X and App Y", "All Apps: X, Y, and Z", "None of them, they run in User Mode completely"],
+    "answer": "All Apps: X, Y, and Z",
+    "explanation": "Step 1: Modifying registry (X) involves disk I/O -> System Call. Step 2: Streaming video (Y) requires network I/O and graphics rendering -> System Call. Step 3: Calculating math (Z) is purely CPU bound, but outputting the result to the screen or allocating memory for large variables requires a System Call. Thus, virtually all practical apps use them.",
+    "trick": "Even purely mathematical apps must allocate memory or print results, which mandate system calls.",
+    "tip": "Almost all practical applications rely on System Calls for I/O."
+  },
+  {
+    "id": 74,
+    "question": "Assertion (A): Bespoke software is inherently faster than Off-The-Shelf software because it bypasses the OS Kernel layer. Reason (R): Custom-built software is optimized specifically for an organization's unique hardware setup. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: R is true; bespoke software can be highly optimized for specific organizational hardware or workflows. Step 2: A is false. No user-level software, no matter how customized or expensive, can bypass the OS Kernel layer. Step 3: Kernel bypass is impossible without modifying the OS architecture itself. Therefore, it still experiences system call latency.",
+    "trick": "Bespoke software is custom-tailored, but it does not gain magical Kernel-bypassing privileges.",
+    "tip": "Bespoke software is optimized but cannot bypass the OS Kernel."
+  },
+  {
+    "id": 75,
+    "question": "Identify the correct pairing of System Call categories with their respective operations: 1. Process Control -> read(), write() 2. Information Maintenance -> getpid(), alarm() 3. Communication -> pipe(), shmget() 4. File Management -> fork(), exit()",
+    "options": ["Only 2 and 3 are correct", "Only 1 and 4 are correct", "Only 2, 3, and 4 are correct", "All are correct"],
+    "answer": "Only 2 and 3 are correct",
+    "explanation": "Step 1: Process Control involves fork() and exit(), not read/write (Pair 1 is false). Step 2: File Management involves read() and write() (Pair 4 is false). Step 3: Information Maintenance handles time and process ID data like getpid() (Pair 2 is true). Step 4: Communication involves pipes and shared memory like shmget() (Pair 3 is true).",
+    "trick": "Cross-check categories: read/write are File/Device I/O, while fork/exit are Process Control.",
+    "tip": "Process: fork/exit. File: read/write. Info: getpid. Comm: pipe."
+  },
+  {
+    "id": 76,
+    "question": "Assertion (A): A monolithic kernel is generally faster at executing system calls than a microkernel. Reason (R): In a monolithic kernel, system calls do not require message-passing mechanisms between user-space servers. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Monolithic kernels hold all services (VFS, IPC, memory, drivers) in one Kernel space. Step 2: A system call requires only one context switch into Kernel Mode. Step 3: Microkernels put services in User Mode. Step 4: Accessing a service in a microkernel requires Inter-Process Communication (IPC) message passing, causing multiple context switches. Step 5: Thus, Monolithic is faster.",
+    "trick": "Microkernels are more stable but slower due to IPC overhead. Monolithic is faster but less stable.",
+    "tip": "Monolithic kernels execute faster by minimizing IPC context switches."
+  },
+  {
+    "id": 77,
+    "question": "When a User Mode application makes an API call like 'printf()', what is the immediate next step in the architectural hierarchy before reaching the CPU hardware?",
+    "options": ["The standard library triggers an interrupt to invoke a System Call.", "The printf() function directly activates the monitor hardware.", "The CPU immediately switches to Ring 0.", "The OS Kernel compiles the printf() statement into machine code."],
+    "answer": "The standard library triggers an interrupt to invoke a System Call.",
+    "explanation": "Step 1: printf() is an API function in the standard C library (libc). Step 2: It formats the string in User Mode. Step 3: It does not talk to hardware directly. Step 4: It must call a system-level function like write(). Step 5: The write() function executes a software interrupt (Trap) to transition into Kernel Mode.",
+    "trick": "APIs don't magically touch hardware; they format data and then politely ask the Kernel via a trap.",
+    "tip": "Standard libraries translate API calls into system-level software interrupts."
+  },
+  {
+    "id": 78,
+    "question": "Assertion (A): Memory-mapped I/O allows specific hardware devices to be controlled directly by User Mode applications without System Calls. Reason (R): Memory-mapped I/O assigns physical hardware control registers to standard memory addresses. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: R is true; memory-mapped I/O maps hardware registers into memory space. Step 2: However, A is false. Step 3: These mapped memory addresses are strictly protected by the OS via the MMU. Step 4: User Mode applications cannot read/write these protected addresses without Kernel privilege or specific OS authorization (like mmap).",
+    "trick": "Even if hardware is mapped to memory, that memory space is strictly guarded by Ring 0 protections.",
+    "tip": "Memory-mapped I/O is protected by Kernel MMU restrictions."
+  },
+  {
+    "id": 79,
+    "question": "In a bespoke banking software, high-speed transaction logging is required. The developers use a 'System Call Interface' (SCI). What is the main purpose of the SCI?",
+    "options": ["To compile high-level code into low-level machine code.", "To intercept user inputs and convert them into encrypted database queries.", "To maintain a table mapping generic API requests to specific, hardware-dependent kernel functions.", "To bypass the OS entirely and write directly to the NVMe storage."],
+    "answer": "To maintain a table mapping generic API requests to specific, hardware-dependent kernel functions.",
+    "explanation": "Step 1: The SCI acts as the exact border between User Mode and Kernel Mode. Step 2: When an API makes a request, the SCI uses an index number. Step 3: It looks up this number in the System Call Table. Step 4: It then invokes the correct kernel function tailored to the specific hardware. Step 5: It cannot bypass the OS; it IS the gateway to the OS.",
+    "trick": "SCI translates abstract API requests into exact kernel routines using an index table.",
+    "tip": "SCI maps API calls to specific kernel functions using tables."
+  },
+  {
+    "id": 80,
+    "question": "Assertion (A): Device drivers are always executed in User Mode to ensure system stability. Reason (R): If a device driver fails in Kernel Mode, it can cause a System Panic (BSoD) because memory boundaries are unprotected in Ring 0. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: R is true; Ring 0 lacks memory protection boundaries between kernel components, so a driver crash causes a complete system crash (BSoD/Kernel Panic). Step 2: A is false; in standard Monolithic kernels (Windows, Linux, macOS), the vast majority of device drivers run in Kernel Mode for performance reasons, despite the risk.",
+    "trick": "While User Mode drivers exist (microkernels), monolithic OS architectures default to Kernel Mode drivers.",
+    "tip": "Most modern monolithic OS device drivers execute in Kernel Mode."
+  },
+  {
+    "id": 81,
+    "question": "A bespoke logistics application runs on a dual-mode OS architecture. Which of the following sequence of events represents a 'Trap' execution accurately?",
+    "options": ["App runs -> Hardware triggers interrupt -> Kernel handles it -> Returns to App.", "App executes division by zero -> Hardware detects fault -> Context switch to Ring 0 -> OS terminates App.", "User clicks mouse -> UI updates -> App directly polls mouse -> App saves state.", "Kernel schedules App -> App runs in Ring 0 -> App finishes -> Returns to Ring 3."],
+    "answer": "App executes division by zero -> Hardware detects fault -> Context switch to Ring 0 -> OS terminates App.",
+    "explanation": "Step 1: A Trap is a synchronous, software-generated exception (like divide by zero or a system call). Step 2: The hardware CPU detects the illegal operation. Step 3: It triggers a trap, forcing a context switch to Kernel Mode (Ring 0). Step 4: The Kernel analyzes the trap and sends a signal (e.g., SIGFPE) to terminate the app.",
+    "trick": "Traps are synchronous (caused by the executing instruction itself), whereas standard interrupts are external (mouse/keyboard).",
+    "tip": "Traps are synchronous exceptions caused by software execution faults."
+  },
+  {
+    "id": 82,
+    "question": "Consider the following Linux System Calls: 1. fork() 2. exec() 3. wait() 4. getpid(). Which sequence accurately describes creating a child process, executing a new program inside it, and having the parent synchronize with its completion?",
+    "options": ["1 -> 2 -> 3", "2 -> 1 -> 3", "1 -> 3 -> 2", "4 -> 1 -> 2"],
+    "answer": "1 -> 2 -> 3",
+    "explanation": "Step 1: The parent calls fork() to create an exact duplicate child process. Step 2: The child process calls exec() to replace its memory space with a brand new program. Step 3: Meanwhile, the parent calls wait() to pause execution until the child process terminates. This is standard POSIX process orchestration.",
+    "trick": "You must 'fork' before you 'exec'. You cannot execute a new program in a child until the child exists.",
+    "tip": "POSIX sequence: fork() creates, exec() replaces, wait() synchronizes."
+  },
+  {
+    "id": 83,
+    "question": "Assertion (A): During a Context Switch between two user applications, the OS Kernel is completely bypassed. Reason (R): Context switching only swaps the User Mode stack and CPU registers, avoiding Ring 0 overhead. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A is false. The OS Kernel is the entity that *performs* the context switch; it cannot be bypassed. Step 2: R is false. Context switching mandates a transition to Ring 0 because the Kernel's scheduler must pause the current app, save its state in the PCB, load the next PCB, and update MMU tables before returning to User Mode.",
+    "trick": "User apps cannot manage themselves. Only the Kernel can pause and swap applications.",
+    "tip": "Context switches require Kernel intervention and heavy Ring 0 overhead."
+  },
+  {
+    "id": 84,
+    "question": "A bespoke application is designed to operate exclusively within 'Ring 1' and 'Ring 2' of the x86 architecture. In modern operating system paradigms (like Windows/Linux), how will this application be handled?",
+    "options": ["It will execute faster than Ring 3 apps because it has partial hardware access.", "The OS will map the application natively to Ring 0 for stability.", "Modern OSs largely ignore Ring 1 and 2, forcing all applications into Ring 3.", "The hardware will reject the application upon compilation."],
+    "answer": "Modern OSs largely ignore Ring 1 and 2, forcing all applications into Ring 3.",
+    "explanation": "Step 1: While older x86 architecture defines 4 rings (0, 1, 2, 3), Rings 1 and 2 were originally meant for OS services/drivers. Step 2: Modern operating systems (Windows, Linux, macOS) simplified this architecture. Step 3: They only use Ring 0 (Kernel) and Ring 3 (User). Step 4: Any user application or bespoke software is strictly confined to Ring 3.",
+    "trick": "Despite hardware support for 4 rings, modern OS architectures only utilize Ring 0 and Ring 3.",
+    "tip": "Modern OS architectures simplify to Ring 0 (Kernel) and Ring 3 (User)."
+  },
+  {
+    "id": 85,
+    "question": "Assertion (A): The 'System Call Table' is accessible and modifiable by root-level User Mode applications. Reason (R): Root administrators require the ability to dynamically add bespoke system calls for custom database software. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The System Call Table is an array of function pointers stored deep within Kernel memory. Step 2: A is false; even 'root' applications in User Mode cannot modify Kernel memory directly due to MMU protections. Step 3: R is false; you cannot dynamically add system calls from User Mode. Adding them requires writing a Kernel module and loading it in Ring 0.",
+    "trick": "'Root' access simply bypasses User Mode file/process permissions; it does NOT grant direct Kernel memory write access.",
+    "tip": "Root access does not equal Kernel memory write access."
+  },
+  {
+    "id": 86,
+    "question": "Which specific OS component is responsible for resolving a System Call number (e.g., system call #3 for 'read') to the actual physical memory address of the Kernel function?",
+    "options": ["The Memory Management Unit (MMU)", "The Interrupt Vector Table (IVT)", "The Application Program Interface (API)", "The System Call Interface (SCI) via the Dispatch Table"],
+    "answer": "The System Call Interface (SCI) via the Dispatch Table",
+    "explanation": "Step 1: The application places the system call number in a CPU register (like EAX). Step 2: It triggers an interrupt (like 0x80). Step 3: The CPU jumps to the general interrupt handler via the IVT. Step 4: The System Call Interface (SCI) takes over, looks at the number in EAX, and uses a Dispatch Table to find the exact kernel function address.",
+    "trick": "The IVT handles the initial trap, but the SCI/Dispatch Table resolves the specific system call ID.",
+    "tip": "SCI uses a Dispatch Table to map call IDs to functions."
+  },
+  {
+    "id": 87,
+    "question": "Assertion (A): 'User Mode' is technically defined as the state where the CPU restricts execution of certain instruction subsets. Reason (R): These restricted instructions include I/O operations, memory management setup, and interrupt disabling. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: User Mode is not an OS construct; it's a hardware CPU state (e.g., Ring 3). Step 2: In this state, the hardware actively blocks certain opcodes. Step 3: These opcodes (Privileged Instructions) include HALT, modifying page tables, direct device I/O (IN/OUT), and CLI (Clear Interrupts). Step 4: Attempting them in User Mode causes an immediate hardware trap.",
+    "trick": "User Mode is enforced by hardware silicon, not software logic.",
+    "tip": "User mode restricts privileged opcodes like HALT, IN, OUT, and CLI."
+  },
+  {
+    "id": 88,
+    "question": "Consider a custom-built 'Bespoke' accounting software used by a central bank. It utilizes 'multithreading'. Do threads belonging to the same process require a full OS Context Switch to communicate with each other?",
+    "options": ["Yes, because threads run in Kernel Mode.", "Yes, because every thread has an independent memory space.", "No, because threads within the same process share the same data and heap memory.", "No, because the CPU handles threads directly without OS scheduling."],
+    "answer": "No, because threads within the same process share the same data and heap memory.",
+    "explanation": "Step 1: Threads belong to a parent process. Step 2: They have separate stacks and program counters, but they share the parent's data section, code section, and heap memory. Step 3: Because they share memory, they do not need the Kernel to broker their communication (unlike Inter-Process Communication). Step 4: Thus, no heavy context switch is needed for them to read/write shared variables.",
+    "trick": "Thread Context Switch is much lighter than Process Context Switch because memory space remains identical.",
+    "tip": "Threads share process memory, avoiding heavy OS-mediated context switches."
+  },
+  {
+    "id": 89,
+    "question": "Assertion (A): An application can read a local file from the hard drive without invoking a System Call if the file is already cached in RAM. Reason (R): User Mode applications have direct read access to the OS disk cache in RAM. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The OS maintains disk caches in RAM to speed up file access. Step 2: However, this cache resides in Kernel Space memory. Step 3: User applications are barred from reading Kernel memory directly. Step 4: Therefore, even if the file is cached in RAM, the app must still invoke a 'read()' system call. Step 5: The Kernel copies the data from Kernel RAM to User RAM.",
+    "trick": "Cache hits speed up the OS response, but the app still must cross the Kernel boundary to get the data.",
+    "tip": "Kernel RAM caches still require System Calls for User Mode access."
+  },
+  {
+    "id": 90,
+    "question": "Which of the following describes a 'Zombie Process' in the context of OS execution flow?",
+    "options": ["A bespoke application that has locked up and is consuming 100% CPU in Ring 3.", "A process that has completed execution but still has an entry in the process table because the parent hasn't called wait().", "A Kernel Mode driver that has crashed but cannot be terminated.", "A background daemon that runs continuously without a User Interface."],
+    "answer": "A process that has completed execution but still has an entry in the process table because the parent hasn't called wait().",
+    "explanation": "Step 1: A child process finishes execution and calls exit(). Step 2: Its memory is deallocated by the Kernel. Step 3: However, its exit status must be kept until the parent process reads it using the wait() system call. Step 4: Until wait() is called, the dead process remains in the OS Process Table as a 'Zombie'.",
+    "trick": "Zombies don't consume memory or CPU; they only consume a Process ID (PID) slot.",
+    "tip": "Zombies are dead processes waiting for parent to read exit status."
+  },
+  {
+    "id": 91,
+    "question": "Assertion (A): A 'Page Fault' acts similarly to a Trap, switching the processor into Kernel Mode. Reason (R): A Page Fault indicates an error in the bespoke software, causing the OS to terminate the application. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: A is true; a page fault triggers an exception, moving execution to Ring 0. Step 2: However, R is false. Step 3: A standard page fault is NOT an error. It simply means the requested memory page is currently on the hard disk (swap space) instead of RAM. Step 4: The Kernel pauses the app, fetches the data from disk into RAM, and resumes the app smoothly.",
+    "trick": "Trap: 'Fault' sounds bad, but a Page Fault is a routine part of Virtual Memory management, not an app crash.",
+    "tip": "Page Faults fetch data from disk to RAM; they aren't fatal errors."
+  },
+  {
+    "id": 92,
+    "question": "When a compiler converts a 'C' program containing standard file operations into an executable binary, what exactly is placed in the binary to represent the file operations?",
+    "options": ["Direct memory addresses of the hard drive sectors.", "Hardware-specific interrupt assembly instructions (e.g., INT 0x80) or system call wrappers.", "High-level API text strings parsed by the OS at runtime.", "A miniature copy of the OS Kernel to execute the command."],
+    "answer": "Hardware-specific interrupt assembly instructions (e.g., INT 0x80) or system call wrappers.",
+    "explanation": "Step 1: Compilers translate high-level code into machine instructions. Step 2: An app cannot contain OS code or direct hardware addresses. Step 3: Instead, the compiler links standard libraries. Step 4: These libraries insert specific assembly instructions (like SYSCALL or INT 0x80) that trap to the Kernel, alongside the correct system call index number in the registers.",
+    "trick": "Executables don't contain the OS magic; they just contain the 'doorbell rings' (interrupts) to wake the OS.",
+    "tip": "Compilers insert interrupt instructions (SYSCALL) to trigger OS interventions."
+  },
+  {
+    "id": 93,
+    "question": "Assertion (A): In a virtualized environment, a Guest OS running in a Virtual Machine operates directly in Ring 0. Reason (R): Operating Systems require Ring 0 to function, so the Hypervisor must grant the Guest OS full Kernel privileges. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: In Type-1 virtualization, the Hypervisor owns Ring 0. Step 2: A Guest OS cannot run in Ring 0 because it would compromise the host. Step 3: Instead, the Guest OS is forced to run in Ring 1 (or Ring 3 in modern extensions like VT-x/AMD-V). Step 4: When the Guest OS tries to execute a privileged instruction, the Hypervisor traps it, emulates it, and returns the result (Ring Aliasing/Deprivileging).",
+    "trick": "Guest OSs are tricked into thinking they have Ring 0. The Hypervisor holds the true Ring 0.",
+    "tip": "Guest OS runs in deprivileged rings; Hypervisor controls true Ring 0."
+  },
+  {
+    "id": 94,
+    "question": "A bespoke inventory system needs to communicate securely with a bespoke shipping system running on the same server. Which Inter-Process Communication (IPC) mechanism provides the fastest data transfer, and what execution mode facilitates its setup?",
+    "options": ["Pipes; User Mode setup", "Shared Memory; Kernel Mode setup", "Message Passing; User Mode setup", "Sockets; Network Interface setup"],
+    "answer": "Shared Memory; Kernel Mode setup",
+    "explanation": "Step 1: Sockets and Pipes require data to be copied from App A into Kernel space, then copied into App B (slow). Step 2: Shared Memory maps a single segment of RAM to both applications. Step 3: Data read/write happens instantly without OS copying. Step 4: However, establishing this shared memory mapping absolutely requires a System Call (Kernel Mode setup).",
+    "trick": "Shared memory is extremely fast because it bypasses the Kernel for data transfer, but the Kernel MUST initially set it up.",
+    "tip": "Shared Memory is fastest IPC, but setup mandates Kernel Mode system calls."
+  },
+  {
+    "id": 95,
+    "question": "Assertion (A): An application running in User Mode can arbitrarily read the 'Process Control Block' (PCB) of another application to monitor its CPU usage. Reason (R): PCBs are stored in standard RAM which is accessible to all User Mode processes. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The PCB contains highly sensitive process state data (registers, open files, memory limits). Step 2: It is strictly stored in Kernel Space RAM. Step 3: User Mode apps are completely blocked from reading Kernel Space. Step 4: To get CPU usage data, an app must use a system call (like read from /proc in Linux) to securely ask the Kernel for the information.",
+    "trick": "RAM is divided. Kernel Space RAM is invisible and inaccessible to User Mode Space RAM.",
+    "tip": "PCBs reside in protected Kernel memory, inaccessible to User Mode apps."
+  },
+  {
+    "id": 96,
+    "question": "Which system call is explicitly responsible for tearing down a process's memory space, closing its file descriptors, and transitioning it into a zombie state?",
+    "options": ["kill()", "exit()", "wait()", "terminate()"],
+    "answer": "exit()",
+    "explanation": "Step 1: The 'kill()' call sends a signal to a process, but doesn't tear it down internally. Step 2: 'wait()' is used by the parent to clean up the zombie. Step 3: 'terminate()' is a general concept, not a standard POSIX call. Step 4: 'exit()' is the explicit system call an app invokes (or the OS invokes on its behalf) to formally surrender its resources and transition into a zombie.",
+    "trick": "A process initiates its own teardown via exit(). Even fatal errors internally trigger an exit routine.",
+    "tip": "exit() dismantles process resources and creates the zombie state."
+  },
+  {
+    "id": 97,
+    "question": "Consider a 'Bespoke' scientific application that requires allocating 16GB of contiguous RAM. When the app calls 'malloc()', which of the following perfectly describes the sequence?",
+    "options": ["malloc() directly accesses the MMU -> MMU allocates physical RAM -> Returns pointer to App.", "malloc() executes in Kernel Mode -> Scans physical RAM -> Allocates and returns to User Mode.", "malloc() checks User Mode heap -> If insufficient, invokes 'brk()' or 'mmap()' System Call -> Kernel updates Page Tables -> Returns pointer.", "App bypasses malloc() -> Signals RAM Controller -> Maps directly to CPU cache."],
+    "answer": "malloc() checks User Mode heap -> If insufficient, invokes 'brk()' or 'mmap()' System Call -> Kernel updates Page Tables -> Returns pointer.",
+    "explanation": "Step 1: malloc() is just a User Mode library function. Step 2: It manages a small pool of already-allocated heap memory. Step 3: If 16GB is needed, the pool is insufficient. Step 4: malloc() invokes system calls like brk() or mmap() to ask the Kernel for more pages. Step 5: The Kernel updates the MMU page tables and hands the virtual addresses back to malloc().",
+    "trick": "Memory allocation functions (malloc/new) try to stay in User Mode to save time, using System Calls only when their pool runs dry.",
+    "tip": "malloc() uses User Mode pools, calling mmap()/brk() when empty."
+  },
+  {
+    "id": 98,
+    "question": "Assertion (A): Hardware Interrupts have higher priority than Software Traps (System Calls). Reason (R): Hardware events (like a disk read completion) are highly time-sensitive and must preempt current CPU tasks to prevent data loss. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Traps are synchronous and controlled by the software schedule. Step 2: Hardware interrupts (from NICs, Disks, Timers) are completely asynchronous and unpredictable. Step 3: If a hardware buffer fills up, data will be dropped if not serviced instantly. Step 4: Therefore, CPU architecture is designed to allow hardware interrupts to preempt (interrupt) almost any software operation, including active system calls.",
+    "trick": "Hardware doesn't wait. Asynchronous hardware interrupts will pause synchronous software routines.",
+    "tip": "Time-sensitive hardware interrupts preempt synchronous software traps."
+  },
+  {
+    "id": 99,
+    "question": "A COTS web server and a Bespoke database server are running on the same OS. The web server crashes due to a buffer overflow. Why does the Bespoke database server continue running flawlessly?",
+    "options": ["Because Bespoke software runs in a higher privilege ring than COTS software.", "Because the OS Kernel enforces strict Virtual Memory isolation between processes.", "Because the web server processes do not use system calls.", "Because the CPU automatically allocates separate cores to COTS and Bespoke software."],
+    "answer": "Because the OS Kernel enforces strict Virtual Memory isolation between processes.",
+    "explanation": "Step 1: All applications run in Ring 3. Step 2: The OS gives every process the illusion of owning the entire RAM using Virtual Memory. Step 3: The MMU translates these virtual addresses to physical ones. Step 4: If App A tries to access memory outside its allocated virtual space (buffer overflow), the MMU detects it and the Kernel kills App A (Segmentation Fault). App B's memory is perfectly walled off.",
+    "trick": "Isolation isn't based on software origin (COTS vs Bespoke); it's based on Virtual Memory boundaries.",
+    "tip": "Kernel and MMU use Virtual Memory to isolate process crashes."
+  },
+  {
+    "id": 100,
+    "question": "Assertion (A): System Software like compilers and assemblers execute in Kernel Mode because they translate code into low-level machine hardware instructions. Reason (R): Generating executable binaries requires modifying the CPU instruction sets. Select the correct code.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A is false. Compilers and assemblers are just standard applications. They read a text file (source code) and write a binary file (executable). Step 2: File reading/writing is done via standard system calls. The translation process is purely mathematical and string manipulation, running entirely in User Mode. Step 3: R is false; compilers do not modify CPU hardware instruction sets; they just output files that adhere to those sets.",
+    "trick": "Just because a tool is 'low-level' or 'system software' doesn't grant it Kernel Mode access. Only the OS Kernel and drivers run in Ring 0.",
+    "tip": "Compilers are User Mode applications; they just process text into binaries."
+  }
+]

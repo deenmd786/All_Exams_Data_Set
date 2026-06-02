@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): Unlike Static RAM (SRAM), Dynamic RAM (DRAM) requires constant periodic refreshing to maintain its stored data. Reason (R): Each memory cell in DRAM utilizes a microscopic capacitor to hold a charge representing data, which gradually leaks away over milliseconds. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate Assertion (A). DRAM indeed requires a refresh circuit to rewrite data thousands of times per second, whereas SRAM does not. A is True. Step 2: Evaluate Reason (R). The fundamental architecture of a DRAM cell is one transistor and one capacitor. Step 3: Capacitors are imperfect and physically leak their electrical charge over time (milliseconds). Step 4: If not refreshed, the '1' state leaks down to a '0' state, causing data corruption. R is True. Step 5: Therefore, the physical leakage of the capacitor (R) is the exact engineering reason why DRAM requires constant refreshing (A).",
+    "trick": "Bank/IT Trap: Do not assume DRAM is 'better' just because it is 'Dynamic'. SRAM is significantly faster because it lacks the refresh latency, but DRAM is used for main memory because its 1-transistor design is vastly cheaper and denser.",
+    "tip": "DRAM = Capacitor leakage = Needs refresh. SRAM = Flip-flops = No refresh."
+  },
+  {
+    "id": 2,
+    "question": "In the strict architectural memory hierarchy, which of the following represents the absolute fastest storage medium, physically operating at the exact same clock speed as the CPU core itself?",
+    "options": ["Level 1 (L1) Cache", "Level 2 (L2) Cache", "Processor Registers", "Static RAM (SRAM)"],
+    "answer": "Processor Registers",
+    "explanation": "Step 1: Identify the components of the memory hierarchy. Step 2: Registers are memory locations physically built directly into the CPU's execution unit (ALU/Control Unit). Step 3: Because they are part of the core logic, they operate at the exact same clock frequency as the processor (zero latency). Step 4: L1 Cache, while incredibly fast and located on the die, still requires 1-3 clock cycles of latency to access. Step 5: Therefore, Processor Registers strictly sit at the absolute pinnacle of the speed/cost pyramid.",
+    "trick": "Bank/IT Trap: Candidates frequently default to selecting 'L1 Cache' when asked for the fastest memory. Note carefully: If 'Registers' are present in the options, they ALWAYS win.",
+    "tip": "Registers > L1 Cache > L2 Cache > L3 Cache > Main Memory (RAM)."
+  },
+  {
+    "id": 3,
+    "question": "Assertion (A): A CPU cache 'Conflict Miss' occurs heavily in Fully Associative cache architectures when the cache physically runs out of total storage space. Reason (R): Conflict misses happen because multiple memory blocks are mathematically mapped to the exact same cache line, forcing evictions even when other cache lines remain empty. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). A Conflict Miss occurs specifically in Direct-Mapped or Set-Associative caches because addresses are forced to compete for specific slots (modulo arithmetic), causing evictions even if the rest of the cache is empty. R is True. Step 2: Evaluate Assertion (A). A Fully Associative cache allows any memory block to go into ANY cache line. Step 3: Therefore, a Fully Associative cache NEVER experiences 'Conflict Misses'. It only experiences Capacity Misses (when truly full) or Compulsory Misses. Step 4: Because A claims Conflict Misses happen heavily in Fully Associative caches, A is absolutely False.",
+    "trick": "Trap: The three C's of cache misses are Compulsory, Capacity, and Conflict. Fully Associative caches mathematically eliminate Conflict misses entirely by allowing free placement.",
+    "tip": "Fully Associative caches have ZERO Conflict Misses. They only suffer Capacity/Compulsory misses."
+  },
+  {
+    "id": 4,
+    "question": "Which specific principle of computer architecture dictates that if a CPU accesses memory address 0x1A40, it is highly probable that it will access memory address 0x1A44 in the very near future?",
+    "options": ["Temporal Locality", "Spatial Locality", "Amdahl's Law", "The von Neumann Principle"],
+    "answer": "Spatial Locality",
+    "explanation": "Step 1: The Principle of Locality governs cache design. Step 2: Temporal Locality states that if an item is referenced, it will tend to be referenced AGAIN soon (e.g., loops). Step 3: Spatial Locality states that if an item is referenced, items whose ADDRESSES are physically close by will tend to be referenced soon. Step 4: Memory addresses 0x1A40 and 0x1A44 are contiguous sequential addresses (like stepping through an array). Step 5: Therefore, anticipating the next sequential address is the strict definition of Spatial Locality.",
+    "trick": "Trap: Do not mix up Time and Space. Temporal = Same data accessed repeatedly over TIME. Spatial = Adjacent data accessed together in SPACE.",
+    "tip": "Spatial Locality = Accessing nearby addresses. Temporal Locality = Re-accessing the same address."
+  },
+  {
+    "id": 5,
+    "question": "Assertion (A): During heavy multitasking, an operating system experiencing 'Thrashing' will show near 100% hard drive utilization but almost 0% CPU execution throughput. Reason (R): Thrashing occurs when physical RAM is exhausted, forcing the Virtual Memory manager to spend all its time swapping pages in and out of the hard drive rather than executing actual program instructions. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Virtual Memory uses a hard drive 'pagefile' as fake RAM when physical RAM is full. Step 2: If a system is running too many apps, the RAM fills up completely. Step 3: The OS must evict a page to the hard drive to load the next requested page. Step 4: If the evicted page is needed again immediately, it must swap again. This continuous, rapid swapping is called 'Thrashing' (R is True). Step 5: Because hard drives are millions of times slower than RAM, the CPU sits idle waiting for the disk, causing high disk usage but zero computing progress (A is True, R explains A).",
+    "trick": "Trap: High CPU usage is NOT a symptom of thrashing. Thrashing kills CPU throughput because the processor is permanently stalled waiting for the mechanical/NAND disk.",
+    "tip": "Thrashing = Excessive Virtual Memory paging = High Disk usage + Low CPU throughput."
+  },
+  {
+    "id": 6,
+    "question": "Consider the internal circuitry of SRAM (Static RAM). What is the minimum number of transistors typically required to construct a single stable memory cell (storing one bit) in a standard SRAM architecture without any capacitors?",
+    "options": ["1 transistor", "2 transistors", "6 transistors", "10 transistors"],
+    "answer": "6 transistors",
+    "explanation": "Step 1: DRAM uses 1 transistor and 1 capacitor (1T1C), making it highly dense and cheap. Step 2: SRAM does not use capacitors; it relies entirely on transistor logic to maintain state. Step 3: A standard SRAM cell uses a 'flip-flop' latch design consisting of two cross-coupled inverters. Step 4: Each inverter requires 2 transistors (total 4) to hold the state continuously. Step 5: An additional 2 'access' transistors are required to control reading and writing to the cell. Step 6: This totals 6 transistors (6T) per bit, which explains why SRAM is fast but physically bulky and expensive.",
+    "trick": "Trap: Never confuse the simplicity of DRAM with SRAM. SRAM's speed comes at the cost of massive physical footprint (6 transistors per bit vs 1).",
+    "tip": "Standard SRAM uses a 6-Transistor (6T) flip-flop design. DRAM uses a 1T1C design."
+  },
+  {
+    "id": 7,
+    "question": "Assertion (A): Utilizing a 'Write-Through' cache policy guarantees absolute data consistency between the Cache and Main Memory at all times. Reason (R): In a Write-Through policy, every time the CPU alters data in the cache, the cache controller immediately and simultaneously writes that updated data to the slower Main Memory. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Cache holds copies of RAM data. If the CPU changes the cache data, the RAM data becomes 'stale'. Step 2: A 'Write-Through' policy dictates that any write operation to the cache MUST also be passed 'through' to the RAM instantly (R is True). Step 3: Because the RAM is updated concurrently with the cache, the data in both locations is always perfectly identical/consistent (A is True). Step 4: The trade-off is severe performance degradation due to the constant slow RAM access. R perfectly outlines the mechanism causing A.",
+    "trick": "Trap: 'Write-Back' is the alternative policy, which is faster because it only writes to RAM when the cache line is evicted. But Write-Back temporarily breaks consistency. Write-Through guarantees consistency.",
+    "tip": "Write-Through = Instant RAM update (consistent but slow). Write-Back = Delayed update (fast)."
+  },
+  {
+    "id": 8,
+    "question": "Within the architecture of Virtual Memory, what specific hardware component is responsible for translating a program's continuous 'Virtual Address' into a physical RAM 'Physical Address'?",
+    "options": ["Translation Lookaside Buffer (TLB)", "Memory Management Unit (MMU)", "Direct Memory Access (DMA) Controller", "Programmable Interrupt Controller (PIC)"],
+    "answer": "Memory Management Unit (MMU)",
+    "explanation": "Step 1: Programs operate under the illusion they own vast, contiguous memory (Virtual Memory). Step 2: In reality, their data is scattered across fragmented physical RAM frames. Step 3: When the CPU issues a virtual address, it must be translated. Step 4: The Memory Management Unit (MMU) is the dedicated hardware chip (often inside the CPU) that performs this exact translation. Step 5: It uses Page Tables to map the virtual page to the physical frame. (Note: The TLB is just a cache *inside* the MMU to speed this up, but the MMU is the primary functional unit).",
+    "trick": "Trap: The TLB is a highly tempting trap. However, the TLB only *caches* recent translations. The MMU is the overarching hardware component actually responsible for the overarching translation process.",
+    "tip": "MMU (Memory Management Unit) handles Virtual-to-Physical address translation."
+  },
+  {
+    "id": 9,
+    "question": "Assertion (A): Level 1 (L1) Cache is almost universally split into two distinct physical caches (L1-I and L1-D), whereas Level 2 and Level 3 caches are unified. Reason (R): Splitting the L1 cache implements a strict Harvard Architecture at the core level, completely eliminating structural hazards when the CPU attempts to fetch an instruction and read data in the exact same clock cycle. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Modern CPU cores use a pipelined execution model. Step 2: In a single clock cycle, the 'Fetch' stage needs to grab an instruction, while the 'Memory' stage might need to read a data variable. Step 3: If L1 cache were unified (von Neumann), these two stages would collide on the same bus, causing a pipeline stall (Structural Hazard). Step 4: By physically splitting L1 into Instruction (L1-I) and Data (L1-D) caches, the CPU can read both simultaneously over separate buses (Harvard Architecture). Step 5: L2 and L3 don't need this split because they merely feed the L1. Both statements are accurate and linked.",
+    "trick": "Trap: While desktop PCs as a whole are von Neumann (unified Main RAM), the internal L1 cache is strictly Harvard (split) to maximize pipeline throughput.",
+    "tip": "L1 Cache is split (Instruction & Data) to prevent pipeline structural hazards."
+  },
+  {
+    "id": 10,
+    "question": "In a cache memory system utilizing a 'Write-Back' policy, what specific architectural metadata bit is mathematically required to be appended to every cache line to track consistency?",
+    "options": ["Valid Bit", "Parity Bit", "Dirty Bit", "Sticky Bit"],
+    "answer": "Dirty Bit",
+    "explanation": "Step 1: In a Write-Back policy, the CPU writes data only to the fast Cache, intentionally leaving the slower Main Memory with outdated data. Step 2: The cache controller needs a way to remember which cache lines have been modified. Step 3: It adds a 1-bit flag to the cache line's metadata called the 'Dirty Bit'. Step 4: When the CPU alters the data, the Dirty Bit flips to 1. Step 5: Later, when that cache line must be evicted to make room for new data, the controller checks the Dirty Bit. If it is 1, it writes the data back to RAM. If 0, it simply discards the line.",
+    "trick": "Trap: The 'Valid bit' indicates if the cache line holds real data or garbage from startup. The 'Dirty bit' specifically indicates if the data has been modified and differs from RAM.",
+    "tip": "Write-Back Cache requires a 'Dirty Bit' to flag modified data needing RAM synchronization."
+  },
+  {
+    "id": 11,
+    "question": "Assertion (A): Increasing the Cache Line Size (Block Size) endlessly will eventually lead to an increased Cache Miss Rate, degrading system performance. Reason (R): Larger cache blocks inherently exploit spatial locality, allowing the processor to pre-fetch more contiguous data per memory access. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, but R is not the correct explanation of A",
+    "explanation": "Step 1: Evaluate Reason (R). A larger cache block pulls in 64 bytes instead of 32 bytes, relying on spatial locality to guess the CPU will need the extra adjacent bytes. R is factually True. Step 2: Evaluate Assertion (A). Cache size is physically limited. If you endlessly increase the block size, the cache can hold fewer total individual blocks. Step 3: Fewer blocks mean data is evicted much more frequently, causing massive 'Conflict Misses'. Therefore, an overly huge block size destroys performance (A is True). Step 4: However, R (which explains the *benefit* of spatial locality) does NOT explain why A (the *detriment* of too large blocks) occurs. The true reason for A is reduced block count.",
+    "trick": "Logic Trap: Both statements are true in isolation, but R highlights the positive aspect of block size, failing to explain the negative consequence described in A.",
+    "tip": "Too large a cache block size reduces total blocks, causing higher conflict misses."
+  },
+  {
+    "id": 12,
+    "question": "Consider the latency of the memory hierarchy. If accessing Processor Registers takes 1 clock cycle, what is the generally accepted, real-world latency range for fetching data from an SSD (Solid State Drive) in equivalent CPU clock cycles?",
+    "options": ["5 to 15 clock cycles", "50 to 200 clock cycles", "Millions of clock cycles", "Billions of clock cycles"],
+    "answer": "Millions of clock cycles",
+    "explanation": "Step 1: Understand CPU clock speeds. A modern 4 GHz CPU executes 4 billion cycles per second (0.25 nanoseconds per cycle). Step 2: Register access = 1 cycle. L1 Cache = ~3 cycles. Main RAM = ~200-300 cycles (50-100 nanoseconds). Step 3: An SSD access takes roughly 50 to 100 microseconds. Step 4: 100 microseconds is 100,000 nanoseconds. Step 5: Divide 100,000ns by the 0.25ns cycle time = 400,000 to 1,000,000+ clock cycles. Therefore, SSD latency is measured in millions of CPU cycles.",
+    "trick": "Perspective Trap: SSDs feel instant to humans, but to a CPU, they are glacially slow. Hard drives (HDD) take MILLISECONDS, which equates to TENS OF MILLIONS of cycles.",
+    "tip": "RAM latency = Hundreds of cycles. SSD latency = Millions of cycles."
+  },
+  {
+    "id": 13,
+    "question": "Assertion (A): When physical RAM is exhausted, Virtual Memory prevents software crashes by utilizing the L3 Cache as overflow memory. Reason (R): Modern operating systems utilize a paging file or swap partition on secondary storage to seamlessly page out inactive memory blocks. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). When RAM is full, the OS moves inactive 4KB 'pages' of RAM to a dedicated file on the hard drive/SSD (pagefile.sys or swap). R is a perfectly accurate definition. Step 2: Evaluate Assertion (A). The assertion claims Virtual Memory uses the L3 Cache as overflow. Step 3: L3 Cache is microscopic (e.g., 32MB) compared to RAM (16GB) and sits higher up the speed pyramid, not lower. It is entirely impossible to use L3 as a RAM overflow. A is completely False.",
+    "trick": "Hierarchy Direction Trap: Overflow must move DOWN the memory pyramid to a cheaper, larger medium (Storage). L3 is UP the pyramid (faster, smaller).",
+    "tip": "Virtual Memory overflows physical RAM into Secondary Storage (HDD/SSD), never into Cache."
+  },
+  {
+    "id": 14,
+    "question": "In Cache mapping techniques, which specific architecture drastically simplifies hardware search logic by ensuring that any given block of Main Memory can only be loaded into one single, mathematically predetermined cache line?",
+    "options": ["Fully Associative Mapping", "Direct Mapping", "2-Way Set Associative Mapping", "TLB Paged Mapping"],
+    "answer": "Direct Mapping",
+    "explanation": "Step 1: In Fully Associative mapping, a RAM block can go anywhere in the cache, requiring massive hardware comparators to search every line simultaneously. Step 2: In Direct Mapping, a mathematical modulo operation is used (RAM Block Address MOD Number of Cache Lines). Step 3: This formula forces RAM Block 12 to always go to Cache Line 4 (for example). Step 4: The hardware is extremely simple because to find Block 12, the CPU only has to check Line 4. Step 5: The trade-off is massive Conflict Misses if two active RAM blocks map to the same line.",
+    "trick": "Trap: Direct mapping is 'direct' because the mapping is rigid and 1-to-1. Set-Associative allows a block to go to 'N' specific lines. Fully Associative allows it to go anywhere.",
+    "tip": "Direct Mapped Cache: A RAM block has exactly ONE specific line it can occupy."
+  },
+  {
+    "id": 15,
+    "question": "Assertion (A): Synchronous DRAM (SDRAM) drastically improved memory throughput by aligning its internal operations to the CPU's external system bus clock. Reason (R): Tying the memory to the system clock allows for 'burst mode' data transfers, where the CPU sends one address and the SDRAM sequentially feeds back multiple contiguous data words without requiring new address signals. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Older Asynchronous DRAM operated on its own internal timing. The CPU had to wait (wait states) unpredictably for the RAM to respond. Step 2: SDRAM solved this by synchronizing to the motherboard's clock (A is True). Step 3: Because the timing is perfectly predictable, the CPU and RAM can coordinate complex maneuvers. Step 4: In 'burst mode', the CPU requests Address 0. Because of the clock sync, the SDRAM knows exactly when to output data for Address 0, 1, 2, and 3 in consecutive clock ticks automatically. Step 5: This eliminates the latency of sending addresses for every byte, massively increasing bandwidth (R explains A).",
+    "trick": "Trap: Asynchronous RAM was chaotic. Synchronous RAM allows precision pipelining and bursting, which is the foundational technology for modern DDR memory.",
+    "tip": "SDRAM syncs to the bus clock, allowing high-speed sequential 'burst' data transfers."
+  },
+  {
+    "id": 16,
+    "question": "Which of the following Page Replacement Algorithms used in Virtual Memory management suffers from 'Belady’s Anomaly', where giving the system more physical RAM pages actually increases the number of Page Faults?",
+    "options": ["Least Recently Used (LRU)", "Optimal Page Replacement (OPT)", "First-In, First-Out (FIFO)", "Most Frequently Used (MFU)"],
+    "answer": "First-In, First-Out (FIFO)",
+    "explanation": "Step 1: A Page Replacement Algorithm dictates which RAM page is evicted to the hard drive when RAM is full. Step 2: Logically, adding more RAM (more page frames) should decrease the number of times you have to fetch from the disk (Page Faults). Step 3: However, Laszlo Belady discovered in 1969 that the strict First-In, First-Out (FIFO) algorithm can anomalously perform WORSE when given more memory frames. Step 4: This happens because FIFO evicts the oldest page indiscriminately, even if that page is a heavily used core variable, destroying the mathematical efficiency of certain access patterns. Step 5: LRU and Optimal algorithms do not suffer from this anomaly.",
+    "trick": "Trap: LRU is the industry standard precisely because it tracks usage, avoiding Belady's Anomaly. FIFO is incredibly naive, replacing strictly by age.",
+    "tip": "Belady's Anomaly (more RAM = more page faults) specifically plagues the FIFO algorithm."
+  },
+  {
+    "id": 17,
+    "question": "Assertion (A): EEPROM and Flash Memory are considered non-volatile storage because they utilize tiny internal batteries to maintain the capacitor charge when the main power is disconnected. Reason (R): Non-volatile memory is defined as any storage medium that retains its data payload indefinitely without requiring a continuous external power source. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). The definition of non-volatile memory (NVM) is exactly as stated: it holds data without power. R is True. Step 2: Evaluate Assertion (A). While EEPROM (like BIOS chips) and Flash (like SSDs) are non-volatile, they absolutely DO NOT use tiny internal batteries or capacitors. Step 3: They use 'Floating-Gate Transistors'. These transistors trap electrons in an insulated oxide chamber, holding a binary state physically for years without any electrical power. A is fundamentally false regarding the circuit logic.",
+    "trick": "Trap: Legacy CMOS RAM (holding the system clock/BIOS settings) used a tiny CR2032 battery. Modern EEPROM and Flash do not; they trap electrons in floating gates.",
+    "tip": "Flash/EEPROM are non-volatile because they trap electrons in Floating-Gate Transistors, not batteries."
+  },
+  {
+    "id": 18,
+    "question": "When a CPU attempts to read data and suffers a 'TLB Miss', what is the immediate subsequent action the hardware must take before it can check the L1 Data Cache?",
+    "options": ["It must generate a hard Page Fault and fetch the data from the SSD.", "It must flush the entire instruction pipeline to prevent a structural hazard.", "It must initiate a 'Page Table Walk' in Main Memory to find the physical address.", "It must switch to a Write-Through policy to resynchronize the cache."],
+    "answer": "It must initiate a 'Page Table Walk' in Main Memory to find the physical address.",
+    "explanation": "Step 1: The TLB (Translation Lookaside Buffer) is a tiny cache inside the CPU that stores recent Virtual-to-Physical address translations. Step 2: To access data in L1 Cache or RAM, the CPU must first know the Physical Address. Step 3: If the translation is not in the TLB (a TLB Miss), the CPU doesn't know where to look. Step 4: The hardware Memory Management Unit (MMU) must halt and perform a 'Page Table Walk'. Step 5: It reads the massive master Page Table located in slow Main Memory (RAM) to find the correct translation map, updates the TLB, and only then proceeds to fetch the actual data.",
+    "trick": "Trap: A TLB miss is NOT a Page Fault. A Page Fault means the data is on the hard drive. A TLB miss just means the *map* to the data wasn't cached, but the data is likely still safe in RAM.",
+    "tip": "TLB Miss forces a 'Page Table Walk' in RAM to find the virtual-to-physical address map."
+  },
+  {
+    "id": 19,
+    "question": "Assertion (A): The 'Average Memory Access Time' (AMAT) of a system can be improved by adding a Level 2 (L2) cache between the L1 cache and Main Memory. Reason (R): The L2 cache guarantees a 100% Hit Rate for data missed by the L1 cache, entirely bypassing the need for RAM access. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Evaluate A. AMAT = Hit Time + (Miss Rate * Miss Penalty). Adding an L2 cache reduces the massive 'Miss Penalty' of going to RAM, improving the average speed. A is True. Step 2: Evaluate R. No cache has a 100% Hit Rate. L2 cache is larger than L1, so it catches many misses, but if the data isn't in L2, the system still suffers an L2 Miss and must query the Main RAM. Step 3: Because R claims a physically impossible 100% hit rate guarantee, R is completely False.",
+    "trick": "Trap: Absolutes like 'guarantees 100%' are massive red flags in cache logic. Caches are probabilistic speedups, never guarantees.",
+    "tip": "Adding L2 cache lowers the Miss Penalty, but it never guarantees a 100% Hit Rate."
+  },
+  {
+    "id": 20,
+    "question": "In the construction of high-density DRAM modules, why must the physical circuitry incorporate multiplexing for the address bus lines (Row Address Strobe/RAS and Column Address Strobe/CAS)?",
+    "options": ["To double the bandwidth of the data bus during burst transfers.", "To reduce the physical pin count on the memory chip package, saving motherboard space and cost.", "To convert digital memory addresses into analog voltage levels for the capacitors.", "To prevent the capacitors from leaking charge during a read operation."],
+    "answer": "To reduce the physical pin count on the memory chip package, saving motherboard space and cost.",
+    "explanation": "Step 1: DRAM holds billions of cells arranged in a grid (Rows and Columns). Step 2: A 4GB module might require 32 address lines to uniquely identify every location. Step 3: If 32 physical pins were used just for addressing, the silicon chip package would be massive, fragile, and extremely expensive to wire to the CPU. Step 4: To solve this, engineers split the address in half. Step 5: They use the same 16 physical pins twice: first sending the Row Address (triggering the RAS signal), then sending the Column Address (triggering the CAS signal). This multiplexing drastically cuts the pin count.",
+    "trick": "Trap: Multiplexing addresses actually SLOWS DOWN the access slightly because it takes two steps. It is done purely for physical packaging economy, not performance.",
+    "tip": "DRAM multiplexes Row (RAS) and Column (CAS) addresses to halve the physical pin count."
+  },
+  {
+    "id": 21,
+    "question": "Assertion (A): In a virtualized memory system, an application crash due to 'Out of Memory' implies that both physical RAM and the Virtual Memory swap file have been completely exhausted. Reason (R): Virtual Memory isolates applications by assigning them independent virtual address spaces, which the MMU maps to physical frames or disk pages transparently. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, but R is not the correct explanation of A",
+    "explanation": "Step 1: Evaluate A. An OS will seamlessly use the hard drive (swap/pagefile) as RAM. An application only crashes with 'Out of Memory' when the OS physically cannot expand the pagefile anymore (disk full or hard limit reached). A is True. Step 2: Evaluate R. VM does provide memory protection and isolation by giving each app its own virtual sandbox mapping. R is True. Step 3: Check linkage. While R is a true feature of VM, it explains memory *protection/security*, not memory *capacity exhaustion*. The cause of A is running out of physical disk space, not address isolation.",
+    "trick": "Logic Trap: Both are accurate definitions of Virtual Memory behaviors, but the isolation feature (Reason) does not explain the capacity exhaustion feature (Assertion).",
+    "tip": "Virtual Memory combines RAM and Disk space. 'Out of Memory' means BOTH are full."
+  },
+  {
+    "id": 22,
+    "question": "Which of the following cache coherence protocols is considered the industry standard for multi-core processors to manage data consistency across independent L1 caches?",
+    "options": ["CSMA/CD Protocol", "MESI Protocol", "TCP/IP Protocol", "BGP Protocol"],
+    "answer": "MESI Protocol",
+    "explanation": "Step 1: In a multi-core CPU, Core 1 and Core 2 each have their own L1 cache. Step 2: If Core 1 modifies a variable in its cache, Core 2's cached copy becomes invalid. Step 3: Hardware architects use Cache Coherence Protocols to fix this. Step 4: The industry standard is the MESI protocol. Step 5: MESI stands for the four states a cache line can hold: Modified (changed locally), Exclusive (clean and only in this cache), Shared (clean and in multiple caches), and Invalid (stale data).",
+    "trick": "Trap: CSMA/CD is networking (Ethernet). TCP and BGP are internet routing. Only MESI (and its variants like MOESI) apply to CPU cache coherence logic.",
+    "tip": "The MESI Protocol (Modified, Exclusive, Shared, Invalid) maintains cache coherence in multi-core CPUs."
+  },
+  {
+    "id": 23,
+    "question": "Assertion (A): A modern CPU accessing data from the L3 cache incurs higher latency than accessing data from the L1 cache. Reason (R): L3 cache is typically constructed using Dynamic RAM (DRAM) capacitors, whereas L1 cache utilizes fast Static RAM (SRAM) flip-flops. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Evaluate Assertion (A). L1 cache is smaller and physically closer to the ALU, taking ~1-3 cycles. L3 cache is massive, shared across cores, and takes ~10-15 cycles. L3 is definitely slower. A is True. Step 2: Evaluate Reason (R). All CPU caches (L1, L2, and L3) are universally constructed using fast SRAM (Static RAM) flip-flops. Step 3: DRAM is too slow for any CPU cache and is strictly used for Main Memory sticks on the motherboard. Because R claims L3 uses DRAM, R is completely False.",
+    "trick": "Material Trap: Students assume L3 is slower because it uses cheaper materials. L3 is slower purely because it is physically larger (takes longer to search) and located further away on the silicon die, NOT because it uses DRAM.",
+    "tip": "All CPU caches (L1, L2, L3) use SRAM. Only Main Memory uses DRAM."
+  },
+  {
+    "id": 24,
+    "question": "In the evaluation of Page Replacement Algorithms for Virtual Memory, what defines a 'Page Fault'?",
+    "options": ["The MMU detects a corrupted data sector in the RAM module.", "The CPU attempts to write to a Read-Only memory segment, triggering a security exception.", "The CPU requests a virtual address whose corresponding physical page currently resides on the hard drive, not in RAM.", "The TLB cache is full and must evict an old address translation."],
+    "answer": "The CPU requests a virtual address whose corresponding physical page currently resides on the hard drive, not in RAM.",
+    "explanation": "Step 1: The OS allocates memory in 4KB chunks called 'Pages'. Step 2: When physical RAM is full, the OS moves inactive pages to the hard drive. Step 3: The MMU's Page Table marks these pages with an 'Invalid' bit indicating they are not in RAM. Step 4: If a program suddenly needs that data, the CPU checks the Page Table and sees the Invalid bit. Step 5: This hardware interrupt is called a 'Page Fault'. It forces the OS to pause the program, fetch the 4KB page from the slow hard drive, load it back into RAM, and resume execution.",
+    "trick": "Trap: A Page Fault sounds like an error or hardware crash. It is actually a normal, intended mechanism of Virtual Memory management.",
+    "tip": "Page Fault = The requested data is on the hard disk and must be swapped into RAM."
+  },
+  {
+    "id": 25,
+    "question": "Assertion (A): The 'Locality of Reference' principle is entirely ignored by compilers and software engineers because it is strictly a hardware-level phenomenon handled by the CPU cache controller. Reason (R): Cache memory is invisible to the software architecture; the Instruction Set Architecture (ISA) does not provide assembly instructions to explicitly target L1 or L2 cache addresses. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). Cache is mathematically transparent to software. You compile code for RAM addresses, and the hardware cache controller intercepts and caches it autonomously. R is historically True. Step 2: Evaluate Assertion (A). Because cache is so fast, software engineers desperately optimize their code to exploit it. Step 3: Compilers actively reorder loops (Loop Nest Optimization) and developers structure data in contiguous arrays (Data-Oriented Design) specifically to maximize Spatial Locality. Step 4: Writing cache-friendly software is a massive part of optimization. Therefore, claiming software ignores it makes A entirely False.",
+    "trick": "Trap: While cache is hardware-managed (invisible to the code), writing code that aligns with hardware physics (Locality) is the secret to high-performance programming.",
+    "tip": "Software is actively optimized to exploit hardware Locality of Reference (e.g., using arrays)."
+  },
+  {
+    "id": 26,
+    "question": "What is the primary architectural purpose of utilizing a 'Victim Cache' in a microprocessor's memory hierarchy?",
+    "options": ["To store a permanent backup of the BIOS to recover from malware attacks.", "To act as a tiny, fully associative cache holding blocks recently evicted from the L1 cache to mitigate conflict misses.", "To queue memory write operations intended for the hard drive, shielding the CPU from disk latency.", "To permanently lock essential OS kernel instructions into SRAM so they are never evicted."],
+    "answer": "To act as a tiny, fully associative cache holding blocks recently evicted from the L1 cache to mitigate conflict misses.",
+    "explanation": "Step 1: Direct-mapped L1 caches are incredibly fast but suffer heavily from Conflict Misses (two active addresses competing for the exact same cache slot). Step 2: When the L1 cache evicts a block, that block is technically 'lost' back to L2 or RAM. Step 3: Hardware engineers add a microscopic 'Victim Cache' (usually just 4 to 16 blocks wide) sitting right next to L1. Step 4: When L1 evicts a block, it is dumped into the Victim Cache. Step 5: If the CPU suddenly needs that evicted block again (a common anomaly), it finds it instantly in the Victim Cache instead of waiting for L2, saving massive latency.",
+    "trick": "Trap: The term 'Victim' refers to the cache line that was unfairly 'evicted' due to a conflict. It is a safety net for immediate reuse.",
+    "tip": "Victim Cache is a tiny buffer holding recently evicted L1 blocks to fix Conflict Misses."
+  },
+  {
+    "id": 27,
+    "question": "Assertion (A): During the memory read cycle of a DRAM chip, reading the data physically destroys the charge stored in the capacitor. Reason (R): When the access transistor opens, the microscopic charge in the capacitor dumps into the bitline to be read by the sense amplifier, leaving the capacitor completely discharged. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: DRAM stores a '1' as a tiny reservoir of electrons in a capacitor. Step 2: To read this value, the wordline opens the transistor gate. Step 3: The electrons flood out of the capacitor and onto the bitline (wire). Step 4: A sense amplifier detects this slight voltage spike to read the '1' (R is True). Step 5: Because the electrons left the capacitor to be measured, the capacitor is now empty. This is known as a 'Destructive Read' (A is True). Step 6: The DRAM controller must immediately rewrite the '1' back into the cell before concluding the cycle. R perfectly explains the destructive physics of A.",
+    "trick": "Physics Trap: SRAM reading is non-destructive because it's tied to active power. DRAM reading is inherently destructive because you are dumping the physical bucket of electrons to measure them.",
+    "tip": "DRAM reading is physically 'Destructive'. The hardware must instantly rewrite the data after reading."
+  },
+  {
+    "id": 28,
+    "question": "Consider a 32-bit computer architecture utilizing standard Paging for Virtual Memory. If the system utilizes a standard Page Size of exactly 4 Kilobytes (KB), how many bits of the 32-bit virtual address are strictly dedicated to representing the 'Page Offset'?",
+    "options": ["10 bits", "12 bits", "20 bits", "32 bits"],
+    "answer": "12 bits",
+    "explanation": "Step 1: A Virtual Address is mathematically split into two parts: the Page Number (which page to look at) and the Page Offset (which specific byte inside that page). Step 2: The Page Size dictates the length of the Offset. Step 3: A 4 Kilobyte (KB) page contains exactly 4096 bytes (2^12 bytes). Step 4: To uniquely address all 4096 individual bytes within that single page, you mathematically need 12 binary bits. Step 5: Therefore, the lowest 12 bits of the address form the Offset. (The remaining 20 bits form the Page Number, pointing to 2^20 unique pages).",
+    "trick": "Binary Math Trap: Memorize powers of 2. 1 KB = 2^10. 4 KB = 2^2 * 2^10 = 2^12. The exponent dictates the exact number of bits needed for the offset.",
+    "tip": "A 4 KB Page Size strictly requires a 12-bit Page Offset (2^12 = 4096)."
+  },
+  {
+    "id": 29,
+    "question": "Assertion (A): Hard Disk Drives (HDDs) utilize volatile magnetic platters, meaning they require constant platter rotation to retain data over decades. Reason (R): If the spindle motor stops, the magnetic flux fields overlapping the read/write heads collapse, causing catastrophic data erasure. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is False"],
+    "answer": "A is False, but R is False",
+    "explanation": "Step 1: Evaluate A. HDDs are the definitive example of NON-volatile storage. They retain data permanently without power or movement. Claiming they are volatile is fundamentally False. Step 2: Evaluate R. The data is stored as permanent microscopic magnetic polarities on the platter's coating. The spindle motor strictly spins the disks so the head can find data quickly, but stopping the motor has absolutely zero effect on the static magnetic polarities. R is pseudo-scientific nonsense and completely False.",
+    "trick": "Basic Definition Trap: 'Volatile' means data dies without power (like RAM). Storage drives (HDD, SSD, Flash, Tape) are universally 'Non-volatile'.",
+    "tip": "HDDs are Non-volatile. Stopping the spinning platters does NOT erase the magnetic data."
+  },
+  {
+    "id": 30,
+    "question": "In the hierarchy of memory access times, an L1 Cache hit typically takes ~1 nanosecond. What is the approximate structural penalty if the data suffers a complete Cache Miss across all levels (L1, L2, L3) and must be retrieved from Main Memory (DRAM)?",
+    "options": ["~5 nanoseconds", "~10 nanoseconds", "~100 nanoseconds", "~10,000 nanoseconds"],
+    "answer": "~100 nanoseconds",
+    "explanation": "Step 1: Understand the scale of the speed pyramid. L1 cache is usually 1-3 clock cycles (~1 ns). Step 2: L2 cache is roughly 10-15 cycles (~3-5 ns). Step 3: L3 cache is roughly 30-40 cycles (~10-15 ns). Step 4: If all caches miss, the request hits the external memory controller, travels over the motherboard bus, triggers the DRAM CAS/RAS signals, and returns. Step 5: This Main Memory latency historically and currently hovers around 50 to 100 nanoseconds (roughly 200-300 clock cycles). Step 6: 10,000 ns (10 microseconds) is encroaching on SSD speeds, not RAM.",
+    "trick": "Scale Trap: RAM is incredibly fast compared to SSDs, but glacially slow compared to CPU Cache. Memorize the '100 ns' rule of thumb for standard DRAM latency.",
+    "tip": "L1 Cache latency = ~1 ns. Main Memory (RAM) latency = ~100 ns."
+  },
+  {
+    "id": 31,
+    "question": "Assertion (A): Implementing a 'Write-Allocate' policy on a cache miss improves subsequent read performance for the newly modified data. Reason (R): Write-Allocate forces the cache controller to fetch the missed data block from Main Memory into the cache before overwriting it with the new CPU data, exploiting temporal locality. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: If a CPU wants to write to Address X, but X is NOT in the cache (Write Miss), the system must decide what to do. Step 2: A 'Write-No-Allocate' policy bypasses the cache and just writes directly to RAM. Step 3: A 'Write-Allocate' policy dictates pulling the block from RAM into the cache first, then writing the new data to the cache (R is True). Step 4: Because of Temporal Locality, the CPU is highly likely to read or modify Address X again very soon. Step 5: Because Write-Allocate placed it in the fast cache, subsequent accesses are instant Cache Hits, massively boosting performance (A is True, and R is the exact mechanism).",
+    "trick": "Trap: 'Write-Allocate' is almost always paired with 'Write-Back'. It seems inefficient to fetch from RAM just to overwrite it, but the assumption of future reuse (Locality) makes the initial penalty worthwhile.",
+    "tip": "Write-Allocate pulls missed data into cache upon writing, betting on Temporal Locality for future speed."
+  },
+  {
+    "id": 32,
+    "question": "What primary hardware limitation restricts engineers from simply making the hyper-fast L1 cache equal in size to Main Memory (e.g., 16 Gigabytes of L1 cache)?",
+    "options": ["SRAM generates significantly more heat per byte than DRAM, leading to immediate thermal failure at large capacities.", "SRAM requires 6 transistors per bit, meaning a 16GB cache would require trillions of transistors, making the silicon die physically massive, economically unviable, and prone to signal latency.", "The OS Page Table cannot index SRAM addresses larger than 32 Megabytes.", "L1 cache cannot retain data longer than a few microseconds before automatic self-erasure."],
+    "answer": "SRAM requires 6 transistors per bit, meaning a 16GB cache would require trillions of transistors, making the silicon die physically massive, economically unviable, and prone to signal latency.",
+    "explanation": "Step 1: L1 cache is built from SRAM. Main memory is built from DRAM. Step 2: DRAM needs 1 transistor and 1 capacitor per bit. SRAM needs 6 transistors per bit. Step 3: To build 16 GB of SRAM, you would need roughly 768 billion dedicated memory transistors. Step 4: Modern massive CPUs have ~50 billion transistors *total* for logic and small caches. Building a 768B transistor chip is physically impossible on current wafers. Step 5: Furthermore, a die that large would require long copper wires internally. The time it takes electrons to travel those long wires would ruin the ~1ns latency, defeating the entire purpose of L1 cache.",
+    "trick": "Economics & Physics Trap: The limitation is both density (cost) AND the speed of light (physics). Larger physical chips take longer to cross, destroying L1 latency constraints.",
+    "tip": "SRAM takes 6x the physical space of DRAM. Making it too big makes the CPU massive, expensive, and slow."
+  },
+  {
+    "id": 33,
+    "question": "Assertion (A): Swapping a traditional mechanical HDD for an NVMe SSD will drastically increase the Frames Per Second (FPS) output of a graphics-intensive video game. Reason (R): NVMe SSDs utilize the PCIe x4 bus, allowing them to render 3D geometry alongside the GPU to alleviate bottlenecking. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is False"],
+    "answer": "A is False, but R is False",
+    "explanation": "Step 1: Evaluate A. Storage drives (HDD/SSD) only handle loading assets (textures, models) from disk to RAM/VRAM. Once in RAM, the CPU and GPU handle the live rendering. Therefore, an SSD drastically reduces LOAD TIMES, but has zero effect on the maximum rendered FPS. A is False. Step 2: Evaluate R. SSDs strictly store and retrieve static data. They contain standard NAND flash controllers, not ALU/Shader cores capable of calculating 3D geometry or rendering frames. R is completely False.",
+    "trick": "Gamer Myth Trap: Consumers often conflate 'faster storage' with 'better gaming performance'. SSDs fix loading screens and stuttering (asset streaming), but they do not increase maximum computational FPS.",
+    "tip": "SSDs improve LOAD TIMES. They do NOT increase rendering speed (FPS) because they cannot process graphics."
+  },
+  {
+    "id": 34,
+    "question": "In Cache memory design, what does the 'Tag' portion of a memory address specifically identify?",
+    "options": ["It identifies which exact byte within the 64-byte cache block the CPU is requesting.", "It identifies the mathematical Set Index where the block must be placed.", "It serves as a unique identifier matching the upper bits of the Main Memory address to prove the cache line holds the correct data block.", "It tracks the Least Recently Used (LRU) chronological order for eviction purposes."],
+    "answer": "It serves as a unique identifier matching the upper bits of the Main Memory address to prove the cache line holds the correct data block.",
+    "explanation": "Step 1: A physical memory address is split into three parts by the cache controller: Tag, Index, and Offset. Step 2: The Offset dictates the specific byte inside the cache block. Step 3: The Index dictates which row (Set) the block is mapped to. Step 4: Because thousands of different RAM blocks might map to the exact same Index, the cache must verify which specific block is currently sitting there. Step 5: The 'Tag' represents the upper bits of the RAM address. The hardware compares the requested Tag with the Tag stored in the cache metadata. If they match, it is a Cache Hit.",
+    "trick": "Trap: Index = Where to look. Tag = Verifying you found the right thing. Offset = Grabbing the exact byte from the box.",
+    "tip": "The 'Tag' proves the cache line contains the specific RAM block the CPU requested."
+  },
+  {
+    "id": 35,
+    "question": "Assertion (A): Direct Memory Access (DMA) allows hardware peripherals to bypass the CPU and read/write data directly into the L1 Cache to maximize peripheral throughput. Reason (R): Bypassing the CPU eliminates the von Neumann bottleneck, preventing the processor from wasting cycles managing bulk data transfers. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). The entire point of DMA is to take bulk transfer duties away from the CPU so the CPU can keep doing math. R is a perfectly true statement about DMA's purpose. Step 2: Evaluate Assertion (A). DMA transfers data from a peripheral (like an SSD or Network Card) directly into Main Memory (RAM). Step 3: DMA explicitly DOES NOT write into the CPU's internal L1 Cache. Writing to L1 from external hardware would cause massive cache coherence violations and is architecturally prohibited. A is False.",
+    "trick": "Trap: DMA bypasses the CPU to reach RAM. Because L1 Cache is physically inside the CPU core, bypassing the CPU means you cannot target L1. DMA targets standard DRAM.",
+    "tip": "DMA transfers bulk data from peripherals directly to RAM, never to internal CPU Caches."
+  },
+  {
+    "id": 36,
+    "question": "Which specific architectural anomaly occurs in a memory hierarchy when the CPU's execution pipeline is starved because data cannot be fetched from RAM fast enough, despite the RAM operating at its maximum theoretical clock speed?",
+    "options": ["The von Neumann Bottleneck", "Dennard Scaling Breakdown", "Branch Misprediction Penalty", "Belady's Anomaly"],
+    "answer": "The von Neumann Bottleneck",
+    "explanation": "Step 1: In the von Neumann architecture, programs and data share the same unified memory space and the same system bus. Step 2: Over the decades, CPU processing speeds (Moore's Law) increased exponentially faster than DRAM access speeds. Step 3: Modern CPUs process instructions infinitely faster than the RAM can supply the data over the bus. Step 4: The CPU is forced into 'Wait States', idling while data travels. Step 5: This inherent speed disparity between the ultra-fast CPU and the slower shared RAM bus is globally recognized as the 'von Neumann Bottleneck'.",
+    "trick": "Trap: Dennard Scaling involves transistor power limits. Branch misprediction is a pipeline logic error. The pure speed gap between CPU and RAM is the von Neumann bottleneck.",
+    "tip": "von Neumann Bottleneck = CPU is too fast, RAM is too slow, causing CPU idle starvation."
+  },
+  {
+    "id": 37,
+    "question": "Assertion (A): In a fully inclusive multi-level cache hierarchy, if a data block is evicted from the L1 cache, it must immediately be evicted from the L2 and L3 caches as well. Reason (R): An inclusive cache policy mandates that the highest-level cache (L3) contains a strict superset of all data currently residing in the lower-level caches (L1, L2). Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). An inclusive cache policy means L2 must contain everything L1 has, and L3 must contain everything L2 has. R is a perfectly true definition. Step 2: Evaluate Assertion (A). Because of this rule, if L3 evicts a block, it MUST force L1 to evict it (to maintain the superset rule). Step 3: However, the assertion claims the reverse: if L1 evicts a block, L2/L3 must evict it. This is False. L1 is tiny; it evicts blocks constantly to make room. Leaving those blocks in the massive L2/L3 cache is the entire point of the hierarchy. A is False.",
+    "trick": "Directional Logic Trap: Inclusive eviction flows downwards. If the big bucket (L3) throws it away, the small bucket (L1) must throw it away. But the small bucket (L1) throwing it away has no effect on the big bucket.",
+    "tip": "Inclusive Cache: Evicting from L3 forces eviction from L1. Evicting from L1 does NOT affect L3."
+  },
+  {
+    "id": 38,
+    "question": "Consider a system with 4GB of physical RAM and a 32-bit Operating System. If an application suffers a massive memory leak and demands 6GB of contiguous memory, what hardware/software mechanism attempts to fulfill this request before crashing?",
+    "options": ["The L3 Cache controller initiates a buffer overflow.", "The Memory Management Unit maps the request to the Virtual Memory pagefile on the Hard Drive.", "The Southbridge dynamically compresses data in RAM to double the physical space.", "Nothing. A 32-bit OS has a rigid 4GB addressing limit, so the request mathematically fails immediately."],
+    "answer": "Nothing. A 32-bit OS has a rigid 4GB addressing limit, so the request mathematically fails immediately.",
+    "explanation": "Step 1: Understand Virtual Memory. Yes, normally Virtual Memory extends RAM by using the hard drive. Step 2: However, understand the strict architecture limit of a 32-bit system. Step 3: A 32-bit processor's address registers can only generate 2^32 distinct binary addresses. Step 4: 2^32 bytes equals exactly 4 Gigabytes. Step 5: Therefore, a single application on a pure 32-bit OS mathematically cannot ask for 6GB of contiguous memory. The CPU literally lacks the numbers to point to it. The request fails instantly before Virtual Memory is even considered.",
+    "trick": "Trap: The prompt sets you up to confidently select 'Virtual Memory / Pagefile'. But the '32-bit' constraint overrides everything. Virtual Memory cannot exceed the hard math limit of the CPU's address bus.",
+    "tip": "A 32-bit OS physically cannot address more than 4GB. Virtual Memory cannot bypass this math limit."
+  },
+  {
+    "id": 39,
+    "question": "Assertion (A): Flash memory cells (NAND) degrade physically with every 'Write' operation, eventually becoming dead sectors. Reason (R): To write new data to a NAND flash cell, a massive high-voltage pulse must be applied to force electrons through an insulating oxide layer, slowly destroying the insulation over thousands of cycles. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: RAM is volatile but lasts forever. SSDs (Flash) are non-volatile but have a limited lifespan of 'Terabytes Written' (TBW). A is True. Step 2: Flash memory stores data by trapping electrons in a 'Floating Gate'. Step 3: To trap or erase these electrons, they must be fired through a silicon oxide insulating wall using Quantum Tunneling (Fowler-Nordheim tunneling). Step 4: This requires a massive voltage spike (~20V). Every time this happens, the oxide wall suffers microscopic atomic damage. Step 5: After 3,000 to 10,000 write cycles, the wall breaks, the electrons leak, and the cell dies. R is the exact quantum physics explanation for A.",
+    "trick": "Physics Trap: Unlike magnetic HDDs which last indefinitely regarding writes, SSDs physically destroy themselves via tunneling voltages during every write/erase cycle. Wear-leveling algorithms hide this from the user.",
+    "tip": "SSD Flash degrades because high-voltage electron tunneling physically damages the oxide insulator during Writes."
+  },
+  {
+    "id": 40,
+    "question": "In the context of the caching process, what specific action generates a 'Compulsory Miss' (also known as a Cold Start Miss)?",
+    "options": ["The cache is full and the requested block must replace an older block.", "Two memory blocks are mathematically mapped to the same cache line, overwriting each other.", "The CPU requests a memory block that has absolutely never been accessed before since the system powered on.", "The operating system forces a cache flush due to a Context Switch."],
+    "answer": "The CPU requests a memory block that has absolutely never been accessed before since the system powered on.",
+    "explanation": "Step 1: Misses are categorized into the Three C's: Compulsory, Capacity, and Conflict. Step 2: A Capacity miss happens because the cache is too small (full). Step 3: A Conflict miss happens because the mapping algorithm forced a collision. Step 4: A Compulsory Miss happens strictly on the very first time a specific block of data is requested. Step 5: Because the CPU has never asked for it before, it is impossible for it to be in the cache. The CPU is 'compelled' to miss and fetch it from RAM. (Also called a Cold Miss).",
+    "trick": "Trap: No amount of cache size, clever associativity, or advanced mapping can prevent a Compulsory Miss. It is the inescapable first-time penalty.",
+    "tip": "Compulsory Miss (Cold Miss) = The unavoidable miss occurring on the very first request for data."
+  },
+  {
+    "id": 41,
+    "question": "Assertion (A): ECC (Error-Correcting Code) RAM is utilized almost exclusively in enterprise servers rather than consumer gaming PCs. Reason (R): Cosmic rays and background radiation can strike memory chips, occasionally flipping a binary 0 to a 1, causing catastrophic server crashes that ECC logic actively detects and repairs. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate A. ECC RAM is significantly more expensive and slightly slower, so it is omitted from consumer PCs but mandated in enterprise servers where uptime is critical. A is True. Step 2: Evaluate R. DRAM capacitors hold microscopic amounts of electrons. Step 3: High-energy subatomic particles from space (cosmic rays) pass through the earth constantly. If one strikes a silicon capacitor, it can inject enough charge to flip a '0' to a '1' (a Single-Event Upset or 'Bit Flip'). Step 4: A flipped bit in an OS kernel causes a Blue Screen of Death. Step 5: ECC adds extra parity chips and Hamming Code logic to mathematically detect and instantly fix single-bit errors. R flawlessly explains A.",
+    "trick": "Trivia Trap: 'Cosmic Rays' sounds like a ridiculous science fiction distractor, but it is the actual, literal primary cause of random soft-errors in server RAM.",
+    "tip": "ECC RAM uses parity chips to detect and fix bit-flips caused by cosmic radiation."
+  },
+  {
+    "id": 42,
+    "question": "Which specific memory architecture utilizes 'Pages' composed of multiple 'Blocks', requires erasing data at the Block level but reading/writing at the Page level, resulting in severe 'Write Amplification'?",
+    "options": ["Magnetic Hard Disk Drives (HDD)", "NAND Flash Memory (SSD)", "Dynamic RAM (DRAM)", "Static RAM (SRAM)"],
+    "answer": "NAND Flash Memory (SSD)",
+    "explanation": "Step 1: HDDs overwrite bits directly. RAM overwrites bits directly. Step 2: NAND Flash (SSDs) has a unique, rigid physical architecture. It reads and writes data in small chunks called Pages (e.g., 4KB). Step 3: However, due to the high-voltage circuitry, it can only ERASE data in massive chunks called Blocks (e.g., 256KB). Step 4: To change a single 4KB text file, the SSD must read the whole 256KB block into cache, erase the entire physical block, and rewrite all 256KB with the modified 4KB file. Step 5: This forces the drive to write vastly more data internally than the user requested, a detrimental phenomenon known as Write Amplification.",
+    "trick": "Trap: Users assume SSDs act like RAM. They do not. Flash memory's inability to overwrite single bytes in-place defines its entire firmware architecture (Garbage Collection, TRIM).",
+    "tip": "NAND Flash Writes in Pages, but Erases in Blocks. This causes Write Amplification."
+  },
+  {
+    "id": 43,
+    "question": "Assertion (A): Moving from a Direct-Mapped Cache to a 4-Way Set Associative Cache dramatically decreases the 'Hit Time' of the processor. Reason (R): Set Associative caches divide the cache into lanes, allowing the CPU to find data mathematically faster without utilizing comparators. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is False"],
+    "answer": "A is False, but R is False",
+    "explanation": "Step 1: Evaluate A. Direct-Mapped cache checks exactly one spot. It is the absolute fastest design for 'Hit Time'. A 4-Way cache must check 4 spots simultaneously, which requires complex logic gates that SLOW DOWN the Hit Time. A is False. Step 2: Evaluate R. Because a 4-Way cache has 4 potential spots for the data, the hardware MUST use 4 hardware comparators simultaneously to check all 4 tags against the requested address. Step 3: It does not eliminate comparators; it drastically increases their usage. R is completely False.",
+    "trick": "Trade-off Trap: Increasing Associativity (Direct -> 4-Way -> Fully) drastically LOWERS the 'Miss Rate' (fewer conflicts). But it INCREASES the 'Hit Time' (hardware logic takes longer to search).",
+    "tip": "Higher Associativity = Lower Miss Rate (good), but slower Hit Time (bad)."
+  },
+  {
+    "id": 44,
+    "question": "In the context of the CPU Cache, what is the exact function of the 'Valid Bit' stored in the cache line metadata?",
+    "options": ["It indicates whether the data in the cache matches the data in Main Memory.", "It prevents the CPU from reading garbage data left over from the physical manufacturing process or a system cold boot.", "It triggers the error-correction code (ECC) algorithm if parity is compromised.", "It flags the cache block as the next candidate for eviction by the LRU algorithm."],
+    "answer": "It prevents the CPU from reading garbage data left over from the physical manufacturing process or a system cold boot.",
+    "explanation": "Step 1: When a computer is powered on (cold boot), the SRAM flip-flops in the cache settle into random 1s and 0s based on ambient electrical noise. Step 2: If the CPU immediately asks for data, it might accidentally read this random garbage thinking it's a real value. Step 3: To prevent this, every cache line has a 1-bit flag called the 'Valid Bit'. Step 4: On boot, hardware forces all Valid Bits to 0. Step 5: When the CPU pulls real, legitimate data from RAM and places it in the cache, the Valid Bit is flipped to 1. The CPU will only trust cache lines with a 1.",
+    "trick": "Trap: Do not confuse the Valid Bit with the Dirty Bit. Valid Bit = 'Is this real data or startup garbage?' Dirty Bit = 'Has this real data been modified compared to RAM?'",
+    "tip": "Valid Bit = 0 means the cache line holds random electrical garbage (Cold Boot)."
+  },
+  {
+    "id": 45,
+    "question": "Assertion (A): Virtual Memory provides a critical security layer for modern Operating Systems by preventing rogue applications from reading passwords stored by other applications. Reason (R): The Memory Management Unit assigns every application an identical, isolated Virtual Address space (e.g., starting at 0x0000), physically preventing Application A from generating a memory address that points to Application B's physical RAM frames. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Before Virtual Memory, programs used raw physical RAM addresses. If a virus guessed where your banking app stored passwords in RAM, it could just read it. Step 2: Virtual Memory gives every app a 'fake' virtual sandbox. App A thinks it owns address 0x100. App B thinks it owns address 0x100. Step 3: The MMU translates App A's 0x100 to Physical RAM 0x5000, and App B's 0x100 to Physical RAM 0x9000 (R is True). Step 4: Because App A can only generate addresses inside its own fake map, it is physically impossible for it to form a pointer that the MMU will translate into App B's territory. Step 5: This absolute hardware isolation provides massive security (A is True, governed by R).",
+    "trick": "Perspective Trap: Users think Virtual Memory is strictly for 'adding capacity' via the hard drive. Historically and architecturally, its primary triumph was security/isolation.",
+    "tip": "Virtual Memory's primary architectural benefit is Security and Isolation between active programs."
+  },
+  {
+    "id": 46,
+    "question": "Which fundamental principle limits the practical size of a Translation Lookaside Buffer (TLB) to typically fewer than 1024 entries in a modern processor?",
+    "options": ["The Von Neumann architectural ceiling limits addressing logic to 10 bits.", "The TLB utilizes a Fully Associative cache layout relying on massive arrays of hardware comparators, which consume exorbitant die space and power.", "The Operating System restricts the TLB size to match the geometry of hard drive sectors.", "L1 cache inclusivity rules prohibit the TLB from exceeding 1% of L1 capacity."],
+    "answer": "The TLB utilizes a Fully Associative cache layout relying on massive arrays of hardware comparators, which consume exorbitant die space and power.",
+    "explanation": "Step 1: The TLB caches virtual-to-physical address translations. It must be searched instantly, in a single clock cycle. Step 2: To avoid conflict misses, TLBs are heavily designed as Fully Associative caches (a translation can be stored anywhere). Step 3: In a Fully Associative cache, the hardware must compare the CPU's requested address against EVERY single entry simultaneously. Step 4: To check 1024 entries at once requires 1024 massive hardware logic comparators running in parallel. Step 5: This consumes immense silicon space and generates massive heat/power draw, placing a hard physics limit on the TLB's maximum capacity.",
+    "trick": "Hardware Physics Trap: Everything in CPU design is a trade-off. Fully associative means zero conflicts, but the hardware comparators required to search it are massive and power-hungry.",
+    "tip": "TLBs are Fully Associative. They remain tiny because hardware comparators are massive and hot."
+  },
+  {
+    "id": 47,
+    "question": "Assertion (A): Read-Only Memory (ROM) is entirely obsolete in modern personal computers and has been physically replaced by dynamic volatile memory. Reason (R): Modern motherboards utilize UEFI firmware stored on rewritable EEPROM or SPI Flash chips, allowing users to update the motherboard logic without physically replacing silicon chips. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). In the 1980s, BIOS was on literal Read-Only chips. Today, UEFI/BIOS is stored on Electrically Erasable Programmable Read-Only Memory (EEPROM) or Flash chips so it can be updated. R is True. Step 2: Evaluate Assertion (A). Despite being rewritable (EEPROM), it is STILL a form of ROM technology because it is non-volatile (holds data without power) and is primarily read from during boot. Step 3: Furthermore, claiming it was replaced by 'volatile' memory (like RAM) is completely false, as the PC would forget how to boot the moment you unplugged it. A is False.",
+    "trick": "Terminology Trap: EEPROM and Flash are technically subsets of the ROM family tree (specifically PROM -> EPROM -> EEPROM). Even though they are rewritable, they are non-volatile ROM.",
+    "tip": "EEPROM/Flash are modern forms of ROM. They are non-volatile, contrary to volatile RAM."
+  },
+  {
+    "id": 48,
+    "question": "If a CPU calculates an effective memory address, what specific component of the memory hierarchy intercepts this request FIRST before any other check occurs?",
+    "options": ["The L1 Data Cache", "The Translation Lookaside Buffer (TLB)", "The L2 Unified Cache", "The Memory Management Unit (MMU) Page Table"],
+    "answer": "The Translation Lookaside Buffer (TLB)",
+    "explanation": "Step 1: The CPU executes software, meaning the address it generates is always a Virtual Address. Step 2: The caches (L1, L2) and the Main Memory are built from physical silicon and require Physical Addresses. Step 3: Before the CPU can even ask the L1 cache if it has the data, the Virtual Address MUST be translated into a Physical Address. Step 4: The TLB is the hyper-fast hardware cache that stores these translations. Step 5: Therefore, the very first thing the CPU hits is the TLB to get the map. Once it has the physical map, it queries the L1 cache.",
+    "trick": "Order of Operations Trap: You cannot check a physically-tagged cache without a physical address. The translation (TLB) must inherently occur before the data check (L1).",
+    "tip": "CPU -> Virtual Address -> TLB (Translation) -> Physical Address -> L1 Cache."
+  },
+  {
+    "id": 49,
+    "question": "Assertion (A): Utilizing an extreme multi-core processor (e.g., 64 cores) guarantees a proportional exponential decrease in software execution time for all desktop applications. Reason (R): Amdahl's Law states that the overall speedup of a system is strictly limited by the sequential fraction of the software that cannot be parallelized. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). Amdahl's Law is the foundational theorem of parallel computing. It mathematically proves that if 20% of a program MUST run sequentially (e.g., waiting for user input or linear math), the maximum theoretical speedup is capped at 5x, regardless of whether you have 10 cores or 10,000 cores. R is perfectly True. Step 2: Evaluate Assertion (A). Because Amdahl's Law enforces this hard ceiling, adding 64 cores absolutely does NOT guarantee proportional scaling. Most desktop apps are highly sequential and see zero benefit past 4-8 cores. A is False.",
+    "trick": "Marketing Trap: CPU vendors sell core counts like magic speed pills. Amdahl's Law brings them back to reality. Sequential code limits parallel hardware scaling.",
+    "tip": "Amdahl's Law dictates that sequential code severely limits the speedup gained from adding CPU cores."
+  },
+  {
+    "id": 50,
+    "question": "In the physical construction of RAM, what is the defining architectural mechanism of an 'Interleaved Memory' system designed to hide DRAM latency?",
+    "options": ["It overlaps SRAM and DRAM chips on the same DIMM stick.", "It spreads sequential memory addresses across multiple independent memory banks so they can be accessed concurrently.", "It places the memory controller directly inside the DRAM module rather than the CPU.", "It compresses data mathematically before storing it, halving the latency footprint."],
+    "answer": "It spreads sequential memory addresses across multiple independent memory banks so they can be accessed concurrently.",
+    "explanation": "Step 1: DRAM is slow because after a read, a memory bank must 'precharge' before it can be read again. Step 2: If a CPU needs a large block of sequential data (e.g., Addresses 1, 2, 3, 4), reading them from the same bank forces the CPU to wait for the precharge penalty 4 times. Step 3: Memory Interleaving splits the RAM into independent hardware Banks. Step 4: It wires Address 1 to Bank A, Address 2 to Bank B, Address 3 to Bank C. Step 5: The CPU can request all three simultaneously. While Bank A is busy recovering, Bank B is already outputting data, effectively hiding the hardware latency and multiplying throughput.",
+    "trick": "Trap: Interleaving does not make the individual RAM chips faster. It uses parallelism (multiple banks) to overlap their slow recovery times.",
+    "tip": "Memory Interleaving hides DRAM latency by spreading sequential addresses across multiple parallel banks."
+  },
+  {
+    "id": 51,
+    "question": "Assertion (A): Unlike Static RAM (SRAM), Dynamic RAM (DRAM) requires constant periodic refreshing to maintain its stored data. Reason (R): Each memory cell in DRAM utilizes a microscopic capacitor to hold a charge representing data, which gradually leaks away over milliseconds. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: SRAM utilizes flip-flop circuitry (typically 6 transistors) which holds its state continuously as long as power is supplied. Step 2: DRAM utilizes a 1-Transistor 1-Capacitor (1T1C) cell architecture. Step 3: The capacitor stores data as an electrical charge. Step 4: Capacitors inherently leak charge over time. Step 5: To prevent data loss, the memory controller must periodically read and rewrite (refresh) the charge, making R the exact physical explanation for A.",
+    "trick": "Bank/IT Trap: Do not confuse volatility with refreshing. Both SRAM and DRAM are volatile (lose data on power loss), but ONLY DRAM requires active refreshing while powered on!",
+    "tip": "DRAM = Capacitor leakage = Needs refresh. SRAM = Flip-flops = No refresh."
+  },
+  {
+    "id": 52,
+    "question": "When analyzing Average Memory Access Time (AMAT) in a hierarchical memory system, which of the following formulas correctly represents the CPU's memory retrieval latency?",
+    "options": ["AMAT = Hit Time + Miss Penalty", "AMAT = Miss Rate * (Hit Time + Miss Penalty)", "AMAT = Hit Time + (Miss Rate * Miss Penalty)", "AMAT = (Hit Time * Hit Rate) + Miss Penalty"],
+    "answer": "AMAT = Hit Time + (Miss Rate * Miss Penalty)",
+    "explanation": "Step 1: When a CPU needs data, it first checks the Cache (Hit Time). Step 2: If the data is found (Hit), the time taken is simply the Hit Time. Step 3: If the data is not found (Miss), the CPU incurs an additional Miss Penalty to fetch it from Main Memory. Step 4: However, misses only happen a fraction of the time, defined by the Miss Rate. Step 5: Therefore, Average Memory Access Time equals the base Hit Time plus the added average delay: (Miss Rate multiplied by Miss Penalty).",
+    "trick": "Examiners often flip the formula. Remember that the 'Hit Time' is ALWAYS incurred because the CPU must check the cache first before realizing it's a miss.",
+    "tip": "AMAT = Hit Time + (Miss Rate * Miss Penalty). You always pay the Hit Time cost!"
+  },
+  {
+    "id": 53,
+    "question": "Assertion (A): In modern superscalar processors, the L1 Cache is almost always split into two separate caches: L1i (Instruction) and L1d (Data). Reason (R): Splitting the L1 cache allows the CPU to fetch an instruction and read/write data simultaneously in the same clock cycle, completely avoiding structural hazards. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A unified cache stores both instructions and data in the same memory block. Step 2: If a CPU attempts to fetch an instruction and read a data operand simultaneously from a unified cache, a structural hazard occurs because the cache port can only handle one request. Step 3: To resolve this, architects split the L1 cache into L1i and L1d. Step 4: This split architecture (a modified Harvard architecture within a von Neumann system) provides separate physical pathways. Step 5: Thus, Reason R correctly explains the pipeline optimization stated in Assertion A.",
+    "trick": "While main memory is unified (von Neumann), the L1 cache behaves like Harvard architecture strictly to prevent pipeline structural hazards.",
+    "tip": "Split L1 Cache (Instruction + Data) prevents structural pipeline hazards."
+  },
+  {
+    "id": 54,
+    "question": "Which of the following cache mapping techniques suffers most severely from 'Conflict Misses' when multiple memory blocks map to the exact same cache line, even if the rest of the cache is completely empty?",
+    "options": ["Fully Associative Mapping", "Direct Mapped Cache", "Set-Associative Mapping", "Sector Mapping"],
+    "answer": "Direct Mapped Cache",
+    "explanation": "Step 1: In a Direct Mapped Cache, every block of main memory maps to exactly one, specific cache line (Block Address modulo Number of Cache Lines). Step 2: If the CPU needs block A and block B, and both map to line 5, they will constantly overwrite each other. Step 3: This occurs even if lines 1 through 4 and 6 through N are completely empty. Step 4: This phenomenon is called a 'Conflict Miss' (or collision). Step 5: Fully Associative and Set-Associative caches mitigate this by allowing a block to be placed in any line or any line within a specific set, respectively.",
+    "trick": "Direct Mapped is fast and cheap to build but rigid. Think of it as assigned parking: if two employees are assigned spot #5, they fight over it, even if the whole lot is empty.",
+    "tip": "Direct Mapped Cache = Highest Conflict Misses. Fully Associative = Zero Conflict Misses."
+  },
+  {
+    "id": 55,
+    "question": "Assertion (A): Implementing a 'Write-Through' cache policy guarantees absolute data consistency between the Cache and Main Memory at all times. Reason (R): In a Write-Through policy, every single write operation by the CPU is directed solely to the Main Memory, completely bypassing the Cache to ensure consistency. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: A 'Write-Through' cache policy means that whenever data is modified, it is updated in BOTH the cache and the main memory simultaneously. Step 2: Because both are updated, absolute data consistency is strictly guaranteed (Assertion A is true). Step 3: However, Reason R claims the cache is completely bypassed. Step 4: This is false; the data is written to the cache AND the main memory concurrently. Step 5: Bypassing the cache entirely would defeat the purpose of having a cache for subsequent fast reads.",
+    "trick": "Write-Through updates BOTH. Write-Back updates ONLY the cache, marking it with a 'Dirty Bit' until the block is evicted to Main Memory. R is false because it claims a bypass.",
+    "tip": "Write-Through = Updates Cache + RAM simultaneously (Consistent but slow)."
+  },
+  {
+    "id": 56,
+    "question": "In the context of Virtual Memory, what specific architectural role does the Translation Lookaside Buffer (TLB) play?",
+    "options": ["It acts as a high-speed disk cache to buffer data transferring from the SSD to RAM.", "It is a specialized hardware cache inside the MMU that stores recent Virtual-to-Physical address translations to bypass page table lookups.", "It is a register that holds the base physical address of the current process's Page Table in Main Memory.", "It buffers context-switching data between L1 and L2 caches during an interrupt."],
+    "answer": "It is a specialized hardware cache inside the MMU that stores recent Virtual-to-Physical address translations to bypass page table lookups.",
+    "explanation": "Step 1: Virtual Memory requires translating a Virtual Address to a Physical Address using a Page Table stored in RAM. Step 2: Accessing RAM for the translation takes a full memory cycle, followed by another cycle to access the actual data. Step 3: This effectively halves memory speed. Step 4: To solve this, the Memory Management Unit (MMU) uses a Translation Lookaside Buffer (TLB). Step 5: The TLB is an ultra-fast hardware cache that stores the most recently used address translations. A TLB hit instantly provides the physical address, bypassing the slow RAM page table lookup.",
+    "trick": "Bank/IT Trap: TLB is NOT a data cache (like L1/L2). It is strictly a cache for ADDRESS TRANSLATIONS. It only holds page map routes, not actual user data.",
+    "tip": "TLB (Translation Lookaside Buffer) = Hardware cache for Page Table address translations."
+  },
+  {
+    "id": 57,
+    "question": "Assertion (A): Increasing the degree of multiprogramming indefinitely will eventually cause the CPU utilization to plummet toward zero. Reason (R): Loading too many processes exhausts physical RAM, causing the system to spend all its time endlessly swapping pages in and out of the hard drive instead of executing instructions, a state known as Thrashing. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Multiprogramming increases CPU utilization by keeping the CPU busy while processes wait for I/O. Step 2: However, each process requires a minimum number of RAM frames (Working Set) to function smoothly. Step 3: If too many processes are loaded (indefinite increase), RAM becomes completely full. Step 4: The OS begins aggressively paging data to the much slower hard drive (Page Faults). Step 5: The CPU spends its entire time waiting for the disk to swap pages rather than doing actual computing. This catastrophic collapse is 'Thrashing', making R the perfect explanation for A.",
+    "trick": "More programs running = higher CPU usage... UNTIL you run out of RAM. Then performance completely collapses due to Thrashing.",
+    "tip": "Thrashing = System spends more time paging to disk than executing CPU instructions."
+  },
+  {
+    "id": 58,
+    "question": "Which of the following Page Replacement algorithms famously suffers from 'Belady's Anomaly', a counter-intuitive phenomenon where increasing the number of physical memory frames actually INCREASES the number of page faults?",
+    "options": ["Least Recently Used (LRU)", "First-In-First-Out (FIFO)", "Optimal Page Replacement (OPT)", "Most Recently Used (MRU)"],
+    "answer": "First-In-First-Out (FIFO)",
+    "explanation": "Step 1: Normally, giving a computer more RAM (more page frames) reduces page faults because more data can stay in memory. Step 2: Laszlo Belady discovered in 1969 that this is not always true for certain algorithms. Step 3: In the First-In-First-Out (FIFO) algorithm, pages are evicted strictly based on arrival time, ignoring how often they are used. Step 4: With a specific sequence of page requests, adding an extra frame alters the queue dynamics such that a frequently used page is pushed out right before it's needed again. Step 5: This anomaly exclusively affects FIFO-based algorithms; stack-based algorithms like LRU are immune to it.",
+    "trick": "Belady's Anomaly ONLY happens in FIFO! Stack algorithms (like LRU or Optimal) guarantee that adding frames will always equal or decrease page faults.",
+    "tip": "Belady's Anomaly = Increasing RAM increases page faults. Strictly associated with FIFO."
+  },
+  {
+    "id": 59,
+    "question": "In the context of multi-core processor cache coherence, the MESI protocol assigns one of four states to a cache line. What does it mean if a cache line is marked with the 'Exclusive' (E) state?",
+    "options": ["The data in the cache line has been modified by the CPU and no longer matches Main Memory.", "The cache line contains data that matches Main Memory and is present in multiple other core caches.", "The cache line contains data that matches Main Memory and is present ONLY in this specific core's cache.", "The cache line is locked and cannot be evicted by the replacement algorithm until the CPU releases it."],
+    "answer": "The cache line contains data that matches Main Memory and is present ONLY in this specific core's cache.",
+    "explanation": "Step 1: MESI stands for Modified, Exclusive, Shared, Invalid. It maintains data consistency across multiple L1 caches in a multi-core CPU. Step 2: Modified (M): Data is changed and differs from RAM (Dirty). Step 3: Shared (S): Data matches RAM but exists in multiple cores' caches. Step 4: Invalid (I): Data is obsolete because another core modified it. Step 5: Exclusive (E): Data perfectly matches RAM (Clean) AND this is the ONLY core holding a copy of it. This allows the core to modify it instantly without notifying other cores.",
+    "trick": "Exclusive does NOT mean modified. It means 'I am the only one holding this clean copy, so I have exclusive rights to modify it without asking permission from other cores'.",
+    "tip": "MESI: M (Dirty/Local), E (Clean/Local Only), S (Clean/Multiple cores), I (Obsolete)."
+  },
+  {
+    "id": 60,
+    "question": "Assertion (A): Accessing data from a CPU Register is fundamentally faster than accessing data from the L1 Cache. Reason (R): Registers are fabricated using SRAM technology, whereas L1 Cache is fabricated using significantly slower DRAM technology. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: Registers are located physically inside the CPU execution core and operate at the exact clock speed of the CPU, making them the fastest memory. Assertion A is true. Step 2: L1 Cache is located slightly further away but is still incredibly fast. Step 3: However, Reason R makes a false physical claim. BOTH Registers and L1 Cache (as well as L2 and L3) are fabricated using SRAM (Static RAM) flip-flop technology. Step 4: DRAM (Dynamic RAM) is strictly used for Main Memory (RAM), not internal CPU caches. Step 5: Therefore, Reason R is architecturally false.",
+    "trick": "Bank/IT Trap: NEVER associate DRAM with internal CPU caches. All caches (L1, L2, L3) and Registers are SRAM. Main Memory is DRAM.",
+    "tip": "Registers > L1 > L2 > L3. All of these are SRAM. Main Memory is DRAM."
+  },
+  {
+    "id": 61,
+    "question": "A system architect is designing a Translation Lookaside Buffer (TLB). To achieve a 1-clock-cycle lookup time across all entries simultaneously, the TLB is engineered using a highly specialized memory hardware array. Which type of memory is used?",
+    "options": ["Non-Volatile Random Access Memory (NVRAM)", "Synchronous Dynamic RAM (SDRAM)", "Content Addressable Memory (CAM)", "Phase-Change Memory (PCM)"],
+    "answer": "Content Addressable Memory (CAM)",
+    "explanation": "Step 1: Standard RAM retrieves data based on a provided Address (you give it an address, it returns data). Step 2: A TLB must search its entire table instantly to find if a specific Virtual Page Number exists. Step 3: Doing a sequential search in RAM would take hundreds of cycles. Step 4: Content Addressable Memory (CAM) reverses standard RAM. You feed it the DATA (the Virtual Page Number), and the hardware searches every single cell in parallel simultaneously. Step 5: If found, it instantly outputs the matching physical address in 1 clock cycle, making CAM essential for TLBs despite its high cost and power draw.",
+    "trick": "CAM is the 'Reverse RAM'. Instead of providing an address to get data, you provide data, and the hardware instantly tells you where it is. It's the hardware version of a Hash Map.",
+    "tip": "TLB hardware utilizes CAM (Content Addressable Memory) for instant parallel searching."
+  },
+  {
+    "id": 62,
+    "question": "Assertion (A): In a fully associative cache, the 'Index' field of the physical address is completely omitted. Reason (R): A fully associative cache allows a main memory block to be placed in any available cache line, eliminating the need to calculate a specific target set or line index. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A memory address is normally split into Tag, Index, and Offset. Step 2: The Offset determines the specific byte within the block. Step 3: In a Direct Mapped or Set-Associative cache, the Index determines exactly which line (or set) the block MUST go to. Step 4: A Fully Associative cache has no restrictions; any block can go anywhere. Step 5: Because there are no assigned lines or sets, the 'Index' field is entirely unnecessary and omitted. The address is split only into a massive Tag and an Offset. Both A and R are true and perfectly linked.",
+    "trick": "If a block can go ANYWHERE, you don't need a map (Index) to find its designated parking spot. You just check the license plates (Tag) of every car in the lot simultaneously.",
+    "tip": "Fully Associative Cache Address = Tag + Offset only. No Index bits exist."
+  },
+  {
+    "id": 63,
+    "question": "Which of the following cache miss types (collectively known as the '3 Cs') is mathematically impossible to eliminate, even if the CPU cache is made infinitely large and fully associative?",
+    "options": ["Capacity Misses", "Conflict Misses", "Compulsory Misses", "Coherence Misses"],
+    "answer": "Compulsory Misses",
+    "explanation": "Step 1: The '3 Cs' of cache misses are Compulsory, Capacity, and Conflict. Step 2: A Capacity miss happens because the cache is too small to hold all needed data. An infinite cache eliminates this. Step 3: A Conflict miss happens when multiple blocks map to the same line. A fully associative cache eliminates this. Step 4: A Compulsory miss (also known as a Cold Start miss) occurs the absolute very first time a block of data is requested by the CPU. Step 5: Because the data has never been requested before, it physically cannot be in the cache yet. No amount of cache size or architecture can prevent a first-time miss.",
+    "trick": "You can't read a book if you haven't bought it yet! The very first access to any data must always fetch from RAM, triggering an unavoidable 'Compulsory' miss.",
+    "tip": "Compulsory (Cold) Misses occur on the first access to a memory block. They are unavoidable."
+  },
+  {
+    "id": 64,
+    "question": "Assertion (A): SSDs (Solid State Drives) utilize Virtual Memory Paging significantly faster than mechanical HDDs, completely eliminating the risk of Thrashing in a memory-starved system. Reason (R): SSDs utilize NAND flash memory which offers near-instantaneous seek times compared to the physical read/write head movement of an HDD. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: It is absolutely true that SSDs use NAND flash, resulting in near-zero seek latency compared to mechanical HDDs (Reason R is true). Step 2: Because of this, an SSD handles page file swapping vastly faster than an HDD. Step 3: However, even the fastest Gen 5 NVMe SSD operates at roughly 10-14 GB/s, whereas modern RAM operates at 60-100+ GB/s with micro-latencies. Step 4: If a system severely lacks physical RAM, it will still spend all its CPU cycles paging data to the SSD. Step 5: While the system might not freeze as hard as with an HDD, 'Thrashing' still fundamentally occurs, degrading performance. Assertion A's claim of 'completely eliminating' thrashing is false.",
+    "trick": "SSDs mask the symptom of Thrashing because they are fast, but they don't cure the disease. A severe lack of RAM will still cause a CPU bottleneck on I/O overhead.",
+    "tip": "SSDs are faster than HDDs, but relying heavily on SSD page files still causes Thrashing."
+  },
+  {
+    "id": 65,
+    "question": "In an 8-way Set-Associative Cache, how does the memory controller determine where a fetched block of memory is placed?",
+    "options": ["The block is mapped to a specific set based on its Index bits, and can be placed in any of the 8 lines within that specific set.", "The block can be placed in any of the 8 sets globally, based on the Least Recently Used algorithm.", "The block is hashed and placed sequentially across 8 consecutive cache lines to maximize spatial locality.", "The block is placed directly into line number 8 of the cache, overwriting existing data."],
+    "answer": "The block is mapped to a specific set based on its Index bits, and can be placed in any of the 8 lines within that specific set.",
+    "explanation": "Step 1: Set-Associative mapping is a compromise between Direct Mapped (rigid) and Fully Associative (flexible). Step 2: The cache is divided into 'Sets'. Step 3: The 'Index' bits of the memory address force the block to go to one specific Set (just like Direct Mapped). Step 4: However, in an 'N-way' set-associative cache, each set contains 'N' distinct lines. Step 5: Therefore, in an 8-way cache, the block goes to its assigned Set, but has the freedom to park in any of the 8 open lines within that Set, drastically reducing conflict misses.",
+    "trick": "Think of sets as parking lots. You are assigned to Lot #3 (Index). But Lot #3 has 8 open spaces (8-way). You can park in any of those 8 spaces.",
+    "tip": "N-way Set-Associative = Mapped to 1 specific Set, but can occupy any of the N lines inside it."
+  },
+  {
+    "id": 66,
+    "question": "Assertion (A): During a context switch between two executing processes, the operating system must explicitly flush the Translation Lookaside Buffer (TLB). Reason (R): The TLB holds virtual-to-physical address mappings, and because two different processes might use the exact same virtual addresses, failing to flush the TLB would cause Process B to accidentally read Process A's physical memory. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Virtual memory provides an illusion where Process A thinks it starts at address 0x00, and Process B thinks it also starts at address 0x00. Step 2: The Page Table maps these to entirely different physical RAM addresses. Step 3: The TLB caches these mappings. Step 4: If a context switch occurs and the OS leaves Process A's mappings in the TLB, Process B asking for 0x00 will hit the TLB and be routed to Process A's physical RAM, breaching security. Step 5: Therefore, the OS MUST flush (invalidate) the TLB upon a context switch (unless Address Space Identifiers - ASIDs are used). Both A and R are true.",
+    "trick": "Virtual addresses are relative, not absolute! Two programs can use the same virtual address, so the hardware translator (TLB) must be wiped clean when switching programs.",
+    "tip": "TLB caches virtual-to-physical maps. Context switches require TLB flushes to prevent cross-process memory leaks."
+  },
+  {
+    "id": 67,
+    "question": "A microprocessor utilizes a 'Write-Back' cache policy. To minimize memory traffic, which specific hardware indicator is added to each cache line directory to inform the memory controller whether the cache block must be written to RAM upon eviction?",
+    "options": ["The Valid Bit", "The Dirty Bit", "The Reference Bit", "The LRU Counter"],
+    "answer": "The Dirty Bit",
+    "explanation": "Step 1: In a Write-Back cache, when the CPU modifies data, it only updates the Cache, not the Main Memory. Step 2: This creates an inconsistency; the Main Memory now holds stale data. Step 3: To track this, the cache hardware includes an extra bit for each line called the 'Dirty Bit'. Step 4: If the CPU modifies the line, the Dirty Bit is flipped from 0 to 1 (Clean to Dirty). Step 5: When the cache line is eventually evicted to make room for new data, the controller checks the Dirty Bit. If it is 1, the controller writes the modified block to RAM. If it is 0 (unmodified), it simply overwrites it, saving bandwidth.",
+    "trick": "The Valid Bit just says 'Does this line hold real data or garbage?'. The Dirty bit specifically says 'Has this data been modified since we fetched it?'.",
+    "tip": "Dirty Bit = Marks cache data that has been modified and must be written back to RAM upon eviction."
+  },
+  {
+    "id": 68,
+    "question": "Which specific principle of Locality of Reference justifies the architectural decision to fetch an entire 'Block' (e.g., 64 Bytes) of data into the CPU Cache when the CPU only requests a single 4-Byte instruction?",
+    "options": ["Temporal Locality", "Spatial Locality", "Sequential Locality", "Algorithmic Locality"],
+    "answer": "Spatial Locality",
+    "explanation": "Step 1: Locality of Reference dictates how caches operate. Step 2: Temporal Locality means if data is accessed, it will likely be accessed again soon (justifying keeping the data in the cache). Step 3: Spatial Locality means if a specific memory address is accessed, addresses physically adjacent to it will likely be accessed next (e.g., executing lines of code sequentially, or iterating through an array). Step 4: Because of Spatial Locality, when the CPU asks for 4 bytes, the hardware fetches the entire 64-byte block surrounding it. Step 5: This 'prefetching' ensures that the CPU's subsequent requests will result in ultra-fast Cache Hits.",
+    "trick": "Temporal = Time (reusing a variable in a loop). Spatial = Space (using adjacent data in an array). Block fetching relies strictly on Spatial Locality.",
+    "tip": "Spatial Locality predicts adjacent data will be needed next, justifying fetching large memory blocks."
+  },
+  {
+    "id": 69,
+    "question": "Assertion (A): Demand Paging systems only load pages of a process into physical RAM when they are explicitly requested during execution, heavily reducing initial load times. Reason (R): If a requested page is not currently in RAM, the hardware executes a Soft Page Fault, allowing the CPU to instantly retrieve the page from the L3 Cache. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: Demand Paging is lazy loading. It doesn't load the whole program into RAM, only the pages needed right now, drastically speeding up initial program launch. (Assertion A is true). Step 2: If the CPU needs a page that isn't in RAM, a Page Fault occurs. Step 3: However, pages are swapped between RAM and the Hard Drive (Secondary Storage). Step 4: A Hard Page Fault retrieves the missing page from the incredibly slow Hard Drive/SSD, not the ultra-fast L3 Cache. Step 5: Therefore, Reason R is architecturally absurd and entirely false.",
+    "trick": "Page Faults ALWAYS involve the Hard Drive/SSD (Virtual Memory). Caches deal with Cache Misses, not Page Faults!",
+    "tip": "Demand Paging loads data only when needed. Missing pages trigger a Page Fault to the Hard Drive, not the Cache."
+  },
+  {
+    "id": 70,
+    "question": "In resolving the 'Von Neumann Bottleneck' utilizing a memory hierarchy, the concept of 'Inclusion' implies which of the following architectural states?",
+    "options": ["All data present in the L1 cache must also be present in the L2 cache, ensuring a strict subset relationship.", "The TLB strictly includes only addresses that map to the L1 Instruction cache.", "The Hard Drive must maintain a compressed duplicate of all data currently residing in the L3 cache.", "Main Memory (RAM) cannot contain any data that is currently modified (dirty) in the CPU registers."],
+    "answer": "All data present in the L1 cache must also be present in the L2 cache, ensuring a strict subset relationship.",
+    "explanation": "Step 1: Cache hierarchies can be Inclusive, Exclusive, or Non-Inclusive. Step 2: The 'Principle of Inclusion' dictates that the contents of a higher-level (smaller/faster) memory must be a strict subset of the lower-level (larger/slower) memory. Step 3: In an Inclusive cache design, if a data block is in the L1 cache, a copy of that exact block MUST also exist in the L2 cache. Step 4: If the block is evicted from L2, it must also be forcibly evicted from L1 to maintain the inclusion property. Step 5: This simplifies cache coherence protocols (like MESI) in multi-core systems, as checking L2 guarantees the presence/absence in L1.",
+    "trick": "Inclusive = L1 is a subset of L2. Exclusive = L1 and L2 contain completely different data (maximizing total capacity but complicating searches).",
+    "tip": "Cache Inclusion Property: If data is in L1, a copy MUST also exist in L2 and L3."
+  },
+  {
+    "id": 71,
+    "question": "Assertion (A): Using an Inverted Page Table drastically reduces the physical RAM footprint required to store virtual memory mappings compared to standard Multi-Level Page Tables. Reason (R): An Inverted Page Table maintains exactly one entry for each Virtual Page generated by the OS, mapping multiple processes to a single unified directory. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: Standard page tables require an entry for every Virtual Page in existence, which consumes massive amounts of RAM (Assertion A is true). Step 2: An Inverted Page Table reverses this logic. Step 3: Instead of an entry for every Virtual Page, it maintains exactly one entry for every PHYSICAL FRAME of RAM actually installed in the system. Step 4: Since physical frames are vastly fewer than virtual pages, the table size shrinks dramatically. Step 5: Reason R claims it maintains an entry for each Virtual Page, which is the exact opposite of how an Inverted Page Table works. Therefore, Reason R is completely false.",
+    "trick": "Standard Page Table = One entry per Virtual Page (Huge). Inverted Page Table = One entry per Physical RAM Frame (Tiny).",
+    "tip": "Inverted Page Tables index Physical RAM frames, not Virtual Pages, saving massive memory space."
+  },
+  {
+    "id": 72,
+    "question": "Consider a 32-bit operating system utilizing 4 KB (Kilobyte) page sizes for virtual memory. How many unique bits are exclusively required to represent the Page Offset within a given memory address?",
+    "options": ["10 bits", "12 bits", "20 bits", "32 bits"],
+    "answer": "12 bits",
+    "explanation": "Step 1: A Virtual Address is split into two parts: the Page Number and the Page Offset. Step 2: The Page Offset specifies the exact byte location within a single page. Step 3: The page size is given as 4 KB (Kilobytes). Step 4: 4 KB equals 4096 bytes. Step 5: To uniquely address 4096 different byte locations, you need a binary number capable of 4096 states. 2^12 = 4096. Therefore, exactly 12 bits are required for the Page Offset.",
+    "trick": "Always convert the page size to bytes, then find the power of 2. 4KB = 2^12. The exponent (12) is the number of bits needed for the offset. The remaining 20 bits are the Page Number.",
+    "tip": "Page Size of 4KB (2^12 bytes) always requires exactly a 12-bit Page Offset."
+  },
+  {
+    "id": 73,
+    "question": "Assertion (A): EPROM (Erasable Programmable ROM) is structurally distinct from modern EEPROM (Flash Memory) because EPROM requires physical exposure to ultraviolet (UV) light to erase its stored data. Reason (R): The floating-gate transistors in an EPROM cell are surrounded by an exceptionally thick layer of silicon dioxide, preventing electrical currents from quantum tunneling and resetting the charge. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Early EPROM chips had a visible quartz window on top. To erase them, a technician literally shined intense UV light through the window for 20 minutes (Assertion A is true). Step 2: EEPROM (Electrically Erasable) uses electricity to erase. Why the difference? Step 3: In EPROM, the insulating silicon dioxide layer around the floating gate is very thick. Step 4: Normal safe electrical voltages cannot force electrons through this thick barrier. Step 5: UV light provides enough photonic energy to excite the trapped electrons, allowing them to jump the barrier and escape, erasing the chip. Modern EEPROM uses a much thinner oxide layer, allowing electrical quantum tunneling (Fowler-Nordheim tunneling). Thus, R correctly explains A.",
+    "trick": "EPROM uses UV light (Quartz window). EEPROM uses Electricity. The physical difference is the thickness of the oxide insulation layer preventing electrical erasure in older EPROM.",
+    "tip": "EPROM is erased via UV light due to thick oxide layers. EEPROM is electrically erased."
+  },
+  {
+    "id": 74,
+    "question": "A system administrator notices that replacing the system's Main Memory (RAM) with higher-density modules has inadvertently increased the 'Internal Fragmentation' footprint of the OS. Which specific configuration mismatch most accurately causes Internal Fragmentation in virtual memory?",
+    "options": ["The Operating System has increased the fixed Page Size significantly (e.g., from 4KB to 16KB), forcing small files to occupy massively oversized memory pages with unused slack space.", "The memory controller is utilizing Variable Segmentation, leaving tiny, un-allocatable physical gaps between segments in RAM.", "The L2 cache is writing data back to RAM using sequential bursts, fragmenting the data lines.", "The Translation Lookaside Buffer (TLB) is dropping entries prematurely, causing fragmented address lookups."],
+    "answer": "The Operating System has increased the fixed Page Size significantly (e.g., from 4KB to 16KB), forcing small files to occupy massively oversized memory pages with unused slack space.",
+    "explanation": "Step 1: Fragmentation comes in two forms: External and Internal. Step 2: External Fragmentation occurs when free memory is chopped into tiny unusable gaps between allocated blocks (happens in variable Segmentation). Step 3: Internal Fragmentation occurs in fixed Paging systems. Step 4: If the OS sets the fixed page size to 16KB, and a program requests 2KB of memory, the OS MUST give it the whole 16KB page. Step 5: The remaining 14KB inside that page is completely wasted and cannot be used by anyone else. This trapped, wasted space inside an allocated block is Internal Fragmentation.",
+    "trick": "Internal = Trapped INSIDE a fixed page (Paging problem). External = Trapped OUTSIDE allocations as gaps (Segmentation problem). Memory module upgrades often prompt OS page size adjustments.",
+    "tip": "Internal Fragmentation occurs in Paging systems when fixed page sizes are larger than requested memory blocks."
+  },
+  {
+    "id": 75,
+    "question": "Assertion (A): Modern multi-core processors rely heavily on NUMA (Non-Uniform Memory Access) architecture to scale performance across multiple CPU sockets in enterprise servers. Reason (R): In a NUMA architecture, every CPU socket shares a single, centralized memory controller, guaranteeing that all processors experience the exact same memory latency when accessing any block of RAM. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: In multi-socket servers, routing all CPUs to a single memory hub creates a massive bottleneck. Step 2: Therefore, enterprise servers use NUMA (Assertion A is true). Step 3: In NUMA, memory is divided into local nodes. Each CPU socket has its OWN dedicated memory controller and its own local bank of RAM. Step 4: A CPU accessing its local RAM is incredibly fast. Step 5: However, a CPU can access another socket's remote RAM over an interconnect bus, which takes longer. Thus, memory access time is NON-UNIFORM (varies based on distance). Reason R falsely describes a UMA (Uniform Memory Access) shared-controller setup.",
+    "trick": "The acronym literally gives it away! Non-Uniform Memory Access means latency is NOT uniform. Local RAM is fast, Remote RAM is slow. R describes Uniform Memory Access (UMA).",
+    "tip": "NUMA (Non-Uniform Memory Access) = Each CPU has local fast RAM. Accessing another CPU's RAM is slower."
+  },
+  {
+    "id": 76,
+    "question": "In the hierarchy of storage technologies, the 'Write Amplification Factor' (WAF) is a critical lifespan metric that uniquely plagues which type of hardware architecture?",
+    "options": ["Magnetic Hard Disk Drives (HDDs)", "Dynamic Random Access Memory (DRAM)", "NAND Flash Solid State Drives (SSDs)", "Phase-Change Optical Disks (Blu-Ray)"],
+    "answer": "NAND Flash Solid State Drives (SSDs)",
+    "explanation": "Step 1: HDDs can overwrite a magnetic sector directly. DRAM can overwrite a flip-flop directly. Step 2: NAND Flash (SSDs) has a fundamental physical limitation: you cannot directly overwrite existing data. Step 3: To write new data to an occupied area, an SSD must first ERASE the entire Block (which is much larger than a Page). Step 4: If you want to change a 4KB file in a 256KB block, the SSD must read the 256KB, modify the 4KB, erase the entire 256KB block, and rewrite the whole 256KB back. Step 5: Writing 4KB of user data physically resulted in writing 256KB of flash wear. This exponential multiplication of wear is called Write Amplification.",
+    "trick": "Only NAND flash requires the 'Erase-before-Write' cycle on large blocks, causing WAF. HDDs and RAM can overwrite byte-by-byte indefinitely.",
+    "tip": "Write Amplification Factor (WAF) specifically destroys NAND Flash SSDs due to 'Erase-before-write' block mechanics."
+  },
+  {
+    "id": 77,
+    "question": "Assertion (A): High-end workstation RAM modules equipped with ECC (Error-Correcting Code) utilize an additional storage chip on the module specifically to implement a Hamming Code algorithm. Reason (R): A standard Hamming Code allows the memory controller to detect and instantly correct single-bit flips caused by cosmic rays or electrical interference without crashing the system. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Standard non-ECC RAM modules typically have 8 memory chips per side (a 64-bit data bus). Step 2: ECC RAM modules have 9 chips per side (a 72-bit data bus). The 9th chip stores parity/syndrome bits. (Assertion A is true). Step 3: Why? Background radiation and electrical noise can randomly flip a 0 to a 1 in a DRAM capacitor. Step 4: The memory controller uses the Richard Hamming algorithm (Hamming Code). Step 5: By mathematically checking the extra parity bits, the hardware can pinpoint exactly which single bit flipped and reverse it instantly on the fly, preventing a Blue Screen of Death. Thus, R accurately explains A.",
+    "trick": "ECC doesn't just detect errors (like simple parity). It uses Hamming Code to CORRECT single-bit errors dynamically. It detects (but cannot correct) double-bit errors.",
+    "tip": "ECC Memory uses an extra chip to run Hamming Codes, correcting single-bit flips dynamically."
+  },
+  {
+    "id": 78,
+    "question": "In the design of CPU registers, what is the primary architectural purpose of a 'Register Renaming' hardware unit during instruction execution?",
+    "options": ["To expand the address bus width from 32-bit to 64-bit virtual registers.", "To dynamically map a small set of architectural registers to a larger pool of physical registers to eliminate Write-After-Write (WAW) pipeline hazards.", "To convert floating-point data into integer formats before feeding the ALU.", "To shadow the L1 Cache contents directly into the control unit to prevent Branch Mispredictions."],
+    "answer": "To dynamically map a small set of architectural registers to a larger pool of physical registers to eliminate Write-After-Write (WAW) pipeline hazards.",
+    "explanation": "Step 1: Compilers write programs using a limited number of 'architectural registers' (e.g., 16 registers like EAX, EBX in x86). Step 2: In advanced Out-of-Order superscalar CPUs, multiple instructions run simultaneously. Step 3: If two independent instructions try to write their results to 'EAX' at the same time, a Name Dependency conflict occurs (WAW hazard), stalling the pipeline. Step 4: To solve this, the CPU has a massive pool of hidden 'physical registers' (e.g., 128). Step 5: The Register Renamer dynamically changes the destination of the second instruction to a hidden physical register, breaking the false dependency and allowing both to execute in parallel.",
+    "trick": "WAW (Write-After-Write) is a false dependency caused by running out of register names. Register Renaming gives the CPU infinite 'scratchpad' names to keep the pipeline moving.",
+    "tip": "Register Renaming = Dynamically mapping architectural registers to physical ones to prevent Name Dependency hazards (WAW/WAR)."
+  },
+  {
+    "id": 79,
+    "question": "Assertion (A): Utilizing a 'Write-Allocate' policy is almost universally paired with a 'Write-Back' cache design, whereas 'No-Write-Allocate' is paired with 'Write-Through'. Reason (R): In Write-Allocate, a cache miss during a write operation forces the controller to fetch the entire block from RAM into the cache before modifying it locally, which only makes performance sense if subsequent modifications stay exclusively in the cache. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: If a CPU wants to write data to address X, but X is NOT in the cache (Write Miss). Step 2: A 'Write-Allocate' policy fetches block X from RAM, puts it in the cache, and writes to it. Step 3: A 'No-Write-Allocate' policy bypasses the cache entirely and just writes X directly to RAM. Step 4: If you use Write-Through (which writes to RAM anyway), bringing the block into the cache is a waste of time. So Write-Through pairs with No-Write-Allocate. Step 5: If you use Write-Back (which only writes to cache), you MUST bring the block into the cache so subsequent writes are ultra-fast. Thus, the pairings in A are true, and R perfectly explains the logic.",
+    "trick": "Remember the twins: (Write-Back + Write-Allocate) AND (Write-Through + No-Write-Allocate). Mixing them ruins the performance benefits of the architecture.",
+    "tip": "Write-Back pairs with Write-Allocate (fetch block on miss). Write-Through pairs with No-Write-Allocate (bypass cache on miss)."
+  },
+  {
+    "id": 80,
+    "question": "A microprocessor's memory management unit (MMU) is handling a page replacement. Under which specific mathematical scenario does the 'Working Set Model' dictate that a process should be completely suspended (swapped out) rather than simply swapping a single page?",
+    "options": ["When the sum of the Working Set sizes of all active processes exceeds the total available frames of physical RAM.", "When the Page Fault Frequency (PFF) drops below the lower threshold bound.", "When the TLB Hit Rate reaches 100%, indicating cache saturation.", "When the process requests an I/O operation that bypasses the DMA controller."],
+    "answer": "When the sum of the Working Set sizes of all active processes exceeds the total available frames of physical RAM.",
+    "explanation": "Step 1: A process's 'Working Set' is the minimum number of RAM frames it needs at this exact moment to run without constantly page faulting. Step 2: The OS tracks the Working Set size for every running program (W1, W2, W3...). Step 3: The OS adds these together to find total demand (D = W1 + W2 + W3). Step 4: If Total Demand (D) exceeds total physical RAM frames available, the system is mathematically guaranteed to start Thrashing. Step 5: To prevent total system collapse, the Working Set Model dictates the OS must drastically intervene by suspending an entire process and swapping it fully to disk, freeing up enough frames for the others to survive.",
+    "trick": "The Working Set model is a mathematical preventative measure against Thrashing. If the sum of necessary pages > total RAM, the OS must kill or suspend a process to save the system.",
+    "tip": "Working Set Model prevents Thrashing: If total working sets > physical RAM, suspend a process."
+  },
+  {
+    "id": 81,
+    "question": "Assertion (A): Interleaved Memory architecture dramatically increases overall memory bandwidth by placing consecutive words of memory in the same physical memory module. Reason (R): Placing consecutive words in the same module allows the memory controller to read them simultaneously in a single clock burst using spatial locality. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Memory Interleaving is a technique to hide the slow access latency of DRAM. Step 2: Main memory is divided into multiple independent modules (e.g., Bank 0, Bank 1, Bank 2, Bank 3). Step 3: Crucially, consecutive words are assigned to DIFFERENT modules, not the same module. (e.g., Word 0 in Bank 0, Word 1 in Bank 1). Therefore, Assertion A is completely false. Step 4: Why? If the CPU wants 4 consecutive words, it sends requests to all 4 banks simultaneously. Step 5: While Bank 0 is recovering from a read, Bank 1 is delivering, then Bank 2. They pipeline the data. Reason R is false because putting them in the same module would cause a bottleneck, as the module can only output one word at a time.",
+    "trick": "Interleaving is like dealing a deck of cards to 4 players. You give card 1 to player 1, card 2 to player 2. You NEVER put consecutive data in the same bank, because you want them to work in parallel!",
+    "tip": "Memory Interleaving places consecutive memory addresses in DIFFERENT physical modules to allow parallel access."
+  },
+  {
+    "id": 82,
+    "question": "In evaluating page replacement algorithms, the 'Optimal Page Replacement' (OPT or MIN) algorithm is heavily studied in academic computer science but is completely impossible to implement in a real-world operating system. Why?",
+    "options": ["It requires a Translation Lookaside Buffer with infinite entries.", "It relies on perfect future knowledge of the exact sequence of all upcoming memory page requests.", "It requires hardware support for atomic Compare-and-Swap operations not present in modern CPUs.", "It relies strictly on FIFO queues which trigger Belady's Anomaly."],
+    "answer": "It relies on perfect future knowledge of the exact sequence of all upcoming memory page requests.",
+    "explanation": "Step 1: When RAM is full, the OS must choose a page to kick out (evict). Step 2: The Optimal (OPT) algorithm dictates: 'Evict the page that will not be used for the longest period of time in the future'. Step 3: By doing this, it mathematically guarantees the absolute lowest possible number of page faults. Step 4: However, an Operating System is not clairvoyant. It has absolutely no way of predicting exactly which memory addresses a program will request 5 seconds from now. Step 5: Therefore, OPT is impossible to build. It is only used theoretically as a benchmark to measure how well real algorithms (like LRU) perform compared to perfection.",
+    "trick": "You can't build an algorithm that predicts the future. OPT is a theoretical benchmark. Real OSs use approximations of the past (like Least Recently Used - LRU) to guess the future.",
+    "tip": "Optimal Page Replacement (OPT) requires impossible future knowledge. Used only as a benchmark."
+  },
+  {
+    "id": 83,
+    "question": "Assertion (A): When an executing program attempts a division by zero, the CPU generates a non-maskable hardware interrupt routed through the Southbridge to alert the Operating System. Reason (R): Division by zero is a severe arithmetic error occurring within the ALU, which must immediately halt the pipeline and force a context switch. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Interrupts can be Hardware (from external devices) or Software (internal CPU conditions). Step 2: A division by zero, a page fault, or an invalid opcode are internal conditions generated strictly within the CPU pipeline. Step 3: These are technically termed 'Exceptions' or 'Traps', not hardware interrupts. Step 4: Furthermore, they do not travel through the Southbridge (chipset), as they originate inside the CPU die itself. Assertion A is false. Step 5: Reason R is completely true; it is a severe internal ALU error that traps to the OS (halts the pipeline) so the OS can terminate the offending program.",
+    "trick": "Exceptions (Traps) are internal software/ALU events (div by zero). Hardware Interrupts are external physical events (keyboard press). Never mix the two pathways!",
+    "tip": "Division by zero generates an internal software Trap (Exception), not an external hardware interrupt."
+  },
+  {
+    "id": 84,
+    "question": "Consider a system with a 64-bit Virtual Address space and a 48-bit Physical Address limit. If the system uses 4 KB pages, what is the exact mathematical size of the Page Table assuming every page has a 8-byte Page Table Entry (PTE), and why is a multi-level page table mandatory?",
+    "options": ["The single table would require 32 Terabytes (TB) of continuous RAM, which exceeds physical memory capacity.", "The single table would require 32 Petabytes (PB) of continuous RAM, which exceeds physical memory capacity.", "The single table would require 4 Megabytes (MB) of RAM, which overflows the L3 Cache.", "The single table would require 4 Gigabytes (GB) of RAM, consuming too much of the 32-bit offset limit."],
+    "answer": "The single table would require 32 Petabytes (PB) of continuous RAM, which exceeds physical memory capacity.",
+    "explanation": "Step 1: Identify virtual address size: 64 bits. Step 2: Identify page size: 4 KB (2^12 bytes). Step 3: Number of virtual pages = 2^64 / 2^12 = 2^52 pages. Step 4: Every single virtual page needs an entry in the table. 2^52 entries multiplied by 8 bytes per entry (2^3) = 2^55 total bytes for the page table. Step 5: Convert 2^55 bytes: 2^50 is a Petabyte. 2^55 = 32 Petabytes (PB). A single contiguous table of 32 PB is impossible to store in RAM. A multi-level page table splits this up so only actively used portions exist in RAM.",
+    "trick": "Address space minus Offset = Number of pages. 64 - 12 = 52. 2^52 pages * 8 bytes = 2^55 bytes. Massive theoretical sizes require hierarchical multi-level page tables to survive.",
+    "tip": "64-bit address spaces require multi-level page tables because a single flat table would consume Petabytes of RAM."
+  },
+  {
+    "id": 85,
+    "question": "Assertion (A): A CPU cache designed with 'Harvard Architecture' completely eliminates the risk of Read-After-Write (RAW) data hazards in the pipeline. Reason (R): Harvard Architecture physically separates the cache into an Instruction Memory block and a Data Memory block, giving each its own dedicated bus to the CPU. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Reason R accurately describes Harvard Architecture: it splits memory into Instruction and Data paths, avoiding structural pipeline hazards (fetching an instruction and reading data simultaneously). Step 2: However, a Read-After-Write (RAW) hazard is a Data Dependency, not a structural conflict. Step 3: A RAW hazard occurs when Instruction 2 needs the mathematical result of Instruction 1 before Instruction 1 has written it to a register. Step 4: Cache architecture has absolutely nothing to do with resolving data dependencies. They are solved by Data Forwarding/Bypassing or pipeline stalling. Step 5: Therefore, Assertion A is architecturally false.",
+    "trick": "Match the hazard to the cure! Structural Hazards are cured by Harvard Cache (split paths). Data Hazards (RAW) are cured by Forwarding/Bypassing. Control Hazards are cured by Branch Prediction.",
+    "tip": "Harvard Cache cures Structural Hazards. It does NOT cure Data Hazards (RAW/WAW/WAR)."
+  },
+  {
+    "id": 86,
+    "question": "In the context of magnetic Hard Disk Drives (HDDs), the 'Disk Scheduling' algorithm deployed by the OS dictates the order in which sector read requests are physically serviced. Which algorithm specifically solves the 'Starvation' problem inherent in the Shortest Seek Time First (SSTF) method?",
+    "options": ["First-Come, First-Served (FCFS)", "Elevator Algorithm (SCAN)", "Look-Ahead Paging (LAP)", "Least Recently Used (LRU)"],
+    "answer": "Elevator Algorithm (SCAN)",
+    "explanation": "Step 1: SSTF algorithm moves the physical read/write head to the closest requested track next. Step 2: If a stream of requests constantly arrives near track 50, a request waiting out at track 100 will be ignored forever (Starvation). Step 3: The SCAN algorithm (Elevator) fixes this. Step 4: Like a physical elevator, the disk head moves continuously in one direction (e.g., inwards) servicing every request in its path until it hits the absolute end. Step 5: Then it reverses direction and sweeps back. This sweeping motion mathematically guarantees that no request is starved, regardless of how far away it is.",
+    "trick": "SSTF is greedy (takes the closest job), which causes starvation. SCAN (Elevator) is fair, sweeping across the whole disk back and forth.",
+    "tip": "SCAN (Elevator) disk scheduling prevents the starvation problem inherent in Shortest Seek Time First (SSTF)."
+  },
+  {
+    "id": 87,
+    "question": "Assertion (A): Direct Memory Access (DMA) controllers operate utilizing virtual addresses to ensure absolute memory protection between competing user processes. Reason (R): DMA bypasses the CPU completely to transfer data directly between I/O peripherals and Main Memory, meaning the CPU's internal Memory Management Unit (MMU) is not involved in the transfer. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: DMA allows devices (like disk controllers) to write directly to RAM, freeing up the CPU. (Reason R is completely true). Step 2: However, because it bypasses the CPU, it physically bypasses the CPU's Memory Management Unit (MMU). Step 3: The MMU is the hardware that translates virtual addresses into physical addresses. Step 4: Because the DMA controller does not have access to the CPU's page tables, classic DMA must operate strictly using raw PHYSICAL memory addresses, not virtual ones. Step 5: Therefore, Assertion A is completely false. (Note: Modern advanced architectures use an IOMMU to allow virtual DMA, but classical DMA is strictly physical).",
+    "trick": "Virtual memory is an illusion created by the CPU's MMU. If DMA bypasses the CPU, it bypasses the illusion! It must use raw physical addresses to talk to the RAM chips.",
+    "tip": "Standard DMA bypasses the CPU MMU and must use Physical Addresses, not Virtual Addresses."
+  },
+  {
+    "id": 88,
+    "question": "A CPU Cache uses 'Block Size' to dictate how much data is fetched from RAM on a miss. If a system architect increases the cache block size from 64 Bytes to 256 Bytes, what is the most likely conflicting impact on cache performance metrics?",
+    "options": ["Spatial locality benefits will dramatically decrease, causing an overall drop in hit rate.", "Compulsory misses will decrease, but Conflict misses will significantly increase if the total cache size remains fixed.", "The Miss Penalty will decrease because larger blocks transfer faster over the system bus.", "The L1 Instruction Cache will suffer from Belady's Anomaly during context switches."],
+    "answer": "Compulsory misses will decrease, but Conflict misses will significantly increase if the total cache size remains fixed.",
+    "explanation": "Step 1: Increasing block size means pulling larger chunks of adjacent memory at once. Because of Spatial Locality, pulling more adjacent data reduces the number of initial Cold (Compulsory) misses. Step 2: However, if the total size of the cache (e.g., 32KB) stays the same, larger blocks mean FEWER total lines/slots in the cache. Step 3: (e.g., 32KB / 64B = 512 lines. 32KB / 256B = 128 lines). Step 4: Having fewer parking spots means more memory blocks will fight for the same lines. Step 5: This massive reduction in lines drastically increases Conflict Misses. Furthermore, pulling huge 256B blocks takes longer, severely INCREASING the Miss Penalty.",
+    "trick": "Bigger blocks = Fewer compulsory misses (good), but fewer total lines = More conflict misses (bad) and higher miss penalty. It's a fundamental engineering trade-off.",
+    "tip": "Increasing cache block size reduces Compulsory misses but increases Conflict misses and Miss Penalty."
+  },
+  {
+    "id": 89,
+    "question": "Assertion (A): The Translation Lookaside Buffer (TLB) acts as a specialized L1 Cache specifically for storing frequently accessed user data variables. Reason (R): The TLB is physically located within the Memory Management Unit (MMU) to provide single-cycle retrieval times. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: The TLB is physically located inside the MMU and does provide ultra-fast single-cycle access. Therefore, Reason R is an accurate architectural statement. Step 2: However, Assertion A misidentifies its function. Step 3: The TLB does NOT store user data variables, instructions, or program files. Step 4: The TLB strictly stores 'Page Table Entries' (PTEs) — specifically, the mappings from Virtual Addresses to Physical Addresses. Step 5: It is an address translation cache, not a data cache. Therefore, Assertion A is completely false.",
+    "trick": "Never associate the TLB with actual user 'data'. It is simply a map book. It tells the CPU where to look in physical RAM to find the data.",
+    "tip": "The TLB strictly caches Virtual-to-Physical address mappings, NEVER user data or instructions."
+  },
+  {
+    "id": 90,
+    "question": "In a 32-bit architectural system utilizing a 'Two-Level Paging' memory scheme, the virtual address is divided into an Outer Page Number (10 bits), an Inner Page Table Index (10 bits), and a Page Offset (12 bits). What exact function does the 'Outer Page Number' serve during address resolution?",
+    "options": ["It indexes into the Page Directory to retrieve the base physical address of the specific Inner Page Table.", "It acts as a Tag in the TLB to check for cache coherency via the MESI protocol.", "It identifies the specific byte offset within the physical RAM frame.", "It designates the security access level (Ring 0 vs Ring 3) for the memory block."],
+    "answer": "It indexes into the Page Directory to retrieve the base physical address of the specific Inner Page Table.",
+    "explanation": "Step 1: A two-level paging system is used to prevent the page table itself from consuming too much contiguous RAM. Step 2: The OS creates a 'Page Directory' (the outer table) which stays in RAM. Step 3: The first 10 bits of the virtual address (Outer Page Number) point to a specific entry in this Directory. Step 4: This entry does not hold the final physical data address; instead, it holds the physical base address of the SECOND level table (the Inner Page Table). Step 5: The next 10 bits find the final frame address within that Inner table. Thus, the outer bits navigate the top-level directory.",
+    "trick": "Think of Two-Level paging as a book. Outer Page Number = Chapter Index. Inner Page Number = Page Index within the chapter. Offset = The specific line of text.",
+    "tip": "In Two-Level Paging, the Outer Page Number indexes the 'Page Directory' to find the Inner Page Table."
+  },
+  {
+    "id": 91,
+    "question": "Assertion (A): Synchronous DRAM (SDRAM) integrates an internal clock to align its data transfer operations precisely with the CPU's system bus clock. Reason (R): Aligning the memory transfers to the system clock completely eliminates the physical CAS (Column Access Strobe) Latency delay inherent in fetching row data. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: Asynchronous DRAM (old tech) responded to CPU requests with unpredictable timing. SDRAM introduced an internal clock synced to the motherboard, heavily streamlining pipelined data requests (Assertion A is true). Step 2: However, DRAM still physically relies on arrays of capacitors arranged in rows and columns. Step 3: When a request is made, the controller must activate a row, wait for the sense amplifiers to read the tiny charges, and then select the column. Step 4: This physical delay is CAS Latency (CL). Step 5: Synchronizing the clock does absolutely nothing to eliminate the physical time it takes for a capacitor to discharge into a sense amplifier. Reason R is architecturally false.",
+    "trick": "Synchronization organizes the traffic, but it doesn't change the speed of light or physics. CAS Latency is a physical capacitor delay and is impossible to eliminate.",
+    "tip": "SDRAM synchronizes data transfers with the system clock but CANNOT eliminate physical CAS Latency."
+  },
+  {
+    "id": 92,
+    "question": "Which of the following physical anomalies poses a catastrophic threat specifically to ultra-high-density DRAM modules, forcing the implementation of Error-Correcting Code (ECC) in enterprise servers, but has virtually no effect on magnetic Hard Disk Drives?",
+    "options": ["Magnetic degaussing from unshielded power supplies.", "Physical degradation of the NAND oxide layer after a finite number of write cycles.", "Alpha particle emissions and cosmic rays striking the silicon substrate.", "Head crash resulting from microscopic particulate contamination."],
+    "answer": "Alpha particle emissions and cosmic rays striking the silicon substrate.",
+    "explanation": "Step 1: DRAM stores data as microscopic electrical charges in capacitors (1 = charge, 0 = no charge). Step 2: As manufacturing scales down, these capacitors become incredibly tiny, holding very few electrons. Step 3: High-energy cosmic rays from space or alpha particles from packaging materials constantly bombard the earth. Step 4: If a cosmic ray strikes a silicon capacitor, it can inject or drain enough electrons to flip a 0 to a 1 (a 'Soft Error'). Step 5: Magnetic HDDs rely on massive magnetic polarity domains, which are completely immune to single-particle strikes. Enterprise servers mandate ECC RAM to dynamically detect and correct these random cosmic bit flips.",
+    "trick": "It sounds like science fiction, but 'Cosmic Ray Bit Flips' are a massive daily problem in supercomputing. ECC RAM exists almost entirely to fight cosmic radiation and background noise.",
+    "tip": "Cosmic rays and alpha particles can flip bits in tiny DRAM capacitors (Soft Errors), requiring ECC RAM."
+  },
+  {
+    "id": 93,
+    "question": "Assertion (A): Utilizing an external SSD as 'ReadyBoost' or a Page File extension will provide equivalent system performance to installing an identical capacity of DDR4 physical RAM. Reason (R): NVMe SSDs utilize the PCIe x4 bus, allowing them to interface directly with the CPU at multi-gigabyte speeds, virtually negating the von Neumann bottleneck. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Modern DDR4 RAM operates at speeds exceeding 50 GB/s with latency measured in nanoseconds (ns). Step 2: The fastest Gen 4/5 NVMe SSDs operate around 7-14 GB/s with latency in the microseconds (µs) - roughly 1000x slower to respond than RAM. Step 3: Therefore, using an SSD as a Page File is an emergency fallback to prevent crashing, but performance will severely tank compared to real RAM. Assertion A is a massive falsehood. Step 4: While NVMe does use PCIe x4 to achieve gigabyte speeds, it is still orders of magnitude slower than RAM and absolutely does not 'negate' the von Neumann bottleneck (CPU vs Memory speed gap). Reason R is hyperbole and technically false.",
+    "trick": "Never equate SSD storage to RAM. A blazing fast 7,000 MB/s SSD is a snail compared to a 50,000 MB/s RAM module when measuring latency.",
+    "tip": "SSDs (even NVMe) have microsecond latency. RAM has nanosecond latency (1000x faster). SSDs cannot replace RAM."
+  },
+  {
+    "id": 94,
+    "question": "In the structural design of a Direct Mapped Cache, the memory address is divided into Tag, Index, and Offset. If a system features a 64 KB cache, a block size of 16 Bytes, and a 32-bit physical address, exactly how many bits are allocated to the 'Tag' field?",
+    "options": ["12 bits", "16 bits", "20 bits", "28 bits"],
+    "answer": "16 bits",
+    "explanation": "Step 1: Offset Bits: Block size is 16 Bytes. 2^4 = 16, so Offset = 4 bits. Step 2: Index Bits: Calculate number of cache lines. Cache size (64 KB) / Block size (16 Bytes). 64 KB = 65,536 Bytes. 65,536 / 16 = 4096 lines. Step 3: To index 4096 lines, we need 12 bits (2^12 = 4096). Index = 12 bits. Step 4: The total physical address is 32 bits. Step 5: Tag = Total Address - (Index + Offset). Tag = 32 - (12 + 4) = 32 - 16 = 16 bits. The remaining 16 bits form the Tag.",
+    "trick": "Methodical calculation is required. 1. Find Offset from Block Size. 2. Find total lines (Cache / Block size). 3. Find Index from total lines. 4. Subtract Offset + Index from Total Address to get Tag.",
+    "tip": "Cache Math: Tag = Total Address Bits - (Index Bits + Offset Bits)."
+  },
+  {
+    "id": 95,
+    "question": "Assertion (A): Paging memory management systems suffer exclusively from Internal Fragmentation, whereas Segmentation memory systems suffer exclusively from External Fragmentation. Reason (R): Paging divides memory into fixed-size blocks, trapping unused space inside the block, while Segmentation allocates variable-sized blocks, leaving unusable tiny gaps of free space between them over time. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In Paging, the OS uses fixed page sizes (e.g., 4KB). If a program needs 5KB, it gets two pages (8KB). The 3KB left over is trapped INSIDE the second page (Internal Fragmentation). Step 2: Because pages are fixed and universal, they slot perfectly into physical frames anywhere, meaning no odd gaps are left between pages (No External Fragmentation). Step 3: In Segmentation, the OS gives exactly the size asked for (variable). No space is wasted inside the block. Step 4: Over time, as blocks are deleted and new ones added, tiny variable gaps of free space appear between segments in RAM. A new program might need 10MB, and while 10MB total is free, it's shattered across tiny 1MB gaps. This is External Fragmentation. Step 5: Reason R perfectly explains the geometric realities proving A.",
+    "trick": "Fixed sizes (Paging) = Wasted space inside the box (Internal). Variable sizes (Segmentation) = Wasted space outside between the boxes (External).",
+    "tip": "Paging = Fixed size = Internal Fragmentation. Segmentation = Variable size = External Fragmentation."
+  },
+  {
+    "id": 96,
+    "question": "A programmer optimizes a heavily nested 'for-loop' matrix multiplication algorithm by altering the code to iterate through array data row-by-row rather than column-by-column in a C-based environment. Which underlying hardware mechanism is the programmer explicitly exploiting to maximize performance?",
+    "options": ["Translation Lookaside Buffer (TLB) Page pinning", "Branch Prediction Unit (BPU) speculative execution", "Spatial Locality triggering L1 Cache Block Prefetching", "Out-of-Order Execution via Tomasulo's Algorithm"],
+    "answer": "Spatial Locality triggering L1 Cache Block Prefetching",
+    "explanation": "Step 1: In languages like C, 2D arrays (matrices) are stored in memory in 'Row-Major Order'. This means row 1 elements are placed sequentially in memory addresses, followed by row 2. Step 2: When the CPU accesses the first element, the Cache fetches a large block of data (e.g., 64 bytes) encompassing several adjacent elements. Step 3: If the loop processes row-by-row, the next elements it needs are already sequentially packed inside that fetched cache block (Cache Hit due to Spatial Locality). Step 4: If the loop processes column-by-column, the next element is far away in memory, missing the cache block entirely, forcing a slow RAM fetch every single iteration (Cache Thrashing). Step 5: Therefore, iterating row-by-row exploits Spatial Locality.",
+    "trick": "Programming isn't just software; it physically interacts with hardware. Row-major languages reward sequential reads because hardware caches fetch in adjacent sequential blocks.",
+    "tip": "Iterating Row-by-Row in arrays aligns with sequential memory addresses, exploiting Spatial Locality in CPU caches."
+  },
+  {
+    "id": 97,
+    "question": "Assertion (A): EPROM chips require an embedded battery on the motherboard to retain their firmware code when the system is unplugged from the wall. Reason (R): EPROM utilizes non-volatile floating-gate transistors, meaning the presence or absence of trapped electrons dictates the binary state independent of external power. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: EPROM (Erasable Programmable Read-Only Memory) is fundamentally a Non-Volatile memory type. Step 2: Non-volatile memory does NOT require any power source (battery or wall current) to retain its data. Assertion A is completely false. Step 3: It is the CMOS RAM (which holds the BIOS settings and real-time clock) that requires the CR2032 motherboard battery, because CMOS is volatile SRAM. Step 4: Reason R explains HOW EPROM achieves non-volatility. It traps electrons in an insulated floating gate. Because they are physically trapped, no power is needed to keep them there. Reason R is a true architectural statement.",
+    "trick": "Examine the acronyms! ROM (Read-Only Memory) is non-volatile. RAM is volatile. The motherboard battery is strictly for the CMOS RAM clock/settings, never the ROM firmware chip.",
+    "tip": "EPROM/EEPROM (ROM) is Non-Volatile and requires NO battery. CMOS RAM requires the motherboard battery."
+  },
+  {
+    "id": 98,
+    "question": "Within the architecture of a Solid State Drive (SSD), what is the specific role of the 'Flash Translation Layer' (FTL)?",
+    "options": ["To compress image and video data losslessly before it is written to the NAND gates.", "To map Logical Block Addresses (LBAs) provided by the OS to physical NAND flash pages, hiding the complex erase-before-write wear leveling mechanics from the OS.", "To encrypt data dynamically using AES-256 before transferring it across the PCIe bus.", "To convert analog voltage variations from the memory chips into digital binary signals for the SATA controller."],
+    "answer": "To map Logical Block Addresses (LBAs) provided by the OS to physical NAND flash pages, hiding the complex erase-before-write wear leveling mechanics from the OS.",
+    "explanation": "Step 1: Traditional Hard Drives (HDDs) allow the OS to directly overwrite specific physical magnetic sectors. Step 2: The OS sends a command: 'Write file to Logical Block Address 5'. Step 3: SSDs cannot overwrite data directly; they must erase blocks and perform complex wear leveling to prevent killing specific NAND cells. Step 4: If the OS had to manage this, it would be a nightmare. Step 5: The Flash Translation Layer (FTL) is firmware inside the SSD controller. It lies to the OS, accepting the standard 'Write to LBA 5' command, but secretly translates and routes that data to whatever physical NAND page is mathematically optimal for wear leveling.",
+    "trick": "The FTL is the 'Translator' between the OS (who thinks it's talking to an old HDD) and the physical NAND chips (which have weird erase/wear rules).",
+    "tip": "Flash Translation Layer (FTL) maps OS Logical Addresses to Physical SSD NAND cells, managing wear leveling secretly."
+  },
+  {
+    "id": 99,
+    "question": "Assertion (A): A CPU executing a process from a read-only shared library (such as a Windows .DLL file) will generate a copy-on-write (COW) page fault if it attempts to modify a variable within that library. Reason (R): To conserve RAM, the Operating System maps the same physical memory frame of a shared library into the virtual address spaces of multiple distinct processes simultaneously. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: When 5 programs load the exact same system DLL, the OS doesn't load 5 copies into RAM (which wastes space). Step 2: Instead, it loads 1 physical copy into RAM, and points the Page Tables of all 5 programs to that exact same physical frame (Reason R is true). Step 3: To protect the programs, this shared page is flagged as 'Read-Only'. Step 4: If Program A attempts to write/modify data on that page, the hardware detects a protection violation and triggers a Page Fault. Step 5: The OS intercepts this fault, secretly makes a private, physical copy of the page just for Program A, and allows the write to proceed on the new copy. This brilliant optimization is called Copy-On-Write (COW). Both A and R are true and perfectly linked.",
+    "trick": "Copy-On-Write is lazy efficiency! Don't duplicate memory until someone actually tries to alter it. Shared memory saves massive amounts of RAM.",
+    "tip": "Copy-On-Write (COW): Shared RAM pages are only physically duplicated when a process attempts to modify them."
+  },
+  {
+    "id": 100,
+    "question": "When defining the performance bottlenecks of Main Memory (DRAM), what exact timing sequence is measured by the metric 'tRAS' (Active to Precharge Delay)?",
+    "options": ["The time required for the memory controller to switch between the L2 cache and the RAM bus.", "The minimum time required between activating a row of memory and issuing a command to close (precharge) that same row.", "The exact physical distance the electrical signal travels from the CPU socket to the DIMM slot.", "The delay between sending a Column Address Strobe (CAS) and receiving the first bit of data."],
+    "answer": "The minimum time required between activating a row of memory and issuing a command to close (precharge) that same row.",
+    "explanation": "Step 1: RAM timings are expressed as a sequence of numbers (e.g., 16-18-18-36). Step 2: These represent CAS Latency (tCL), Row Address to Column Address Delay (tRCD), Row Precharge Time (tRP), and Active to Precharge Delay (tRAS). Step 3: To read DRAM, a row of capacitors must first be 'Activated' (opened). Step 4: The data is read out of the columns. Step 5: The row cannot be closed immediately; the capacitors must be given enough time to safely restore their charges after the destructive read process. tRAS defines the absolute minimum clock cycles the row must stay open before the controller is allowed to issue the 'Precharge' command to close it.",
+    "trick": "Timing acronyms: CAS (Column wait), tRCD (Row to Column wait), tRP (Row closing wait), tRAS (Row MUST STAY OPEN wait). tRAS is always the largest number in the sequence.",
+    "tip": "tRAS (Active to Precharge Delay) is the minimum time a DRAM row must remain open before closing."
+  }
+]

@@ -1,0 +1,904 @@
+﻿[
+  {
+    "id": 1,
+    "question": "In a coded mapping system: P!Q means P is North of Q; P?Q means East; P#Q means South; P~Q means West. The bracketed value like P!(x)Q means the actual distance is the smallest prime number strictly greater than x. Given the expression A!(4)B ?(6)C #(10)D ~(12)E, what is the shortest distance between A and E?",
+    "options": ["6√2 m", "√85 m", "10 m", "8√2 m"],
+    "answer": "6√2 m",
+    "explanation": "Primes strictly greater: 4->5, 6->7, 10->11, 12->13. Path: A is 5m N of B. B is 7m E of C. C is 11m S of D. D is 13m W of E. Let C=(0,0). B=(7,0). A=(7,5). D=(0,11). E=(13,11). Distance A(7,5) to E(13,11): dx=13-7=6, dy=11-5=6. Dist = √(6^2 + 6^2) = √72 = 6√2 m.",
+    "trick": "Using the given numbers directly instead of finding the next prime, which completely distorts the grid.",
+    "tip": "Always map out absolute coordinates starting from a central baseline point (0,0)."
+  },
+  {
+    "id": 2,
+    "question": "A robot moves continuously. At the end of each path segment, if the total distance covered since the start is an even number, it turns 90 degrees right; if odd, it turns 90 degrees left. The robot starts facing North and moves segment lengths in this order: 3m, 4m, 5m, 2m, and 6m. How far is the robot from its starting point?",
+    "options": ["2√13 m", "4√5 m", "10 m", "6√2 m"],
+    "answer": "2√13 m",
+    "explanation": "Segment 1: 3m N. Total=3 (odd)-> left (West). Segment 2: 4m W. Total=7 (odd)-> left (South). Segment 3: 5m S. Total=12 (even)-> right (West). Segment 4: 2m W. Total=14 (even)-> right (North). Segment 5: 6m N. Net moves: N=3-5+6=4. E=-4-2=-6 (6m West). Distance = √((-6)^2 + 4^2) = √(36+16) = √52 = 2√13 m.",
+    "trick": "Miscalculating cumulative distance or turning left/right relative to absolute compass instead of current facing.",
+    "tip": "Track cumulative distance and facing direction after every single segment."
+  },
+  {
+    "id": 3,
+    "question": "An agent starts at the origin facing North. She moves 10m forward, turns 135 degrees clockwise, moves 10√2 m forward, turns 135 degrees clockwise again, and moves 20m forward. What is her final position relative to the starting point?",
+    "options": ["10 m West", "10 m East", "20 m South", "10 m South"],
+    "answer": "10 m West",
+    "explanation": "Starts (0,0) facing N(0,1). Moves 10m to (0,10). Turns 135 degrees CW: now faces South-East. Moves 10√2m: dx=10, dy=-10. New pos: (10,0). Turns 135 degrees CW: now faces West. Moves 20m West: dx=-20, dy=0. New pos: (-10,0). Final position is 10m West of start.",
+    "trick": "Misinterpreting a 135-degree clockwise turn from South-East, which correctly lands exactly on West, not South-West.",
+    "tip": "Break angled vectors into pure X and Y components to avoid geometry errors."
+  },
+  {
+    "id": 4,
+    "question": "One morning after sunrise, Vikram and Rahul stand in a park facing each other. Vikram shadow falls exactly to Rahul right. From this spot, Vikram turns 90 degrees anti-clockwise and walks 8m, while Rahul turns 180 degrees and walks 6m. What is the shortest distance between their final positions?",
+    "options": ["10 m", "14 m", "2 m", "12 m"],
+    "answer": "10 m",
+    "explanation": "Morning sun is in the East, shadows fall West. If Vikram shadow is to Rahul right, Rahul right is West, so Rahul faces South. Vikram faces North. From meeting point (0,0), Vikram turns 90 degrees anti-clockwise (now faces West) and walks 8m to (-8,0). Rahul turns 180 degrees (now faces North) and walks 6m to (0,6). Distance between (-8,0) and (0,6) is √(64+36) = 10m.",
+    "trick": "Thinking they walk towards each other after turning, or mixing up left/right with East/West.",
+    "tip": "Establish absolute directions first, then plot coordinates from the meeting origin."
+  },
+  {
+    "id": 5,
+    "question": "A person walks 5m North, then 12m East. At this point, they turn to face directly towards their starting point and walk 8m forward. Then, they turn 90 degrees to their right and walk 4m. What is the straight-line distance from their current location to the starting point?",
+    "options": ["√41 m", "5 m", "7 m", "√89 m"],
+    "answer": "√41 m",
+    "explanation": "Start at (0,0). Walk to (12,5). Distance to start is √(144+25)=13m. Facing origin, they walk 8m, stopping 5m away from origin on that same radial line. Turning 90 degrees right means moving tangentially. They form a right triangle where the hypotenuse is the distance to the origin, one leg is the radial distance (5m) and the other is the tangential distance (4m). Distance = √(5^2 + 4^2) = √41 m.",
+    "trick": "Trying to find exact X, Y coordinates for the final point instead of recognizing the radial/tangential right triangle.",
+    "tip": "Look for relative geometric shapes (like right triangles) before calculating messy coordinates."
+  },
+  {
+    "id": 6,
+    "question": "A drone programmed with a relative airspeed of 10 m/s flies North for 4 seconds, then East for 3 seconds. Throughout the flight, a steady wind blows towards the South at 2 m/s. What is the straight-line distance from the starting point to the drone final position?",
+    "options": ["2√394 m", "50 m", "48 m", "√1250 m"],
+    "answer": "2√394 m",
+    "explanation": "Flight 1: Airspeed 10 N, Wind 2 S. Net speed=8 N. Time=4s. Moves 32m N. Position (0,32). Flight 2: Airspeed 10 E, Wind 2 S. Net velocity=(10, -2). Time=3s. Moves 30m E, 6m S. Final position = (30, 32-6) = (30, 26). Distance = √(30^2 + 26^2) = √(900 + 676) = √1576 = 2√394 m.",
+    "trick": "Applying the wind only to the first segment or calculating distances without factoring vector addition per second.",
+    "tip": "Always calculate effective ground velocity (Airspeed + Wind) for each leg separately."
+  },
+  {
+    "id": 7,
+    "question": "A car starts facing North and drives 10m straight. It then makes a smooth 180-degree U-turn to the right. The turning path forms a perfect semi-circle with a radius of 7m. After completing the U-turn, it drives 10m straight. How far and in which direction is the car from its starting position?",
+    "options": ["14 m East", "7 m East", "14 m South", "0 m (Original Point)"],
+    "answer": "14 m East",
+    "explanation": "Start at (0,0), drive 10m N to (0,10). A U-turn to the right with radius 7m means the car travels along a semi-circle and ends up 1 diameter (14m) to the East, facing South. New pos: (14,10). Drives 10m straight (South) to (14,0). Final position is 14m East of (0,0).",
+    "trick": "Confusing radius with diameter, resulting in an answer of 7m East.",
+    "tip": "A U-turn displaces a vehicle sideways by exactly one full diameter."
+  },
+  {
+    "id": 8,
+    "question": "At 9:45 PM on a standard analog clock, a man treats the direction of the minute hand as East. He starts from a center point and walks 12m in the direction shown by the minute hand at 9:45 PM. Then he walks 5m in the direction shown by the hour hand at exactly 6:00 PM. What is his distance and direction relative to his starting point based on his custom compass?",
+    "options": ["13 m North-East", "13 m South-East", "17 m East", "13 m North-West"],
+    "answer": "13 m North-East",
+    "explanation": "At 9:45, minute hand points to 9 (normally West). He treats 9 as East. At 6:00, hour hand points to 6 (normally South). If 9 is East, then 12 is South, 3 is West, 6 is North. So, 6:00 hour hand direction is North. He walks 12m East, then 5m North. Distance = √(12^2 + 5^2) = 13m. Direction from start is North-East.",
+    "trick": "Forgetting to translate the 6:00 direction according to the newly rotated dial frame.",
+    "tip": "Map out all four cardinal points on the clock face immediately after finding the offset."
+  },
+  {
+    "id": 9,
+    "question": "A thief is spotted at point (8,0) on a grid and runs strictly East at 3 m/s. A police dog starts simultaneously from point (0,15) and runs in a straight line at a constant speed, intercepting the thief in exactly 4 seconds. What was the speed of the police dog?",
+    "options": ["6.25 m/s", "5.00 m/s", "7.50 m/s", "4.25 m/s"],
+    "answer": "6.25 m/s",
+    "explanation": "Thief runs East at 3 m/s for 4s, covering 12m. Thief final position = (8+12, 0) = (20,0). Police dog runs from (0,15) to (20,0) in 4s. Distance dog runs = √(20^2 + (-15)^2) = √(400+225) = √625 = 25m. Dog speed = 25m / 4s = 6.25 m/s.",
+    "trick": "Calculating the straight line distance to the thief starting point instead of the interception point.",
+    "tip": "Calculate the target final coordinates first, then evaluate the pursuer path."
+  },
+  {
+    "id": 10,
+    "question": "A faulty compass has its real East direction marked as South-West, and its real North-West marked as East. A hiker walks 20m in the direction the compass indicates as 'North', and then walks 20m in the direction the compass indicates as 'West'. What is his true displacement and direction from the starting point?",
+    "options": ["20√2 m True South", "40 m True West", "20√2 m True West", "20 m True North"],
+    "answer": "20√2 m True South",
+    "explanation": "Real East (90 degrees) marked SW (225 degrees). Offset = +135 degrees. Compass = Real + 135 degrees. When Compass says North (0 or 360), Real = 360 - 135 = 225 (True SW). When Compass says West (270), Real = 270 - 135 = 135 (True SE). Hiker walks 20m True SW, then 20m True SE. Angle between SW and SE is 90 degrees. Forms an isosceles right triangle. Distance = 20√2 m. The midpoint between SW and SE vectors of equal length is True South.",
+    "trick": "Thinking the offset is clockwise vs counter-clockwise and messing up the true tracking vectors.",
+    "tip": "Create an equation for compass error: Compass Angle = True Angle + Offset."
+  },
+  {
+    "id": 11,
+    "question": "An office worker takes an elevator from the ground floor (Floor 0). She goes up 5 floors, exits, and walks 10m East. She then takes another elevator down 2 floors and walks 10m South. Finally, she takes a lift up 3 floors and walks 10m West. Assuming each floor is strictly 3m high, what is the straight-line spatial distance from her starting point on the ground floor?",
+    "options": ["2√106 m", "20 m", "√424 m", "Both A and C"],
+    "answer": "Both A and C",
+    "explanation": "Start at (0,0,0). Up 5 floors: (0,0,15). Walk 10m E: (10,0,15). Down 2 floors: (10,0,9). Walk 10m S: (10,-10,9). Up 3 floors: (10,-10,18). Walk 10m W: (0,-10,18). Final coordinates: X=0, Y=-10, Z=18. Spatial distance from (0,0,0) = √(0^2 + (-10)^2 + 18^2) = √(100 + 324) = √424. Also, √424 = 2√106. Hence, Both A and C are correct.",
+    "trick": "Forgetting to convert floors to meters, or missing that A and C are mathematically identical.",
+    "tip": "Track X, Y, and Z axes separately in multi-level routing problems."
+  },
+  {
+    "id": 12,
+    "question": "In a coded grid: A % B means A is 10m North of B. A ^ B means A is 10m East of B. Point T is exactly midway between P and R. If the relationship is P % Q, Q ^ R, and S % R, what is the distance and direction of T with respect to S?",
+    "options": ["5√2 m South-East", "5√2 m North-West", "10 m South", "5 m East"],
+    "answer": "5√2 m South-East",
+    "explanation": "Let R=(0,0). S is 10m N of R: S=(0,10). Q is 10m E of R: Q=(10,0). P is 10m N of Q: P=(10,10). T is midway between P(10,10) and R(0,0), so T=(5,5). Position of T wrt S: T is at (5,5), S is at (0,10). dx = 5-0=5, dy = 5-10=-5. T is 5m East and 5m South of S, which is South-East. Distance = √(5^2 + (-5)^2) = √50 = 5√2 m.",
+    "trick": "Finding S relative to T instead of T relative to S, which would give North-West.",
+    "tip": "Always double-check the 'from' point in relative direction questions."
+  },
+  {
+    "id": 13,
+    "question": "An automated rover parses commands: #N (move N meters forward), @N (turn 90 degrees right, then move N meters), and &N (turn 90 degrees left, then move N meters). The rover starts facing North and executes: #5, @12, #3, &4, @5. How far is the rover from its starting point?",
+    "options": ["√481 m", "25 m", "21 m", "√521 m"],
+    "answer": "√481 m",
+    "explanation": "Start at (0,0) facing N. #5 -> moves 5m N to (0,5). @12 -> turns right (faces E), moves 12m to (12,5). #3 -> moves 3m E to (15,5). &4 -> turns left (faces N), moves 4m to (15,9). @5 -> turns right (faces E), moves 5m to (20,9). Final position = (20,9). Distance = √(20^2 + 9^2) = √(400 + 81) = √481 m.",
+    "trick": "Assuming @ or & only rotates the rover without moving it, or ignoring the current facing direction for #.",
+    "tip": "Track the facing vector (N/S/E/W) as a separate variable alongside X and Y coordinates."
+  },
+  {
+    "id": 14,
+    "question": "Operators are defined as: A = N B (A is North of B), A = S B (South), A = E B (East), A = W B (West). The distance formula is attached as a suffix. M = N(x) N implies M is North of N by distance (x^2 - 1) meters. If P = N(3) Q = E(4) R = S(2) S = W(2) T, find the shortest distance between P and T.",
+    "options": ["13 m", "10 m", "√122 m", "15 m"],
+    "answer": "13 m",
+    "explanation": "Distances: N(3) -> 3^2-1 = 8m. E(4) -> 4^2-1 = 15m. S(2) -> 2^2-1 = 3m. W(2) -> 2^2-1 = 3m. Path: P is 8 N of Q. Q is 15 E of R. R is 3 S of S. S is 3 W of T. Let T=(0,0). S is 3 W of T: S=(-3,0). R is 3 S of S: R=(-3,-3). Q is 15 E of R: Q=(12,-3). P is 8 N of Q: P=(12,5). Distance P(12,5) to T(0,0) = √(12^2 + 5^2) = √169 = 13m.",
+    "trick": "Failing to correctly substitute the variables into the (x^2 - 1) formula for every segment.",
+    "tip": "Pre-calculate all effective distances before attempting to draw the spatial path."
+  },
+  {
+    "id": 15,
+    "question": "Two identical robots, Alpha and Beta, stand on a perfectly flat grid. A perfectly reflecting mirror stretches infinitely along the Y-axis (x=0). Alpha starts at (-5,0), while Beta is Alpha exact mirror reflection. Alpha moves 3m North, turns 90 degrees left, walks 4m, turns 90 degrees left again, and walks 6m. If Beta simultaneously performs the exact mirrored physical movements, what is the final distance between Alpha and Beta?",
+    "options": ["18 m", "14 m", "8 m", "0 m"],
+    "answer": "18 m",
+    "explanation": "Alpha starts at (-5,0). Moves 3m N to (-5,3). Turns left (faces West), walks 4m to (-9,3). Turns left (faces South), walks 6m to (-9,-3). Since Beta is a perfect mirror reflection across x=0, Beta X coordinate will always be the positive inverse of Alpha X coordinate, and Y will be identical. Beta final position is (9,-3). Distance between (-9,-3) and (9,-3) is 9 - (-9) = 18m.",
+    "trick": "Attempting to calculate Beta path by manually reversing 'lefts' and 'rights' which easily leads to human error.",
+    "tip": "For mirrored paths across an axis, just calculate the real path and flip the corresponding coordinate at the end."
+  },
+  {
+    "id": 16,
+    "question": "A laser is fired from point (2,3) strictly in the North-East direction (45 degrees to the X-axis). A detector moves strictly North along the line x = 10 at a speed of 2 units per second, starting from (10,-2) at the exact moment the laser is fired. If the laser beam moves instantaneously, how many seconds does it take for the detector to cross the laser beam?",
+    "options": ["6.5 s", "5.0 s", "7.5 s", "The detector never crosses it"],
+    "answer": "6.5 s",
+    "explanation": "The laser fires from (2,3) at 45 degrees. Its path is a line with slope 1: y - 3 = 1(x - 2) -> y = x + 1. The detector moves on x = 10. The laser intersects x = 10 at y = 10 + 1 = 11. So the intersection point is (10,11). The detector starts at (10,-2) and must reach (10,11). Distance to travel = 11 - (-2) = 13 units. Speed = 2 units/s. Time = 13 / 2 = 6.5 seconds.",
+    "trick": "Calculating the distance the laser travels instead of the distance the detector travels on its vertical path.",
+    "tip": "Determine the geometric intersection point first, then apply kinematics."
+  },
+  {
+    "id": 17,
+    "question": "In a simulation grid, moving 1 meter North or South consumes 2 units of battery, while moving 1 meter East or West consumes 3 units. A rover is programmed to follow a path: 4m North, 5m East, 6m South, and 1m West. What is the minimum battery required to return straight to the start point assuming it must move strictly along the grid lines?",
+    "options": ["16 units", "14 units", "18 units", "20 units"],
+    "answer": "16 units",
+    "explanation": "Path tracked: N=4, E=5, S=6, W=1. Net displacement: N=4-6=-2 (2m South). E=5-1=4 (4m East). Current position is 2m South and 4m East of the start. To return, it must move 2m North and 4m West. Battery for North = 2m * 2 units/m = 4 units. Battery for West = 4m * 3 units/m = 12 units. Total minimum battery = 4 + 12 = 16 units.",
+    "trick": "Calculating battery consumption of the entire outbound journey instead of the return journey, or using straight-line Euclidean distance.",
+    "tip": "Resolve total net displacement in grid coordinates before applying grid-specific movement costs."
+  },
+  {
+    "id": 18,
+    "question": "A man performs a walking drill. He walks 1m North, then 2m East, 3m South, 4m West, 5m North, 6m East, 7m South, and finally 8m West. What is the straight-line distance from his starting point, and in which quadrant does he finish relative to his start?",
+    "options": ["4√2 m, Quadrant III", "4√2 m, Quadrant IV", "8 m, Quadrant II", "16 m, Quadrant III"],
+    "answer": "4√2 m, Quadrant III",
+    "explanation": "Summing vectors: North/South axis (N is +, S is -): 1 - 3 + 5 - 7 = -4 (4m South). East/West axis (E is +, W is -): 2 - 4 + 6 - 8 = -4 (4m West). Final position is (-4, -4). This is in Quadrant III (South-West). Distance = √((-4)^2 + (-4)^2) = √32 = 4√2 m.",
+    "trick": "Losing track of the alternating signs or failing to recognize that South-West corresponds to the Cartesian third quadrant.",
+    "tip": "Group parallel movements (all N/S together, all E/W together) and sum them algebraically."
+  },
+  {
+    "id": 19,
+    "question": "A digital map has an error: it rotates all input directions 90 degrees clockwise before execution. You input the command: 5m East, 12m North, 5m West. What is your actual displacement and direction in the real world?",
+    "options": ["12 m East", "12 m South", "13 m North-East", "0 m"],
+    "answer": "12 m East",
+    "explanation": "Due to the 90 degree clockwise error: an input of East executes as South; North executes as East; West executes as North. Path executed: 5m South, 12m East, 5m North. The 5m South and 5m North cancel each other out. Final displacement is 12m straight East.",
+    "trick": "Rotating the final displacement vector counter-clockwise by mistake, or miscalculating the cancellation.",
+    "tip": "Translate every single direction instruction into the real-world frame before plotting the path."
+  },
+  {
+    "id": 20,
+    "question": "Two objects, P and Q, start at (0,0). P moves 2m North, then 3m East. Q moves 10m North, then 9m East. From their respective final positions, they turn to face each other and walk straight until they meet exactly halfway. What is the distance each object walked towards the other?",
+    "options": ["5 m", "10 m", "20 m", "2.5 m"],
+    "answer": "5 m",
+    "explanation": "Find coordinates: P final = (3,2). Q final = (9,10). The straight-line distance between P and Q is √((9-3)^2 + (10-2)^2) = √(6^2 + 8^2) = √100 = 10m. Since they walk towards each other and meet exactly in the middle, each covers half the distance. Distance = 10 / 2 = 5m.",
+    "trick": "Calculating the total distance between them and forgetting to divide by two, selecting 10m.",
+    "tip": "Always re-read the final sentence to ensure you are answering the specific variable requested."
+  },
+  {
+    "id": 21,
+    "question": "In a logistics tracking system, a movement code is written as 'Entity1 $ Entity2 (h, v)' meaning Entity1 is North of Entity2, having traveled for 'h' hours at 'v' km/hr. Similarly, '@' means East, '#' means South, and '&' means West. If the logs show: P @ Q (2, 10), R $ P (1.5, 16), and S & R (3, 4), what is the straight-line distance from Q to S?",
+    "options": ["8√10 km", "20 km", "24 km", "12√5 km"],
+    "answer": "8√10 km",
+    "explanation": "Distance = time(h) * speed(v). P @ Q (2, 10) -> P is East of Q by 20km. R $ P (1.5, 16) -> R is North of P by 24km. S & R (3, 4) -> S is West of R by 12km. Let Q=(0,0). P=(20,0). R=(20,24). S is 12km West of R -> S=(8,24). Distance from Q(0,0) to S(8,24) = √(8^2 + 24^2) = √(64 + 576) = √640 = 8√10 km.",
+    "trick": "Failing to multiply hours by speed, or mixing up the directional symbols.",
+    "tip": "Calculate all absolute distances before mapping the coordinates."
+  },
+  {
+    "id": 22,
+    "question": "A smart-compass recalculates its 'North' to be exactly 90 degrees clockwise from its previous 'North' after every single movement instruction. It starts perfectly calibrated to True North. The user follows these commands: 'Go North 10m', 'Go East 15m', 'Go South 10m', 'Go West 15m'. What is the user's actual displacement and direction relative to the real world?",
+    "options": ["10 m True South", "0 m (Origin)", "15 m True West", "20 m True South"],
+    "answer": "10 m True South",
+    "explanation": "Cmd 1: Compass N = True N. Moves 10m True N to (0,10). Compass rotates 90° CW (Compass N is now True E). Cmd 2: 'East' on compass is 90° CW from True E, which is True S. Moves 15m True S to (0,-5). Compass rotates 90° CW (Compass N is now True S). Cmd 3: 'South' on compass is 180° from True S, which is True N. Moves 10m True N to (0,5). Compass rotates 90° CW (Compass N is now True W). Cmd 4: 'West' on compass is 90° CCW from True W, which is True S. Moves 15m True S to (0,-10). Total displacement is 10m True South.",
+    "trick": "Assuming standard fixed directions or forgetting that the relative frame rotates cumulatively.",
+    "tip": "Map the compass's new 'North' to the True compass after every step."
+  },
+  {
+    "id": 23,
+    "question": "Arjun starts at coordinate (0,0) driving True North at 10 m/s. Bindu starts simultaneously at (60,0) driving True North at 15 m/s. After exactly 8 seconds, Bindu instantly turns True West and maintains her speed. What is the distance between Arjun and Bindu at the exact moment Bindu's path crosses Arjun's road (the Y-axis)?",
+    "options": ["10 m", "20 m", "0 m (They collide)", "40 m"],
+    "answer": "0 m (They collide)",
+    "explanation": "After 8 seconds: Arjun is at (0, 80) and Bindu is at (60, 120). Bindu turns West, traveling along the line y=120. Her distance to Arjun's road (x=0) is 60m. At 15 m/s, it takes her 4 seconds to reach x=0. In those 4 seconds, Arjun travels another 40m North (4s * 10m/s). Arjun's new position = 80 + 40 = 120. Arjun is at (0, 120) exactly when Bindu crosses (0, 120). Distance is 0m.",
+    "trick": "Calculating the distance at the 8-second mark instead of calculating the future intersection time.",
+    "tip": "Evaluate independent timeframes for multi-agent intersection problems."
+  },
+  {
+    "id": 24,
+    "question": "An agent moves on a grid starting at (1,1) facing North. After moving 5m forward, he checks his current coordinates (X,Y). If the sum of X+Y is an even number, he turns 90 degrees right; if odd, he turns 90 degrees left. He repeats this process for a total of 3 movements (each 5m). What are his final coordinates?",
+    "options": ["(-4, 11)", "(6, 6)", "(-4, 6)", "(1, 11)"],
+    "answer": "(-4, 11)",
+    "explanation": "Start (1,1) facing N. Move 1: 5m N -> (1,6). Sum = 1+6 = 7 (odd) -> turn left (faces West). Move 2: 5m W -> (1-5, 6) = (-4,6). Sum = -4+6 = 2 (even) -> turn right (faces North). Move 3: 5m N -> (-4, 6+5) = (-4,11). Final coordinates are (-4,11).",
+    "trick": "Miscalculating negative sums or assuming 'even' applies strictly to absolute values.",
+    "tip": "Track the current facing vector separately from the coordinate variables."
+  },
+  {
+    "id": 25,
+    "question": "Two athletes run on concentric circular tracks with radii 14m and 21m. P starts on the inner track at True North. Q starts on the outer track at True South. Both run clockwise. P runs at 4 m/s and Q runs at 6 m/s. Assume π = 22/7. After exactly 11 seconds, P stops and walks in a straight line directly to Q. How far does P walk?",
+    "options": ["35 m", "14 m", "7 m", "21 m"],
+    "answer": "35 m",
+    "explanation": "Inner circumference (P) = 2*π*14 = 88m. P runs 4 m/s * 11s = 44m (exactly half the circle). P moves from North (0,14) to South (0,-14). Outer circumference (Q) = 2*π*21 = 132m. Q runs 6 m/s * 11s = 66m (exactly half the circle). Q moves from South (0,-21) to North (0,21). Distance between P(0,-14) and Q(0,21) is 21 - (-14) = 35m.",
+    "trick": "Assuming they meet on the same side of the track without checking their respective half-circle thresholds.",
+    "tip": "Convert arc distances into angular displacements to easily find absolute coordinates."
+  },
+  {
+    "id": 26,
+    "question": "A massive raft drifts South on a river at a constant 4 m/s. A crab on the raft walks 6m East relative to the raft's surface, which takes 2 seconds. It then turns 90 degrees left and walks 8m North relative to the raft, which takes 4 seconds. What is the crab's total straight-line displacement relative to the Earth's fixed shore?",
+    "options": ["10 m", "2√73 m", "26 m", "14 m"],
+    "answer": "2√73 m",
+    "explanation": "Total time elapsed = 2s + 4s = 6 seconds. The raft's displacement relative to Earth = 6s * 4 m/s = 24m South. Crab's displacement relative to raft = 6m East and 8m North. Crab's displacement relative to Earth = (East: 6m), (North-South: 8m North - 24m South = 16m South). Total displacement = √(6^2 + (-16)^2) = √(36 + 256) = √292 = 2√73 m.",
+    "trick": "Calculating the raft's drift only during the crab's second movement, or treating the 10m relative movement as absolute.",
+    "tip": "Add relative vectors to the frame's translation vector over the total elapsed time."
+  },
+  {
+    "id": 27,
+    "question": "A coded format 'A $ B (X, Y)' means A is positioned relative to B based on two parameters: X mod 4 determines direction (0=North, 1=East, 2=South, 3=West), and Y determines distance in meters. Given the map: K $ L (4, 15), M $ K (7, 8), N $ M (1, 9), and O $ N (2, 23). What is the distance and direction of O with respect to L?",
+    "options": ["√65 m South-East", "√65 m North-West", "10 m East", "13 m South-West"],
+    "answer": "√65 m South-East",
+    "explanation": "K $ L (4, 15) -> 4 mod 4 = 0 (N). K is 15m N of L. L=(0,0), K=(0,15). M $ K (7, 8) -> 7 mod 4 = 3 (W). M is 8m W of K. M=(-8,15). N $ M (1, 9) -> 1 mod 4 = 1 (E). N is 9m E of M. N=(-8+9, 15) = (1,15). O $ N (2, 23) -> 2 mod 4 = 2 (S). O is 23m S of N. O=(1, 15-23) = (1,-8). O is 1m East, 8m South of L. Distance = √(1^2 + (-8)^2) = √65 m. Direction is South-East.",
+    "trick": "Executing modulo math incorrectly or tracing the relationships backwards.",
+    "tip": "Map code rules to variables explicitly before attempting spatial routing."
+  },
+  {
+    "id": 28,
+    "question": "Operators are defined: P \\/ Q (P is North of Q), P /\\ Q (South), P >> Q (East), P << Q (West). The '~' symbol inversely reflects the direction (N becomes S, E becomes W). The number in brackets is distance. Map: A ~(>>)[5] B \\/ [12] C ~(/\\)[4] D << [8] E. What is the shortest distance from A to E?",
+    "options": ["13 m", "5√17 m", "15 m", "17 m"],
+    "answer": "5√17 m",
+    "explanation": "A ~(>>)[5] B -> ~East is West -> A is 5m West of B. B \\/[12] C -> B is 12m North of C. C ~(/\\)[4] D -> ~South is North -> C is 4m North of D. D <<[8] E -> D is 8m West of E. Let E=(0,0). D=(-8,0). C is 4N of D -> C=(-8,4). B is 12N of C -> B=(-8, 16). A is 5W of B -> A=(-13, 16). Distance A(-13, 16) to E(0,0) = √((-13)^2 + 16^2) = √(169 + 256) = √425 = 5√17 m.",
+    "trick": "Missing the logical NOT operator and plotting the direct symbols, leading to a completely mirrored grid.",
+    "tip": "Rewrite the entire equation in plain English first to strip away the complex syntax."
+  },
+  {
+    "id": 29,
+    "question": "Drone X starts at (0,0) facing exactly North-East (45 degrees) and flies 5√2 meters. Drone Y starts at (10,0) facing exactly North-West (135 degrees) and flies 5√2 meters. After arriving at their respective endpoints, X turns 90 degrees right and flies 6m, while Y turns 90 degrees left and flies 6m. What is the final distance between them?",
+    "options": ["0 m (They collide)", "12 m", "6√2 m", "6 m"],
+    "answer": "6√2 m",
+    "explanation": "X path: 5√2 at 45° -> (5,5). Y path: 5√2 at 135° -> (10-5, 5) = (5,5). They meet at (5,5). X faces SE (-45°). Turning 90° right makes X face SW (225°). Wait, NE (45) turns 90 right = SE (-45). X flies 6m SE: dx = 6cos(-45) = 3√2, dy = 6sin(-45) = -3√2. X pos = (5+3√2, 5-3√2). Y faces NW (135). Turning 90 left makes Y face SW (225). Y flies 6m SW: dx = 6cos(225) = -3√2, dy = 6sin(225) = -3√2. Y pos = (5-3√2, 5-3√2). Distance between X and Y = (5+3√2) - (5-3√2) = 6√2 m.",
+    "trick": "Assuming that since their paths intersect initially, they follow the same path backwards.",
+    "tip": "Use trigonometric components (r*cosθ, r*sinθ) for non-cardinal movements."
+  },
+  {
+    "id": 30,
+    "question": "Town Alpha is 40km exactly North of Town Beta. Gamma is 30km exactly East of Alpha. Delta is situated exactly halfway between Beta and Gamma on a straight highway. Epsilon is located on the straight road connecting Alpha and Delta, positioned exactly 1/5th of the total distance away from Alpha. What is the straight-line distance from Epsilon to Alpha?",
+    "options": ["10 km", "5 km", "8 km", "25 km"],
+    "answer": "5 km",
+    "explanation": "Beta=(0,0). Alpha=(0,40). Gamma=(30,40). Delta is midpoint of Beta(0,0) and Gamma(30,40) -> Delta=(15,20). The vector from Alpha(0,40) to Delta(15,20) is (15 - 0, 20 - 40) = (15, -20). The total length of the Alpha-Delta road is √(15^2 + (-20)^2) = √(225 + 400) = √625 = 25km. Epsilon is 1/5th of the way from Alpha. Distance = 25 / 5 = 5 km.",
+    "trick": "Calculating the coordinates of Epsilon and then using the distance formula, which consumes far more time.",
+    "tip": "If asked for distance relative to the origin of a vector, just multiply the total length by the fraction."
+  },
+  {
+    "id": 31,
+    "question": "A rover follows a continuous algorithmic path: It moves 1m, turns 90 degrees right, moves 2m, turns 90 degrees right, moves 3m, turns 90 degrees left, moves 4m, turns 90 degrees left, and finally moves 5m. If it starts at (0,0) facing North, what is its final displacement from the origin?",
+    "options": ["5 m", "√34 m", "3√5 m", "10 m"],
+    "answer": "3√5 m",
+    "explanation": "Start (0,0) facing N. Move 1m N -> (0,1). Turn R (faces E), move 2m E -> (2,1). Turn R (faces S), move 3m S -> (2,-2). Turn L (faces E), move 4m E -> (6,-2). Turn L (faces N), move 5m N -> (6, 3). Net X = 6. Net Y = 3. Displacement = √(6^2 + 3^2) = √(36 + 9) = √45 = 3√5 m.",
+    "trick": "Treating the sequence as a closed loop or messing up the left/right relative orientations mid-path.",
+    "tip": "Keep a running tally of X and Y alongside a discrete 'facing' variable."
+  },
+  {
+    "id": 32,
+    "question": "A goat is tethered to a peg at (0,0) with a 10m rope. It starts at (10,0) and walks steadily counter-clockwise keeping the rope fully taut. After walking a curved arc length of exactly 5π meters, the rope instantly snaps. The goat continues running straight forward tangentially in the direction it was facing for 10m. What is its final straight-line distance from the peg?",
+    "options": ["10√2 m", "20 m", "10 m", "5π√2 m"],
+    "answer": "10√2 m",
+    "explanation": "Arc length = r * θ. 5π = 10 * θ. θ = π/2 radians (90 degrees). The goat moves from (10,0) counter-clockwise by 90°, ending at (0,10). The path at this point is tangent to the circle, meaning the goat is facing exactly West. The rope snaps, and it runs 10m West to (-10, 10). Distance to peg (0,0) = √((-10)^2 + 10^2) = √(100 + 100) = √200 = 10√2 m.",
+    "trick": "Calculating the chord length instead of the arc length, ending up at a 45-degree angle.",
+    "tip": "A tangent line is always perfectly perpendicular to the radius at the point of release."
+  },
+  {
+    "id": 33,
+    "question": "Analyze the coded string: A % B & C $ D # E % F. Rules: P % Q (P is 8m North of Q), P # Q (6m East), P $ Q (4m South), P & Q (12m West). What is the shortest distance between A and F?",
+    "options": ["10 m", "6√5 m", "8√3 m", "14 m"],
+    "answer": "6√5 m",
+    "explanation": "Start from F=(0,0). E % F -> E is 8m N of F -> (0,8). D # E -> D is 6m E of E -> (6,8). C $ D -> C is 4m S of D -> (6,4). B & C -> B is 12m W of C -> (-6,4). A % B -> A is 8m N of B -> (-6, 12). Distance A(-6,12) to F(0,0) = √((-6)^2 + 12^2) = √(36 + 144) = √180 = 6√5 m.",
+    "trick": "Tracing the string forwards (A to F) without absolute anchors, causing sign inversion errors.",
+    "tip": "Always map coded equations backwards starting from the final isolated variable."
+  },
+  {
+    "id": 34,
+    "question": "On an infinite flat plain, a man walks 10m straight, turns 60 degrees left, walks 20m straight, turns 120 degrees right, and walks 10m straight. What is his total straight-line displacement from his starting point?",
+    "options": ["10√7 m", "20√3 m", "30 m", "20 m"],
+    "answer": "10√7 m",
+    "explanation": "Start (0,0) facing East (0°). Walks 10m -> (10,0). Turns 60° left (faces 60°). Walks 20m. dx = 20*cos(60)=10, dy = 20*sin(60)=10√3. Pos = (20, 10√3). Turns 120° right (60° - 120° = -60°). Faces -60°. Walks 10m. dx = 10*cos(-60)=5, dy = 10*sin(-60)=-5√3. Pos = (25, 10√3 - 5√3) = (25, 5√3). Displacement = √(25^2 + (5√3)^2) = √(625 + 75) = √700 = 10√7 m.",
+    "trick": "Treating the 120-degree turn as an absolute bearing rather than relative to the current facing direction.",
+    "tip": "Use standard unit circle angles: Right turns subtract, Left turns add to the current degree."
+  },
+  {
+    "id": 35,
+    "question": "A maze runner starts at (0,0) facing North. He walks 8m North, turns Right, and walks 6m, hitting Portal A. The portal teleports him to (20,20) and inversely mirrors his facing direction (East becomes West, North becomes South). From (20,20), he walks 10m straight, turns Left, and walks 5m. What is his final straight-line distance from the original (0,0)?",
+    "options": ["15√2 m", "10√5 m", "5√13 m", "25 m"],
+    "answer": "5√13 m",
+    "explanation": "Path to portal: 8m N to (0,8), Right turn (faces E), 6m to (6,8). He enters facing East. Teleport to (20,20). Facing East is mirrored to facing West. He walks 10m West to (10,20). Turns Left (faces South), walks 5m to (10,15). Distance from (0,0) to (10,15) = √(10^2 + 15^2) = √(100 + 225) = √325 = 5√13 m.",
+    "trick": "Forgetting to apply the rotational mirror effect of the portal, leading to incorrect final vectors.",
+    "tip": "Log teleportations as a hard reset of X, Y, and Facing Vector before continuing."
+  },
+  {
+    "id": 36,
+    "question": "A weather balloon ascends vertically (Z-axis) at 5 m/s from the origin (0,0,0). Simultaneously, a steady wind blows North at 4 m/s, and a crosswind blows East at 3 m/s. Assuming the balloon drifts perfectly with the wind, what is its straight-line 3D spatial distance from the origin after exactly 12 seconds?",
+    "options": ["60√2 m", "100 m", "144 m", "120 m"],
+    "answer": "60√2 m",
+    "explanation": "Time = 12s. Ascent (Z) = 5 * 12 = 60m. Drift North (Y) = 4 * 12 = 48m. Drift East (X) = 3 * 12 = 36m. Distance = √(X^2 + Y^2 + Z^2) = √(36^2 + 48^2 + 60^2). We know 36, 48 is a 3-4-5 triangle scaled by 12, so √(36^2 + 48^2) = 60. Then we have √(60^2 + 60^2) = √7200 = 60√2 m.",
+    "trick": "Adding the wind vectors linearly or ignoring the vertical Z-axis entirely.",
+    "tip": "Use the 3D Pythagorean theorem d = √(x^2 + y^2 + z^2) for spatial displacement."
+  },
+  {
+    "id": 37,
+    "question": "A thief runs East from the origin at 3 m/s. A cop starts 10 seconds later from the origin, riding a bike East at 8 m/s. When the cop catches the thief, the thief instantly turns 90 degrees left and runs at his original speed for 4 seconds, then stops. The cop stops exactly at the catch point. What is the distance between them at the end?",
+    "options": ["10 m", "24 m", "12 m", "15 m"],
+    "answer": "12 m",
+    "explanation": "Thief head start = 30m. Relative speed = 8 - 3 = 5 m/s. Time to catch = 30 / 5 = 6 seconds. The catch point is 6s * 8 m/s = 48m East. Cop stops at (48,0). The thief turns left (North) and runs for 4 seconds at 3 m/s = 12m North. The thief stops at (48, 12). Since they both have an X-coordinate of 48, the distance between them is strictly the Y difference, which is 12m.",
+    "trick": "Overcomplicating the final step by applying Pythagoras to the origin rather than between the entities.",
+    "tip": "Identify common coordinates between entities to skip unnecessary distance calculations."
+  },
+  {
+    "id": 38,
+    "question": "A land surveyor traces a closed loop: Starting at (0,0), he walks 8m East, 6m North, 4m West, 2m South, 4m West, and finally 4m South, returning to the origin. What is the total area of the land perfectly enclosed by this path?",
+    "options": ["32 sq m", "40 sq m", "48 sq m", "24 sq m"],
+    "answer": "40 sq m",
+    "explanation": "Vertices mapped: (0,0) -> (8,0) -> (8,6) -> (4,6) -> (4,4) -> (0,4) -> (0,0). The shape can be split into two rectangles. Rectangle 1 (bottom): from x=0 to 8, y=0 to 4. Area = 8 * 4 = 32. Rectangle 2 (top-right protrusion): from x=4 to 8, y=4 to 6. Area = 4 * 2 = 8. Total Area = 32 + 8 = 40 sq m. ",
+    "trick": "Multiplying max length by max width (8x6=48) without subtracting the negative spatial void.",
+    "tip": "Break complex grid polygons into simple vertical or horizontal rectangles to find area."
+  },
+  {
+    "id": 39,
+    "question": "Eight people (A-H) sit clockwise around an octagonal table facing the center. A is exactly at True North. The sequence is B(NE), C(E), D(SE), E(S), F(SW), G(W), H(NW). Rule 1: People at North and South swap seats. Rule 2: People at East and West swap seats. Rule 3: Everyone physically shifts 3 seats counter-clockwise. Who is sitting at the South-West position at the end?",
+    "options": ["A", "E", "B", "H"],
+    "answer": "E",
+    "explanation": "Initial positions: N=A, NE=B, E=C, SE=D, S=E, SW=F, W=G, NW=H. After Swap 1 (N/S): N=E, S=A. After Swap 2 (E/W): E=G, W=C. The board is now: E, B, G, D, A, F, C, H. Rule 3: shift 3 seats CCW. This means the chair at SW receives the person who was 3 seats CW from it. The chairs clockwise from SW are W, NW, N. The person currently at N will move into the SW chair. The person at N is E. Therefore, E is at South-West.",
+    "trick": "Shifting the people clockwise instead of counter-clockwise, or moving the chairs instead of the people.",
+    "tip": "To find who lands in seat X after a CCW shift, look CW by the shift amount."
+  },
+  {
+    "id": 40,
+    "question": "A digital game board is a 5x5 toroidal grid (X and Y range exactly from 1 to 5). Moving North from y=5 wraps to y=1. Moving West from x=1 wraps to x=5. Starting at (3,3), a piece executes: 4 North, 3 East, 2 South, 6 West. What are its final coordinates?",
+    "options": ["(5, 5)", "(1, 2)", "(4, 3)", "(5, 1)"],
+    "answer": "(5, 5)",
+    "explanation": "Start (3,3). 4 North: y = 3+4 = 7. Wrap 7 into 1-5 grid: 7-5 = 2. Pos (3,2). 3 East: x = 3+3 = 6. Wrap 6: 6-5 = 1. Pos (1,2). 2 South: y = 2-2 = 0. Wrap 0 backwards: 5. Pos (1,5). 6 West: x = 1-6 = -5. Wrap -5 backwards by adding 5s until in range: -5+10 = 5. Pos (5,5).",
+    "trick": "Failing to account for '0' being invalid on a 1-5 grid, mapping it incorrectly to a standard modulo 0-4 grid.",
+    "tip": "For 1-indexed wrapping grids, use: ((Value - 1) % Max) + 1."
+  },
+  {
+    "id": 41,
+    "question": "Arjun stands in an open field in Delhi. He walks 20m bearing 030 degrees (North-East direction relative to True North, where North is 000 degrees and East is 090 degrees). Then he turns and walks 20m bearing 150 degrees. Finally, he walks 20m bearing 270 degrees. What is his final position relative to his starting point?",
+    "options": ["10 m South", "0 m (Original Point)", "20 m True West", "10√3 m East"],
+    "answer": "0 m (Original Point)",
+    "explanation": "Start at (0,0). Move 1: 20m at 30 degrees CW from North. X = 20*sin(30) = 10. Y = 20*cos(30) = 10√3. Pos = (10, 10√3). Move 2: 20m at 150 degrees. dx = 20*sin(150) = 10. dy = 20*cos(150) = -10√3. Pos = (10+10, 10√3-10√3) = (20, 0). Move 3: 20m at 270 degrees (True West). dx = -20, dy = 0. Final Pos = (20-20, 0) = (0,0).",
+    "trick": "Assuming standard Cartesian angles instead of navigational bearings where 0 is North and angles increase clockwise.",
+    "tip": "In bearings, use X = R*sin(theta) and Y = R*cos(theta) for accurate grid mapping."
+  },
+  {
+    "id": 42,
+    "question": "In a secure banking layout, nodes are mapped algebraically: P © Q (x, y) means P is (x^2 - y) meters North of Q. P ∆ Q (x, y) means P is (x^2 + y) meters East of Q. P ¥ Q (x, y) means P is (2xy) meters South of Q. P Ω Q (x, y) means P is (x*y) meters West of Q. If A © B (4, 6), B ∆ C (3, 3), D ¥ C (2, 5), and A Ω E (5, 2), what is the shortest distance between E and D?",
+    "options": ["2√346 m", "45 m", "50 m", "2√374 m"],
+    "answer": "2√346 m",
+    "explanation": "A © B (4,6) -> A is (16-6)=10m North of B. B ∆ C (3,3) -> B is (9+3)=12m East of C. D ¥ C (2,5) -> D is (2*2*5)=20m South of C. A Ω E (5,2) -> A is (5*2)=10m West of E. Let C = (0,0). B is 12m E -> B=(12,0). A is 10m N of B -> A=(12,10). D is 20m S of C -> D=(0,-20). A is 10m W of E, so E is 10m E of A -> E=(22,10). Distance E to D = √((22-0)^2 + (10-(-20))^2) = √(484 + 900) = √1384 = 2√346 m.",
+    "trick": "Miscalculating the algebraic values or plotting E to the West of A instead of East.",
+    "tip": "Solve all algebraic distance equations before plotting any points on the grid."
+  },
+  {
+    "id": 43,
+    "question": "A drone interprets text commands based on Indian city names. The number of vowels determines the distance in meters. The starting letter dictates direction: Consonants A-M = North, Consonants N-Z = South, Vowels A-E = East, Vowels I-U = West. Path executed: 'LUCKNOW', 'UJJAIN', 'BHOPAL', 'ETAWAH', 'SURAT'. What is the final displacement from the origin?",
+    "options": ["2 m North", "0 m (Origin)", "4 m South", "3 m West"],
+    "answer": "2 m North",
+    "explanation": "LUCKNOW: L (A-M -> North). Vowels (U,O) = 2. Move 2m N. UJJAIN: U (I-U -> West). Vowels (U,A,I) = 3. Move 3m W. BHOPAL: B (A-M -> North). Vowels (O,A) = 2. Move 2m N. ETAWAH: E (A-E -> East). Vowels (E,A,A) = 3. Move 3m E. SURAT: S (N-Z -> South). Vowels (U,A) = 2. Move 2m S. Net North/South = 2N + 2N - 2S = 2m North. Net East/West = 3W + 3E = 0. Final displacement is 2m North.",
+    "trick": "Miscounting consecutive vowels (like AI in UJJAIN) or assigning the wrong directional bracket.",
+    "tip": "Create a quick table mapping each word to its direction and distance before tracing."
+  },
+  {
+    "id": 44,
+    "question": "Karan walks 6m East and 8m North from the origin (0,0) to point P. A magical perfectly reflecting mirror spans infinitely exactly along the line y = x. Karan is instantly teleported to his mathematical reflection point P' across this mirror. From P', he walks 4m South and 3m West to point Q. What is the straight-line distance from the origin to Q?",
+    "options": ["√29 m", "5 m", "√41 m", "7 m"],
+    "answer": "√29 m",
+    "explanation": "Karan's initial point P is (6, 8). Reflecting a coordinate across the line y = x simply swaps the x and y values. So, the teleported point P' is (8, 6). From (8, 6), he walks 4m South (Y becomes 6 - 4 = 2) and 3m West (X becomes 8 - 3 = 5). Point Q is (5, 2). The distance from origin (0,0) to Q(5,2) is √(5^2 + 2^2) = √(25 + 4) = √29 m.",
+    "trick": "Attempting to calculate complex reflection geometry instead of using the simple (y,x) coordinate swap.",
+    "tip": "Reflection across the y=x line always inverts the coordinates from (x,y) to (y,x)."
+  },
+  {
+    "id": 45,
+    "question": "One morning after sunrise in Delhi, Priya and Rahul stand in a park. Priya's shadow falls exactly to her right. Rahul is standing 10m directly behind Priya (relative to her facing direction). Rahul then walks 10m to his left, turns 45 degrees clockwise, and walks 10√2 m. How far is Rahul from Priya's initial position?",
+    "options": ["20 m", "10√5 m", "10 m", "30 m"],
+    "answer": "20 m",
+    "explanation": "Morning sun is East, shadows fall West. Priya's shadow is to her right, so her right is West, meaning she faces South. Rahul is 10m 'behind' her, so he is 10m North of her. Let Priya=(0,0), Rahul=(0,10) facing South. Rahul walks 10m left (East) to (10,10). He turns 45 degrees CW from East, now facing South-East. Walks 10√2m SE. dx = 10, dy = -10. New pos = (10+10, 10-10) = (20,0). Distance to Priya(0,0) is 20m.",
+    "trick": "Assuming 'behind Priya' implies West because of the shadow, or turning CCW instead of CW.",
+    "tip": "Determine absolute compass directions for facing vectors before processing relative left/right moves."
+  },
+  {
+    "id": 46,
+    "question": "A delivery drone must fly from base A to tower B, exactly 40km True North. The drone's maximum airspeed is 50 km/h. A constant crosswind blows from West to East at 30 km/h. To maintain a straight track over the ground along the True North line, the drone angles itself into the wind. If it flies at max speed on this heading, how long will the trip take?",
+    "options": ["48 minutes", "60 minutes", "75 minutes", "50 minutes"],
+    "answer": "60 minutes",
+    "explanation": "Wind vector = (30, 0). Drone airspeed V = 50. Let drone heading vector be (Vx, Vy) such that Vx^2 + Vy^2 = 50^2. To fly True North, net X velocity must be 0. So, Vx + 30 = 0 -> Vx = -30 km/h. Vy = √(50^2 - (-30)^2) = 40 km/h. Net ground velocity is 40 km/h True North. Distance is 40km. Time = 40 / 40 = 1 hour = 60 minutes.",
+    "trick": "Adding the speeds linearly to get 80 or subtracting to get 20, ignoring vector geometry.",
+    "tip": "Ground speed is the Pythagorean leg when airspeed is the hypotenuse offsetting a crosswind."
+  },
+  {
+    "id": 47,
+    "question": "An automated rover navigates a grid based on an 8-bit instruction: '10110100'. Read left to right: '1' means move 5m forward; '0' means turn 90 degrees right (in place). Starting at (0,0) facing North, what is the rover's straight-line displacement from the origin after the byte is executed?",
+    "options": ["10 m", "5√5 m", "0 m", "15 m"],
+    "answer": "10 m",
+    "explanation": "Start (0,0) N. Bit 1: '1' -> 5m N to (0,5). Bit 2: '0' -> Turn Right, faces E. Bit 3: '1' -> 5m E to (5,5). Bit 4: '1' -> 5m E to (10,5). Bit 5: '0' -> Turn Right, faces S. Bit 6: '1' -> 5m S to (10,0). Bit 7: '0' -> Turn Right, faces W. Bit 8: '0' -> Turn Right, faces N. Final position is (10,0). Displacement from (0,0) is 10m.",
+    "trick": "Treating '0' as a movement command or misinterpreting consecutive '1's as a single continuous move instead of separate grid steps.",
+    "tip": "Translate binary strings into a sequential list of discrete actions before tracking."
+  },
+  {
+    "id": 48,
+    "question": "A man follows an exponentially expanding path algorithm: 1m North, 2m East, 4m South, 8m West, 16m North, 32m East, 64m South, 128m West. What is his exact distance from the starting point after these 8 precise movements?",
+    "options": ["51√5 m", "85 m", "102 m", "170 m"],
+    "answer": "51√5 m",
+    "explanation": "Group N/S and E/W movements. North/South axis: +1 (N), -4 (S), +16 (N), -64 (S). Net Y = 1 - 4 + 16 - 64 = -51 (51m South). East/West axis: +2 (E), -8 (W), +32 (E), -128 (W). Net X = 2 - 8 + 32 - 128 = -102 (102m West). Total distance = √((-51)^2 + (-102)^2). Factor out 51: 51 * √(1^2 + 2^2) = 51√5 m.",
+    "trick": "Attempting to plot every coordinate and calculate hypotenuses at each step, consuming massive time.",
+    "tip": "Sum collinear vectors algebraically (all X together, all Y together) before finding the final hypotenuse."
+  },
+  {
+    "id": 49,
+    "question": "A magical compass dynamically uses an analog clock face. At exactly 12:00, the minute hand points True North. The compass maps 'Forward' to the direction of the minute hand, and 'Backward' to the direction of the hour hand. If the time is frozen at exactly 3:00, a person walks 8m Forward, then 6m Backward. What is their displacement and True direction from the start?",
+    "options": ["10 m North-East", "14 m North-West", "10 m South-East", "2 m North"],
+    "answer": "10 m North-East",
+    "explanation": "At 12:00, 12 is True North. At 3:00, the minute hand points to 12, so 'Forward' = True North. The hour hand points to 3, which is 90 degrees CW from 12, meaning 3 is True East. So 'Backward' = True East. The person walks 8m Forward (North) and 6m Backward (East). Final coordinates: (6, 8). Displacement = √(6^2 + 8^2) = 10m. Moving North and East results in the North-East quadrant. ",
+    "trick": "Assuming 'Backward' means reverse of Forward (South), leading to a 2m North answer.",
+    "tip": "Always map the semantic rules to absolute geographic directions before moving."
+  },
+  {
+    "id": 50,
+    "question": "An insect is at the bottom-front-left corner (0,0,0) of a solid 10x10x10 meter wooden block. It needs to reach the top-back-right corner (10,10,10) by crawling only on the surface of the block. What is the length of the shortest possible path it can take?",
+    "options": ["10√3 m", "10√5 m", "30 m", "20 m"],
+    "answer": "10√5 m",
+    "explanation": "To find the shortest path on a 3D surface, 'unfold' the faces into a 2D plane. The insect must cross two faces. Unfolding the front face and the top face creates a flat rectangle of dimensions 10m by 20m. The shortest path is the straight diagonal across this 10x20 rectangle. Distance = √(10^2 + 20^2) = √(100 + 400) = √500 = 10√5 m.",
+    "trick": "Using the 3D interior diagonal formula √(x^2+y^2+z^2) = 10√3, which requires burrowing through the block.",
+    "tip": "For surface traversal on a cube, flatten adjacent faces into a 2D rectangle and find the diagonal."
+  },
+  {
+    "id": 51,
+    "question": "Runners A and B start at the center of a circular track of radius 70m. A runs due North to the edge, then runs along the edge clockwise for 110m and stops. B runs due East to the edge, then runs along the edge counter-clockwise for 110m and stops. What is the straight-line distance between their final positions? (Take pi = 22/7).",
+    "options": ["140 m", "0 m (They meet)", "70√2 m", "70 m"],
+    "answer": "70√2 m",
+    "explanation": "Track circumference = 2 * (22/7) * 70 = 440m. Running 110m is exactly 1/4th of the track, or a 90-degree angular shift. A goes to the North edge (0, 70), then runs CW by 90 degrees, ending exactly at the East edge (70, 0). B goes to the East edge (70, 0), then runs CCW by 90 degrees, ending exactly at the North edge (0, 70). The distance between (70, 0) and (0, 70) is √(70^2 + 70^2) = 70√2 m.",
+    "trick": "Thinking they run towards each other and meet at 45 degrees, missing the specific start edges.",
+    "tip": "Convert arc lengths to degrees (Angle = Arc/Circumference * 360) to find absolute grid coordinates."
+  },
+  {
+    "id": 52,
+    "question": "A robot starts at (0,0) facing East. It receives integers: 5, 8, 3. For each number N: It moves N meters forward. Then, if N is odd, it turns 90 degrees left; if N is even, it turns 90 degrees right. After processing all three numbers, it receives a command to return to the origin in a straight line. What distance must it cover?",
+    "options": ["8√2 m", "16 m", "4√13 m", "10 m"],
+    "answer": "8√2 m",
+    "explanation": "Start (0,0) E. N=5 (odd): Moves 5m E to (5,0). Turns Left -> faces N. N=8 (even): Moves 8m N to (5,8). Turns Right -> faces E. N=3 (odd): Moves 3m E to (8,8). Turns Left -> faces N. The robot is now at (8,8). The straight-line distance to return to (0,0) is √(8^2 + 8^2) = √(64 + 64) = √128 = 8√2 m.",
+    "trick": "Applying the turn before the movement, or misinterpreting the left/right rules for even/odd.",
+    "tip": "Execute instructions strictly in the order stated: move first, then calculate the turn condition."
+  },
+  {
+    "id": 53,
+    "question": "Codes: P % Q means P is exactly midway between Q and the Origin (0,0). P @ Q means P is 10m North of Q. P # Q means P is 20m East of Q. If A @ Origin, B # Origin, C % A, and D % B. What is the shortest distance between point C and point D?",
+    "options": ["5√5 m", "15 m", "10√2 m", "25 m"],
+    "answer": "5√5 m",
+    "explanation": "Origin = (0,0). A @ Origin -> A is 10m N of Origin = (0,10). B # Origin -> B is 20m E of Origin = (20,0). C % A -> C is midway between (0,10) and (0,0) = (0,5). D % B -> D is midway between (20,0) and (0,0) = (10,0). Distance from C(0,5) to D(10,0) = √((10-0)^2 + (0-5)^2) = √(100 + 25) = √125 = 5√5 m.",
+    "trick": "Taking the midpoint between A and B instead of their individual midpoints relative to the Origin.",
+    "tip": "Translate 'midway' logic into dividing coordinate values by two when referenced against the origin."
+  },
+  {
+    "id": 54,
+    "question": "A flat airport travelator moves True East at 3 m/s. Ankit steps onto it and walks at a steady 4 m/s relative to the travelator belt, aiming his body exactly True North. The travelator spans a physical width of 20m across. When he reaches the opposite edge, how far is he from his physical starting point on the ground?",
+    "options": ["20 m", "25 m", "35 m", "15 m"],
+    "answer": "25 m",
+    "explanation": "Ankit's velocity relative to the belt is 4 m/s North. The belt is 20m wide (North-South distance). Time to cross = 20m / 4 m/s = 5 seconds. During these 5 seconds, the belt carries him East at 3 m/s. Eastward displacement = 3 m/s * 5s = 15m. Final coordinates relative to start: 20m North, 15m East. Total distance = √(20^2 + 15^2) = √(400 + 225) = √625 = 25m.",
+    "trick": "Using the resultant speed 5 m/s multiplied by time, but miscalculating the crossing time using 5 m/s instead of the 4 m/s normal component.",
+    "tip": "Independent axes: Use the perpendicular speed to find time, then apply time to the parallel drift."
+  },
+  {
+    "id": 55,
+    "question": "A drone patrols a giant analog clock face drawn on a field with a radius of 10m. It starts at 6 o'clock. It flies straight to the center, then straight to 2 o'clock, then straight to 10 o'clock, and finally straight back to 6 o'clock. What is the total distance covered by the drone?",
+    "options": ["20 + 20√3 m", "40 m", "20 + 10√2 m", "30√3 m"],
+    "answer": "20 + 20√3 m",
+    "explanation": "6 to center: 10m (radius). Center to 2: 10m (radius). 2 to 10 is a chord spanning 4 hours. Angle = 4 * 30 = 120 degrees. Chord length = 2 * r * sin(120/2) = 2 * 10 * sin(60) = 20 * (√3/2) = 10√3 m. 10 to 6 is a chord spanning 4 hours (10, 11, 12, 1... wait. 10 to 6 is 10->11->12->1->2->3->4->5->6. That is 8 hours. 8 * 30 = 240 deg. The shorter arc is 360-240 = 120 deg). Chord length = 10√3 m. Total = 10 + 10 + 10√3 + 10√3 = 20 + 20√3 m.",
+    "trick": "Calculating the arc length instead of the straight straight-line chord length between the hours.",
+    "tip": "The straight distance between two points on a clock is 2*r*sin(theta/2)."
+  },
+  {
+    "id": 56,
+    "question": "Police car P is at (-40, 0) and moves East at 20 m/s. Robber car R is at (0, 30) and moves North at 15 m/s. Both start simultaneously at t=0. What is the mathematically absolute shortest distance between them during their infinite motion?",
+    "options": ["48 m", "50 m", "35 m", "42 m"],
+    "answer": "48 m",
+    "explanation": "Position vectors: P(t) = (-40+20t, 0), R(t) = (0, 30+15t). Distance squared, D^2 = (-40+20t)^2 + (30+15t)^2. Expanding: 1600 - 1600t + 400t^2 + 900 + 900t + 225t^2. D^2 = 625t^2 - 700t + 2500. To find the minimum, take the derivative with respect to t and set to 0: 1250t - 700 = 0 -> t = 700/1250 = 14/25 = 0.56 seconds. Substitute t=14/25 back into D^2: 625*(196/625) - 700*(14/25) + 2500 = 196 - 392 + 2500 = 2304. D = √2304 = 48m.",
+    "trick": "Finding the distance at t=0 (50m) and assuming it only increases from there.",
+    "tip": "Use calculus (d/dt = 0) to find the exact minimum distance between two linearly moving bodies."
+  },
+  {
+    "id": 57,
+    "question": "A laser beam is fired from point (1,1) strictly in the direction of the vector (1,2). It travels inside a 2D box bounded by perfectly reflecting walls at x=0, x=10, y=0, and y=10. What are the coordinates of the laser's second bounce against any wall?",
+    "options": ["(10, 1)", "(8, 0)", "(10, 3)", "(5.5, 10)"],
+    "answer": "(10, 1)",
+    "explanation": "Initial line: passes (1,1) with slope 2/1=2. Eq: y=2x-1. Moving +x, +y. It hits y=10 at x=(10+1)/2=5.5. So 1st bounce is (5.5, 10). Upon reflection at y=10, the y-direction reverses. Vector becomes (1,-2). Slope=-2. Eq through (5.5, 10): y-10 = -2(x-5.5) -> y = -2x+21. Moving +x, -y. It will hit x=10 or y=0. At x=10, y = -2(10)+21 = 1. Since 1 is within bounds (0 to 10), it hits x=10 first. 2nd bounce is at (10, 1).",
+    "trick": "Assuming reflection simply negates both vector components, returning the laser to the origin.",
+    "tip": "Track wall reflections by negating only the specific velocity component perpendicular to the wall."
+  },
+  {
+    "id": 58,
+    "question": "A programmer tests a drone with absolute bearing commands: Move 10m bearing 045 degrees, then 10m bearing 135 degrees, then 20m bearing 270 degrees. What is the drone's final distance from the origin?",
+    "options": ["20 - 10√2 m", "10 m", "10√2 m", "0 m"],
+    "answer": "20 - 10√2 m",
+    "explanation": "Bearing 045 is NE. (dx, dy) = (10sin45, 10cos45) = (5√2, 5√2). Bearing 135 is SE. (dx, dy) = (10sin135, 10cos135) = (5√2, -5√2). Position after two moves: (5√2 + 5√2, 5√2 - 5√2) = (10√2, 0). Bearing 270 is True West. Move 20m W -> dx = -20. Final position: (10√2 - 20, 0). Since 10√2 (approx 14.14) is less than 20, the coordinate is negative. Distance is the absolute value: 20 - 10√2 m.",
+    "trick": "Approximating √2 and rounding too early, missing the exact algebraic representation of the distance.",
+    "tip": "Keep all values in radical form until the very final step of distance extraction."
+  },
+  {
+    "id": 59,
+    "question": "A bot navigates a 2D plane with an algorithmic rule sequence: 2m North, 3m East, 4m South, 5m West, 6m North, 7m East. Condition: If the specific distance number is a Prime number, it moves in the stated direction. If Composite, it moves in the exact opposite direction. What is the final displacement vector from the start?",
+    "options": ["5 m East", "5 m West", "√29 m North-East", "1 m North"],
+    "answer": "5 m East",
+    "explanation": "2m N (2 is Prime) -> 2m N. 3m E (3 is Prime) -> 3m E. 4m S (4 is Composite) -> Reverse to N -> 4m N. 5m W (5 is Prime) -> 5m W. 6m N (6 is Composite) -> Reverse to S -> 6m S. 7m E (7 is Prime) -> 7m E. Sum North/South: 2N + 4N - 6S (Wait, 6S cancels 6N). Net Y = 2 + 4 - 6 = 0. Sum East/West: 3E - 5W + 7E. Net X = 3 - 5 + 7 = 5m East. Final vector is purely 5m East.",
+    "trick": "Treating 2 as composite or forgetting to reverse the direction for composite numbers entirely.",
+    "tip": "Circle all composite numbers in the sequence and immediately strike through and swap their directions."
+  },
+  {
+    "id": 60,
+    "question": "A blindfolded person at origin (0,0) facing North follows this iterative rule for exactly 4 cycles: 'Walk 5m forward. Calculate your coordinates (X,Y). If absolute |X| >= absolute |Y|, turn 90 degrees Left; otherwise, turn 90 degrees Right.' What is their final distance from the origin?",
+    "options": ["10√2 m", "20 m", "5√5 m", "0 m"],
+    "answer": "10√2 m",
+    "explanation": "Cycle 1: Start (0,0) N. Walk 5m -> (0,5). |0| >= |5| is False. Turn Right -> faces East. Cycle 2: Walk 5m -> (5,5). |5| >= |5| is True. Turn Left -> faces North. Cycle 3: Walk 5m -> (5,10). |5| >= |10| is False. Turn Right -> faces East. Cycle 4: Walk 5m -> (10,10). End of 4 cycles. The person is at (10,10). Distance from (0,0) = √(10^2 + 10^2) = √200 = 10√2 m.",
+    "trick": "Incorrectly evaluating the boundary condition |5| >= |5| as False, which completely changes the path.",
+    "tip": "Pay close attention to 'greater than OR EQUAL TO' in algorithmic logic gates."
+  },
+  {
+    "id": 61,
+    "question": "A routing algorithm for 'Digroz HQ' uses algebraic codes: A * B (k) means A is (k^2 + 2k) meters North of B. A / B (k) means South. A + B (k) means East. A - B (k) means West. If the tracking log shows: Digroz * X (3), X + Y (4), Y / Z (2), and Z - Axon (1). What is the shortest straight-line distance from Digroz HQ to Axon?",
+    "options": ["10√7 m", "25 m", "7√10 m", "24 m"],
+    "answer": "7√10 m",
+    "explanation": "Solve the algebraic distances first. Digroz * X (3) -> 3^2+2(3) = 15m North. X + Y (4) -> 4^2+2(4) = 24m East. Y / Z (2) -> 2^2+2(2) = 8m South. Z - Axon (1) -> 1^2+2(1) = 3m West. Let Axon=(0,0). Z is 3m West of Axon -> Z=(-3,0). Y is 8m South of Z -> Y=(-3,-8). X is 24m East of Y -> X=(-3+24, -8) = (21,-8). Digroz is 15m North of X -> Digroz=(21, -8+15) = (21,7). Distance from Digroz(21,7) to Axon(0,0) = √(21^2 + 7^2) = √(441+49) = √490 = 7√10 m.",
+    "trick": "Misinterpreting 'Z - Axon' as Axon being West of Z, which reverses the final coordinates.",
+    "tip": "Always map the second variable relative to the first when unpacking equations backwards."
+  },
+  {
+    "id": 62,
+    "question": "Sachin navigates a massive  where every edge is exactly 10m. He starts at vertex A, faces True North, and walks 10m to the next vertex. He then turns 120 degrees clockwise, walks 10m to a vertex. He turns 60 degrees clockwise, walks 10m. Finally, he turns 120 degrees clockwise and walks 20m. How far is he from vertex A?",
+    "options": ["10 m", "10√3 m", "20 m", "0 m (Vertex A)"],
+    "answer": "10 m",
+    "explanation": "Start (0,0). 10m North to (0,10). Faces North (0°). Turns 120° CW -> Faces 120° (South-East). Walks 10m: dx = 10sin(120)=5√3, dy = 10cos(120)=-5. Pos=(5√3, 5). Turns 60° CW -> Faces 180° (South). Walks 10m: dx=0, dy=-10. Pos=(5√3, -5). Turns 120° CW -> Faces 300° (North-West). Walks 20m: dx = 20sin(300)=-10√3, dy = 20cos(300)=10. Pos=(5√3-10√3, -5+10) = (-5√3, 5). Distance from (0,0) to (-5√3, 5) = √((-5√3)^2 + 5^2) = √(75 + 25) = √100 = 10 m.",
+    "trick": "Assuming standard 90-degree Cartesian turns on a hexagonal grid, leading to catastrophic vector errors.",
+    "tip": "Use standard bearing math (sin for X, cos for Y) to map non-orthogonal grid paths."
+  },
+  {
+    "id": 63,
+    "question": "A delivery boy for Mamta Computers in Delhi relies on a time-based condition to navigate. He checks his analog watch at the start of every 5-minute interval. If the minute hand is strictly in the 1st quadrant (1-15), he drives 4km North. 2nd quadrant (16-30): East. 3rd quadrant (31-45): South. 4th quadrant (46-00): West. If he drives continuously from exactly 12:05 PM to exactly 12:35 PM (stopping when the watch hits 12:35), what is his straight-line distance from his starting point? ",
+    "options": ["16 km", "12√2 km", "20 km", "24 km"],
+    "answer": "12√2 km",
+    "explanation": "Intervals checked at start time. 12:05: watch at 05 (Q1) -> 4km N. Arrives 12:10. 12:10: watch at 10 (Q1) -> 4km N. Arrives 12:15. 12:15: watch at 15 (Q1) -> 4km N. Arrives 12:20. 12:20: watch at 20 (Q2) -> 4km E. Arrives 12:25. 12:25: watch at 25 (Q2) -> 4km E. Arrives 12:30. 12:30: watch at 30 (Q2) -> 4km E. Arrives 12:35. Stop. Total vectors: 12km North (4+4+4) and 12km East (4+4+4). Distance = √(12^2 + 12^2) = √288 = 12√2 km.",
+    "trick": "Including a 7th movement at 12:35, or incorrectly assigning the exact 15/30 boundaries to the wrong quadrant.",
+    "tip": "List out the exact start times for each step to avoid off-by-one interval errors."
+  },
+  {
+    "id": 64,
+    "question": "Dean and his father start back-to-back from point (0,0) in a catering hall. Dean walks 5m True West, turns 135 degrees Left, walks 5√2 m, turns 45 degrees Right, and walks 10m. His father walks 5m True East, turns 45 degrees Right, walks 5√2 m, turns 45 degrees Right, and walks 10m. What is the final spatial distance between them? ",
+    "options": ["20 m", "10 m", "10√2 m", "0 m"],
+    "answer": "10 m",
+    "explanation": "Dean: 5m West to (-5,0). Faces West. Turns 135 Left -> Faces South-East. Walks 5√2 m: dx=5, dy=-5. Pos=(0, -5). Faces SE. Turns 45 Right -> Faces South. Walks 10m to (0, -15). Father: 5m East to (5,0). Faces East. Turns 45 Right -> Faces South-East. Walks 5√2 m: dx=5, dy=-5. Pos=(10, -5). Faces SE. Turns 45 Right -> Faces South. Walks 10m to (10, -15). Final distance is between (0, -15) and (10, -15), which is exactly 10m.",
+    "trick": "Miscalculating the vector components of the √2 hypotenuse paths, leading to mismatched X coordinates.",
+    "tip": "A path of length x√2 at a 45-degree diagonal always yields exactly x units on both horizontal and vertical axes."
+  },
+  {
+    "id": 65,
+    "question": "Sun Spark Power is placing solar panels. At exactly 6:00 AM, Panel A's shadow falls directly towards Panel B. At exactly 12:00 Noon, Panel B's shadow falls directly towards Panel C. Panel A is 5m away from B. Panel C is 12m away from B. What is the shortest distance between Panel A and Panel C?",
+    "options": ["17 m", "7 m", "13 m", "√119 m"],
+    "answer": "13 m",
+    "explanation": "At 6:00 AM, the sun is East, shadows point West. If A's shadow points towards B, B must be West of A. Let B=(0,0). A is 5m East -> A=(5,0). At 12:00 Noon, the sun is overhead but slightly South (in the Northern hemisphere, Indian context), so shadows point North. If B's shadow points towards C, C must be North of B. C=(0,12). The points form a right triangle with B at the right angle. Distance A to C = √(5^2 + 12^2) = √169 = 13 m.",
+    "trick": "Assuming B is East of A in the morning, which would flip the grid but still yield a 5-12-13 triangle, but could mess up relative position questions.",
+    "tip": "Shadows always fall exactly 180 degrees opposite the light source."
+  },
+  {
+  "id": 66,
+  "question": "Balaji Pipes is laying an underground line. Starting at the origin, the pipe is driven 10 m True North. It hits bedrock, so the drill is diverted 90 degrees clockwise for 5 m. It hits another pipe, so it diverts 90 degrees counter-clockwise for 5 m. Finally, it diverts 90 degrees clockwise for 3 m to surface. What is the straight-line displacement from the origin?",
+  "options": ["17 m", "23 m", "15√2 m", "√281 m"],
+  "answer": "17 m",
+  "explanation": "Start at (0,0). Move 10 m North → (0,10). 90° clockwise from North = East → move 5 m → (5,10). 90° counter-clockwise from East = North → move 5 m → (5,15). 90° clockwise from North = East → move 3 m → (8,15). Net displacement: X = 8, Y = 15. Distance = √(8² + 15²) = √(64 + 225) = √289 = 17 m.",
+  "trick": "Track only the final net movement in each direction. Total North = 10 + 5 = 15 m. Total East = 5 + 3 = 8 m. Then apply Pythagoras.",
+  "tip": "In direction problems, ignore total path length. Always calculate net X (East–West) and net Y (North–South) displacement first."
+},
+  {
+    "id": 67,
+    "question": "In a coded spatial test, P ∇ Q (m) means P is (m^2) meters North-West of Q. P ∆ Q (m) means P is (m^2) meters South-East of Q. P x Q (m) means P is (2m) meters South-West of Q. P ÷ Q (m) means P is (2m) meters North-East of Q. If A ∇ B (4) and C x B (8), what is the shortest distance between A and C?",
+    "options": ["16 m", "16√2 m", "32 m", "8√2 m"],
+    "answer": "16√2 m",
+    "explanation": "A ∇ B (4) -> A is 4^2 = 16m North-West of B. C x B (8) -> C is 2(8) = 16m South-West of B. Let B = (0,0). A is 16m NW -> A=(-16cos45, 16sin45) = (-8√2, 8√2). C is 16m SW -> C=(-16cos45, -16sin45) = (-8√2, -8√2). Distance between A and C: they share the same X coordinate (-8√2). The distance is strictly the Y difference: 8√2 - (-8√2) = 16√2 m.",
+    "trick": "Failing to evaluate the (m^2) and (2m) functions, using 4 and 8 directly.",
+    "tip": "Diagonal coordinates radiating from a shared origin form a straight line if they span adjacent quadrants."
+  },
+  {
+    "id": 68,
+    "question": "A candidate preparing for the NISM exams is studying on a cruise ship. The ship is sailing steadily True North at 12 m/s relative to the water. The river current itself is flowing True East at 5 m/s. The candidate walks on the deck at 3 m/s True North relative to the ship. After exactly 10 seconds of walking, what is the absolute displacement of the candidate relative to a fixed observer on the riverbank?",
+    "options": ["150 m", "158 m", "50√10 m", "130 m"],
+    "answer": "50√10 m",
+    "explanation": "Absolute velocity in North/South = Ship's North (12) + Candidate's walk North (3) = 15 m/s North. Absolute velocity in East/West = River's drift (5) = 5 m/s East. Net absolute velocity vector = (5, 15). Over 10 seconds: X displacement = 5 * 10 = 50m East. Y displacement = 15 * 10 = 150m North. Absolute displacement = √(50^2 + 150^2) = √(2500 + 22500) = √25000 = 50√10 m.",
+    "trick": "Adding the river current to the walking speed as if they are parallel, or ignoring the ship's base velocity.",
+    "tip": "Sum all velocity vectors (current + vehicle + entity) to find a single absolute ground track."
+  },
+  {
+    "id": 69,
+    "question": "A routing algorithm builds an N-ary tree grid. A robot starts at a root node facing North. 'Left Branch' means turn 45 degrees counter-clockwise and move 10m. 'Right Branch' means turn 45 degrees clockwise and move 10m. The robot executes: Left, Right, Right, Left. What is its final distance from the root?",
+    "options": ["20 + 10√2 m", "40 m", "10√10 m", "30 m"],
+    "answer": "20 + 10√2 m",
+    "explanation": "Start (0,0) facing N (90° on unit circle). Left (faces NW/135°): moves 10m to (-5√2, 5√2). Right (faces N/90°): moves 10m to (-5√2, 10+5√2). Right (faces NE/45°): moves 10m to (0, 10+10√2). Left (faces N/90°): moves 10m to (0, 20+10√2). Since X=0, the distance is simply the Y coordinate: 20 + 10√2 m.",
+    "trick": "Assuming 'Left' and 'Right' cancel out positionally rather than just directionally.",
+    "tip": "Map turns cumulatively. A Left and Right sequence returns you to the original facing, but not the original path."
+  },
+  {
+    "id": 70,
+    "question": "A faulty compass registers True North as 'North-East' and True East as 'South-East'. A user follows a manual that says: Move 15m North, then 15m East. However, the user blindly follows the faulty compass to execute these stated directions. What is the user's actual, true displacement on the Earth?",
+    "options": ["15√2 m True East", "30 m True North", "15√2 m True North", "30 m True East"],
+    "answer": "15√2 m True East",
+    "explanation": "The compass reads NE when pointing True North. This means the compass face is rotated 45 degrees clockwise. When the user tries to follow the compass 'North', they are actually walking True North-East (45°). When they follow the compass 'East', they are actually walking True South-East (-45°). User walks 15m True NE: (15/√2, 15/√2). Then 15m True SE: (15/√2, -15/√2). Total True displacement = (30/√2, 0) = (15√2, 0). This is exactly 15√2 m True East.",
+    "trick": "Calculating the offset backwards, thinking they walk True North-West and True North-East.",
+    "tip": "Draw the skewed compass over a True compass crosshair to visually lock the erroneous headings."
+  },
+  {
+    "id": 71,
+    "question": "Following a minor accident, Sachin's bike handle is temporarily jammed. He can only drive in straight lines and make sharp 120-degree right turns. His home is exactly 30m True South of his current location. He points his bike True South, drives 30m, makes a 120-degree right turn, drives 30m, makes another 120-degree right turn, and drives 30m. Where does he end up relative to his home?",
+    "options": ["0 m (At home)", "30 m True North", "30√3 m True East", "60 m True North"],
+    "answer": "30 m True North",
+    "explanation": "Three 120-degree turns of equal length form a closed equilateral triangle. Start (0,0). He drives 30m South to (0,-30). Turns 120R (faces North-West), drives 30m. Turns 120R (faces North-East), drives 30m. He perfectly returns to his starting point (0,0). Since his home is at (0,-30), his final position (0,0) is exactly 30m True North of his home.",
+    "trick": "Assuming the first move (driving South 30m) leaves him at home and he stays there, completely ignoring the rest of the loop.",
+    "tip": "A path of N equal lengths with exterior turns of 360/N degrees always returns exactly to the origin."
+  },
+ {
+  "id": 72,
+  "question": "In a massive SSC exam hall set up on a Cartesian grid, the Invigilator sits at (0,0). Candidate P is at (4,3). Candidate Q is at (-2,11). Candidate R is seated perfectly equidistant from the Invigilator, P, and Q. What are the exact coordinates of Candidate R?",
+  "options": ["(1, 7)", "(-1, 5.5)", "(1.5, 6)", "(0, 6)"],
+  "answer": "(-1, 5.5)",
+  "explanation": "Let R(x,y). Since R is equidistant from (0,0), (4,3), and (-2,11), set squared distances equal.\n\n1) Distance from (0,0) = x² + y²\n2) Distance from (4,3) = (x-4)² + (y-3)²\n3) Distance from (-2,11) = (x+2)² + (y-11)²\n\nSet (1) = (2):\nx² + y² = (x-4)² + (y-3)²\nExpanding and simplifying gives:\n8x + 6y = 25\n\nSet (1) = (3):\nx² + y² = (x+2)² + (y-11)²\nExpanding and simplifying gives:\n4x - 22y = -125\n\nSolve simultaneously:\n8x + 6y = 25\n4x - 22y = -125\n\nMultiply second equation by 2:\n8x - 44y = -250\n\nSubtract from first equation:\n(8x + 6y) - (8x - 44y) = 25 - (-250)\n50y = 275\n\ny = 5.5\n\nSubstitute back:\n8x + 6(5.5) = 25\n8x + 33 = 25\n8x = -8\nx = -1\n\nTherefore R = (-1, 5.5)."
+,
+  "trick": "Equidistant from three non-collinear points means circumcenter, NOT centroid. Never average coordinates here.",
+  "tip": "Always equate squared distances to avoid square roots. Expand carefully and cancel x², y² early."
+},
+  {
+    "id": 73,
+    "question": "A mehndi artist from 'Monu Mehndi Arts' draws a fractal geometric spiral on a giant courtyard. She starts at the center facing North. She draws a 16m line forward, turns 90 degrees Right, draws a line exactly half the length of the previous (8m), turns 90 degrees Right, draws half again (4m), turns 90 degrees Right, draws half again (2m), and turns 90 degrees Right, drawing one final line of 1m. What is her straight-line displacement from the center?",
+    "options": ["13 m", "√205 m", "15 m", "√213 m"],
+    "answer": "√205 m",
+    "explanation": "Moves: 16m North, 8m East, 4m South, 2m West, 1m North. Sum Y (North/South) = 16 (N) - 4 (S) + 1 (N) = 13m North. Sum X (East/West) = 8 (E) - 2 (W) = 6m East. The displacement vector is (6, 13). Distance = √(6^2 + 13^2) = √(36 + 169) = √205 m.",
+    "trick": "Subtracting the final 1m North move instead of adding it, assuming the spiral is a perfect inward loop.",
+    "tip": "Track alternating axes. A spiral goes +Y, +X, -Y, -X, and repeats."
+  },
+  {
+    "id": 74,
+    "question": "A conditional spatial matrix dictates: P # Q means P is North of Q by exactly the sum of Q's coordinates. P $ Q means P is West of Q by exactly the product of Q's coordinates. P % Q means P is South of Q by exactly the absolute difference of Q's coordinates. The Origin is (0,0). A is 5m East of Origin. If B # A, C $ B, and D % C, what is the shortest distance from the Origin to D?",
+    "options": ["20√2 m", "30 m", "25 m", "10√5 m"],
+    "answer": "20√2 m",
+    "explanation": "A = (5,0). B # A -> B is North of A by sum(5+0=5). B = (5,5). C $ B -> C is West of B by product(5*5=25). C = (5-25, 5) = (-20, 5). D % C -> D is South of C by absolute diff |-20 - 5| = 25. D = (-20, 5-25) = (-20, -20). Distance from Origin(0,0) to D(-20,-20) = √((-20)^2 + (-20)^2) = √(400+400) = √800 = 20√2 m.",
+    "trick": "Calculating the absolute difference of C as |-20| - |5| = 15 instead of |-20 - 5| = 25.",
+    "tip": "Apply the mathematical operators exactly to the raw coordinate values before calculating distance."
+  },
+  {
+    "id": 75,
+    "question": "A rescue helicopter must reach a target exactly 240 km True East of its base. The helicopter's maximum airspeed is 100 km/h. However, a severe crosswind is blowing continuously True South at 60 km/h. The pilot adjusts the nose of the helicopter into the wind to maintain a perfect True East ground track. How many hours will it take to reach the target?",
+    "options": ["2.4 hours", "3 hours", "4 hours", "1.5 hours"],
+    "answer": "3 hours",
+    "explanation": "Let Ground Velocity Vg = (Vx, 0) since it tracks True East. Wind Vw = (0, -60). Air Velocity Va = Vg - Vw = (Vx, 60). The maximum airspeed |Va| = 100 km/h. So, Vx^2 + 60^2 = 100^2 -> Vx^2 + 3600 = 10000 -> Vx^2 = 6400 -> Vx = 80 km/h. The helicopter makes 80 km/h of progress East over the ground. Target is 240 km away. Time = 240 / 80 = 3 hours.",
+    "trick": "Assuming the wind helps or subtracts directly from the 100 km/h, getting 40 or 160.",
+    "tip": "Ground velocity is the horizontal leg of a right triangle where airspeed is the hypotenuse and crosswind is the vertical leg."
+  },
+  {
+    "id": 76,
+    "question": "An employee at Axon Career Institute drops a pen down a hollow stairwell from the 8th floor. The ground floor is Floor 0. Each floor is exactly 4m high. The employee was standing 15m North of the drop point. The pen falls to the 3rd floor and instantly bounces 5m East upon landing. What is the straight-line 3D spatial distance between the exact point from which the employee dropped the pen, and where it finally came to rest?",
+    "options": ["5√17 m", "25 m", "20 m", "√450 m"],
+    "answer": "5√17 m",
+    "explanation": "Drop point altitude Z = 8 * 4 = 32m. Relative to the shaft, let drop point = (0, 0, 32). (The 15m North is irrelevant trivia, the question asks for distance from the drop point, not the employee's standing point). Pen falls to 3rd floor: Z = 3 * 4 = 12m. Bounces 5m East: X = 5. Landing point = (5, 0, 12). Distance between (0, 0, 32) and (5, 0, 12) = √(5^2 + 0^2 + (12-32)^2) = √(25 + (-20)^2) = √(25 + 400) = √425 = 5√17 m.",
+    "trick": "Including the 15m North in the calculation, assuming it asked for distance from the employee's original position.",
+    "tip": "Read spatial questions carefully to identify exactly which two end-nodes are being measured."
+  },
+  {
+    "id": 77,
+    "question": "A routing protocol uses an L-Jump system on a massive grid. 'L-Jump(North, East)' translates to a movement of 3m North and 4m East. 'L-Jump(South, West)' means 3m South and 4m West. Starting at (0,0), a drone executes: L-Jump(North, East), followed by L-Jump(South, East), followed by L-Jump(South, West). What is the straight-line displacement from the origin?",
+    "options": ["10 m", "5 m", "√17 m", "7 m"],
+    "answer": "5 m",
+    "explanation": "L-Jump(N,E): dx=4, dy=3. Pos: (4,3). L-Jump(S,E) applies the same magnitude logic: dx=4, dy=-3. Pos: (4+4, 3-3) = (8,0). L-Jump(S,W): dx=-4, dy=-3. Pos: (8-4, 0-3) = (4,-3). The final coordinates are (4,-3). Distance from origin = √(4^2 + (-3)^2) = √(16+9) = √25 = 5 m.",
+    "trick": "Assuming L-Jumps are literal knight's moves (2m and 1m) rather than the explicitly defined 3m and 4m.",
+    "tip": "Strictly follow explicit variable definitions over real-world assumptions of terms like 'L-Jump'."
+  },
+  {
+    "id": 78,
+    "question": "A vertical pole stands at the origin (0,0). At exactly 8:00 AM, the tip of its shadow rests at coordinate (-15, 0). At exactly 4:00 PM, the tip of its shadow rests at coordinate (15, 0). Assuming the shadow tip moves across the ground in a perfectly straight line at a constant speed, what is the exact coordinate of the shadow tip at 11:20 AM?",
+    "options": ["(-2.5, 0)", "(0, 0)", "(-5, 0)", "(-1.5, 0)"],
+    "answer": "(-2.5, 0)",
+    "explanation": "Total time from 8:00 AM to 4:00 PM is 8 hours (480 minutes). Total distance covered by the shadow tip is 15 - (-15) = 30m. The speed is 30m / 480min = 1/16 m/min. The time from 8:00 AM to 11:20 AM is 3 hours and 20 minutes (200 minutes). Distance moved = 200 * (1/16) = 12.5m. The tip starts at -15. Coordinate = -15 + 12.5 = -2.5. Final coordinate is (-2.5, 0).",
+    "trick": "Miscalculating the time duration as 240 minutes, leading to an incorrect fraction and plotting it at 0.",
+    "tip": "Convert all hours into minutes to track sub-hourly linear interpolations easily."
+  },
+  {
+    "id": 79,
+    "question": "A radar tracks an unidentified vessel on a polar grid. The vessel starts at a radius of 10km, on a bearing of 000 degrees (True North). It spirals outward continuously such that its radius increases by precisely 2km for every 90 degrees of clockwise rotation around the origin. What is the straight-line distance from its starting point when its bearing reaches exactly 180 degrees (True South)?",
+    "options": ["24 km", "14 km", "20 km", "28 km"],
+    "answer": "24 km",
+    "explanation": "Start: Radius = 10km, Bearing = 0° (North). Start Coordinate = (0, 10). The vessel rotates clockwise to 180° (South). This is a rotation of 180°, which consists of two 90° segments. Its radius increases by 2km per segment: 2 * 2km = 4km total increase. Final radius = 10 + 4 = 14km. Final bearing is South, so Coordinate = (0, -14). Distance from (0, 10) to (0, -14) = 10 - (-14) = 24km.",
+    "trick": "Using the Pythagorean theorem on the radii assuming they form a right angle, yielding an irrational number.",
+    "tip": "Points on exactly opposite bearings (0 and 180) form a straight line through the origin, just add their radii."
+  },
+  {
+    "id": 80,
+    "question": "A digital compass is glitching: it consistently maps 'North' to point precisely in the direction of the hour hand of an analog clock at that exact moment. If the current time is locked at exactly 1:30, and a person walks 10m in the direction the compass indicates as 'East', what is their true geographical displacement direction (assuming 12 on the clock face represents True North)? ",
+    "options": ["True South-East", "True East", "True South", "True North-East"],
+    "answer": "True South-East",
+    "explanation": "At 1:30, the minute hand points to 6. The hour hand is exactly halfway between 1 and 2. On a 360-degree clock face (12 is 0°), 1 is 30°, and 2 is 60°. Halfway is 45° (True North-East). The compass maps 'North' to 45°. The person walks in the compass's 'East' direction, which is exactly 90 degrees clockwise from its 'North'. 45° + 90° = 135°. 135° on a true compass is True South-East.",
+    "trick": "Assuming the hour hand is exactly on the 1, calculating 'East' as 120 degrees.",
+    "tip": "The hour hand on an analog clock moves continuously; at half-past, it is always perfectly bisecting two hour marks."
+  },
+  {
+    "id": 81,
+    "question": "A rover decodes a 4-bit binary sequence into movement. The first two bits indicate direction: 00=North, 01=East, 10=South, 11=West. The last two bits indicate a distance multiplier that is multiplied by 5 meters: 00=1, 01=2, 10=3, 11=4. The rover executes the following exact sequence: 0001, 0110, 1000, 1101. What is the straight-line displacement of the rover from its starting point?",
+    "options": ["10 m", "5√2 m", "10√2 m", "5 m"],
+    "answer": "5√2 m",
+    "explanation": "Sequence 1: 00 (North), 01 (multiplier 2) -> 2 * 5 = 10m North. Pos: (0, 10). Sequence 2: 01 (East), 10 (multiplier 3) -> 3 * 5 = 15m East. Pos: (15, 10). Sequence 3: 10 (South), 00 (multiplier 1) -> 1 * 5 = 5m South. Pos: (15, 5). Sequence 4: 11 (West), 01 (multiplier 2) -> 2 * 5 = 10m West. Pos: (5, 5). Net displacement is 5m East and 5m North. Distance = √(5^2 + 5^2) = √50 = 5√2 m.",
+    "trick": "Assuming binary values map directly to standard integer digits without the +1 offset mapped in the multiplier table.",
+    "tip": "Translate binary chunks directly into plain English variables before plotting the grid."
+  },
+  {
+  "id": 82,
+  "question": "Two drones navigate a Cartesian grid. Alpha starts at (-10, 0) facing East, moving at 2 m/s. Beta starts at (0, 10) facing South, moving at 3 m/s. Every exactly 4 seconds of its own movement, Alpha turns 90 degrees Left instantly. Every exactly 3 seconds of its own movement, Beta turns 90 degrees Right instantly. What is the straight-line distance between them at exactly t = 12 seconds?",
+  "options": ["4√13 m", "2√26 m", "5√2 m", "10 m"],
+  "answer": "2√26 m",
+  "explanation": "ALPHA PATH:\nSpeed = 2 m/s → in 4 sec travels 8 m each segment.\n\n0–4s: East → (-2,0)\nTurn Left → North\n4–8s: North → (-2,8)\nTurn Left → West\n8–12s: West → (-10,8)\n\nAlpha final position = (-10,8)\n\nBETA PATH:\nSpeed = 3 m/s → in 3 sec travels 9 m each segment.\n\n0–3s: South → (0,1)\nTurn Right → West\n3–6s: West → (-9,1)\nTurn Right → North\n6–9s: North → (-9,10)\nTurn Right → East\n9–12s: East → (0,10)\n\nBeta final position = (0,10)\n\nDistance between (-10,8) and (0,10):\n= √[(10)² + (2)²]\n= √(100 + 4)\n= √104\n= 2√26 m."
+,
+  "trick": "Break motion into fixed time blocks. Compute position after each turning interval — never mix path segments.",
+  "tip": "In time-based turning problems, first calculate distance per interval, then track coordinates chronologically."
+},
+  {
+    "id": 83,
+    "question": "At exactly 8:00 AM, Aman stands in an open field and walks 15m strictly in the direction of his own shadow. He stops, turns 135 degrees anti-clockwise, and walks 10√2 meters. He stops again, turns 45 degrees clockwise, and walks 10m. What is his final straight-line distance from his starting position?",
+    "options": ["25 m", "15√2 m", "5√17 m", "20 m"],
+    "answer": "5√17 m",
+    "explanation": "At 8 AM, the sun is in the East, so his shadow points West. Aman walks 15m West to (-15,0) facing West (180°). He turns 135° ACW -> faces South-East (315° or -45°). He walks 10√2 m SE -> dx = 10, dy = -10. New pos = (-15+10, 0-10) = (-5,-10). He turns 45° CW from SE -> faces South. He walks 10m South -> dx = 0, dy = -10. Final pos = (-5, -20). Distance from (0,0) = √((-5)^2 + (-20)^2) = √(25 + 400) = √425 = 5√17 m.",
+    "trick": "Calculating the ACW turn from East rather than the current facing direction (West).",
+    "tip": "Always anchor turns relative to the current facing vector, not the global origin."
+  },
+  {
+    "id": 84,
+    "question": "A motorized security camera sweeps continuously. It initially faces True North. It executes a programmed sweep: rotates 75 degrees Clockwise, then 150 degrees Anti-Clockwise, then 225 degrees Clockwise, and finally 60 degrees Anti-Clockwise. A guard starts 20m away from the camera pole in the exact direction the camera is finally facing. The guard then walks 20m True East. What is the guard's final straight-line distance from the camera pole?",
+    "options": ["20√2 m", "40 m", "0 m", "20 m"],
+    "answer": "40 m",
+    "explanation": "Net camera rotation = +75 (CW) - 150 (ACW) + 225 (CW) - 60 (ACW) = 90 degrees CW. True North + 90° CW = True East. The camera faces East. The guard starts 20m away in this direction, so the guard starts 20m East of the pole at (20,0). The guard then walks 20m True East -> (40,0). The distance from the pole (0,0) is 40m.",
+    "trick": "Assuming the guard walks East towards the pole or treating the final heading as South instead of East.",
+    "tip": "Sum all rotational degrees algebraically before determining the final directional heading."
+  },
+  {
+    "id": 85,
+    "question": "A man is testing a massive industrial travelator moving continuously True South at 2 m/s relative to the factory floor. While standing on the belt, he executes commands relative to the belt: 4m North (takes 2s), 6m East (takes 3s), and 8m South (takes 4s). What is his final straight-line displacement relative to his original physical starting point on the solid factory floor?",
+    "options": ["10√5 m", "25 m", "2√130 m", "22 m"],
+    "answer": "2√130 m",
+    "explanation": "Total time on the belt = 2 + 3 + 4 = 9 seconds. The belt moves South at 2 m/s, so total belt displacement = 18m South. Man's movement relative to the belt = 4m North, 6m East, 8m South. Net relative movement = 4m South, 6m East. Total absolute Earth displacement = (18m South + 4m South) and 6m East = 22m South, 6m East. Distance = √(22^2 + 6^2) = √(484 + 36) = √520 = 2√130 m.",
+    "trick": "Calculating the belt's movement only during the periods the man is standing still, ignoring that the belt moves continuously while he walks.",
+    "tip": "Add the frame's total displacement vector to the entity's net relative displacement vector."
+  },
+  {
+    "id": 86,
+    "question": "A protocol uses time validation for movement commands. If the command's timestamp minute is an even number, it executes normally. If it is an odd number, the direction is perfectly reversed before execution. Path logged: [10m North at 10:01 AM], [15m East at 10:03 AM], [20m South at 10:06 AM]. Assuming zero transit time between logs, what is the final straight-line distance from the origin?",
+    "options": ["30 m", "15√5 m", "25 m", "10√10 m"],
+    "answer": "15√5 m",
+    "explanation": "10:01 AM (Odd) -> '10m North' reverses to 10m South -> (0, -10). 10:03 AM (Odd) -> '15m East' reverses to 15m West -> (-15, -10). 10:06 AM (Even) -> '20m South' executes normally -> (-15, -30). Final coordinates are (-15, -30). Distance = √((-15)^2 + (-30)^2) = √(225 + 900) = √1125 = 15√5 m.",
+    "trick": "Assuming standard traversal and ignoring the reversal logic, which would yield a completely different grid position.",
+    "tip": "Circle the odd timestamps and strike through their directions immediately to avoid execution errors."
+  },
+  {
+    "id": 87,
+    "question": "On an invisible grid, a path runs along the mathematical line defined by y = 2x + 5. A person starts at x = 0 on this line and walks along it until they reach x = 3. At this exact point, they turn exactly 90 degrees Right and walk in a straight line until they cross the X-axis. At what exact X-coordinate do they step on the X-axis?",
+    "options": ["(15, 0)", "(25, 0)", "(22, 0)", "(17.5, 0)"],
+    "answer": "(25, 0)",
+    "explanation": "Start on y = 2x + 5 at x=0 -> point A(0,5). Walk to x=3 -> y = 2(3)+5 = 11. Point B(3,11). The vector is (3,6), which corresponds to slope m=2. Turning 90 degrees Right means the new slope is the negative reciprocal: m' = -1/2. The new path is a line passing through B(3,11) with slope -1/2. Equation: y - 11 = -0.5(x - 3). Crossing the X-axis means y = 0. So, -11 = -0.5(x - 3) -> 22 = x - 3 -> x = 25. The coordinate is (25, 0).",
+    "trick": "Turning 90 degrees Left (yielding x = -19) or miscalculating the negative reciprocal slope.",
+    "tip": "A 90-degree turn from a line with slope 'm' creates a new trajectory with slope '-1/m'."
+  },
+  {
+    "id": 88,
+    "question": "A massive warehouse is a 4x4 grid of identical 10mx10m square rooms (Rows 1-4 North to South, Columns 1-4 West to East). A worker starts exactly in the center of Room (1,1). He moves through the doors: 2 rooms South, 3 rooms East, 1 room North, and 2 rooms West. What is his straight-line distance from his starting point?",
+    "options": ["10 m", "20 m", "15 m", "10√2 m"],
+    "answer": "10√2 m",
+    "explanation": "Let the top-left corner of Room(1,1) be (0,0). Center of (1,1) is (5,-5). Moving 1 room South adds -10 to Y. Moving 1 room East adds +10 to X. Sequence: 2 South (Row 3), 3 East (Col 4) -> Room(3,4). 1 North (Row 2), 2 West (Col 2) -> Room(2,2). Final location is Room(2,2). Center of Room(2,2) is (15, -15). Distance from (5,-5) to (15,-15) is dx=10, dy=-10. Distance = √(10^2 + (-10)^2) = √200 = 10√2 m.",
+    "trick": "Mapping the grid incorrectly by assuming Row 1 is South and Row 4 is North.",
+    "tip": "Row/Column matrix indexing naturally plots +Y as South and +X as East."
+  },
+  {
+    "id": 89,
+    "question": "A mechanical watch is malfunctioning: its dial is rotated such that at exactly 6:00 PM, the hour hand points True South-West. If a tiny bug starts at the center of the watch face at exactly 9:15 PM and walks 12cm straight along the minute hand, then turns 90 degrees Right and walks 5cm, what is its straight-line distance from the center? ",
+    "options": ["13 cm", "7 cm", "10 cm", "17 cm"],
+    "answer": "13 cm",
+    "explanation": "Normally at 6:00, the hour hand points True South. If it points SW, the entire watch is rotated 45 degrees Clockwise relative to True Earth. At exactly 9:15, the minute hand points strictly to the 3 (normally East). With the 45° CW offset, the minute hand points South-East. The bug walks 12cm SE. It turns 90° Right (facing South-West) and walks 5cm. The paths form a perfect right triangle relative to the center origin. Distance = √(12^2 + 5^2) = √169 = 13 cm.",
+    "trick": "Trying to plot absolute Earth coordinates for the bug which is unnecessary since it moves on a perpendicular local right triangle.",
+    "tip": "If paths form right angles, calculate the hypotenuse directly regardless of global compass bearings."
+  },
+  {
+    "id": 90,
+    "question": "Spatial code operators: P § Q (m, n) means P is (m^2 - n) meters North of Q. P $ Q (m, n) means P is (m + n^2) meters East of Q. P £ Q (m, n) means P is (m * n) meters West of Q. If A § Origin (4, 6), B $ A (1, 4), C § B (3, 14), and D £ C (2, 8.5), what is the exact distance from the Origin (0,0) to point D?",
+    "options": ["10 m", "17 m", "13 m", "5 m"],
+    "answer": "5 m",
+    "explanation": "A § Origin (4, 6) -> 4^2 - 6 = 10m North. A = (0,10). B $ A (1, 4) -> 1 + 4^2 = 17m East. B = (17,10). C § B (3, 14) -> 3^2 - 14 = -5m North = 5m South. C = (17, 10-5) = (17,5). D £ C (2, 8.5) -> 2 * 8.5 = 17m West. D = (17-17, 5) = (0,5). Distance from Origin(0,0) to D(0,5) is 5m.",
+    "trick": "Failing to recognize that a negative North value translates directly to South, misplotting C at (17, 15).",
+    "tip": "Solve the mathematical sub-functions for all nodes before tracing the spatial grid."
+  },
+  {
+    "id": 91,
+    "question": "Rajat runs True East at a constant 4 m/s. A perfectly flat, infinitely long mirror is placed along the mathematical line y = -x. Rajat starts at coordinate (0, 10) and runs for exactly 5 seconds. If we map his virtual reflection inside the mirror plane, what is the straight-line distance between Rajat's physical end position and his virtual reflection's end position?",
+    "options": ["30√2 m", "40 m", "50 m", "20√5 m"],
+    "answer": "30√2 m",
+    "explanation": "Rajat runs East (positive X) for 5s at 4 m/s -> moves 20m East. Final physical position = (20, 10). The mirror is the line y = -x. Reflection across y = -x swaps the coordinates and negates them: (x, y) becomes (-y, -x). Final virtual position = (-10, -20). The distance between (20, 10) and (-10, -20) is √((20 - -10)^2 + (10 - -20)^2) = √(30^2 + 30^2) = √1800 = 30√2 m.",
+    "trick": "Reflecting across the Y-axis instead of the y = -x diagonal, which would yield a distance of 40m.",
+    "tip": "Coordinate reflection across y = x is (y,x). Across y = -x is (-y,-x)."
+  },
+  {
+    "id": 92,
+    "question": "Let Point A be the origin (0,0). Point B is 3m North and 4m East of A. Point C is the exact mathematical reflection of Point B across the X-axis. Point D is generated by rotating Point C exactly 90 degrees counter-clockwise around the origin. What is the straight-line distance between Point B and Point D?",
+    "options": ["2 m", "√2 m", "√7 m", "5 m"],
+    "answer": "√2 m",
+    "explanation": "Point A is (0,0). B is (4,3). Point C is the reflection of B across the X-axis, meaning the Y-coordinate flips sign -> C = (4,-3). Point D is C rotated 90 degrees CCW. The rule for 90° CCW rotation around the origin is (x, y) -> (-y, x). So, D = (-(-3), 4) = (3,4). The distance between B(4,3) and D(3,4) is √((4-3)^2 + (3-4)^2) = √(1^2 + (-1)^2) = √2 m.",
+    "trick": "Executing a clockwise rotation for D instead of counter-clockwise, which would plot D at (-3,-4).",
+    "tip": "Standard 90-degree CCW rotation matrix translates (x,y) to (-y, x)."
+  },
+  {
+    "id": 93,
+    "question": "An algorithm forces a robot to move strictly 5m forward at the start of every minute. If the current minute index (1, 2, 3...) is a multiple of 3, the robot turns 90 degrees Right before moving. If it is a multiple of 4, it turns 90 degrees Left before moving. Starting at t=0 facing North, the robot runs for exactly 5 minutes. What is its final straight-line distance from the start?",
+    "options": ["15 m", "10√2 m", "5√17 m", "20 m"],
+    "answer": "5√17 m",
+    "explanation": "Min 1: 5m N -> (0,5). Min 2: 5m N -> (0,10). Min 3 (multiple of 3): turns 90 Right (faces E), moves 5m E -> (5,10). Min 4 (multiple of 4): turns 90 Left (faces N), moves 5m N -> (5,15). Min 5: moves 5m N -> (5,20). Final position is (5,20). Distance from (0,0) is √(5^2 + 20^2) = √(25 + 400) = √425 = 5√17 m.",
+    "trick": "Turning Left on minute 3 or evaluating the turning logic after the movement instead of before.",
+    "tip": "List condition triggers chronologically and update the facing vector before applying displacement."
+  },
+  {
+    "id": 94,
+    "question": "A drone takes off from (0,0,0) facing exactly True North (+Y axis). Command 1: Pitch 30 degrees upwards and fly 10m straight. Command 2: Yaw 90 degrees Right to face True East (+X axis), level off perfectly horizontally, and fly 5m straight. What is the drone's 3D spatial distance from the origin?",
+    "options": ["15 m", "10 m", "5√3 m", "5√5 m"],
+    "answer": "5√5 m",
+    "explanation": "Cmd 1: Drone flies 10m at a 30° pitch facing North. dx = 0. dy = 10*cos(30) = 5√3. dz = 10*sin(30) = 5. Position = (0, 5√3, 5). Cmd 2: Faces East, flies 5m horizontally. dx = 5. dy = 0. dz = 0. Final position = (5, 5√3, 5). 3D Distance = √(x^2 + y^2 + z^2) = √(5^2 + (5√3)^2 + 5^2) = √(25 + 75 + 25) = √125 = 5√5 m.",
+    "trick": "Calculating the pitch altitude as 10m directly, ignoring the trigonometric components of the inclined flight path.",
+    "tip": "In 3D routing, slanted flight paths must be broken into planar (cos) and vertical (sin) vectors."
+  },
+  {
+    "id": 95,
+    "question": "Two merchant ships depart from the exact same port. Ship A sails 10km on a navigational bearing of 060 degrees. Ship B sails 10km on a navigational bearing of 120 degrees. Once both ships stop, what is the straight-line distance between them? ",
+    "options": ["5√2 km", "10√3 km", "10 km", "20 km"],
+    "answer": "10 km",
+    "explanation": "Navigational bearings start at North (0°) and move clockwise. Ship A (060°): dx = 10*sin(60) = 10*(√3/2) = 5√3. dy = 10*cos(60) = 10*(1/2) = 5. A=(5√3, 5). Ship B (120°): dx = 10*sin(120) = 5√3. dy = 10*cos(120) = -5. B=(5√3, -5). Since both share the exact same X-coordinate (5√3), the distance is simply the absolute difference in their Y-coordinates: 5 - (-5) = 10 km.",
+    "trick": "Using standard Cartesian angles (starting from East, going counter-clockwise) which scrambles the coordinates completely.",
+    "tip": "Navigational bearings use X = R*sin(θ) and Y = R*cos(θ), opposite of standard math angles."
+  },
+  {
+    "id": 96,
+    "question": "A walker moves in strictly 5m segments starting from (0,0) facing North. After every segment, he checks his total accumulated distance. If the distance is a multiple of 10, he turns 90 degrees Left. If it is a multiple of 15, he turns 90 degrees Right. If it is a multiple of 30, he turns 180 degrees. (Evaluate highest applicable multiple first). He stops after 30m. What is his final displacement?",
+    "options": ["15 m", "10√2 m", "20 m", "5√5 m"],
+    "answer": "10√2 m",
+    "explanation": "5m: N -> (0,5). 10m: (Mult 10) Turn L (W). Moves 5m W -> (-5,5). 15m: (Mult 15) Turn R (N). Moves 5m N -> (-5,10). 20m: (Mult 10) Turn L (W). Moves 5m W -> (-10,10). 25m: Moves 5m W -> (-15,10). 30m: (Mult 30 overrides 15 and 10) Turn 180 (E). Moves 5m E -> (-10,10). Distance = √((-10)^2 + 10^2) = √200 = 10√2 m.",
+    "trick": "Applying the multiple of 10 and 15 rules at the 30m mark instead of prioritizing the highest tier rule.",
+    "tip": "Track total distance explicitly at the end of every discrete movement chunk."
+  },
+  {
+    "id": 97,
+    "question": "Two parallel lasers are fired towards the Y-axis. Laser A fires from (10, 10) along the vector (-1, -1). Laser B fires from (10, -10) along the vector (-1, 1). A perfectly reflective vertical mirror stands exactly along the line x = 5. At what exact coordinate do the two reflected laser beams intersect?",
+    "options": ["(0, 0)", "(5, 0)", "(0, 5)", "They do not intersect"],
+    "answer": "(0, 0)",
+    "explanation": "Laser A path: slope = -1. Eq: y - 10 = -1(x - 10) -> y = -x + 20. Hits mirror (x=5) at y = 15. Wait, 10 to 5 is dx=-5, dy=-5. So it hits (5,5). Reflected slope = +1. Eq: y - 5 = 1(x - 5) -> y = x. Laser B path: slope = +1. Eq: y + 10 = 1(x - 10) -> y = x - 20. Hits mirror (x=5) at y = -5. Reflected slope = -1. Eq: y + 5 = -1(x - 5) -> y = -x. Intersection of y = x and y = -x is (0,0).",
+    "trick": "Assuming the reflection retains the negative X vector, meaning the lasers punch through the mirror.",
+    "tip": "Vertical mirrors strictly reverse the X-component of the incoming vector slope."
+  },
+  {
+    "id": 98,
+    "question": "Midpoint routing code: A ≈ B means A is exactly midway between B and the Origin (0,0). Point X is 24m North of the Origin. Point Y is 32m East of the Origin. If Z ≈ X and W ≈ Y, what is the exact straight-line distance between Point Z and Point W?",
+    "options": ["20 m", "15 m", "10√3 m", "25 m"],
+    "answer": "20 m",
+    "explanation": "Origin = (0,0). X is 24m North -> X = (0,24). Y is 32m East -> Y = (32,0). Z ≈ X means Z is midway between (0,24) and (0,0) -> Z = (0,12). W ≈ Y means W is midway between (32,0) and (0,0) -> W = (16,0). Distance between Z(0,12) and W(16,0) = √(16^2 + (-12)^2) = √(256 + 144) = √400 = 20 m.",
+    "trick": "Calculating the midpoint between X and Y directly, instead of using the origin as the individual anchor.",
+    "tip": "Midpoint to origin simply halves the Cartesian coordinates of the target node."
+  },
+  {
+    "id": 99,
+    "question": "An algorithm dictates movement based on the Fibonacci sequence modulo 4. For step 'n', the distance is 'n' meters, and the direction is Fibonacci(n) mod 4, mapped as 1=North, 2=East, 3=South, 0=West. The Fibonacci sequence starts F(1)=1, F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8. After executing exactly 6 steps starting from the origin, what is the final straight-line distance from the origin?",
+    "options": ["√61 m", "10 m", "5 m", "7 m"],
+    "answer": "5 m",
+    "explanation": "n=1: F=1, mod 4 = 1 (N). Moves 1m N -> (0,1). n=2: F=1, mod 4 = 1 (N). Moves 2m N -> (0,3). n=3: F=2, mod 4 = 2 (E). Moves 3m E -> (3,3). n=4: F=3, mod 4 = 3 (S). Moves 4m S -> (3,-1). n=5: F=5, mod 4 = 1 (N). Moves 5m N -> (3,4). n=6: F=8, mod 4 = 0 (W). Moves 6m W -> (-3,4). Final position is (-3,4). Distance from (0,0) = √((-3)^2 + 4^2) = √(9 + 16) = √25 = 5 m.",
+    "trick": "Forgetting the initial duplicate 1 in the Fibonacci sequence and shifting the entire modulo array.",
+    "tip": "Write out the mapped direction key for all N steps before tracing the physical path."
+  },
+  {
+    "id": 100,
+    "question": "Three agents P, Q, and R stand exactly at the vertices of an equilateral triangle on a flat field. The side length of the triangle is 12m. P directly faces Q. Q directly faces R. R directly faces P. At a signal, all three agents simultaneously walk 6m straight forward and stop. What is the straight-line distance between P and Q now?",
+    "options": ["12 m", "6√3 m", "3√2 m", "6 m"],
+    "answer": "6 m",
+    "explanation": "Let P = (0,0). Q = (12,0). P faces Q (East). Walks 6m to P' = (6,0). R forms the peak at (6, 6√3). Q faces R. The vector from Q to R is (-6, 6√3), length 12m. Q walks 6m, which puts Q exactly halfway along this vector. Q' = (12 - 3, 0 + 3√3) = (9, 3√3). Distance between P'(6,0) and Q'(9, 3√3): dx = 9-6 = 3. dy = 3√3 - 0 = 3√3. Distance = √(3^2 + (3√3)^2) = √(9 + 27) = √36 = 6 m.",
+    "trick": "Assuming the triangle collapses perfectly into the centroid where all distance is 0.",
+    "tip": "For symmetrical node collapse problems, plot the coordinates of just two entities and find the sub-vector."
+  }
+]

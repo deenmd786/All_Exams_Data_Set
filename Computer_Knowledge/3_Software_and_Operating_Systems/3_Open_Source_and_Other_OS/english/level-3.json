@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): 'Open Source' software does not necessarily mean the software is provided completely free of cost. Reason (R): The core principle of open source is granting access to the source code; developers are legally allowed to charge money for compiled binaries, packaging, or technical support. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The term 'Free' in Free Software refers to freedom (liberty), not price. Step 2: The GNU General Public License (GPL) explicitly permits selling copies of free software. Step 3: However, the seller must also provide the source code to the buyer. Step 4: Companies like Red Hat build billion-dollar business models on this by charging for enterprise support and compiled, tested binaries while keeping the source open. Step 5: Therefore, R perfectly explains the economic reality of A.",
+    "trick": "Bank/IT Trap: Candidates confuse 'Free Software' with 'Freeware'. Freeware is zero cost but closed-source. Free software is open-source but can cost money!",
+    "tip": "Think 'Free as in Free Speech', not 'Free as in Free Beer'."
+  },
+  {
+    "id": 2,
+    "question": "Which of the following best describes the architectural transition from Dalvik to the Android Runtime (ART) regarding application execution performance?",
+    "options": ["Dalvik used Ahead-Of-Time (AOT) compilation natively, whereas ART reverted to purely interpreted execution for better memory management.", "Dalvik utilized Just-In-Time (JIT) compilation strictly at runtime, whereas ART initially shifted entirely to Ahead-Of-Time (AOT) compilation during application installation.", "Dalvik compiled Java bytecode directly into native x86 machine code, whereas ART translates it into intermediary DEX files.", "Dalvik and ART both use the exact same execution model, but ART utilizes a 64-bit stack-based architecture instead of registers."],
+    "answer": "Dalvik utilized Just-In-Time (JIT) compilation strictly at runtime, whereas ART initially shifted entirely to Ahead-Of-Time (AOT) compilation during application installation.",
+    "explanation": "Step 1: Dalvik VM used JIT compilation, compiling parts of the DEX bytecode into machine code every time the app ran. Step 2: This caused CPU overhead and battery drain during execution. Step 3: ART (introduced in Android 4.4/5.0) switched to AOT compilation. Step 4: AOT compiles the entire app into native machine code once during installation (via dex2oat). Step 5: This results in faster app launches and better battery life, though it increases installation time and storage footprint.",
+    "trick": "Bank/IT Trap: Do not confuse modern Android (7.0+) which uses a hybrid JIT/AOT profile-guided approach. The fundamental initial shift from Dalvik to ART was strictly JIT to AOT.",
+    "tip": "Dalvik = JIT (compiled while running). Early ART = AOT (compiled upon installation)."
+  },
+  {
+    "id": 3,
+    "question": "A system administrator applies the command 'chmod 4755 script.sh'. What specific security implication does the '4' in this octal notation introduce?",
+    "options": ["It makes the file completely hidden from standard users on the system.", "It sets the Sticky Bit, preventing anyone but the owner from deleting the file.", "It sets the Set-User-ID (SUID) bit, allowing the script to execute with the privileges of the file's owner rather than the user running it.", "It sets the Set-Group-ID (SGID) bit, forcing all files created by the script to inherit the group of the script's owner."],
+    "answer": "It sets the Set-User-ID (SUID) bit, allowing the script to execute with the privileges of the file's owner rather than the user running it.",
+    "explanation": "Step 1: Standard permissions use three digits (e.g., 755 for user, group, others). Step 2: A four-digit octal permission introduces special bits in the first position. Step 3: Value 4 represents the SUID (Set-User-ID) bit. Step 4: Value 2 represents SGID, and 1 represents the Sticky Bit. Step 5: When SUID is set on an executable, any user launching it will temporarily gain the execution rights of the file's owner (often root), which is a massive security design concept.",
+    "trick": "Bank/IT Trap: Octal 4000 is SUID, 2000 is SGID, 1000 is Sticky. Do not confuse the special bit '4' with the standard Read '4' bit!",
+    "tip": "In 4-digit chmod, 4=SUID, 2=SGID, 1=Sticky Bit. SUID adopts owner's privileges."
+  },
+  {
+    "id": 4,
+    "question": "Assertion (A): The Linux kernel is licensed under GNU GPLv2, but Android user-space applications and the Android framework are primarily licensed under the Apache License 2.0. Reason (R): The Apache License 2.0 is a permissive license that allows hardware manufacturers to keep their proprietary modifications to the Android framework closed-source. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The Linux kernel strictly uses GPLv2, a 'copyleft' license requiring derivative works to also be open-sourced. Step 2: Google wanted smartphone OEMs (like Samsung, HTC) to adopt Android commercially. Step 3: If the entire OS was GPL, OEMs would have to open-source their proprietary UI skins and apps. Step 4: To solve this, Google licensed the user-space framework under Apache 2.0. Step 5: Apache 2.0 is permissive, allowing OEMs to modify the code and distribute it as closed-source proprietary software, explaining Google's architectural licensing split.",
+    "trick": "Bank/IT Trap: Android is NOT entirely GPL. Google deliberately uses Apache for user-space to protect commercial vendor secrets while relying on the GPL Linux kernel underneath.",
+    "tip": "Linux Kernel = GPL (strict copyleft). Android Framework = Apache (permissive, commercial-friendly)."
+  },
+  {
+    "id": 5,
+    "question": "Which of the following scenarios constitutes a direct violation of the GNU General Public License version 2 (GPLv2)?",
+    "options": ["Selling a CD containing an unmodified version of the Ubuntu operating system for $50.", "Using GPLv2 licensed code internally within a corporation without releasing the source code to the public.", "Dynamically linking a proprietary, closed-source application to a GPLv2 licensed software library and distributing the combined application.", "Modifying a GPLv2 licensed program and offering the new compiled binary for free download along with its modified source code."],
+    "answer": "Dynamically linking a proprietary, closed-source application to a GPLv2 licensed software library and distributing the combined application.",
+    "explanation": "Step 1: Selling GPL software is fully legal as long as source is provided. Step 2: Internal corporate use without distribution does not trigger the GPL requirement to share code. Step 3: Providing modified binaries with source is the exact intent of the GPL. Step 4: However, linking proprietary code to a strict GPL library (static or dynamic) creates a 'derivative work'. Step 5: Distributing this mixed proprietary/GPL work violates the GPL's copyleft clause. (Note: LGPL was created specifically to allow dynamic linking without this restriction).",
+    "trick": "Bank/IT Trap: The GPL 'viral' nature triggers upon DISTRIBUTION. You can modify GPL code and keep it secret forever as long as you never distribute the binary outside your organization.",
+    "tip": "GPL forbids distributing proprietary software linked to GPL libraries. LGPL permits it."
+  },
+  {
+    "id": 6,
+    "question": "In a POSIX-compliant file system, you are given a directory with the permissions 'drw-r--r--'. As a standard user who is not the owner and does not belong to the group, what actions can you perform on this directory?",
+    "options": ["You can list the files inside it using 'ls' and enter it using 'cd'.", "You can list the files inside it using 'ls', but you cannot enter it using 'cd' or read any files within.", "You cannot list the files, but if you know the exact filename, you can read it.", "You have zero access to the directory or its contents."],
+    "answer": "You can list the files inside it using 'ls', but you cannot enter it using 'cd' or read any files within.",
+    "explanation": "Step 1: Break down the permission 'drw-r--r--'. The last three characters 'r--' apply to standard users (Others). Step 2: The 'r' (Read) bit on a directory allows viewing the list of contents (e.g., using 'ls'). Step 3: However, the 'x' (Execute) bit is missing for all users. Step 4: In Linux, the execute bit on a directory is required to 'enter' it (using 'cd') or access the inodes of the files inside it. Step 5: Therefore, you can see the names of the files, but cannot access their contents or enter the folder.",
+    "trick": "Bank/IT Trap: Execute ('x') on a directory doesn't mean running a script. It means 'search/traverse' permission. Without 'x', a directory is structurally blocked from entry.",
+    "tip": "Read on directory = ls. Execute on directory = cd. You need both to function fully."
+  },
+  {
+    "id": 7,
+    "question": "Assertion (A): The introduction of Android 7.0 (Nougat) fundamentally changed the ART execution model by re-introducing a Just-In-Time (JIT) compiler alongside the Ahead-Of-Time (AOT) compiler. Reason (R): Pure AOT compilation caused excessively long application installation times and required significantly more storage space, which hindered budget devices. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Android 5.0 introduced pure AOT via ART, which compiled everything during install. Step 2: This led to the infamous 'Android is upgrading' slow boot screen and massive app sizes on disk. Step 3: To fix this, Android 7.0 introduced a hybrid Profile-Guided Compilation system. Step 4: Apps now install quickly without full compilation. They run initially via JIT. Step 5: While the user uses the app, Android profiles the 'hot' code and uses an idle background AOT compiler to optimize only the frequently used parts, perfectly balancing speed and storage.",
+    "trick": "Bank/IT Trap: ART is not just AOT anymore. Modern ART is a sophisticated hybrid of Interpreter + JIT + Profile-Guided AOT background compilation.",
+    "tip": "Modern ART uses a hybrid approach: fast install via JIT, optimized later via AOT."
+  },
+  {
+    "id": 8,
+    "question": "In the context of the Free Software Foundation's philosophy, which specific technological practice is directly targeted and prohibited by the anti-circumvention clauses of the GNU GPL version 3 (GPLv3)?",
+    "options": ["Monetization of open-source software.", "Tivoization", "Dynamic linking of LGPL libraries.", "Porting GNU software to Windows subsystems."],
+    "answer": "Tivoization",
+    "explanation": "Step 1: TiVo used a Linux kernel (GPLv2) in their DVR boxes. Step 2: They provided the modified source code, strictly complying with GPLv2. Step 3: However, they locked the hardware to only boot binaries cryptographically signed by TiVo. Step 4: This meant a user could compile the source code but could never actually run their modified version on their own TiVo hardware. Step 5: Richard Stallman called this 'Tivoization'. GPLv3 was specifically drafted to prohibit this, forcing vendors to provide the installation keys necessary to run modified software on the hardware.",
+    "trick": "Bank/IT Trap: Tivoization represents hardware-level lockdown of open-source software. GPLv3 explicitly closes this loophole, which is why the Linux Kernel stayed on GPLv2 to avoid alienating hardware vendors.",
+    "tip": "GPLv3 bans 'Tivoization'—locking hardware so users cannot run their own modified open-source code."
+  },
+  {
+    "id": 9,
+    "question": "Consider a scenario where the default `umask` on a highly secure POSIX-compliant server is set to `077`. If a developer creates a new text file named 'config.txt', what will be the resulting absolute octal permissions of this file?",
+    "options": ["700", "600", "077", "666"],
+    "answer": "600",
+    "explanation": "Step 1: `umask` (user file-creation mode mask) defines which permissions are STRIPPED away upon creation. Step 2: The base default permission for a directory is 777, but the base default for a standard text file is 666 (files are not born executable). Step 3: To find the final permission, subtract the umask from the base permission. Step 4: Base file (666) minus Umask (077). Step 5: 6-0=6, 6-7=0 (negative bounds to 0), 6-7=0. The final result is 600 (rw-------), meaning only the owner can read and write the file.",
+    "trick": "Bank/IT Trap: Never subtract umask from 777 for a file! Files start at 666. Directories start at 777. 666 - 077 = 600.",
+    "tip": "For umask calculations: default files start at 666, directories at 777. Subtract the umask."
+  },
+  {
+    "id": 10,
+    "question": "Assertion (A): Both the Dalvik Virtual Machine and the Java Virtual Machine (JVM) translate Java source code directly into executable machine code using purely stack-based architectures. Reason (R): Android opted for Dalvik's `.dex` file format because it allowed multiple classes to share a single constant pool, vastly reducing the memory footprint on mobile devices. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Reason (R) is true. Standard Java creates multiple `.class` files, duplicating constant pools. Dalvik compiles these into a single `.dex` file, sharing constants and drastically saving RAM. Step 2: However, Assertion (A) is completely false for two reasons. Step 3: Neither Dalvik nor early JVM translate source code 'directly into machine code'; they compile to intermediate bytecode. Step 4: Furthermore, the JVM is stack-based, but Dalvik was custom-designed as a REGISTER-based architecture. Step 5: Register-based VMs require fewer instructions to execute complex operations, which was optimal for early slow mobile CPUs.",
+    "trick": "Bank/IT Trap: Dalvik is inherently different from the standard Oracle JVM. Dalvik is register-based; standard JVM is stack-based. This is a classic advanced interview trap.",
+    "tip": "Dalvik VM uses a register-based architecture and .dex files. Standard JVM is stack-based."
+  },
+  {
+    "id": 11,
+    "question": "Which POSIX standard formally defines the 'Single UNIX Specification' (SUS) and serves as the baseline API compliance required for an operating system to be legally branded as 'UNIX'?",
+    "options": ["IEEE 802.11", "IEEE 1003.1", "ISO/IEC 9899", "RFC 793"],
+    "answer": "IEEE 1003.1",
+    "explanation": "Step 1: POSIX (Portable Operating System Interface) is maintained by the IEEE to ensure compatibility across OS environments. Step 2: IEEE 802.11 refers to Wi-Fi. ISO 9899 is the C Programming Language. RFC 793 is TCP. Step 3: IEEE 1003.1 is the core POSIX standard. Step 4: The Open Group requires compliance with the latest IEEE 1003.1 standard (combined with the Single UNIX Specification) for an OS to earn the official UNIX trademark. Step 5: macOS is officially certified POSIX IEEE 1003.1 compliant, while Linux is mostly compliant but uncertified due to cost and differing philosophies.",
+    "trick": "Bank/IT Trap: Linux is 'UNIX-like' because it largely follows POSIX but rarely pays for official certification. macOS is a fully certified UNIX OS.",
+    "tip": "IEEE 1003.1 is the formal standard code for POSIX OS compatibility."
+  },
+  {
+    "id": 12,
+    "question": "A developer wants to set file permissions such that the owner has full rights, the group can read and execute, and others have zero access. Furthermore, they want to set the SGID bit so executed files adopt the group ID. Which octal command achieves this?",
+    "options": ["chmod 2750 file", "chmod 4750 file", "chmod 2740 file", "chmod 1750 file"],
+    "answer": "chmod 2750 file",
+    "explanation": "Step 1: Break down standard permissions. Owner full rights = 7 (4+2+1). Step 2: Group read and execute = 5 (4+1). Step 3: Others zero access = 0. Base permission is 750. Step 4: Now add the special bit. SUID = 4, SGID = 2, Sticky = 1. Step 5: The question asks for the SGID bit. Therefore, prepend '2' to the base permission, resulting in the final command: 2750.",
+    "trick": "Bank/IT Trap: Read carefully! 4000 is SUID (adopts user ID), 2000 is SGID (adopts group ID). The question strictly asked for Group ID adoption.",
+    "tip": "Octal breakdown: 2 (SGID) + 7 (Owner rwx) + 5 (Group r-x) + 0 (Others ---)."
+  },
+  {
+    "id": 13,
+    "question": "Assertion (A): The GNU Lesser General Public License (LGPL) is widely preferred over the standard GPL for open-source software libraries like GLibc. Reason (R): The LGPL allows developers to dynamically link their proprietary, closed-source applications to the open-source library without being forced to open-source their entire application. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: If a library like GLibc (the core C library in Linux) was strictly GPL, any program compiled on Linux linking to it would legally have to be open-source. Step 2: This would kill commercial software development on Linux. Step 3: To solve this, the Free Software Foundation created the Lesser GPL (LGPL). Step 4: The LGPL specifically states that if a program dynamically links to the library, the proprietary program can remain closed-source. Step 5: However, any modifications to the LGPL library itself must still be shared. Reason R perfectly explains the architectural necessity stated in Assertion A.",
+    "trick": "Bank/IT Trap: GPL is 'strong copyleft' (infects everything it touches). LGPL is 'weak copyleft' (infects only modifications to itself, not the calling application).",
+    "tip": "LGPL permits proprietary apps to dynamically link to open-source libraries safely."
+  },
+  {
+    "id": 14,
+    "question": "Which core subsystem library acts as the bridge between Android's user space (ART/Dalvik, Java framework) and the POSIX-compliant Linux Kernel, replacing standard implementations like GNU C Library (glibc)?",
+    "options": ["Zygote", "Bionic libc", "SurfaceFlinger", "HAL (Hardware Abstraction Layer)"],
+    "answer": "Bionic libc",
+    "explanation": "Step 1: Standard Linux distributions use the GNU C Library (glibc) to provide standard POSIX functions (like open, read, thread management). Step 2: glibc is licensed under the LGPL and is relatively large. Step 3: Google wanted Android to be independent of GPL/LGPL licensing in user space and needed a smaller footprint for mobile memory limits. Step 4: Google created 'Bionic', a custom, BSD-licensed implementation of the standard C library. Step 5: Bionic acts as the direct interface between Android's runtime environments and the underlying Linux kernel system calls.",
+    "trick": "Bank/IT Trap: Android uses the Linux kernel but does NOT use standard GNU utilities. There is no glibc in Android; Bionic replaces it for licensing and speed reasons.",
+    "tip": "Bionic is Google's custom, BSD-licensed C library bridging Android to the Linux Kernel."
+  },
+  {
+    "id": 15,
+    "question": "An RBI Grade B IT Officer investigates a shared public directory '/tmp' on a Linux server. The permissions are set to 'drwxrwxrwt'. What is the exact functional implication of the 't' at the end of the permission string?",
+    "options": ["It signifies the directory is a 'Temporary' file system mapped directly to RAM rather than the hard disk.", "It enables the Set-User-ID bit, ensuring all files created inside inherit the root user's permissions.", "It enables the Sticky Bit, ensuring that files within the directory can only be deleted or renamed by the file's owner or the root user.", "It indicates that execution of any binary within this folder is traced by the kernel for auditing."],
+    "answer": "It enables the Sticky Bit, ensuring that files within the directory can only be deleted or renamed by the file's owner or the root user.",
+    "explanation": "Step 1: The '/tmp' directory must be writable by all users so applications can dump temporary data (rwxrwxrwx). Step 2: However, if everyone has write permission, User A could maliciously delete User B's temporary files. Step 3: To prevent this chaos, the system administrator applies the Sticky Bit (chmod +t or chmod 1777). Step 4: In symbolic notation, the execution 'x' bit for 'others' is replaced by a 't'. Step 5: The Sticky Bit on a directory overrides standard write permissions, strictly enforcing that only the file's creator (owner) or root can delete or rename the file.",
+    "trick": "Bank/IT Trap: A lowercase 't' means the execute bit is ON and the sticky bit is ON. An uppercase 'T' means the sticky bit is ON but the execute bit is OFF.",
+    "tip": "The Sticky Bit (t) on directories prevents users from deleting each other's files."
+  },
+  {
+    "id": 16,
+    "question": "Assertion (A): A developer writes a cloud-based web application relying on a modified AGPL (Affero General Public License) database. If they offer this database as a SaaS (Software as a Service) over the network without sharing the source code, they are violating the AGPL. Reason (R): The AGPL was specifically designed to close the 'Application Service Provider (ASP) loophole' found in the standard GPL. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Under standard GPL, you only have to release source code if you 'distribute' the binary software to users. Step 2: With cloud computing (SaaS), companies run modified GPL software on their own servers and users connect via a browser. Step 3: Because the binary is never physically distributed to the user, the GPL requirement to share code is never triggered (the ASP loophole). Step 4: The Affero GPL (AGPL) adds a specific clause: providing network access to a modified application constitutes distribution. Step 5: Therefore, failing to provide the source code in a SaaS deployment violates the AGPL, making R the exact legal rationale for A.",
+    "trick": "Bank/IT Trap: Standard GPL ignores cloud/SaaS usage. If a company uses open-source in the cloud and refuses to share modifications, check if it's GPL or AGPL. AGPL forces cloud sharing.",
+    "tip": "AGPL closes the cloud loophole: network interaction equals distribution, forcing source code sharing."
+  },
+  {
+    "id": 17,
+    "question": "In the evolution of the Android Runtime architecture, what specific role does the 'Zygote' process play in optimizing application startup times and memory usage?",
+    "options": ["It acts as the primary garbage collector, reclaiming memory from orphaned Dalvik instances.", "It is the Ahead-Of-Time compiler module that transforms DEX files into OAT files during boot.", "It is a pre-initialized VM instance containing core Android libraries, which forks itself to launch new apps almost instantaneously.", "It translates Bionic libc system calls into standard POSIX system calls for the Linux kernel."],
+    "answer": "It is a pre-initialized VM instance containing core Android libraries, which forks itself to launch new apps almost instantaneously.",
+    "explanation": "Step 1: When Android boots, it takes significant time to load the core framework classes and resources into memory. Step 2: If every new application had to load these from scratch, app launch times would be unacceptably slow. Step 3: Android solves this by launching a special process called 'Zygote' at startup. Step 4: Zygote is a warm, pre-initialized VM containing all common libraries. Step 5: When the user taps an app icon, Zygote simply uses the POSIX `fork()` command to clone itself. The clone then loads the specific app code, sharing the core libraries in RAM via Copy-On-Write (COW).",
+    "trick": "Bank/IT Trap: In biology, a zygote is an initial cell that divides to form a new organism. In Android, Zygote is the 'mother' process that forks to spawn every single app VM.",
+    "tip": "Zygote is a pre-warmed VM process that forks to launch Android apps instantly."
+  },
+  {
+    "id": 18,
+    "question": "Assertion (A): Modifying a file's permissions to 'chmod 700' provides stronger local security against unauthorized access than setting it to 'chmod 755'. Reason (R): 'chmod 755' allows the file's Group and public Others to execute the file, whereas 'chmod 700' strips all rights from anyone except the Owner. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Octal 700 translates to 'rwx------'. The owner can read, write, and execute. Group and Others have zero access (0). Step 2: Octal 755 translates to 'rwxr-xr-x'. The owner has full rights (7). Step 3: The group has read and execute (4+1=5). Others have read and execute (4+1=5). Step 4: 755 allows anyone on the system to run the file or script. Step 5: Therefore, 700 is structurally more secure for private files, perfectly mapping the Reason to the Assertion.",
+    "trick": "Bank/IT Trap: 777 is worst for security. 755 is standard for web servers (public read/execute). 700 is paranoid local security (only owner can touch it).",
+    "tip": "chmod 700 restricts access completely to the file owner; 755 allows public execution."
+  },
+  {
+    "id": 19,
+    "question": "Which of the following is NOT one of the 'Four Essential Freedoms' defined by Richard Stallman and the Free Software Foundation (FSF) for software to be considered truly free?",
+    "options": ["The freedom to run the program as you wish, for any purpose.", "The freedom to redistribute copies so you can help your neighbor.", "The freedom to force proprietary derivative works to remain closed-source.", "The freedom to study how the program works, and change it so it does your computing as you wish."],
+    "answer": "The freedom to force proprietary derivative works to remain closed-source.",
+    "explanation": "Step 1: The FSF defines Free Software based on four fundamental freedoms (numbered 0 to 3). Step 2: Freedom 0 is to run the program for any purpose. Step 3: Freedom 1 is to study and modify the source code. Step 4: Freedom 2 is to redistribute copies. Step 5: Freedom 3 is to distribute modified versions. Allowing derivative works to become proprietary/closed-source violates the 'copyleft' principle central to the FSF's GPL philosophy. It is the opposite of a recognized freedom.",
+    "trick": "Bank/IT Trap: Permissive licenses (like MIT/BSD) actually allow modified code to be closed-source. However, the question specifically asks about the FSF's philosophy, which heavily promotes 'Copyleft' (forcing derivatives to remain open).",
+    "tip": "FSF's 4 Freedoms guarantee the right to use, study, share, and improve open-source software."
+  },
+  {
+    "id": 20,
+    "question": "During the boot process of a modern Android device running ART, which file format represents the heavily optimized, device-specific native machine code generated from the application's original bytecode?",
+    "options": [".apk", ".dex", ".oat", ".class"],
+    "answer": ".oat",
+    "explanation": "Step 1: A developer writes Java/Kotlin which compiles to standard `.class` files. Step 2: The Android SDK converts these into Dalvik Executable (`.dex`) files, packed inside the `.apk`. Step 3: In the old Dalvik runtime, the VM interpreted the `.dex` file. Step 4: Under ART (Android Runtime), the `dex2oat` utility compiles the `.dex` bytecode into an `.oat` file. Step 5: The `.oat` file is essentially a standard Linux ELF (Executable and Linkable Format) binary containing pure native machine code optimized exactly for that specific phone's CPU architecture.",
+    "trick": "Bank/IT Trap: The .apk is the zip archive. The .dex is the bytecode. The .oat is the final compiled native binary executed by ART.",
+    "tip": "ART uses the dex2oat tool to compile .dex bytecode into native .oat executable files."
+  },
+  {
+    "id": 21,
+    "question": "Assertion (A): The POSIX `fork()` system call creates a new child process that shares the exact same memory space and variables as the parent process to conserve RAM. Reason (R): POSIX defines `fork()` as a lightweight thread-creation mechanism rather than a heavy process-creation tool. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The POSIX `fork()` command creates a new *process*, not a thread. Step 2: A core principle of process creation via `fork()` is memory isolation. Step 3: The child gets an exact, independent *copy* of the parent's memory space (variables, heap, stack). Step 4: If the child modifies a variable, the parent's variable remains unchanged. (Modern OSs use Copy-On-Write to defer physical RAM copying, but logically the spaces are separate). Step 5: Threads (created via POSIX `pthreads`) share memory; processes (`fork`) do not. Thus, both A and R are entirely false.",
+    "trick": "Bank/IT Trap: Fork = Processes (Isolated Memory). Pthreads = Threads (Shared Memory). Forking does not create shared-memory threads.",
+    "tip": "fork() creates an isolated child process; pthreads create threads with shared memory."
+  },
+  {
+    "id": 22,
+    "question": "A system administrator tries to delete a file named 'report.pdf' inside a directory owned by another user. The administrator has 'rw-' permissions on the file itself, but only 'r-x' permissions on the parent directory. Can the administrator delete the file?",
+    "options": ["Yes, because write permission on the file itself guarantees the right to delete it.", "No, because deleting a file requires write ('w') permission on the parent directory, regardless of the file's own permissions.", "Yes, because execute ('x') permission on the directory allows bypassing the directory's write restrictions.", "No, because the administrator lacks execute ('x') permission on the file itself."],
+    "answer": "No, because deleting a file requires write ('w') permission on the parent directory, regardless of the file's own permissions.",
+    "explanation": "Step 1: In POSIX file systems, a directory is simply a file that contains a list of filenames and their associated inode numbers. Step 2: When you delete a file, you are not actually modifying the file itself; you are removing its entry from the directory's list. Step 3: Therefore, modifying the directory's list requires Write ('w') permission on the DIRECTORY. Step 4: The file's own permissions ('rw-') dictate if you can edit the contents of 'report.pdf', but not if you can delete it. Step 5: Since the admin only has 'r-x' on the directory, the deletion will be denied.",
+    "trick": "Bank/IT Trap: File deletion is a directory-level operation, not a file-level operation. You can delete a read-only file if you own the folder, but you cannot delete a writable file if the folder is read-only!",
+    "tip": "Deleting a file requires Write permission on the parent directory, not the file itself."
+  },
+  {
+    "id": 23,
+    "question": "Assertion (A): Software released under the MIT or BSD licenses can legally be incorporated into a closed-source, proprietary commercial product. Reason (R): MIT and BSD are 'permissive' open-source licenses that lack the strong 'copyleft' restrictions found in the GNU GPL. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The open-source landscape is split into 'Copyleft' (GPL) and 'Permissive' (MIT, BSD, Apache). Step 2: Copyleft licenses legally force derivative works to adopt the same open-source license. Step 3: Permissive licenses basically say, 'Do whatever you want with this code, just keep my copyright notice intact, and don't sue me.' Step 4: Because there is no restriction on derivative licensing, a corporation like Apple or Microsoft can take BSD code, modify it, compile it, and sell it as closed-source proprietary software (e.g., macOS heavily uses BSD code). Step 5: R perfectly explains why A is legally true.",
+    "trick": "Bank/IT Trap: Open source doesn't always force downstream sharing. 'Permissive' licenses allow taking code closed-source. 'Copyleft' licenses forbid it.",
+    "tip": "Permissive licenses (MIT/BSD/Apache) allow proprietary use. Copyleft licenses (GPL) force continued open-source sharing."
+  },
+  {
+    "id": 24,
+    "question": "In the standard POSIX shell environment, when a command executes successfully without any errors, what specific integer value is returned to the operating system as the 'Exit Status'?",
+    "options": ["1", "-1", "0", "255"],
+    "answer": "0",
+    "explanation": "Step 1: When a process terminates in a POSIX system, it returns a status code to its parent process (often the shell). Step 2: This is verified via the special variable `$?`. Step 3: By strict convention, an exit status of 0 represents success (execution completed with no errors). Step 4: Any non-zero value (typically 1 to 255) indicates a specific failure or error state. Step 5: For example, 1 might mean general error, 2 might mean syntax error, and 127 means 'command not found'.",
+    "trick": "Bank/IT Trap: In boolean logic, 1 is often True/Success and 0 is False. In POSIX exit codes, it is the exact opposite! 0 is Success, 1+ is Error.",
+    "tip": "In POSIX systems, an exit status of 0 means absolute success. Non-zero means error."
+  },
+  {
+    "id": 25,
+    "question": "Assertion (A): The 'Garbage Collection' (GC) process in Dalvik caused more noticeable UI stuttering ('jank') in older Android devices compared to the modern Android Runtime (ART). Reason (R): Dalvik's garbage collector required two distinct 'Stop-the-World' pauses to mark and sweep memory, whereas ART implemented a concurrent garbage collector that drastically reduced pause times. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Garbage Collection reclaims unused RAM. Step 2: During Dalvik's GC, the entire VM had to freeze ('Stop-the-World') to prevent apps from allocating memory while it was being cleaned. Step 3: Dalvik did this twice per GC cycle, causing pauses up to 20-50 milliseconds. Step 4: If an animation runs at 60fps, a frame takes 16ms. A 50ms pause drops multiple frames, causing visible stutter (jank). Step 5: ART introduced a Concurrent Mark-Sweep (CMS) GC architecture, shrinking pauses to roughly 2-3ms, completely eliminating the visual stutter. Thus, R accurately explains A.",
+    "trick": "Bank/IT Trap: Garbage collection inherently causes pauses. The architectural leap in ART wasn't eliminating GC, but moving the heavy lifting to parallel/concurrent threads to shrink the 'Stop-the-World' time.",
+    "tip": "ART drastically reduces 'Stop-the-World' GC pauses, eliminating UI stuttering seen in older Dalvik."
+  },
+  {
+    "id": 26,
+    "question": "A developer applies the command `chmod u=rw,g=r,o= script.sh`. Which octal representation is mathematically identical to this symbolic command?",
+    "options": ["740", "640", "620", "644"],
+    "answer": "640",
+    "explanation": "Step 1: 'u' stands for User (Owner), 'g' for Group, 'o' for Others. Step 2: The user is given Read (4) and Write (2), which equals 6. Step 3: The group is given Read (4) only, which equals 4. Step 4: Others are given nothing (no characters after the equals sign), which equals 0. Step 5: Concatenating these digits yields 640. The owner can edit it, the group can read it, and others are locked out.",
+    "trick": "Bank/IT Trap: In symbolic notation, `o=` with nothing after it strictly means zero permissions. Do not assume default permissions apply.",
+    "tip": "Read=4, Write=2, Execute=1. u=rw (6), g=r (4), o= (0). Result: 640."
+  },
+  {
+    "id": 27,
+    "question": "Assertion (A): A software company releases a proprietary image editing software that heavily utilizes POSIX standard APIs to ensure it can be easily compiled on both Linux and macOS. This utilization forces the company to release their proprietary code under an open-source license. Reason (R): POSIX is a standardized architectural framework governed by the Free Software Foundation, applying strict GPL viral clauses to any compliant API. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: POSIX (Portable Operating System Interface) is an API standard defined by the IEEE, not the Free Software Foundation. Step 2: Writing code that complies with a standard API does not incur any licensing penalties or force open-sourcing. Step 3: Therefore, utilizing POSIX APIs has absolutely zero bearing on whether software must be open-source or proprietary. Step 4: Assertion (A) is false because POSIX doesn't force open-sourcing. Step 5: Reason (R) is false because the IEEE governs POSIX, not the FSF, and APIs are generally uncopyrightable in this context (per recent US Supreme Court rulings).",
+    "trick": "Bank/IT Trap: Do not confuse POSIX (a technical IEEE compatibility standard) with GPL (a legal FSF licensing framework). They are completely unrelated domains.",
+    "tip": "POSIX is an IEEE technical standard, not a license. It does not force open-source compliance."
+  },
+  {
+    "id": 28,
+    "question": "When configuring a Linux web server, the administrator assigns a folder the permission 'chmod 2775 /var/www/html'. If a standard user belonging to the web group creates a new file inside this directory, what specific behavior is guaranteed by this permission structure?",
+    "options": ["The file will automatically become an executable binary.", "The file will be temporarily mapped to the user's personal home directory.", "The file will inherit the Group ID of the parent directory rather than the primary group of the user who created it.", "The file will inherit the Set-User-ID (SUID) bit from the directory, giving it root execution privileges."],
+    "answer": "The file will inherit the Group ID of the parent directory rather than the primary group of the user who created it.",
+    "explanation": "Step 1: The octal notation 2775 uses a special bit (2). Step 2: Value 4 is SUID, Value 2 is SGID (Set-Group-ID), Value 1 is Sticky. Step 3: When SGID is applied to an executable file, it runs with the group rights of the file. Step 4: However, when SGID is applied to a DIRECTORY, it behaves entirely differently. Step 5: SGID on a directory forces all newly created files within it to automatically inherit the group ownership of the directory, rather than the creating user's default group. This is vital for collaborative web folders.",
+    "trick": "Bank/IT Trap: SGID has a dual personality. On a file, it changes execution privilege. On a directory, it changes inheritance rules for new files.",
+    "tip": "SGID (chmod 2xxx) on a directory forces new files to inherit the directory's group."
+  },
+  {
+    "id": 29,
+    "question": "Assertion (A): An Android application compiled heavily with the Android NDK (Native Development Kit) in C++ bypasses the ART/Dalvik virtual machine entirely during its core mathematical execution. Reason (R): The NDK allows developers to compile C/C++ code directly into native ARM/x86 machine code, avoiding the Java Native Interface (JNI) and standard bytecode overhead. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: It is true (A) that heavy C++ math code in the NDK executes natively on the CPU, bypassing the ART/Dalvik bytecode interpretation/AOT engine for that specific logic. Step 2: It is also true that NDK compiles to native ARM/x86. Step 3: However, Reason (R) is false because Android applications CANNOT bypass the Java Native Interface (JNI). Step 4: The core app lifecycle (onCreate, etc.) is strictly managed by the Android Framework (Java/Kotlin). Step 5: To execute the C++ code, the Java layer MUST use JNI to call the native libraries. You cannot avoid JNI overhead.",
+    "trick": "Bank/IT Trap: NDK code runs native, but it is not a standalone island. It must cross the 'JNI bridge' from the Java UI thread to execute, which actually introduces slight latency.",
+    "tip": "Android NDK compiles to native code, but must still communicate via the JNI bridge."
+  },
+  {
+    "id": 30,
+    "question": "Which specific concept did the GNU Project introduce as a direct legal hack against traditional copyright law, ensuring that software remains permanently in the public commons?",
+    "options": ["Permissive Licensing", "Copyleft", "Patent Trolling", "Public Domain Dedication"],
+    "answer": "Copyleft",
+    "explanation": "Step 1: Traditional Copyright is used by authors to restrict who can copy, modify, or distribute their work. Step 2: Richard Stallman wanted to guarantee the exact opposite: ensuring everyone can copy and modify the work. Step 3: However, if he just put it in the 'Public Domain', a corporation could take it, modify it, and lock it down via copyright. Step 4: To solve this, he invented 'Copyleft'. Step 5: Copyleft uses the legal power of copyright to stipulate: 'You can use this freely, BUT any modified version you distribute MUST also carry this exact same free license.' It weaponizes copyright to mandate freedom.",
+    "trick": "Bank/IT Trap: 'Public Domain' means anyone can do anything, including taking it closed-source. 'Copyleft' enforces permanent open-source status.",
+    "tip": "Copyleft uses copyright law to ensure software and its derivatives remain permanently free/open."
+  },
+  {
+    "id": 31,
+    "question": "Assertion (A): The POSIX environment defines three standard data streams for processes: standard input (0), standard output (1), and standard error (2). Reason (R): Separating standard output from standard error allows administrators to redirect pure data to a file while ensuring critical error messages are still visible on the terminal screen. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In POSIX, file descriptor 0 is stdin, 1 is stdout, and 2 is stderr. Step 2: When running scripts, stdout generates the expected data, while stderr outputs failures. Step 3: If they were combined, error messages would corrupt data files during redirection (e.g., `ls > list.txt`). Step 4: Because they are separate, `ls > list.txt` sends descriptor 1 to the file. Step 5: If the directory doesn't exist, descriptor 2 (error) bypasses the file and prints to the terminal, perfectly illustrating the architectural intent stated in Reason R.",
+    "trick": "Bank/IT Trap: Understand the redirection syntax: `>` redirects 1 (stdout). `2>` redirects stderr. `2>&1` combines them.",
+    "tip": "POSIX Streams: 0 = stdin (input), 1 = stdout (data), 2 = stderr (errors)."
+  },
+  {
+    "id": 32,
+    "question": "An IT Security Auditor reviews a Linux file system and finds the `/etc/shadow` file has permissions set to `000`. Which of the following statements is architecturally true regarding access to this file?",
+    "options": ["The file is completely inaccessible to every entity on the system, including the kernel.", "The root user can still read and write to this file, completely bypassing the file permission bits.", "Only processes with the Set-Group-ID (SGID) bit can access the file.", "The file will be automatically deleted on the next reboot due to invalid permissions."],
+    "answer": "The root user can still read and write to this file, completely bypassing the file permission bits.",
+    "explanation": "Step 1: Permissions `000` translates to `---------`, meaning Owner, Group, and Others have absolutely zero rights. Step 2: `/etc/shadow` stores sensitive hashed passwords. Step 3: Standard POSIX security architecture enforces these bits strictly for standard users (UID > 0). Step 4: However, the `root` user (UID 0) is the superuser. Step 5: The Linux kernel is programmed to bypass standard permission checks (Read and Write) for UID 0. Root can always read and write a 000 file, though even root must manually add the execute bit if they want to run it.",
+    "trick": "Bank/IT Trap: Root ignores read/write restrictions entirely. A `000` file locks out everyone *except* root.",
+    "tip": "The root user (UID 0) structurally bypasses all Read and Write POSIX file permission restrictions."
+  },
+  {
+    "id": 33,
+    "question": "Assertion (A): Dual-licensing a software project allows the creators to release the software under the GPL for the open-source community, while simultaneously selling a commercial license of the exact same code to corporations. Reason (R): The GPL forbids the original copyright holder from selling their own software for profit. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: Dual-licensing is a common business model (e.g., MySQL, Qt). Step 2: The company releases the code under GPL so open-source developers can use it for free (A is True). Step 3: If a corporation wants to use that code in a closed-source product (which the GPL forbids), they pay the creator for a commercial, non-GPL license. Step 4: Reason R is False because the GPL *does* allow selling software for profit. Step 5: Furthermore, the GPL only applies to the *licensees* (users). The original copyright holder is immune to their own license and can license the code 100 different ways if they choose.",
+    "trick": "Bank/IT Trap: The creator of a GPL program is not bound by the GPL. They own the copyright. The GPL restricts the *users*, not the *owners*.",
+    "tip": "Copyright owners can dual-license code (GPL for free, Proprietary for profit) without restrictions."
+  },
+  {
+    "id": 34,
+    "question": "Which combination of standard POSIX shell commands accurately represents the architectural flow of substituting the output of one command as an argument to another, without using intermediate files?",
+    "options": ["Piping using '|' (e.g., `ls | grep`)", "Command Substitution using backticks or '$()' (e.g., `kill $(pidof nginx)`)", "Input Redirection using '<' (e.g., `cat < file.txt`)", "Logical AND using '&&' (e.g., `make && make install`)"],
+    "answer": "Command Substitution using backticks or '$()' (e.g., `kill $(pidof nginx)`)",
+    "explanation": "Step 1: Piping (`|`) takes the *stdout* of Command A and feeds it into the *stdin* of Command B (data stream, not argument). Step 2: Redirection (`<`) reads a file into stdin. Step 3: Logical AND (`&&`) executes Command B only if Command A succeeds. Step 4: The question specifically asks to use the output as an *argument* (parameter) to another command. Step 5: Command Substitution `$()` executes the inner command (`pidof nginx`), captures its string output (e.g., '1234'), and places it directly onto the command line as an argument (`kill 1234`).",
+    "trick": "Bank/IT Trap: Piping provides data via standard input. Command substitution provides data as command-line arguments. They are architecturally distinct.",
+    "tip": "Pipes (|) send data to stdin. Command Substitution $() passes data as command-line arguments."
+  },
+  {
+    "id": 35,
+    "question": "Assertion (A): Changing the ownership of a file using the `chown` command automatically strips the Set-User-ID (SUID) bit from the file. Reason (R): Retaining the SUID bit after changing the owner would create a severe security vulnerability, potentially allowing a user to unexpectedly execute a file as root. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: SUID allows a file to execute with the privileges of its owner. Step 2: Suppose an admin creates a script, makes it SUID (runs as admin), and then changes the owner to a standard user. Step 3: If the SUID bit remained, it might now grant unintended escalation or break security paradigms. Step 4: More dangerously, if a standard user owns an SUID file and chowns it to root (if permitted), anyone running it becomes root. Step 5: To prevent these architectural security flaws, the POSIX kernel automatically clears the SUID and SGID bits whenever `chown` is successfully executed.",
+    "trick": "Bank/IT Trap: The kernel protects administrators from themselves. If you change a file's owner, you must manually re-apply the SUID bit (`chmod u+s`) afterward.",
+    "tip": "Running `chown` automatically drops SUID/SGID bits to prevent unintended privilege escalation."
+  },
+  {
+    "id": 36,
+    "question": "In the modern Android ecosystem, what is the architectural purpose of an '.vdex' file generated by the Android Runtime (ART)?",
+    "options": ["It holds the verified, uncompressed original .dex code to bypass verification checks during future app updates.", "It is the virtual memory swap file dedicated exclusively to the Zygote process.", "It contains the user's encrypted private data isolated by the hardware Keystore.", "It is a Volatile Dalvik Executable used specifically for JIT profiling data."],
+    "answer": "It holds the verified, uncompressed original .dex code to bypass verification checks during future app updates.",
+    "explanation": "Step 1: When an APK is installed, ART analyzes and verifies the bytecode for security and structure. Step 2: Verification is CPU-intensive. Step 3: Starting in Android 8.0 (Oreo), ART produces a `.vdex` (Verified DEX) file alongside the `.oat` file. Step 4: The `.vdex` file contains the uncompressed DEX code that has already passed verification. Step 5: When the app is updated (e.g., play store update) without changing core structures, ART can skip the expensive verification step by referencing the `.vdex` file, speeding up installation drastically.",
+    "trick": "Bank/IT Trap: V in vdex stands for 'Verified', not 'Virtual' or 'Volatile'. It's an optimization cache for bytecode verification.",
+    "tip": ".vdex files store pre-verified DEX bytecode to speed up Android app installations and updates."
+  },
+  {
+    "id": 37,
+    "question": "Assertion (A): The GNU General Public License version 3 (GPLv3) contains a specific clause that terminates a user's right to use the software if they initiate a patent infringement lawsuit against any contributor to the software. Reason (R): Large corporations frequently used patent litigation to attack open-source projects, so the FSF implemented this 'patent retaliation' clause to create a protective, mutually assured destruction shield around the software. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Software patents became a massive weapon in the 2000s against open-source developers. Step 2: A company could use GPLv2 software, modify it, and then sue the original creators claiming the code violated the company's patents. Step 3: To combat this, the FSF drafted GPLv3. Step 4: GPLv3 includes an explicit patent grant and a retaliation clause: if you sue anyone for patent infringement regarding this software, you instantly lose your GPL license to use the software. Step 5: This creates a 'safe zone' (R), deterring patent trolls from touching GPLv3 code, validating Assertion A.",
+    "trick": "Bank/IT Trap: GPLv2 says nothing about patents. GPLv3 specifically weaponized the license to fight patent trolling, making it highly controversial among large tech giants.",
+    "tip": "GPLv3 includes a 'Patent Retaliation' clause, revoking usage rights from entities launching patent lawsuits."
+  },
+  {
+    "id": 38,
+    "question": "A developer runs the command `chmod +x script.sh`. The file originally had permissions `rw-r--r--`. Assuming standard umask settings apply during creation, what dictates the final executable permissions across User, Group, and Others?",
+    "options": ["The execute bit is added to the Owner only, resulting in `rwxr--r--`.", "The execute bit is added to all three classes (User, Group, Others), resulting in `rwxr-xr-x`.", "The command fails because symbolic notation requires specifying `u+x`, `g+x`, or `o+x` explicitly.", "The execute bit is added based on the current user's active umask."],
+    "answer": "The execute bit is added based on the current user's active umask.",
+    "explanation": "Step 1: The command `chmod +x` is shorthand. It omits the target (u, g, or o). Step 2: When no target is specified, `chmod` does NOT simply apply it to all classes universally. Step 3: Instead, it relies on the user's `umask`. Step 4: It attempts to add the execute bit to all classes (a+x), but masks out (denies) the bits defined in the umask. Step 5: If the umask is 022, the group and others are denied write access by default. `chmod +x` will respect the umask, typically resulting in `rwxr-xr-x`. If umask was 077, it would result in `rwx------`. Thus, umask dictates the final outcome.",
+    "trick": "Bank/IT Trap: Most candidates assume `+x` is identical to `a+x` (all + execute). It is NOT. `+x` is filtered through the umask; `a+x` ignores the umask.",
+    "tip": "Shorthand `chmod +x` passes through the umask. Explicit `chmod a+x` ignores the umask."
+  },
+  {
+    "id": 39,
+    "question": "Assertion (A): In POSIX environments, hard links can be created to reference files residing on entirely different physical hard drives or network file systems. Reason (R): Hard links operate by mapping directly to the file's inode number, bypassing path-based resolution. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Reason (R) is true: a hard link is essentially a directory entry that points directly to an inode number. Step 2: An inode is a data structure on a specific filesystem that describes a file. Step 3: Because inodes are unique only within a single filesystem/partition, inode #12345 on Drive C has nothing to do with inode #12345 on Drive D. Step 4: Therefore, you physically CANNOT create a hard link across different filesystems or partitions. Step 5: This makes Assertion (A) false. (Symbolic/Soft links, which point to text paths, can cross partitions).",
+    "trick": "Bank/IT Trap: Hard Links = Same Partition Only (inode based). Soft Links = Anywhere (path based).",
+    "tip": "Hard links point to local inodes and cannot span across different partitions or drives."
+  },
+  {
+    "id": 40,
+    "question": "Which of the following Android compilation terminologies specifically refers to the profile-guided optimization data collected while a user actively interacts with an application?",
+    "options": ["JIT cache", "OAT header", "PGO profile (.prof)", "DEX bytecode"],
+    "answer": "PGO profile (.prof)",
+    "explanation": "Step 1: In modern Android (7.0+), apps install quickly without AOT compilation. Step 2: They run using the Just-In-Time (JIT) interpreter. Step 3: As the user clicks around, ART monitors which parts of the code are executed frequently ('hot code'). Step 4: This data is saved into a Profile-Guided Optimization (PGO) file, typically with a `.prof` extension. Step 5: When the device is idle and charging, the background `dex2oat` service reads this `.prof` file and uses AOT to compile *only* the hot code, saving storage and improving targeted performance.",
+    "trick": "Bank/IT Trap: Don't confuse the cache with the profile. The profile (.prof) dictates *what* should be optimized. The background compiler does the actual optimization later.",
+    "tip": "PGO (Profile-Guided Optimization) tracks 'hot' app usage to guide background AOT compilation."
+  },
+  {
+    "id": 41,
+    "question": "Assertion (A): A Linux system administrator can enforce mandatory access controls (MAC) that override standard POSIX `chmod` permissions. Reason (R): Security modules like SELinux or AppArmor implement policies at the kernel level that can deny access even if the file's rwx permissions are set to 777. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Standard Linux permissions (chmod/chown) use Discretionary Access Control (DAC), where owners decide who accesses their files. Step 2: If a user sets a file to 777, anyone can execute it, which is dangerous. Step 3: Mandatory Access Control (MAC) systems, like SELinux (Security-Enhanced Linux), operate below DAC in the kernel. Step 4: SELinux assigns security contexts (labels) to files and processes. Step 5: Even if a file is 777, if the SELinux policy says the 'apache' process cannot read a file labeled 'user_home_t', access is denied. Thus, R accurately explains A.",
+    "trick": "Bank/IT Trap: DAC (chmod) is the first line of defense. MAC (SELinux) is the absolute final say. If DAC allows it, MAC can still block it.",
+    "tip": "SELinux/AppArmor (MAC) overrides standard chmod permissions (DAC) to enforce strict kernel security."
+  },
+  {
+    "id": 42,
+    "question": "The GNU project originally developed a microkernel intended to replace the proprietary Unix kernel. What is the name of this kernel, which is still in development today but was largely superseded by Linux in standard GNU distributions?",
+    "options": ["Mach", "Hurd", "Minix", "Darwin"],
+    "answer": "Hurd",
+    "explanation": "Step 1: Richard Stallman's FSF started the GNU Project in 1983 to build a completely free OS. Step 2: They successfully built the compiler (GCC), editor (Emacs), and shell (Bash). Step 3: However, their kernel, named GNU Hurd, was based on a complex microkernel architecture (using Mach). Step 4: Hurd development was slow and plagued with debugging issues. Step 5: In 1991, Linus Torvalds released the Linux kernel (a monolithic architecture), which filled the missing piece of the GNU ecosystem, leading to the creation of 'GNU/Linux'.",
+    "trick": "Bank/IT Trap: Linux is not the official GNU kernel! Hurd is the official GNU kernel. Linux is a third-party kernel that adopted the GPL.",
+    "tip": "GNU Hurd is the official, microkernel-based core of the GNU project, overshadowed by Linux."
+  },
+  {
+    "id": 43,
+    "question": "Assertion (A): Creating a symbolic link (symlink) to a directory allows you to traverse into that directory using `cd`, even if you lack execution (`x`) permissions on the original directory. Reason (R): Symbolic links bypass inode permission checks and operate strictly on string-based path resolution. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A symbolic link (soft link) is essentially a text file pointing to another path. Step 2: When you try to access the symlink, the kernel redirects you to the target path. Step 3: Once redirected, the kernel *strictly* evaluates the POSIX permissions of the TARGET directory. Step 4: If you lack execute (`x`) permission on the target directory, the kernel will block access with a 'Permission denied' error. Step 5: Therefore, symlinks do not bypass security or inode checks, making both Assertion (A) and Reason (R) completely false.",
+    "trick": "Bank/IT Trap: Symlinks always show permissions of `lrwxrwxrwx` (777) when you run `ls -l`. Do not be fooled! The system ignores symlink permissions and applies the target's permissions.",
+    "tip": "Symlinks cannot bypass target permissions. The target directory's permissions ultimately govern access."
+  },
+  {
+    "id": 44,
+    "question": "In standard POSIX file permissions, what is the exact numerical difference in octal value between a file having absolute maximum unrestricted access, and a file restricted strictly to owner read-only access?",
+    "options": ["377", "400", "777", "333"],
+    "answer": "377",
+    "explanation": "Step 1: Absolute maximum unrestricted access means Read(4), Write(2), Execute(1) for Owner, Group, and Others. Step 2: This is octal 777. Step 3: Strictly owner read-only access means Read(4) for Owner, and 0 for Group and Others. Step 4: This is octal 400. Step 5: The numerical difference in octal representation is 777 - 400 = 377. (Note: While octal arithmetic differs from decimal, simple positional subtraction here works: 7-4=3, 7-0=7, 7-0=7).",
+    "trick": "Bank/IT Trap: Don't overthink octal math if the lower digits are zero. 777 minus 400 is simply 377.",
+    "tip": "Max access is 777. Owner read-only is 400. The difference is 377."
+  },
+  {
+    "id": 45,
+    "question": "Assertion (A): Standard Android APK installations utilizing the modern ART runtime execute their `.oat` files exclusively in Kernel Mode for maximum performance. Reason (R): Android limits native code execution to Ring 0 (Kernel Mode) to ensure third-party apps bypass JVM interpretation overhead. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Apps installed on Android, regardless of using Dalvik (JIT) or ART (AOT/.oat), are third-party user applications. Step 2: In OS architecture, user applications strictly run in Ring 3 (User Mode). Step 3: Ring 0 (Kernel Mode) is reserved for the Linux kernel and core drivers. Step 4: If an app ran in Ring 0, a simple bug could crash the entire phone. Step 5: Therefore, ART executes `.oat` native code entirely within User Mode, making both A and R wildly false.",
+    "trick": "Bank/IT Trap: Native code (`.oat` or C++ NDK) means it is compiled for the CPU architecture, NOT that it gains Kernel Mode privileges. It remains strictly User Mode.",
+    "tip": "Android apps, even when compiled to native .oat machine code, run strictly in User Mode."
+  },
+  {
+    "id": 46,
+    "question": "Which of the following POSIX shell constructs specifically executes a block of commands in a 'subshell', ensuring that any directory changes or variable assignments do not affect the parent shell environment?",
+    "options": ["Commands enclosed in curly braces `{ command1; command2; }`", "Commands enclosed in parentheses `( command1; command2 )`", "Commands piped to grep `command1 | grep text`", "Commands separated by logical OR `command1 || command2`"],
+    "answer": "Commands enclosed in parentheses `( command1; command2 )`",
+    "explanation": "Step 1: In a POSIX shell (like bash or sh), you can group commands. Step 2: Curly braces `{ ... }` group commands in the CURRENT shell context. If you `cd` inside them, the parent shell's path changes. Step 3: Parentheses `( ... )` trigger a fork, creating a completely independent subshell. Step 4: The subshell executes the commands. If it changes directories (`cd`) or exports variables, those changes die when the subshell closes. Step 5: The parent shell remains completely unaffected, which is vital for safe architectural scripting.",
+    "trick": "Bank/IT Trap: `{}` is inline grouping (shared environment). `()` is subshell grouping (isolated environment). Know the difference for secure scripting.",
+    "tip": "Parentheses ( ) create an isolated subshell; curly braces { } execute in the current shell."
+  },
+  {
+    "id": 47,
+    "question": "Assertion (A): The 'POSIX.1b' standard explicitly defines real-time extensions, ensuring that a Linux operating system guarantees microsecond-level deterministic execution of application code. Reason (R): Standard Linux distributions (like Ubuntu or Red Hat) are entirely POSIX.1b compliant by default out-of-the-box. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: POSIX.1b does define real-time extensions (like real-time signals, scheduling). Step 2: However, an API standard CANNOT guarantee hardware-level deterministic execution (microsecond accuracy). That depends on the kernel architecture (A is False). Step 3: Furthermore, standard Linux is a general-purpose, time-sharing OS, not a Real-Time Operating System (RTOS). Step 4: Standard distributions use the Completely Fair Scheduler (CFS), prioritizing throughput over absolute predictability. Step 5: You must apply specific kernel patches (like PREEMPT_RT) to approach real-time behavior, making Reason (R) false as standard Linux is not strictly real-time out of the box.",
+    "trick": "Bank/IT Trap: Standard Linux is not an RTOS. POSIX real-time extensions provide the *API*, but without a patched kernel, the OS cannot guarantee deterministic execution.",
+    "tip": "Standard Linux is not a Real-Time OS. POSIX.1b APIs exist, but CFS scheduler prioritizes fairness."
+  },
+  {
+    "id": 48,
+    "question": "A system administrator notices a file with the permission string `-rwsr-xr-x`. The owner of the file is root. If a standard user named 'bob' executes this file, under which Effective User ID (EUID) will the process run?",
+    "options": ["Bob's EUID", "Root's EUID", "The 'nobody' user's EUID", "The system's generic 'daemon' EUID"],
+    "answer": "Root's EUID",
+    "explanation": "Step 1: Analyze the permission string `-rwsr-xr-x`. Step 2: The fourth character is an 's', located in the execution position for the owner. Step 3: This denotes the Set-User-ID (SUID) bit is active. Step 4: When an SUID binary is executed, the process adopts the Effective User ID (EUID) of the file's owner, not the user launching it. Step 5: Since the owner is 'root', Bob will execute the process with root's privileges. (A classic example is the `/usr/bin/passwd` command).",
+    "trick": "Bank/IT Trap: The Real UID remains 'bob', but the Effective UID (which the kernel checks for permissions) becomes 'root'.",
+    "tip": "SUID (s in the owner field) runs the file with the owner's privileges, ignoring the launcher's."
+  },
+  {
+    "id": 49,
+    "question": "Assertion (A): The Free Software Foundation (FSF) strongly discourages the use of the term 'Intellectual Property' (IP) when discussing software licensing. Reason (R): The term IP conflates distinct legal frameworks—such as copyright, patents, and trademarks—which operate under completely different rules and philosophies. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Richard Stallman and the FSF argue that 'Intellectual Property' is a propaganda term used by corporations. Step 2: They assert (A) that it confuses the public. Step 3: Reason (R) is exactly why: Copyright covers expression (code), Patents cover ideas (algorithms), and Trademarks cover branding (logos). Step 4: These laws have entirely different historical origins, durations, and societal purposes. Step 5: Bundling them into 'IP' tricks people into thinking abstract ideas are physical property like a house. Thus, R is the precise philosophical reason for A.",
+    "trick": "Bank/IT Trap: The FSF focuses intensely on precise terminology. They reject 'Linux' (preferring GNU/Linux), 'Open Source' (preferring Free Software), and 'Intellectual Property'.",
+    "tip": "FSF rejects the term 'Intellectual Property' because it muddles copyright, patents, and trademarks together."
+  },
+  {
+    "id": 50,
+    "question": "In an Android environment using the modern ART architecture, what is the primary role of the 'Dex2oat' background service during idle device periods?",
+    "options": ["It securely erases orphaned .apk files to free up internal storage.", "It reverse-engineers native machine code back into portable Java bytecode for cross-device sharing.", "It analyzes user profiles to compile heavily used bytecode paths into highly optimized native machine code.", "It synchronizes app permissions with Google Play Protect via POSIX network sockets."],
+    "answer": "It analyzes user profiles to compile heavily used bytecode paths into highly optimized native machine code.",
+    "explanation": "Step 1: Android 7.0+ uses Profile-Guided Optimization (PGO). Step 2: Apps launch via JIT compilation to ensure fast installation. Step 3: As the user plays the game or uses the app, ART records which parts of the code are most frequently accessed (profiling). Step 4: When the phone is plugged in, fully charged, and idle, a background job triggers the `dex2oat` compiler. Step 5: `dex2oat` reads the profile data and executes Ahead-Of-Time (AOT) compilation *only* on those heavily used code paths, creating a highly optimized `.oat` file for future launches without draining battery during active use.",
+    "trick": "Bank/IT Trap: Dex2oat doesn't compile the *whole* app anymore. It selectively compiles 'hot' paths based on profiles during idle time.",
+    "tip": "Dex2oat runs in the background while idle, applying AOT compilation to frequently used app code."
+  },
+  {
+    "id": 51,
+    "question": "Assertion (A): 'Open Source' software distributed under the GNU General Public License (GPL) cannot be sold for a profit by third-party developers. Reason (R): The core principle of the GPL is granting access to the source code, but developers are legally allowed to charge money for compiled binaries, physical packaging, or technical support. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: The Free Software Foundation (FSF) explicitly states that 'Free Software' means free as in freedom (liberty), not price. Step 2: Developers and third parties are legally allowed to sell copies of GPL-licensed software. Step 3: Therefore, Assertion (A) is completely false. Step 4: However, Reason (R) is true because if you distribute the software (even for a fee), you must provide the source code under the same GPL terms.",
+    "trick": "Bank/IT Trap: Do not confuse 'Free Software' with 'Freeware'. Free software guarantees user freedoms, not zero cost.",
+    "tip": "GPL allows commercial sale, provided the source code is released alongside binaries."
+  },
+  {
+    "id": 52,
+    "question": "A system administrator executes the command 'chmod 4755 script.sh'. What is the architectural significance of the '4' in this octal permission string?",
+    "options": ["It sets the 'Sticky Bit', ensuring only the owner can delete the file.", "It sets the 'SetUID (SUID)' bit, allowing users to execute the file with the privileges of the file's owner.", "It sets the 'SetGID (SGID)' bit, granting the executing user the privileges of the file's group.", "It restricts the file execution strictly to the root user."],
+    "answer": "It sets the 'SetUID (SUID)' bit, allowing users to execute the file with the privileges of the file's owner.",
+    "explanation": "Step 1: In standard octal permissions, 3 digits are used (e.g., 755). Step 2: A 4-digit octal includes special permission bits at the front. Step 3: 4000 represents the SetUID (SUID) bit. Step 4: 2000 represents the SetGID (SGID) bit. Step 5: 1000 represents the Sticky Bit. A leading '4' (4755) applies SUID, meaning any user who runs 'script.sh' does so with the effective permissions of the file owner (often root).",
+    "trick": "Bank/IT Trap: Candidates focus on read(4)/write(2)/execute(1) but forget the special bit math: SUID(4), SGID(2), Sticky(1) placed at the start.",
+    "tip": "Leading digit 4 in chmod enables SUID; 2 is SGID; 1 is Sticky Bit."
+  },
+  {
+    "id": 53,
+    "question": "Which of the following fundamental architectural differences distinguishes the Android Runtime (ART) from the older Dalvik Virtual Machine (DVM)?",
+    "options": ["ART uses a stack-based architecture, whereas Dalvik used a register-based architecture.", "ART utilizes Ahead-Of-Time (AOT) compilation during installation, whereas Dalvik relied primarily on Just-In-Time (JIT) compilation during execution.", "ART completely eliminated Garbage Collection to save memory, whereas Dalvik relied heavily on it.", "ART compiles code directly into x86 machine code, bypassing ARM translation entirely."],
+    "answer": "ART utilizes Ahead-Of-Time (AOT) compilation during installation, whereas Dalvik relied primarily on Just-In-Time (JIT) compilation during execution.",
+    "explanation": "Step 1: Dalvik used JIT compilation, translating bytecode to machine code dynamically as the app was running, causing battery drain and latency. Step 2: Google introduced ART in Android 4.4 (KitKat) and made it standard in Android 5.0 (Lollipop). Step 3: ART relies primarily on AOT compilation, using 'dex2oat' to compile DEX files into native machine code at the time of app installation. Step 4: This drastically reduces runtime CPU overhead and improves battery life.",
+    "trick": "Bank/IT Trap: While ART introduced AOT, newer Android versions (7.0+) use a Hybrid JIT/AOT model, but the primary defining distinction of ART vs Dalvik remains AOT integration.",
+    "tip": "Dalvik = JIT (compiled while running). ART = AOT (compiled during installation)."
+  },
+  {
+    "id": 54,
+    "question": "Assertion (A): macOS is officially a POSIX-certified operating system, whereas most popular Linux distributions like Ubuntu are strictly speaking, not officially POSIX-certified. Reason (R): POSIX certification is a paid, rigorous commercial compliance testing process by the IEEE/Open Group, which most free Linux distros bypass, despite being highly POSIX-compliant by design. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: POSIX (Portable Operating System Interface) ensures cross-platform compatibility for Unix-like systems. Step 2: Apple pays the Open Group to test and officially certify macOS as UNIX 03/POSIX compliant. Step 3: Linux was designed from scratch to be POSIX compliant (e.g., LSB standards). Step 4: However, because official certification costs immense amounts of money per version, most Linux distros (except a few enterprise variants like Huawei's EulerOS) do not hold the official trademark certificate.",
+    "trick": "Bank/IT Trap: People assume Linux is the ultimate 'official' UNIX/POSIX system. Legally and commercially, macOS holds the trademark, while Linux is an 'unregistered' clone.",
+    "tip": "macOS is officially POSIX certified; most Linux distros are compliant but uncertified."
+  },
+  {
+    "id": 55,
+    "question": "In the context of open-source licensing, what is the primary structural difference between the GNU General Public License (GPL) and the GNU Lesser General Public License (LGPL)?",
+    "options": ["GPL applies only to complete operating systems, while LGPL applies only to standalone applications.", "Software dynamically linking to an LGPL library is not required to release its proprietary source code, whereas linking to a GPL library strictly mandates it.", "LGPL strictly forbids commercial usage, while GPL explicitly encourages it.", "LGPL requires patent royalties to be paid to the Free Software Foundation, whereas GPL is royalty-free."],
+    "answer": "Software dynamically linking to an LGPL library is not required to release its proprietary source code, whereas linking to a GPL library strictly mandates it.",
+    "explanation": "Step 1: The GPL is 'strong copyleft'. If your proprietary code uses or links to a GPL component, your entire application must be released under the GPL. Step 2: This makes GPL 'viral'. Step 3: To allow open-source libraries to be used in proprietary software, the FSF created the LGPL ('Lesser' GPL). Step 4: If you dynamically link an LGPL library, your main application can remain closed-source and proprietary, making LGPL highly popular for software libraries.",
+    "trick": "Bank/IT Trap: The keyword is 'Linking'. GPL mandates the whole project becomes open-source. LGPL protects the library but lets the host software remain proprietary.",
+    "tip": "LGPL allows proprietary apps to link to open-source libraries without opening their own code."
+  },
+  {
+    "id": 56,
+    "question": "If a Linux system has a default 'umask' value set to 027, what will be the default octal permissions assigned to a newly created text file and a newly created directory, respectively?",
+    "options": ["File: 640, Directory: 750", "File: 750, Directory: 640", "File: 666, Directory: 777", "File: 750, Directory: 750"],
+    "answer": "File: 640, Directory: 750",
+    "explanation": "Step 1: 'umask' determines permissions to be REMOVED from the maximum base. Step 2: The maximum base permission for directories is 777 (rwxrwxrwx). Step 3: The maximum base permission for standard files is 666 (rw-rw-rw-), as execution is disabled by default for security. Step 4: Subtract umask 027 from Directory 777: 7-0=7, 7-2=5, 7-7=0 -> 750. Step 5: Subtract umask 027 from File 666: 6-0=6, 6-2=4, 6-7 = (No negative, removes read/write/exec bits -> 0) -> 640.",
+    "trick": "Bank/IT Trap: Umask subtraction on files acts as a bitwise NOT AND operation. Subtracting 7 from 6 leaves 0, not -1. Base files start at 666, not 777.",
+    "tip": "Directories base = 777. Files base = 666. Umask strips permissions bitwise."
+  },
+  {
+    "id": 57,
+    "question": "Assertion (A): On Android 7.0 (Nougat) and later, the ART runtime reverted completely to Just-In-Time (JIT) compilation, abandoning Ahead-Of-Time (AOT) to save internal storage space. Reason (R): AOT compilation translates DEX bytecode into native machine code entirely during installation, which significantly increases the application footprint on disk. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Reason (R) is true; AOT does generate native binaries that consume significantly more disk space than compressed DEX files. Step 2: However, Assertion (A) is false. Android 7.0 did not 'revert completely' to JIT. Step 3: Instead, it introduced a Hybrid Profile-Guided model. Apps install quickly without AOT (using JIT initially). Step 4: When the device is idle and charging, the ART runtime uses Profile-Guided Optimization (PGO) to apply AOT compilation only to frequently used code paths.",
+    "trick": "Bank/IT Trap: Modern Android does not use pure JIT or pure AOT; it uses a hybrid approach to balance fast install times and optimal runtime performance.",
+    "tip": "Android 7.0+ uses a Hybrid JIT/AOT model via Profile-Guided Optimization."
+  },
+  {
+    "id": 58,
+    "question": "A developer runs 'chmod 1777 /share_data' on a Linux server. Multiple users have read, write, and execute permissions on this directory. If User A creates a file inside '/share_data', what specific restriction does the octal '1' enforce?",
+    "options": ["It forces all new files to inherit the root group ownership.", "It prevents User B from deleting or renaming User A's file, despite User B having full '7' write privileges to the directory.", "It hides User A's file from all users except the root administrator.", "It strictly prevents the execution of binary scripts within the directory."],
+    "answer": "It prevents User B from deleting or renaming User A's file, despite User B having full '7' write privileges to the directory.",
+    "explanation": "Step 1: The '1' in the 4-digit octal permission stands for the Sticky Bit. Step 2: The '777' grants Read, Write, and Execute to User, Group, and Others. Step 3: Normally, if a user has Write permission on a directory, they can delete ANY file inside it, regardless of who owns the file. Step 4: Applying the Sticky Bit to a directory alters this behavior. Only the file's specific owner (or root) can delete or rename the file. This is standard for shared spaces like '/tmp'.",
+    "trick": "Bank/IT Trap: Write access on a directory means you can delete its contents. The Sticky Bit is the ONLY way to create a secure shared drop-box folder.",
+    "tip": "The Sticky Bit (1) on a directory prevents users from deleting others' files."
+  },
+  {
+    "id": 59,
+    "question": "Which specific IEEE standard designation formally defines the POSIX core specifications, including the C API, shell, and fundamental utility binaries?",
+    "options": ["IEEE 802.11", "IEEE 1003", "IEEE 1394", "IEEE 754"],
+    "answer": "IEEE 1003",
+    "explanation": "Step 1: IEEE 802.11 defines Wireless LAN (Wi-Fi) networking standards. Step 2: IEEE 1394 defines FireWire hardware interfaces. Step 3: IEEE 754 defines floating-point arithmetic standards for CPUs. Step 4: IEEE 1003 (specifically IEEE Std 1003.1) is the family of standards defining POSIX (Portable Operating System Interface). It standardizes OS interfaces to guarantee application portability across Unix variants.",
+    "trick": "Bank/IT Trap: Expect standard designation matching in ultra-hard tier PSC/RBI IT exams. POSIX = 1003.",
+    "tip": "POSIX standards are designated by the IEEE 1003 family."
+  },
+  {
+    "id": 60,
+    "question": "Assertion (A): A directory in Linux with permissions set to 'r--r--r--' (444) allows a user to run the 'ls' command to see filenames inside it, but prevents the user from using 'cd' to enter the directory. Reason (R): In Linux, the 'Execute' (x) permission on a directory is explicitly required to traverse it or access the metadata (inodes) of its contents. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: On a file, 'execute' means running it as a program. Step 2: On a directory, 'execute' (x) means 'Search/Traverse' permission. Step 3: If a directory only has 'Read' (r), you can read the list of names inside it (ls), but you cannot 'cd' into it or access file contents (like cat dir/file.txt). Step 4: You absolutely need 'x' to pass through the directory to reach its internal inodes. Thus, both A and R are fundamentally correct and aligned.",
+    "trick": "Bank/IT Trap: Read = List contents. Execute = Traverse/Enter directory. You need BOTH to properly use a directory.",
+    "tip": "Directory 'Execute' bit enables traversing (cd) and accessing internal file metadata."
+  },
+  {
+    "id": 61,
+    "question": "In modern Android architecture, what is the primary function of the 'Zygote' process?",
+    "options": ["It manages hardware abstract layers (HAL) for camera and bluetooth.", "It acts as a warm VM template that forks itself to drastically accelerate the launch time of new applications.", "It compiles Dalvik bytecode into native machine code during device idle states.", "It manages the encryption of the SQLite databases used by applications."],
+    "answer": "It acts as a warm VM template that forks itself to drastically accelerate the launch time of new applications.",
+    "explanation": "Step 1: Booting up an entirely new virtual machine instance for every app takes massive overhead. Step 2: Android solves this using the 'Zygote' process. Step 3: Zygote is a specialized pre-warmed VM process that starts at boot and preloads core core libraries (like framework.jar). Step 4: When a user taps an app, Zygote uses the Unix 'fork()' system call to duplicate its memory space instantly. Step 5: The child process then loads the specific app code, reducing launch latency from seconds to milliseconds.",
+    "trick": "Bank/IT Trap: Zygote is all about process creation (forking preloaded templates) to save memory and time, not code compilation.",
+    "tip": "Android's Zygote process forks pre-warmed VM instances to accelerate app launches."
+  },
+  {
+    "id": 62,
+    "question": "Consider the Linux command `chmod g+s /var/www/html`. If a user named 'alice' creates a file named 'index.php' inside this directory, who will be the group owner of the new file?",
+    "options": ["The 'alice' user's primary default group.", "The 'root' administrative group.", "The file will inherit the exact group ownership of the '/var/www/html' directory.", "The file will not have a group assigned until manually modified using 'chown'."],
+    "answer": "The file will inherit the exact group ownership of the '/var/www/html' directory.",
+    "explanation": "Step 1: The command `chmod g+s` sets the SetGID (SGID) bit on the directory. Step 2: Normally, when a user creates a file, the file's group ownership defaults to the user's primary group (e.g., alice). Step 3: When SGID is applied to a directory, standard behavior changes. Step 4: Any newly created file inside that directory automatically inherits the group ownership of the parent directory. Step 5: This is a critical architectural tool for collaborative shared folders where multiple users need group-level write access.",
+    "trick": "Bank/IT Trap: SGID on an executable file changes execution privileges. SGID on a DIRECTORY forces group inheritance for new files.",
+    "tip": "SetGID (SGID) on a directory forces all new child files to inherit its group."
+  },
+  {
+    "id": 63,
+    "question": "Assertion (A): The GNU Affero General Public License (AGPL) was specifically created to close the 'Application Service Provider (ASP) loophole' present in standard GPLv2 and GPLv3. Reason (R): Standard GPL only triggers the requirement to share source code if the compiled binary is physically distributed; running software purely as a backend cloud service does not trigger this clause. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The standard GPL requires you to share modifications ONLY if you 'convey' or distribute the software to another party. Step 2: Tech giants began using modified GPL software strictly on their backend servers (SaaS/Cloud), never actually distributing the binaries. Step 3: This 'SaaS loophole' allowed them to avoid sharing their improvements back to the community. Step 4: FSF created the AGPL. It explicitly dictates that if users interact with modified software over a network, the source code must be made available to them.",
+    "trick": "Bank/IT Trap: AGPL is strictly for network/cloud services. Standard GPL fails to protect open-source code running purely as a server backend.",
+    "tip": "AGPL closes the cloud loophole, forcing network services to share modified source code."
+  },
+  {
+    "id": 64,
+    "question": "A developer bundles an Android application into an APK (Android Package) file. Which specific internal file contains the optimized bytecode that the Android Runtime (ART) or Dalvik VM actually executes?",
+    "options": ["AndroidManifest.xml", "classes.dex", "resources.arsc", "libapp.so"],
+    "answer": "classes.dex",
+    "explanation": "Step 1: Android apps are written in Java or Kotlin. Step 2: The compiler translates the source code into standard Java bytecode (.class files). Step 3: The 'D8' or 'R8' tool then converts these .class files into Dalvik Executable format. Step 4: This format is stored as 'classes.dex' inside the APK archive. Step 5: Whether using Dalvik (JIT) or ART (AOT compiling the DEX to OAT format), the 'classes.dex' file is the authoritative source of execution instructions.",
+    "trick": "Bank/IT Trap: Even though modern Android uses ART instead of Dalvik, the file extension remains '.dex' (Dalvik Executable) for legacy compatibility.",
+    "tip": "Android bytecode execution relies on the 'classes.dex' file bundled inside the APK."
+  },
+  {
+    "id": 65,
+    "question": "Assertion (A): Richard Stallman resigned from MIT to establish the GNU Project to prevent the university from claiming ownership of his code. Reason (R): The primary motivation behind the GNU Project was to create a proprietary, highly secure version of UNIX for corporate environments. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Assertion (A) is true. Richard Stallman resigned from his job at the MIT AI Lab in 1984 so that MIT could not claim copyright over his work on GNU. Step 2: Reason (R) is completely false. The sole purpose of the GNU Project (GNU's Not Unix) was to develop an entirely *free* (as in freedom) operating system to replace proprietary UNIX, granting users the freedom to view, modify, and share software.",
+    "trick": "Bank/IT Trap: GNU was built as a direct rebellion against proprietary software culture, not to create a secure corporate product.",
+    "tip": "GNU stands for 'GNU's Not Unix', designed entirely to combat proprietary, closed-source software."
+  },
+  {
+    "id": 66,
+    "question": "In the context of standard POSIX regular expressions (Basic vs. Extended), what must a programmer do to make the characters '?', '+', and '|' function as special meta-characters in Basic Regular Expressions (BRE) like standard 'grep'?",
+    "options": ["Enclose them in curly brackets {}", "Precede them with a backslash escape character \\", "Pass the '-E' flag to the compiler", "They are natively treated as meta-characters in BRE without any modification"],
+    "answer": "Precede them with a backslash escape character \\",
+    "explanation": "Step 1: POSIX defines two regex standards: Basic (BRE) and Extended (ERE). Step 2: In ERE (used by `egrep` or `grep -E`), characters like `?` (zero or one), `+` (one or more), and `|` (OR) are native meta-characters. Step 3: In BRE (used by default `grep`), these characters are treated as plain text literals by default. Step 4: To activate their special meaning in BRE, they MUST be escaped with a backslash (e.g., `\\+`, `\\|`).",
+    "trick": "Bank/IT Trap: It feels counter-intuitive. Usually, escaping removes special meaning. In BRE, escaping ADDS the special mathematical meaning to literal text characters.",
+    "tip": "In POSIX BRE, characters like +, ?, and | require backslashes to become functional meta-characters."
+  },
+  {
+    "id": 67,
+    "question": "If an IT administrator executes `chmod 000 secret.txt` as the 'root' user, which of the following accurately describes the outcome for the 'root' user?",
+    "options": ["The root user can no longer read or write to the file unless permissions are changed back.", "The root user can still read and write to the file, but cannot execute it.", "The file is completely locked at the hardware level and inaccessible to all.", "The root user is prompted for a password whenever attempting to read the file."],
+    "answer": "The root user can still read and write to the file, but cannot execute it.",
+    "explanation": "Step 1: `chmod 000` strips all Read, Write, and Execute permissions from Owner, Group, and Others. Step 2: For standard users, access is entirely denied. Step 3: However, the Linux Kernel intrinsically bypasses standard file permission checks for the 'root' (UID 0) account. Step 4: Root retains arbitrary read and write access to all files regardless of their permission bits. Step 5: However, even root cannot execute a file as a program if the execute bit (x) is not explicitly set.",
+    "trick": "Bank/IT Trap: Root ignores read/write restrictions completely. But execution is safety-guarded; root cannot run a text file unless the execution bit is enabled.",
+    "tip": "Root ignores read/write file permissions entirely, but still requires the execute bit to run programs."
+  },
+  {
+    "id": 68,
+    "question": "Assertion (A): The Apache 2.0 license is highly preferred by commercial corporations over the GPL because it is a 'Permissive' license. Reason (R): Unlike GPL, the Apache 2.0 license does not require derivative works to be open-sourced, and it includes an explicit grant of patent rights protecting users from patent infringement lawsuits. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: 'Copyleft' licenses (GPL) force derivative works to be open. 'Permissive' licenses (MIT, BSD, Apache) allow the code to be used in closed-source, proprietary software. Step 2: Assertion (A) is true; corporations love permissive licenses for commercial software. Step 3: Reason (R) is true; Apache 2.0 specifically includes a patent retaliation clause. If you use the code, you are granted a patent license. If you sue for patent infringement, you lose the license. This provides massive corporate safety.",
+    "trick": "Bank/IT Trap: MIT and Apache 2.0 are both permissive, but Apache 2.0 is favored for large tech because of its strict legal patent protection framework.",
+    "tip": "Apache 2.0 is a permissive license featuring strong patent protections, unlike BSD or MIT."
+  },
+  {
+    "id": 69,
+    "question": "A developer is writing a C program intended to be 100% POSIX.1 compliant. They need to create a new child process. Which specific system call must they use according to the POSIX standard?",
+    "options": ["CreateProcess()", "fork()", "spawn()", "clone()"],
+    "answer": "fork()",
+    "explanation": "Step 1: POSIX standards dictate uniform Application Programming Interfaces (APIs). Step 2: `CreateProcess()` is specific to the Windows Win32 API. Step 3: `clone()` is a Linux-specific system call used to create threads, not strictly POSIX compliant for general child processes. Step 4: The POSIX.1 standard explicitly defines `fork()` as the universal mechanism to duplicate the calling process and create a child.",
+    "trick": "Bank/IT Trap: While modern Linux heavily relies on `clone()` under the hood, the strictly defined POSIX C-library function for process creation is always `fork()`.",
+    "tip": "POSIX.1 compliance explicitly relies on the fork() system call for process creation."
+  },
+  {
+    "id": 70,
+    "question": "Assertion (A): In modern Android architecture, standard system applications are physically separated from user-installed applications to enhance security. Reason (R): Android enforces this by executing system applications within the root user's Dalvik virtual machine space, bypassing standard UID isolation. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Assertion (A) is true. System apps are stored in read-only partitions (like /system/app), while user apps are in /data/app. Step 2: Reason (R) is completely false. Android security relies on Application Sandboxing. Step 3: In Android, EVERY application (including system apps) is assigned a unique Linux User ID (UID). Step 4: System apps do NOT run as root. They run under unique UIDs just like user apps, using POSIX file permissions to enforce memory isolation and security.",
+    "trick": "Bank/IT Trap: Never assume Android apps run as root. Android fundamentally abuses Linux UIDs by assigning one UID per app, rather than per human user.",
+    "tip": "Android sandboxing relies on assigning a unique Linux UID to every single application."
+  },
+  {
+    "id": 71,
+    "question": "In the context of the GNU Project, what is the specific purpose of the GPL's 'Tivoization' clause introduced in GPLv3?",
+    "options": ["To prevent companies from distributing GPL software via cloud networks without sharing the source code.", "To prevent hardware manufacturers from modifying GPL software and locking the hardware so users cannot run their own modified versions of the software.", "To forbid military or government entities from utilizing GPL software in weapons systems.", "To legally require developers to attribute the original authors in the graphical user interface."],
+    "answer": "To prevent hardware manufacturers from modifying GPL software and locking the hardware so users cannot run their own modified versions of the software.",
+    "explanation": "Step 1: 'TiVo' was a digital video recorder that used GPLv2 Linux software. Step 2: TiVo provided the source code, complying with GPLv2. Step 3: However, TiVo implemented hardware cryptography. If a user compiled modified source code and put it on the device, the hardware refused to boot it. Step 4: Richard Stallman argued this violated the 'spirit' of free software. Step 5: GPLv3 introduced a clause (anti-Tivoization) demanding that if hardware runs GPLv3 code, the manufacturer must provide the cryptographic keys necessary for the user to install modifications.",
+    "trick": "Bank/IT Trap: GPLv3 anti-tivoization secures the user's right to install modified software on the physical hardware, not just access the code.",
+    "tip": "GPLv3 prevents 'Tivoization' by demanding hardware keys to allow user-modified code execution."
+  },
+  {
+    "id": 72,
+    "question": "Consider a file named 'script.py' with permissions `rwxr-xr-x`. A user named 'bob' is neither the owner nor in the file's group. If bob executes `chmod o-rx script.py`, what will the new permissions be, assuming bob has NO sudo privileges?",
+    "options": ["rwxr-x---", "rw-r--r--", "rwxr-xr-x (Operation fails)", "---------"],
+    "answer": "rwxr-xr-x (Operation fails)",
+    "explanation": "Step 1: The command `chmod o-rx` attempts to remove read and execute permissions from 'others'. Step 2: Bob is an 'other' (not owner, not group). Step 3: In Linux, a user CANNOT change the permissions of a file using `chmod` unless they are the specific OWNER of the file (or root). Step 4: Since Bob is not the owner and lacks sudo privileges, the OS Kernel denies the action with 'Operation not permitted'. The permissions remain unchanged.",
+    "trick": "Bank/IT Trap: This is a classic trick. Candidates do the octal math but forget the golden security rule: Only the owner or root can execute chmod.",
+    "tip": "Only the file owner or the root administrator can alter permissions using chmod."
+  },
+  {
+    "id": 73,
+    "question": "Assertion (A): The transition from Dalvik to ART dramatically reduced the RAM footprint required by background applications. Reason (R): ART pre-compiles bytecode into native machine code, meaning the runtime no longer needs to keep the heavyweight JIT compiler and its translation caches active in memory for every application. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In the Dalvik era, every running app required its own instance of the Dalvik VM, complete with a JIT compiler tracking 'hot' code and storing translations in RAM. Step 2: This duplicated massive amounts of memory overhead. Step 3: With ART's Ahead-Of-Time (AOT) compilation, the app is already native x86/ARM binary. Step 4: The OS simply maps the native code directly into memory. The JIT overhead is removed, validating both A and R.",
+    "trick": "Bank/IT Trap: ART trades Disk Space (AOT binaries are larger) for CPU/RAM efficiency (no live compilation).",
+    "tip": "ART saves runtime RAM by eliminating the active JIT compiler and translation caches."
+  },
+  {
+    "id": 74,
+    "question": "Which of the following scenarios describes a violation of the GNU General Public License version 2 (GPLv2)?",
+    "options": ["A company forks a GPLv2 repository, modifies it internally for managing employee payroll, and never publishes the source code.", "A developer compiles a GPLv2 text editor, sells the binary on a USB drive for $500, but includes a written offer to supply the source code for free.", "An app developer statically links a GPLv2 audio library into their proprietary iOS game and distributes the game on the App Store without releasing their source code.", "A web hosting service modifies a GPLv2 web server to run 20% faster and uses it to host client websites without publishing their modified source code."],
+    "answer": "An app developer statically links a GPLv2 audio library into their proprietary iOS game and distributes the game on the App Store without releasing their source code.",
+    "explanation": "Step 1: Internal use without distribution (Option A) is legal. Step 2: Selling binaries while offering source code (Option B) is explicitly legal. Step 3: Using modified GPL software purely as a backend server (ASP loophole, Option D) is legal under GPLv2 (requires AGPL to be illegal). Step 4: Statically linking a GPL library directly fuses it with the proprietary app. Distributing this combined work without open-sourcing the entire app violates the copyleft viral nature of the GPL.",
+    "trick": "Bank/IT Trap: Distribution is the trigger. If you distribute an app fused with GPL code, you MUST open-source your proprietary code.",
+    "tip": "Statically linking GPL code into proprietary distributed software strictly violates the GPL copyleft."
+  },
+  {
+    "id": 75,
+    "question": "Assertion (A): The 'umask' value sets the absolute permissions for newly created files, effectively overriding any restrictive permissions an application tries to specify. Reason (R): Umask operates as a bitwise AND operation, enforcing a minimum security baseline across the operating system. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Assertion (A) is false. Umask does NOT set absolute permissions; it acts as a 'filter' that removes default permissions. If an app tries to create a file with highly restrictive permissions (e.g., 400), umask will not 'override' it to make it less restrictive. Step 2: Reason (R) is false. Umask uses bitwise NOT AND (or bitwise subtraction against the base 666/777), not standard AND. It removes bits; it never adds them.",
+    "trick": "Bank/IT Trap: Umask is a mask. It can only REMOVE permissions from the default base (666/777). It cannot grant or force permissions.",
+    "tip": "Umask acts as a filter to remove permissions (using bitwise NOT AND); it cannot grant permissions."
+  },
+  {
+    "id": 76,
+    "question": "In the Android ecosystem, applications are packaged in an APK. Which Android security architecture mechanism fundamentally relies on the 'META-INF' directory within this APK?",
+    "options": ["Application Sandboxing via Linux UIDs", "The Android Manifest XML permission declaration", "Application Signing and Integrity Verification", "Dalvik Executable bytecode obfuscation"],
+    "answer": "Application Signing and Integrity Verification",
+    "explanation": "Step 1: An APK is fundamentally a ZIP archive. Step 2: The Android OS strictly requires every application to be cryptographically signed by the developer before installation. Step 3: When the APK is built, cryptographic hashes of every file inside the APK are generated. Step 4: These hashes, along with the developer's public key certificate, are stored in the 'META-INF' directory. Step 5: During installation, the Android package manager reads 'META-INF' to verify the app hasn't been tampered with.",
+    "trick": "Bank/IT Trap: Permissions are in AndroidManifest.xml. Obfuscation uses ProGuard/R8. META-INF is strictly for cryptographic signatures.",
+    "tip": "The META-INF folder inside an APK stores developer certificates for cryptographic signature verification."
+  },
+  {
+    "id": 77,
+    "question": "A system administrator applies the command `chown :developers project_folder`. What is the exact purpose of the colon (`:`) in this POSIX-compliant command?",
+    "options": ["It securely authenticates the user 'developers' against the /etc/shadow file.", "It specifies that 'developers' is a Group, changing the group ownership while leaving the user owner intact.", "It forces the command to recursively apply to all subdirectories.", "It links the ownership to an Active Directory domain via LDAP."],
+    "answer": "It specifies that 'developers' is a Group, changing the group ownership while leaving the user owner intact.",
+    "explanation": "Step 1: The `chown` (change owner) utility alters ownership of files. Step 2: The syntax is `chown USER:GROUP file`. Step 3: If you only specify a name before a colon (`chown alice: file`), it changes user owner and sets the group to alice's primary group. Step 4: If you use ONLY a colon followed by a name (`chown :developers file`), it explicitly targets the GROUP ownership without altering the user owner. (This makes it equivalent to the `chgrp` command).",
+    "trick": "Bank/IT Trap: A leading colon bypasses user modification. `chown :group` is identical in function to `chgrp group`.",
+    "tip": "Using a leading colon in chown (e.g., :group) explicitly changes only the group ownership."
+  },
+  {
+    "id": 78,
+    "question": "Assertion (A): The Linux Kernel itself is licensed under GPLv2, but Linus Torvalds explicitly refused to adopt GPLv3. Reason (R): GPLv3 contains anti-Tivoization clauses that Torvalds felt restricted the freedom of hardware manufacturers to build secure, locked-down commercial devices. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The Linux kernel is famously licensed under GPLv2. Step 2: When FSF released GPLv3 in 2007, they included anti-Tivoization clauses (forcing hardware makers to allow users to modify the software). Step 3: Linus Torvalds strongly opposed this. He believed the license should only govern software, and that hardware manufacturers have a valid commercial right to lock their hardware for security or business reasons. Step 4: Therefore, Linux remained on GPLv2, making both A and R true and perfectly linked.",
+    "trick": "Bank/IT Trap: The FSF and Linux are deeply intertwined (GNU/Linux), but they have a massive ideological split regarding GPLv3 and hardware locks.",
+    "tip": "Linus Torvalds rejected GPLv3 because its anti-tivoization clause restricted hardware manufacturers' security locking."
+  },
+  {
+    "id": 79,
+    "question": "Which of the following combinations of File Descriptor (FD) numeric assignments strictly conforms to the POSIX standard for C programming and shell environments?",
+    "options": ["0 = Error, 1 = Standard Input, 2 = Standard Output", "0 = Standard Input, 1 = Standard Output, 2 = Standard Error", "0 = Standard Output, 1 = Standard Error, 2 = Standard Input", "1 = Standard Input, 2 = Standard Output, 3 = Standard Error"],
+    "answer": "0 = Standard Input, 1 = Standard Output, 2 = Standard Error",
+    "explanation": "Step 1: POSIX operating systems treat everything as a file, including keyboard input and terminal screens. Step 2: When a process starts, the OS automatically opens three default data streams. Step 3: These are indexed by integer File Descriptors (FDs). Step 4: FD 0 is explicitly assigned to STDIN (Standard Input - usually the keyboard). FD 1 is STDOUT (Standard Output - the screen). FD 2 is STDERR (Standard Error - diagnostic messages).",
+    "trick": "Bank/IT Trap: Remember this for shell redirection. `2>&1` means 'redirect Standard Error (2) to the same place Standard Output (1) is going'.",
+    "tip": "POSIX File Descriptors: 0 is STDIN, 1 is STDOUT, and 2 is STDERR."
+  },
+  {
+    "id": 80,
+    "question": "Assertion (A): During Android app execution, the ART garbage collector utilizes a Generational collection strategy. Reason (R): Generational garbage collection assumes that objects surviving multiple collection cycles are likely to live a long time, so it segregates memory into 'Young' and 'Old' generations to optimize scanning overhead. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Garbage Collection (GC) pauses apps to free memory, causing UI stutter. Step 2: ART improved Dalvik's GC by adopting a Generational Concurrent GC. Step 3: Generational Hypothesis states: 'Most objects die young.' (e.g., temporary loop variables). Step 4: By splitting the heap into 'Young Generation' and 'Old Generation', ART can frequently and rapidly clean the small 'Young' space without wasting CPU time scanning the stable 'Old' space. Thus, R accurately explains A.",
+    "trick": "Bank/IT Trap: Memory management in Android relies entirely on this 'Generational' theory to maintain 60FPS UI rendering without constant GC pauses.",
+    "tip": "ART uses Generational Garbage Collection, separating objects by lifespan to drastically minimize memory scanning overhead."
+  },
+  {
+    "id": 81,
+    "question": "If an IT professional intends to distribute a modified open-source database application but strictly wants to retain the copyright to their personal modifications without forcing users to release derivative works, which license should they absolutely AVOID?",
+    "options": ["The MIT License", "The BSD 3-Clause License", "The Apache 2.0 License", "The GNU General Public License (GPL)"],
+    "answer": "The GNU General Public License (GPL)",
+    "explanation": "Step 1: The MIT, BSD, and Apache licenses are 'Permissive'. They allow developers to take open-source code, modify it, and release the result as proprietary, closed-source software without sharing derivatives. Step 2: The GPL is 'Copyleft'. Step 3: The strict viral condition of GPL mandates that any distributed derivative work MUST also be released under the GPL, forcing the code open. Step 4: To avoid forcing users to open their derivatives, the GPL must be avoided.",
+    "trick": "Bank/IT Trap: Permissive licenses maximize business freedom. Copyleft licenses maximize software freedom.",
+    "tip": "GPL is a strong 'copyleft' license; it forces all derivative works to remain open-source."
+  },
+  {
+    "id": 82,
+    "question": "Under POSIX standards, what is the architectural significance of an 'inode' in a Linux filesystem?",
+    "options": ["It stores the absolute text string of the filename and directory path.", "It stores the file's metadata (permissions, owner, timestamps) and block pointers, but NOT the filename.", "It acts as a temporary memory buffer for transferring data between the network and the hard disk.", "It defines the boot sector sequence required to initialize the POSIX environment."],
+    "answer": "It stores the file's metadata (permissions, owner, timestamps) and block pointers, but NOT the filename.",
+    "explanation": "Step 1: In Unix/POSIX filesystems (like ext4), a file consists of two parts: the data blocks and the inode. Step 2: The inode (index node) holds all metadata: permissions (rwx), ownership (UID/GID), file size, and pointers to the physical hard drive sectors. Step 3: Crucially, inodes DO NOT contain filenames. Step 4: The filename is stored in a 'Directory File', which acts as a mapping table linking human-readable names to inode numbers.",
+    "trick": "Bank/IT Trap: Filenames are property of the directory, not the file itself. This is why hard links work (two different filenames in a directory pointing to the same inode).",
+    "tip": "Inodes store file metadata and data block pointers, but strictly exclude the human-readable filename."
+  },
+  {
+    "id": 83,
+    "question": "Assertion (A): 'chmod a+X' and 'chmod a+x' produce functionally identical results regardless of the target file's current permissions. Reason (R): Both commands translate into the exact same underlying octal value of +111. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: 'chmod a+x' (lowercase x) forces the execute bit on for everyone, on everything (files and directories). Step 2: 'chmod a+X' (uppercase X) is a conditional execute. Step 3: Capital 'X' only applies the execute bit if the target is a directory, OR if it's a file that already has execute permission for at least one user (like a script). It prevents accidentally making plain text files executable. Step 4: Thus, both A and R are fundamentally false as they operate entirely differently.",
+    "trick": "Bank/IT Trap: Capital 'X' is the smart execute. It safely applies to directories (needed for traversal) without turning your .txt files into executable risks.",
+    "tip": "Capital 'X' in chmod safely adds execute permissions only to directories or already-executable scripts."
+  },
+  {
+    "id": 84,
+    "question": "In the Android build process, what is the specific role of the 'R8' compiler?",
+    "options": ["It compiles C/C++ native code into an ARM shared library (.so file).", "It handles the initial translation of Java source code (.java) into standard Java bytecode (.class).", "It shrinks, obfuscates, and translates Java bytecode (.class) into optimized Dalvik Executable (.dex) bytecode.", "It generates the digital cryptographic certificate used to sign the final APK."],
+    "answer": "It shrinks, obfuscates, and translates Java bytecode (.class) into optimized Dalvik Executable (.dex) bytecode.",
+    "explanation": "Step 1: The standard Java Compiler (`javac`) turns source code into `.class` files. Step 2: Android devices do not run Java bytecode; they run Dalvik bytecode. Step 3: Historically, the `dx` tool did this conversion. Later, `ProGuard` was used for shrinking/obfuscating. Step 4: Google introduced `R8` to combine all these steps. `R8` takes the `.class` files, optimizes them, obfuscates variable names for security, and outputs the highly compressed `classes.dex` file for the Android Runtime.",
+    "trick": "Bank/IT Trap: R8 replaced both ProGuard and the older D8/DX toolchains. It is the definitive modern bytecode optimization tool for Android.",
+    "tip": "R8 shrinks, obfuscates, and compiles Java bytecode into optimized Dalvik executable (.dex) files."
+  },
+  {
+    "id": 85,
+    "question": "Assertion (A): The Free Software Definition explicitly permits users to modify the software but forbids them from keeping their modifications entirely private. Reason (R): Freedom 3 of the FSF definition states that users must release their improved versions to the public so the whole community benefits. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The Free Software Foundation outlines 4 essential freedoms (0 through 3). Step 2: Freedom 1 allows you to modify the program. Step 3: Freedom 3 grants you the RIGHT to distribute your modified versions, but it is NOT an obligation. Step 4: If you modify GPL software for your own personal or internal business use, you have absolute privacy rights. You are never forced to release your code unless you actively distribute the compiled software to the public. Thus, both A and R misrepresent the rules.",
+    "trick": "Bank/IT Trap: The GPL only triggers on 'conveyance' (distribution). You can modify open-source code privately forever without sharing it.",
+    "tip": "Free software guarantees the right to private modification; sharing source code is only mandated upon distribution."
+  },
+  {
+    "id": 86,
+    "question": "A system administrator needs to identify all active processes running on a POSIX-compliant system. They navigate to the `/proc` directory. Which architectural principle explains why this directory exists and contains process information?",
+    "options": ["The system kernel intercepts filesystem API calls and dynamically generates a virtual hierarchy representing internal OS data structures.", "The POSIX standard requires the hard drive to dedicate physical sectors to process state tracking.", "The `/proc` directory is a binary executable database formatted natively in SQLite.", "It is a remnant of the Dalvik virtual machine structure utilized for debugging."],
+    "answer": "The system kernel intercepts filesystem API calls and dynamically generates a virtual hierarchy representing internal OS data structures.",
+    "explanation": "Step 1: Unix-like systems follow the philosophy 'Everything is a file'. Step 2: `/proc` (procfs) is a pseudo-filesystem. Step 3: It does not exist on the physical hard drive. It exists purely in RAM. Step 4: When a user runs `cat /proc/cpuinfo` or reads a process ID folder (like `/proc/1234`), the Kernel dynamically intercepts the file-read request and formats real-time internal kernel data (like CPU state or process memory maps) into a readable text stream.",
+    "trick": "Bank/IT Trap: `/proc` takes up 0 bytes on disk. It is a real-time 'illusion' created by the Kernel to expose hardware and process states via standard file APIs.",
+    "tip": "The /proc directory is a virtual, RAM-based pseudo-filesystem generated dynamically by the Linux kernel."
+  },
+  {
+    "id": 87,
+    "question": "Consider a dual-licensing business model often used by open-source companies (e.g., MySQL, Qt). Which legal interaction makes this model profitable?",
+    "options": ["The company licenses the software under MIT for public use, but charges for copyright assignments.", "The company licenses the software under GPL for free community use, but sells a proprietary commercial license to enterprises that wish to embed the software without releasing their own source code.", "The company forces users to buy a GPL license keys to unlock advanced features.", "The company utilizes the AGPL to encrypt the database, requiring users to pay for decryption algorithms."],
+    "answer": "The company licenses the software under GPL for free community use, but sells a proprietary commercial license to enterprises that wish to embed the software without releasing their own source code.",
+    "explanation": "Step 1: Dual licensing relies on the strict viral nature of the GPL. Step 2: The creator releases the software for free under GPL. Step 3: If an enterprise uses the software in their proprietary app, the GPL forces them to open-source their app. Step 4: Enterprises hate this. Because the original creator holds the ultimate copyright, the creator can offer the enterprise an 'exception'—a secondary, paid commercial license that lacks the GPL copyleft restrictions, protecting the enterprise's proprietary code.",
+    "trick": "Bank/IT Trap: You cannot dual-license code if you don't own 100% of the copyright (which is why projects demand Contributor License Agreements).",
+    "tip": "Dual licensing exploits GPL's copyleft strictness by selling proprietary exception licenses to corporate entities."
+  },
+  {
+    "id": 88,
+    "question": "Assertion (A): In modern Android, the 'odex' (Optimized DEX) files are stored entirely within the APK archive to ensure fast installation. Reason (R): Providing pre-optimized files inside the APK bypasses the need for the device's ART runtime to compile bytecode, saving battery life. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Assertion (A) is completely false. An APK is a universal package meant to run on thousands of different hardware configurations (ARM, x86). You cannot pre-package a device-specific optimized file inside the universal APK. Step 2: Reason (R) is false. Optimization and compilation MUST happen on the target device. Step 3: During install (or idle time via dexopt/dex2oat), the Android system extracts the DEX file, optimizes/compiles it for that specific CPU architecture, and saves the resulting `.odex` or `.oat` file onto the device's local `/data/dalvik-cache` partition.",
+    "trick": "Bank/IT Trap: Optimization is inherently device-specific. You can't ship an 'optimized' file from the Play Store; the phone must generate it locally.",
+    "tip": "Optimized DEX (odex/oat) files are generated locally by the device, never bundled inside universal APKs."
+  },
+  {
+    "id": 89,
+    "question": "Under POSIX standards, which signal is explicitly designated as the one that CANNOT be caught, blocked, or ignored by a user-space process?",
+    "options": ["SIGTERM (15)", "SIGINT (2)", "SIGKILL (9)", "SIGHUP (1)"],
+    "answer": "SIGKILL (9)",
+    "explanation": "Step 1: POSIX processes communicate using asynchronous signals. Step 2: Most signals (like SIGTERM or SIGINT) can be 'caught' by the application, allowing it to save data and shut down gracefully. Step 3: If a process hangs or turns malicious, the Kernel needs an absolute override. Step 4: POSIX designates SIGKILL (Signal 9) as the absolute termination signal. The Kernel intercepts it and destroys the process immediately without ever delivering the signal to the application logic.",
+    "trick": "Bank/IT Trap: `kill -9` (SIGKILL) is the nuclear option. `kill -15` (SIGTERM) is the polite request to exit.",
+    "tip": "SIGKILL (Signal 9) is the only POSIX signal that cannot be intercepted, blocked, or ignored."
+  },
+  {
+    "id": 90,
+    "question": "Assertion (A): If an Android device runs purely on Dalvik (pre-KitKat), an application written in native C/C++ via the NDK will execute significantly faster than Java code. Reason (R): Dalvik exclusively translates Java bytecode and incurs massive JIT overhead, whereas Native NDK code compiles directly to raw ARM machine code completely bypassing the VM. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Android allows developers to write in Java/Kotlin (running on the VM) or C/C++ (using the Native Development Kit - NDK). Step 2: Dalvik relies on JIT, translating bytecode to machine code dynamically, which is slow and CPU intensive. Step 3: C/C++ code compiled with the NDK generates `.so` shared libraries that are already pre-compiled bare-metal ARM machine instructions. Step 4: Because it bypasses Dalvik's JIT overhead entirely, NDK code operates at near bare-metal hardware speeds, validating both A and R.",
+    "trick": "Bank/IT Trap: While NDK is faster for pure math/physics, jumping the boundary between Java (UI) and C++ (JNI) causes friction. Overusing NDK actually slows apps down.",
+    "tip": "NDK (C/C++) compiles to bare-metal native code, entirely bypassing Dalvik/ART virtual machine translation overhead."
+  },
+  {
+    "id": 91,
+    "question": "Which Linux utility changes both the owner and the group of a file simultaneously using a specific syntax format?",
+    "options": ["chmod", "chgrp", "chown", "umask"],
+    "answer": "chown",
+    "explanation": "Step 1: `chmod` changes read/write/execute permissions. Step 2: `chgrp` only changes the group ownership. Step 3: `umask` alters default creation filters. Step 4: `chown` (Change Owner) is uniquely capable of modifying both properties simultaneously. Step 5: By using the POSIX syntax `chown user:group filename` (e.g., `chown root:admin config.txt`), the utility efficiently updates the file's entire ownership metadata in a single system call.",
+    "trick": "Bank/IT Trap: Look for the colon `:` or dot `.`. While `chown bob file` only changes user, `chown bob:staff file` changes both simultaneously.",
+    "tip": "The chown utility modifies both user and group ownership simultaneously using the 'user:group' syntax."
+  },
+  {
+    "id": 92,
+    "question": "In the context of software licensing, what does 'Copyleft' fundamentally ensure?",
+    "options": ["It guarantees that the original author gives up all copyright claims and places the software into the Public Domain.", "It ensures that the software is free, but any modifications must be licensed exclusively to the original author.", "It guarantees that all modified and extended versions of the software must carry the exact same free software rights as the original.", "It prevents any commercial entity from legally executing the software on their servers."],
+    "answer": "It guarantees that all modified and extended versions of the software must carry the exact same free software rights as the original.",
+    "explanation": "Step 1: 'Copyleft' is a play on the word 'Copyright'. Step 2: Copyright uses legal frameworks to restrict sharing and modification. Step 3: Copyleft (like the GPL) uses that exact same legal framework to enforce the opposite: it mandates that the software, and all derivative works, remain perpetually free and open. Step 4: It does not place software in the public domain; the author retains copyright but applies conditions that lock the code 'open' forever.",
+    "trick": "Bank/IT Trap: Copyleft relies on Copyright. Without Copyright law, you couldn't enforce the viral 'you must open-source your modifications' rule of the GPL.",
+    "tip": "Copyleft utilizes copyright law to legally mandate that all derivative works remain free and open-source."
+  },
+  {
+    "id": 93,
+    "question": "Assertion (A): On a Linux system, modifying the permissions of a symbolic link (symlink) using standard `chmod` command directly alters the security of the link file itself, rather than the target file. Reason (R): POSIX standardizes that symbolic links possess their own independent set of inodes and metadata, totally separate from the destination file. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Reason (R) is true. A symbolic link is a distinct file type containing a text path to the target, meaning it has its own inode and metadata. Step 2: Assertion (A) is false. By default, the POSIX `chmod` command dereferences symbolic links. Step 3: If you run `chmod 777 symlink.txt`, the OS silently passes the command through the link and alters the permissions of the underlying target file. Step 4: The permissions of a symlink itself are generally fixed at 777 and ignored by the OS security checks.",
+    "trick": "Bank/IT Trap: `chmod` on a symlink modifies the TARGET, not the link. To alter the link's metadata (like ownership), you must use special flags like `chown -h`.",
+    "tip": "Standard chmod commands 'pass through' symbolic links, modifying the permissions of the actual target file."
+  },
+  {
+    "id": 94,
+    "question": "Within the Android Runtime architecture, what is the primary role of the 'JNI' (Java Native Interface)?",
+    "options": ["It securely encrypts all incoming Java Bytecode before AOT compilation.", "It acts as the architectural bridge allowing Java/Kotlin code running in the VM to call C/C++ functions residing in native shared libraries.", "It connects the Android Application framework directly to the Google Play Services cloud backend.", "It transforms iOS Swift code into compatible Dalvik Executable instructions."],
+    "answer": "It acts as the architectural bridge allowing Java/Kotlin code running in the VM to call C/C++ functions residing in native shared libraries.",
+    "explanation": "Step 1: Android apps are primarily written in Java/Kotlin running in ART. Step 2: Some tasks (heavy 3D gaming, physics, legacy C libraries) are written in C/C++ via the NDK. Step 3: Java bytecode cannot natively understand C++ memory pointers or machine code. Step 4: JNI (Java Native Interface) provides the framework of stubs and headers. Step 5: It translates JVM data types into C++ data types, allowing the VM to invoke native `.so` libraries and vice versa.",
+    "trick": "Bank/IT Trap: JNI is the exact border crossing between the 'managed' Virtual Machine world (Java) and the 'unmanaged' bare-metal world (C/C++).",
+    "tip": "JNI provides the communication bridge between managed Java/Kotlin VM code and native C/C++ libraries."
+  },
+  {
+    "id": 95,
+    "question": "Assertion (A): The 'Public Domain' and 'Open Source' are legally identical concepts in software development. Reason (R): Both paradigms allow any user to download, modify, and distribute the software completely free of charge. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Reason (R) is true; both paradigms offer zero-cost access and modification rights. Step 2: However, Assertion (A) is completely false. Step 3: 'Public Domain' means all copyright has expired or been explicitly forfeited. There are zero legal rules attached. Step 4: 'Open Source' relies entirely on strict Copyright law to enforce licenses (like GPL, MIT). You must follow license conditions (e.g., attributing the author or keeping derivatives open).",
+    "trick": "Bank/IT Trap: Public domain means NO rules. Open Source means strict legal rules governed by copyright licenses.",
+    "tip": "Public Domain lacks copyright entirely, whereas Open Source utilizes strict copyright licenses to enforce rules."
+  },
+  {
+    "id": 96,
+    "question": "In Linux, a system administrator needs to allow a specific program, `/usr/bin/passwd`, to modify the highly secure `/etc/shadow` file, but strictly wants to prevent normal users from editing the file directly. How does POSIX architecture securely resolve this paradox?",
+    "options": ["By assigning a dynamic AGPL license key to the binary.", "By enforcing a umask of 000 on the shadow file.", "By configuring an ACL (Access Control List) targeting the user's IP address.", "By setting the SetUID (SUID) bit on the `passwd` executable."],
+    "answer": "By setting the SetUID (SUID) bit on the `passwd` executable.",
+    "explanation": "Step 1: The `/etc/shadow` file stores password hashes and is only writable by 'root'. Step 2: A normal user must be able to change their own password, requiring them to run the `/usr/bin/passwd` program. Step 3: If they run it as themselves, the OS blocks the write to `/etc/shadow`. Step 4: The system administrator sets the SUID bit on the `passwd` binary. Step 5: When the user executes `passwd`, the process temporarily assumes the privileges of the file's owner (root). It safely modifies the password, then drops the privileges.",
+    "trick": "Bank/IT Trap: SUID elevates the privileges of the *process*, not the *user*. It is the foundational mechanism for secure, controlled privilege escalation.",
+    "tip": "The SUID bit allows users to execute binaries with the temporary root privileges required for tasks."
+  },
+  {
+    "id": 97,
+    "question": "Assertion (A): If an Android device is factory reset, the first boot process will take significantly longer than subsequent reboots because of the ART runtime compilation. Reason (R): During the first boot, the Android OS must utilize 'dex2oat' to Ahead-Of-Time (AOT) compile all pre-installed system applications from DEX bytecode into native machine code. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: You've likely seen the 'Android is upgrading... Optimizing app 1 of 50' screen. Step 2: When an Android device is wiped, all pre-compiled native binaries in the Dalvik-cache are erased. Step 3: Upon boot, the OS detects that the system apps (in /system/app) only exist as unoptimized DEX files. Step 4: The ART runtime initiates the `dex2oat` utility to compile them all into AOT native executables. Step 5: This CPU-intensive compilation causes the famous long first-boot delay. Both A and R are accurate.",
+    "trick": "Bank/IT Trap: This 'Optimizing apps' delay is the literal manifestation of ART's AOT compilation happening in real-time before the UI can load.",
+    "tip": "Long initial Android boots occur because ART must AOT compile pre-installed apps via dex2oat."
+  },
+  {
+    "id": 98,
+    "question": "Which POSIX-compliant command line tool is primarily designed to securely alter a user's effective Group ID temporarily without requiring a full re-login?",
+    "options": ["su", "sudo", "newgrp", "chgrp"],
+    "answer": "newgrp",
+    "explanation": "Step 1: `su` and `sudo` are used to switch entirely to another User ID (usually root). Step 2: `chgrp` changes the group ownership of a file, not a user. Step 3: A user might belong to multiple secondary groups. When they create a file, it defaults to their primary group. Step 4: The `newgrp` command allows the user to log into a new group, temporarily changing their primary active group ID. Any files they create during this session will instantly belong to this new group.",
+    "trick": "Bank/IT Trap: `newgrp` changes the human user's active session group. `chgrp` changes a physical file's group.",
+    "tip": "The 'newgrp' command temporarily switches a user's primary active group session without logging out."
+  },
+  {
+    "id": 99,
+    "question": "Assertion (A): The MIT license requires any developer distributing modified binaries to publicly attribute the original creator inside the software documentation. Reason (R): The MIT license operates under the legal framework of Copyleft, which strictly enforces continuous public recognition. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Assertion (A) is true. The MIT license is extremely short but mandates that the original copyright notice and permission notice shall be included in all copies or substantial portions of the Software. Step 2: Reason (R) is false. The MIT license is a 'Permissive' license, completely legally opposite to 'Copyleft'. It requires attribution but places zero requirements on open-sourcing derivative works.",
+    "trick": "Bank/IT Trap: All major permissive licenses (MIT, BSD, Apache) demand attribution (keeping the copyright text). Copyleft (GPL) goes further by demanding the source code itself.",
+    "tip": "MIT is a permissive license requiring attribution, but it strictly opposes the viral Copyleft framework."
+  },
+  {
+    "id": 100,
+    "question": "What is the technical justification used by the Free Software Foundation to insist that the operating system commonly known as 'Linux' should formally be referred to as 'GNU/Linux'?",
+    "options": ["Because Linux Torvalds utilized FSF servers to originally host and compile his kernel code.", "Because Linux is merely the kernel allocating hardware, while the entire user-space environment (shell, compiler, core utilities) interacting with the user was developed by the GNU Project.", "Because the GNU Project owns the legal trademark to the word 'Linux' under the GPLv2 license.", "Because GNU and Linux were originally coded simultaneously as a joint venture funded by the IEEE."],
+    "answer": "Because Linux is merely the kernel allocating hardware, while the entire user-space environment (shell, compiler, core utilities) interacting with the user was developed by the GNU Project.",
+    "explanation": "Step 1: An operating system comprises the core hardware allocator (the Kernel) and the User-Space tools (APIs, shells, text editors). Step 2: Linus Torvalds solely wrote the Kernel (Linux) in 1991. Step 3: However, a kernel is useless without tools. Torvalds utilized the massive suite of free software already written by Richard Stallman's GNU Project (like the GCC compiler, Bash shell, and coreutils). Step 4: The FSF argues that because the bulk of the OS's functional ecosystem is GNU software, calling the whole system 'Linux' erases the foundational work of the GNU project.",
+    "trick": "Bank/IT Trap: Linux is just the engine. GNU is the steering wheel, chassis, and tires. FSF insists on GNU/Linux to acknowledge the complete vehicle.",
+    "tip": "Linux is strictly the kernel. The user-space tools (Bash, GCC, Coreutils) belong to GNU."
+  }
+]

@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): You cannot send a PDF document or a JPEG image as an email attachment using strictly the original, unmodified SMTP protocol. Reason (R): The original Simple Mail Transfer Protocol (SMTP) was designed solely to handle 7-bit ASCII text data, requiring modern email clients to utilize the MIME standard to encode multimedia files for transmission. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The original SMTP protocol (RFC 821) was built for simple, text-based communication. Step 2: It strictly supports 7-bit ASCII characters (basic English letters, numbers, and symbols). Step 3: Multimedia files (PDFs, JPEGs) are binary files requiring 8-bit architecture. Step 4: To solve this, MIME (Multipurpose Internet Mail Extensions) was created. Step 5: MIME encodes binary data into 7-bit ASCII (like Base64 encoding) so SMTP can transmit it, perfectly explaining why pure SMTP cannot handle modern attachments natively.",
+    "trick": "Bank/IT Trap: SMTP sends the mail, but MIME packages the non-text attachments. Without MIME, your email is permanently stuck as a plain text string.",
+    "tip": "MIME extends SMTP capability to transmit binary attachments (images, PDFs) via Base64 encoding."
+  },
+  {
+    "id": 2,
+    "question": "An IT administrator sends a mass email to 1,000 corporate clients. The email tracking software reports a 'Hard Bounce' for 15 specific email addresses. What is the precise architectural reason for these specific failures?",
+    "options": ["The receiving server was temporarily offline during the transmission window.", "The recipient's inbox storage quota was 100% full, rejecting new messages.", "The recipient email addresses are permanently invalid, non-existent, or mathematically misconfigured.", "The email contained an attachment that exceeded the receiving server's temporary size limit."],
+    "answer": "The recipient email addresses are permanently invalid, non-existent, or mathematically misconfigured.",
+    "explanation": "Step 1: Email bounces are categorized into two structural types: Soft and Hard. Step 2: A 'Soft Bounce' is a temporary failure. The email address is valid, but an environmental issue prevents delivery (e.g., server down, inbox full, message too large). The sending server usually retries later. Step 3: A 'Hard Bounce' is a permanent, fatal failure. Step 4: The receiving server explicitly tells the sender: 'This user does not exist' or 'Domain not found'. Step 5: Therefore, the 15 failures are permanently invalid addresses and should be scrubbed from the mailing list immediately.",
+    "trick": "Bank/IT Trap: Examiners love testing the difference! Soft = Temporary (full inbox, server down). Hard = Permanent (fake address, dead domain).",
+    "tip": "Hard Bounce = Permanent failure (invalid address). Soft Bounce = Temporary failure (full inbox)."
+  },
+  {
+    "id": 3,
+    "question": "Which of the following scenarios is a textbook example of data residing strictly within the 'Deep Web' rather than the 'Surface Web' or 'Dark Web'?",
+    "options": ["A public Wikipedia article about quantum physics.", "An illegal marketplace accessible only via the Tor browser using .onion routing.", "An SBI PO's personal online banking dashboard containing their account balance.", "A corporate homepage detailing their services and office locations."],
+    "answer": "An SBI PO's personal online banking dashboard containing their account balance.",
+    "explanation": "Step 1: The 'Surface Web' consists of pages indexed by standard search engines (Google, Bing) that anyone can click and view (Wikipedia, corporate homepages). Step 2: The 'Dark Web' requires specialized software (like Tor) and hidden networks (onion routing) to access. Step 3: The 'Deep Web' contains standard web pages that are explicitly blocked from search engine crawlers (using robots.txt or paywalls) or require login authentication. Step 4: Your personal banking dashboard is highly secure and requires credentials; Google cannot index it. Step 5: Therefore, it perfectly represents the Deep Web.",
+    "trick": "Bank/IT Trap: The Deep Web is not illegal or scary! It's simply the massive portion of the internet hidden behind login screens (your email, banking, private databases).",
+    "tip": "The Deep Web consists of standard internet pages hidden behind logins or search-engine blocks."
+  },
+  {
+    "id": 4,
+    "question": "Assertion (A): Apple Safari, Google Chrome, and Microsoft Edge (modern versions) all utilize the exact same underlying browser rendering engine. Reason (R): The Chromium project established the 'Blink' engine as a universal standard, forcing Apple to abandon WebKit to ensure HTML5 compliance. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A browser engine is the core software that translates HTML/CSS into pixels on the screen. Step 2: Google Chrome uses the 'Blink' engine (a fork of WebKit). Microsoft Edge abandoned its proprietary engine (EdgeHTML) to also adopt 'Blink'. Step 3: However, Apple Safari strictly utilizes the 'WebKit' engine. Assertion A is false because Safari does not use the same engine as Chrome/Edge. Step 4: Furthermore, Apple physically mandates that ALL web browsers on iOS (even Chrome for iPhone) must use WebKit under the hood. Step 5: Therefore, Reason R is completely false; Apple never abandoned WebKit.",
+    "trick": "Bank/IT Trap: Chrome = Blink. Edge = Blink. Firefox = Gecko. Safari = WebKit. Memorize this exact mapping for Tier 2 networking questions!",
+    "tip": "Browser Engines: Chrome/Edge use Blink. Firefox uses Gecko. Safari strictly uses WebKit."
+  },
+  {
+    "id": 5,
+    "question": "When examining an email's raw header, an IT specialist notices the string `Content-Type: multipart/mixed; boundary=\"----=_Part_1\"`. What specific architectural capability does this MIME declaration grant to the email message?",
+    "options": ["It encrypts the entire email payload using a mixed 256-bit AES algorithm.", "It allows the email to contain multiple distinct data formats, such as a plain text body alongside an attached PDF and a JPEG image.", "It forces the email to bypass local firewall filtering rules by fragmenting the packets.", "It specifies that the email is a chain containing multiple forwarded messages from different SMTP servers."],
+    "answer": "It allows the email to contain multiple distinct data formats, such as a plain text body alongside an attached PDF and a JPEG image.",
+    "explanation": "Step 1: Standard SMTP sends a single block of plain text. Step 2: MIME extends this capability. The `Content-Type` header tells the receiving client what kind of data is arriving. Step 3: `multipart/mixed` is a critical MIME directive. Step 4: It tells the email client: 'This email is chopped into multiple independent pieces (parts), separated by a specific boundary string.' Step 5: This structure allows Part 1 to be HTML text (the email body), Part 2 to be a Base64 encoded PDF, and Part 3 to be a JPEG, all seamlessly rendered in one unified email view.",
+    "trick": "Bank/IT Trap: MIME doesn't just encode attachments; it acts as a structural envelope, organizing text and various files into a single, cohesive message using boundaries.",
+    "tip": "`multipart/mixed` MIME headers allow a single email to carry diverse payloads like text and attachments."
+  },
+  {
+    "id": 6,
+    "question": "An email server logs a Delivery Status Notification (DSN) error code of '5.1.1'. Which of the following bounce categories does this code represent, and what is its operational implication?",
+    "options": ["Soft Bounce; the recipient's inbox is temporarily full, retry in 24 hours.", "Hard Bounce; the destination email address does not exist or is permanently invalid, remove from mailing list.", "Soft Bounce; the sending server is blocklisted for spam, contact ISP.", "Hard Bounce; the email contained a virus, delete the attachment."],
+    "answer": "Hard Bounce; the destination email address does not exist or is permanently invalid, remove from mailing list.",
+    "explanation": "Step 1: SMTP delivery codes follow a specific numerical architecture. Step 2: Codes starting with '4.x.x' represent transient, temporary failures (Soft Bounces), meaning the server will retry. Step 3: Codes starting with '5.x.x' represent permanent, fatal errors (Hard Bounces). Step 4: The specific code '5.1.1' translates to 'Bad destination mailbox address' (the user doesn't exist). Step 5: Operationally, continuing to send emails to a 5.x.x hard bounce damages sender reputation, so the address must be purged immediately.",
+    "trick": "Bank/IT Trap: Error code prefixes are standardized. 4xx = Soft/Temporary (Try again). 5xx = Hard/Permanent (Give up immediately).",
+    "tip": "SMTP error codes starting with 5xx denote permanent Hard Bounces; 4xx denote temporary Soft Bounces."
+  },
+  {
+    "id": 7,
+    "question": "Assertion (A): The Mozilla Firefox web browser handles CSS styling and JavaScript execution fundamentally differently than Google Chrome at the engine level. Reason (R): Firefox is built upon the proprietary 'Gecko' rendering engine and 'SpiderMonkey' JavaScript engine, creating a distinct architectural branch from the Chromium project. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A browser comprises two main engines: a Rendering engine (draws the UI) and a JavaScript engine (runs the code). Step 2: Google Chrome uses Blink (Rendering) and V8 (JavaScript). Step 3: Because Chrome dominates the market, many competing browsers (Edge, Opera, Brave) simply adopted Chrome's open-source 'Chromium' architecture to ensure compatibility. Step 4: Mozilla Firefox is the major holdout. It uses its own 'Gecko' rendering engine and 'SpiderMonkey' JS engine (Assertion A is true). Step 5: This architectural divergence (Reason R) means web developers must specifically test websites in Firefox, as Gecko interprets CSS rendering rules slightly differently than Blink.",
+    "trick": "Bank/IT Trap: Firefox is the lone wolf in the modern browser war. It refuses to use Chromium/Blink, fiercely maintaining its independent Gecko engine.",
+    "tip": "Mozilla Firefox uniquely utilizes the 'Gecko' rendering engine and 'SpiderMonkey' JavaScript engine."
+  },
+  {
+    "id": 8,
+    "question": "A user attempts to download an academic research paper. A Google search provides a direct link to the paper's title, but upon clicking, the user hits a strict paywall requiring a university login credential to read the PDF content. Does this specific PDF document reside on the Surface Web or the Deep Web?",
+    "options": ["Surface Web, because the URL was indexed and discoverable by a standard Google search.", "Deep Web, because the actual content of the PDF requires authentication and is hidden behind a paywall.", "Dark Web, because it involves encrypted academic transactions.", "It exists simultaneously in both; the metadata is Surface Web, but the payload is Deep Web."],
+    "answer": "Deep Web, because the actual content of the PDF requires authentication and is hidden behind a paywall.",
+    "explanation": "Step 1: Define the boundary between Surface and Deep web. The Surface Web is anything a web crawler (like Googlebot) can physically read and index. Step 2: The Deep Web is content inaccessible to these automated bots. Step 3: Academic journals often place the *title* and *abstract* on a public, indexable HTML page (Surface Web). Step 4: However, the actual PDF payload requires human authentication (a login) to access. Web crawlers do not have login accounts. Step 5: Therefore, because the core document content is completely unindexed and hidden behind an authentication wall, the PDF itself resides strictly in the Deep Web.",
+    "trick": "Bank/IT Trap: Don't be fooled by the Google search link. Google only found the 'door' (the abstract). The actual 'room' (the PDF) is locked, placing the content securely in the Deep Web.",
+    "tip": "Content hidden behind paywalls or login screens (like academic PDFs) strictly constitutes the Deep Web."
+  },
+  {
+    "id": 9,
+    "question": "In the MIME protocol specification, what is the exact function of 'Base64' encoding during the email transmission process?",
+    "options": ["It encrypts the email payload with a 64-bit cryptographic key to prevent packet sniffing.", "It translates raw 8-bit binary data (like images) into a safe, restricted alphabet of 64 standard ASCII characters to survive legacy 7-bit SMTP relays.", "It compresses the file size of attachments to bypass the standard 25MB SMTP size limit.", "It converts HTML formatted text back into legacy plain text."],
+    "answer": "It translates raw 8-bit binary data (like images) into a safe, restricted alphabet of 64 standard ASCII characters to survive legacy 7-bit SMTP relays.",
+    "explanation": "Step 1: Standard SMTP was built for basic English text and can only reliably process 7-bit ASCII characters (values 0-127). Step 2: An image or PDF is raw binary (8-bit data, containing values 0-255). Step 3: If you push 8-bit binary through a 7-bit SMTP relay, the top bits get stripped, catastrophically corrupting the file. Step 4: MIME uses Base64 encoding to fix this. Step 5: Base64 mathematically takes the 8-bit binary data and translates it into a very safe, narrow alphabet of exactly 64 ASCII characters (A-Z, a-z, 0-9, +, /). This allows the binary payload to safely masquerade as plain text during transit.",
+    "trick": "Bank/IT Trap: Base64 is NOT encryption! It provides zero security. It is purely a translation mechanism to ensure binary data doesn't crash text-based legacy mail servers.",
+    "tip": "Base64 encoding safely translates 8-bit binary attachments into 7-bit ASCII text for SMTP transmission."
+  },
+  {
+    "id": 10,
+    "question": "Assertion (A): An email system administrator configures a policy to automatically delete an email address from the corporate mailing list if it generates three consecutive 'Soft Bounces' over a 72-hour period. Reason (R): Soft Bounces indicate a fatal domain configuration error, mathematically ensuring the email will never reach the intended recipient. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Understand the nature of a 'Soft Bounce'. It is a transient, temporary failure (e.g., recipient inbox is 100% full, or receiving server is under maintenance). Step 2: Because it is temporary, there is a high probability the issue will be resolved (e.g., the user deletes old emails to clear space). Step 3: Therefore, automatically deleting an address after Soft Bounces is a terrible administrative practice, making Assertion A a description of a bad policy (though some strict systems might do it, the reason makes the logic fail). Let's evaluate R. Step 4: Reason R states Soft Bounces are fatal domain errors. This is the exact definition of a HARD Bounce. Step 5: Because R is factually false regarding the definition of a Soft Bounce, the entire premise collapses. (Note: A true admin only deletes instantly on Hard Bounces).",
+    "trick": "Bank/IT Trap: Repeated soft bounces MIGHT eventually be treated as a hard bounce by aggressive software, but the core definition of a Soft Bounce is strictly 'Temporary'.",
+    "tip": "Soft Bounces denote temporary issues (full inbox); Hard Bounces denote permanent, fatal domain/address errors."
+  },
+  {
+    "id": 11,
+    "question": "When examining the architecture of modern web browsers, which specific component is responsible for parsing JavaScript code, allocating memory heap, and compiling it into machine code for rapid execution?",
+    "options": ["The Rendering Engine (e.g., Blink, Gecko)", "The JavaScript Engine (e.g., V8, SpiderMonkey)", "The Document Object Model (DOM) API", "The HTTP Request Handler"],
+    "answer": "The JavaScript Engine (e.g., V8, SpiderMonkey)",
+    "explanation": "Step 1: A web browser is a complex suite of sub-programs. Step 2: The Rendering Engine (Blink/WebKit) is responsible for the visual layout—parsing HTML and CSS to draw the interface on the screen. Step 3: However, it does NOT execute logic or code. Step 4: When the browser encounters a `<script>` tag, it hands the code over to a completely distinct architectural component: the JavaScript Engine. Step 5: Engines like Google's 'V8' (used in Chrome/Node.js) or Mozilla's 'SpiderMonkey' take the raw JS text, parse it, compile it Just-In-Time (JIT) into machine code, and execute it using dedicated memory heaps.",
+    "trick": "Bank/IT Trap: Browsers split duties! Rendering Engines (Blink) paint the visual picture. JS Engines (V8) run the mathematical code. Do not conflate them.",
+    "tip": "JavaScript Engines (V8, SpiderMonkey) specifically compile and execute JS code, separate from Rendering Engines."
+  },
+  {
+    "id": 12,
+    "question": "Assertion (A): The 'Dark Web' constitutes the vast majority of all data existing on the internet today. Reason (R): The Dark Web relies on complex encryption routing (like Tor) which masks the physical location of servers, making it impossible for standard Google spiders to index its sheer volume. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Evaluate Assertion A. The internet is divided into Surface, Deep, and Dark. Step 2: The vast majority of internet data (estimated >90%) consists of private databases, medical records, corporate intranets, and user emails. Step 3: All of this private data constitutes the 'Deep Web', not the Dark Web. Step 4: The 'Dark Web' is actually a tiny fraction (often estimated at less than 5%) of the total internet. Therefore, Assertion A is completely false. Step 5: Evaluate Reason R. The description of the Dark Web (Tor, onion routing, unindexable by Google due to encryption) is architecturally precise and true.",
+    "trick": "Bank/IT Trap: The media conflates the terms. The DEEP Web is massive (all your private data). The DARK Web is tiny (encrypted, specialized routing networks).",
+    "tip": "The Deep Web constitutes the vast majority of internet data, not the encrypted Dark Web."
+  },
+  {
+    "id": 13,
+    "question": "An email sender receives an 'Out of Office' auto-reply from a recipient immediately after dispatching a message. Under which of the following email delivery classifications does this specific automated response fall?",
+    "options": ["Soft Bounce", "Hard Bounce", "Greylisting Deferral", "It is not a bounce; it is a successful delivery notification with an auto-responder payload."],
+    "answer": "It is not a bounce; it is a successful delivery notification with an auto-responder payload.",
+    "explanation": "Step 1: A 'Bounce' (Non-Delivery Report or NDR) strictly means the email failed to reach the intended recipient's mailbox. Step 2: Hard Bounces mean it failed permanently. Soft Bounces mean it failed temporarily at the server gate. Step 3: An 'Out of Office' (OOF) or vacation reply implies the email successfully passed all server checks, landed securely inside the recipient's inbox, and triggered a user-defined rule. Step 4: Because the email physically reached the destination storage successfully, it is fundamentally classified as a successful delivery. Step 5: The resulting OOF message is just an automated reciprocal email, entirely distinct from an SMTP bounce error.",
+    "trick": "Bank/IT Trap: Auto-replies are proof of success! A bounce implies the server rejected the mail before it ever reached the user's inbox.",
+    "tip": "Auto-replies ('Out of Office') indicate successful delivery, whereas bounces indicate SMTP delivery failures."
+  },
+  {
+    "id": 14,
+    "question": "Which of the following MIME header declarations is essential for an email client to reconstruct a base64 encoded string back into a functional image file directly within the body of an email?",
+    "options": ["Content-Transfer-Encoding: base64", "MIME-Version: 1.0", "Content-Disposition: inline", "Content-Type: multipart/alternative"],
+    "answer": "Content-Disposition: inline",
+    "explanation": "Step 1: MIME headers provide instructions to the receiving email client. Step 2: `Content-Transfer-Encoding: base64` just tells the client HOW to decode the math; it doesn't tell it WHERE to put the resulting file. Step 3: The crucial instruction is the `Content-Disposition` header. Step 4: If set to `attachment`, the client decodes the image and places it at the bottom as a downloadable file icon. Step 5: If set to `inline`, it instructs the email client to decode the image and render it visually embedded directly within the text flow of the email body itself.",
+    "trick": "Bank/IT Trap: Base64 handles the decoding, but 'Content-Disposition' commands the UI layout. 'Inline' forces rendering inside the email; 'Attachment' creates a download icon.",
+    "tip": "`Content-Disposition: inline` instructs email clients to display decoded attachments visibly inside the email body."
+  },
+  {
+    "id": 15,
+    "question": "Assertion (A): Using an Apple iPhone running the latest version of iOS, a user downloads Google Chrome, Mozilla Firefox, and Safari. All three of these browsers will render HTML and CSS identically on this specific device. Reason (R): Apple's App Store guidelines architecturally mandate that all web browsers deployed on iOS must utilize Apple's proprietary 'WebKit' rendering engine, overriding Blink and Gecko. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: On desktop PCs, Chrome uses Blink, Firefox uses Gecko, and Safari uses WebKit. They all render slightly differently. Step 2: However, Apple enforces a strict monopoly on their mobile iOS platform. Step 3: Apple's App Store Review Guidelines (specifically section 2.5.6) explicitly state that apps browsing the web must use the iOS WebKit framework. Step 4: Consequently, Google cannot ship the 'Blink' engine to iPhones, and Mozilla cannot ship 'Gecko'. Step 5: Chrome and Firefox on iOS are essentially just custom user interfaces (UI wrappers) running on top of Apple's WebKit engine. Because they all share the exact same underlying engine, they render code identically. Both A and R are completely true.",
+    "trick": "Bank/IT Trap: Chrome on Windows uses Blink. Chrome on an iPhone is forced to use WebKit! This is a massive architectural caveat in mobile networking.",
+    "tip": "Apple strictly mandates all iOS web browsers (including Chrome/Firefox) utilize the 'WebKit' rendering engine."
+  },
+  {
+    "id": 16,
+    "question": "An enterprise firewall is configured to block all incoming traffic that matches known 'Tor node' IP addresses. What specific portion of the internet is this firewall attempting to restrict access to/from?",
+    "options": ["The Surface Web", "The Dark Web", "The Deep Web", "The Intranet"],
+    "answer": "The Dark Web",
+    "explanation": "Step 1: Understand internet segmentation. The Surface web is indexed (Google). The Deep web is unindexed (logins). Step 2: The Dark Web is a tiny subset of the Deep Web that explicitly requires specialized routing software to access. Step 3: The most prominent of these networks is Tor (The Onion Router). Step 4: Tor utilizes layers of encryption and bounces traffic through thousands of volunteer 'nodes' to anonymize the source and destination. Step 5: Blocking Tor node IP addresses is a direct architectural defense to prevent internal corporate machines from accessing the anonymized Dark Web marketplaces or command-and-control servers.",
+    "trick": "Bank/IT Trap: Tor (The Onion Router) is the synonymous gateway to the Dark Web. If you see Tor or .onion, it strictly refers to Dark Web architecture.",
+    "tip": "The Tor network utilizes onion routing to provide anonymous access to the Dark Web."
+  },
+  {
+    "id": 17,
+    "question": "Assertion (A): When an email generates a 'Soft Bounce', the original sending SMTP server immediately deletes the message from its queue and notifies the sender of a failed delivery. Reason (R): Soft Bounces are caused by transient network anomalies (like a temporary DNS lookup failure), making immediate resubmission impossible. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Reason R is technically true: Soft Bounces are caused by temporary, transient issues like full inboxes, server maintenance, or DNS timeouts. Step 2: However, Assertion A misrepresents the architectural behavior of an SMTP server. Step 3: Because the error is explicitly classified as 'Temporary' (a 4xx error code), the sending SMTP server does NOT immediately delete the message. Step 4: Instead, the sending server places the email into a deferred queue and actively retries delivery periodically (often for up to 48 or 72 hours). Step 5: Only after this extensive retry period expires does the server finally give up and notify the sender. Therefore, A is completely false.",
+    "trick": "Bank/IT Trap: The magic of a Soft Bounce is patience. The server will retry silently in the background for days before finally giving up and issuing a failure notice.",
+    "tip": "Sending servers queue and repeatedly retry Soft Bounces for days before issuing failure notifications."
+  },
+  {
+    "id": 18,
+    "question": "Which of the following browser engines was specifically developed by Microsoft from scratch to replace Trident for Windows 10, before being ultimately abandoned in favor of Chromium's Blink engine?",
+    "options": ["Gecko", "EdgeHTML", "Presto", "Quantum"],
+    "answer": "EdgeHTML",
+    "explanation": "Step 1: Internet Explorer utilized the notoriously non-compliant 'Trident' rendering engine. Step 2: With the launch of Windows 10, Microsoft wanted a clean break and launched the new 'Edge' browser. Step 3: They built a brand new, highly optimized proprietary engine from scratch called 'EdgeHTML' to power it. Step 4: However, maintaining a unique engine became too costly, and web developers were ignoring it. Step 5: In 2020, Microsoft officially abandoned 'EdgeHTML' and rebuilt the Edge browser using Google's open-source Chromium project (adopting the 'Blink' engine).",
+    "trick": "Bank/IT Trap: Know the Microsoft timeline! Trident (Internet Explorer) -> EdgeHTML (Early Edge) -> Blink (Modern Chromium Edge).",
+    "tip": "Microsoft built 'EdgeHTML' for early Windows 10 Edge, later abandoning it for Chromium's Blink."
+  },
+  {
+    "id": 19,
+    "question": "A user sends an email containing highly confidential text, relying on MIME to package a PDF attachment. Which of the following statements is architecturally true regarding the security of this transmission if standard SMTP without TLS is used?",
+    "options": ["MIME inherently encrypts the email body and the attachment using Base64, rendering it unreadable to packet sniffers.", "The text body is sent in plain text, but MIME's Base64 encoding cryptographically secures the PDF attachment.", "Both the text body and the Base64-encoded PDF are transmitted in plain, unencrypted formats, easily intercepted and reconstructed by attackers.", "SMTP automatically rejects confidential keywords using the MIME `Content-Security` header."],
+    "answer": "Both the text body and the Base64-encoded PDF are transmitted in plain, unencrypted formats, easily intercepted and reconstructed by attackers.",
+    "explanation": "Step 1: Standard SMTP is a raw, plain-text protocol. Step 2: Without an external encryption layer like TLS (Transport Layer Security), everything sent is visible on the wire. Step 3: A common misconception is that MIME 'encrypts' data. Step 4: MIME uses Base64 'encoding'. Encoding is NOT encryption. Base64 simply translates binary data into an ASCII string (like 'JVBERi0xLjQK...') so SMTP doesn't crash. Step 5: Any packet sniffer (like Wireshark) can capture this Base64 string and instantly decode it back into the original PDF in milliseconds. It offers zero cryptographic security.",
+    "trick": "Bank/IT Trap: Encoding ≠ Encryption. Base64 is purely a mathematical translation for format compatibility, offering absolutely zero data confidentiality.",
+    "tip": "MIME Base64 encoding provides zero encryption; attachments sent over standard SMTP are completely vulnerable."
+  },
+  {
+    "id": 20,
+    "question": "Assertion (A): To ensure a website renders perfectly across all devices, a web developer must include proprietary CSS prefixes like `-webkit-` and `-moz-`. Reason (R): Different browser rendering engines historically implemented experimental CSS features using custom vendor prefixes before the W3C officially standardized them. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The W3C (World Wide Web Consortium) sets official HTML/CSS standards. Step 2: However, browser makers (Apple, Mozilla) often invent cool new CSS features (like drop-shadows or gradients) before the W3C standardizes them. Step 3: To prevent breaking the web later, these experimental features are locked behind 'vendor prefixes'. Step 4: Safari uses `-webkit-`, Firefox uses `-moz-`. Step 5: Therefore, a developer wanting a cutting-edge gradient to work on both Safari and Firefox MUST write duplicate CSS rules utilizing these specific engine prefixes (Assertion A). Reason R correctly identifies the historical architectural cause of this necessity.",
+    "trick": "Bank/IT Trap: If you see `-webkit-` in CSS code, know it specifically targets Apple's WebKit engine (Safari/iOS) or Blink (which was forked from WebKit). `-moz-` targets Gecko (Firefox).",
+    "tip": "Vendor prefixes (`-webkit-`, `-moz-`) target specific rendering engines for experimental CSS compatibility."
+  },
+  {
+    "id": 21,
+    "question": "An IT system generates an automated email containing a CSV data dump. The MIME header indicates `Content-Type: text/csv`. Why does the email client likely download this file instead of displaying the raw CSV text directly in the email body pane?",
+    "options": ["The MIME type is unsupported by modern email clients, causing a failsafe download.", "The email client defaults to rendering `text/html` or `text/plain` for the body, treating other specific data subtypes as external attachments.", "CSV files contain malicious macros that are automatically sandboxed into downloads.", "The SMTP server compresses all `text/*` headers to save bandwidth."],
+    "answer": "The email client defaults to rendering `text/html` or `text/plain` for the body, treating other specific data subtypes as external attachments.",
+    "explanation": "Step 1: The `Content-Type` MIME header defines how the client should interpret the data block. Step 2: Email clients (like Outlook or Gmail) are programmed with a specific rendering hierarchy for the main viewing pane. Step 3: They look specifically for `text/html` (to draw formatted web-like emails) or `text/plain` (for basic text). Step 4: While `text/csv` is technically a text string, the client recognizes it as a structured data format intended for a spreadsheet application (like Excel). Step 5: Because it doesn't match the primary body rendering types, the client gracefully extracts the MIME boundary block and presents it as a downloadable attachment file.",
+    "trick": "Bank/IT Trap: Just because a MIME type starts with `text/` doesn't mean it renders inline. Only `plain` and `html` are guaranteed body text; others become attachments.",
+    "tip": "Email clients natively render `text/html` and `text/plain` inline; other formats become downloadable attachments."
+  },
+  {
+    "id": 22,
+    "question": "Assertion (A): A corporation discovers that 50 of its outbound marketing emails resulted in 'Hard Bounces'. The marketing team should wait 48 hours and attempt to resend the emails to see if the server issue resolves. Reason (R): Hard Bounces trigger the SMTP 5xx error code block, which indicates a permanent, irrecoverable failure regarding the recipient address. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: A 'Hard Bounce' is a permanent failure. The address is mathematically invalid, the domain doesn't exist, or the user was deleted. Step 2: Because the failure is permanent, waiting 48 hours will accomplish nothing. The address is dead. Step 3: Furthermore, continually blasting emails to dead addresses (Hard Bounces) triggers ISP spam filters, which will blocklist the corporation's IP address. Step 4: Therefore, the marketing team must absolutely NOT resend the emails; they must delete them immediately (Assertion A is false). Step 5: Reason R is entirely accurate; Hard Bounces correlate to SMTP 5xx codes, which explicitly define permanent failures.",
+    "trick": "Bank/IT Trap: Retrying a Hard Bounce is a catastrophic administrative error that will destroy your corporate email reputation and trigger spam blocklists.",
+    "tip": "Never retry sending to Hard Bounces (SMTP 5xx errors); they denote permanent, irrecoverable address failures."
+  },
+  {
+    "id": 23,
+    "question": "Which of the following database queries represents a user fetching information that fundamentally resides within the 'Deep Web' architecture?",
+    "options": ["A user searching Google for the Wikipedia article on 'Data Structures'.", "A user typing a product name into the public Amazon.com search bar.", "A user querying their corporate intranet portal to retrieve an employee HR performance review.", "A user downloading a torrent using the Onion routing network."],
+    "answer": "A user querying their corporate intranet portal to retrieve an employee HR performance review.",
+    "explanation": "Step 1: The 'Surface Web' is data that public web crawlers (Googlebots) can index. Public Wikipedia and Amazon search pages are easily indexed (Surface Web). Step 2: The 'Dark Web' requires specialized routing software (like Tor/.onion) to obscure physical locations. Step 3: The 'Deep Web' is standard internet architecture, but the specific data is blocked from crawlers. Step 4: Private, password-protected databases (like banking portals, email inboxes, or corporate HR intranets) are invisible to Google. Step 5: Because the HR review requires authentication credentials to access, it securely resides in the Deep Web.",
+    "trick": "Bank/IT Trap: Don't confuse 'Deep' with 'Dark'. If you log in to check your bank balance, you are surfing the Deep Web. It is mundane and accounts for 90% of the internet.",
+    "tip": "The Deep Web encompasses all standard internet content protected by authentication barriers or search-engine blocks."
+  },
+  {
+    "id": 24,
+    "question": "In the history of web browser engine architecture, what was the primary structural motivation for Google to fork Apple's 'WebKit' engine to create its own 'Blink' rendering engine in 2013?",
+    "options": ["WebKit was incapable of rendering modern CSS3 gradients.", "Google wanted a proprietary, closed-source engine to monopolize web standards.", "WebKit's monolithic architecture clashed heavily with Chrome's multi-process, sandboxed architecture, causing severe development bottlenecks.", "Apple threatened to sue Google for copyright infringement over WebKit usage."],
+    "answer": "WebKit's monolithic architecture clashed heavily with Chrome's multi-process, sandboxed architecture, causing severe development bottlenecks.",
+    "explanation": "Step 1: Apple developed WebKit (an open-source project) for Safari. Google originally used WebKit to build Chrome. Step 2: However, Chrome pioneered a 'multi-process' architecture (every browser tab runs as a separate, isolated OS process so a crashing tab doesn't crash the whole browser). Step 3: WebKit was designed as a monolithic engine (single process). Step 4: Every time Google wanted to update Chrome, they had to write massive, complex workarounds to force the monolithic WebKit to work in their multi-process sandbox. Step 5: To eliminate this massive engineering bottleneck, Google 'forked' the code, created 'Blink', and deleted millions of lines of legacy WebKit code they didn't need.",
+    "trick": "Bank/IT Trap: WebKit and Blink share the same DNA. Google didn't fork it for rendering capabilities; they forked it because Chrome's underlying tab-isolation architecture was vastly different from Safari's.",
+    "tip": "Google created 'Blink' by forking WebKit to seamlessly support Chrome's highly isolated, multi-process architecture."
+  },
+  {
+    "id": 25,
+    "question": "Assertion (A): Sending an email with a 50MB video attachment using the MIME protocol will result in a total network transmission size significantly larger than 50MB. Reason (R): MIME's Base64 encoding algorithm translates 8-bit binary data into 7-bit ASCII characters, which mathematically increases the payload size by approximately 33%. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A video is a binary file. To send it via SMTP, it must be encoded by MIME into safe ASCII text. Step 2: Base64 encoding takes 3 bytes of raw binary data (24 bits) and splits it into 4 distinct 6-bit chunks. Step 3: Each 6-bit chunk is mapped to a printable ASCII character (adding padding to reach 8-bits per character). Step 4: Mathematically, replacing 3 bytes of raw data with 4 bytes of encoded text creates a 33% overhead bloat. Step 5: Therefore, a 50MB video actually consumes around 67MB of bandwidth when traversing the network as an email attachment. Both statements are scientifically accurate and linked.",
+    "trick": "Bank/IT Trap: This is why email servers have strict 25MB attachment limits! A 25MB file actually takes ~33MB of server processing space after MIME Base64 encoding.",
+    "tip": "MIME Base64 encoding inherently increases the size of binary attachments by roughly 33%."
+  },
+  {
+    "id": 26,
+    "question": "An email server logs a bounce with the error code: '452 4.2.2 The email account that you tried to reach is over quota'. Based on email architectural standards, how should the sending Mail Transfer Agent (MTA) automatically respond to this specific error?",
+    "options": ["It should instantly delete the email from the queue and notify the sender of a fatal failure.", "It should mark the address as invalid and permanently blocklist it in the outbound registry.", "It should place the email in a deferred queue and periodically attempt to retransmit it until a timeout threshold is reached.", "It should compress the email payload to bypass the recipient's quota limit."],
+    "answer": "It should place the email in a deferred queue and periodically attempt to retransmit it until a timeout threshold is reached.",
+    "explanation": "Step 1: Analyze the error string. 'Over quota' means the recipient's inbox is completely full. Step 2: Analyze the SMTP error code. It starts with a '4' (452). Step 3: In SMTP architecture, 4xx codes dictate transient, temporary errors. They are explicitly defined as 'Soft Bounces'. Step 4: Standard MTA (Mail Transfer Agent) protocol dictates that upon receiving a 4xx error, the server must NOT drop the mail. Step 5: It must hold the email in a retry queue and attempt delivery again later (e.g., every 4 hours for 2 days), hoping the user has deleted some old emails to free up quota space.",
+    "trick": "Bank/IT Trap: Full inboxes are the most common cause of Soft Bounces. Do not treat them as hard failures; the MTA is programmed to be patient and retry.",
+    "tip": "Soft Bounces (4xx codes, like Full Inboxes) trigger the sending server to queue and automatically retry transmission."
+  },
+  {
+    "id": 27,
+    "question": "Assertion (A): The 'Surface Web' is defined as the entirety of the internet that is heavily encrypted using HTTPS protocols. Reason (R): Search engines like Google utilize 'Web Crawler' bots that index pages by following public hyperlinks from one site to another, constituting the Surface Web. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Evaluate Assertion A. The definition of the Surface Web has absolutely nothing to do with HTTPS encryption. (Almost all modern web traffic, including Deep/Dark web, uses encryption). The Surface Web simply means data is publicly indexable. Assertion A is completely false. Step 2: Evaluate Reason R. Search engines build their databases using automated scripts called 'Spiders' or 'Crawlers'. Step 3: These bots visit a page, read the text, find every hyperlink (`<a>` tag) on that page, and follow them to new pages. Step 4: Any page found and mapped by these bots becomes part of the public search index, which perfectly defines the architecture of the 'Surface Web'. Reason R is completely true.",
+    "trick": "Bank/IT Trap: Encryption (HTTPS) does not hide you from Google. Logins and `robots.txt` hide you from Google. Encryption secures data in transit; it doesn't define web indexing tiers.",
+    "tip": "The Surface Web consists of publicly linked pages indexed by automated search engine crawler bots."
+  },
+  {
+    "id": 28,
+    "question": "When a web developer utilizes a CSS property such as `border-radius` to round the corners of a box, which specific engine inside the Mozilla Firefox browser parses this code and executes the visual curvature on the screen?",
+    "options": ["SpiderMonkey", "Blink", "Gecko", "V8"],
+    "answer": "Gecko",
+    "explanation": "Step 1: CSS (Cascading Style Sheets) dictates the visual presentation of a webpage (colors, borders, layouts). Step 2: Visual rendering is explicitly the job of the browser's Rendering Engine. Step 3: SpiderMonkey and V8 are JavaScript engines; they process math and logic, not visual CSS rendering. Step 4: Blink is a rendering engine, but it belongs to Google Chrome and Microsoft Edge. Step 5: Mozilla Firefox exclusively utilizes the 'Gecko' rendering engine to parse HTML/CSS and paint the visual elements on the screen.",
+    "trick": "Bank/IT Trap: Know the pairs! Chrome = Blink (Visual) + V8 (Logic). Firefox = Gecko (Visual) + SpiderMonkey (Logic). If the question is about CSS (Visual), it's the rendering engine.",
+    "tip": "Firefox relies on the 'Gecko' rendering engine to process and visually paint CSS and HTML."
+  },
+  {
+    "id": 29,
+    "question": "An email client receives a message containing the MIME header `Content-Type: multipart/alternative`. What specific architectural functionality does this header provide to the receiving email application?",
+    "options": ["It indicates the email contains a virus payload that should be diverted to a quarantine folder.", "It provides the same exact text content in multiple different formats (e.g., Plain Text and HTML), allowing the client to choose the best one to display.", "It splits a massive 100MB file across several different consecutive emails.", "It forces the recipient to choose between downloading a PDF or a Word document."],
+    "answer": "It provides the same exact text content in multiple different formats (e.g., Plain Text and HTML), allowing the client to choose the best one to display.",
+    "explanation": "Step 1: The MIME `multipart` directive organizes an email into segmented blocks. Step 2: `multipart/mixed` is used to attach different things (text body + PDF attachment). Step 3: `multipart/alternative` serves a very specific compatibility purpose. Step 4: It tells the email client: 'Here are two versions of the exact same message. One is raw Plain Text, the other is rich HTML.' Step 5: If the user is on an ancient text-only terminal, it reads the plain text block. If the user is on modern Outlook, it ignores the plain text and renders the rich HTML block. It provides fallback alternatives.",
+    "trick": "Bank/IT Trap: `mixed` = distinct items (attachments). `alternative` = the exact same item in different formats (HTML vs Text) for compatibility rendering.",
+    "tip": "`multipart/alternative` MIME headers bundle Plain Text and HTML versions of the same message for compatibility."
+  },
+  {
+    "id": 30,
+    "question": "Assertion (A): Implementing an aggressive 'Double Opt-In' subscription process for a corporate newsletter is a highly effective administrative strategy for minimizing the occurrence of Hard Bounces. Reason (R): Double Opt-In completely secures the mail server against Distributed Denial of Service (DDoS) attacks. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: A Hard Bounce occurs when you send an email to a fake or mistyped address (e.g., john@gmial.com). Step 2: In a 'Single Opt-In', a user types a fake email on a website, and they are instantly added to the mailing list, causing a Hard Bounce later. Step 3: In a 'Double Opt-In', the system sends a confirmation link. The user is NOT added to the list until they click the link. Because fake addresses can't click links, they are never added to the list. This drastically minimizes Hard Bounces (Assertion A is true). Step 4: However, Reason R states this stops DDoS attacks. This is complete nonsense. Opt-in protocols govern mailing list hygiene, not network infrastructure security against packet flooding. Thus, Reason R is completely false.",
+    "trick": "Bank/IT Trap: Double Opt-In is the gold standard for database hygiene. It forces users to prove their email address is real (preventing Hard Bounces) before marketing blasts them.",
+    "tip": "Double Opt-In subscription models drastically reduce Hard Bounces by verifying email addresses before adding them to lists."
+  },
+  {
+    "id": 31,
+    "question": "Which of the following scenarios describes the fundamental routing architecture that creates the anonymity provided by the 'Dark Web' Tor network?",
+    "options": ["Direct point-to-point connections established exclusively via IPsec VPN tunnels.", "Data traffic is encapsulated in multiple layers of encryption and bounced randomly through a series of global volunteer relays before reaching its destination.", "The utilization of proprietary, unregistered Top-Level Domains (TLDs) managed by private DNS servers.", "Broadcasting traffic via satellite to bypass localized ISP packet sniffing."],
+    "answer": "Data traffic is encapsulated in multiple layers of encryption and bounced randomly through a series of global volunteer relays before reaching its destination.",
+    "explanation": "Step 1: The Dark Web relies heavily on Tor (The Onion Router). Step 2: In standard routing, your ISP knows you connected to Server X. Step 3: To create anonymity, Tor takes your data and encrypts it in layers (like an onion). Step 4: It sends the data to Node A (Entry), which peels a layer and sends it to Node B (Middle). Node B peels a layer and sends it to Node C (Exit). Node C sends it to the target. Step 5: Because no single node knows both the origin AND the destination, the traffic routing is heavily obfuscated, creating the defining anonymity of the Dark Web.",
+    "trick": "Bank/IT Trap: The 'Onion' analogy is critical. Multi-layered encryption routed through decentralized volunteer nodes breaks the traceability of standard TCP/IP routing.",
+    "tip": "The Tor network achieves Dark Web anonymity by bouncing multi-encrypted traffic across decentralized volunteer relay nodes."
+  },
+  {
+    "id": 32,
+    "question": "A web developer writes the following code: `<div style=\"-webkit-transform: rotate(45deg);\">`. Which specific cohort of web browsers is this CSS prefix architecturally targeting to ensure the visual rotation executes correctly?",
+    "options": ["Browsers utilizing the Gecko engine (Firefox).", "Browsers utilizing the Presto engine (Opera).", "Browsers utilizing the WebKit or Blink engines (Safari, Chrome, Edge).", "Browsers utilizing the Trident engine (Internet Explorer)."],
+    "answer": "Browsers utilizing the WebKit or Blink engines (Safari, Chrome, Edge).",
+    "explanation": "Step 1: CSS vendor prefixes are used to apply experimental rendering rules before they become universal standards. Step 2: The prefix explicitly identifies the rendering engine it targets. Step 3: `-moz-` targets Mozilla's Gecko engine. `-ms-` targets Microsoft's Trident engine. Step 4: `-webkit-` was originally created for Apple's WebKit engine (Safari). Step 5: Because Google Chrome's 'Blink' engine is a direct codebase fork of WebKit, it inherited and supports all `-webkit-` prefixes. Therefore, this specific code targets Safari, Chrome, and the modern Chromium-based Edge.",
+    "trick": "Bank/IT Trap: Even though Chrome doesn't use pure WebKit anymore, it still processes `-webkit-` prefixes because its 'Blink' engine is built directly from WebKit's DNA.",
+    "tip": "The `-webkit-` CSS vendor prefix specifically targets browsers running the WebKit (Safari) or Blink (Chrome/Edge) rendering engines."
+  },
+  {
+    "id": 33,
+    "question": "Assertion (A): When an email attachment triggers the MIME `Content-Transfer-Encoding: quoted-printable` specification, the file size expands significantly more than if it used `Base64` encoding. Reason (R): Quoted-printable encoding is designed for payloads that are predominantly standard text, only encoding non-standard characters into 3-byte hexadecimal sequences to maintain human readability. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: MIME offers different encoding architectures. Base64 is used for heavy binary files (images/PDFs) and mathematically increases the payload by ~33%. Step 2: 'Quoted-printable' is used when the payload is mostly normal text (like a French email with a few accented characters like 'é'). Step 3: Quoted-printable leaves standard ASCII text completely untouched (1 byte per char). It only expands the weird characters into a 3-byte hex format (e.g., '=E9'). Step 4: Because it leaves 99% of the text unexpanded, Quoted-printable is vastly more efficient for text, making the file size MUCH SMALLER than Base64 encoding. Therefore, Assertion A is completely false. Step 5: Reason R accurately describes the exact mechanical behavior of quoted-printable encoding.",
+    "trick": "Bank/IT Trap: Base64 = Best for Binary (Images). Quoted-Printable = Best for Text (foreign alphabets). Quoted-printable keeps file sizes incredibly small by only encoding the specific non-ASCII characters.",
+    "tip": "Quoted-printable MIME encoding is highly efficient for text payloads, only encoding non-standard characters as hexadecimals."
+  },
+  {
+    "id": 34,
+    "question": "An IT department notices that emails sent to `hr@partnercompany.com` return a bounce message with an SMTP status code of '421'. What is the most appropriate technical response to this situation?",
+    "options": ["Immediately permanently delete the address from the mailing list due to domain invalidation.", "Quarantine the email server to scrub the attached macro virus.", "Do nothing; allow the Mail Transfer Agent (MTA) to hold the message in the queue and retry automatically.", "Reconfigure the MIME headers to enforce quoted-printable encoding."],
+    "answer": "Do nothing; allow the Mail Transfer Agent (MTA) to hold the message in the queue and retry automatically.",
+    "explanation": "Step 1: Analyze the SMTP code. It begins with a '4' (421). Step 2: In SMTP architecture, 4xx codes dictate transient, temporary errors (Soft Bounces). Step 3: Code 421 specifically indicates a temporary server issue, such as 'Service not available' or 'Insufficient system storage' on the receiving end. Step 4: The standard operating procedure for a Mail Transfer Agent (MTA) encountering a 4xx error is to retain the message in a deferred queue. Step 5: The MTA will autonomously attempt to resend the email at specified intervals (e.g., every 30 minutes) until the receiving server recovers or a maximum timeout (e.g., 72 hours) is reached. No manual human intervention is required initially.",
+    "trick": "Bank/IT Trap: 4xx = Soft Bounce = Chill out and let the server retry. 5xx = Hard Bounce = Delete the address. The first digit is the only one you need to define your response.",
+    "tip": "SMTP 4xx error codes denote Soft Bounces; standard MTA protocols dictate automatic queuing and retrying."
+  },
+  {
+    "id": 35,
+    "question": "Which of the following structural web components fundamentally separates the 'Deep Web' from the 'Surface Web' by explicitly instructing search engine crawlers to bypass and ignore specific website directories?",
+    "options": ["Tor Onion Routing protocols", "The `robots.txt` file and `noindex` meta tags", "MIME multi-part boundary encryption", "Gecko Engine CSS prefixes"],
+    "answer": "The `robots.txt` file and `noindex` meta tags",
+    "explanation": "Step 1: The Surface Web is defined by search engine indexability (what Google can find). Step 2: The Deep Web is everything Google cannot find. Step 3: While passwords hide most of the Deep Web (like your bank account), website administrators also have public pages they simply don't want showing up on Google (like backend admin login portals). Step 4: They achieve this by placing a `robots.txt` file in the website root directory, or applying `<meta name=\"robots\" content=\"noindex\">` in the HTML. Step 5: Web crawlers are programmed to respect these protocols. Upon seeing them, they halt indexing, effectively sinking those specific directories into the Deep Web.",
+    "trick": "Bank/IT Trap: The Deep Web isn't always hidden by heavy encryption or passwords. Sometimes it's just a polite sign on the door (`robots.txt`) asking Google to stay out.",
+    "tip": "Website administrators relegate public directories to the Deep Web by utilizing `robots.txt` and `noindex` meta tags."
+  },
+  {
+    "id": 36,
+    "question": "Assertion (A): Modern web applications heavily rely on the V8 engine to rapidly execute CSS transitions and HTML layouts on the user's screen. Reason (R): The V8 engine utilizes a Just-In-Time (JIT) compiler to translate dynamic code directly into machine-level instructions for maximum performance. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Evaluate the core function of the V8 engine. V8 is an open-source engine developed by Google. Step 2: V8 is strictly a **JavaScript** engine. It parses, compiles, and executes JavaScript math and logic. Step 3: V8 does absolutely nothing with CSS transitions or HTML layouts. Visual rendering is the explicit domain of the Rendering Engine (like Blink or WebKit). Therefore, Assertion A is completely false. Step 4: Evaluate Reason R. V8 achieves its incredible speed by completely bypassing intermediate interpreters. Step 5: It uses a JIT (Just-In-Time) compiler to translate JavaScript text directly into raw native machine code on the fly. Reason R is architecturally perfect and true.",
+    "trick": "Bank/IT Trap: V8 = JavaScript (Logic). Blink = HTML/CSS (Visuals). Do not mix up the visual painter with the mathematical brain of the browser.",
+    "tip": "Google's V8 engine strictly compiles and executes JavaScript logic, leaving visual HTML/CSS rendering to Blink/WebKit."
+  },
+  {
+    "id": 37,
+    "question": "During an email forensic investigation, an analyst discovers a malicious executable disguised within an email. The email lacks any standard `Content-Disposition: attachment` headers, yet the executable executes when the email is viewed. What architectural vulnerability in the MIME protocol is likely being exploited?",
+    "options": ["The attacker bypassed SMTP by routing the email through the Deep Web Tor network.", "The attacker utilized `multipart/mixed` and forced a buffer overflow in the Base64 decoding algorithm.", "The attacker utilized `Content-Disposition: inline` combined with an unpatched browser rendering engine vulnerability to force execution within the email body pane.", "The attacker replaced the Base64 encoding with a JavaScript Engine compiler."],
+    "answer": "The attacker utilized `Content-Disposition: inline` combined with an unpatched browser rendering engine vulnerability to force execution within the email body pane.",
+    "explanation": "Step 1: If an email uses `Content-Disposition: attachment`, the user must explicitly click, download, and open the file, providing a layer of human defense. Step 2: The `Content-Disposition: inline` MIME header instructs the email client (like Outlook) to automatically decode and render the object directly inside the viewing pane without asking the user. Step 3: Modern email clients use built-in browser rendering engines (like Word/EdgeHTML) to display this inline content. Step 4: If an attacker crafts a malicious payload (like a corrupted OLE object or exploit script) and forces it to render `inline`, the rendering engine processes the bad code automatically the second the user clicks the email. Step 5: This 'Zero-Click' exploit leverages the inline display architecture to hijack the system.",
+    "trick": "Bank/IT Trap: 'Inline' is convenient for showing logos in signatures, but it is a massive security risk because it forces the email client to process and render complex files automatically.",
+    "tip": "MIME's `Content-Disposition: inline` header forces automatic rendering, exposing email clients to zero-click rendering engine exploits."
+  },
+  {
+    "id": 38,
+    "question": "Assertion (A): An email server administrator analyzing a 'Hard Bounce' log must immediately check the local server's DNS MX (Mail Exchanger) records for misconfigurations. Reason (R): Hard Bounces are strictly generated when the sending server fails to locate a valid outbound routing path to the internet. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Understand the origin of a Hard Bounce. A bounce (Non-Delivery Report) is generated by the RECEIVING server, not the sending server. Step 2: The sender connects, transmits the envelope, and the receiving server checks its local active directory. Step 3: If the user 'john.doe@target.com' doesn't exist, the RECEIVING server rejects the transaction with a 5xx fatal error code (Hard Bounce). Step 4: Because the sender successfully reached the target domain to get this rejection, the sender's DNS MX records and outbound routing are working perfectly. Step 5: Therefore, the local admin has no DNS issue to fix. The problem lies entirely with the recipient's invalid address. Both A and R are completely false.",
+    "trick": "Bank/IT Trap: Bounces are 'Return to Sender' letters. If you get a bounce, it proves your outbound mail delivery system works! The issue is strictly the destination address.",
+    "tip": "Hard Bounces are generated by the receiving server rejecting invalid addresses; they do not indicate local sending errors."
+  },
+  {
+    "id": 39,
+    "question": "Which of the following scenarios is a defining characteristic of navigating the 'Dark Web', separating it fundamentally from accessing the 'Deep Web'?",
+    "options": ["Inputting a username and password to access a private corporate intranet portal.", "Using a standard browser to access unindexed government archives via an obscure IP address.", "Routing traffic through decentralized, multi-encrypted nodes to access a `.onion` pseudo-top-level domain.", "Downloading a PDF file that requires an aggressive payment gateway subscription."],
+    "answer": "Routing traffic through decentralized, multi-encrypted nodes to access a `.onion` pseudo-top-level domain.",
+    "explanation": "Step 1: The Deep Web consists of normal internet infrastructure protected by passwords or paywalls (e.g., banking, corporate portals, paid PDFs). You use standard Chrome or Edge to access them. Step 2: The Dark Web is a completely different architectural beast. Step 3: It utilizes specialized overlay networks (Darknets) that exist on top of the internet. Step 4: The most famous is the Tor network. It uses 'Onion Routing'—bouncing heavily encrypted traffic across decentralized global volunteer nodes to mask the IP addresses of both the host and the server. Step 5: These hidden services use a special pseudo-domain suffix, `.onion`, which standard DNS servers cannot resolve. This specific encrypted routing architecture is the exclusive hallmark of the Dark Web.",
+    "trick": "Bank/IT Trap: If it uses a normal `.com` or `.org` but requires a password, it's Deep Web. If it uses `.onion` and requires Tor routing software, it's Dark Web.",
+    "tip": "The Dark Web exclusively utilizes decentralized overlay networks (like Tor) and pseudo-domains (like `.onion`) for absolute anonymity."
+  },
+  {
+    "id": 40,
+    "question": "In 2020, Microsoft abandoned its proprietary 'EdgeHTML' rendering engine for the Edge browser. By adopting the 'Blink' engine, Edge architecturally aligned itself with which major open-source software initiative?",
+    "options": ["The Mozilla Foundation", "The Chromium Project", "The Apache Software Foundation", "The WebKit Consortium"],
+    "answer": "The Chromium Project",
+    "explanation": "Step 1: Browser engines are massive, expensive undertakings. Step 2: Google originally built Chrome using Apple's WebKit, but later forked it to create 'Blink'. Step 3: Google wrapped the Blink rendering engine and the V8 JavaScript engine into a massive open-source repository known as the 'Chromium Project'. Step 4: Anyone can take Chromium code and build a browser on top of it. Step 5: Microsoft realized maintaining EdgeHTML was a losing battle against Chrome's market dominance. They scrapped it, downloaded the Chromium source code, and rebuilt Edge. Modern Edge is simply Microsoft's customized interface running on the exact same underlying architecture as Google Chrome.",
+    "trick": "Bank/IT Trap: Chromium is the open-source engine base (Blink+V8). Chrome, Edge, Opera, and Brave are all just different UI wrappers built around the exact same Chromium core.",
+    "tip": "Microsoft Edge is built upon the open-source 'Chromium Project', utilizing the Blink rendering engine and V8 JavaScript engine."
+  },
+  {
+    "id": 41,
+    "question": "Assertion (A): The MIME standard inherently increases the security of an email by isolating potentially malicious executable attachments from the plain text body. Reason (R): MIME breaks the email into segmented 'boundary' blocks, forcing the email client to execute each block in a physically separate sandbox environment. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: MIME (Multipurpose Internet Mail Extensions) is purely an encoding and formatting standard. Step 2: Its `multipart/mixed` architecture uses text boundaries (e.g., `----=_Boundary123`) to visually tell the email client where the text ends and the attachment begins. Step 3: However, this provides absolutely ZERO security isolation. MIME is just a layout blueprint. Step 4: If an attachment contains malware, MIME's structure does nothing to sandbox it or prevent the OS from executing it if the user clicks it. Step 5: Therefore, MIME does not increase security (Assertion A is false), and it does not mandate sandboxing (Reason R is false). Security relies entirely on antivirus software and user behavior.",
+    "trick": "Bank/IT Trap: MIME organizes data; it doesn't protect it. A well-organized bomb is still a bomb. MIME provides formatting, not sandboxing or encryption.",
+    "tip": "MIME structurally organizes email payloads into boundaries but provides zero intrinsic security, encryption, or sandboxing capabilities."
+  },
+  {
+    "id": 42,
+    "question": "A massive e-commerce company sends out a promotional email blast. Their dashboard shows a 5% 'Soft Bounce' rate and a 2% 'Hard Bounce' rate. To maintain a pristine domain reputation and avoid ISP spam blacklists, what automated database rule MUST the IT team implement immediately?",
+    "options": ["Purge the 5% soft bounce addresses from the database permanently.", "Purge the 2% hard bounce addresses from the database permanently.", "Automatically resend the email to the 2% hard bounce addresses using an alternate SMTP server.", "Convert the email format from MIME to plain text and resend to both lists."],
+    "answer": "Purge the 2% hard bounce addresses from the database permanently.",
+    "explanation": "Step 1: Domain reputation is calculated by major ISPs (Gmail, Yahoo). If you send too many emails to fake/dead addresses, ISPs assume you are a spammer and send all your corporate emails straight to the Junk folder. Step 2: A 'Hard Bounce' (5xx error) explicitly means the address is permanently dead or fake. Step 3: Continuing to send mail to Hard Bounces destroys reputation metrics instantly. Step 4: A 'Soft Bounce' (4xx error) is temporary (full inbox); these users are real and shouldn't be deleted immediately. Step 5: Therefore, the golden rule of database hygiene is to immediately and permanently scrub/purge Hard Bounces from the active mailing list.",
+    "trick": "Bank/IT Trap: Hitting Hard Bounces repeatedly is the fastest way to get your company's IP address globally blacklisted by anti-spam organizations.",
+    "tip": "To maintain SMTP domain reputation, organizations must permanently purge 'Hard Bounce' addresses from their mailing lists immediately."
+  },
+  {
+    "id": 43,
+    "question": "Assertion (A): The 'Surface Web' encompasses a significantly smaller volume of data compared to the 'Deep Web'. Reason (R): Search engine crawlers are structurally incapable of navigating past authentication gateways, dynamically generated database queries, and private user accounts. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Visualize the internet as an iceberg. The visible tip above the water is the Surface Web. It consists of public pages that Google can index (Wikipedia, news sites, blogs). Step 2: The massive chunk of ice underwater is the Deep Web. It contains every single private email in existence, every medical record, every bank account ledger, and every Netflix user profile. Step 3: By sheer data volume, the Deep Web dwarfs the Surface Web exponentially (Assertion A is true). Step 4: Why? Because Google's bots cannot type in a username/password to log into your bank account. Step 5: Bots can only follow public, static HTML links. Anything behind an authentication wall or generated dynamically by a backend database search is completely invisible to crawlers, making Reason R the exact structural cause of this data divide.",
+    "trick": "Bank/IT Trap: The Deep Web is normal, boring, everyday internet usage. It's just massive because it holds the private data for all 5 billion internet users.",
+    "tip": "The Deep Web vastly dwarfs the Surface Web because it houses all authentication-protected and database-driven private internet data."
+  },
+  {
+    "id": 44,
+    "question": "Which of the following scenarios best demonstrates a fundamental architectural limitation of Apple's proprietary 'WebKit' browser engine when deployed on older iOS devices?",
+    "options": ["It is unable to process or execute JavaScript code, forcing reliance on HTML5.", "It relies on a centralized Google server to pre-render complex CSS animations.", "It ties browser engine updates directly to full iOS operating system updates, severely delaying the adoption of new web standards.", "It uses Base64 encoding to render images, which quadruples bandwidth usage."],
+    "answer": "It ties browser engine updates directly to full iOS operating system updates, severely delaying the adoption of new web standards.",
+    "explanation": "Step 1: On Android or Windows, if Chrome (Blink) needs an update to support a new CSS feature, Google simply pushes an app update through the Play Store. The engine updates instantly. Step 2: Apple's architecture is vastly different. Step 3: WebKit is deeply integrated into the core iOS operating system. Step 4: Apple does not allow WebKit to be updated via simple App Store updates. Step 5: To get a new version of the WebKit engine, the user MUST download and install a massive, complete iOS software update. If an older device stops receiving iOS updates, its web browser engine is permanently frozen in time, breaking compatibility with modern websites.",
+    "trick": "Bank/IT Trap: WebKit's fatal flaw on mobile is its tight coupling with the OS. Android decoupled its WebView engine years ago to allow instant app-store updates.",
+    "tip": "WebKit engine updates on iOS are fundamentally bound to major OS updates, hindering rapid web standard adoption."
+  },
+  {
+    "id": 45,
+    "question": "A developer writes an email script intended to send a heavily formatted, corporate newsletter. The script generates raw HTML code (e.g., `<b>Hello</b>`). However, upon testing, the recipient's email client displays the raw, unrendered code tags instead of bold text. Which specific MIME header is misconfigured or missing?",
+    "options": ["Content-Transfer-Encoding: base64", "MIME-Version: 1.0", "Content-Type: text/plain", "Content-Disposition: inline"],
+    "answer": "Content-Type: text/plain",
+    "explanation": "Step 1: When an email arrives, the email client reads the `Content-Type` header to know how to interpret the incoming data. Step 2: If the header says `text/plain`, the client operates in a strict, secure mode. Step 3: It assumes everything in the payload is literal text meant to be read by human eyes. Step 4: If it sees `<b>Hello</b>`, it does not process it as code; it literally prints the bracket characters on the screen. Step 5: To force the email client's rendering engine (like EdgeHTML in Outlook) to parse and paint the tags as formatting, the header MUST be explicitly set to `Content-Type: text/html`. Therefore, the current setting is misconfigured as `text/plain`.",
+    "trick": "Bank/IT Trap: The payload doesn't matter if the metadata is wrong. The client blindly obeys the MIME `Content-Type` header. If it says plain text, HTML tags become useless decorations.",
+    "tip": "A `Content-Type: text/plain` MIME header forces email clients to display raw HTML tags instead of rendering them visually."
+  },
+  {
+    "id": 46,
+    "question": "Assertion (A): The 'Blink' rendering engine was designed with a multi-process architecture, allocating a separate operating system process to every single open browser tab. Reason (R): Multi-process architecture ensures that if a complex JavaScript loop causes one tab to crash, the other tabs and the main browser interface remain entirely unaffected. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Legacy browsers used a monolithic (single-process) architecture. If one tab encountered a fatal error (like a bad Flash plugin), the entire browser application crashed. Step 2: Google built Chrome (and the Blink engine) to solve this using a multi-process architecture. Step 3: When you open 10 tabs in Chrome, you spawn 10 separate 'chrome.exe' processes in the Windows Task Manager (Assertion A is true). Step 4: Each tab runs in its own memory sandbox. Step 5: If Tab 3 hits an infinite JavaScript loop and crashes (the 'Aw, Snap!' error), the OS kills that specific process. Tabs 1, 2, and 4 keep running flawlessly because their memory spaces are isolated. Reason R perfectly explains the immense stability advantage of A.",
+    "trick": "Bank/IT Trap: This architecture is why Chrome uses so much RAM! Sandboxing every tab requires duplicate memory overhead, trading high RAM usage for extreme stability.",
+    "tip": "Blink's multi-process architecture sandboxes every tab, ensuring individual tab crashes never bring down the entire web browser."
+  },
+  {
+    "id": 47,
+    "question": "An IT administrator analyzes an SMTP error log and sees the code: '550 5.1.1 User unknown'. Which of the following statements represents the absolute best-practice response protocol for managing this specific domain feedback?",
+    "options": ["The admin should configure the server to retry delivery every 12 hours for a maximum of 5 days.", "The admin should immediately purge the target address from the active mailing list to preserve SMTP domain reputation.", "The admin should change the MIME encoding from Base64 to Quoted-Printable to bypass the firewall block.", "The admin should contact the receiving ISP to unblock their IP address."],
+    "answer": "The admin should immediately purge the target address from the active mailing list to preserve SMTP domain reputation.",
+    "explanation": "Step 1: The key to analyzing SMTP codes is the first digit. A '5' indicates a 5xx series error. Step 2: 5xx errors denote a fatal, permanent failure (Hard Bounce). Step 3: The string '5.1.1 User unknown' explicitly means the email address literally does not exist on that server (they quit, or it was a typo). Step 4: Because the user doesn't exist, retrying is mathematically pointless. Step 5: Furthermore, major email providers (Gmail/Microsoft) actively monitor how many 5xx bounces you hit. If you repeatedly hit dead addresses, they assume your mailing list is bought/stolen spam, and they will blacklist your entire domain. You MUST purge 5xx bounces immediately.",
+    "trick": "Bank/IT Trap: 5xx = Hard Bounce = Permanent Death. Clean your list immediately! 4xx = Soft Bounce = Let the server retry.",
+    "tip": "SMTP '550 User Unknown' is a fatal Hard Bounce requiring immediate removal from mailing lists to protect sender reputation."
+  },
+  {
+    "id": 48,
+    "question": "Which of the following internet layers or protocols fundamentally provides the anonymity structure allowing a user to safely browse the 'Dark Web' without exposing their originating IP address?",
+    "options": ["The Multi-Part MIME boundary encryption protocol.", "The Secure Sockets Layer (SSL) and Transport Layer Security (TLS) certificates.", "The Onion Routing protocol, which encrypts and bounces traffic across decentralized global relays.", "The HTML5 WebKit rendering engine sandbox."],
+    "answer": "The Onion Routing protocol, which encrypts and bounces traffic across decentralized global relays.",
+    "explanation": "Step 1: Standard browsing (even with SSL/TLS) encrypts the *content* of your traffic, but the router still knows your IP address and the destination IP address. This is not anonymous. Step 2: The Dark Web relies on anonymity. Step 3: The primary technology for this is 'The Onion Router' (Tor). Step 4: Tor intercepts the data and wraps it in multiple layers of encryption (like an onion). Step 5: It sends the data through a randomized path of three volunteer servers (Entry, Relay, Exit). Each server only knows the previous hop and the next hop; no single server knows both the origin and the destination. This completely obfuscates the IP trail, granting true Dark Web anonymity.",
+    "trick": "Bank/IT Trap: HTTPS/SSL hides WHAT you are saying. Tor/Onion routing hides WHO you are and WHO you are talking to. Dark web survival relies on the latter.",
+    "tip": "Dark Web anonymity is achieved via Onion Routing, which obfuscates IP addresses across decentralized, multi-encrypted relay nodes."
+  },
+  {
+    "id": 49,
+    "question": "Assertion (A): The legacy 'Internet Explorer' browser achieved widespread enterprise dominance because its 'Trident' rendering engine strictly adhered to W3C global web standards, ensuring universal compatibility. Reason (R): Microsoft forced all web developers to adopt standard CSS practices by refusing to implement proprietary vendor prefixes. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Internet Explorer (powered by the Trident engine) dominated the 2000s not because of standards, but because it was pre-installed on 95% of the world's Windows PCs (monopoly power). Step 2: In reality, Trident was notoriously non-compliant with W3C web standards. Step 3: Microsoft created massive amounts of proprietary, non-standard code (like ActiveX controls and custom CSS) that ONLY worked in Internet Explorer. Therefore, Assertion A is completely false. Step 4: Because Microsoft ignored standards, web developers had to write 'hacky' code just to make websites render properly on Trident, leading to the infamous 'Best viewed in Internet Explorer' badges. Step 5: Microsoft heavily utilized proprietary vendor prefixes (like `-ms-`), making Reason R entirely false as well.",
+    "trick": "Bank/IT Trap: Internet Explorer (Trident) is the ultimate villain of web developer history. It was the least standard-compliant browser ever made, surviving purely on Microsoft's OS monopoly.",
+    "tip": "Internet Explorer's 'Trident' engine notoriously ignored W3C global web standards, relying heavily on proprietary, non-compliant Microsoft technologies."
+  },
+  {
+    "id": 50,
+    "question": "A user attaches a 10MB JPEG image to an email. The email client uses MIME to encode the file into Base64 format. What is the approximate final size of the email payload transmitted over the network?",
+    "options": ["10MB (The size remains constant).", "5MB (Base64 acts as a compression algorithm).", "13.3MB (Base64 encoding incurs roughly a 33% size overhead).", "20MB (Base64 encoding exactly doubles the size to ensure ASCII compatibility)."],
+    "answer": "13.3MB (Base64 encoding incurs roughly a 33% size overhead).",
+    "explanation": "Step 1: The original file is a 10MB binary JPEG. Step 2: SMTP servers crash if they receive 8-bit binary data, so MIME must convert it to 7-bit ASCII text. Step 3: It uses Base64 encoding for this translation. Step 4: The mathematical algorithm of Base64 takes 3 bytes of raw binary data and splits them into 4 distinct bytes of ASCII characters. Step 5: Replacing every 3 bytes with 4 bytes creates an exact 33.3% increase in total file size. Therefore, 10MB + 33% (3.3MB) yields a final network transmission size of approximately 13.3MB.",
+    "trick": "Bank/IT Trap: A highly common exam math question. Base64 always adds ~33% overhead. If an ISP has a 20MB attachment limit, a 16MB file will actually bounce because the MIME encoded size will hit ~21.3MB!",
+    "tip": "MIME Base64 translates 3 binary bytes into 4 ASCII bytes, consistently increasing file size by roughly 33%."
+  },
+  {
+    "id": 51,
+    "question": "Assertion (A): You cannot send a PDF document or a JPEG image as an email attachment using strictly the original, unmodified SMTP protocol. Reason (R): The original Simple Mail Transfer Protocol (SMTP) was designed solely to handle 7-bit ASCII text data, requiring modern email clients to utilize the MIME standard to encode multimedia files for transmission. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The original SMTP protocol (RFC 821) was strictly limited to 7-bit ASCII text. Step 2: Because multimedia files (like PDFs and JPEGs) are binary data, attempting to send them via pure 7-bit SMTP corrupts the data. Step 3: To solve this, MIME (Multipurpose Internet Mail Extensions) was developed. Step 4: MIME encodes binary files into Base64 (which is text-based), allowing the attachment to safely pass through standard SMTP servers. Step 5: Therefore, A is true and R correctly explains the architectural limitation requiring MIME.",
+    "trick": "Bank/IT Trap: MIME does not replace SMTP; it acts as a translator, encoding binary files into text so standard SMTP can transport them.",
+    "tip": "MIME encodes binary attachments into Base64 text to bypass SMTP's 7-bit ASCII limitation."
+  },
+  {
+    "id": 52,
+    "question": "Which of the following browser rendering engines represents a 'fork' from the original WebKit engine, specifically optimized for multi-process architecture, and currently dominates global web traffic via Google Chrome and Microsoft Edge?",
+    "options": ["Gecko", "Blink", "Trident", "Presto"],
+    "answer": "Blink",
+    "explanation": "Step 1: WebKit is the rendering engine developed by Apple for Safari. Step 2: Originally, Google Chrome also used WebKit. Step 3: However, Google wanted to implement a multi-process architecture (where each tab acts as an isolated process) that conflicted with Apple's design goals. Step 4: In 2013, Google forked the WebKit code and created the 'Blink' engine. Step 5: Microsoft later abandoned its proprietary EdgeHTML engine and adopted Chromium, making Blink the dominant engine behind both Chrome and Edge.",
+    "trick": "Bank/IT Trap: Chrome did not invent its engine from scratch; Blink is a direct fork of Apple's WebKit, customized heavily for multi-threading.",
+    "tip": "Google Chrome and Microsoft Edge utilize the Blink rendering engine, a fork of WebKit."
+  },
+  {
+    "id": 53,
+    "question": "A digital marketing agency sends a newsletter to 5,000 subscribers. The server returns 50 'Soft Bounces' and 20 'Hard Bounces'. Which of the following specific scenarios accurately describes the cause of one of the Hard Bounces?",
+    "options": ["The recipient's email server is temporarily offline due to a DDoS attack.", "The recipient's mailbox has exceeded its storage quota (Inbox Full).", "The email message size exceeds the receiving server's maximum attachment limit.", "The recipient's email address contains a typographical error (e.g., '@gnail.com' instead of '@gmail.com')."],
+    "answer": "The recipient's email address contains a typographical error (e.g., '@gnail.com' instead of '@gmail.com').",
+    "explanation": "Step 1: Understand email bounce classifications. A Soft Bounce is a temporary delivery failure. A Hard Bounce is a permanent delivery failure. Step 2: A server being offline (Option A) is temporary. Step 3: A full inbox (Option B) is temporary. Step 4: A message too large (Option C) can be fixed by sending a smaller email. Step 5: Option D represents a non-existent or permanently invalid domain/address. The delivery will never succeed, classifying it strictly as a Hard Bounce.",
+    "trick": "Bank/IT Trap: Examiners love testing the difference in email bounces! A 'Soft Bounce' means there is hope. A 'Hard Bounce' means it hit a brick wall—the address is dead.",
+    "tip": "Hard Bounces result from permanent errors, such as invalid or non-existent email addresses."
+  },
+  {
+    "id": 54,
+    "question": "Assertion (A): Content hosted on the 'Deep Web' is inherently encrypted and exclusively accessible via specialized anonymizing networks like Tor. Reason (R): Standard search engines like Google deploy web crawlers that cannot parse JavaScript or bypass CAPTCHAs, rendering the Deep Web invisible to them. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Assertion (A) conflates two different concepts. The 'Deep Web' simply refers to unindexed content (like your bank account dashboard or a private medical record). It does NOT require Tor. Step 2: The 'Dark Web' requires Tor. Therefore, A is completely false. Step 3: Reason (R) is also false. Standard crawlers CAN parse JavaScript. The reason the Deep Web is unindexed is because crawlers are blocked by authentication barriers (passwords, logins, paywalls), not CAPTCHAs or JavaScript inability.",
+    "trick": "Bank/IT Trap: Deep Web = Anything behind a password (90% of the internet). Dark Web = Encrypted overlay networks requiring Tor. Do not mix them up!",
+    "tip": "The Deep Web consists of unindexed pages behind passwords; it does not require Tor."
+  },
+  {
+    "id": 55,
+    "question": "In the context of the MIME protocol architecture, what is the exact function of the 'Multipart/Mixed' content type declaration in an email header?",
+    "options": ["It encrypts the email payload using multiple layers of SSL/TLS.", "It instructs the email client that the message contains multiple distinct data types, such as a plaintext body combined with a separate binary PDF attachment.", "It translates foreign languages dynamically using a mix of dictionary APIs.", "It bypasses standard SMTP servers to route directly to Microsoft Exchange servers."],
+    "answer": "It instructs the email client that the message contains multiple distinct data types, such as a plaintext body combined with a separate binary PDF attachment.",
+    "explanation": "Step 1: Standard emails are usually just one content type (Text/Plain or Text/HTML). Step 2: If an email contains both a typed message AND an attachment, the email client needs to know how to separate them. Step 3: The MIME header 'Content-Type: multipart/mixed' is used. Step 4: It tells the receiving software, 'This package has multiple parts. Part 1 is text to display on screen. Part 2 is a Base64 encoded file to offer as a download link.' Step 5: This architectural boundary setting is essential for modern email.",
+    "trick": "Bank/IT Trap: MIME doesn't just encode attachments; it also handles 'Boundaries' that separate the typed message from the attached file using the 'multipart' directive.",
+    "tip": "'Multipart/Mixed' MIME headers separate the email text body from the enclosed file attachments."
+  },
+  {
+    "id": 56,
+    "question": "An IT administrator notices a massive spike in CPU usage on a local server immediately after opening an email attachment ending in '.js'. Why does a JavaScript file act as a critical security vector on a Windows desktop compared to running inside a web browser?",
+    "options": ["Windows natively attempts to compile the JavaScript into a C++ executable upon opening.", "Outside a web browser, Windows executes the '.js' file directly using the Windows Script Host (WSH), bypassing the browser's security sandbox.", "The '.js' file automatically edits the Windows Registry to disable all antivirus definitions.", "The file corrupts the active browser rendering engine, forcing a memory leak."],
+    "answer": "Outside a web browser, Windows executes the '.js' file directly using the Windows Script Host (WSH), bypassing the browser's security sandbox.",
+    "explanation": "Step 1: JavaScript running inside Google Chrome is heavily restricted by the 'Sandbox'. It cannot read local files or delete system data. Step 2: However, if a user downloads a malicious `.js` file via an email attachment and double-clicks it on their Windows desktop, a different engine takes over. Step 3: Windows defaults to executing local `.js` files via the Windows Script Host (wscript.exe). Step 4: WSH has deep system-level access and zero sandbox protections. Step 5: The script can download ransomware, delete files, and cause catastrophic damage.",
+    "trick": "Bank/IT Trap: Context matters! JavaScript in Chrome is safe. JavaScript executed on the bare Windows OS via WSH is extremely dangerous.",
+    "tip": "Local .js files execute via Windows Script Host, bypassing the protective browser sandbox."
+  },
+  {
+    "id": 57,
+    "question": "Assertion (A): The Mozilla Firefox browser is fundamentally immune to web exploits that target the Blink rendering engine. Reason (R): Firefox operates on an entirely distinct, independently developed open-source rendering engine called 'Gecko', which utilizes a different code base than Chrome or Edge. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Rendering engines parse HTML/CSS into visual pixels. Step 2: Chrome, Edge, Brave, and Opera all share the same underlying engine: Blink. Step 3: A zero-day exploit targeting Blink will inherently compromise all these browsers. Step 4: Mozilla Firefox is unique in modern desktop computing; it relies on 'Gecko'. Step 5: Because Gecko shares no code with Blink, a specific software vulnerability designed to crash Blink will fail to affect Firefox, making both A and R true and logically connected.",
+    "trick": "Bank/IT Trap: Firefox is the last major independent desktop browser engine. Almost everything else (even Microsoft Edge) is just a customized skin over Chromium's Blink.",
+    "tip": "Firefox uses the Gecko engine, providing architectural immunity to exploits targeting Blink (Chromium)."
+  },
+  {
+    "id": 58,
+    "question": "When examining an email header to troubleshoot a delivery failure, an administrator sees the diagnostic code '550 5.1.1 User unknown'. Which category of email failure does this specific SMTP reply code explicitly confirm?",
+    "options": ["A Soft Bounce due to Greylisting.", "A Hard Bounce due to an invalid recipient address.", "A Soft Bounce due to DNS resolution failure.", "A Hard Bounce due to a revoked SSL certificate."],
+    "answer": "A Hard Bounce due to an invalid recipient address.",
+    "explanation": "Step 1: SMTP diagnostic codes follow strict numerical categories. Step 2: Codes beginning with '4' (e.g., 450) indicate transient/temporary errors (Soft Bounces), meaning the server will try again later. Step 3: Codes beginning with '5' (e.g., 550) indicate permanent fatal errors (Hard Bounces). Step 4: The specific subcode '5.1.1 User unknown' means the receiving server exists, but it explicitly states the mailbox (the part before the @ symbol) does not exist on their system. Step 5: This is a definitive Hard Bounce.",
+    "trick": "Bank/IT Trap: SMTP Error 4xx = Try again later (Soft). Error 5xx = Fatal, do not try again (Hard). Memorize the leading digits!",
+    "tip": "SMTP 5xx codes indicate permanent fatal errors, officially classifying the delivery as a Hard Bounce."
+  },
+  {
+    "id": 59,
+    "question": "In the architecture of modern web browsers, what specific role does the 'V8' engine play within Google Chrome?",
+    "options": ["It parses HTML tags and constructs the Document Object Model (DOM).", "It compiles and executes JavaScript code into machine-level instructions at runtime.", "It renders CSS animations and transitions on the hardware GPU.", "It manages the SSL/TLS cryptographic handshakes during HTTPS connections."],
+    "answer": "It compiles and executes JavaScript code into machine-level instructions at runtime.",
+    "explanation": "Step 1: A browser relies on two major processing engines. Step 2: The 'Rendering Engine' (like Blink or WebKit) parses HTML and CSS to draw the physical pixels on the screen (the DOM). Step 3: However, web pages also contain complex programming logic (JavaScript). Step 4: Google Chrome delegates JS execution to a specialized engine called 'V8'. Step 5: V8 acts as a Just-In-Time (JIT) compiler, taking raw JavaScript text and instantly converting it into native machine code, providing massive speed advantages for web apps.",
+    "trick": "Bank/IT Trap: Blink = HTML/CSS Rendering. V8 = JavaScript execution. Do not confuse the visual renderer with the logic compiler!",
+    "tip": "The V8 engine explicitly compiles and executes JavaScript, separate from the Blink visual rendering engine."
+  },
+  {
+    "id": 60,
+    "question": "Assertion (A): An email server that strictly enforces DMARC (Domain-based Message Authentication, Reporting, and Conformance) policies will convert certain spoofed phishing emails from successful deliveries into Hard Bounces. Reason (R): DMARC utilizes DNS records to verify that the sender's IP address matches the authorized SPF records of the sending domain, instantly rejecting unauthenticated spoofed mail. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Phishers often spoof the 'From' address (e.g., ceo@bank.com) using a rogue mail server. Step 2: Standard SMTP blindly accepts this. Step 3: DMARC is a security protocol. When the receiving server gets the email, it checks the DNS records of 'bank.com' (Reason R). Step 4: It verifies the SPF (Sender Policy Framework) to see if the sending IP is actually authorized by the bank. Step 5: If it fails, DMARC tells the receiving server to reject the message entirely. Because this rejection is permanent and policy-based, it constitutes an administrative Hard Bounce (Assertion A).",
+    "trick": "Bank/IT Trap: Hard bounces aren't just for 'bad email addresses'. Strict security policies (like DMARC/SPF failures) cause immediate, permanent administrative hard bounces.",
+    "tip": "DMARC causes spoofed emails to hard bounce by verifying sender IPs against authorized DNS records."
+  },
+  {
+    "id": 61,
+    "question": "A web developer is building a highly complex, graphic-intensive 3D browser game. They want the code to run at near-native C++ speeds rather than relying on standard JavaScript performance. Which modern web architecture standard enables this capability within the browser engine?",
+    "options": ["WebGL", "WebAssembly (Wasm)", "HTML5 Canvas", "Blink Hardware Acceleration"],
+    "answer": "WebAssembly (Wasm)",
+    "explanation": "Step 1: Historically, JavaScript was the only programming language native to web browsers. Even with JIT compilers like V8, JS is too slow for high-end 3D gaming or video editing. Step 2: WebGL provides graphics APIs, but doesn't solve the core logic processing speed. Step 3: WebAssembly (Wasm) is a revolutionary binary instruction format. Step 4: It allows developers to write code in C, C++, or Rust, compile it into a highly compact binary format, and execute it directly alongside JavaScript within the browser engine at near-native CPU speeds.",
+    "trick": "Bank/IT Trap: WebGL is for rendering graphics. WebAssembly is for executing heavy CPU logic (compiling C++ to run in a browser).",
+    "tip": "WebAssembly allows C/C++ code to compile into a binary format executing natively inside browsers."
+  },
+  {
+    "id": 62,
+    "question": "Assertion (A): Implementing a 'Greylisting' defense mechanism on an enterprise mail server inherently increases the number of Soft Bounces recorded in the server logs. Reason (R): Greylisting intentionally rejects the first delivery attempt from any unknown sender with a temporary 4xx SMTP error code, forcing legitimate mail servers to queue the message and retry later. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Greylisting is a highly effective anti-spam technique. Step 2: When an unknown server tries to deliver an email, the defending server intentionally rejects it with a 4xx code (e.g., 451 Try again later). Step 3: A 4xx code is the definition of a Soft Bounce (Assertion A). Step 4: Spambots are designed to send millions of emails fast; they rarely bother to queue and retry failed deliveries. Step 5: Legitimate mail servers (like Exchange or Gmail) strictly adhere to RFC protocols and WILL queue the soft-bounced message and retry 15 minutes later. On the second attempt, the greylisting filter lets it pass (Reason R).",
+    "trick": "Bank/IT Trap: Greylisting weaponizes the definition of a Soft Bounce. It uses a temporary failure to filter out lazy spam scripts while allowing legitimate servers to retry.",
+    "tip": "Greylisting intentionally causes Soft Bounces to filter out spam bots that refuse to retry."
+  },
+  {
+    "id": 63,
+    "question": "Which of the following MIME Content-Type headers explicitly informs the receiving email client to render the payload as an embedded image within the email body, rather than treating it as a downloadable attachment?",
+    "options": ["Content-Type: image/jpeg; disposition=attachment", "Content-Type: text/html; encoding=base64", "Content-Type: multipart/alternative", "Content-Type: image/png; Content-Disposition: inline"],
+    "answer": "Content-Type: image/png; Content-Disposition: inline",
+    "explanation": "Step 1: When a server sends an image via MIME, it must tell the client what the file is (Content-Type) and how to handle it visually (Content-Disposition). Step 2: The `Content-Type: image/png` declares the file type. Step 3: The crucial parameter is `Content-Disposition`. Step 4: If disposition is set to `attachment`, the email client displays a paperclip icon and forces the user to download the file. Step 5: If disposition is set to `inline`, the email client is instructed to render the image directly alongside the text within the viewing pane.",
+    "trick": "Bank/IT Trap: Content-Disposition is the key! 'Attachment' equals a download link. 'Inline' equals viewing it physically inside the email body.",
+    "tip": "MIME 'Content-Disposition: inline' forces attachments to render visually inside the email body."
+  },
+  {
+    "id": 64,
+    "question": "Assertion (A): Apple mandates that all third-party web browsers available on the iOS App Store (such as Google Chrome or Mozilla Firefox) must utilize the WebKit rendering engine. Reason (R): WebKit is the only rendering engine structurally capable of executing ARM-based iOS machine code for touchscreen interfaces. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Assertion A is a true statement regarding Apple's historical App Store policies. For security and control reasons, Apple strictly forces all competing browsers on iPhones/iPads to use Apple's own WebKit engine. Step 2: This means Chrome on iOS does not use Blink; it is essentially a customized skin over Safari's WebKit. Step 3: Reason R is entirely false. Blink and Gecko are perfectly capable of running on ARM hardware and touchscreen devices (as evidenced by Chrome and Firefox on Android). Apple's restriction is purely policy-driven, not a structural code limitation.",
+    "trick": "Bank/IT Trap: Chrome on Android uses Blink. Chrome on Windows uses Blink. Chrome on an iPhone uses WebKit! Apple's strict policy enforces engine monopolies on iOS.",
+    "tip": "Apple policy forces all iOS browsers (including Chrome) to use the Safari WebKit engine."
+  },
+  {
+    "id": 65,
+    "question": "A forensic investigator is analyzing network traffic and notices an email transmission containing the header `Content-Transfer-Encoding: Base64`. What is the specific mathematical function of Base64 encoding in the context of this email?",
+    "options": ["It encrypts the email payload to prevent unauthorized packet sniffing during SMTP transmission.", "It compresses a large video file into a smaller ZIP format to bypass server attachment size limits.", "It translates 8-bit binary data into a restricted 64-character subset of 7-bit ASCII to ensure compatibility with legacy SMTP servers.", "It digitally signs the email to prove the sender's identity to the receiving DMARC server."],
+    "answer": "It translates 8-bit binary data into a restricted 64-character subset of 7-bit ASCII to ensure compatibility with legacy SMTP servers.",
+    "explanation": "Step 1: Email (SMTP) was originally built to handle only standard 7-bit ASCII text (basic English letters and numbers). Step 2: A PDF or JPEG file consists of raw 8-bit binary data containing non-printable characters. Step 3: If you push raw binary through an old SMTP server, the server will misinterpret the bytes and corrupt the file. Step 4: Base64 encoding takes the binary data and translates it completely into a safe alphabet of 64 standard ASCII characters (A-Z, a-z, 0-9, +, /). Step 5: This makes the file perfectly safe for SMTP transport, after which the receiving client decodes it back to binary.",
+    "trick": "Bank/IT Trap: Base64 is NOT encryption! It provides zero security. It is purely a translation mechanism to ensure data survives legacy text-based protocols.",
+    "tip": "Base64 translates binary files into safe ASCII text to prevent corruption across SMTP servers."
+  },
+  {
+    "id": 66,
+    "question": "Assertion (A): Academic databases, corporate intranets, and premium news archives are classified as belonging to the 'Deep Web' rather than the 'Surface Web'. Reason (R): These websites actively embed the `<meta name=\"robots\" content=\"noindex\">` HTML tag in their source code to intentionally block Google and Bing crawlers from mapping their data. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, but R is not the correct explanation of A",
+    "explanation": "Step 1: Assertion A is true. The Deep Web consists of any internet content that standard search engines cannot access (paywalls, logins, intranets). Step 2: Reason R is also a true statement; webmasters do use the 'noindex' meta tag to instruct polite search engines to ignore specific pages. Step 3: However, Reason R is NOT the primary correct explanation for A. Academic databases and corporate intranets belong to the Deep Web primarily because they sit behind authentication barriers (login screens and passwords). A web crawler physically cannot type in a password to access the data, regardless of meta tags.",
+    "trick": "Bank/IT Trap: The vast majority of the Deep Web isn't hiding via 'noindex' tags. It's simply hiding behind a login screen. A crawler can't bypass a password prompt.",
+    "tip": "The Deep Web primarily exists because web crawlers cannot bypass authentication barriers (login screens)."
+  },
+  {
+    "id": 67,
+    "question": "When an email server attempts to deliver a message and encounters a 'Soft Bounce', what is the standard architectural protocol the Mail Transfer Agent (MTA) employs to resolve the issue?",
+    "options": ["It immediately converts the email to a Base64 text string and resends it.", "It immediately deletes the email and sends an automated Non-Delivery Report (NDR) to the sender.", "It places the email into a retry queue and attempts redelivery at exponentially increasing time intervals for a specified duration (e.g., 48 to 72 hours).", "It queries the DNS MX records to find an alternative email address for the recipient."],
+    "answer": "It places the email into a retry queue and attempts redelivery at exponentially increasing time intervals for a specified duration (e.g., 48 to 72 hours).",
+    "explanation": "Step 1: A Soft Bounce (a 4xx SMTP error) signifies a temporary issue, such as a full inbox, a server rebooting, or greylisting. Step 2: The sending Mail Transfer Agent (MTA, like Exchange or Postfix) recognizes this as a transient failure. Step 3: Standard SMTP protocol dictates that the MTA must not give up immediately. Step 4: The MTA places the email in a deferred queue. It retries delivery (e.g., after 15 mins, then 1 hour, then 4 hours). Step 5: If the issue resolves within the server's timeout window (usually 2 to 5 days), the email is delivered. If the timer expires, it upgrades the failure to a Hard Bounce and notifies the sender.",
+    "trick": "Bank/IT Trap: Soft Bounces are quiet! The sender usually has no idea a soft bounce occurred unless the server fails completely after 48-72 hours, at which point an NDR is generated.",
+    "tip": "Soft Bounces trigger the MTA to queue the message and retry delivery over several days."
+  },
+  {
+    "id": 68,
+    "question": "Which of the following browser architectural components is explicitly responsible for converting the Document Object Model (DOM) and the CSS Object Model (CSSOM) into the physical pixels displayed on the user's monitor?",
+    "options": ["The JavaScript V8 Engine", "The Networking Layer", "The Rendering Engine", "The User Interface Shell"],
+    "answer": "The Rendering Engine",
+    "explanation": "Step 1: A web browser is composed of several high-level components. Step 2: The Networking Layer fetches the raw HTML/CSS from the internet. Step 3: The JavaScript engine executes logic. Step 4: The Rendering Engine (like Blink, Gecko, or WebKit) is the core visual component. Step 5: It parses the raw HTML to build the DOM tree, parses the CSS to build the CSSOM tree, combines them into a Render Tree, calculates the geometric layout, and finally 'paints' the exact pixels onto the user's screen.",
+    "trick": "Bank/IT Trap: The UI Shell is just the browser's buttons (Back, Forward, URL bar). The Rendering Engine is the heavy lifter that draws the actual webpage content.",
+    "tip": "The Rendering Engine mathematically combines the DOM and CSSOM to paint physical pixels."
+  },
+  {
+    "id": 69,
+    "question": "Assertion (A): An email campaign management system will automatically and immediately scrub an email address from its mailing list if it receives a single 'Soft Bounce' notification. Reason (R): Soft Bounces indicate that the recipient domain has explicitly blacklisted the sender's IP address, making future delivery mathematically impossible. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A Soft Bounce is a temporary issue (like 'mailbox full' or 'server busy'). Step 2: Because it is temporary, marketing systems DO NOT scrub the address immediately. They usually wait for 3 to 5 consecutive soft bounces over a period of weeks before determining the address is dead. Therefore, Assertion A is false. Step 3: Reason R is also false. If a domain explicitly blacklists your IP, the server will flatly reject the connection with a 5xx fatal error, which constitutes a Hard Bounce, not a soft one.",
+    "trick": "Bank/IT Trap: Hard Bounces = Scrub immediately. Soft Bounces = Give it a few more tries on subsequent campaigns before scrubbing.",
+    "tip": "Soft Bounces are temporary; mailing lists tolerate several consecutive soft bounces before scrubbing an address."
+  },
+  {
+    "id": 70,
+    "question": "In the context of the Deep Web vs. the Dark Web, what is the specific architectural requirement that differentiates accessing a '.onion' website from accessing a standard unindexed corporate intranet portal?",
+    "options": ["The '.onion' site requires payment via cryptocurrency, while the intranet requires an employee ID.", "The '.onion' site relies on the Onion Routing protocol overlay network which actively anonymizes IP addresses, requiring a specialized browser like Tor to resolve the address.", "The '.onion' site is hosted on military servers, while intranets are hosted on commercial AWS servers.", "The '.onion' site bypasses the DNS system entirely by using raw IPv6 broadcasting."],
+    "answer": "The '.onion' site relies on the Onion Routing protocol overlay network which actively anonymizes IP addresses, requiring a specialized browser like Tor to resolve the address.",
+    "explanation": "Step 1: An unindexed corporate intranet is part of the Deep Web. It uses standard TCP/IP routing and standard DNS. A standard browser (Chrome) can access it if you type the URL and provide a password. Step 2: A `.onion` site belongs to the Dark Web. Step 3: Dark Web sites do not use standard internet routing. They sit on an encrypted overlay network. Step 4: The Tor (The Onion Router) network encrypts traffic through multiple randomized nodes to hide both the server's and the user's IP addresses. Step 5: Standard browsers cannot resolve a `.onion` domain; it strictly requires Tor software to negotiate the encrypted circuit.",
+    "trick": "Bank/IT Trap: Deep Web = Standard internet, just hidden behind passwords. Dark Web = Encrypted overlay network requiring specialized routing software (Tor/I2P).",
+    "tip": "Dark Web '.onion' sites require the Tor browser to navigate their encrypted overlay routing network."
+  },
+  {
+    "id": 71,
+    "question": "Assertion (A): The original implementation of Microsoft's Internet Explorer (IE) utilized the 'Trident' rendering engine, which was heavily criticized for failing to adhere to W3C web standards. Reason (R): Trident was deeply intertwined with the Windows operating system shell, prioritizing proprietary Microsoft technologies (like ActiveX) over universal HTML compatibility. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: During the browser wars, Microsoft built Internet Explorer using the 'Trident' rendering engine (MSHTML). Step 2: To gain a competitive edge, Microsoft deeply embedded Trident into Windows itself (it powered Windows Explorer windows as well). Step 3: They pushed proprietary technologies like ActiveX and VBScript. Step 4: Because Trident prioritized these proprietary tools over the open standards established by the World Wide Web Consortium (W3C), developers had to write completely different code just to make websites work in IE. Step 5: This architectural flaw (Reason R) explains the immense criticism of the Trident engine (Assertion A).",
+    "trick": "Bank/IT Trap: Microsoft abandoned Trident with the launch of Edge. They built EdgeHTML, then abandoned that too, finally surrendering to Google's Blink engine.",
+    "tip": "Internet Explorer's 'Trident' engine prioritized proprietary Windows tech over universal W3C web standards."
+  },
+  {
+    "id": 72,
+    "question": "An email administrator configures an Out-of-Office auto-responder. Why is it a critical best practice for the auto-responder software to explicitly evaluate the MIME headers before replying to incoming messages?",
+    "options": ["To ensure the auto-response is translated into the sender's native language.", "To prevent 'Bounce Loops' by identifying and ignoring incoming automated Non-Delivery Reports (NDRs) or system mailing list messages.", "To extract the sender's IP address and block spam.", "To compress the auto-reply payload, saving SMTP bandwidth."],
+    "answer": "To prevent 'Bounce Loops' by identifying and ignoring incoming automated Non-Delivery Reports (NDRs) or system mailing list messages.",
+    "explanation": "Step 1: An auto-responder blindly replies to every incoming email. Step 2: Suppose a sender emails an invalid address, triggering an automated Hard Bounce (NDR) from the server. Step 3: The sender's auto-responder receives the NDR and replies to it. The server receives the reply, fails again, and sends another NDR. This creates an infinite 'Bounce Loop' that can crash mail servers. Step 4: To stop this, modern auto-responders parse the MIME headers (specifically looking for `Auto-Submitted: auto-generated` or checking if the Return-Path is null `<>`). Step 5: By reading these headers, the software intelligently ignores automated bounces.",
+    "trick": "Bank/IT Trap: Auto-responders must be smart enough to know when NOT to respond. Parsing MIME headers prevents catastrophic infinite server loops.",
+    "tip": "Auto-responders must parse MIME headers to ignore automated bounces and prevent infinite email loops."
+  },
+  {
+    "id": 73,
+    "question": "Assertion (A): A 'Spam Trap' (or Honeypot) email address will reliably generate a Soft Bounce when targeted by a bulk mailing system. Reason (R): Spam traps are actively monitored but intentionally maintained with a zero-byte storage quota, causing all incoming messages to fail with a '452 Mailbox Full' error. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A Spam Trap (Honeypot) is a secret email address created by ISPs or security researchers that has never been published or opted-into any mailing list. Step 2: Its sole purpose is to catch spammers. Step 3: If an ISP configures a spam trap, they actively ACCEPT the incoming email to analyze the sender's data and immediately blacklist their IP. Step 4: Because the email is successfully accepted by the server, it generates NO bounce (neither hard nor soft). Step 5: Both Assertion A and Reason R completely misunderstand the stealth architecture of a honeypot.",
+    "trick": "Bank/IT Trap: A honeypot must silently catch the prey. If it bounces the email, the spammer's automated software will just scrub the address and escape detection. Spam traps successfully accept the mail!",
+    "tip": "Spam Traps (Honeypots) silently accept emails without bouncing to successfully identify and blacklist spammers."
+  },
+  {
+    "id": 74,
+    "question": "Which of the following components of the MIME architecture is responsible for enabling the creation of 'Rich Text' HTML emails that seamlessly fall back to plain text if the recipient's email client cannot render web code?",
+    "options": ["Content-Type: multipart/alternative", "Content-Transfer-Encoding: Quoted-Printable", "Content-Disposition: Attachment", "X-Mailer: Microsoft Outlook"],
+    "answer": "Content-Type: multipart/alternative",
+    "explanation": "Step 1: Email senders want their messages to look beautiful (HTML), but some recipients use older or highly secure text-only clients. Step 2: Sending only HTML results in the recipient seeing raw code. Step 3: The MIME standard solves this using `multipart/alternative`. Step 4: The email client generates the exact same message in two formats: a basic Plain Text version and a styled HTML version. Step 5: Both versions are packed into a single email payload. The receiving client looks at the `multipart/alternative` header and automatically selects the most advanced format it is capable of rendering.",
+    "trick": "Bank/IT Trap: `multipart/mixed` is for adding attachments. `multipart/alternative` is for offering the exact same content in two different formats (HTML vs Text).",
+    "tip": "'Multipart/alternative' bundles both HTML and Plain Text versions of an email for maximum compatibility."
+  },
+  {
+    "id": 75,
+    "question": "Assertion (A): The 'Brave' browser offers superior native privacy features compared to Google Chrome, despite both browsers utilizing the exact same underlying Blink rendering engine. Reason (R): Brave achieves this by modifying the V8 JavaScript compiler to completely disable the execution of all third-party scripts at the hardware level. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Brave, Edge, and Chrome all use Chromium (Blink engine + V8 engine) as their base architecture. Step 2: Assertion A is true; Brave integrates aggressive native ad-blocking and tracker-blocking, making it more private out-of-the-box than Chrome. Step 3: However, Reason R is completely false. Brave does NOT disable all third-party JavaScript at the hardware level (which would break 90% of the modern internet). Step 4: Brave achieves privacy through robust, software-level filter lists (similar to uBlock Origin) that intercept network requests for known tracking domains before the engine processes them.",
+    "trick": "Bank/IT Trap: Browsers built on Chromium (like Brave) don't rewrite the core V8 logic; they add specialized networking and filtering layers on top of it.",
+    "tip": "Brave uses Chromium's Blink engine but adds aggressive network-level ad and tracker blocking filters."
+  },
+  {
+    "id": 76,
+    "question": "A forensic analyst is examining a server log to determine why a critical internal corporate dashboard is inaccessible via standard web search engines. The dashboard is hosted on a public IP address without password protection. Which of the following mechanisms definitively places this dashboard into the 'Deep Web' category?",
+    "options": ["The server utilizes a '.local' top-level domain instead of '.com'.", "The web server root directory contains a `robots.txt` file explicitly specifying `Disallow: /` for all User-Agents.", "The server forces all incoming traffic to route through an encrypted Tor relay node.", "The HTML source code utilizes HTML5 Canvas to draw the dashboard."],
+    "answer": "The web server root directory contains a `robots.txt` file explicitly specifying `Disallow: /` for all User-Agents.",
+    "explanation": "Step 1: The Deep Web is defined as any part of the internet that is not indexed by search engines. Step 2: While passwords are the most common method, they are not the only method. Step 3: If a site is public, a search engine crawler (like Googlebot) will eventually find it. Step 4: However, polite crawlers obey the `robots.txt` file located at the root of a server. Step 5: A `Disallow: /` command instructs all honest search engine bots to immediately turn around and avoid indexing any pages on that server. Because it is unindexed, the site technically resides in the Deep Web.",
+    "trick": "Bank/IT Trap: Unindexed does not mean invisible or secure. A hacker can still type the IP address and view the site. `robots.txt` only stops honest search engines, pushing the site into the Deep Web.",
+    "tip": "A 'robots.txt' file with 'Disallow' instructions prevents indexing, placing public sites into the Deep Web."
+  },
+  {
+    "id": 77,
+    "question": "Assertion (A): Executing a MIME encoding process (like Base64) on a 10 Megabyte (MB) video attachment will cause the final transmitted email size to be significantly larger than 10 MB. Reason (R): Base64 encoding utilizes only 64 safe ASCII characters to represent binary data, requiring 4 ASCII characters to represent every 3 bytes of raw binary data, inherently increasing the payload size by approximately 33%. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Binary data uses 8 bits per byte. Step 2: Base64 relies on a safe subset of ASCII text, where each character only represents 6 bits of data. Step 3: To translate 8-bit binary into 6-bit text, the math forces the algorithm to take 3 bytes of binary (24 bits) and split it into 4 characters of Base64 text (4 x 6 = 24 bits). Step 4: This 3-to-4 translation ratio bloats the file size by exactly 33%. Step 5: Therefore, a 10 MB video becomes roughly a 13.3 MB email attachment, confirming both A and R as fundamentally linked facts.",
+    "trick": "Bank/IT Trap: This is why enterprise email servers have strict 25MB attachment limits. A 20MB file will actually bloat to 26MB during MIME encoding, crashing against the server limit and causing a Soft/Hard bounce!",
+    "tip": "MIME Base64 encoding inflates the physical size of binary file attachments by approximately 33%."
+  },
+  {
+    "id": 78,
+    "question": "During the establishment of a secure HTTPS connection, what critical operation must the browser rendering engine's underlying network layer perform before it can parse the HTML DOM?",
+    "options": ["It must execute the JavaScript V8 engine to validate the site's cookies.", "It must query the MIME type via a UDP broadcast.", "It must complete a TCP 3-way handshake followed by a TLS cryptographic handshake to negotiate cipher suites and verify certificates.", "It must download the robots.txt file to ensure the site allows client-side rendering."],
+    "answer": "It must complete a TCP 3-way handshake followed by a TLS cryptographic handshake to negotiate cipher suites and verify certificates.",
+    "explanation": "Step 1: Rendering engines (Blink/WebKit) cannot process data until the networking layer securely delivers it. Step 2: When requesting an HTTPS site, the browser first must establish basic network connectivity via the TCP 3-way handshake (SYN, SYN-ACK, ACK). Step 3: Because it is HTTPS, an encryption layer must be established before sending the HTTP GET request. Step 4: The browser and server execute a TLS Handshake (Client Hello, Server Hello, Certificate Exchange) to agree on encryption keys. Step 5: Only after the secure tunnel is built does the server transmit the HTML for the rendering engine to parse.",
+    "trick": "Bank/IT Trap: The order of operations is rigid: TCP Handshake -> TLS Handshake -> HTTP Request -> DOM Rendering. The renderer waits blindly until the network tunnel is secure.",
+    "tip": "HTTPS requires a TCP handshake followed by a TLS cryptographic handshake before rendering HTML."
+  },
+  {
+    "id": 79,
+    "question": "Assertion (A): Safari's WebKit engine is inherently more secure than Chrome's Blink engine because WebKit compiles its HTML directly into Assembly language, bypassing memory leaks. Reason (R): Rendering engines are primarily built using low-level languages like C++ to optimize the mathematical calculation of the Render Tree layout. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Reason R is true. WebKit, Blink, and Gecko are massive, highly complex codebases written primarily in C++ because calculating CSS grid layouts and painting millions of pixels requires bare-metal CPU optimization. Step 2: However, Assertion A is completely false. Step 3: WebKit does not compile HTML into Assembly. HTML is a markup language, not a programming language; it is parsed into a DOM tree, not compiled into executable machine code. Step 4: Furthermore, WebKit is not inherently 'more secure' than Blink; both have suffered severe zero-day memory leak vulnerabilities.",
+    "trick": "Bank/IT Trap: HTML and CSS are NEVER compiled into executable machine code. They are structural blueprints parsed by the C++ rendering engine.",
+    "tip": "Rendering engines (Blink/WebKit) are built in C++ to rapidly parse HTML, but HTML is never compiled."
+  },
+  {
+    "id": 80,
+    "question": "A corporate email server is attempting to send an important invoice. The receiving server returns the SMTP code '421 4.3.2 Service not available, closing transmission channel'. What is the correct classification for this event, and what is the standard protocol response?",
+    "options": ["Hard Bounce; the email is immediately deleted and the recipient is scrubbed from the active directory.", "Soft Bounce; the sending MTA retains the email in its deferred queue and will attempt to resend it later.", "Hard Bounce; the sending MTA encrypts the email via MIME and routes it through an alternative ISP.", "Soft Bounce; the sending MTA automatically converts the email to a plaintext SMS message."],
+    "answer": "Soft Bounce; the sending MTA retains the email in its deferred queue and will attempt to resend it later.",
+    "explanation": "Step 1: Analyze the SMTP error code. The code begins with a '4' (421). Step 2: Any SMTP code beginning with a 4 signifies a transient, temporary error (e.g., server overloaded, connection dropped, out of memory). Step 3: This explicitly classifies the event as a 'Soft Bounce'. Step 4: Standard Mail Transfer Agent (MTA) protocols dictate that upon receiving a 4xx error, the server must not drop the message. Step 5: It places the message in a deferred queue and executes a retry schedule (e.g., attempting delivery every 30 minutes for up to 48 hours).",
+    "trick": "Bank/IT Trap: 4xx = Soft Bounce (Retry). 5xx = Hard Bounce (Fail permanently). Memorizing the first digit dictates the entire server behavior.",
+    "tip": "SMTP 4xx errors classify as Soft Bounces, forcing the sending server to queue and retry delivery."
+  },
+  {
+    "id": 81,
+    "question": "Assertion (A): An email attachment containing a malicious executable virus will safely bounce back to the sender as a 'Soft Bounce' if the receiving server's antivirus software intercepts it. Reason (R): Antivirus gateways reject malware using a 5xx SMTP error code to ensure the sending server permanently terminates the malicious transmission attempt. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Reason R correctly describes how modern email security gateways function. When they detect a virus payload in the MIME stream, they actively reject the connection using a permanent 5xx error code (e.g., 554 5.7.1 Message rejected due to malware). Step 2: Because a 5xx error is a permanent, fatal rejection, it constitutes a Hard Bounce, not a Soft Bounce. Step 3: A Soft Bounce (4xx) would tell the infected sender to 'try again later', which defeats the purpose of antivirus blocking. Therefore, Assertion A is completely false.",
+    "trick": "Bank/IT Trap: Security blocks (Antivirus, DMARC failures, strict SPAM filters) almost universally generate 5xx Hard Bounces. They want to kill the transmission permanently, not delay it.",
+    "tip": "Antivirus and strict security policy rejections generate permanent 5xx Hard Bounces, not Soft Bounces."
+  },
+  {
+    "id": 82,
+    "question": "Which specific architectural paradigm allows the 'Blink' rendering engine in Google Chrome to prevent a catastrophic crash on a single website tab from taking down the entire browser application?",
+    "options": ["Just-In-Time (JIT) Compilation", "Sandboxed Multi-Process Architecture", "Hardware Accelerated DOM Tree Mapping", "Synchronous MIME Execution"],
+    "answer": "Sandboxed Multi-Process Architecture",
+    "explanation": "Step 1: Older browsers (like IE) used a monolithic, single-process architecture. If one tab encountered a fatal JavaScript loop or memory leak, the entire application crashed. Step 2: When Google designed Chrome and the Blink engine, they revolutionized the architecture by implementing a Multi-Process model. Step 3: The main 'Browser Process' manages the UI and tabs. Every single tab is spawned as an entirely separate, isolated 'Renderer Process' running in its own secure Sandbox. Step 4: If Tab A crashes, only Tab A's process dies (the 'Aw, Snap!' screen). The main Browser Process and all other tabs remain perfectly stable and unaffected.",
+    "trick": "Bank/IT Trap: This architecture is why Chrome uses so much RAM in Task Manager! Every tab requires its own dedicated memory space to guarantee crash isolation.",
+    "tip": "Blink utilizes a Multi-Process Sandbox architecture to ensure single tab crashes do not kill the entire browser."
+  },
+  {
+    "id": 83,
+    "question": "Assertion (A): It is impossible to locate a user's private medical portal on the Surface Web because standard search engines lack the algorithms to index HTTPS encrypted sites. Reason (R): Web crawlers operate purely on standard HTTP port 80 and immediately drop connections when encountering an SSL/TLS cryptographic certificate. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Assertion A is false. A medical portal is part of the Deep Web, but NOT because of HTTPS encryption. Google heavily prioritizes and indexes millions of HTTPS websites daily. Step 2: Reason R is completely false. Modern web crawlers perfectly navigate TLS handshakes on Port 443. Step 3: The actual reason private medical portals belong to the Deep Web is because the sensitive data is located behind a User Authentication barrier (a login screen). Crawlers do not have usernames and passwords, so they cannot index the data located past the login page.",
+    "trick": "Bank/IT Trap: HTTPS/Encryption does not make a site 'Deep Web'. Wikipedia is HTTPS, and it's heavily indexed. Authentication barriers (passwords) define the Deep Web.",
+    "tip": "The Deep Web is created by Authentication barriers (passwords), not by HTTPS encryption protocols."
+  },
+  {
+    "id": 84,
+    "question": "In the MIME standard, what is the critical function of the 'Boundary' string defined within a `multipart/mixed` email header?",
+    "options": ["It defines the exact physical byte size of the total email payload.", "It provides a unique, randomly generated text marker used to strictly separate the different data components (e.g., separating the text body from the Base64 attachment).", "It prevents cross-site scripting (XSS) attacks by isolating JavaScript execution.", "It restricts the email from being forwarded outside of the original receiving domain."],
+    "answer": "It provides a unique, randomly generated text marker used to strictly separate the different data components (e.g., separating the text body from the Base64 attachment).",
+    "explanation": "Step 1: A multipart email contains different elements (HTML text, a PDF, a JPEG) combined into one massive text file. Step 2: The receiving email client must know exactly where the HTML text ends and where the PDF Base64 code begins. Step 3: In the main MIME header, a `boundary` parameter is defined (e.g., `boundary=\"----=_Part_1234\"`). Step 4: This exact random string is then inserted physically between every different section of the email payload. Step 5: The client parses the email, using the boundary strings as scissors to slice the payload back into distinct, readable files.",
+    "trick": "Bank/IT Trap: The boundary string must be completely unique and random. If the boundary string accidentally appeared naturally within the text of the email, the client would slice the email prematurely and corrupt the display!",
+    "tip": "MIME Boundaries are unique text markers used to slice multipart emails into distinct components."
+  },
+  {
+    "id": 85,
+    "question": "Assertion (A): A newsletter sent to an employee who recently resigned and had their corporate email account deleted will result in a 'Soft Bounce' because the account may be restored later. Reason (R): An SMTP server cannot permanently declare an address invalid unless the overarching domain name itself expires from the global DNS registry. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: When an employee leaves and their account is deleted, the corporate mail server updates its internal directory. Step 2: If a sender attempts to email that specific address, the receiving server will check its directory, find no match, and immediately reject the connection with a 5xx error (e.g., '550 User Unknown'). Step 3: A 5xx error is the strict definition of a permanent Hard Bounce. Therefore, Assertion A is false. Step 4: Reason R is also false. Mail servers have absolute authority over their own local mailboxes and can definitively reject specific users even while the primary domain remains fully active and valid.",
+    "trick": "Bank/IT Trap: Do not overthink 'what if the admin restores the account'. To the SMTP protocol at that exact millisecond, the address is dead. It returns a fatal 550 Hard Bounce.",
+    "tip": "Mailing a deleted or deactivated email account immediately generates a 5xx permanent Hard Bounce."
+  },
+  {
+    "id": 86,
+    "question": "Which legacy browser rendering engine, originally developed by Opera Software, was highly praised for its speed and standards compliance before being completely abandoned in 2013 in favor of transitioning to Google's Blink engine?",
+    "options": ["EdgeHTML", "Presto", "Trident", "KHTML"],
+    "answer": "Presto",
+    "explanation": "Step 1: Browser engine history is highly tested. Trident was IE. EdgeHTML was legacy Edge. Step 2: KHTML was the Linux engine that Apple forked to create WebKit. Step 3: 'Presto' was the proprietary rendering engine built by Opera Software for the Opera browser. Step 4: It was renowned for its lightning-fast JavaScript execution and strict W3C compliance. Step 5: However, maintaining a proprietary engine became too expensive. In 2013, Opera abandoned Presto and rebuilt their browser entirely on the Chromium project, adopting the Blink engine.",
+    "trick": "Bank/IT Trap: Opera is no longer independent. Like Edge and Brave, modern Opera is just a customized UI running on top of Google's Blink engine.",
+    "tip": "'Presto' was Opera's proprietary rendering engine before they abandoned it for Chromium's Blink."
+  },
+  {
+    "id": 87,
+    "question": "Assertion (A): Implementing the 'Content-Transfer-Encoding: Quoted-Printable' MIME standard is mathematically more efficient than 'Base64' when attaching a mostly plaintext document containing only a few foreign language characters. Reason (R): Quoted-Printable encoding leaves standard 7-bit ASCII characters completely untouched, only expanding non-standard characters into 3-byte hexadecimal representations. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Base64 encodes EVERYTHING. A 100-page English text document encoded in Base64 will suffer a massive 33% size bloat. Step 2: Quoted-Printable (QP) is an alternative MIME encoding. Step 3: Reason R explains its genius: QP scans the document. If it sees a standard English letter 'A', it leaves it alone. It takes 1 byte. Step 4: If it sees a French 'é' or a German 'ö', it translates only that specific character into an equal sign followed by hex (e.g., `=E9`). Step 5: Because the vast majority of the document remains untouched, QP minimizes file bloat for text-heavy emails compared to Base64. Both A and R are perfectly accurate.",
+    "trick": "Bank/IT Trap: Base64 is for heavy binary (PDFs, Images). Quoted-Printable is for text documents that have a few weird characters scattered inside them.",
+    "tip": "Quoted-Printable MIME encoding minimizes bloat by only encoding non-standard characters, leaving basic ASCII untouched."
+  },
+  {
+    "id": 88,
+    "question": "In the context of the 'Dark Web', what is the fundamental cryptographic mechanism utilized by the 'Tor' network to ensure the anonymity of the user's IP address from the final destination server?",
+    "options": ["It uses the BGP protocol to randomly alter the Autonomous System Number (ASN) of the sender.", "It encapsulates the data in multiple nested layers of encryption, stripping off one layer of encryption at each sequential relay node before reaching the exit node.", "It utilizes a NAT router to translate the user's IP into a multicast MAC address.", "It requires the user to access the network via an offline virtual machine."],
+    "answer": "It encapsulates the data in multiple nested layers of encryption, stripping off one layer of encryption at each sequential relay node before reaching the exit node.",
+    "explanation": "Step 1: The Dark Web relies on overlay networks. Tor (The Onion Router) is the most famous. Step 2: Anonymity requires hiding the source IP. Step 3: When a user sends a request, the Tor software selects a circuit of three random nodes (Entry, Relay, Exit). Step 4: It wraps the data in three distinct layers of encryption (like the layers of an onion). Step 5: The Entry node peels off the first layer and forwards it. The Relay node peels the second. The Exit node peels the final layer and sends the raw request to the destination. Because no single node knows both the origin and the destination, absolute anonymity is achieved.",
+    "trick": "Bank/IT Trap: This is why it is called 'The Onion Router'. The nested layers of encryption are mathematically peeled away one hop at a time.",
+    "tip": "Tor achieves anonymity by routing traffic through randomized nodes, peeling away nested layers of encryption."
+  },
+  {
+    "id": 89,
+    "question": "Assertion (A): During the HTML parsing process, if the rendering engine encounters a `<script>` tag pointing to an external JavaScript file, the entire DOM construction process is paused until the script is fully downloaded and executed. Reason (R): JavaScript possesses the capability to radically alter the DOM structure (e.g., `document.write`); therefore, the engine must execute the script immediately to avoid rendering invalidated layouts. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The Rendering Engine parses HTML sequentially from top to bottom to build the DOM tree. Step 2: Assertion A states that hitting a `<script>` tag causes 'Render Blocking'. This is a factual, critical bottleneck in web performance. Step 3: Reason R explains why this happens. JavaScript can manipulate the HTML structure dynamically. Step 4: If the engine continued building the DOM while the script downloaded, and the script later commanded the deletion of a major `<div>`, all the engine's rendering work would be wasted. Step 5: To prevent this, the parser halts completely, waits for the V8 engine to execute the script, and only then resumes DOM construction. Both are true and linked.",
+    "trick": "Bank/IT Trap: This render-blocking behavior is why developers use the `defer` or `async` attributes on `<script>` tags, instructing the browser to download them in the background without pausing the DOM parser.",
+    "tip": "External <script> tags block DOM parsing because JavaScript can structurally alter the HTML layout."
+  },
+  {
+    "id": 90,
+    "question": "A corporate executive complains that an email sent to an external client was not delivered. The administrator checks the logs and sees a 'Hard Bounce' with the diagnostic message indicating a 'Sender Policy Framework (SPF) PermError'. What specific architectural misconfiguration caused this fatal bounce?",
+    "options": ["The executive's Outlook client is using an outdated SSL certificate to connect to the internal Exchange server.", "The receiving server's mailbox has exceeded its physical hard drive storage limit.", "The corporate domain's public DNS records contain a syntax error in their TXT record, rendering the receiver unable to verify the sender's IP authorization.", "The email contained an executable attachment that triggered the receiving server's anti-spam heuristic engine."],
+    "answer": "The corporate domain's public DNS records contain a syntax error in their TXT record, rendering the receiver unable to verify the sender's IP authorization.",
+    "explanation": "Step 1: SPF (Sender Policy Framework) is an email authentication protocol. Step 2: The sending corporation must publish a TXT record in their public DNS explicitly listing the IP addresses allowed to send email on their behalf. Step 3: When the receiver gets the email, it queries this DNS record. Step 4: An 'SPF PermError' specifically indicates that the receiver found the DNS record, but it was structurally invalid (e.g., a typo in the syntax, or too many DNS lookups). Step 5: Because the receiver cannot mathematically parse the rule, it assumes the email is unauthorized spoofing and permanently rejects it (Hard Bounce).",
+    "trick": "Bank/IT Trap: SPF failures are administrative Hard Bounces! They are caused by bad DNS configurations by the SENDER, not problems with the RECEIVER's mailbox.",
+    "tip": "SPF PermErrors trigger Hard Bounces due to syntax errors in the sender's public DNS records."
+  },
+  {
+    "id": 91,
+    "question": "Assertion (A): Web crawlers utilized by search engines like Google heavily prioritize parsing the CSS Object Model (CSSOM) over the Document Object Model (DOM) to determine search rankings. Reason (R): Search engines prioritize visual aesthetics and mobile responsiveness, which are entirely governed by CSS rules, rather than the raw textual content. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Web crawlers (Googlebot) traverse the internet to index content. Step 2: While modern crawlers do render pages to check for mobile-friendliness, their absolute primary focus is extracting semantic value (keywords, headings, links). Step 3: This semantic data resides entirely within the HTML structure, parsed as the Document Object Model (DOM). Step 4: The CSSOM dictates colors, margins, and animations, which have minimal impact on actual keyword relevance or search intent. Step 5: Therefore, crawlers heavily prioritize the DOM over the CSSOM. Both the Assertion and the Reason present a fundamentally flawed understanding of SEO and crawler architecture.",
+    "trick": "Bank/IT Trap: If a website is built purely with CSS animations and zero HTML text, a crawler will see an empty, useless page. Content is king; the DOM is paramount.",
+    "tip": "Search engine crawlers prioritize the HTML DOM over the CSSOM to extract relevant semantic text."
+  },
+  {
+    "id": 92,
+    "question": "In standard MIME formatting, which specific header parameter must be configured to ensure that a receiving email client correctly maps an attached Base64 file back to its original recognizable format (e.g., 'invoice.pdf') upon user download?",
+    "options": ["Content-Type: name=\"invoice.pdf\"", "Content-Disposition: filename=\"invoice.pdf\"", "X-Attachment-Name: \"invoice.pdf\"", "MIME-Version: \"invoice.pdf\""],
+    "answer": "Content-Disposition: filename=\"invoice.pdf\"",
+    "explanation": "Step 1: MIME breaks an email into parts. Step 2: The `Content-Type` header tells the client the file's raw data structure (e.g., `application/pdf`). Step 3: However, this doesn't give the file a name for the user's hard drive. Step 4: The `Content-Disposition` header tells the client how to present the file (e.g., `attachment`). Step 5: Critically, it is within this `Content-Disposition` header that the `filename=` parameter is defined. When the user clicks download, the client reads this exact parameter to name the resulting file on the desktop.",
+    "trick": "Bank/IT Trap: While older email clients used a `name=` parameter inside `Content-Type`, the strict modern RFC standard dictates that the `filename=` parameter belongs exclusively inside the `Content-Disposition` header.",
+    "tip": "The 'filename' parameter resides within the 'Content-Disposition' MIME header to name downloaded attachments."
+  },
+  {
+    "id": 93,
+    "question": "Assertion (A): The 'Surface Web' contains substantially less data volume than the 'Deep Web'. Reason (R): The Surface Web consists only of static HTML pages, whereas all dynamic web applications and large video streaming sites are relegated to the Deep Web. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Assertion A is a widely accepted fact. Estimates suggest the Deep Web contains 400 to 500 times more data than the Surface Web. Step 2: However, Reason R is entirely false. Step 3: The Surface Web contains massive amounts of dynamic applications and video streaming (e.g., public YouTube videos). Step 4: The reason the Deep Web is so massive is that it contains the entirety of the world's private databases: every medical record, every banking transaction, every corporate database, and every private email inbox. This private, password-protected data vastly outweighs public web pages.",
+    "trick": "Bank/IT Trap: Deep Web does not mean 'complex code'. It strictly means 'not indexed by Google'. Your personal Gmail inbox is massive, dynamic, and 100% part of the Deep Web.",
+    "tip": "The Deep Web dwarfs the Surface Web due to massive private databases and password-protected user accounts."
+  },
+  {
+    "id": 94,
+    "question": "A user attempts to open a website, but their browser's rendering engine halts on a blank white screen. Developer tools reveal that the browser is locked in a 'Layout/Reflow Thrashing' loop. What specific architectural interaction between the DOM and CSSOM causes this severe performance issue?",
+    "options": ["The CSSOM contains invalid hex color codes that crash the GPU shader.", "A JavaScript function is rapidly and repeatedly requesting a geometric measurement (e.g., element width) immediately after modifying a CSS style, forcing the engine to recalculate the entire page geometry recursively.", "The HTML DOM exceeds the maximum 10,000 node limit allowed by the Blink engine.", "The MIME type of the incoming HTML was incorrectly declared as plain text."],
+    "answer": "A JavaScript function is rapidly and repeatedly requesting a geometric measurement (e.g., element width) immediately after modifying a CSS style, forcing the engine to recalculate the entire page geometry recursively.",
+    "explanation": "Step 1: The browser calculates the exact physical location of every element (Layout/Reflow). Step 2: This is a highly CPU-intensive operation. Step 3: Normally, the browser waits until all script changes are done, then performs one single Layout calculation. Step 4: 'Layout Thrashing' occurs when bad JavaScript changes a style (e.g., `element.style.width = '100px'`) and instantly asks for a measurement (`element.offsetWidth`) inside a fast loop. Step 5: To provide the accurate measurement, the engine is forced to instantly recalculate the entire page layout. Doing this hundreds of times a second paralyzes the CPU and freezes the browser.",
+    "trick": "Bank/IT Trap: This is a highly advanced Tier 2 web performance concept. Reading layout properties (like offsetHeight) forces the browser to flush its queue and execute a massive mathematical reflow.",
+    "tip": "Layout Thrashing occurs when JavaScript repeatedly interleaves DOM style writes with layout measurement reads."
+  },
+  {
+    "id": 95,
+    "question": "Assertion (A): When an email generates a 'Soft Bounce' due to a Greylisting filter, the original sender receives an immediate Non-Delivery Report (NDR) warning them of the delay. Reason (R): The SMTP protocol dictates that any temporary 4xx failure code must generate an automated alert to maintain transparency with the end-user. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: When a sending mail server (MTA) hits a Greylisting filter, it receives a temporary 4xx Soft Bounce error. Step 2: Assertion A is completely false. Soft Bounces are silent to the end-user. The sending server's job is to shield the user from transient internet hiccups. Step 3: Reason R is also false. The SMTP protocol explicitly commands the MTA to place the email in a queue and attempt silent redelivery in the background. Step 4: An NDR is ONLY generated if the MTA exhausts its retry timer (e.g., failing continuously for 48 hours), at which point it upgrades the error to a fatal failure and finally alerts the user.",
+    "trick": "Bank/IT Trap: Users never see Soft Bounces! If you get a bounce message in your inbox instantly, it is a 5xx Hard Bounce. Soft bounces are handled entirely in the background by server admins.",
+    "tip": "Soft Bounces are resolved silently in the background by the MTA; they do not generate immediate NDRs."
+  },
+  {
+    "id": 96,
+    "question": "Which of the following browser architectures utilizes a strictly 'Single-Process' model, making it highly memory-efficient for low-end devices but extremely vulnerable to complete application crashes if a single background tab encounters a fatal JavaScript error?",
+    "options": ["Google Chrome (Blink)", "Legacy Internet Explorer 6 (Trident)", "Microsoft Edge (Blink)", "Mozilla Firefox Quantum (Gecko/Servo)"],
+    "answer": "Legacy Internet Explorer 6 (Trident)",
+    "explanation": "Step 1: Modern browsers (Chrome, modern Edge, and Firefox Quantum) all utilize Multi-Process architectures. They spawn a separate OS process for every single tab. This consumes massive RAM but ensures one tab crashing doesn't kill the whole browser. Step 2: Legacy browsers, notably Internet Explorer 6 utilizing the older Trident engine, used a Single-Process architecture. Step 3: All tabs, the UI, and the rendering engine shared one memory pool. Step 4: If Tab 3 hit an infinite loop or memory leak, the entire application locked up and crashed, destroying the user's session across all tabs.",
+    "trick": "Bank/IT Trap: Memory efficiency vs. Stability is the classic architecture trade-off. Chrome eats your RAM to guarantee stability. Legacy IE saved RAM but crashed constantly.",
+    "tip": "Legacy Internet Explorer used a single-process architecture, causing entire browser crashes from single tab failures."
+  },
+  {
+    "id": 97,
+    "question": "Assertion (A): The 'Content-Transfer-Encoding: 7bit' MIME header is heavily utilized to securely encrypt confidential plaintext emails over hostile networks. Reason (R): Because standard SMTP servers cannot alter or parse strict 7-bit ASCII data, the payload passes through intermediate gateways transparently, preventing man-in-the-middle data manipulation. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Assertion A is completely false. The '7bit' encoding in MIME provides absolutely zero encryption, security, or obfuscation. It is plain, readable text. Step 2: Reason R is also fundamentally flawed. The reason '7bit' is declared is simply to assure legacy SMTP servers that the data natively conforms to the original RFC 821 limitations (which could only handle 7-bit ASCII) and does not require complex binary translation like Base64. Step 3: It has absolutely no mechanism to prevent man-in-the-middle attacks or data manipulation. True email security requires S/MIME or PGP encryption.",
+    "trick": "Bank/IT Trap: MIME Encodings (7bit, 8bit, Base64, Quoted-Printable) are translation tools for compatibility. They are NEVER security tools.",
+    "tip": "MIME '7bit' encoding simply denotes plain ASCII text compatibility; it provides zero cryptographic security."
+  },
+  {
+    "id": 98,
+    "question": "In the context of the Dark Web, the '.onion' pseudo-top-level domain relies on cryptographic hashes rather than the standard centralized Domain Name System (DNS). How does the Tor network physically route traffic to a specific hidden service without an IP address?",
+    "options": ["It uses the BGP protocol to broadcast the hidden service's MAC address globally.", "The '.onion' address itself is derived from the public key of the hidden service; the Tor network uses Distributed Hash Tables (DHT) to locate the service's introduction points.", "It relies on Internet Service Providers (ISPs) to maintain a secret offline DNS registry.", "It converts the '.onion' string into a standard IPv6 multicast packet that floods the network."],
+    "answer": "The '.onion' address itself is derived from the public key of the hidden service; the Tor network uses Distributed Hash Tables (DHT) to locate the service's introduction points.",
+    "explanation": "Step 1: Standard internet routing uses DNS to turn 'google.com' into an IP address, relying on centralized servers. Step 2: The Dark Web (Tor) must be decentralized to prevent censorship and tracking. Step 3: A `.onion` address (e.g., `expyuz5...onion`) is not registered anywhere. It is mathematically generated directly from the public cryptographic key of the hidden server. Step 4: To connect, the Tor client queries a decentralized Distributed Hash Table (DHT) stored across the Tor node network. Step 5: This DHT maps the public key to specific 'Introduction Points' within the Tor network, allowing connection without ever exposing the hidden server's true IP address.",
+    "trick": "Bank/IT Trap: Dark web URLs look like gibberish because they aren't words; they are literal cryptographic public keys Base32-encoded into a URL format.",
+    "tip": "Dark Web '.onion' addresses are derived from cryptographic public keys, bypassing centralized DNS completely."
+  },
+  {
+    "id": 99,
+    "question": "Assertion (A): When a user clicks a 'mailto:' link on a webpage, the browser's rendering engine (e.g., Blink) translates the link into an active SMTP session and directly transmits the email in the background. Reason (R): Modern rendering engines natively incorporate full Mail Transfer Agent (MTA) capabilities to reduce reliance on third-party desktop applications. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A `mailto:` link is a URI scheme. Step 2: Assertion A is completely false. A web browser (and its rendering engine) is an HTTP client, not an SMTP client. It does not speak the SMTP protocol natively and cannot transmit emails in the background. Step 3: Reason R is also false. Browsers do not possess Mail Transfer Agent (MTA) capabilities. Step 4: When a `mailto:` link is clicked, the browser simply hands the URI string over to the host Operating System (Windows/macOS). The OS then triggers the default registered email application (like Outlook or Windows Mail) to handle the actual SMTP execution.",
+    "trick": "Bank/IT Trap: Browsers display the web; they don't send emails. The `mailto:` tag is just an OS-level trigger to wake up a totally different software application.",
+    "tip": "Browsers cannot send emails natively; 'mailto:' links simply trigger the OS's default external email application."
+  },
+  {
+    "id": 100,
+    "question": "A massive enterprise sends 100,000 marketing emails. The campaign analytics show 5,000 'Hard Bounces' categorized specifically under 'Policy Rejection'. Which of the following strict email architectural paradigms did the enterprise most likely violate?",
+    "options": ["They exceeded the MIME Base64 character limit for the HTML body payload.", "Their sending IP address was listed on a global DNSBL (DNS Blackhole List) due to poor sender reputation.", "They failed to encrypt the email subject line using TLS 1.3.", "Their mail server utilized UDP Port 25 instead of TCP Port 25 for the outbound transmission."],
+    "answer": "Their sending IP address was listed on a global DNSBL (DNS Blackhole List) due to poor sender reputation.",
+    "explanation": "Step 1: A Hard Bounce is a permanent rejection. Step 2: While 'User Unknown' is the most common hard bounce, 'Policy Rejection' is an administrative block. Step 3: Receiving servers query global databases known as DNSBLs (DNS Blackhole Lists) or RBLs (Real-time Blackhole Lists). Step 4: If the sending server's IP address has a history of sending spam, these lists flag it. Step 5: The receiving server instantly drops the connection with a 5xx fatal error (Policy Rejection). The email never reaches the inbox, resulting in a permanent Hard Bounce.",
+    "trick": "Bank/IT Trap: Hard bounces aren't just bad email addresses. If your server looks like a spammer, receiving servers will administratively execute a hard bounce block against your entire IP.",
+    "tip": "Policy Rejection Hard Bounces occur when the sender's IP is flagged by global DNS Blackhole Lists (DNSBL)."
+  }
+]

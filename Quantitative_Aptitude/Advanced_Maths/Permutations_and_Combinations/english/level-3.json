@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "The Finance Ministry is allocating a special infrastructure budget of ₹40 Crore across 4 state departments. The budget is allocated in integer multiples of ₹1 Crore. To prevent fund hoarding, a strict rule caps the maximum allocation to any single department at ₹15 Crore. In how many ways can the entire ₹40 Crore be distributed?",
+    "options": ["1631", "1771", "1431", "1851"],
+    "answer": "1631",
+    "explanation": "Step 1: Let the allocation to the 4 departments be x1, x2, x3, x4. We need the number of integer solutions to x1 + x2 + x3 + x4 = 40, where 0 <= xi <= 15. Step 2: Instead of direct PIE, use variable substitution. Let yi = 15 - xi. Since 0 <= xi <= 15, we must have 0 <= yi <= 15. Step 3: Substitute xi = 15 - yi into the equation: (15 - y1) + (15 - y2) + (15 - y3) + (15 - y4) = 40. This simplifies to y1 + y2 + y3 + y4 = 20. Step 4: Find the total non-negative solutions for sum = 20 without upper bounds: C(20 + 4 - 1, 4 - 1) = C(23, 3) = 1771. Step 5: Now, subtract invalid cases where any yi >= 16. If y1 >= 16, let y1 = 16 + k. Then k + y2 + y3 + y4 = 4. Number of ways is C(4 + 4 - 1, 4 - 1) = C(7, 3) = 35. Step 6: Since there are 4 departments, total invalid cases = 4 * 35 = 140. (Cases where two yi >= 16 require sum >= 32, which is impossible since sum is 20). Valid ways = 1771 - 140 = 1631.",
+    "trick": "Transform the upper bound problem into a lower bound problem by substituting yi = Maximum - xi. It drastically simplifies the PIE calculations.",
+    "tip": "For strict upper bounds, invert variables using yi = Max - xi to minimize PIE overlaps."
+  },
+  {
+    "id": 2,
+    "question": "A postman is navigating the perfectly grid-aligned streets of Chandigarh from sector point (0,0) to (8,8). Due to VIP movement, the specific road segment connecting intersection (4,4) to (4,5) is heavily barricaded and impassable. Moving only North and East, how many shortest valid paths exist?",
+    "options": ["10420", "12870", "10320", "2450"],
+    "answer": "10420",
+    "explanation": "Step 1: Calculate the total unrestricted shortest paths from (0,0) to (8,8). This is given by C(8+8, 8) = C(16, 8) = 12870. Step 2: Calculate the number of paths that traverse the blocked segment (4,4) to (4,5). Step 3: Find the number of paths from (0,0) to (4,4), which is C(4+4, 4) = C(8, 4) = 70. Step 4: Once at (4,4), the mandatory step to (4,5) is taken (1 way). Step 5: Find the number of paths from (4,5) to (8,8). The steps needed are 4 along X and 3 along Y. Paths = C(4+3, 3) = C(7, 3) = 35. Step 6: Total paths going through the blocked segment = 70 * 35 = 2450. Valid paths = 12870 - 2450 = 10420.",
+    "trick": "Isolate the blocked segment exactly by multiplying paths to the segment's start by paths from the segment's end.",
+    "tip": "Blocked segment paths = (paths to start) * (paths from end)."
+  },
+  {
+    "id": 3,
+    "question": "An HR manager at a leading IT firm has up to 15 identical performance vouchers to distribute among 4 distinct teams. It is not mandatory to distribute all 15 vouchers, but company policy dictates that every team must receive at least 1 voucher. How many distribution combinations are possible?",
+    "options": ["1365", "1001", "3876", "3003"],
+    "answer": "1365",
+    "explanation": "Step 1: Let the vouchers received by the 4 teams be x1, x2, x3, x4. The inequality is x1 + x2 + x3 + x4 <= 15, with xi >= 1. Step 2: Introduce a non-negative dummy variable 'D' to absorb the undistributed vouchers, transforming the inequality into an equation: x1 + x2 + x3 + x4 + D = 15, where D >= 0. Step 3: Adjust the limits to use the Stars and Bars formula. Let yi = xi - 1 >= 0. Step 4: Substituting xi = yi + 1 gives: (y1+1) + (y2+1) + (y3+1) + (y4+1) + D = 15. Step 5: This simplifies to y1 + y2 + y3 + y4 + D = 11, where all variables are >= 0. Step 6: Using the standard formula C(n+r-1, r-1) for 5 variables and sum 11, the ways are C(11+5-1, 5-1) = C(15, 4) = (15*14*13*12)/24 = 1365.",
+    "trick": "Introduce a dummy bin to convert an inequality into a strict equation, seamlessly integrating undistributed items.",
+    "tip": "For x1+..+xr <= N, add dummy variable D>=0 to make it x1+..+xr+D = N."
+  },
+  {
+    "id": 4,
+    "question": "A grandfather decides to distribute 20 identical ₹500 notes among his 3 grandchildren. However, for a traditional reason, he insists that each grandchild must receive an strictly even number of notes (receiving zero notes is allowed). In how many ways can the notes be distributed?",
+    "options": ["66", "231", "132", "55"],
+    "answer": "66",
+    "explanation": "Step 1: Let the number of notes received by the grandchildren be x1, x2, x3. We know x1 + x2 + x3 = 20. Step 2: The parity constraint states that each xi must be even. Let xi = 2ki, where ki >= 0. Step 3: Substitute into the equation: 2k1 + 2k2 + 2k3 = 20. Step 4: Divide the entire equation by 2 to simplify: k1 + k2 + k3 = 10. Step 5: The problem now reduces to finding the number of non-negative integral solutions for the sum 10 among 3 variables. Step 6: Using Stars and Bars, ways = C(10+3-1, 3-1) = C(12, 2) = (12*11)/2 = 66.",
+    "trick": "Divide the total and the variables by the step-size (2 for even numbers) to map it back to a standard non-negative integer equation.",
+    "tip": "For purely even identical distributions, simply halve the total sum before applying Stars and Bars."
+  },
+  {
+    "id": 5,
+    "question": "During a fiercely contested local election in Delhi, Candidate A and Candidate B ultimately receive exactly 8 votes each. In how many distinct sequences can the 16 votes be counted such that Candidate A is never trailing behind Candidate B at any point during the tally?",
+    "options": ["1430", "12870", "4862", "143"],
+    "answer": "1430",
+    "explanation": "Step 1: This scenario perfectly models a Dyck Path from (0,0) to (n,n) that never crosses below the diagonal y = x. Step 2: The number of such valid sequences where A >= B is given by the nth Catalan number. Step 3: Here, n = 8 (the total votes per candidate). Step 4: The formula for the nth Catalan number is Cn = (1 / (n+1)) * C(2n, n). Step 5: Calculate C(16, 8): 16! / (8! * 8!) = 12870. Step 6: Divide by (8+1) = 9. So, C8 = 12870 / 9 = 1430.",
+    "trick": "Recognize 'never trailing' tally problems immediately as standard Catalan numbers. Don't trace grids manually.",
+    "tip": "'Never trailing' sequence of n vs n items is exactly the nth Catalan number: C(2n,n)/(n+1)."
+  },
+  {
+    "id": 6,
+    "question": "A legendary sweets shop in Kolkata sells Rasgullas packed strictly in boxes of 2, 3, and 5. A customer wishes to purchase exactly 20 Rasgullas. If x, y, and z represent the number of boxes of 2, 3, and 5 purchased respectively, how many unique non-negative integer combinations exist?",
+    "options": ["11", "14", "15", "10"],
+    "answer": "11",
+    "explanation": "Step 1: Set up the Diophantine equation: 2x + 3y + 5z = 20, where x, y, z >= 0. Step 2: Solve by casework on z (the largest coefficient) to minimize iterations. Maximum value of z is 4 (since 5*4 = 20). Step 3: If z = 0, 2x + 3y = 20. Valid (x,y) pairs are (10,0), (7,2), (4,4), (1,6). [4 solutions]. Step 4: If z = 1, 2x + 3y = 15. Valid (x,y) pairs are (6,1), (3,3), (0,5). [3 solutions]. Step 5: If z = 2, 2x + 3y = 10. Valid (x,y) pairs are (5,0), (2,2). [2 solutions]. Step 6: If z = 3, 2x + 3y = 5. Valid (x,y) pairs are (1,1). [1 solution]. Step 7: If z = 4, 2x + 3y = 0. Valid (x,y) pair is (0,0). [1 solution]. Total = 4 + 3 + 2 + 1 + 1 = 11.",
+    "trick": "Always iterate over the variable with the highest coefficient first to minimize manual case counting.",
+    "tip": "For ax+by+cz=N, isolate the highest coefficient and count solutions for the remaining 2-variable equations."
+  },
+  {
+    "id": 7,
+    "question": "In a corporate Diwali lucky draw, 10 identical gold coins are to be distributed among 3 winners. However, compliance rules dictate that the first winner receives a maximum of 4 coins, the second a maximum of 5 coins, and the third a maximum of 6 coins. How many valid distribution permutations exist?",
+    "options": ["20", "21", "66", "15"],
+    "answer": "20",
+    "explanation": "Step 1: We need integer solutions for x1 + x2 + x3 = 10, with 0 <= x1 <= 4, 0 <= x2 <= 5, 0 <= x3 <= 6. Step 2: Substitute yi = Max - xi. Here, y1 = 4 - x1, y2 = 5 - x2, y3 = 6 - x3. Step 3: The sum becomes y1 + y2 + y3 = (4+5+6) - (x1+x2+x3) = 15 - 10 = 5. Step 4: The new limits are 0 <= y1 <= 4, 0 <= y2 <= 5, 0 <= y3 <= 6. Step 5: Total non-negative solutions for sum 5 among 3 variables without upper bounds: C(5+3-1, 3-1) = C(7, 2) = 21. Step 6: Subtract cases violating the new upper bounds. The only possible violation is y1 >= 5. Since the total sum is 5, y1 = 5 forces y2 = 0 and y3 = 0. This is exactly 1 invalid case. Valid cases = 21 - 1 = 20.",
+    "trick": "Using the inverse variable technique (yi = Max - xi) drops the required sum from 10 to 5, making upper bound violations trivially rare.",
+    "tip": "Inverting variables (yi = limit - xi) drastically cuts down PIE intersection checks."
+  },
+  {
+    "id": 8,
+    "question": "A delivery executive navigates the perfectly rectangular grid of Salt Lake City, moving from origin (0,0) to final destination (7,7). Company protocol requires mandatory pickups exactly at intersection (2,3) and a drop-off exactly at intersection (5,5). How many shortest path routes satisfy this itinerary?",
+    "options": ["600", "3432", "1200", "480"],
+    "answer": "600",
+    "explanation": "Step 1: Break the journey into three distinct sequential segments: (0,0)->(2,3), (2,3)->(5,5), and (5,5)->(7,7). Step 2: Segment 1 (0,0 to 2,3) requires 2 Right and 3 Up moves. Ways = C(2+3, 2) = C(5, 2) = 10. Step 3: Segment 2 (2,3 to 5,5) requires (5-2)=3 Right and (5-3)=2 Up moves. Ways = C(3+2, 3) = C(5, 3) = 10. Step 4: Segment 3 (5,5 to 7,7) requires (7-5)=2 Right and (7-5)=2 Up moves. Ways = C(2+2, 2) = C(4, 2) = 6. Step 5: Since these are independent sequential steps, multiply the possibilities. Step 6: Total paths = 10 * 10 * 6 = 600.",
+    "trick": "Treat mandatory grid transit points as isolated sub-problems. Multiply the distinct combinations of each sub-grid.",
+    "tip": "Mandatory transit nodes split the grid. Multiply C(dx+dy, dx) for each segment."
+  },
+  {
+    "id": 9,
+    "question": "An IT consortium is donating 12 completely identical high-end servers to 5 specific IIT departments (CS, EE, ME, CE, CH). A special clause mandates that the CS and EE departments, when combined, must receive exactly 5 servers in total. In how many ways can the 12 servers be distributed?",
+    "options": ["216", "432", "792", "120"],
+    "answer": "216",
+    "explanation": "Step 1: The problem splits the 5 departments into two strict, independent groups: Group 1 (CS, EE) and Group 2 (ME, CE, CH). Step 2: Let x1, x2 be the servers for Group 1. We are given x1 + x2 = 5. The number of ways to distribute these is C(5+2-1, 2-1) = C(6, 1) = 6. Step 3: The remaining servers are 12 - 5 = 7. These must go to Group 2. Step 4: Let x3, x4, x5 be the servers for Group 2. We have x3 + x4 + x5 = 7. The number of ways is C(7+3-1, 3-1) = C(9, 2) = 36. Step 5: The total number of valid distributions is the product of the ways for each group. Step 6: Total ways = 6 * 36 = 216.",
+    "trick": "Recognize that a grouped sum constraint completely isolates the variables into two mutually exclusive combinatorial events. Solve and multiply.",
+    "tip": "Grouped sum constraints decouple the equation. Solve each sub-equation independently and multiply."
+  },
+  {
+    "id": 10,
+    "question": "A unicorn startup rewards its top management by distributing 5 totally identical stock-option grants and 3 distinct luxury holiday packages among 3 top executives. Assuming an executive can receive any number of rewards (including zero), in how many ways can this dual-distribution be achieved?",
+    "options": ["567", "120", "315", "729"],
+    "answer": "567",
+    "explanation": "Step 1: The distribution involves two distinct events: distributing identical items and distributing distinct items. Step 2: Distribute the 5 identical stock grants among 3 executives. This is a Stars and Bars problem: C(5+3-1, 3-1) = C(7, 2) = 21 ways. Step 3: Distribute the 3 distinct luxury packages among 3 executives. Since the packages are distinct, each package has 3 independent choices (Executive A, B, or C). Step 4: Total ways for distinct items = 3 * 3 * 3 = 3^3 = 27. Step 5: Since the distribution of stock grants and holiday packages are completely independent events, multiply the results. Step 6: Total ways = 21 * 27 = 567.",
+    "trick": "Never mix identical and distinct logic. Identical uses combinations (Stars & Bars), distinct uses exponents (n^k). Calculate separately and multiply.",
+    "tip": "Identical items to n groups = C(k+n-1, n-1). Distinct items to n groups = n^k."
+  },
+  {
+    "id": 11,
+    "question": "A volatile tech stock starts at ₹100. Over the next 10 trading minutes, it exclusively moves either up by ₹1 or down by ₹1 each minute. If the stock closes exactly at ₹104, in how many trajectory paths did the price strictly NEVER drop below its starting price of ₹100?",
+    "options": ["75", "120", "45", "210"],
+    "answer": "75",
+    "explanation": "Step 1: Let U be up moves and D be down moves. U + D = 10, and U - D = 4. Solving gives U = 7, D = 3. Step 2: Total possible paths from (0, 0) to (10, 4) in an unconstrained grid = C(10, 3) = 120. Step 3: We must subtract paths that touch ₹99 (i.e., y = -1). By the Reflection Principle, any path touching y = -1 can be reflected across y = -1 from the touch point to the end. Step 4: The new reflected endpoint's y-coordinate is -1 - (4 - (-1)) = -6. The target is now (10, -6). Step 5: For the reflected path, U' + D' = 10 and U' - D' = -6. Solving gives U' = 2, D' = 8. Number of such paths = C(10, 2) = 45. Step 6: Valid paths = Total paths - Reflected paths = 120 - 45 = 75.",
+    "trick": "Use Andre's Reflection Principle to map invalid paths to a ghost endpoint across the forbidden boundary, making counting trivial.",
+    "tip": "To exclude paths hitting y=-1, subtract paths to the reflected endpoint: (x, -y - 2)."
+  },
+  {
+    "id": 12,
+    "question": "An NGO must distribute exactly 24 identical relief kits across 3 isolated rural clinics. For logistical uniformity, each clinic must receive a number of kits that is strictly a multiple of 3, and every clinic must receive at least 3 kits. How many distribution permutations are possible?",
+    "options": ["21", "28", "36", "45"],
+    "answer": "21",
+    "explanation": "Step 1: Let the number of kits received by the clinics be x, y, z. We have x + y + z = 24. Step 2: Apply the step constraint: x, y, z must be multiples of 3. Let x = 3a, y = 3b, z = 3c. Step 3: Substitute into the equation: 3a + 3b + 3c = 24, which simplifies strictly to a + b + c = 8. Step 4: Apply the lower bound constraint: Each clinic receives at least 3 kits, meaning x >= 3, which translates to 3a >= 3, so a >= 1. Similarly, b >= 1, c >= 1. Step 5: We need positive integral solutions for sum = 8 among 3 variables. Formula is C(n-1, r-1). Step 6: Ways = C(8-1, 3-1) = C(7, 2) = (7*6)/2 = 21.",
+    "trick": "Scaling variables by the required multiple (e.g., x=3a) instantly maps a complex stepwise combinatorial problem back to basic integer distribution.",
+    "tip": "For multiples of 'k', divide the total sum by 'k' and solve for standard positive integers."
+  },
+  {
+    "id": 13,
+    "question": "An automated drone navigates a 3D coordinate warehouse from origin (0,0,0) to delivery zone (3,3,3). It can only move positively along the x, y, or z axes (+1 unit per step). How many unique paths pass through at least one of the two inspection nodes: (1,1,1) or (2,2,2)?",
+    "options": ["864", "1080", "1680", "648"],
+    "answer": "864",
+    "explanation": "Step 1: Use Principle of Inclusion-Exclusion: N(A U B) = N(A) + N(B) - N(A n B). Let node A=(1,1,1) and B=(2,2,2). Step 2: Paths through A: O->A takes 3 steps (1x,1y,1z) = 3!/(1!1!1!) = 6 ways. A->End takes 6 steps (2x,2y,2z) = 6!/(2!2!2!) = 90 ways. Total N(A) = 6 * 90 = 540. Step 3: Paths through B: O->B takes 6 steps = 90 ways. B->End takes 3 steps = 6 ways. Total N(B) = 90 * 6 = 540. Step 4: Paths through BOTH A and B: O->A (6 ways), A->B (steps: 1x,1y,1z) = 6 ways, B->End (steps: 1x,1y,1z) = 6 ways. Total N(A n B) = 6 * 6 * 6 = 216. Step 5: Substitute into PIE: N(A U B) = 540 + 540 - 216. Step 6: Valid paths = 1080 - 216 = 864.",
+    "trick": "In 3D grid PIE problems, paths intersecting multiple nodes must traverse them sequentially. Multiply combinations for each sub-segment.",
+    "tip": "3D grid paths for (dx,dy,dz) is (dx+dy+dz)! / (dx! dy! dz!). Use PIE for 'OR' nodes."
+  },
+  {
+    "id": 14,
+    "question": "A cybersecurity architect must isolate a threat by partitioning 6 uniquely coded distinct servers into exactly 3 identical, indistinguishable sub-network blocks. Every sub-network block must secure at least one server. In how many ways can this partitioning be done?",
+    "options": ["90", "540", "120", "729"],
+    "answer": "90",
+    "explanation": "Step 1: Distributing 'n' distinct objects into 'k' identical groups (no empty groups) is the classic definition of the Stirling Numbers of the Second Kind, S(n, k). Step 2: The formula is S(n, k) = (1/k!) * sum(from i=0 to k) (-1)^(k-i) * C(k, i) * i^n. Step 3: Here, n=6, k=3. S(6, 3) = (1/3!) * [ (-1)^0*C(3,3)*3^6 + (-1)^1*C(3,2)*2^6 + (-1)^2*C(3,1)*1^6 ]. Step 4: Calculate the terms: 1 * 1 * 729 = 729; -1 * 3 * 64 = -192; 1 * 3 * 1 = 3. Step 5: Sum the terms inside the bracket: 729 - 192 + 3 = 540. Step 6: Divide by k!: 540 / 3! = 540 / 6 = 90.",
+    "trick": "Identify 'distinct items into identical bins (no empty)' as Stirling Numbers of the Second Kind. Standard P&C formulas fail here.",
+    "tip": "Distinct into Identical (>=1) = Stirling Number 2nd Kind: S(n,k)."
+  },
+  {
+    "id": 15,
+    "question": "A cryptic combinatorial puzzle requires finding the exact number of integral solutions to the equation a + b + c = 15, subject to uniquely offset constraints: a >= 2, b >= -1, and c >= 3. How many solutions exist?",
+    "options": ["78", "91", "105", "66"],
+    "answer": "78",
+    "explanation": "Step 1: We need to normalize the variable constraints so they all follow the standard form >= 0 for Stars and Bars. Step 2: Let A = a - 2, so A >= 0 (which means a = A + 2). Step 3: Let B = b + 1, so B >= 0 (which means b = B - 1). Step 4: Let C = c - 3, so C >= 0 (which means c = C + 3). Step 5: Substitute these back into the original equation: (A + 2) + (B - 1) + (C + 3) = 15. Step 6: Simplify the constants: A + B + C + 4 = 15, so A + B + C = 11. The number of non-negative integer solutions is C(11+3-1, 3-1) = C(13, 2) = (13*12)/2 = 78.",
+    "trick": "Negative constraints aren't an anomaly. Just shift the axis by defining a new variable offset by the negative bound to make it >= 0.",
+    "tip": "Normalize all inequalities to >=0 by substitution before summing the constants."
+  },
+  {
+    "id": 16,
+    "question": "A logistics director assigns 15 strictly identical delivery vans across 3 distinct regional garages (A, B, C). Due to physical space constraints, Garage A holds a maximum of 6 vans, B holds up to 7, and C holds up to 8. How many valid allocation profiles exist?",
+    "options": ["28", "136", "109", "45"],
+    "answer": "28",
+    "explanation": "Step 1: We need integer solutions to xA + xB + xC = 15, where 0 <= xA <= 6, 0 <= xB <= 7, 0 <= xC <= 8. Step 2: Direct PIE is tedious. Substitute using inverted bounds: yi = Maximum_limit - xi. Step 3: Let yA = 6 - xA, yB = 7 - xB, yC = 8 - xC. Step 4: Sum the new variables: yA + yB + yC = (6 + 7 + 8) - (xA + xB + xC) = 21 - 15 = 6. Step 5: The new problem is yA + yB + yC = 6, with 0 <= yA <= 6, 0 <= yB <= 7, 0 <= yC <= 8. Step 6: Since the new total sum (6) is less than or equal to all individual upper limits, it's impossible to violate any upper bound! Therefore, the answer is just the unrestricted non-negative solutions: C(6+3-1, 3-1) = C(8, 2) = 28.",
+    "trick": "By inverting the variables, the target sum shrinks to 6, which is smaller than every individual capacity, immediately neutralizing all upper-bound intersection checks.",
+    "tip": "If transformed sum is less than all new upper bounds, the answer is simply C(sum+r-1, r-1)."
+  },
+  {
+    "id": 17,
+    "question": "To secure access to a high-frequency trading server, a developer writes a script generating all possible 6-digit PIN codes using exclusively the digits {1, 2, 3, 4}. If an audit demands that every PIN must contain each of the 4 digits at least once, how many compliant PINs exist?",
+    "options": ["1560", "4096", "1080", "2520"],
+    "answer": "1560",
+    "explanation": "Step 1: This is finding the number of surjective (onto) functions from a set of size 6 to a set of size 4. Use the Principle of Inclusion-Exclusion (PIE). Step 2: Total unrestricted combinations = 4^6 = 4096. Step 3: Subtract cases missing 1 digit: Choose the missing digit C(4,1) and arrange the rest: 4 * 3^6 = 4 * 729 = 2916. Step 4: Add back overlap cases missing 2 digits: Choose the 2 missing digits C(4,2) and arrange the rest: 6 * 2^6 = 6 * 64 = 384. Step 5: Subtract overlap cases missing 3 digits: Choose the 3 missing digits C(4,3) and arrange the rest: 4 * 1^6 = 4. Step 6: Apply the full PIE formula: Total = 4096 - 2916 + 384 - 4 = 1560.",
+    "trick": "Identify 'at least once' password formatting natively as the counting of surjective functions to trigger the exact PIE formula instantly.",
+    "tip": "Number of n-length codes using k characters at least once: sum (-1)^i * C(k,i) * (k-i)^n."
+  },
+  {
+    "id": 18,
+    "question": "From a large grid mapped by coordinates (x,y) where both x and y are integers from 1 to 10 inclusive, you must select 4 points (x1,y1), (x2,y2), (x3,y3), (x4,y4). In how many ways can this be done if x1 < x2 < x3 < x4 must strictly hold, but y1 <= y2 <= y3 <= y4 allows equality?",
+    "options": ["150150", "44100", "1001000", "210"],
+    "answer": "150150",
+    "explanation": "Step 1: The selections of x-coordinates and y-coordinates are completely independent. Step 2: For x-coordinates, we need 4 strictly increasing numbers from 1 to 10. This is simply choosing 4 distinct numbers (they naturally arrange in only one ascending order). Ways = C(10, 4) = 210. Step 3: For y-coordinates, we need 4 non-strictly increasing numbers from 1 to 10. This allows repetition, which is equivalent to 'combinations with replacement' (or Stars and Bars into 10 bins). Step 4: Ways to choose y = C(n+r-1, r) = C(10+4-1, 4) = C(13, 4). Step 5: Calculate C(13, 4) = (13*12*11*10)/(4*3*2*1) = 715. Step 6: Multiply the independent choices: 210 * 715 = 150,150.",
+    "trick": "Recognize that 'strictly increasing' is plain combinations C(n,r), while 'non-strictly increasing' is combinations with replacement C(n+r-1, r).",
+    "tip": "Strictly increasing = C(n, r). Non-strictly increasing (with equals) = C(n+r-1, r)."
+  },
+  {
+    "id": 19,
+    "question": "A venture capitalist is prepared to inject up to ₹10 Crore across 3 promising AI startups. Funding is allocated strictly in multiples of ₹1 Crore. Each selected startup must receive a minimum of ₹1 Crore, but the investor is not obligated to deploy the entire ₹10 Crore. How many funding allocations exist?",
+    "options": ["120", "84", "165", "36"],
+    "answer": "120",
+    "explanation": "Step 1: Let the funding allocated to the 3 startups be x1, x2, x3. We have an inequality: x1 + x2 + x3 <= 10. Step 2: The lower bounds dictate that x1 >= 1, x2 >= 1, x3 >= 1. Step 3: Convert the inequality to a strict equation by adding a non-negative dummy variable 'D' (representing unallocated funds). x1 + x2 + x3 + D = 10, where D >= 0. Step 4: Handle the lower bounds by substituting yi = xi - 1 >= 0. Step 5: The equation becomes (y1 + 1) + (y2 + 1) + (y3 + 1) + D = 10, which reduces to y1 + y2 + y3 + D = 7. Step 6: We now seek non-negative integer solutions for sum = 7 across 4 variables. Ways = C(7+4-1, 4-1) = C(10, 3) = (10*9*8)/6 = 120.",
+    "trick": "Don't sum multiple equal equations for <=. Add one dummy variable 'D' to instantly bridge the inequality and solve it in a single formula.",
+    "tip": "Convert <= inequality to equality by adding a dummy variable D >= 0."
+  },
+  {
+    "id": 20,
+    "question": "During a corporate offsite, 6 identical-looking briefcases containing highly classified dossiers are accidentally scrambled. What is the number of ways the briefcases can be returned such that EXACTLY two executives receive their own correct briefcase?",
+    "options": ["135", "90", "120", "180"],
+    "answer": "135",
+    "explanation": "Step 1: This is a classic partial derangement problem. We need exactly 2 people to get their correct items, and the remaining 4 to get strictly wrong items. Step 2: First, select the 2 executives who get their correct briefcases. This can be done in C(6, 2) ways. Step 3: C(6, 2) = (6*5)/2 = 15 ways. Step 4: The remaining 4 executives must receive briefcases such that NO ONE gets their own. This is a Derangement of 4 items (D4). Step 5: The formula for derangement is Dn = n! * (1 - 1/1! + 1/2! - 1/3! + ... + (-1)^n/n!). For D4: 24 * (1/2 - 1/6 + 1/24) = 12 - 4 + 1 = 9. Step 6: Total arrangements = Choices for correct people * Derangements of the rest = 15 * 9 = 135.",
+    "trick": "Remember D4 = 9 and D5 = 44 by heart for advanced exams. It saves immense calculation time for partial derangement questions.",
+    "tip": "Exactly k matches out of n = C(n, k) * D(n-k), where D is the derangement number."
+  },
+  {
+    "id": 21,
+    "question": "An NGO is distributing exactly 53 identical relief packets to 4 flood-affected districts in Assam. To maintain a specific proportional parity, each district must receive a number of packets that leaves a remainder of exactly 2 when divided by 5. How many distribution combinations are possible?",
+    "options": ["286", "165", "220", "120"],
+    "answer": "220",
+    "explanation": "Step 1: Let the number of packets given to the 4 districts be x1, x2, x3, x4. We are given x1 + x2 + x3 + x4 = 53. Step 2: Since each xi leaves a remainder of 2 when divided by 5, we can express them as xi = 5ki + 2, where ki >= 0. Step 3: Substitute this into the sum equation: (5k1 + 2) + (5k2 + 2) + (5k3 + 2) + (5k4 + 2) = 53. Step 4: Simplify the equation: 5(k1 + k2 + k3 + k4) + 8 = 53. Step 5: Subtract 8 from both sides: 5(k1 + k2 + k3 + k4) = 45, which simplifies strictly to k1 + k2 + k3 + k4 = 9. Step 6: We now seek the number of non-negative integer solutions for sum = 9 among 4 variables. Using the Stars and Bars formula C(n+r-1, r-1): C(9+4-1, 4-1) = C(12, 3) = (12*11*10) / (3*2*1) = 220.",
+    "trick": "Instantly substitute modular constraints as xi = mk + r. This shifts the complexity from a restricted distribution to a standard Stars and Bars equation.",
+    "tip": "For xi = m(ki) + r, substitute and divide to get a simple sum equation."
+  },
+  {
+    "id": 22,
+    "question": "A cinema hall in Mumbai has a single premium row of 15 seats. 5 identical corporate sponsors must be assigned seats such that no two sponsors sit exactly next to each other to avoid compliance conflicts. How many valid seating arrangements exist?",
+    "options": ["3003", "462", "1365", "792"],
+    "answer": "462",
+    "explanation": "Step 1: This is equivalent to choosing 5 non-adjacent objects from a linear sequence of 15 objects. Since the sponsors are treated as identical entities in terms of arrangement, we only need to select the seats. Step 2: Let the 5 selected seats act as bars, creating 6 gaps (before the first, between each, and after the last). Step 3: Let the number of empty seats in these gaps be x1, x2, x3, x4, x5, x6. We know the total empty seats are 15 - 5 = 10. Thus, x1 + x2 + x3 + x4 + x5 + x6 = 10. Step 4: To ensure no two sponsors are adjacent, the inner gaps must contain at least 1 empty seat. So, x2, x3, x4, x5 >= 1. x1 and x6 can be >= 0. Step 5: A much faster standard formula for selecting k non-adjacent items from n items in a row is C(n - k + 1, k). Step 6: Here, n = 15, k = 5. Ways = C(15 - 5 + 1, 5) = C(11, 5) = (11*10*9*8*7) / (5*4*3*2*1) = 462.",
+    "trick": "Skip manual gap logic completely. The selection of k non-adjacent objects from n linear objects is always exactly C(n - k + 1, k).",
+    "tip": "Selecting k non-adjacent items from n in a row = C(n - k + 1, k)."
+  },
+  {
+    "id": 23,
+    "question": "A prominent sports academy has 8 distinct pairs of branded running shoes (16 total shoes). A coach randomly selects exactly 6 shoes. What is the number of ways to select them such that exactly TWO complete pairs are formed among the 6 shoes?",
+    "options": ["1120", "2688", "6720", "3360"],
+    "answer": "6720",
+    "explanation": "Step 1: The coach needs exactly 2 complete pairs and 2 odd shoes (which do not form a pair). Step 2: First, select the 2 complete pairs from the 8 available pairs. Ways = C(8, 2) = 28. Step 3: We have 6 shoes left to select (which is 2 shoes, since 4 are already picked). These 2 shoes must come from the remaining 6 pairs, and they MUST NOT form a complete pair. Step 4: To ensure they don't form a pair, select 2 different pairs from the remaining 6 pairs to draw from. Ways = C(6, 2) = 15. Step 5: From each of these 2 selected pairs, choose exactly 1 shoe (either the Left or the Right shoe). Ways = 2^2 = 4. Step 6: Total distinct selections = (Ways to pick 2 pairs) * (Ways to pick 2 distinct pairs for singles) * (Ways to pick L/R) = 28 * 15 * 4 = 6720.",
+    "trick": "Split the problem into purely complete pairs and purely single shoes. Select the base pairs for singles first, then multiply by 2^k for L/R choices.",
+    "tip": "For exactly k pairs from n, choose the pairs, then choose singles from the rest."
+  },
+  {
+    "id": 24,
+    "question": "The RBI issues special commemorative coins in denominations of ₹1, ₹2, and ₹5. A numismatist wants to build a set worth exactly ₹20 using any combination of these coins. How many mathematically distinct combinations can form this exact sum?",
+    "options": ["25", "36", "29", "42"],
+    "answer": "29",
+    "explanation": "Step 1: Let x, y, and z be the number of ₹1, ₹2, and ₹5 coins respectively. We need non-negative integer solutions for x + 2y + 5z = 20. Step 2: Iterate over z (the largest coefficient) to drastically reduce cases. The maximum possible value for z is 20/5 = 4. Step 3: If z = 0: x + 2y = 20. y can range from 0 to 10. This gives 11 solutions. Step 4: If z = 1: x + 2y = 15. y can range from 0 to 7. This gives 8 solutions. Step 5: If z = 2: x + 2y = 10. y can range from 0 to 5. This gives 6 solutions. Step 6: If z = 3: x + 2y = 5. y can range from 0 to 2. This gives 3 solutions. Step 7: If z = 4: x + 2y = 0. y must be 0 (and x=0). This gives 1 solution. Total combinations = 11 + 8 + 6 + 3 + 1 = 29.",
+    "trick": "Always isolate and iterate using the variable with the highest coefficient. The number of solutions for x + 2y = N is simply floor(N/2) + 1.",
+    "tip": "For multi-coefficient linear sums, iterate the largest coefficient and sum floor(N/2)+1."
+  },
+  {
+    "id": 25,
+    "question": "In a corporate Diwali gift exchange, 6 senior managers each bring a distinct gift. What is the number of ways the gifts can be redistributed such that exactly ONE manager receives the gift they brought, and the remaining 5 managers receive someone else's gift?",
+    "options": ["135", "530", "264", "320"],
+    "answer": "264",
+    "explanation": "Step 1: This scenario strictly requires exactly 1 match and 5 complete mismatches. This is a partial derangement problem. Step 2: First, select the 1 manager who receives their own correct gift. This can be done in C(6, 1) = 6 ways. Step 3: The remaining 5 managers must receive a derangement of the remaining 5 gifts (no one gets their own). Step 4: The number of derangements for n items is D(n). For 5 items, D(5) = 5! * (1 - 1/1! + 1/2! - 1/3! + 1/4! - 1/5!). Step 5: Calculating D(5): 120 * (1/2 - 1/6 + 1/24 - 1/120) = 60 - 20 + 5 - 1 = 44. Step 6: Total valid redistributions = (Choices for the 1 correct manager) * (Derangements of the 5 others) = 6 * 44 = 264.",
+    "trick": "Memorize the first few derangement numbers: D(3)=2, D(4)=9, D(5)=44, D(6)=265. It eliminates a massive calculation bottleneck in partial derangements.",
+    "tip": "Exactly k matches from n items = C(n, k) * D(n-k). D(5) is 44."
+  },
+  {
+    "id": 26,
+    "question": "A drone navigates an invisible 2D grid from coordinate (0,0) to (6,6) using exactly 10 precise moves. It can move 1 unit Right (R), 1 unit Up (U), or 1 unit Diagonally (D) covering both simultaneously. How many unique path sequences satisfy these exact conditions?",
+    "options": ["1260", "2520", "3150", "4200"],
+    "answer": "3150",
+    "explanation": "Step 1: Let R, U, and D be the number of Right, Up, and Diagonal moves respectively. Step 2: The total moves constraint is R + U + D = 10. Step 3: The coordinate constraints dictate the total displacement: R + D = 6 (for the x-axis) and U + D = 6 (for the y-axis). Step 4: Add the two coordinate equations: R + U + 2D = 12. Step 5: Subtract the total moves equation (R + U + D = 10) from this sum: (R + U + 2D) - (R + U + D) = 12 - 10, giving strictly D = 2. Step 6: Substitute D = 2 back into the displacement equations to get R = 4 and U = 4. Step 7: We need the number of permutations of 10 moves containing exactly 4 R's, 4 U's, and 2 D's. Ways = 10! / (4! * 4! * 2!) = 3628800 / (24 * 24 * 2) = 3150.",
+    "trick": "Treat diagonal moves as variables in a system of linear equations to instantly lock down the exact count of each move type, then use basic permutations.",
+    "tip": "For grid paths with diagonals, solve the displacement system before permuting."
+  },
+  {
+    "id": 27,
+    "question": "A tech firm has 5 highly distinct prestigious awards to allocate to 3 distinct departments (AI, Cloud, Security). Any department can receive any number of awards, but to ensure morale, no single department is allowed to sweep ALL 5 awards. How many distribution combinations are possible?",
+    "options": ["120", "240", "150", "243"],
+    "answer": "240",
+    "explanation": "Step 1: We are distributing 5 DISTINCT items into 3 DISTINCT groups. Unlike identical items (Stars and Bars), distinct items imply each item makes an independent choice. Step 2: Unrestricted distributions: Each of the 5 awards can be given to any of the 3 departments. Total unrestricted ways = 3 * 3 * 3 * 3 * 3 = 3^5 = 243. Step 3: We must subtract the invalid cases where a single department sweeps all awards. Step 4: There is exactly 1 way for the AI department to get all 5 awards, 1 way for the Cloud department, and 1 way for the Security department. Step 5: Total invalid cases = 3. Step 6: Total valid distribution combinations = 243 - 3 = 240.",
+    "trick": "Do not confuse this with Stars and Bars. Distinct items to distinct boxes is always n^k. Simply subtract the explicit boundary violations.",
+    "tip": "Distinct objects into distinct boxes = (boxes)^(objects). Subtract total sweeps."
+  },
+  {
+    "id": 28,
+    "question": "An architect in Chandigarh is designing a linear row of 12 streetlights. Each light can be illuminated in either Red or Green. To strictly avoid traffic glare, no two Red lights can be adjacent. How many valid color sequences are possible?",
+    "options": ["377", "233", "610", "144"],
+    "answer": "377",
+    "explanation": "Step 1: Let the number of valid sequences of length n be S(n). Consider the last light in the row. Step 2: If the last light is Green, the remaining n-1 lights can be any valid sequence. This gives S(n-1) ways. Step 3: If the last light is Red, the second to last light MUST be Green to avoid adjacency. The remaining n-2 lights can be any valid sequence. This gives S(n-2) ways. Step 4: Therefore, S(n) = S(n-1) + S(n-2). This is the exact Fibonacci recurrence relation! Step 5: Let's find base cases. Length 1: R, G (S(1) = 2). Length 2: RG, GR, GG (S(2) = 3). Notice S(n) corresponds to the (n+2)th Fibonacci number (where F1=1, F2=1, F3=2). Step 6: We need S(12) = F(14). Let's list: F3=2, F4=3, F5=5, F6=8, F7=13, F8=21, F9=34, F10=55, F11=89, F12=144, F13=233, F14=377.",
+    "trick": "A linear sequence of n binary choices with no two identical adjacencies is always exactly the (n+2)th Fibonacci number.",
+    "tip": "Binary sequences with no consecutive 1s (or Rs) follow Fibonacci: Ans = F(n+2)."
+  },
+  {
+    "id": 29,
+    "question": "A master jeweler arranges 7 absolutely distinct gold beads and 5 completely identical emeralds around a circular display tray. Due to aesthetic rules, no two emeralds can be adjacent. How many visually unique arrangements exist (ignoring flipping)?",
+    "options": ["15120", "2520", "7560", "30240"],
+    "answer": "15120",
+    "explanation": "Step 1: First, arrange the 7 distinct gold beads in a circle. The number of ways to arrange n distinct objects in a circle is (n-1)!. So, (7-1)! = 6! = 720 ways. Step 2: The 7 gold beads create exactly 7 gaps between them. Step 3: To ensure no two identical emeralds are adjacent, we must place the 5 emeralds into these 7 gaps such that no gap receives more than one emerald. Step 4: Since the gold beads are distinct, the 7 gaps are mathematically distinguishable. Thus, we simply choose 5 gaps out of the 7. Ways = C(7, 5) = 21. Step 5: Because the emeralds are completely identical, there is only 1 way to arrange them once the gaps are chosen. Step 6: Total unique arrangements = (Arrangements of gold beads) * (Ways to place emeralds) = 720 * 21 = 15120.",
+    "trick": "Circular permutations only require the (n-1)! rule for the first set of items. Once placed, the circle is 'broken' and gaps become standard linear combinations.",
+    "tip": "Place n distinct items in circle: (n-1)!. They make n distinct gaps for the rest."
+  },
+  {
+    "id": 30,
+    "question": "A supply truck travels a strictly mapped grid from origin (0,0) to target (7,7). It must absolutely avoid two severe traffic intersections located at node A(2,2) and node B(5,5). How many valid shortest paths exist?",
+    "options": ["1260", "2304", "1128", "1904"],
+    "answer": "1128",
+    "explanation": "Step 1: Use the Principle of Inclusion-Exclusion. Total unrestricted paths to (7,7) = C(14, 7) = 3432. Step 2: Calculate paths passing through A(2,2). Path to A = C(4, 2) = 6. Path from A to end = C(10, 5) = 252. Total through A = 6 * 252 = 1512. Step 3: Calculate paths passing through B(5,5). Path to B = C(10, 5) = 252. Path from B to end = C(4, 2) = 6. Total through B = 252 * 6 = 1512. Step 4: Calculate paths passing through BOTH A and B sequentially. Path to A (6), Path A to B (dx=3, dy=3) = C(6, 3) = 20, Path B to end (6). Total through both = 6 * 20 * 6 = 720. Step 5: Calculate total invalid paths passing through A OR B: N(A U B) = N(A) + N(B) - N(A n B) = 1512 + 1512 - 720 = 2304. Step 6: Valid paths = Total paths - Invalid paths = 3432 - 2304 = 1128.",
+    "trick": "For isolated exclusion nodes, use standard PIE. Double-counting (paths hitting both nodes) is a common trap, subtract the sequential path intersection strictly.",
+    "tip": "Avoid multiple nodes using PIE. Intersections mean paths visiting node A THEN node B."
+  },
+  {
+    "id": 31,
+    "question": "An entrance exam features 3 sections (Math, Logic, Verbal) containing 4, 5, and 6 questions respectively. A student must select exactly 10 questions to answer, ensuring they pick at least 2 questions from every section. How many valid selection combinations are possible?",
+    "options": ["2715", "1850", "3003", "2455"],
+    "answer": "2715",
+    "explanation": "Step 1: Let x, y, z be the number of questions picked from the sections. We need x+y+z = 10, subject to 2<=x<=4, 2<=y<=5, 2<=z<=6. Step 2: Instead of pure combinatorics, we can evaluate the cases of (x,y,z) that sum to 10. Step 3: Valid triplets and their combinations: (4,4,2) -> C(4,4)*C(5,4)*C(6,2) = 1*5*15 = 75. (4,3,3) -> C(4,4)*C(5,3)*C(6,3) = 1*10*20 = 200. (4,2,4) -> C(4,4)*C(5,2)*C(6,4) = 1*10*15 = 150. Step 4: (3,5,2) -> 4*1*15 = 60. (3,4,3) -> 4*5*20 = 400. (3,3,4) -> 4*10*15 = 600. (3,2,5) -> 4*10*6 = 240. Step 5: (2,5,3) -> 6*1*20 = 120. (2,4,4) -> 6*5*15 = 450. (2,3,5) -> 6*10*6 = 360. (2,2,6) -> 6*10*1 = 60. Step 6: Summing all the valid cases: 75 + 200 + 150 + 60 + 400 + 600 + 240 + 120 + 450 + 360 + 60 = 2715.",
+    "trick": "For distinct elements with independent bounds summing to a moderate number, manually listing the integer partitions and multiplying binomials is safer than advanced generating functions.",
+    "tip": "For bounded distinct selections, break the sum into integer partitions and multiply combinations."
+  },
+  {
+    "id": 32,
+    "question": "What is the exact lexicographic rank of the word 'BOMBAY' in a dictionary formed by permuting all its constituent letters?",
+    "options": ["147", "182", "125", "156"],
+    "answer": "147",
+    "explanation": "Step 1: The letters in alphabetical order are A, B, B, M, O, Y. The total number of permutations is 6! / 2! = 360. Step 2: Count words starting with A: The remaining letters are B, B, M, O, Y. Permutations = 5! / 2! = 60. Step 3: Now we move to words starting with B. The remaining pool is A, B, M, O, Y (all distinct). We need to reach B O M B A Y. Step 4: Words starting with B A... (remaining B, M, O, Y): 4! = 24. Words starting with B B...: 4! = 24. Words starting with B M...: 4! = 24. Step 5: Now starting with B O... We need to reach B O M... Words starting with B O A...: 3! = 6. Words starting with B O B...: 3! = 6. Step 6: Now starting with B O M... We need to reach B O M B... Words starting with B O M A...: 2! = 2. Step 7: The next word is exactly B O M B A Y (1 way). Step 8: Sum the ranks: 60 + 24 + 24 + 24 + 6 + 6 + 2 + 1 = 147.",
+    "trick": "Always pre-sort the letters and carefully track the dynamic pool of remaining letters. Remember to divide by identical letter factorials ONLY if the repeated letters are still in the active pool.",
+    "tip": "Lexicographic rank with repeats: dynamically adjust the denominator based on remaining letters."
+  },
+  {
+    "id": 33,
+    "question": "A tech billionaire wants to donate exactly 26 identical high-performance laptops to 4 rural schools such that each school receives an strictly ODD number of laptops. How many valid distribution combinations are possible?",
+    "options": ["220", "455", "364", "120"],
+    "answer": "364",
+    "explanation": "Step 1: Let the number of laptops received by the 4 schools be x1, x2, x3, x4. We need x1 + x2 + x3 + x4 = 26. Step 2: Since each school receives an odd number, we can express each variable as xi = 2ki + 1, where ki is a non-negative integer (ki >= 0). Step 3: Substitute this into the main equation: (2k1 + 1) + (2k2 + 1) + (2k3 + 1) + (2k4 + 1) = 26. Step 4: Combine the constants: 2(k1 + k2 + k3 + k4) + 4 = 26. Step 5: Subtract 4 from both sides: 2(k1 + k2 + k3 + k4) = 22. Step 6: Divide by 2: k1 + k2 + k3 + k4 = 11. Step 7: We now just need the number of non-negative integer solutions for sum = 11 across 4 variables. Ways = C(11+4-1, 4-1) = C(14, 3) = (14*13*12) / 6 = 364.",
+    "trick": "Convert odd parity constraints natively into 2k+1 (where k>=0) to seamlessly transform the problem back into a classic non-negative integer distribution.",
+    "tip": "Odd distributions: substitute xi = 2ki + 1, simplify, and apply Stars and Bars."
+  },
+  {
+    "id": 34,
+    "question": "A chief minister allocates exactly ₹15 Lakhs exclusively for 3 distinct new development projects. Each project must mathematically receive a strictly distinct positive integer amount in Lakhs (no two projects can receive the same amount). How many unique allocation profiles are possible?",
+    "options": ["91", "120", "72", "85"],
+    "answer": "72",
+    "explanation": "Step 1: First, find all positive integer solutions to x1 + x2 + x3 = 15. Using Stars and Bars for positive integers: C(15-1, 3-1) = C(14, 2) = 91. Step 2: Now, we must subtract cases where amounts are not strictly distinct. There are two types of invalid cases: all 3 equal, and exactly 2 equal. Step 3: All 3 equal: x1 = x2 = x3 = 5. There is exactly 1 such permutation. Step 4: Exactly 2 equal: Let two projects receive 'a' and the third receive 'b'. So, 2a + b = 15. Valid (a,b) pairs where a != b: a=1,b=13; a=2,b=11; a=3,b=9; a=4,b=7; a=6,b=3; a=7,b=1. (Note a=5 gives 5,5,5 which is handled). Step 5: There are 6 such pairs. Each pair can be permuted among the 3 projects in 3!/2! = 3 ways. Total cases = 6 * 3 = 18. Step 6: Total invalid permutations = 1 + 18 = 19. Valid distinct allocations = 91 - 19 = 72.",
+    "trick": "Count the total unrestricted positive solutions and systematically subtract the symmetry-breaking cases (all equal, two equal) rather than guessing distinct sets.",
+    "tip": "For distinct integer partitions, use Total - (all equal) - 3*(pairs equal)."
+  },
+  {
+    "id": 35,
+    "question": "In how many ways can 3 identical rooks be placed on a standard 8x8 chessboard such that no two rooks attack each other mathematically?",
+    "options": ["40320", "18816", "3136", "112896"],
+    "answer": "18816",
+    "explanation": "Step 1: For rooks to not attack each other, they must not share any row or column. Step 2: First, select the 3 rows out of the 8 available rows where the rooks will be placed. This can be done in C(8, 3) ways. Step 3: Next, select the 3 columns out of the 8 available columns where the rooks will be placed. This can be done in C(8, 3) ways. Step 4: The intersection of these 3 rows and 3 columns forms a 3x3 sub-grid. Step 5: We must place the 3 identical rooks in this 3x3 grid such that no two share a row or column. This is equivalent to arranging 3 objects, which is 3! ways. Step 6: Total non-attacking placements = C(8, 3) * C(8, 3) * 3! = 56 * 56 * 6 = 18816.",
+    "trick": "Decouple the board constraints. Choose the isolated rows, choose the isolated columns, and then permute the pieces within that restricted sub-matrix.",
+    "tip": "Non-attacking identical rooks (k) on NxN board = C(N, k) * C(N, k) * k!"
+  },
+  {
+    "id": 36,
+    "question": "A high-level crisis committee of exactly 5 members is to be formed from a pool of 6 IAS officers and 8 IPS officers. In how many ways can this committee be formed if it mathematically must maintain a strict majority of IPS officers?",
+    "options": ["1316", "2450", "1860", "980"],
+    "answer": "1316",
+    "explanation": "Step 1: A 'strict majority' of IPS officers in a 5-member committee means the committee must contain 3, 4, or 5 IPS officers. Step 2: Case 1 (3 IPS and 2 IAS): Choose 3 from 8 IPS and 2 from 6 IAS. Ways = C(8, 3) * C(6, 2) = 56 * 15 = 840. Step 3: Case 2 (4 IPS and 1 IAS): Choose 4 from 8 IPS and 1 from 6 IAS. Ways = C(8, 4) * C(6, 1) = 70 * 6 = 420. Step 4: Case 3 (5 IPS and 0 IAS): Choose 5 from 8 IPS and 0 from 6 IAS. Ways = C(8, 5) * C(6, 0) = 56 * 1 = 56. Step 5: Since these cases are mutually exclusive, we sum them to find the total number of combinations. Step 6: Total ways = 840 + 420 + 56 = 1316.",
+    "trick": "Split the 'majority' condition into disjoint, exact integer cases. Calculate the binomial product for each case and sum them directly.",
+    "tip": "Strict majority in 5 means exactly 3, 4, or 5. Evaluate cases and sum."
+  },
+  {
+    "id": 37,
+    "question": "A CEO wants to divide a ₹10,00,000 corporate bonus pool equally among 'd' top performers, where each must receive a strict integer amount of Rupees. If the number of performers 'd' must be strictly greater than 1 and strictly less than 100, how many possible values for 'd' exist?",
+    "options": ["13", "14", "18", "21"],
+    "answer": "13",
+    "explanation": "Step 1: Since each performer receives an equal integer amount, 'd' must be a divisor of 1,000,000. We need the number of divisors of 10^6 strictly between 1 and 100. Step 2: Prime factorization of 1,000,000 = 2^6 * 5^6. Step 3: We evaluate divisors of the form 2^a * 5^b that are < 100. Step 4: If b=0, divisors are 2^0 to 2^6 (1, 2, 4, 8, 16, 32, 64). That is 7 divisors. Step 5: If b=1, divisors are 5 * (2^0 to 2^4) (5, 10, 20, 40, 80). That is 5 divisors. Step 6: If b=2, divisors are 25 * (2^0 to 2^1) (25, 50). That is 2 divisors. If b=3, the smallest divisor is 125 > 100 (0 divisors). Step 7: Total divisors < 100 = 7 + 5 + 2 = 14. We must exclude d=1 since performers > 1. Total possible values = 14 - 1 = 13.",
+    "trick": "Equally dividing a sum translates directly to counting mathematical divisors. Cross-reference bounds systematically by locking the larger prime power first.",
+    "tip": "Count divisors within bounds by locking the higher prime and listing exponents."
+  },
+  {
+    "id": 38,
+    "question": "A courier robot moves strictly along a linear track from coordinate x=0 to x=10. It is programmed to only take forward leaps of exactly +1 unit or +2 units. If it is mathematically prohibited from landing exactly on coordinate x=5, how many valid pathways exist to reach x=10?",
+    "options": ["34", "89", "55", "25"],
+    "answer": "25",
+    "explanation": "Step 1: The number of ways to reach coordinate n using +1 or +2 steps follows the Fibonacci sequence F(n+1), where F(1)=1(for n=0), F(2)=1(for n=1), F(3)=2(for n=2), etc. Step 2: To strictly avoid landing on x=5, the robot MUST jump completely over it. The only physical way to bypass x=5 using +1 or +2 steps is to leap exactly from x=4 to x=6 (a +2 step). Step 3: Therefore, the journey is broken into two isolated segments: reaching x=4, and then traveling from x=6 to x=10. Step 4: Number of ways to reach x=4 from x=0 is F(4+1) = F(5). The Fibonacci numbers are 1, 1, 2, 3, 5. So, 5 ways. Step 5: After the forced jump to x=6, the robot must travel a distance of 4 units (from 6 to 10). The ways to cover 4 units is also F(5) = 5 ways. Step 6: Multiply the independent segments: 5 * 5 = 25.",
+    "trick": "To avoid a point in a +1/+2 step system, you are absolutely forced to jump from (point-1) to (point+1). This isolates the path into two independent Fibonacci sequences.",
+    "tip": "Avoid node X with +1/+2 steps: Paths(0 to X-1) * Paths(X+1 to end)."
+  },
+  {
+    "id": 39,
+    "question": "An anagram puzzle requires forming a 7-letter word from the 11 letters of 'ENGINEERING' (E:3, N:3, G:2, I:2, R:1). How many distinct 7-letter words can be formed that mathematically contain exactly two pairs of identical letters, and three completely distinct other letters?",
+    "options": ["3780", "1260", "7560", "2520"],
+    "answer": "7560",
+    "explanation": "Step 1: Identify the available letter pools. We have 5 distinct types of letters: E, N, G, I, R. Step 2: The structural requirement is 2 pairs (AA, BB) and 3 singles (C, D, E). Step 3: Select the 2 types of letters to form the pairs. Only letters with a frequency >= 2 can be used (E, N, G, I). Choosing 2 from these 4 gives C(4, 2) = 6 ways. Step 4: Select the 3 types of letters to form the singletons. We must choose from the remaining 3 unpicked letter types. C(3, 3) = 1 way. Step 5: The total ways to select the multiset of letters is 6 * 1 = 6. Step 6: For each multiset, we must permute the 7 letters containing 2 identical pairs. The permutations are 7! / (2! * 2!) = 5040 / 4 = 1260. Step 7: Total distinct words = (Multiset selections) * (Permutations) = 6 * 1260 = 7560.",
+    "trick": "Split the process strictly into Selection (multisets) and Arrangement (permutations). Ensure the selection pools acknowledge frequency limits natively.",
+    "tip": "For words with repeated letters: combinations to select multisets * permutations."
+  },
+  {
+    "id": 40,
+    "question": "A secured vault contains unlabelled, scattered data drives: 10 Red, 12 Blue, 15 Green, and 20 Yellow. A blindfolded technician must retrieve drives. What is the absolute minimum number of drives they must pull to mathematically guarantee they possess at least 7 drives of the EXACT same color?",
+    "options": ["24", "25", "28", "21"],
+    "answer": "25",
+    "explanation": "Step 1: Apply the Pigeonhole Principle. To find the minimum draws for a 'guarantee', we must calculate the absolute worst-case scenario. Step 2: The worst-case scenario occurs when the technician draws as many drives of each color as possible without hitting the target of 7 for any single color. Step 3: The maximum they can draw of each color without hitting 7 is exactly 6 drives. Step 4: Since there are 4 available colors (Red, Blue, Green, Yellow), the technician could theoretically draw 6 Red, 6 Blue, 6 Green, and 6 Yellow drives. Step 5: Total drives in the worst-case scenario = 6 + 6 + 6 + 6 = 24 drives. Step 6: At this exact point, drawing just 1 more drive (the 25th) MUST be one of the 4 colors, pushing that specific color's count to 7. The answer is 24 + 1 = 25.",
+    "trick": "Always simulate the absolute unluckiest outcome. Fill every category to exactly (target - 1), then add exactly 1 to force the condition.",
+    "tip": "Worst-case guarantee: Sum of (Target - 1) for all categories, then add 1."
+  },
+  {
+    "id": 41,
+    "question": "An AI research lab has 5 distinct neural network training subroutines that must be assigned to 3 distinct supercomputers. Any supercomputer can receive any number of subroutines (including zero), but the order in which the subroutines execute inside any given supercomputer strictly matters. How many valid execution arrangements exist?",
+    "options": ["243", "2520", "120", "720"],
+    "answer": "2520",
+    "explanation": "Step 1: Distributing 'n' distinct items into 'k' distinct bins where the internal arrangement (order) matters is mathematically equivalent to arranging the 'n' items alongside 'k-1' identical dividers in a single linear row. Step 2: The total number of objects to arrange is n items + (k - 1) dividers. Here, n = 5 and k = 3. Step 3: Total objects = 5 items + 2 identical dividers = 7 objects. Step 4: The number of permutations of these 7 objects, where the 5 items are distinct but the 2 dividers are identical, is 7! / 2!. Step 5: Calculate 7! = 5040. Step 6: 5040 / 2 = 2520 distinct execution arrangements.",
+    "trick": "When order matters inside distinct bins, treat the bins as (k-1) identical dividers and permute everything linearly: (n + k - 1)! / (k - 1)!",
+    "tip": "Distinct items into distinct bins where internal order matters = (n+k-1)! / (k-1)!"
+  },
+  {
+    "id": 42,
+    "question": "A space agency manufactures a 3x3 square LED sensor array. Each of the 9 cells can be independently painted either Black or White. If the array can only be rotated in a 2D plane (90, 180, or 270 degrees) but NOT flipped over, how many visually distinct sensor arrays can be manufactured?",
+    "options": ["140", "512", "128", "256"],
+    "answer": "140",
+    "explanation": "Step 1: Apply Burnside's Lemma. The number of distinct configurations is the average number of fixed points over all symmetry operations. There are 4 rotational operations: 0, 90, 180, and 270 degrees. Step 2: For 0 degrees (Identity): All 9 cells can be painted independently. Fixed points = 2^9 = 512. Step 3: For 90 & 270 degrees: The center cell is independent (1 orbit). The 4 corners must share the same color (1 orbit). The 4 edge cells must share the same color (1 orbit). Fixed points for each = 2^3 = 8. Step 4: For 180 degrees: Center cell is independent. The 4 corners form 2 pairs of opposite cells (2 orbits). The 4 edges form 2 pairs (2 orbits). Total orbits = 5. Fixed points = 2^5 = 32. Step 5: Sum the fixed points: 512 + 8 + 32 + 8 = 560. Step 6: Divide by the number of operations (4): 560 / 4 = 140 distinct arrays.",
+    "trick": "Burnside's Lemma drastically simplifies rotational equivalence. Count the independent 'orbits' for each rotation angle and average 2^(orbits).",
+    "tip": "Visually distinct grids under rotation = Average of 2^(orbits) for 0, 90, 180, 270 degrees."
+  },
+  {
+    "id": 43,
+    "question": "Four regional branches of a national bank independently report a quarterly profit ranging strictly between ₹1 Crore and ₹6 Crore (integer values only). In how many distinct combinations can the aggregate reported profit of all four branches total exactly ₹16 Crores?",
+    "options": ["119", "125", "146", "231"],
+    "answer": "125",
+    "explanation": "Step 1: Let the profit of the 4 branches be x1, x2, x3, x4. We need solutions to x1 + x2 + x3 + x4 = 16, subject to 1 <= xi <= 6. Step 2: Shift the lower bounds by letting yi = xi - 1. So, 0 <= yi <= 5, and the sum becomes y1 + y2 + y3 + y4 = 12. Step 3: Find total non-negative solutions without the upper bound: C(12+4-1, 4-1) = C(15, 3) = 455. Step 4: Subtract cases where one variable breaches the upper bound (yi >= 6). Choose 1 variable to breach in C(4,1)=4 ways. Let y1 = z1 + 6. The new sum is z1 + y2 + y3 + y4 = 6. Solutions = C(6+4-1, 3) = C(9, 3) = 84. Violations = 4 * 84 = 336. Step 5: Add back the overlap (Inclusion-Exclusion) where TWO variables breach (yi >= 6, yj >= 6). Choose 2 variables in C(4,2)=6 ways. New sum is z1 + z2 + y3 + y4 = 0. Solutions = C(0+4-1, 3) = C(3, 3) = 1. Overlap cases = 6 * 1 = 6. Step 6: Total valid combinations = 455 - 336 + 6 = 125.",
+    "trick": "This models identical dice rolls. Instead of pure combinatorics, use the generating function coefficient of x^12 in (1-x^6)^4 * (1-x)^(-4).",
+    "tip": "For bounded sums, use PIE: Total - C(n,1)*P(breach 1) + C(n,2)*P(breach 2)."
+  },
+  {
+    "id": 44,
+    "question": "12 elite NSG commandos stand in a perfect circle facing the center. A commander must select a covert strike team of exactly 4 commandos such that no two selected commandos were standing adjacent to each other in the circle. How many such distinct teams can be formed?",
+    "options": ["495", "105", "210", "126"],
+    "answer": "105",
+    "explanation": "Step 1: Selecting 'k' non-adjacent items from 'n' items arranged in a CIRCLE requires a specific combinatorial formula to account for the wrap-around wrap: [n / (n - k)] * C(n - k, k). Step 2: Here, the total commandos n = 12, and the required team size k = 4. Step 3: Calculate the components of the formula. (n - k) = 12 - 4 = 8. Step 4: C(n - k, k) = C(8, 4) = (8 * 7 * 6 * 5) / (4 * 3 * 2 * 1) = 70. Step 5: Multiply by the scaling factor [n / (n - k)] = 12 / 8 = 1.5. Step 6: Total valid circular selections = 1.5 * 70 = 105.",
+    "trick": "Do not use the linear non-adjacent formula C(n-k+1, k). The circular requirement adds the specific n/(n-k) modifier to eliminate end-overlap violations.",
+    "tip": "k non-adjacent items from n in a CIRCLE = [n / (n - k)] * C(n - k, k)."
+  },
+  {
+    "id": 45,
+    "question": "During a bust, customs officials seize 11 completely identical, unmarked gold bars. They must securely distribute all 11 bars into exactly 4 completely identical velvet evidence pouches such that no pouch is left empty. In how many distinct ways can this distribution be done?",
+    "options": ["11", "15", "18", "21"],
+    "answer": "11",
+    "explanation": "Step 1: Distributing identical items into identical non-empty bins is the mathematical 'Partition Function' P(n, k). We need P(11, 4). Step 2: Since manual listing can be error-prone, use the recurrence relation P(n, k) = P(n-1, k-1) + P(n-k, k). Step 3: P(11, 4) = P(10, 3) + P(7, 4). Step 4: Expand P(10, 3) = P(9, 2) + P(7, 3). P(9, 2) is the number of ways to partition 9 into 2 parts (which is floor(9/2) = 4). P(7, 3) = P(6, 2) + P(4, 3) = 3 + 1 = 4. Thus, P(10, 3) = 4 + 4 = 8. Step 5: Expand P(7, 4) = P(6, 3) + P(3, 4). Since k > n, P(3, 4) = 0. P(6, 3) = P(5, 2) + P(3, 3) = 2 + 1 = 3. Step 6: Finally, P(11, 4) = 8 + 3 = 11.",
+    "trick": "The recurrence relation P(n,k) = P(n-1, k-1) + P(n-k, k) systematically breaks complex identical-to-identical distributions into trivial base cases.",
+    "tip": "Identical items to identical bins uses Partition Numbers. Recursion: P(n,k) = P(n-1,k-1) + P(n-k,k)."
+  },
+  {
+    "id": 46,
+    "question": "A premier B-school randomly pairs up 12 top-performing students into exactly 6 distinct two-person teams for a case study competition. How many unique sets of 6 pairings can be formed from this cohort?",
+    "options": ["10395", "462", "7484400", "5197"],
+    "answer": "10395",
+    "explanation": "Step 1: We are dividing a distinct group of 2n people into exactly n distinct pairs. Step 2: The formula to divide 2n items into n groups of 2 (where the order of the pairs does not matter, and the internal order within a pair does not matter) is (2n)! / (2^n * n!). Step 3: Here, 2n = 12, so n = 6. Step 4: Formula application: 12! / (2^6 * 6!). Step 5: Expand to simplify: (12 * 11 * 10 * 9 * 8 * 7 * 6!) / (64 * 6!). The 6! cancels out. Step 6: We are left with (12 * 11 * 10 * 9 * 8 * 7) / 64 = 665280 / 64 = 10395.",
+    "trick": "Alternatively, think of the first person choosing a partner (11 choices), the next available choosing (9 choices), etc. Product of odd numbers: 11*9*7*5*3*1 = 10395.",
+    "tip": "Dividing 2n people into n pairs = (2n)! / (2^n * n!) OR product of first n odd numbers."
+  },
+  {
+    "id": 47,
+    "question": "A high-frequency algorithm executes 1 trade per hour for exactly 6 hours. Each trade adds 1 lot (+1), sells 1 lot (-1), or holds (0). If the algorithm starts flat (0), ends flat (0), and NEVER holds a net negative position at any hour, how many unique trading sequences exist?",
+    "options": ["51", "63", "21", "127"],
+    "answer": "51",
+    "explanation": "Step 1: A sequence of n steps utilizing +1, -1, and 0 moves that starts at 0, ends at 0, and never dips below 0 is precisely defined by the nth Motzkin Number (M_n). We need M_6. Step 2: The Motzkin numbers follow the recurrence: M_n = M_n-1 + Sum(M_i * M_n-2-i) for i=0 to n-2. Step 3: The base cases are M_0 = 1, M_1 = 1. Step 4: Calculate systematically: M_2 = M_1 + (M_0*M_0) = 1 + 1 = 2. M_3 = M_2 + (M_0*M_1 + M_1*M_0) = 2 + 2 = 4. M_4 = M_3 + (M_0*M_2 + M_1*M_1 + M_2*M_0) = 4 + (2 + 1 + 2) = 9. M_5 = M_4 + (M_0*M_3 + M_1*M_2 + M_2*M_1 + M_3*M_0) = 9 + (4 + 2 + 2 + 4) = 21. Step 5: M_6 = M_5 + (M_0*M_4 + M_1*M_3 + M_2*M_2 + M_3*M_1 + M_4*M_0). Step 6: M_6 = 21 + (9 + 4 + 4 + 4 + 9) = 21 + 30 = 51.",
+    "trick": "Recognize ternary state bounds (+1, -1, 0) staying >= 0 as Motzkin numbers, a direct cousin to Catalan numbers but allowing horizontal stationary steps.",
+    "tip": "Paths with (+1,-1,0) staying >= 0 are Motzkin numbers: 1, 1, 2, 4, 9, 21, 51."
+  },
+  {
+    "id": 48,
+    "question": "An intelligence handler is sending 6 classified dossiers to 6 distinct safehouses. The delivery protocol dictates that the route mappings must form exactly 2 independent, unbroken, closed substitution cycles (where a cycle can involve 1 or more safehouses). In how many ways can this mapping occur?",
+    "options": ["225", "274", "120", "365"],
+    "answer": "274",
+    "explanation": "Step 1: The number of ways to arrange 'n' elements into exactly 'k' distinct permutation cycles is given by the unsigned Stirling Numbers of the First Kind, denoted as |s(n, k)|. Step 2: We need |s(6, 2)|. Step 3: The recurrence relation is |s(n, k)| = (n-1) * |s(n-1, k)| + |s(n-1, k-1)|. Step 4: For k=2, a faster explicit formula exists: |s(n, 2)| = (n-1)! * H_{n-1}, where H is the harmonic number sum (1 + 1/2 + 1/3 + ... + 1/(n-1)). Step 5: Here, n=6. The sum H_5 = 1 + 1/2 + 1/3 + 1/4 + 1/5. Step 6: Multiply by (6-1)! = 5! = 120. Result = 120 * (1 + 1/2 + 1/3 + 1/4 + 1/5) = 120 + 60 + 40 + 30 + 24 = 274.",
+    "trick": "Permutations grouped into exact unbroken cycles strictly invoke Stirling Numbers of the First Kind. The Harmonic sum formula bypasses full recursive matrices for k=2.",
+    "tip": "Arranging n items into exactly 2 cycles = (n-1)! * (1 + 1/2 + ... + 1/(n-1))."
+  },
+  {
+    "id": 49,
+    "question": "A telecom company is establishing a localized optical fiber network physically connecting 7 remote villages in Ladakh. The network must be fully connected, ensuring a path exists between any two villages, but it must contain zero redundant circular loops (forming a spanning tree). How many distinct topological configurations can be created?",
+    "options": ["16807", "5040", "2401", "823543"],
+    "answer": "16807",
+    "explanation": "Step 1: The problem asks for the number of distinct spanning trees in a complete graph with 'n' vertices (the 7 villages). Step 2: This is a direct application of Cayley's Formula. Step 3: Cayley's Formula states that the number of distinct spanning trees for a fully connected graph of 'n' labeled vertices is n^(n-2). Step 4: Here, n = 7. Step 5: Calculate 7^(7-2) = 7^5. Step 6: 7^5 = 7 * 7 * 7 * 7 * 7 = 49 * 49 * 7 = 2401 * 7 = 16807.",
+    "trick": "Identify 'fully connected with zero redundant loops' seamlessly as the definition of a Spanning Tree to unlock Cayley's Formula instantly.",
+    "tip": "The number of spanning trees for 'n' labeled nodes is ALWAYS exactly n^(n-2)."
+  },
+  {
+    "id": 50,
+    "question": "Two completely identical AI observer drones are randomly deployed onto a standard 8x8 search grid (64 squares). If they are mathematically deemed 'interfering' when placed in the same square or any horizontally, vertically, or diagonally adjacent square, how many non-interfering placement combinations exist?",
+    "options": ["1806", "1722", "1904", "1650"],
+    "answer": "1806",
+    "explanation": "Step 1: First, calculate the total possible unrestricted ways to place 2 identical drones on 64 squares. Ways = C(64, 2) = (64 * 63) / 2 = 2016. Step 2: Now, calculate the number of 'interfering' placements, which implies the two drones are adjacent. Two drones are adjacent if they share an edge or a corner. Step 3: This is mathematically equivalent to counting the number of pairs of adjacent cells (in all 8 directions) on an m x n grid. Step 4: The explicit formula for total adjacent pairs (horizontal + vertical + diagonal) on an m x n grid is: 4mn - 3m - 3n + 2. Step 5: Substitute m = 8, n = 8: 4(64) - 3(8) - 3(8) + 2 = 256 - 24 - 24 + 2 = 210 adjacent pairs. Step 6: Subtract the interfering placements from the total: 2016 - 210 = 1806 safe placement combinations.",
+    "trick": "Counting specific grid adjacencies manually is tedious. Use the universal adjacency pair formula: 4mn - 3m - 3n + 2 for any m x n board.",
+    "tip": "Total adjacent pairs (including diagonals) on an m x n grid = 4mn - 3m - 3n + 2."
+  },
+  {
+    "id": 51,
+    "question": "A massive tech conglomerate plans to distribute 10 completely identical proprietary server racks among 3 major distinct global data centers. To balance operational capability, the EXACT maximum number of racks allocated to any single data center must be exactly 5. How many distribution profiles fit this strict constraint?",
+    "options": ["15", "21", "6", "36"],
+    "answer": "15",
+    "explanation": "Step 1: We need integer solutions to x1 + x2 + x3 = 10, with the strict condition that Max(x1, x2, x3) = 5. Step 2: This can be computed by finding the total cases where Max <= 5, and then subtracting the cases where Max <= 4. Step 3: Find cases for Max <= 5. Substitute yi = 5 - xi. The new sum is y1 + y2 + y3 = (5+5+5) - 10 = 5. Non-negative solutions = C(5+3-1, 3-1) = C(7, 2) = 21. Step 4: Find cases for Max <= 4. Substitute zi = 4 - xi. The new sum is z1 + z2 + z3 = (4+4+4) - 10 = 2. Non-negative solutions = C(2+3-1, 3-1) = C(4, 2) = 6. Step 5: The number of distributions where the maximum is EXACTLY 5 is the difference between these two sets. Step 6: Valid profiles = 21 - 6 = 15.",
+    "trick": "An 'exact maximum' constraint is just a nested boundary problem. Calculate (Total where upper bound is N) minus (Total where upper bound is N-1).",
+    "tip": "Exact Max = K is found by calculating (Combinations where Max <= K) - (Combinations where Max <= K-1)."
+  },
+  {
+    "id": 52,
+    "question": "Two automated maintenance bots start at completely opposite corners of a 6x6 underground municipal grid. Bot A starts at (0,0) moving only North or East. Bot B starts at (6,6) moving only South or West. If they move simultaneously at identical constant speeds, in how many mathematically distinct route combinations will they suffer a head-on collision at any node?",
+    "options": ["924", "400", "3432", "252"],
+    "answer": "924",
+    "explanation": "Step 1: Since both bots move at identical speeds on a 6x6 grid, they will each have made exactly 6 moves when they cross paths. Therefore, they can only collide on the anti-diagonal line defined by x + y = 6. Step 2: The points on this diagonal are (k, 6-k) where k ranges from 0 to 6. Step 3: For a specific point (k, 6-k), the number of paths for Bot A to reach it is C(6, k). Step 4: The number of paths for Bot B to move from (6,6) to (k, 6-k) requires (6-k) Left moves and k Down moves, totaling 6 moves. Paths for B = C(6, 6-k) = C(6, k). Step 5: Because their movements are independent, the number of collision combinations at point (k, 6-k) is C(6, k) * C(6, k) = C(6, k)^2. Step 6: Summing over all meeting points yields Sum(C(6, k)^2) from k=0 to 6. By Vandermonde's Identity, this sum evaluates exactly to C(12, 6) = (12*11*10*9*8*7)/(6*5*4*3*2*1) = 924.",
+    "trick": "Vandermonde's Identity flawlessly maps the sum of squared binomials to a single larger combination. Meeting in an N x N grid is always C(2N, N).",
+    "tip": "Two objects moving from opposite N x N corners at equal speeds collide in C(2N, N) ways."
+  },
+  {
+    "id": 53,
+    "question": "A cybersecurity firm generates cryptographic seeds by selecting an integer from 1 to 1000 inclusive. To ensure algorithm integrity, the chosen seed must be strictly coprime to 30 (i.e., it must share zero common prime factors with 30). How many valid seeds exist in this range?",
+    "options": ["266", "333", "280", "400"],
+    "answer": "266",
+    "explanation": "Step 1: The prime factors of 30 are 2, 3, and 5. A number is coprime to 30 if it is not divisible by 2, 3, or 5. We use the Principle of Inclusion-Exclusion (PIE). Step 2: Total numbers = 1000. Let N(k) be the numbers divisible by k. Step 3: Calculate single divisibilities: N(2) = floor(1000/2) = 500. N(3) = floor(1000/3) = 333. N(5) = floor(1000/5) = 200. Step 4: Calculate pairwise divisibilities: N(6) = floor(1000/6) = 166. N(10) = floor(1000/10) = 100. N(15) = floor(1000/15) = 66. Step 5: Calculate triple divisibility: N(30) = floor(1000/30) = 33. Step 6: Apply PIE: Total coprime = Total - (N(2) + N(3) + N(5)) + (N(6) + N(10) + N(15)) - N(30). Coprime = 1000 - (500 + 333 + 200) + (166 + 100 + 66) - 33 = 1000 - 1033 + 332 - 33 = 266.",
+    "trick": "You can also use Euler's Totient function logic if N is a multiple of 30. Since 1000 = 33 * 30 + 10, calculate phi(30)*33 + valid numbers in the last 10.",
+    "tip": "Coprime counting strictly uses PIE involving the unique prime factors of the reference number."
+  },
+  {
+    "id": 54,
+    "question": "6 state cabinet ministers must pose for a historic group photo in a single straight row. The Finance and Defense ministers absolutely refuse to stand next to each other, while the Home and Foreign ministers insist on standing perfectly adjacent. How many acceptable sequence configurations exist?",
+    "options": ["144", "288", "120", "240"],
+    "answer": "144",
+    "explanation": "Step 1: First, satisfy the adjacency condition. Bind the Home and Foreign ministers together into a single block. This block can be arranged internally in 2! = 2 ways. Step 2: We now have 5 total entities: the (Home/Foreign) block, the Finance minister, the Defense minister, and the 2 remaining independent ministers. Step 3: To satisfy the separation condition (Finance and Defense must not be adjacent), we first arrange the OTHER 3 entities: the (Home/Foreign) block and the 2 independent ministers. Step 4: These 3 base entities can be arranged in 3! = 6 ways. Combined with the internal block permutation, this base arrangement has 6 * 2 = 12 ways. Step 5: These 3 base entities create exactly 4 gaps (including the ends) where the Finance and Defense ministers can be placed safely. Step 6: We must place the 2 separated ministers into these 4 gaps. The number of ways is P(4, 2) = 4 * 3 = 12. Total configurations = Base arrangements * Gap placements = 12 * 12 = 144.",
+    "trick": "Handle contiguity (grouping) first to form base entities, then use the 'Gap Method' to place non-adjacent members to prevent messy PIE subtractions.",
+    "tip": "For mixed adjacency/separation, group the adjacent ones, arrange the neutral base, and place the separated ones in gaps."
+  },
+  {
+    "id": 55,
+    "question": "An angel investor plans to fund exactly 8 startup pitches drawn from a vetted pool consisting of 3 identical Fintech proposals, 4 identical Edtech proposals, and 5 identical Agritech proposals. How many valid multisector selection combinations can be executed?",
+    "options": ["14", "26", "45", "10"],
+    "answer": "14",
+    "explanation": "Step 1: Let f, e, a be the number of Fintech, Edtech, and Agritech pitches selected. We need f + e + a = 8, with constraints 0 <= f <= 3, 0 <= e <= 4, 0 <= a <= 5. Step 2: Calculate total non-negative solutions without upper limits: C(8+3-1, 3-1) = C(10, 2) = 45. Step 3: Subtract violations using PIE. Violation 1 (f >= 4): Let f' = f - 4. f' + e + a = 4. Solutions = C(4+2, 2) = 15. Step 4: Violation 2 (e >= 5): Let e' = e - 5. f + e' + a = 3. Solutions = C(3+2, 2) = 10. Step 5: Violation 3 (a >= 6): Let a' = a - 6. f + e + a' = 2. Solutions = C(2+2, 2) = 6. Step 6: Check for overlaps (e.g., f >= 4 AND e >= 5). This requires a sum of 9, but our total is only 8. So zero overlaps exist. Valid selections = 45 - (15 + 10 + 6) = 45 - 31 = 14.",
+    "trick": "Because the maximum required sum (8) is less than the sum of any two boundary constraints (4+5=9), the PIE overlap intersections are strictly zero, accelerating computation.",
+    "tip": "Multiset selection = Stars & Bars total minus single boundary breaches. (Zero overlaps if boundary sums > total)."
+  },
+  {
+    "id": 56,
+    "question": "5 adjoining agricultural zones in Punjab form a perfect circular ring. The state board has exactly 4 distinct viable crop types. To prevent cross-pollination risks, no two geometrically adjacent zones can be planted with the exact same crop type. How many distinct planting configurations exist?",
+    "options": ["240", "1024", "260", "256"],
+    "answer": "240",
+    "explanation": "Step 1: This is mathematically equivalent to finding the chromatic polynomial of a cycle graph C_n with 'k' colors. Step 2: The universal formula for coloring a cycle graph of 'n' vertices using 'k' colors such that no two adjacent vertices share a color is: P(C_n, k) = (k - 1)^n + (-1)^n * (k - 1). Step 3: Identify the parameters. The number of zones n = 5, and the number of distinct crops (colors) k = 4. Step 4: Substitute the values into the formula: P(C_5, 4) = (4 - 1)^5 + (-1)^5 * (4 - 1). Step 5: Simplify: 3^5 + (-1) * 3 = 243 - 3. Step 6: Total distinct planting configurations = 240.",
+    "trick": "Avoid linear placement mapping (which fails on the wrap-around wrap condition). The graph chromatic polynomial for cycles perfectly handles the end-to-end clash.",
+    "tip": "Coloring a circular ring of n nodes with k colors = (k-1)^n + (-1)^n * (k-1)."
+  },
+  {
+    "id": 57,
+    "question": "The Supreme Court assigns 6 uniquely distinct high-priority legal cases to 3 distinct senior advocates. To ensure equitable workload distribution, every advocate must be assigned at least one case. How many valid assignment schedules exist?",
+    "options": ["540", "729", "90", "120"],
+    "answer": "540",
+    "explanation": "Step 1: Assigning 'n' distinct objects to 'k' distinct bins such that no bin is empty is the definition of counting Surjective (onto) functions. Step 2: This can be computed by multiplying the number of ways to partition the distinct items into identical non-empty groups (Stirling Numbers of the Second Kind, S(n,k)) by the permutations of the distinct bins (k!). Step 3: Formula = k! * S(n, k). Here n=6, k=3. Step 4: S(6, 3) = (1/3!) * [C(3,3)*3^6 - C(3,2)*2^6 + C(3,1)*1^6] = (1/6) * [729 - 3(64) + 3(1)] = (1/6) * [729 - 192 + 3] = (1/6) * 540 = 90. Step 5: Now, multiply by the permutations of the 3 distinct advocates: 3! * 90 = 6 * 90. Step 6: Total valid schedules = 540.",
+    "trick": "Distinct items to distinct non-empty bins natively translates to Surjective functions. Use PIE or k! * S(n,k) directly.",
+    "tip": "Distinct to Distinct (>=1) = k! * S(n, k), where S is Stirling number 2nd kind."
+  },
+  {
+    "id": 58,
+    "question": "A standard 8x8 chessboard is painted on a public plaza. An event planner needs to cordon off a strictly rectangular region bounded by the existing grid lines. If the cordoned region mathematically CANNOT be a perfect square, how many distinct rectangular regions are possible?",
+    "options": ["1092", "1296", "1024", "1140"],
+    "answer": "1092",
+    "explanation": "Step 1: First, calculate the total number of ALL rectangular regions (including squares) in an n x n grid. The grid has (n+1) vertical lines and (n+1) horizontal lines. Step 2: Choosing any 2 vertical lines and any 2 horizontal lines defines a rectangle. Total rectangles = C(9, 2) * C(9, 2) = 36 * 36 = 1296. Step 3: Next, calculate the number of perfect squares in an n x n grid. The formula is the sum of the first n squares: 1^2 + 2^2 + 3^2 + ... + n^2. Step 4: For n=8, sum of squares = 8^2 + 7^2 + 6^2 + 5^2 + 4^2 + 3^2 + 2^2 + 1^2 = 64 + 49 + 36 + 25 + 16 + 9 + 4 + 1 = 204. Step 5: Subtract the square regions from the total rectangular regions to isolate the strictly rectangular (non-square) regions. Step 6: 1296 - 204 = 1092 distinct regions.",
+    "trick": "The number of grids isn't N, the number of intersecting lines is N+1. Always use C(N+1, 2) for orthogonal rectangle generation.",
+    "tip": "Total rectangles = C(n+1,2)^2. Total squares = n(n+1)(2n+1)/6. Subtract to get pure rectangles."
+  },
+  {
+    "id": 59,
+    "question": "A fully automated logistics drone operates inside a 3D mapped warehouse in Mumbai. It must move from coordinate (0,0,0) to coordinate (4,3,2) using only positive unit steps along the X, Y, or Z axes. How many distinct shortest paths exist for this drone?",
+    "options": ["1260", "288", "362880", "1680"],
+    "answer": "1260",
+    "explanation": "Step 1: The drone must take a total of 4 steps along X, 3 steps along Y, and 2 steps along Z. Step 2: The absolute shortest path requires the drone to take exactly the sum of these coordinate displacements in total moves. Step 3: Total steps = 4 + 3 + 2 = 9 steps. Step 4: Any valid path is simply a unique permutation of the multiset of these moves: {X,X,X,X, Y,Y,Y, Z,Z}. Step 5: The number of unique permutations is given by the multinomial coefficient: (Total steps)! / (X_steps! * Y_steps! * Z_steps!). Step 6: Calculate: 9! / (4! * 3! * 2!) = 362880 / (24 * 6 * 2) = 362880 / 288 = 1260.",
+    "trick": "3D routing strictly follows multinomial permutations of coordinate displacements, entirely bypassing complex nodal path tracing.",
+    "tip": "Shortest 3D grid path to (x,y,z) is the multinomial coefficient (x+y+z)! / (x! y! z!)."
+  },
+  {
+    "id": 60,
+    "question": "A digital radio station plays a playlist consisting of 5 strictly distinct classical ragas. In how many mathematically distinct playback sequences are there exactly 3 'inversions' (an inversion occurs whenever an earlier track in the original alphabetical order is played after a later track)?",
+    "options": ["15", "20", "24", "9"],
+    "answer": "15",
+    "explanation": "Step 1: The number of permutations of length 'n' with exactly 'k' inversions is equivalent to finding integer solutions to i_1 + i_2 + ... + i_n = k, where 0 <= i_m <= m - 1 for all m. Step 2: Here n=5, k=3. The constraints are i1=0, 0<=i2<=1, 0<=i3<=2, 0<=i4<=3, 0<=i5<=4. Step 3: Since i1 is always 0, we need i2 + i3 + i4 + i5 = 3. Step 4: Total non-negative solutions without upper limits: C(3+4-1, 4-1) = C(6, 3) = 20. Step 5: Subtract upper-limit violations. Violation 1: i2 >= 2. Let i2 = z2 + 2. New sum = 1. Solutions = C(1+4-1, 3) = C(4, 3) = 4. Violation 2: i3 >= 3. Let i3 = z3 + 3. New sum = 0. Solutions = C(0+4-1, 3) = C(3, 3) = 1. Step 6: Violations for i4 >= 4 and i5 >= 5 are impossible since total sum is 3. Valid sequences = 20 - 4 - 1 = 15.",
+    "trick": "Inversions strictly map to bounded integer partitions where the upper bound for the m-th element is uniquely m-1. Use PIE to filter.",
+    "tip": "Permutations of n with k inversions = solutions to sum(i_m)=k where 0 <= i_m <= m-1."
+  },
+  {
+    "id": 61,
+    "question": "ISRO is allocating a strict budget of ₹18 Crore across three distinct research divisions. Division A requires funding in multiples of ₹3 Crore, while Divisions B and C require funding in multiples of ₹1 Crore. If all divisions must receive at least ₹0, how many distinct budget allocation profiles are mathematically possible?",
+    "options": ["70", "84", "133", "65"],
+    "answer": "70",
+    "explanation": "Step 1: Let the funding for Division A be 3x, Division B be y, and Division C be z. We need non-negative integer solutions to 3x + y + z = 18. Step 2: Iterate over the variable with the largest coefficient, x. Since 3x <= 18, the possible values for x are 0, 1, 2, ..., 6. Step 3: For each value of x, the equation becomes y + z = 18 - 3x. The number of non-negative solutions to y + z = K is simply K + 1. Step 4: Calculate the sum of solutions for each x: For x=0, y+z=18 (19 solutions). For x=1, y+z=15 (16 solutions). For x=2, y+z=12 (13 solutions). Step 5: Continuing this arithmetic progression, the total number of solutions is 19 + 16 + 13 + 10 + 7 + 4 + 1. Step 6: Summing this arithmetic progression gives 70 distinct allocation profiles.",
+    "trick": "Always isolate the variable with the highest coefficient and sum the resulting 2-variable combinations (K+1). It forms a simple Arithmetic Progression.",
+    "tip": "For ax + y + z = N, iterate over x and sum (N - ax + 1)."
+  },
+  {
+    "id": 62,
+    "question": "During a high-level diplomatic summit in New Delhi, 20 international delegates are seated at a perfectly circular round table. A core committee of exactly 5 delegates must be selected for a closed-door briefing. To avoid regional bias, no two delegates sitting adjacent to each other at the table can be selected. How many valid committees can be formed?",
+    "options": ["15504", "3003", "4004", "4368"],
+    "answer": "4004",
+    "explanation": "Step 1: Selecting 'k' non-adjacent items from 'n' items arranged in a CIRCULAR configuration is governed by a specific formula to account for the wrap-around boundary condition. Step 2: The standard linear non-adjacent formula is C(n - k + 1, k). For a circle, the formula is [n / (n - k)] * C(n - k, k). Step 3: Identify the parameters: n = 20 (total delegates), k = 5 (selected delegates). Step 4: Calculate (n - k) = 20 - 5 = 15. Step 5: Calculate the combination part: C(15, 5) = (15 * 14 * 13 * 12 * 11) / (5 * 4 * 3 * 2 * 1) = 3003. Step 6: Apply the circular scaling multiplier: [20 / 15] * 3003 = (4/3) * 3003 = 4 * 1001 = 4004.",
+    "trick": "Using the linear formula C(16, 5) gives 4368, which is a trap! Always apply the circular modifier n/(n-k) to account for the endpoints joining.",
+    "tip": "Circular selection of k non-adjacent items from n = [n/(n-k)] * C(n-k, k)."
+  },
+  {
+    "id": 63,
+    "question": "A defense academy must select exactly 8 officers for a special ops team from 4 distinct regional regiments. Each regiment can provide a maximum of 3 identical-profile officers. How many distinct team compositions are possible?",
+    "options": ["31", "165", "140", "65"],
+    "answer": "31",
+    "explanation": "Step 1: We need non-negative integer solutions to x1 + x2 + x3 + x4 = 8, subject to the strict upper bound 0 <= xi <= 3. Step 2: First, find total unrestricted solutions: C(8+4-1, 4-1) = C(11, 3) = 165. Step 3: Use PIE to subtract violations. A violation occurs if any xi >= 4. Choose 1 regiment to violate: C(4,1) = 4 ways. Let x1 = y1 + 4. New sum: y1 + x2 + x3 + x4 = 4. Solutions = C(4+4-1, 3) = C(7, 3) = 35. Total single violations = 4 * 35 = 140. Step 4: Add back double-counting overlaps (two regiments violating: xi >= 4, xj >= 4). Choose 2 regiments: C(4,2) = 6 ways. Sum required is 8 - 4 - 4 = 0. Solutions for sum 0 is C(0+4-1, 3) = C(3, 3) = 1. Total double violations = 6 * 1 = 6. Step 5: Triple violations are impossible (requires sum >= 12). Step 6: Total valid compositions = Total - Single Violations + Double Violations = 165 - 140 + 6 = 31.",
+    "trick": "When bounds are tight, generating functions or PIE is strictly required. Do not forget to ADD back the double-breach intersections.",
+    "tip": "For upper bounds, PIE is standard: Total - C(n,1)*Breach1 + C(n,2)*Breach2."
+  },
+  {
+    "id": 64,
+    "question": "A VIP convoy is navigating the grid-like streets of Chandigarh from coordinate (0,0) to (7,7). For extreme security, the convoy must never physically touch or cross the primary diagonal fault-line defined mathematically by the equation y = x + 1. How many valid shortest paths exist?",
+    "options": ["429", "1430", "3432", "132"],
+    "answer": "429",
+    "explanation": "Step 1: The condition that the path must never touch or cross y = x + 1 means that for every point (x,y) on the path, the condition y <= x must strictly hold. Step 2: A grid path from (0,0) to (n,n) that never crosses above the diagonal y = x is the precise geometric definition of a Dyck Path. Step 3: The number of such valid paths is given by the nth Catalan Number, C_n. Step 4: Here, n = 7. The formula for the nth Catalan Number is C_n = (1 / (n+1)) * C(2n, n). Step 5: Calculate the standard combinations: C(14, 7) = (14 * 13 * 12 * 11 * 10 * 9 * 8) / (7 * 6 * 5 * 4 * 3 * 2 * 1) = 3432. Step 6: Divide by (n+1): 3432 / 8 = 429.",
+    "trick": "A boundary of y = x + 1 is just the formal mathematical way of stating 'do not cross above y = x', which instantly triggers Catalan Numbers.",
+    "tip": "Paths from (0,0) to (n,n) bounded by y <= x are always the nth Catalan number."
+  },
+  {
+    "id": 65,
+    "question": "A tech philanthropist is donating 30 completely identical tablets to 4 rural village schools. To conform to a local cultural superstition, every single school must receive a strictly ODD number of tablets. How many distinct distribution profiles exist?",
+    "options": ["560", "455", "364", "680"],
+    "answer": "560",
+    "explanation": "Step 1: Let the number of tablets received by the 4 schools be x1, x2, x3, x4. We need x1 + x2 + x3 + x4 = 30. Step 2: Since each school must receive an odd number, substitute xi = 2ki + 1, where ki >= 0. Step 3: The equation becomes (2k1 + 1) + (2k2 + 1) + (2k3 + 1) + (2k4 + 1) = 30. Step 4: Group the constants: 2(k1 + k2 + k3 + k4) + 4 = 30. Step 5: Subtract 4 from both sides and divide by 2: k1 + k2 + k3 + k4 = (30 - 4) / 2 = 13. Step 6: We now seek non-negative integer solutions for sum = 13 across 4 variables. Using Stars and Bars: C(13+4-1, 4-1) = C(16, 3) = (16 * 15 * 14) / 6 = 560.",
+    "trick": "Always map odd parity constraints directly to 2k+1 (where k>=0) to normalize the equation into a basic non-negative integer framework.",
+    "tip": "Odd distributions: replace xi with 2ki+1, simplify the sum, and use Stars & Bars."
+  },
+  {
+    "id": 66,
+    "question": "A Venture Capitalist has exactly ₹12 Crore to invest in 3 specific startups (A, B, and C). Funding is exclusively in integer multiples of ₹1 Crore. To ensure a clear hierarchy of stake, no two startups can receive the exact same funding amount, and every startup must receive at least ₹1 Crore. How many unique investment profiles are possible?",
+    "options": ["42", "55", "36", "48"],
+    "answer": "42",
+    "explanation": "Step 1: Let the funding be x, y, z. We need positive integer solutions to x + y + z = 12, with the strict condition that x != y, y != z, x != z. Step 2: First, find total positive integer solutions using Stars and Bars: C(12-1, 3-1) = C(11, 2) = 55. Step 3: We must subtract the symmetric violations where two or more amounts are identical. First, check if all three can be equal: x=y=z. This gives 3x = 12, so x=4. There is exactly 1 such case (4,4,4). Step 4: Now, check cases where EXACTLY two amounts are equal. Let 2a + b = 12. Valid pairs for (a) are 1 (b=10), 2 (b=8), 3 (b=6), 5 (b=2). Note that a=4 gives b=4, which is the all-three-equal case already counted. Step 5: For each of the 4 valid values of 'a', there are 3 ways to assign the unique 'b' value to one of the 3 startups. So, 4 * 3 = 12 cases of exactly two equal. Step 6: Total violating cases = 1 (all three) + 12 (exactly two) = 13. Total valid unique profiles = 55 - 13 = 42.",
+    "trick": "Calculate total positive solutions, then systematically subtract the 'all three equal' case and permutations of the 'exactly two equal' cases.",
+    "tip": "Strictly distinct distributions = Total - (All Equal) - 3*(Pairs Equal)."
+  },
+  {
+    "id": 67,
+    "question": "A political strategist is allocating 20 identical campaign rally permits across 3 crucial voting districts. To ensure a balanced offensive, no single district can receive a number of permits that allows it to outnumber or equal the combined permits of the other two districts. How many valid allocation profiles are possible?",
+    "options": ["36", "66", "198", "45"],
+    "answer": "36",
+    "explanation": "Step 1: Let the permits be x, y, z. We need non-negative integer solutions to x + y + z = 20. Step 2: The constraint is that no district has >= the sum of the others. For x, this means x < y + z. Since x + y + z = 20, we substitute y + z = 20 - x. Thus, x < 20 - x, leading to 2x < 20, which strictly means x <= 9. Step 3: The same logic applies to all districts, so we have bounds: x <= 9, y <= 9, z <= 9. Step 4: Use PIE. Total unrestricted non-negative solutions = C(20+3-1, 3-1) = C(22, 2) = 231. Step 5: Subtract cases where one variable breaches the bound (e.g., x >= 10). Let x = x' + 10. Sum becomes 10. Solutions = C(10+3-1, 3-1) = C(12, 2) = 66. Since there are 3 variables, single breaches = 3 * 66 = 198. Step 6: Add back double breaches (e.g., x >= 10 AND y >= 10). Let x = x'+10, y = y'+10. Sum becomes 0. Solutions = C(0+3-1, 3-1) = C(2, 2) = 1. For 3 pairs, double breaches = 3 * 1 = 3. Step 7: Valid allocations = 231 - 198 + 3 = 36.",
+    "trick": "Triangle inequality logic (A < B+C) within a constant sum S instantly translates to strict upper bounds A < S/2 on all variables.",
+    "tip": "Condition A < B+C for sum S means A < S/2. Solve using upper bounds PIE."
+  },
+  {
+    "id": 68,
+    "question": "In a municipal digital election, a user can distribute a total of 10 identical votes among 3 specific candidates. The digital interface caps the maximum votes they can cast for Candidate A at 5, Candidate B at 4, and Candidate C at 6. How many valid voting distributions exist?",
+    "options": ["20", "66", "46", "35"],
+    "answer": "20",
+    "explanation": "Step 1: Let the votes be A, B, C. We need A + B + C = 10, subject to 0 <= A <= 5, 0 <= B <= 4, 0 <= C <= 6. Step 2: Total non-negative solutions without bounds = C(10+3-1, 3-1) = C(12, 2) = 66. Step 3: Apply PIE. Breach for A (A >= 6): Remaining sum = 10 - 6 = 4. Solutions = C(4+3-1, 2) = C(6, 2) = 15. Step 4: Breach for B (B >= 5): Remaining sum = 10 - 5 = 5. Solutions = C(5+3-1, 2) = C(7, 2) = 21. Step 5: Breach for C (C >= 7): Remaining sum = 10 - 7 = 3. Solutions = C(3+3-1, 2) = C(5, 2) = 10. Step 6: Check for double breaches (e.g., A >= 6 AND B >= 5). This requires a sum of 11, but we only have 10 votes, making double breaches strictly impossible (zero overlaps). Step 7: Valid distributions = 66 - (15 + 21 + 10) = 66 - 46 = 20.",
+    "trick": "Because the sum of any two boundary breach conditions (e.g., 6+5=11) exceeds the total available sum (10), PIE intersection terms are cleanly zero.",
+    "tip": "PIE with no double breaches: Total - Sum of individual breach combinations."
+  },
+  {
+    "id": 69,
+    "question": "A security patrol drone must navigate an 8x8 city sector grid from coordinate (0,0) to (8,8) moving only North and East. Due to a city-wide parade, every single intersection located on the anti-diagonal line defined by x + y = 8 is strictly barricaded, EXCEPT for the exact midpoint intersection (4,4). How many valid shortest paths reach the destination?",
+    "options": ["4900", "12870", "3432", "2450"],
+    "answer": "4900",
+    "explanation": "Step 1: The drone must reach (8,8), which strictly requires 16 total moves (8 East, 8 North). Step 2: At exactly the 8th move of any possible shortest path, the drone's coordinates (x,y) must mathematically satisfy x + y = 8. Step 3: Therefore, EVERY possible path from (0,0) to (8,8) absolutely MUST cross the anti-diagonal line x + y = 8 at exactly one node. Step 4: Since all nodes on this line are barricaded except (4,4), the drone is mathematically forced to route exclusively through the single node (4,4). Step 5: The problem simplifies to finding the number of paths from (0,0) to (4,4), and then multiplying it by the paths from (4,4) to (8,8). Step 6: Paths to (4,4) = C(8, 4) = 70. Paths from (4,4) to (8,8) = C(8, 4) = 70. Total valid paths = 70 * 70 = 4900.",
+    "trick": "Identify the mandatory bottleneck. Any path of length 2N must cross the anti-diagonal x+y=N. If only one node is open, the path is strictly routed through it.",
+    "tip": "All N x N paths must cross x+y=N. Isolated open nodes become mandatory checkpoints."
+  },
+  {
+    "id": 70,
+    "question": "A massive engineering firm assigns exactly 7 distinctly specialized infrastructure contracts to 3 distinct regional offices (North, South, East). To match operational capacities, the North office must receive exactly 2 contracts, the South office exactly 2 contracts, and the East office exactly 3 contracts. How many assignment combinations are possible?",
+    "options": ["210", "5040", "420", "1260"],
+    "answer": "210",
+    "explanation": "Step 1: We are partitioning 7 distinct items into 3 distinct groups of specifically predetermined sizes (2, 2, and 3). Step 2: This is a classic application of the multinomial coefficient, which distributes distinct items into defined distinct compartments. Step 3: The formula is n! / (k1! * k2! * k3!), where n is total items, and ki are the exact bin sizes. Step 4: Here, n = 7, and the bins are 2, 2, 3. Formula: 7! / (2! * 2! * 3!). Step 5: Expand the factorial: (7 * 6 * 5 * 4 * 3!) / (2 * 2 * 3!). Step 6: The 3! terms cancel out, leaving (7 * 6 * 5 * 4) / 4 = 7 * 6 * 5 = 210.",
+    "trick": "Because the offices (bins) are distinctly named (North, South, East), we do not divide by the symmetric repeating sizes (like 1/2! for the two 2s). Multinomial handles distinct bins natively.",
+    "tip": "Distinct items to specific sized distinct bins = n! / (size1! * size2! * ...)"
+  },
+  {
+    "id": 71,
+    "question": "An automated forklift operates in a 3D mapped warehouse, moving from coordinate (0,0,0) to (3,3,3) using strictly positive unit steps along the X, Y, or Z axes. A localized sensor failure has jammed two specific nodes: (1,1,1) and (2,2,2), rendering them impassable. How many valid collision-free shortest paths exist?",
+    "options": ["816", "864", "1680", "1140"],
+    "answer": "816",
+    "explanation": "Step 1: Total unrestricted paths in the 3x3x3 grid is given by (3+3+3)! / (3!*3!*3!) = 9! / 216 = 362880 / 216 = 1680. Step 2: Calculate paths hitting the first jammed node A(1,1,1). Paths to A = 3!/(1!1!1!) = 6. Paths from A to end = 6!/(2!2!2!) = 90. Total through A = 6 * 90 = 540. Step 3: Calculate paths hitting the second jammed node B(2,2,2). Paths to B = 6!/(2!2!2!) = 90. Paths from B to end = 3!/(1!1!1!) = 6. Total through B = 90 * 6 = 540. Step 4: Calculate paths hitting BOTH A and B sequentially (double counting). O -> A (6), A -> B (3!/(1!1!1!) = 6), B -> end (6). Total through both = 6 * 6 * 6 = 216. Step 5: Use PIE to find total invalid paths: N(A U B) = N(A) + N(B) - N(A n B) = 540 + 540 - 216 = 864. Step 6: Valid paths = Total paths - Invalid paths = 1680 - 864 = 816.",
+    "trick": "3D routing uses the exact same PIE logic as 2D grids. Subtract paths hitting individual nodes and add back paths hitting sequential nodes to fix the overlap.",
+    "tip": "3D path invalidation: Total - Paths(A) - Paths(B) + Paths(A then B)."
+  },
+  {
+    "id": 72,
+    "question": "The National Disaster Response Force allocates exactly 21 identical supply crates to 3 distinct flood-affected zones. For uniformity in air-dropping pallets, every zone must receive a number of crates that is a strict multiple of 3. Moreover, no zone can be completely neglected (minimum 3 crates each). How many allocation permutations exist?",
+    "options": ["15", "21", "28", "36"],
+    "answer": "15",
+    "explanation": "Step 1: Let the crates allocated be x, y, z. We need x + y + z = 21. Step 2: Incorporate the multiple constraint: Let x = 3a, y = 3b, z = 3c. Step 3: Substitute into the equation: 3a + 3b + 3c = 21, which simplifies to a + b + c = 7. Step 4: Incorporate the minimum constraint: Since each zone gets at least 3 crates, x >= 3, which translates to 3a >= 3, so a >= 1. Similarly, b >= 1 and c >= 1. Step 5: We need strictly positive integer solutions to a + b + c = 7. Step 6: The standard Stars and Bars formula for positive integer solutions is C(N-1, R-1). Here N=7, R=3. Ways = C(7-1, 3-1) = C(6, 2) = (6 * 5) / 2 = 15.",
+    "trick": "Whenever identically scaled variables appear (e.g., multiples of k), divide the entire sum by k immediately to map it back to a base-1 Stars and Bars calculation.",
+    "tip": "Multiples of K allocations: Divide the total sum by K and solve normally."
+  },
+  {
+    "id": 73,
+    "question": "8 strictly classified intelligence files are delivered to 8 distinct secure safehouses. Due to a mapping error, exactly 4 files arrive correctly at their intended safehouses, while the remaining 4 files are delivered completely wrongly, forming a single, unbroken cyclical misdelivery loop. How many such delivery arrangements exist?",
+    "options": ["420", "630", "1260", "2520"],
+    "answer": "420",
+    "explanation": "Step 1: This is a specialized partial derangement problem where the deranged items must form exactly one cycle (a mathematical $n$-cycle). Step 2: First, select the 4 files that are delivered to their correct safehouses. This can be done in C(8, 4) = 70 ways. Step 3: The remaining 4 files are entirely misplaced and form a single, unbroken cycle. The number of ways to arrange 'n' elements into a single cycle is given by circular permutations: (n - 1)!. Step 4: Here, the cycle length is 4. The number of possible 4-cycles is (4 - 1)! = 3! = 6. Step 5: Since the correct assignments and the cyclic misdeliveries are independent structural events, multiply the possibilities. Step 6: Total arrangements = 70 * 6 = 420.",
+    "trick": "A single cyclic misdelivery is just a circular permutation (n-1)!. It is much more constrained than a standard full derangement which allows multiple separate sub-cycles.",
+    "tip": "Exactly k correct, rest in a single cycle: C(n, k) * (n - k - 1)!."
+  },
+  {
+    "id": 74,
+    "question": "A state budget committee is evaluating infrastructural spending. They must allocate funds to 3 distinct civic departments such that the combined expenditure is AT MOST ₹15 Crores. If Department A demands a minimum of ₹2 Cr, Department B a minimum of ₹3 Cr, and Department C a minimum of ₹4 Cr (all in strict integers), how many valid budget allocations exist?",
+    "options": ["84", "120", "56", "165"],
+    "answer": "84",
+    "explanation": "Step 1: Let the allocations be x, y, z. We have an inequality: x + y + z <= 15, subject to bounds x >= 2, y >= 3, z >= 4. Step 2: Transform the lower bounds to zero by substituting a = x - 2, b = y - 3, c = z - 4 (where a, b, c >= 0). Step 3: Substitute back into the inequality: (a + 2) + (b + 3) + (c + 4) <= 15, which simplifies to a + b + c + 9 <= 15. Step 4: The new inequality is a + b + c <= 6. Step 5: Convert the inequality into a strict equation by introducing a non-negative dummy variable 'd' representing unspent funds. Equation: a + b + c + d = 6. Step 6: We now seek non-negative integer solutions for sum = 6 across 4 variables. Using Stars and Bars: C(6+4-1, 4-1) = C(9, 3) = (9 * 8 * 7) / (3 * 2 * 1) = 84.",
+    "trick": "Inequalities with <= transform seamlessly into equations by simply adding a dummy variable. It perfectly absorbs any leftover integer slack.",
+    "tip": "For sum <= N, add a dummy variable D>=0 to make it sum + D = N."
+  },
+  {
+    "id": 75,
+    "question": "A communication protocol requires deploying exactly 3 identical signal jamming devices onto a 3x3 digital grid network. To avoid destructive interference, no two jammers can be placed in cells that share any edge or any corner mathematically (i.e., non-attacking King placement). How many valid deployment configurations exist?",
+    "options": ["16", "24", "8", "32"],
+    "answer": "16",
+    "explanation": "Step 1: This is mathematically identical to placing 3 non-attacking Kings on a 3x3 chessboard. Step 2: Consider the center cell. If a jammer is placed in the center cell, it mathematically 'attacks' (interferes with) all other 8 cells in the grid, leaving zero valid cells for the remaining 2 jammers. Therefore, the center cell MUST remain completely empty. Step 3: The remaining 8 valid cells form a continuous ring (cycle) along the perimeter of the grid. Jammers can interfere with adjacent cells on this perimeter ring. Step 4: The problem now reduces to selecting exactly 3 non-adjacent cells from a circular array of 8 cells. Step 5: Use the circular non-adjacent selection formula: [n / (n - k)] * C(n - k, k). Step 6: Substitute n = 8, k = 3. Ways = [8 / (8 - 3)] * C(8 - 3, 3) = (8 / 5) * C(5, 3) = (8 / 5) * 10 = 16.",
+    "trick": "The center cell of a 3x3 grid acts as a total lockout hub. Deleting it unravels the 2D grid seamlessly into a simple 1D circular array.",
+    "tip": "3 non-attacking kings on 3x3 board = 3 non-adjacent points on a circle of 8."
+  },
+  {
+    "id": 76,
+    "question": "To secure a blockchain ledger, a cryptographic key is generated as a 5-digit PIN (values from 00000 to 99999). What is the exact number of valid 5-digit PINs where the mathematical sum of the individual digits is precisely 9?",
+    "options": ["715", "1287", "495", "1001"],
+    "answer": "715",
+    "explanation": "Step 1: A 5-digit PIN allows leading zeros (e.g., 00009), so we are distributing a sum of 9 across 5 ordered digit positions. Step 2: Let the digits be x1, x2, x3, x4, x5. We need non-negative integer solutions to x1 + x2 + x3 + x4 + x5 = 9. Step 3: The standard constraint for digits is that no digit can exceed 9 (xi <= 9). Step 4: However, since the total sum required is exactly 9, it is mathematically impossible for any single digit to breach the upper bound of 9 (a digit >= 10 would require the sum to be >= 10). Step 5: Therefore, the upper bound constraint is entirely redundant, and we can directly apply the unrestricted Stars and Bars formula. Step 6: Ways = C(9+5-1, 5-1) = C(13, 4) = (13 * 12 * 11 * 10) / (4 * 3 * 2 * 1) = 715.",
+    "trick": "Recognize when an upper bound is mathematically unreachable based on the sum limit. It instantly removes the need for complex Inclusion-Exclusion logic.",
+    "tip": "If sum limit <= single variable limit, ignore upper bounds entirely and just use C(N+R-1, R-1)."
+  },
+  {
+    "id": 77,
+    "question": "A national task force requires a precise composition of exactly 5 experts drawn from a curated pool of 4 Doctors, 5 Engineers, and 6 Architects. To maintain interdisciplinary perspective, the task force must contain AT LEAST one expert from each of the three professions. How many valid selection combinations are possible?",
+    "options": ["2170", "3003", "1850", "2450"],
+    "answer": "2170",
+    "explanation": "Step 1: The selections required are D + E + A = 5, with bounds D >= 1, E >= 1, A >= 1. Step 2: The integer partition combinations for a sum of 5 using 3 non-zero parts are strictly bounded. Let's list the valid sets of counts: (1, 1, 3), (1, 2, 2), (1, 3, 1), (2, 1, 2), (2, 2, 1), (3, 1, 1). Step 3: Calculate the combinations for each valid set based on the pools (4 Doctors, 5 Eng, 6 Arch). Step 4: (1, 1, 3): C(4,1)*C(5,1)*C(6,3) = 4 * 5 * 20 = 400. (1, 2, 2): C(4,1)*C(5,2)*C(6,2) = 4 * 10 * 15 = 600. (1, 3, 1): C(4,1)*C(5,3)*C(6,1) = 4 * 10 * 6 = 240. Step 5: (2, 1, 2): C(4,2)*C(5,1)*C(6,2) = 6 * 5 * 15 = 450. (2, 2, 1): C(4,2)*C(5,2)*C(6,1) = 6 * 10 * 6 = 360. (3, 1, 1): C(4,3)*C(5,1)*C(6,1) = 4 * 5 * 6 = 120. Step 6: Sum all valid combination paths = 400 + 600 + 240 + 450 + 360 + 120 = 2170.",
+    "trick": "Because items are DISTINCT, Stars and Bars fails utterly. Manually partitioning the target sum into specific combinations and calculating binomials is the only rigorous path.",
+    "tip": "For bounded selections from distinct pools, list the valid integer partitions and multiply combinations."
+  },
+  {
+    "id": 78,
+    "question": "10 distinct political delegates sit in a straight row for a press conference. Protocol strictly dictates that the Prime Minister and the President must be seated such that there are EXACTLY 3 delegates seated geometrically between them. How many acceptable seating arrangements exist?",
+    "options": ["483840", "362880", "120960", "241920"],
+    "answer": "483840",
+    "explanation": "Step 1: First, determine the possible fixed position pairs for the PM and the President within the 10 available seats that maintain exactly 3 empty seats between them. Step 2: The valid pairs of positions are: (1, 5), (2, 6), (3, 7), (4, 8), (5, 9), and (6, 10). Step 3: This gives exactly 6 valid structural slots for the two VIPs. Step 4: Within any chosen pair of positions, the PM and the President can mathematically swap their specific seats. This gives 2! = 2 arrangements. Step 5: After the two VIPs are seated, there are exactly 8 remaining delegates and 8 remaining empty seats. These delegates can be arranged in the remaining seats in 8! ways. Step 6: Total configurations = (Slot pairs) * (VIP swaps) * (Rest arrangements) = 6 * 2 * 8! = 12 * 40320 = 483840.",
+    "trick": "Do not treat the VIPs and the 3 people between them as an isolated 'block' of 5, as it complicates choosing the 3 fillers. Just map the absolute position indices instead.",
+    "tip": "Specific gap distance between 2 elements = (N - gap - 1) slot pairs * 2! * (N-2)!."
+  },
+  {
+    "id": 79,
+    "question": "A quantum cryptography system generates composite keys by factoring the number 1,000,000 into exactly three ordered positive integer factors (a, b, and c) such that a × b × c = 1,000,000. How many distinct ordered triads (a, b, c) are possible?",
+    "options": ["784", "400", "576", "1024"],
+    "answer": "784",
+    "explanation": "Step 1: First, find the prime factorization of 1,000,000. 1,000,000 = 10^6 = (2 * 5)^6 = 2^6 * 5^6. Step 2: Let the three ordered factors be a, b, and c. Each factor must be of the form: a = 2^(x1) * 5^(y1), b = 2^(x2) * 5^(y2), c = 2^(x3) * 5^(y3). Step 3: Multiplying a, b, and c gives: 2^(x1 + x2 + x3) * 5^(y1 + y2 + y3) = 2^6 * 5^6. Step 4: This yields two independent equations: x1 + x2 + x3 = 6 (where xi >= 0), and y1 + y2 + y3 = 6 (where yi >= 0). Step 5: Using Stars and Bars, the number of non-negative integer solutions for each equation is C(6+3-1, 3-1) = C(8, 2) = 28. Step 6: Since the assignment of powers for 2 and powers for 5 are strictly independent combinatorial events, we multiply them: 28 * 28 = 784.",
+    "trick": "Ordered factorizations always reduce precisely to independent Stars and Bars equations mapping the exponents of each prime base.",
+    "tip": "Ordered factors a*b*c = p^M * q^N -> Solutions = C(M+2,2) * C(N+2,2)."
+  },
+  {
+    "id": 80,
+    "question": "A database architect is sharding a core dataset 'S' containing exactly 6 distinct digital records. They must create an ordered pair of subsets (A, B) drawn from 'S' such that the strict intersection of subset A and subset B contains EXACTLY 2 records. How many such ordered pairs of subsets exist?",
+    "options": ["1215", "720", "2430", "405"],
+    "answer": "1215",
+    "explanation": "Step 1: Set S has 6 distinct elements. We need subsets A and B such that |A n B| = 2. Step 2: First, select the 2 specific records that will form the exact intersection of A and B. The number of ways to choose these 2 elements from the 6 available is C(6, 2) = 15 ways. Step 3: The remaining 4 elements must NOT be in the intersection. For each of these 4 elements, there are mathematically 3 independent choices to ensure they stay out of the intersection. Step 4: The 3 choices are: The element belongs ONLY to subset A, the element belongs ONLY to subset B, or the element belongs to NEITHER subset A nor B. Step 5: Since there are 4 remaining elements and 3 choices for each, there are 3^4 = 81 ways to distribute them. Step 6: Total ordered pairs of subsets = (Ways to pick intersection) * (Ways to distribute the rest) = 15 * 81 = 1215.",
+    "trick": "For Venn diagram subset problems, evaluate the structural state of each individual element independently. Every element has 4 states: Only A, Only B, Both, Neither.",
+    "tip": "Ordered pairs of subsets where |A n B| = k is C(N, k) * 3^(N-k)."
+  },
+  {
+    "id": 81,
+    "question": "A VIP convoy is navigating the grid-like streets of Central Delhi from coordinate (0,0) to (6,6) moving only North and East. For security protocols, the convoy must never touch or cross the restricted fault-line mathematically defined by y = x + 3. How many valid shortest paths exist?",
+    "options": ["704", "924", "429", "220"],
+    "answer": "704",
+    "explanation": "Step 1: The unrestricted shortest paths from (0,0) to (6,6) are given by C(12, 6) = 924. Step 2: The restricted boundary is y = x + 2 (the path must stay below y = x + 3). Any invalid path touches the line y = x + 3. Step 3: Use the Reflection Principle. Reflect the origin (0,0) across the line x - y + 3 = 0. Step 4: The reflected origin (x', y') is found via (x'-0)/1 = (y'-0)/-1 = -2(0-0+3)/(1+1) = -3. So x' = -3, y' = 3. Step 5: The number of invalid paths equals the total paths from the reflected origin (-3, 3) to the destination (6, 6). Step 6: Grid steps from (-3,3) to (6,6) are dx = 9, dy = 3. Total moves = 12. Invalid paths = C(12, 3) = 220. Valid paths = 924 - 220 = 704.",
+    "trick": "Generalized Catalan logic: Subtract paths from the reflected origin across the forbidden boundary line.",
+    "tip": "Invalid paths touching y=x+k equal paths from reflected origin (-k, k) to the target."
+  },
+  {
+    "id": 82,
+    "question": "The Finance Ministry distributes a total of ₹20 Crore among 3 distinctly named state departments. Every department must receive a strictly positive integer amount (in Crores), and no two departments can receive the exact same amount. How many unique allocation profiles are possible?",
+    "options": ["171", "144", "114", "150"],
+    "answer": "144",
+    "explanation": "Step 1: Let the allocations be x, y, z. We need strictly positive integer solutions to x + y + z = 20 where x != y, y != z, x != z. Step 2: Total unrestricted positive integer solutions via Stars and Bars = C(20-1, 3-1) = C(19, 2) = 171. Step 3: Subtract cases where all three are equal. 3x = 20 has no integer solution, so 0 cases. Step 4: Subtract cases where exactly two are equal. Let 2a + b = 20. Valid values for 'a' (where a >= 1 and b >= 1) are a = 1, 2, 3, 4, 5, 6, 7, 8, 9. Step 5: This gives 9 pairs of (a,b). Each pair can be permuted among the 3 distinct departments in 3 ways (since two are identical, 3!/2! = 3). Step 6: Total violating cases = 9 * 3 = 27. Valid distinct allocations = 171 - 27 = 144.",
+    "trick": "Systematically subtract the 'all equal' and 'two equal' permutations from the total Stars and Bars positive solutions.",
+    "tip": "Distinct distributions = Total C(n-1, r-1) - (all equal) - 3*(pairs equal)."
+  },
+  {
+    "id": 83,
+    "question": "A tech giant assigns 7 completely distinct AI algorithms to 4 distinct regional servers. Every server must receive at least one algorithm to remain active. If the primary Bengaluru server must receive EXACTLY 2 algorithms, how many valid deployment schedules exist?",
+    "options": ["3150", "2520", "1260", "4200"],
+    "answer": "3150",
+    "explanation": "Step 1: First, explicitly select the 2 distinct algorithms for the Bengaluru server. Ways to choose 2 from 7 = C(7, 2) = 21. Step 2: There are 5 algorithms remaining. These must be distributed among the remaining 3 distinct servers. Step 3: Every remaining server must receive at least one algorithm. This is calculated using Surjective (onto) functions or Stirling Numbers of the Second Kind, S(n, k). Step 4: The number of ways to partition 5 distinct items into 3 identical non-empty groups is S(5, 3) = 25. Step 5: Since the 3 servers are distinctly named, we multiply by the permutations of the servers: 3!. Ways for the rest = 3! * S(5, 3) = 6 * 25 = 150. Step 6: Total valid deployment schedules = 21 (Bengaluru selection) * 150 (rest deployment) = 3150.",
+    "trick": "Isolate the strictly constrained bin first. Then apply surjective functions (k! * S(n,k)) to the remaining items and bins.",
+    "tip": "Assigning 'n' distinct to 'k' distinct (>=1) = k! * S(n, k)."
+  },
+  {
+    "id": 84,
+    "question": "A critical server logs its operational status every hour for 12 continuous hours as either OK (0) or ERROR (1). If the system is mathematically programmed to hard-crash if exactly 3 consecutive ERROR (1) statuses occur, how many valid 12-hour log sequences survive without crashing?",
+    "options": ["1705", "927", "3136", "2048"],
+    "answer": "1705",
+    "explanation": "Step 1: The number of binary sequences of length 'n' that avoid 3 consecutive 1s strictly follows the Tribonacci sequence. Step 2: Let T(n) be the valid sequences of length n. Base cases: T(1) = 2 (0, 1), T(2) = 4 (00, 01, 10, 11), T(3) = 7 (all 8 except 111). Step 3: The recurrence relation is T(n) = T(n-1) + T(n-2) + T(n-3). Step 4: Calculate systematically: T(4) = 7+4+2 = 13. T(5) = 13+7+4 = 24. T(6) = 24+13+7 = 44. T(7) = 44+24+13 = 81. Step 5: T(8) = 81+44+24 = 149. T(9) = 149+81+44 = 274. T(10) = 274+149+81 = 504. T(11) = 504+274+149 = 927. Step 6: Finally, T(12) = 927 + 504 + 274 = 1705.",
+    "trick": "Avoiding 'k' consecutive identical outcomes in a binary sequence always maps to a k-bonacci sequence (Fibonacci for 2, Tribonacci for 3).",
+    "tip": "Binary strings avoiding '111' follow Tribonacci: T(n) = T(n-1) + T(n-2) + T(n-3)."
+  },
+  {
+    "id": 85,
+    "question": "An anagram puzzle requires creating 12-letter words using the exact letters of the word 'INDEPENDENCE' (E:4, N:3, D:2, I:1, P:1, C:1). In how many distinct words are all 4 'E's completely separated by at least one other letter?",
+    "options": ["423360", "1693440", "3360", "846720"],
+    "answer": "423360",
+    "explanation": "Step 1: First, remove the 4 E's and arrange the remaining 8 letters. The remaining letters are N:3, D:2, I:1, P:1, C:1. Step 2: The number of permutations of these 8 letters is 8! / (3! * 2!) = 40320 / 12 = 3360. Step 3: These 8 arranged letters create exactly 9 gaps (including the two ends) where the E's can be safely placed to ensure separation. Step 4: Choose exactly 4 gaps out of the 9 available for the 4 E's. Since all E's are identical, we just select the gaps. Ways = C(9, 4). Step 5: Calculate C(9, 4) = (9 * 8 * 7 * 6) / (4 * 3 * 2 * 1) = 126. Step 6: Total valid words = (Permutations of other letters) * (Gap selections for E's) = 3360 * 126 = 423360.",
+    "trick": "Use the Gap Method for identical repeated items. Arrange the non-restricted items first, then drop the restricted identical items into the resulting gaps.",
+    "tip": "To separate all identical items, arrange the rest first, then use C(gaps, identical_count)."
+  },
+  {
+    "id": 86,
+    "question": "A courier delivers 6 distinct sealed boxes to 6 distinct target addresses. Exactly 2 boxes arrive at their correct addresses. The remaining 4 boxes are misdelivered such that they form exactly TWO distinct 2-cycles (i.e., A goes to B's address and B goes to A's, while C goes to D's and D goes to C's). How many such delivery profiles exist?",
+    "options": ["45", "135", "90", "15"],
+    "answer": "45",
+    "explanation": "Step 1: First, select the 2 boxes that are delivered to their correct addresses. Ways = C(6, 2) = 15. Step 2: The remaining 4 boxes (let's call them W, X, Y, Z) must be misdelivered into exactly two 2-cycles. Step 3: The number of ways to partition 4 distinct items into k=2 cycles of exact length 2 is mathematically given by 4! / ((2!^2) * 2!). Step 4: The division by 2! inside the parenthesis is for the internal swaps of the cycles, and the outer 2! is because the two cycles themselves are structurally indistinguishable sets. Step 5: Calculate the cycle partitions = 24 / (4 * 2) = 24 / 8 = 3. (The explicit cycles are (WX)(YZ), (WY)(XZ), (WZ)(XY)). Step 6: Total delivery profiles = (Ways to pick correct) * (Ways to form the two 2-cycles) = 15 * 3 = 45.",
+    "trick": "A standard derangement D(4) = 9 covers both 4-cycles (6 ways) and two 2-cycles (3 ways). Read the exact cycle structure requirement carefully.",
+    "tip": "Partitioning 4 items into two 2-cycles = 4! / (2!^2 * 2!) = 3 ways."
+  },
+  {
+    "id": 87,
+    "question": "A server administrator distributes exactly 20 identical load-balancing tokens across 3 separate clusters. Cluster A must receive an EVEN number of tokens, while Cluster B must receive a multiple of 3 tokens. Cluster C has no restrictions. How many valid token distribution combinations exist?",
+    "options": ["44", "60", "36", "52"],
+    "answer": "44",
+    "explanation": "Step 1: Let the tokens for the clusters be x, y, z. We need x + y + z = 20. Step 2: Apply the constraints: x = 2a, y = 3b, and z >= 0. Step 3: Substitute into the equation: 2a + 3b + z = 20. Step 4: Since z >= 0, this implies 2a + 3b <= 20. We just need to find all non-negative integer pairs (a, b) that satisfy this inequality. Step 5: Iterate over b: If b=0, 2a <= 20 -> a in [0..10] (11 ways). If b=1, 2a <= 17 -> a in [0..8] (9 ways). If b=2, 2a <= 14 -> a in [0..7] (8 ways). If b=3, 2a <= 11 -> a in [0..5] (6 ways). Step 6: If b=4, 2a <= 8 -> a in [0..4] (5 ways). If b=5, 2a <= 5 -> a in [0..2] (3 ways). If b=6, 2a <= 2 -> a in [0..1] (2 ways). Step 7: Sum the valid pairs = 11 + 9 + 8 + 6 + 5 + 3 + 2 = 44.",
+    "trick": "Do not attempt complex generating functions for small bounds. Simply substitute the multiples and iterate over the largest coefficient to find boundary pairs manually.",
+    "tip": "For ax + by <= N, iterate over y and count valid values of x: floor((N-by)/a) + 1."
+  },
+  {
+    "id": 88,
+    "question": "A digital packet routes through an 8x8 matrix from (0,0) to (7,7) moving only North and East. It is strictly programmed to pass through EXACTLY ONE of two deep-packet inspection nodes: A(3,3) or B(4,4), but never both. How many valid shortest routes satisfy this?",
+    "options": ["1200", "2800", "1600", "800"],
+    "answer": "1200",
+    "explanation": "Step 1: Use the XOR logical Inclusion-Exclusion formula: N(A XOR B) = N(A) + N(B) - 2*N(A n B). Step 2: Calculate paths passing through A(3,3). Paths to A = C(6, 3) = 20. Paths A to end = C(8, 4) = 70. N(A) = 20 * 70 = 1400. Step 3: Calculate paths passing through B(4,4). Paths to B = C(8, 4) = 70. Paths B to end = C(6, 3) = 20. N(B) = 70 * 20 = 1400. Step 4: Calculate paths passing through BOTH A and B. Paths to A (20) * Paths A to B (dx=1, dy=1 -> C(2, 1) = 2) * Paths B to end (20). N(A n B) = 20 * 2 * 20 = 800. Step 5: Substitute into the XOR PIE formula: 1400 + 1400 - 2(800). Step 6: Valid paths = 2800 - 1600 = 1200.",
+    "trick": "Exactly one node means XOR. Subtract the intersection TWICE, because the standard sum N(A) + N(B) counts the intersection exactly twice.",
+    "tip": "Paths hitting exactly one of two nodes: Paths(A) + Paths(B) - 2*Paths(A then B)."
+  },
+  {
+    "id": 89,
+    "question": "An ad agency must select exactly 3 distinct days out of a 20-day contiguous promotional block to launch massive campaigns. To prevent audience fatigue, there must be a blackout period of AT LEAST 3 days between any two campaign days. How many valid 3-day selections exist?",
+    "options": ["364", "455", "560", "286"],
+    "answer": "364",
+    "explanation": "Step 1: Let the chosen days be a, b, c such that 1 <= a < b < c <= 20. The gap condition translates mathematically to b - a >= 4 and c - b >= 4. Step 2: Create gap variables: x1 = a - 1 >= 0 (days before first campaign). x2 = b - a - 4 >= 0 (excess gap between 1st and 2nd). x3 = c - b - 4 >= 0 (excess gap between 2nd and 3rd). x4 = 20 - c >= 0 (days after last campaign). Step 3: Sum the gap variables: x1 + x2 + x3 + x4 = a - 1 + b - a - 4 + c - b - 4 + 20 - c. Step 4: Simplify the sum: x1 + x2 + x3 + x4 = 20 - 9 = 11. Step 5: We need non-negative integer solutions to a sum of 11 across 4 variables. Step 6: Using Stars and Bars: C(11+4-1, 4-1) = C(14, 3) = (14 * 13 * 12) / 6 = 364.",
+    "trick": "A blackout of 'k' days means the absolute difference is 'k+1'. The total gap reduction sum is (Selections - 1) * (k+1).",
+    "tip": "Selecting r items from n with min difference d: use C(n - (r-1)(d-1), r)."
+  },
+  {
+    "id": 90,
+    "question": "A cloud provider has 4 distinct primary data lakes and 5 distinct backup clusters. They must create a networked topology (a spanning tree) such that direct connections only ever exist between a primary lake and a backup cluster (forming a bipartite graph). How many distinct valid topologies can be formed?",
+    "options": ["32000", "100000", "16000", "64000"],
+    "answer": "32000",
+    "explanation": "Step 1: The problem describes finding the number of spanning trees in a complete bipartite graph K_m,n. Step 2: The universal formula for the number of spanning trees in a complete bipartite graph K_m,n is m^(n-1) * n^(m-1). Step 3: Identify the parameters. The primary lakes form one set (m = 4) and the backup clusters form the other set (n = 5). Step 4: Substitute into the formula: 4^(5-1) * 5^(4-1). Step 5: Simplify the exponents: 4^4 * 5^3. Step 6: Calculate the values: 256 * 125 = 32000.",
+    "trick": "Do not attempt Cayley's general n^(n-2) formula here. The strict 'primary-to-backup only' rule defines a bipartite graph, which strictly uses m^(n-1) * n^(m-1).",
+    "tip": "Spanning trees of a complete bipartite graph K_m,n = m^(n-1) * n^(m-1)."
+  },
+  {
+    "id": 91,
+    "question": "A security algorithm assigns 10 distinct encrypted packets to 10 distinct target IPs. A post-audit reveals that exactly 4 packets reached their correct IPs. Exactly 2 other packets swapped their destinations with each other. The remaining 4 packets were completely misdelivered, forming a single unbroken 4-cycle. How many such delivery mappings exist?",
+    "options": ["18900", "9450", "37800", "4725"],
+    "answer": "18900",
+    "explanation": "Step 1: Break the mapping down into independent structural events. Step 2: Select the 4 packets that reached the exact correct IPs. Ways = C(10, 4) = 210. Step 3: From the remaining 6 packets, select the 2 packets that swapped with each other (forming a 2-cycle). Ways = C(6, 2) = 15. Step 4: The 4 remaining packets must form exactly one continuous 4-cycle. Step 5: The number of ways to arrange 'n' items into a single cycle is (n-1)!. For 4 items, ways = (4-1)! = 3! = 6. Step 6: Since all these group assignments and internal structures are independent, multiply them. Total ways = 210 * 15 * 6 = 18900.",
+    "trick": "A derangement of 4 has 9 permutations, but only 6 form a 4-cycle (the other 3 form two 2-cycles). Pay intense attention to the exact cycle structure requested.",
+    "tip": "Exactly k correct, j swapped, rest 1 cycle: C(n,k) * C(n-k,j) * (rest-1)!."
+  },
+  {
+    "id": 92,
+    "question": "Over 6 successive trading days, an asset's price can end the day strictly moving Up (A), Down (B), or Flat (C). How many distinct 6-day market trajectory strings contain a strictly EVEN number of 'Up' (A) days? (Note: 0 is considered an even number).",
+    "options": ["365", "364", "729", "183"],
+    "answer": "365",
+    "explanation": "Step 1: We are forming 6-letter strings from the alphabet {A, B, C} such that the frequency of 'A' is even. Total unrestricted strings = 3^6 = 729. Step 2: Consider the generating binomial expansion. The number of strings with exactly 'k' A's is C(6, k) * 2^(6-k), because the remaining (6-k) spots must be filled by B or C (2 options each). Step 3: We want the sum for even k: Sum [C(6, k) * 2^(6-k)] for k = 0, 2, 4, 6. Step 4: Use the property of binomial expansions. The sum of even terms in the expansion of (x + y)^n is ((x+y)^n + (y-x)^n) / 2. Step 5: Here, the base choices are x=1 (for A) and y=2 (for B,C), and n=6. Step 6: Total even A's = ((2+1)^6 + (2-1)^6) / 2 = (3^6 + 1^6) / 2 = (729 + 1) / 2 = 730 / 2 = 365.",
+    "trick": "For parity constraints on a single element type among multi-element choices, always use the ((y+1)^n + (y-1)^n)/2 binomial trick.",
+    "tip": "Even occurrences of 1 choice among K total choices = ((K)^n + (K-2)^n) / 2."
+  },
+  {
+    "id": 93,
+    "question": "A cybersecurity firm deploys 15 completely identical threat-detection nodes across 5 distinctly named power grids. No grid can be left unprotected (each gets >= 1). If EXACTLY ONE power grid is allowed to receive exactly 5 nodes, how many valid deployment configurations exist?",
+    "options": ["300", "420", "240", "360"],
+    "answer": "300",
+    "explanation": "Step 1: First, select the 1 specific power grid that will receive exactly 5 nodes. Ways = C(5, 1) = 5. Step 2: Distribute the remaining 10 nodes among the remaining 4 grids such that each gets >= 1, AND NONE of them gets exactly 5. Step 3: Let x1, x2, x3, x4 >= 1. Sum = 10. Total positive solutions = C(10-1, 4-1) = C(9, 3) = 84. Step 4: Subtract violating cases where any of these 4 grids receives exactly 5. Choose the violating grid: C(4, 1) = 4. Step 5: If one gets 5, the remaining 3 grids must sum to 5 (each >= 1). Solutions = C(5-1, 3-1) = C(4, 2) = 6. Total single violations = 4 * 6 = 24. Step 6: Check for double violations (two grids getting 5). The remaining 2 grids would sum to 0, which is impossible since each must get >= 1. Step 7: Valid distributions for the remaining 4 grids = 84 - 24 = 60. Total configurations = 5 * 60 = 300.",
+    "trick": "Calculate total base distributions for the remainder, then strictly use PIE to filter out the 'none of the rest equals X' condition to avoid overcounting.",
+    "tip": "For EXACTLY one bin = K, isolate it. Then use PIE to ensure no other bin = K."
+  },
+  {
+    "id": 94,
+    "question": "At a covert summit, 4 pairs of identical twin operatives (8 people total) must be divided into exactly 4 two-person recon teams. To prevent predictable tactics, it is mathematically mandated that ZERO teams consist of identical twins. How many valid pairing combinations exist?",
+    "options": ["60", "105", "45", "72"],
+    "answer": "60",
+    "explanation": "Step 1: Use the Principle of Inclusion-Exclusion on pairs. Total unrestricted ways to divide 8 people into 4 pairs is 7!! = 7 * 5 * 3 * 1 = 105. Step 2: Let Ei be the event that twin pair 'i' is paired together. We need N(0). N(0) = Total - S1 + S2 - S3 + S4. Step 3: Calculate S1 (at least 1 twin pair). Choose 1 twin pair: C(4, 1) = 4. The remaining 6 people form 3 pairs in 5!! = 15 ways. S1 = 4 * 15 = 60. Step 4: Calculate S2 (at least 2 twin pairs). Choose 2 twin pairs: C(4, 2) = 6. The remaining 4 people form 2 pairs in 3!! = 3 ways. S2 = 6 * 3 = 18. Step 5: Calculate S3 (at least 3 twin pairs). Choose 3 pairs: C(4, 3) = 4. The remaining 2 people form 1 pair in 1!! = 1 way. S3 = 4 * 1 = 4. Step 6: Calculate S4 (all 4 twin pairs). C(4, 4) * (-1)!! (which is 1) = 1. Step 7: Apply PIE: N(0) = 105 - 60 + 18 - 4 + 1 = 60.",
+    "trick": "Total pairings of 2N people is (2N-1)!!. Use PIE for restricted pairs, where selecting 'k' restricted pairs leaves (2N - 2k - 1)!! ways for the rest.",
+    "tip": "Matching pairings with zero distinct pairs uses PIE with (2N-1)!! double factorials."
+  },
+  {
+    "id": 95,
+    "question": "6 distinctly named agricultural zones in Punjab form a closed geographic ring (Zone A borders B, B borders C... and F borders A). The state has 4 unique fertilizer types. If no two geographically bordering zones can use the same fertilizer, how many valid deployment colorings exist?",
+    "options": ["732", "729", "1024", "4096"],
+    "answer": "732",
+    "explanation": "Step 1: Since the zones form a closed ring, this is mathematically identical to finding the chromatic polynomial of a Cycle Graph C_n. Step 2: The universal formula for coloring a cycle graph C_n with 'k' distinct colors such that no two adjacent vertices share a color is: P(C_n, k) = (k - 1)^n + (-1)^n * (k - 1). Step 3: Identify the parameters. The number of vertices (zones) n = 6, and the number of colors (fertilizers) k = 4. Step 4: Substitute the values into the formula: P(C_6, 4) = (4 - 1)^6 + (-1)^6 * (4 - 1). Step 5: Simplify the terms: 3^6 + (1) * 3. Step 6: Calculate the final value: 729 + 3 = 732.",
+    "trick": "Linear placement fails because the ends of the line wrap around and border each other, adding an extra collision constraint. Always use the Chromatic Polynomial for rings.",
+    "tip": "Valid colorings of a ring of N nodes with K colors = (K-1)^N + (-1)^N * (K-1)."
+  },
+  {
+    "id": 96,
+    "question": "A risk manager allocates 20 identical treasury bonds across 3 distinct offshore accounts (A, B, C). To enforce a strict pyramidal risk hierarchy, the allocations must mathematically satisfy 0 <= A <= B <= C. How many valid hierarchical allocation profiles exist?",
+    "options": ["44", "33", "66", "10"],
+    "answer": "44",
+    "explanation": "Step 1: The condition 0 <= A <= B <= C for a sum of 20 means we are looking for the number of integer partitions of 20 into AT MOST 3 parts. Step 2: The total partitions into at most 3 parts is the sum of partitions into exactly 1 part, exactly 2 parts, and exactly 3 parts. Step 3: P(20, 1) = 1 (the partition is {20}). Step 4: P(20, 2) = floor(20 / 2) = 10. Step 5: P(20, 3) has a special nearest-integer formula: round(N^2 / 12). For N=20, this is round(400 / 12) = round(33.33) = 33. Step 6: Total hierarchical profiles = P(20, 1) + P(20, 2) + P(20, 3) = 1 + 10 + 33 = 44.",
+    "trick": "Inequality constraints that force a sorted order (A <= B <= C) completely strip away the distinction of the bins, converting a Stars and Bars problem into a pure Integer Partitions problem.",
+    "tip": "Ordered bounded variables (A <= B <= C) equal integer partitions. P(N, 3) = round(N^2/12)."
+  },
+  {
+    "id": 97,
+    "question": "An automated rover navigates a 5x5 grid warehouse moving only North and East. Due to battery cooling limits, the rover's software mathematically aborts the trip if it ever executes 3 consecutive East moves (i.e., 'EEE'). How many valid routes successfully reach (5,5)?",
+    "options": ["126", "252", "180", "150"],
+    "answer": "126",
+    "explanation": "Step 1: A path to (5,5) is a sequence of 5 E's and 5 N's. Total unrestricted paths = C(10, 5) = 252. Step 2: To avoid 'EEE', use the gap method. The 5 N's create 6 gaps (including ends) where the E's can be placed. Step 3: Let x1, x2... x6 be the number of E's in each gap. We need x1 + x2 + x3 + x4 + x5 + x6 = 5. Step 4: The constraint to avoid 'EEE' is that no gap can contain 3 or more E's. So, 0 <= xi <= 2. Step 5: Use PIE. Total unrestricted solutions = C(5+6-1, 6-1) = C(10, 5) = 252. Step 6: Subtract breaches where any xi >= 3. Choose the violating gap: C(6, 1) = 6. Let x1 = y1 + 3. The new sum is y1 + x2...x6 = 2. Solutions = C(2+6-1, 6-1) = C(7, 5) = 21. Total breaches = 6 * 21 = 126. Double breaches are impossible (requires sum >= 6). Valid paths = 252 - 126 = 126.",
+    "trick": "Grid paths with consecutive move limits are just 1D anagram strings. Use the Gap Method on the unrestricted move to create bounded variables.",
+    "tip": "Limit consecutive identical moves by placing them in gaps formed by the other move."
+  },
+  {
+    "id": 98,
+    "question": "A cybersecurity agency must divide a task force of 9 distinctly skilled hackers into exactly 3 specialized operational teams. The tactical requirements dictate that the teams must have sizes of exactly 2, 3, and 4 members. How many unique team formations are possible?",
+    "options": ["1260", "7560", "280", "2520"],
+    "answer": "1260",
+    "explanation": "Step 1: We are partitioning 9 distinct items into 3 indistinguishable subsets, but the subsets have uniquely distinct predefined sizes (2, 3, and 4). Step 2: Because the sizes of the groups are all mathematically distinct, the sizes themselves act as unique identifiers for the groups (e.g., the 'group of 2', the 'group of 3'). Step 3: Therefore, this behaves exactly like distributing distinct items into distinct bins, and we use the multinomial coefficient directly without dividing by factorial symmetry factors. Step 4: Formula: n! / (k1! * k2! * k3!). Step 5: Substitute the values: 9! / (2! * 3! * 4!). Step 6: Expand and simplify: (9 * 8 * 7 * 6 * 5 * 4!) / (2 * 6 * 4!) = (9 * 8 * 7 * 6 * 5) / 12 = 15120 / 12 = 1260.",
+    "trick": "If the required group sizes are all completely unique (no repeating numbers like 2, 2, 5), you DO NOT divide by factorial symmetry terms. Just use the raw multinomial.",
+    "tip": "Dividing into distinct-sized unlabelled groups is just the multinomial: N! / (s1! * s2! * ...)."
+  },
+  {
+    "id": 99,
+    "question": "A government grants a ₹12 Crore subsidy to be divided sequentially into any number of valid sequential tranches (from 1 up to 12 tranches). If each tranche must be a strictly positive integer amount (in Crores), how many mathematical sequences of tranches can perfectly sum to exactly ₹12 Crore?",
+    "options": ["2048", "4096", "1024", "144"],
+    "answer": "2048",
+    "explanation": "Step 1: The problem asks for the total number of integer compositions of the number 12. A composition is a way of writing an integer as a sum of a sequence of strictly positive integers where the order of summation matters. Step 2: The universal combinatorial formula for the total number of compositions of an integer N into ANY number of parts is simply 2^(N-1). Step 3: To understand why, imagine N identical 1 Crore units lined up. There are N-1 gaps between them. Step 4: To form a composition, you either place a 'divider' in a gap or you don't. Each unique placement of dividers creates a unique sequence of positive integers. Step 5: Since there are N-1 gaps and 2 choices (divider or no divider) for each gap, the total configurations are 2^(N-1). Step 6: For N = 12, the answer is 2^(12-1) = 2^11 = 2048.",
+    "trick": "Skip solving Stars and Bars for k=1 to 12. The sum of all positive integer partitions where order matters is universally just 2^(N-1).",
+    "tip": "Total compositions (ordered positive integer sums) of an integer N is exactly 2^(N-1)."
+  },
+  {
+    "id": 100,
+    "question": "A router must assign 8 distinct data packets to 8 distinct MAC addresses. Due to a hardcoded override, Packet 1 MUST go to Address 2, and Packet 2 MUST go to Address 1. If the remaining packets are subjected to a strict derangement protocol (none go to their original matching addresses), how many valid routing assignments exist?",
+    "options": ["265", "1854", "360", "133"],
+    "answer": "265",
+    "explanation": "Step 1: The condition that Packet 1 goes to Address 2 and Packet 2 goes to Address 1 mathematically isolates these two packets into a self-contained 2-cycle, i.e., (1 2). Step 2: Since this override completely satisfies the destinations for Packets 1 and 2, the remaining 6 packets and 6 addresses are entirely unaffected by them. Step 3: The problem explicitly dictates that the remaining 6 packets must be fully deranged among their own 6 corresponding addresses (no packet i goes to address i). Step 4: The number of ways to derange 'n' items is D(n) = n! * (1/0! - 1/1! + 1/2! - 1/3! + ... + (-1)^n/n!). Step 5: Calculate D(6): 720 * (1/2 - 1/6 + 1/24 - 1/120 + 1/720) = 360 - 120 + 30 - 6 + 1. Step 6: D(6) = 265. Since the first two packets are fixed in exactly 1 way, the total assignments = 1 * 265 = 265.",
+    "trick": "A fixed permutation cycle completely detaches those specific elements from the rest of the combinatorics. You only need to derange the remainder.",
+    "tip": "If 'k' items are locked into a fixed misaligned cycle, simply derange the remaining (N-k) items."
+  }
+]

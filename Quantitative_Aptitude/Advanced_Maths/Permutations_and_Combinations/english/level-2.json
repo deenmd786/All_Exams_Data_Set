@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "At an SSC examination center, 5 exam invigilators forget their designated room numbers and randomly enter 5 different rooms. What is the total number of ways in which none of the invigilators enters their correctly assigned room?",
+    "options": ["24", "44", "45", "120"],
+    "answer": "44",
+    "explanation": "This is a classic problem of derangement, where no item occupies its originally designated place. The formula for the derangement of 'n' items is D(n) = n! * (1 - 1/1! + 1/2! - 1/3! + ... + (-1)^n / n!). For n = 5, D(5) = 5! * (1/2! - 1/3! + 1/4! - 1/5!) = 120 * (1/2 - 1/6 + 1/24 - 1/120) = 120 * (44 / 120) = 44.",
+    "trick": "Memorize the first few derangement values for speed: D(1)=0, D(2)=1, D(3)=2, D(4)=9, D(5)=44, D(6)=265.",
+    "tip": "Derangement formula: D(n) = n! * summation of (-1)^r / r!"
+  },
+  {
+    "id": 2,
+    "question": "During a corporate dinner, 6 executives and 6 major clients are to be seated around a circular table. In how many ways can they be seated such that no two clients sit together?",
+    "options": ["86400", "43200", "518400", "3628800"],
+    "answer": "86400",
+    "explanation": "First, seat the 6 executives around the circular table. The number of ways to arrange 'n' people in a circle is (n-1)!. So, 6 executives can be seated in (6-1)! = 5! = 120 ways. Once seated, they create 6 gaps between them. To ensure no two clients sit together, the 6 clients must be placed in these 6 gaps. The number of ways to arrange the 6 clients in 6 available gaps is 6! = 720. Total arrangements = 120 * 720 = 86400.",
+    "trick": "Always arrange the unconstrained group first in circular permutations, then use the linear permutation formula (n!) for placing the constrained group in the gaps.",
+    "tip": "Circular gaps equal the number of seated people."
+  },
+  {
+    "id": 3,
+    "question": "A startup company wants to take a team photo. There are 7 HR managers and 4 Tech leads. In how many ways can they stand in a straight line so that no two Tech leads stand next to each other?",
+    "options": ["7! * 4!", "6! * 8! / 4!", "7! * 8P4", "11! - (7! * 4!)"],
+    "answer": "7! * 8P4",
+    "explanation": "Use the Gap Method. First, arrange the 7 HR managers in a row. This can be done in 7! ways. These 7 managers create 8 potential spots (6 between them, plus 1 at each end) for the Tech leads to stand. To ensure no two Tech leads are together, we must place the 4 Tech leads into these 8 spots. The number of ways to arrange 4 people in 8 spots is 8P4. Total ways = 7! * 8P4.",
+    "trick": "When a question says 'never together', the Gap Method is much faster and less error-prone than subtracting 'always together' from the total, especially when there are more than 2 items.",
+    "tip": "For 'n' items in a row, there are 'n+1' gaps."
+  },
+  {
+    "id": 4,
+    "question": "If all permutations of the letters of the word 'MUMBAI' are arranged exactly as they would appear in a standard dictionary, what will be the rank of the word 'MUMBAI' itself?",
+    "options": ["295", "296", "297", "298"],
+    "answer": "297",
+    "explanation": "Alphabetical order of letters: A, B, I, M, M, U. Total letters = 6. Words starting with A: 5!/2! = 60. Words starting with B: 5!/2! = 60. Words starting with I: 5!/2! = 60. Words starting with M (now we have A,B,I,M,U left): Start with MA: 4! = 24. Start with MB: 4! = 24. Start with MI: 4! = 24. Start with MM: 4! = 24. Start with MU: next letter could be A (MUA: 3! = 6), B (MUB: 3! = 6), I (MUI: 3! = 6). Finally, MUM: next is A (MUMA: 2! = 2). Next is MUMB: next is A, then I -> MUMBAI (1 way). Total = 60*3 + 24*4 + 6*3 + 2 + 1 = 180 + 96 + 18 + 2 + 1 = 297.",
+    "trick": "Systematically eliminate the starting letters alphabetically. Don't forget to divide by 2! for the repeated 'M' when arranging the remaining letters.",
+    "tip": "Always list available letters alphabetically before starting."
+  },
+  {
+    "id": 5,
+    "question": "A corporate office has 12 entirely distinct Diwali gift hampers. In how many ways can these gifts be distributed equally among 3 specific regional managers?",
+    "options": ["12! / (4!)^3", "12! / (3! * (4!)^3)", "12! / 3!", "12! * 3!"],
+    "answer": "12! / (4!)^3",
+    "explanation": "We need to distribute 12 distinct gifts into 3 equal groups of 4. The number of ways to divide 12 distinct items into 3 unlabeled groups of 4 is 12! / (3! * 4! * 4! * 4!). However, these groups are distributed to 3 distinct (specific) regional managers. Therefore, we must multiply the grouping formula by 3! to account for the distribution. The 3! terms cancel out: [12! / (3! * (4!)^3)] * 3! = 12! / (4!)^3.",
+    "trick": "If the recipients are distinct (labeled), you do not divide by the factorial of the number of groups (3!). If you are just forming unlabeled piles, you must divide by 3!.",
+    "tip": "Distinct items to distinct recipients: 12! / (4!)^3."
+  },
+  {
+    "id": 6,
+    "question": "A financial firm needs to form an audit committee of 5 members from a pool of 6 Senior Accountants and 7 Junior Accountants. In how many ways can this committee be formed if it must include at least 3 Senior Accountants?",
+    "options": ["456", "525", "531", "1287"],
+    "answer": "531",
+    "explanation": "The committee can be formed in the following combinations of Seniors (S) and Juniors (J): Case 1: 3S and 2J = 6C3 * 7C2 = 20 * 21 = 420 ways. Case 2: 4S and 1J = 6C4 * 7C1 = 15 * 7 = 105 ways. Case 3: 5S and 0J = 6C5 * 7C0 = 6 * 1 = 6 ways. Total possible ways = 420 + 105 + 6 = 531.",
+    "trick": "Always map out all valid scenarios for 'at least' or 'at most' before doing any calculations to avoid missing edge cases like exactly 5 Seniors.",
+    "tip": "Compute 'At least 3' as: 3, 4, or 5."
+  },
+  {
+    "id": 7,
+    "question": "At an executive board meeting, 8 directors are to be seated around a circular table. In how many ways can they be seated if the CEO and the CFO must sit exactly opposite each other?",
+    "options": ["120", "720", "1440", "5040"],
+    "answer": "720",
+    "explanation": "First, fix the position of the CEO at the circular table. Since it's a circle with no starting point, placing the first person can be done in only 1 way. The CFO must sit exactly opposite the CEO, which also leaves only 1 valid seat for the CFO. Now, there are 6 remaining seats and 6 remaining directors. These 6 directors can be arranged in the remaining seats in 6! ways. Total ways = 1 * 1 * 6! = 720.",
+    "trick": "Do not treat this as 7! and then divide by something. Fixing the first person anchors the table, making the remaining seats distinct, meaning standard linear permutations (n!) apply.",
+    "tip": "Fixing one person in a circle makes remaining seats linear."
+  },
+  {
+    "id": 8,
+    "question": "The IT department has 10 entirely distinct laptops to allocate. In how many ways can they be distributed to the Sales, Marketing, and Support departments such that they receive exactly 5, 3, and 2 laptops respectively?",
+    "options": ["1260", "2520", "5040", "7560"],
+    "answer": "2520",
+    "explanation": "We need to distribute 10 distinct items into 3 specific groups of unequal sizes (5, 3, and 2). The formula for grouping into unequal distinct groups is simply 10! / (5! * 3! * 2!). Calculation: (10 * 9 * 8 * 7 * 6 * 5!) / (5! * 6 * 2) = (10 * 9 * 8 * 7 * 6) / 12 = 30240 / 12 = 2520 ways.",
+    "trick": "Because the group sizes (5, 3, 2) are all different, you do not need to divide by any extra factorials for identical group sizes, nor do you need to multiply for distributing to distinct departments—it is already accounted for.",
+    "tip": "Unequal distinct grouping: n! / (p! * q! * r!)."
+  },
+  {
+    "id": 9,
+    "question": "A manager has 6 customized festive greeting cards and 6 matching addressed envelopes. In how many ways can the cards be placed into the envelopes such that exactly 3 cards go into their correct envelopes?",
+    "options": ["20", "40", "60", "120"],
+    "answer": "40",
+    "explanation": "This is a partial derangement problem. First, choose the 3 cards that will go into the correct envelopes. This can be done in 6C3 ways = 20 ways. The remaining 3 cards must go into the completely wrong envelopes. The number of ways to derange 3 items is D(3) = 3! * (1/2! - 1/3!) = 6 * (1/2 - 1/6) = 2 ways. Multiply the selections by the derangements: 20 * 2 = 40 ways.",
+    "trick": "Don't calculate the total arrangements and subtract. Directly multiply the combination of correct items by the derangement of the incorrect items: nCr * D(n-r).",
+    "tip": "Partial derangement formula: nCr * D(n-r)."
+  },
+  {
+    "id": 10,
+    "question": "A decorator is crafting a traditional wedding garland using 10 distinct types of flowers. In how many ways can the garland be formed if two specific flowers (Rose and Marigold) must never be placed adjacent to each other?",
+    "options": ["8! * 7", "9! - 8! * 2", "7 * 8! / 2", "9! / 2 - 8!"],
+    "answer": "7 * 8! / 2",
+    "explanation": "Total ways to form a garland with 10 distinct flowers is (10-1)! / 2 = 9! / 2 (divided by 2 because a garland can be flipped over). Now, find ways they ARE together. Treat Rose and Marigold as 1 unit. Total units = 9. Circular arrangements of 9 units = 8!. The two flowers can swap internally in 2! ways. So, directed circular arrangements = 8! * 2. As a garland, divide by 2: (8! * 2) / 2 = 8!. Ways they are NEVER together = Total ways - Ways together = 9! / 2 - 8! = 8! * (9/2 - 1) = 8! * (7/2) = 7 * 8! / 2.",
+    "trick": "Remember the 1/2 factor for garlands/necklaces because clockwise and counter-clockwise arrangements are identical when physically turned over in 3D space.",
+    "tip": "Garlands can be flipped; always divide final circular count by 2."
+  },
+  {
+    "id": 11,
+    "question": "For a televised debate, a panel consisting of 3 politicians, 4 journalists, and 2 social activists sit in a row. In how many ways can they be seated if members of the same profession insist on sitting together?",
+    "options": ["288", "864", "1728", "3456"],
+    "answer": "1728",
+    "explanation": "Use the Block Method. Treat each profession as a single cohesive unit or block. There are 3 blocks (Politicians, Journalists, Activists). These 3 blocks can be arranged in a linear row in 3! = 6 ways. Inside their respective blocks, the 3 politicians can be arranged in 3! = 6 ways, the 4 journalists in 4! = 24 ways, and the 2 activists in 2! = 2 ways. Total seating arrangements = 3! * (3! * 4! * 2!) = 6 * (6 * 24 * 2) = 6 * 288 = 1728 ways.",
+    "trick": "Don't forget to multiply the internal permutations of each group by the permutation of the groups themselves (the outer 3!).",
+    "tip": "Multiply group arrangements by internal arrangements: N! * (a!*b!*c!)."
+  },
+  {
+    "id": 12,
+    "question": "A startup needs to select a core team of 4 software developers from a group of 10. However, there is a conflict: if Developer A is selected, Developer B will strictly refuse to join the team. In how many ways can the team be formed?",
+    "options": ["126", "168", "182", "210"],
+    "answer": "182",
+    "explanation": "Calculate the total possible teams without any restrictions, and then subtract the teams where both A and B are selected together. Total unrestricted ways to select 4 out of 10 = 10C4 = 210. Now, assume both A and B are selected. We need 2 more developers from the remaining 8. Ways to select the remaining 2 = 8C2 = 28. Valid teams = Total teams - Teams with both A and B = 210 - 28 = 182 ways.",
+    "trick": "The condition 'If A is selected, B refuses' simply means 'A and B cannot both be on the team'. Subtracting the intersection (both present) from the total is the fastest path.",
+    "tip": "Subtract the undesired overlap (A AND B) from total combinations."
+  },
+  {
+    "id": 13,
+    "question": "A food delivery agent in Bengaluru needs to travel on a grid from coordinates (0,0) to (5,5), moving only exactly one unit Right or one unit Up per step. Due to construction, the junction at (3,3) is completely blocked. How many valid paths are there to reach the destination?",
+    "options": ["112", "120", "132", "252"],
+    "answer": "132",
+    "explanation": "Total paths without restrictions from (0,0) to (5,5) require 5 Right and 5 Up moves. Total moves = 10. Paths = 10! / (5! * 5!) = 252. Now, find the paths that pass strictly through the blocked node (3,3). Paths from (0,0) to (3,3) = 6! / (3! * 3!) = 20. Paths from (3,3) to (5,5) require 2 Right and 2 Up moves = 4! / (2! * 2!) = 6. Total invalid paths passing through (3,3) = 20 * 6 = 120. Valid paths = Total paths - Invalid paths = 252 - 120 = 132.",
+    "trick": "Grid path formula from (x1,y1) to (x2,y2) is (dx+dy)C(dx), where dx and dy are the differences in x and y coordinates. Subtract the blocked route product.",
+    "tip": "Grid paths = (R+U)! / (R! * U!)."
+  },
+  {
+    "id": 14,
+    "question": "A security vault requires a 5-digit PIN code using the digits 1, 2, 3, 4, and 5 without any repetition. How many valid PIN codes can be formed that hold a numerical value strictly greater than 40000?",
+    "options": ["24", "48", "72", "120"],
+    "answer": "48",
+    "explanation": "For the 5-digit number to be greater than 40000, its first digit must be either 4 or 5. Case 1: The PIN starts with 4. The remaining 4 positions can be filled by the remaining 4 digits (1, 2, 3, 5) in 4! = 24 ways. Case 2: The PIN starts with 5. The remaining 4 positions can be filled by the remaining 4 digits (1, 2, 3, 4) in 4! = 24 ways. Total valid PIN codes = 24 + 24 = 48.",
+    "trick": "Fix the leading digit to satisfy the magnitude constraint, then simply apply a standard factorial permutation to all remaining unconstrained digits.",
+    "tip": "Fix the leftmost digit to control numerical magnitude."
+  },
+  {
+    "id": 15,
+    "question": "At a family gathering, 7 cousins (A, B, C, D, E, F, G) sit around a circular dining table. In how many ways can they sit if A and B insist on sitting next to each other, but C refuses to sit immediately next to A?",
+    "options": ["144", "192", "216", "240"],
+    "answer": "192",
+    "explanation": "First, find total ways where A and B are together. Treat [A,B] as 1 unit. Total units = 6. Circular arrangements = 5! = 120. A and B can swap = 2!. Total = 240 ways. Now subtract cases where A and B are together AND C is next to A. C can be next to A only if they sit as (CAB) or (BAC). Since C is next to A and A is next to B, the blocks are exactly [CAB] and [BAC]. For block [CAB], total units = 5. Circular arrangements = 4! = 24. For block [BAC], total units = 5. Circular arrangements = 4! = 24. Total violation cases = 24 + 24 = 48. Valid arrangements = 240 - 48 = 192.",
+    "trick": "Break overlapping constraints down: Calculate (Condition 1) then strictly subtract the intersection of (Condition 1 AND Not Condition 2).",
+    "tip": "Create exact violation blocks like [CAB] and [BAC] to subtract."
+  },
+  {
+    "id": 16,
+    "question": "Consider a standard Indian chessboard (8x8 grid of squares formed by 9 vertical and 9 horizontal lines). How many perfectly rectangular sections can be formed that are NOT squares?",
+    "options": ["204", "888", "1092", "1296"],
+    "answer": "1092",
+    "explanation": "First, find the total number of rectangles. A rectangle is formed by choosing any 2 out of 9 vertical lines and any 2 out of 9 horizontal lines. Total rectangles = 9C2 * 9C2 = 36 * 36 = 1296. Next, calculate the total number of squares on an n x n board using the formula sum(n^2): 8^2 + 7^2 + 6^2 + 5^2 + 4^2 + 3^2 + 2^2 + 1^2 = 64 + 49 + 36 + 25 + 16 + 9 + 4 + 1 = 204. Rectangles that are not squares = Total rectangles - Total squares = 1296 - 204 = 1092.",
+    "trick": "Total rectangles uses combinations (nC2 * mC2), while total squares uses the sum of squares formula. Subtracting them directly isolates the strictly non-square rectangles.",
+    "tip": "Total rectangles = nC2 * mC2. Squares = sum of k^2."
+  },
+  {
+    "id": 17,
+    "question": "In how many distinct ways can all the letters of the word 'ASSASSINATION' be arranged such that all the 'S's are always kept together?",
+    "options": ["75600", "151200", "302400", "604800"],
+    "answer": "151200",
+    "explanation": "The word ASSASSINATION has 13 letters: A=3, S=4, I=2, N=2, T=1, O=1. Since all 4 'S's must be together, treat 'SSSS' as a single unified block. Now, we have to arrange 10 entities: 9 remaining letters + 1 block of 'SSSS'. The entities are: A(3), I(2), N(2), T(1), O(1), and [SSSS](1). Total ways to arrange these 10 entities = 10! / (3! * 2! * 2!). The 4 'S's inside the block are identical, so they can only be arranged in 1 way. Calculation: 3628800 / (6 * 2 * 2) = 3628800 / 24 = 151200.",
+    "trick": "When identical items are forced together into a block, their internal permutation is 1. You only divide the outer factorial by the remaining identical letters outside the block.",
+    "tip": "Treat the tied identical items as a single, un-permutable unit."
+  },
+  {
+    "id": 18,
+    "question": "A temple offering basket contains 4 identical mangoes, 3 identical apples, and 5 distinctly different bananas. In how many ways can a devotee select at least one fruit from the basket?",
+    "options": ["119", "120", "639", "640"],
+    "answer": "639",
+    "explanation": "For identical items of quantity 'p', the number of ways to select them is (p+1) corresponding to picking 0, 1, 2... up to p items. Ways to select mangoes = (4+1) = 5. Ways to select apples = (3+1) = 4. For 'n' distinct items, each can either be selected or not, giving 2^n ways. Ways to select bananas = 2^5 = 32. Total ways to select any combination of fruits (including picking none) = 5 * 4 * 32 = 640. Since the devotee must pick at least one fruit, we subtract the 1 scenario where exactly zero fruits are selected. Total ways = 640 - 1 = 639.",
+    "trick": "Mix of identical and distinct formulas: Total combinations = [(p+1)(q+1)... * 2^n] - 1.",
+    "tip": "Identical items: (p+1) choices. Distinct items: 2^n choices."
+  },
+  {
+    "id": 19,
+    "question": "A complex Rangoli design is laid out in the shape of a perfectly regular convex polygon. If the designer drew exactly 170 distinct diagonals connecting the vertices, how many sides does this polygon have?",
+    "options": ["15", "17", "20", "22"],
+    "answer": "20",
+    "explanation": "The number of diagonals in a polygon with 'n' sides is given by the combination formula nC2 - n, which simplifies to n(n - 3) / 2. We are given n(n - 3) / 2 = 170. Multiplying by 2 gives n^2 - 3n = 340. Rearranging into a quadratic equation: n^2 - 3n - 340 = 0. Factoring the quadratic: (n - 20)(n + 17) = 0. Since 'n' represents the number of physical sides, it must be a positive integer. Therefore, n = 20.",
+    "trick": "Instead of solving the quadratic, you can quickly plug the options into the equation n(n-3)/2 to see which yields 170. 20*(17)/2 = 170. Done in 5 seconds.",
+    "tip": "Number of diagonals formula: n(n - 3) / 2."
+  },
+  {
+    "id": 20,
+    "question": "In how many ways can the letters of the word 'DIRECTOR' be arranged so that the vowels completely maintain their original relative order (I, then E, then O)?",
+    "options": ["1680", "3360", "6720", "20160"],
+    "answer": "3360",
+    "explanation": "The word DIRECTOR contains 8 letters: 3 vowels (I, E, O) and 5 consonants (D, R, C, T, R), with 'R' repeating 2 times. First, choose 3 positions out of the 8 available slots for the vowels. This can be done in 8C3 = 56 ways. Since the vowels must appear strictly in the relative order I -> E -> O, there is exactly 1 way to place them into those 3 chosen slots. The remaining 5 slots must be filled by the 5 consonants. The consonants can be arranged in 5! / 2! = 120 / 2 = 60 ways. Total arrangements = 56 * 60 = 3360.",
+    "trick": "Whenever relative order is fixed, treat those specific letters as identical objects for the sake of slot combination, then arrange the rest. 8! / (3! * 2!) = 3360.",
+    "tip": "Fixed relative order reduces permutations; use nCr for slotting."
+  },
+  {
+    "id": 21,
+    "question": "A corporate board consists of 5 male directors and 5 female directors. In how many ways can they be seated around a circular conference table such that male and female directors sit in strictly alternating positions?",
+    "options": ["14400", "2880", "86400", "3628800"],
+    "answer": "2880",
+    "explanation": "Step 1: Seat the 5 male directors around the circular table first. The number of ways to arrange 'n' people in a circle is (n-1)!. For 5 men, this is (5-1)! = 4! = 24 ways. \nStep 2: These 5 seated men create exactly 5 gaps between them. \nStep 3: To ensure genders alternate, the 5 female directors must occupy these 5 gaps. Arranging 5 women in 5 specific gaps is a linear permutation, which is 5! = 120 ways. \nStep 4: Total valid seating arrangements = 24 * 120 = 2880.",
+    "trick": "In alternating circular arrangements of two equal groups of size n, the formula is always (n-1)! * n!. Don't make the mistake of using (n-1)! for the second group.",
+    "tip": "Alternating circle of n and n: (n-1)! * n!."
+  },
+  {
+    "id": 22,
+    "question": "A tech company is distributing 10 identical ₹1 Lakh Diwali bonus cheques among 4 regional branch managers. In how many ways can these cheques be distributed such that every branch manager receives at least one cheque?",
+    "options": ["84", "120", "210", "286"],
+    "answer": "84",
+    "explanation": "Step 1: Since every manager must receive at least 1 cheque, first give 1 cheque to each of the 4 managers. \nStep 2: We are now left with 10 - 4 = 6 identical cheques to distribute among 4 distinct managers, with no restrictions on these remaining cheques. \nStep 3: Use the 'Stars and Bars' formula for distributing 'n' identical items into 'k' distinct groups: C(n + k - 1, k - 1). Here, n = 6 and k = 4. \nStep 4: C(6 + 4 - 1, 4 - 1) = C(9, 3). \nStep 5: Calculate C(9, 3) = (9 * 8 * 7) / (3 * 2 * 1) = 84 ways.",
+    "trick": "For 'at least one' distributions of identical items, use the direct positive integer Stars and Bars formula: C(n-1, k-1) where n is total items and k is recipients. C(10-1, 4-1) = C(9, 3) = 84.",
+    "tip": "Identical items, $\\ge1$ to each: C(n-1, k-1)."
+  },
+  {
+    "id": 23,
+    "question": "In how many ways can the letters of the word 'PANCHAYAT' be arranged such that all the vowels strictly occupy the even positions in the word?",
+    "options": ["720", "1440", "2880", "5760"],
+    "answer": "2880",
+    "explanation": "Step 1: Analyze the word 'PANCHAYAT'. It has 9 letters. Vowels: A, A, A (3 vowels). Consonants: P, N, C, H, Y, T (6 consonants). \nStep 2: Identify the even positions. In a 9-letter word, the even positions are 2nd, 4th, 6th, and 8th. So, there are 4 even slots available. \nStep 3: Place the 3 'A's into these 4 slots. We choose 3 slots out of 4 in 4C3 = 4 ways. Since all 3 vowels are identical ('A'), they can only be arranged in 1 way inside those slots. \nStep 4: Arrange the 6 remaining consonants in the remaining 6 slots (1 even slot left + 5 odd slots). This can be done in 6! = 720 ways. \nStep 5: Total arrangements = 4 * 720 = 2880.",
+    "trick": "Remember that since the vowels are identical, you only need to select the positions (4C3). If they were distinct vowels, you would multiply by 3!.",
+    "tip": "Select positions first (nCr), then arrange the remaining letters."
+  },
+  {
+    "id": 24,
+    "question": "The IT department generates 6 unique server passwords for 6 different database administrators. Due to a system glitch, the passwords are mixed up. In how many ways can exactly 2 administrators receive their correct passwords, while the other 4 receive incorrect ones?",
+    "options": ["45", "135", "180", "360"],
+    "answer": "135",
+    "explanation": "Step 1: This is a partial derangement problem. First, select the 2 administrators who will receive their correct passwords. This can be done in 6C2 ways = (6 * 5) / 2 = 15 ways. \nStep 2: The remaining 4 administrators must receive completely incorrect passwords. This requires the derangement formula for 4 items: D(4). \nStep 3: D(4) = 4! * (1/2! - 1/3! + 1/4!) = 24 * (1/2 - 1/6 + 1/24) = 12 - 4 + 1 = 9. \nStep 4: Multiply the combinations by the derangements: 15 * 9 = 135 ways.",
+    "trick": "Always isolate the 'correct' group using combinations (nCr) and apply the exact derangement sequence D(n-r) to the remainder. D(4) is always 9.",
+    "tip": "Exact 'r' correct items = nCr * D(n-r)."
+  },
+  {
+    "id": 25,
+    "question": "A highly specialized task force of 5 officers is to be formed from a pool of 7 IAS officers and 6 IPS officers. In how many ways can this task force be formed if it must contain at most 2 IPS officers?",
+    "options": ["525", "735", "756", "1281"],
+    "answer": "756",
+    "explanation": "Step 1: 'At most 2 IPS officers' means the committee can have 0, 1, or 2 IPS officers. The rest must be IAS officers to make a total of 5. \nStep 2: Case 1 (0 IPS, 5 IAS) = 6C0 * 7C5 = 1 * 21 = 21 ways. \nStep 3: Case 2 (1 IPS, 4 IAS) = 6C1 * 7C4 = 6 * 35 = 210 ways. \nStep 4: Case 3 (2 IPS, 3 IAS) = 6C2 * 7C3 = 15 * 35 = 525 ways. \nStep 5: Sum all valid cases = 21 + 210 + 525 = 756 ways.",
+    "trick": "Systematically list out all combination cases defined by the 'at most' condition to ensure you do not miss the 'Zero' inclusion case (0 IPS).",
+    "tip": "'At most 2' includes 0, 1, and 2. Calculate each case."
+  },
+  {
+    "id": 26,
+    "question": "Two parallel straight highways, NH-1 and NH-2, have multiple toll checkpoints. There are 5 checkpoints on NH-1 and 7 checkpoints on NH-2. How many distinct triangles can be formed by using these 12 checkpoints as vertices?",
+    "options": ["140", "175", "210", "220"],
+    "answer": "175",
+    "explanation": "Step 1: To form a triangle, we need 3 non-collinear points. Since the points lie on two parallel lines, we can either take 2 points from NH-1 and 1 point from NH-2, OR 1 point from NH-1 and 2 points from NH-2. \nStep 2: Case 1 (2 from NH-1, 1 from NH-2) = 5C2 * 7C1 = 10 * 7 = 70 triangles. \nStep 3: Case 2 (1 from NH-1, 2 from NH-2) = 5C1 * 7C2 = 5 * 21 = 105 triangles. \nStep 4: Total triangles = 70 + 105 = 175. \n(Alternative method: Total ways to pick 3 points - collinear points = 12C3 - 5C3 - 7C3 = 220 - 10 - 35 = 175).",
+    "trick": "The subtraction method (Total combinations minus collinear combinations) is generally faster and scales better for larger point sets.",
+    "tip": "Triangles on parallel lines: nC2*m + mC2*n OR TotalC3 - CollinearC3."
+  },
+  {
+    "id": 27,
+    "question": "In how many ways can the letters of the word 'RAJDHANI' be arranged such that the specific substring 'DHAN' always appears together and strictly in that exact order?",
+    "options": ["120", "240", "720", "1440"],
+    "answer": "120",
+    "explanation": "Step 1: Since 'DHAN' must appear together in that exact order, treat the entire sequence 'DHAN' as a single unbreakable block or entity. \nStep 2: The remaining letters from 'RAJDHANI' are R, A, J, I. Note that the 'A' in 'DHAN' is locked inside the block, leaving only one 'A' outside. \nStep 3: We now have 5 entities to arrange: R, A, J, I, and the block [DHAN]. \nStep 4: Since there are no repeating entities among these 5 items (every item is distinct), they can be arranged in 5! ways. \nStep 5: 5! = 120 ways.",
+    "trick": "Do not divide by 2! for the two 'A's. Once one 'A' is locked inside the rigid substring block, it ceases to be an independent interchangeable letter.",
+    "tip": "Treat fixed sequential substrings as a single distinct unit."
+  },
+  {
+    "id": 28,
+    "question": "A corporate training center has 12 distinct laptops. In how many ways can these laptops be divided into 3 identical, unlabeled training rooms such that each room receives exactly 4 laptops?",
+    "options": ["5775", "34650", "138600", "415800"],
+    "answer": "5775",
+    "explanation": "Step 1: We are distributing 12 distinct items into 3 unlabeled groups of equal size (4 items each). \nStep 2: The standard formula for dividing 'n' distinct items into 'k' unlabeled groups of 'r' items each is n! / ((r!)^k * k!). \nStep 3: Plugging in the values: 12! / ((4!)^3 * 3!). \nStep 4: Calculate: 12! / (24 * 24 * 24 * 6) = 479,001,600 / 82,944 = 5775. \n(Alternatively: Pick 4 for room one (12C4), 4 for room two (8C4), 4 for room three (4C4). Since rooms are identical, divide by 3! to remove order: (495 * 70 * 1) / 6 = 5775).",
+    "trick": "Because the rooms are identically unlabeled and the group sizes are equal, you must divide by the factorial of the number of groups (3!) to prevent permutation overcounting.",
+    "tip": "Divide by k! when distributing into k equal unlabeled groups."
+  },
+  {
+    "id": 29,
+    "question": "How many 4-digit numbers can be formed using the digits 2, 3, 4, 5, and 6 without any repetition such that the resulting number is perfectly divisible by 4?",
+    "options": ["24", "30", "36", "48"],
+    "answer": "36",
+    "explanation": "Step 1: A number is divisible by 4 if its last two digits form a number divisible by 4. \nStep 2: From the digits 2, 3, 4, 5, 6 (without repetition), the possible valid 2-digit endings are: 24, 32, 36, 52, 56, and 64. That is 6 possible cases for the ending. \nStep 3: For each specific ending (which uses 2 digits), there are 3 remaining digits to fill the first 2 positions of the 4-digit number. \nStep 4: The number of ways to arrange 3 digits in 2 spots is 3P2 = 3 * 2 = 6 ways. \nStep 5: Total valid numbers = 6 (endings) * 6 (arrangements for each) = 36.",
+    "trick": "Always list out the specific combinations for divisibility rules (like last two digits for 4) first, then calculate permutations for the remaining spots.",
+    "tip": "Divisibility by 4 requires checking only the last two digits."
+  },
+  {
+    "id": 30,
+    "question": "If all possible 3-digit numbers are formed using the digits 3, 5, 7, and 9 exactly once (without repetition), what is the sum of all these generated numbers?",
+    "options": ["15984", "17984", "63936", "66600"],
+    "answer": "15984",
+    "explanation": "Step 1: The total number of 3-digit numbers that can be formed from 4 digits without repetition is 4P3 = 4 * 3 * 2 = 24 numbers. \nStep 2: In these 24 numbers, each of the 4 digits (3, 5, 7, 9) will appear equally in the hundreds, tens, and units places. The number of times each digit appears in any specific column is 3P2 = 6 times. \nStep 3: The sum of the digits in any one column is 6 * (3 + 5 + 7 + 9) = 6 * 24 = 144. \nStep 4: Since this sum applies to the units, tens, and hundreds places, the total sum is 144 * 100 + 144 * 10 + 144 * 1 = 144 * 111. \nStep 5: 144 * 111 = 15984.",
+    "trick": "The formula for the sum of 'r'-digit numbers formed by 'n' non-zero digits without repetition is: (n-1)P(r-1) * (Sum of digits) * (111... r times). Here: 3P2 * (24) * 111.",
+    "tip": "Sum = (n-1)P(r-1) * (Sum of given digits) * (111...)"
+  },
+  {
+    "id": 31,
+    "question": "The CEO, CFO, COO, and 3 other executive board members are holding a meeting around a circular table. In how many ways can they be seated if the CEO and CFO must always sit together, but the COO refuses to sit immediately next to the CEO?",
+    "options": ["24", "36", "48", "72"],
+    "answer": "36",
+    "explanation": "Step 1: First, calculate the total circular arrangements where CEO (A) and CFO (B) are together. Treat [AB] as 1 unit. Total units = 5. Circular arrangements = 4! = 24. A and B can swap (AB or BA), so 24 * 2 = 48 total ways. \nStep 2: Now subtract the invalid cases where COO (C) sits next to the CEO (A). Since A and B are already together, C sitting next to A forces the block to be exactly [CAB] or [BAC]. \nStep 3: There are exactly 2 violating blocks: [CAB] and [BAC]. For each block, treat it as 1 unit. We have the block + 3 other members = 4 units. \nStep 4: Circular arrangements for 4 units = 3! = 6 ways. Since there are 2 bad blocks, total violating cases = 6 * 2 = 12. \nStep 5: Valid arrangements = Total (A&B together) - Violations (C next to A) = 48 - 12 = 36.",
+    "trick": "When subtracting multi-condition intersections, visualize the rigid block formed. If A and B are tied, and C touches A, they form a strict 3-person segment.",
+    "tip": "Subtract specific violating blocks [CAB] and [BAC] from the total."
+  },
+  {
+    "id": 32,
+    "question": "A city planner is marking out new development zones using 12 distinct survey points on a map. However, 5 of these survey points lie on exactly the same straight highway. How many distinct straight lines can be drawn by joining any two of these 12 points?",
+    "options": ["56", "57", "66", "76"],
+    "answer": "57",
+    "explanation": "Step 1: Normally, the number of straight lines formed by joining any 2 out of 12 points is 12C2. 12C2 = (12 * 11) / 2 = 66. \nStep 2: However, 5 of these points are collinear (on the same highway). The number of lines that would normally be formed exclusively by these 5 points is 5C2 = 10. \nStep 3: Since these 10 combinations only form 1 single continuous straight line (the highway itself), we must subtract the overcounted combinations and add back the 1 valid line they actually form. \nStep 4: Total distinct lines = Total combinations - Collinear combinations + 1. \nStep 5: 66 - 10 + 1 = 57.",
+    "trick": "Always subtract nC2 for the collinear points to remove the overcount, but don't forget the '+1' to account for the single straight line those points actually create.",
+    "tip": "Lines from points: TotalC2 - CollinearC2 + 1."
+  },
+  {
+    "id": 33,
+    "question": "A wedding gift basket contains 4 identical red apples, 5 identical oranges, and 6 distinct varieties of imported kiwis. In how many ways can a guest select a combination of fruits such that they pick at least one of each identical fruit type, and at least one kiwi?",
+    "options": ["1200", "1260", "1386", "1440"],
+    "answer": "1260",
+    "explanation": "Step 1: The selections for each fruit type are independent. \nStep 2: For the 4 identical apples, the guest must pick at least 1. The possible quantities are 1, 2, 3, or 4. This is 4 ways. \nStep 3: For the 5 identical oranges, the guest must pick at least 1. The possible quantities are 1, 2, 3, 4, or 5. This is 5 ways. \nStep 4: For the 6 distinct kiwis, the guest can pick any combination, but must pick at least one. Each distinct kiwi has 2 choices (selected or not). So, total combinations = 2^6. Subtract 1 for the case where zero kiwis are selected: 2^6 - 1 = 64 - 1 = 63 ways. \nStep 5: Multiply the independent choices: 4 * 5 * 63 = 1260 ways.",
+    "trick": "Identical items use arithmetic counting based on quantity limits (max - min + 1), whereas distinct items use exponential combinations (2^n).",
+    "tip": "Identical picking: count quantities. Distinct picking: 2^n - 1."
+  },
+  {
+    "id": 34,
+    "question": "A government agency has 6 distinct infrastructure contracts to award to 4 distinct construction vendors. In how many ways can these contracts be distributed such that every vendor receives at least one contract?",
+    "options": ["1080", "1560", "4096", "7800"],
+    "answer": "1560",
+    "explanation": "Step 1: Distributing 'n' distinct objects into 'k' distinct boxes with no box empty requires the Principle of Inclusion-Exclusion (PIE) or Stirling numbers of the second kind. We use PIE here: n=6, k=4. \nStep 2: Total unrestricted distributions = 4^6 = 4096. \nStep 3: Subtract cases where exactly 1 vendor gets nothing: 4C1 * 3^6 = 4 * 729 = 2916. \nStep 4: Add cases where exactly 2 vendors get nothing: 4C2 * 2^6 = 6 * 64 = 384. \nStep 5: Subtract cases where exactly 3 vendors get nothing: 4C3 * 1^6 = 4 * 1 = 4. \nStep 6: Total valid ways = 4096 - 2916 + 384 - 4 = 1560.",
+    "trick": "This is equivalent to finding the onto functions from a set of 6 to a set of 4. PIE is the safest manual method: k^n - kC1*(k-1)^n + kC2*(k-2)^n ...",
+    "tip": "Distinct to distinct (no empty): Use Inclusion-Exclusion formula."
+  },
+  {
+    "id": 35,
+    "question": "An artisan is crafting an asymmetrical wedding garland using 6 entirely distinct roses and 1 heavy, unique central gold pendant. In how many distinct ways can this garland be assembled?",
+    "options": ["120", "360", "720", "5040"],
+    "answer": "360",
+    "explanation": "Step 1: In a standard circular arrangement, n objects arrange in (n-1)! ways. However, the unique central gold pendant acts as a fixed anchor point, breaking the continuous circular symmetry. \nStep 2: Because the pendant anchors the circle, the 6 roses are effectively arranged in a linear row starting from one side of the pendant to the other. This linear arrangement is 6! = 720 ways. \nStep 3: However, this is still a physical garland in 3D space. Turning the garland over (flipping it) produces an identical physical arrangement, mapping the clockwise sequence to the counter-clockwise sequence. \nStep 4: Therefore, we must divide the total by 2. \nStep 5: Total arrangements = 6! / 2 = 720 / 2 = 360.",
+    "trick": "A fixed distinct item on a necklace anchors it linearly (n!), but the 3D flip rule for necklaces/garlands still mandates dividing by 2.",
+    "tip": "Garland with 1 fixed pendant: n! / 2 (where n = other beads)."
+  },
+  {
+    "id": 36,
+    "question": "A wholesale jeweler has an abundant stock of identical Ruby rings, identical Emerald rings, and identical Sapphire rings. In how many ways can a wealthy customer purchase exactly 4 rings from this shop?",
+    "options": ["12", "15", "81", "256"],
+    "answer": "15",
+    "explanation": "Step 1: The customer needs to choose 4 rings, and the shop has 3 distinct types (Ruby, Emerald, Sapphire). Since the stock is 'abundant', there are at least 4 of each type. \nStep 2: This is equivalent to finding the number of non-negative integer solutions to the equation: R + E + S = 4, where R, E, and S are the quantities of each ring type. \nStep 3: Use the Stars and Bars formula: C(n + k - 1, k - 1), where 'n' is the number of items to pick (4) and 'k' is the number of distinct categories (3). \nStep 4: Plugging in the values: C(4 + 3 - 1, 3 - 1) = C(6, 2). \nStep 5: Calculate C(6, 2) = (6 * 5) / (2 * 1) = 15.",
+    "trick": "Selecting identical items from distinct infinite categories is a standard 'Stars and Bars' application. Don't confuse it with combinations of distinct items.",
+    "tip": "Choosing n items from k infinite categories: C(n+k-1, k-1)."
+  },
+  {
+    "id": 37,
+    "question": "At a corporate mixer, there are 10 Marketing Executives and 8 Software Developers. Every person shakes hands exactly once with every other person in the room. How many handshakes occur strictly between two people belonging to the SAME profession?",
+    "options": ["73", "80", "153", "306"],
+    "answer": "73",
+    "explanation": "Step 1: We only want handshakes where a Marketer shakes hands with another Marketer, or a Developer shakes hands with another Developer. \nStep 2: The number of handshakes among the 10 Marketers is the number of ways to choose 2 people from 10. This is 10C2 = (10 * 9) / 2 = 45. \nStep 3: The number of handshakes among the 8 Developers is the number of ways to choose 2 people from 8. This is 8C2 = (8 * 7) / 2 = 28. \nStep 4: These two events are mutually exclusive (you cannot have a handshake that is both Marketer-Marketer and Developer-Developer). \nStep 5: Add the possibilities together: 45 + 28 = 73.",
+    "trick": "Calculate intragroup combinations separately and sum them. If the question asked for cross-profession handshakes, it would simply be 10 * 8 = 80.",
+    "tip": "Handshakes within groups: GroupA_C2 + GroupB_C2."
+  },
+  {
+    "id": 38,
+    "question": "If all the permutations of the letters of the word 'BIHAR' are arranged exactly as they would appear in a standard English dictionary, what will be the numerical rank of the word 'BIHAR'?",
+    "options": ["38", "39", "40", "41"],
+    "answer": "39",
+    "explanation": "Step 1: Alphabetize the letters of BIHAR: A, B, H, I, R. \nStep 2: Words starting with A: Since there are 4 remaining distinct letters, there are 4! = 24 words. \nStep 3: Next alphabetically are words starting with B. Since 'B' matches our target word, we fix B and move to the second letter alphabetically, which is A. \nStep 4: Words starting with BA: 3 remaining letters = 3! = 6 words. Words starting with BH: 3! = 6 words. \nStep 5: Next is BI, which matches our target. Fix BI and check the third letter. First alphabetically is A. Words starting with BIA = 2! = 2 words. \nStep 6: Next is BIH, which matches. Fix BIH. Fourth letter alphabetically is A, which matches. Fifth is R. This spells BIHAR (1 word). \nStep 7: Total sum = 24 + 6 + 6 + 2 + 1 = 39.",
+    "trick": "Systematically lock in matching letters and compute factorials for the remaining available letters in alphabetical chunks.",
+    "tip": "List letters alphabetically, then sum factorials of bypassed letters."
+  },
+  {
+    "id": 39,
+    "question": "At a wedding reception, 4 men and 4 women are to be seated in a single straight row of 8 chairs. In how many ways can they be seated such that no two women sit adjacent to each other?",
+    "options": ["1152", "2880", "5760", "40320"],
+    "answer": "2880",
+    "explanation": "Step 1: Use the Gap Method to separate the women. First, arrange the unconstrained group, which is the 4 men. \nStep 2: The 4 men can be seated in a row in 4! = 24 ways. \nStep 3: These 4 seated men create 5 potential seating gaps (one at each end, and three between them): _ M _ M _ M _ M _. \nStep 4: To ensure no two women sit together, the 4 women must be placed into these 5 gaps. The number of ways to arrange 4 distinct women into 5 gaps is 5P4 = 5! / (5-4)! = 120 ways. \nStep 5: Total valid seating arrangements = 24 * 120 = 2880.",
+    "trick": "Never subtract 'all women together' from the total. That only removes cases where ALL 4 are together, leaving cases where 2 or 3 are together. Always use the Gap Method.",
+    "tip": "For 'no two together', always use the Gap Method."
+  },
+  {
+    "id": 40,
+    "question": "A delivery agent must travel on a grid from coordinates (0,0) to (5,4), moving strictly one unit Right or one unit Up per step. Due to severe waterlogging, the specific junction at (2,2) is completely impassable. How many valid routes exist for the agent?",
+    "options": ["60", "66", "116", "126"],
+    "answer": "66",
+    "explanation": "Step 1: First, calculate the total possible paths without any restrictions. A path from (0,0) to (x,y) takes C(x+y, x) ways. For (5,4), it is C(9, 4) = (9 * 8 * 7 * 6) / 24 = 126 paths. \nStep 2: Now, calculate the number of paths that pass strictly through the blocked node (2,2). \nStep 3: Paths from (0,0) to (2,2) = C(4, 2) = (4 * 3) / 2 = 6 paths. \nStep 4: Paths from (2,2) to (5,4). The difference is dx = 3, dy = 2. Paths = C(5, 2) = (5 * 4) / 2 = 10 paths. \nStep 5: Total invalid paths passing through (2,2) = 6 * 10 = 60 paths. \nStep 6: Total valid paths = Total paths - Invalid paths = 126 - 60 = 66.",
+    "trick": "Split the blocked route into two independent grid segments: Start to Block, and Block to End. Multiply them to get total invalid paths.",
+    "tip": "Grid paths = C(Total Steps, Right Steps). Subtract blocked node product."
+  },
+  {
+    "id": 41,
+    "question": "A logistics delivery drone is navigating a 3D grid network from coordinates (0,0,0) to (3,3,3). It can only move exactly one unit in the positive x, y, or z direction per step. Due to severe interference, the node at (1,1,1) is completely blocked. How many valid paths can the drone take to reach its destination?",
+    "options": ["1080", "1140", "1260", "1680"],
+    "answer": "1140",
+    "explanation": "Total unrestricted paths from (0,0,0) to (3,3,3) require 3 steps in x, 3 in y, and 3 in z. Total steps = 9. Paths = 9! / (3! * 3! * 3!) = 1680. Now, calculate paths passing through the blocked node (1,1,1). Paths from (0,0,0) to (1,1,1) = 3! / (1! * 1! * 1!) = 6. Paths from (1,1,1) to (3,3,3) require 2 steps in each direction (since 3-1=2). Paths = 6! / (2! * 2! * 2!) = 90. Invalid paths passing through (1,1,1) = 6 * 90 = 540. Valid paths = 1680 - 540 = 1140.",
+    "trick": "Split the blocked journey into two independent 3D grids: Start -> Blocked Node, and Blocked Node -> End. Multiply their combinations and subtract from total.",
+    "tip": "3D Grid paths = (x+y+z)! / (x! * y! * z!)."
+  },
+  {
+    "id": 42,
+    "question": "An executive wants to distribute 10 identical gold coins as Diwali bonuses into 3 completely identical, unmarked envelopes such that no envelope remains empty. In how many ways can this be done?",
+    "options": ["6", "8", "10", "36"],
+    "answer": "8",
+    "explanation": "Since both the coins and envelopes are identical, this is a mathematical 'integer partition' problem. We need to find the number of ways to partition 10 into exactly 3 non-zero parts. We can systematically list them by keeping the sequence in descending order to avoid duplicates: (8,1,1), (7,2,1), (6,3,1), (6,2,2), (5,4,1), (5,3,2), (4,4,2), and (4,3,3). Counting these unique groupings gives us exactly 8 ways.",
+    "trick": "Because both items and containers are identical, standard Stars and Bars will incorrectly overcount permutations (like treating 8,1,1 differently from 1,8,1). Always list integer partitions manually for small numbers.",
+    "tip": "Identical objects into identical boxes = Integer Partitions."
+  },
+  {
+    "id": 43,
+    "question": "A teacher accidentally scrambles the letters of the word 'PENCIL'. In how many of these scrambled arrangements is not a single letter in its original position?",
+    "options": ["120", "265", "360", "720"],
+    "answer": "265",
+    "explanation": "This is a full derangement problem. The word 'PENCIL' has 6 distinct letters. We need the number of arrangements where exactly 0 items are in their original spot. The derangement formula is D(n) = n! * (1 - 1/1! + 1/2! - 1/3! ... + (-1)^n / n!). For n = 6, D(6) = 720 * (1/2 - 1/6 + 1/24 - 1/120 + 1/720) = 360 - 120 + 30 - 6 + 1 = 265.",
+    "trick": "Instead of calculating the long series, memorize the first six derangement values: D(1)=0, D(2)=1, D(3)=2, D(4)=9, D(5)=44, D(6)=265.",
+    "tip": "Full derangement of 6 distinct items is always 265."
+  },
+  {
+    "id": 44,
+    "question": "At a geopolitical summit, 5 Ruling Party members and 5 Opposition members sit around a circular table. They must sit in strictly alternating seats. If the Prime Minister (Ruling) and the Leader of the Opposition must sit exactly diametrically opposite to each other, how many such seating arrangements are possible?",
+    "options": ["576", "1152", "2880", "14400"],
+    "answer": "576",
+    "explanation": "Fix the Prime Minister (PM) in any one seat. Since seats must alternate, the 5 ruling members take odd seats and 5 opposition members take even seats. Diametrically opposite to the PM (seat 1) is seat 6. Seat 6 is an even seat, which perfectly fits an opposition member. Place the Leader of the Opposition (LO) in seat 6. This can be done in only 1 way since the seats are relative. Now, the remaining 4 ruling members can be arranged in the remaining 4 ruling seats in 4! = 24 ways. The remaining 4 opposition members can be arranged in the 4 opposition seats in 4! = 24 ways. Total arrangements = 1 * 24 * 24 = 576.",
+    "trick": "Fixing the PM effectively anchors the circle, making the remaining seats distinct. Do not multiply by 2 for the LO, because their relative position (opposite) is locked by the PM.",
+    "tip": "Fix one constraint strongly; arrange the rest linearly."
+  },
+  {
+    "id": 45,
+    "question": "A corporation must form a core committee of 5 members from a pool of 4 HR executives, 5 Tech leads, and 6 Marketing heads. How many ways can this committee be formed if it must contain exactly 2 Tech leads, and at least one member from each of the other two departments?",
+    "options": ["720", "840", "960", "1260"],
+    "answer": "960",
+    "explanation": "First, select exactly 2 Tech leads from 5: 5C2 = 10 ways. The remaining 3 members must be chosen from 4 HR and 6 Marketing, with at least 1 from each. There are two valid case splits for these 3 members: Case 1 (1 HR, 2 Mkt) = 4C1 * 6C2 = 4 * 15 = 60 ways. Case 2 (2 HR, 1 Mkt) = 4C2 * 6C1 = 6 * 6 = 36 ways. Sum of valid HR/Mkt combinations = 60 + 36 = 96. Total combinations = 10 (Tech) * 96 (Others) = 960 ways.",
+    "trick": "Isolate the 'exact' condition first (Tech leads), then map out the rigid combination cases for the remaining slots to prevent overlap.",
+    "tip": "Handle exact constraints first, then sum the remaining cases."
+  },
+  {
+    "id": 46,
+    "question": "An IT manager has 8 highly distinct software licenses. In how many ways can they be distributed among 3 specific employees (Alice, Bob, and Charlie) such that one employee receives 4 licenses, another receives 3, and the last receives exactly 1?",
+    "options": ["280", "1680", "3360", "5040"],
+    "answer": "1680",
+    "explanation": "First, divide the 8 distinct licenses into three groups of sizes 4, 3, and 1. Since the group sizes are all different, we don't need to divide by any matching group factorials. Grouping ways = 8! / (4! * 3! * 1!) = 280 ways. Second, these three distinct groups of sizes (4, 3, 1) need to be distributed to the 3 distinct employees. The number of ways to distribute them is 3! = 6 ways. Total distributions = 280 * 6 = 1680.",
+    "trick": "The text 'one receives 4, another 3, another 1' implies the quota is not fixed to specific people. You must multiply the grouping combinations by 3! to assign the uneven piles.",
+    "tip": "Unequal grouping: n! / (p!q!r!), then multiply by k! for distinct people."
+  },
+  {
+    "id": 47,
+    "question": "In how many ways can the letters of the word 'TRAINING' be arranged such that the vowels appear strictly in alphabetical order (A, I, I) and no two vowels are ever adjacent to each other?",
+    "options": ["600", "1200", "2400", "3600"],
+    "answer": "1200",
+    "explanation": "The word has 8 letters. Vowels: A, I, I. Consonants: T, R, N, N, G. First, arrange the 5 consonants. Since 'N' repeats twice, this takes 5! / 2! = 60 ways. These 5 consonants create 6 gaps (_C_C_C_C_C_). To ensure no two vowels are adjacent, we must select 3 of these 6 gaps for the vowels: 6C3 = 20 ways. Since the vowels MUST be in alphabetical order (A -> I -> I), there is exactly 1 valid way to place them into the 3 chosen gaps. Total arrangements = 60 * 20 * 1 = 1200.",
+    "trick": "When items have a fixed relative order, their internal permutation is simply 1. Combine this with the Gap Method for the 'never adjacent' constraint.",
+    "tip": "Gap Method + Fixed relative order = nCr * 1."
+  },
+  {
+    "id": 48,
+    "question": "A sales director wants to distribute 15 identical ₹1000 cash vouchers among 3 top-performing executives. To keep things relatively fair, no executive is allowed to receive more than 6 vouchers. In how many valid ways can this distribution occur?",
+    "options": ["10", "15", "21", "28"],
+    "answer": "10",
+    "explanation": "Let the executives receive x, y, and z vouchers. Equation: x + y + z = 15, with 0 <= x, y, z <= 6. Total ways without upper bound = C(15+3-1, 3-1) = 17C2 = 136. Now apply Inclusion-Exclusion for violations (someone getting >= 7). Condition A (x>=7): Let x' = x-7. x' + y + z = 8. Ways = C(8+2, 2) = 10C2 = 45. There are 3 variables, so 3 * 45 = 135 violating cases. However, two executives can violate simultaneously (e.g., 7+7+1 = 15). Intersection (x>=7, y>=7): Let x'=x-7, y'=y-7. x' + y' + z = 1. Ways = C(1+2, 2) = 3. There are 3C2 = 3 such pairs. 3 * 3 = 9. Valid ways = Total - Single Violations + Double Violations = 136 - 135 + 9 = 10.",
+    "trick": "Upper bound distributions with identical items strongly mandate Inclusion-Exclusion to prevent overcounting overlapping violations.",
+    "tip": "Upper bound = Total - C(1 violation) + C(2 violations)."
+  },
+  {
+    "id": 49,
+    "question": "Using the digits 0, 1, 2, 3, 4, and 5 exactly once (without any repetition), how many 5-digit numbers can be formed that are perfectly divisible by 6?",
+    "options": ["96", "108", "120", "144"],
+    "answer": "108",
+    "explanation": "Divisibility by 6 requires being divisible by 2 and 3. Sum of all 6 digits = 15. For a 5-digit number to be divisible by 3, the dropped digit must be a multiple of 3 (0 or 3). Case 1: Drop 0. Digits used: 1, 2, 3, 4, 5. To be even, it must end in 2 or 4. Ends in 2: 4! = 24. Ends in 4: 4! = 24. Case 1 total = 48. Case 2: Drop 3. Digits used: 0, 1, 2, 4, 5. Ends in 0: 4! = 24. Ends in 2: 0 cannot be the leading digit, so 3 choices for the first digit * 3! for the rest = 18. Ends in 4: similarly, 18. Case 2 total = 24 + 18 + 18 = 60. Grand total = 48 + 60 = 108.",
+    "trick": "Always drop digits first to satisfy the divisibility rule for 3, then evaluate the last digit for the divisibility rule of 2. Handle leading zeros separately.",
+    "tip": "Sum of digits must be a multiple of 3; last digit even."
+  },
+  {
+    "id": 50,
+    "question": "At an exclusive couples' retreat, 8 married couples (16 people) are placed in a room. Every person shakes hands exactly once with everyone else in the room, EXCEPT for their own spouse. What is the total number of handshakes?",
+    "options": ["112", "120", "224", "240"],
+    "answer": "112",
+    "explanation": "If there were no restrictions, the total number of handshakes between 16 people would be 16C2 = (16 * 15) / 2 = 120 handshakes. Since there are 8 married couples, there are exactly 8 handshakes that would have occurred between spouses. Since the rule states they do not shake their spouse's hand, we subtract these 8 from the total. Valid handshakes = 120 - 8 = 112.",
+    "trick": "Instead of calculating inter-group permutations, just calculate the total universal combinations (nC2) and subtract the isolated restriction cases.",
+    "tip": "Total Handshakes - Forbidden Handshakes = Valid Handshakes."
+  },
+  {
+    "id": 51,
+    "question": "A display window has 4 different pairs of designer shoes (8 shoes in total). In how many ways can they be arranged in a single straight row such that no two shoes belonging to the exact same pair are placed adjacent to each other?",
+    "options": ["9600", "13824", "17280", "23040"],
+    "answer": "13824",
+    "explanation": "Use Inclusion-Exclusion. Total unrestricted arrangements = 8! = 40320. Condition P_i is that pair i is together. 1 pair together: 4C1 * (7! * 2!) = 40320. 2 pairs together: 4C2 * (6! * 2^2) = 6 * 720 * 4 = 17280. 3 pairs together: 4C3 * (5! * 2^3) = 4 * 120 * 8 = 3840. 4 pairs together: 4C4 * (4! * 2^4) = 1 * 24 * 16 = 384. Valid ways = Total - (1 together) + (2 together) - (3 together) + (4 together) = 40320 - 40320 + 17280 - 3840 + 384 = 13824.",
+    "trick": "Inclusion-Exclusion is the only fail-proof way for multiple pairs avoiding each other. The alternating sequence handles overlaps perfectly. Remember to multiply by 2^k for internal swaps.",
+    "tip": "Multiple pairs avoiding each other requires Inclusion-Exclusion."
+  },
+  {
+    "id": 52,
+    "question": "A jeweler is crafting a necklace using 6 completely distinct regular beads and 2 identical special diamond beads. In how many distinct ways can the necklace be formed if the 2 diamond beads must never be adjacent?",
+    "options": ["450", "900", "1800", "3600"],
+    "answer": "900",
+    "explanation": "First, arrange the unconstrained items (the 6 distinct regular beads) in a circle. This takes (6 - 1)! = 5! = 120 ways. These 6 beads create exactly 6 gaps. To keep the 2 identical diamond beads separated, we must place them into 2 of these 6 gaps. We choose 2 gaps in 6C2 = 15 ways. Because the diamonds are identical, there is only 1 way to place them in the chosen gaps. Directed circular permutations = 120 * 15 = 1800. Since a necklace can be physically flipped in 3D space, clockwise and counter-clockwise are identical. Divide by 2: 1800 / 2 = 900.",
+    "trick": "The combination of the circular gap method and the 3D necklace rule requires dividing by 2 at the very end of the directed permutation calculation.",
+    "tip": "Circular Gap Method -> multiply -> divide by 2 for necklaces."
+  },
+  {
+    "id": 53,
+    "question": "If all possible 4-digit numbers are formed using the digits 1, 2, 3, 4, and 5 exactly once (without repetition) such that the resulting number is strictly greater than 3000, what is the sum of all these numbers?",
+    "options": ["309978", "319978", "399960", "412340"],
+    "answer": "309978",
+    "explanation": "To be >3000, the thousands digit must be 3, 4, or 5. Total valid numbers = 3 (choices for 1st digit) * 4P3 = 3 * 24 = 72. The sum of the thousands place = 24*(3000) + 24*(4000) + 24*(5000) = 288,000. For the hundreds, tens, and units places, let's find the frequency of any digit. If a specific digit (say, 1) is fixed in the hundreds place, the thousands place has 3 valid choices (3,4,5). The remaining 2 places are filled from 3 digits (3P2=6). Frequency = 3*6 = 18 times. If the fixed digit is 3 (or 4, or 5), the thousands place only has 2 valid choices left. Frequency = 2*6 = 12 times. Sum of any remaining column = 18*(1+2) + 12*(3+4+5) = 54 + 144 = 198. Sum of H, T, U places = 198*100 + 198*10 + 198*1 = 21,978. Total sum = 288,000 + 21,978 = 309,978.",
+    "trick": "When the leading digit is restricted, the remaining digits do not appear with uniform frequency in the other columns. Calculate conditional frequencies based on whether the restricted digits are used.",
+    "tip": "Calculate place-value sums independently with conditional frequencies."
+  },
+  {
+    "id": 54,
+    "question": "If all permutations of the letters of the word 'SUCCESS' are arranged exactly as they would appear in a standard dictionary, what will be the numerical rank of the word 'SUCCESS'?",
+    "options": ["330", "331", "332", "333"],
+    "answer": "331",
+    "explanation": "Alphabetical order: C, C, E, S, S, S, U. Words starting with C: 6!/3! = 120. With E: 6!/(2!3!) = 60. Now S. We need SU, so bypass SC, SE, SS. S-C starts: 5!/2! = 60. S-E starts: 5!/(2!2!) = 30. S-S starts: 5!/2! = 60. Now we hit S-U. We need SUC, which is the first alphabetically. S-U-C. We need SUCC, which is the first alphabetically. S-U-C-C. Leftover: E, S, S. Alphabetically, E is first. S-U-C-C-E. Leftover: S, S. Only one way: SUCCESS. Adding them up: 120 + 60 + 60 + 30 + 60 + 1 = 331.",
+    "trick": "Systematically lock in the matching letters and calculate the permutations of the bypassed branches. Remember to divide by the factorials of the duplicated letters remaining in the pool.",
+    "tip": "Sum permutations of bypassed alphabet branches to find rank."
+  },
+  {
+    "id": 55,
+    "question": "A hospital board must form a review committee of 6 members from a pool of 5 Doctors, 4 Engineers, and 3 Lawyers. In how many ways can this committee be formed if it must include exactly 2 Doctors and at most 2 Engineers?",
+    "options": ["180", "220", "280", "320"],
+    "answer": "220",
+    "explanation": "Select exactly 2 Doctors from 5: 5C2 = 10 ways. The remaining 4 members must be chosen from 4 Engineers and 3 Lawyers, with the condition that Engineers <= 2. Case splits for (Eng, Law): Case 1 (1 Eng, 3 Law) = 4C1 * 3C3 = 4 * 1 = 4 ways. Case 2 (2 Eng, 2 Law) = 4C2 * 3C2 = 6 * 3 = 18 ways. Case 3 (0 Eng, 4 Law) = Impossible, as there are only 3 Lawyers. Total ways for the remaining 4 spots = 4 + 18 = 22. Total valid committee formations = 10 (Doctors) * 22 (Others) = 220.",
+    "trick": "Write out the rigid requirements first. Notice that 'at most 2 Engineers' implicitly restricts the Lawyers, revealing a boundary constraint (you can't pick 4 Lawyers).",
+    "tip": "Map exacts first, then boundary test the 'at most' rules."
+  },
+  {
+    "id": 56,
+    "question": "Consider a standard 8x8 chessboard. How many perfectly rectangular sections can be formed that consist of exactly 6 minimum unit squares?",
+    "options": ["112", "132", "144", "168"],
+    "answer": "132",
+    "explanation": "A rectangle of exactly 6 unit squares can have dimensions 1x6, 6x1, 2x3, or 3x2. For a 1x6 rectangle: in any of the 8 rows, there are (8-6+1) = 3 contiguous placements. Total = 8 * 3 = 24. For a 6x1 rectangle: similarly, in any of the 8 columns, there are 3 placements. Total = 8 * 3 = 24. For a 2x3 rectangle: choose 2 adjacent rows in 7 ways, and 3 adjacent cols in 6 ways. Total = 7 * 6 = 42. For a 3x2 rectangle: choose 3 adjacent rows in 6 ways, and 2 adjacent cols in 7 ways. Total = 6 * 7 = 42. Grand total = 24 + 24 + 42 + 42 = 132.",
+    "trick": "The number of ways to pick a contiguous block of length L from a strip of length N is always (N - L + 1). Multiply these for horizontal and vertical spans.",
+    "tip": "Contiguous lengths L on grid N: (N-L+1) valid segments."
+  },
+  {
+    "id": 57,
+    "question": "7 people (A, B, C, D, E, F, G) are to be seated in a single straight row. In how many distinct ways can they be seated such that there is exactly 1 person sitting strictly between person A and person B?",
+    "options": ["720", "1200", "1440", "2400"],
+    "answer": "1200",
+    "explanation": "Create a rigid block [A _ B]. The gap between A and B can be filled by any of the remaining 5 people in 5 ways. A and B can swap positions (A _ B or B _ A) in 2! = 2 ways. This customized 3-person block now acts as 1 single cohesive unit. There are 4 remaining people not in the block. Total cohesive units to arrange = 1 (block) + 4 (people) = 5 units. Arrange these 5 units linearly in 5! = 120 ways. Total seating arrangements = 5 (gap choices) * 2 (A/B swap) * 120 (unit arrangements) = 1200.",
+    "trick": "Building a custom block handles relative distance constraints perfectly. Just remember to account for the internal permutations (swaps and gap fillers).",
+    "tip": "Treat specific distance conditions as a cohesive multi-slot block."
+  },
+  {
+    "id": 58,
+    "question": "A regional manager is tasked with distributing 20 identical reward coupons among 4 distinct teams. To recognize performance tiers, Team 1 must get at least 1 coupon, Team 2 at least 2, Team 3 at least 3, and Team 4 at least 4. In how many ways can this distribution be done?",
+    "options": ["120", "286", "364", "455"],
+    "answer": "286",
+    "explanation": "First, fulfill the minimum requirements for all teams. Give 1 coupon to Team 1, 2 to Team 2, 3 to Team 3, and 4 to Team 4. This consumes 1 + 2 + 3 + 4 = 10 coupons. We are now left with 20 - 10 = 10 identical coupons to distribute among the 4 distinct teams with absolutely no further restrictions. We use the Stars and Bars formula: C(n + k - 1, k - 1), where n = 10 and k = 4. C(10 + 4 - 1, 4 - 1) = 13C3 = (13 * 12 * 11) / (3 * 2 * 1) = 286 ways.",
+    "trick": "Progressive minimums just mean you pre-allocate the required sums before applying the standard unrestricted Stars and Bars formula.",
+    "tip": "Subtract all minimums from total, then use C(n+k-1, k-1)."
+  },
+  {
+    "id": 59,
+    "question": "Consider a regular 12-sided polygon (a Dodecagon). If triangles are formed by joining any 3 vertices of this polygon, how many such triangles will share exactly one side with the boundary of the dodecagon?",
+    "options": ["72", "84", "96", "108"],
+    "answer": "96",
+    "explanation": "To form a triangle sharing exactly one side with the polygon, we first select that specific side. A dodecagon has 12 sides, so there are 12 choices for the side. This side consumes 2 adjacent vertices. To complete the triangle, we need 1 more vertex from the remaining 10. However, choosing either of the 2 vertices immediately adjacent to the chosen side would cause the triangle to share TWO sides with the polygon. Therefore, we must exclude these 2 adjacent vertices. Remaining valid choices for the third vertex = 10 - 2 = 8. Total such triangles = 12 (sides) * 8 (vertices) = 96.",
+    "trick": "The formula for triangles sharing exactly one side with an n-sided regular polygon is always n * (n - 4). For a dodecagon, 12 * 8 = 96.",
+    "tip": "Triangles sharing exactly 1 side = n * (n - 4)."
+  },
+  {
+    "id": 60,
+    "question": "An eccentric billionaire owns 6 distinctly different custom rings. In how many ways can he wear all 6 rings on 4 distinct fingers of his right hand, assuming the order of rings on any single finger strictly matters?",
+    "options": ["15120", "30240", "60480", "120960"],
+    "answer": "60480",
+    "explanation": "Since the rings are distinct and the order on each finger matters (rings are stacked), we can think of this as sequentially placing the rings. The 1st ring can be placed on any of the 4 fingers (4 choices). The 2nd ring can go on any of the 4 fingers underneath the first, OR it can go on top of the 1st ring. Effectively, placing the 1st ring creates a new 'slot' on top of it. So the 2nd ring has 4 + 1 = 5 choices. The 3rd ring will have 6 choices, and so on. Mathematically, this is P(n+r-1, r) where n=4 fingers and r=6 rings. P(4+6-1, 6) = 9P6 = 9! / 3! = 9 * 8 * 7 * 6 * 5 * 4 = 60480.",
+    "trick": "When placing distinct items into distinct groups where stacking order matters, the formula transitions from standard combinations to a sequential permutation expansion: P(n+r-1, r).",
+    "tip": "Distinct stacked items on distinct pegs = P(n+r-1, r)."
+  },
+  {
+    "id": 61,
+    "question": "At an SSC examination center in Delhi, 7 exam invigilators are randomly assigned to 7 different classrooms. What is the total number of ways the assignment can happen such that exactly 2 invigilators go to their correctly designated rooms?",
+    "options": ["504", "924", "1260", "2520"],
+    "answer": "924",
+    "explanation": "Step 1: First, choose the 2 invigilators who go to their correct rooms. This is done using combinations: 7C2 = 21 ways. Step 2: The remaining 5 invigilators must completely mismatch their designated rooms. This requires the derangement formula for 5 items, denoted as D(5). Step 3: D(5) = 5! * (1/2! - 1/3! + 1/4! - 1/5!) = 120 * (1/2 - 1/6 + 1/24 - 1/120) = 44. Step 4: Multiply the correct selections by the derangements: 21 * 44 = 924 ways.",
+    "trick": "For partial derangement where exactly 'r' items are in correct positions out of 'n', the formula is nCr * D(n-r). Memorize D(5) = 44 to save time.",
+    "tip": "Partial derangement formula: nCr * D(n-r)."
+  },
+  {
+    "id": 62,
+    "question": "A corporate HR team wants to divide 12 distinct Diwali gift hampers into 4 completely identical, unlabeled parcels, each containing exactly 3 hampers. In how many ways can this grouping be accomplished?",
+    "options": ["5775", "15400", "46200", "369600"],
+    "answer": "15400",
+    "explanation": "Step 1: We are dividing 'n' distinct items into 'k' equal, unlabeled groups of 'r' items each. Step 2: The formula for such grouping is n! / ((r!)^k * k!). Step 3: Plugging in the values: 12! / ((3!)^4 * 4!). Step 4: Calculate the denominator: (6^4) * 24 = 1296 * 24 = 31104. Step 5: 12! / 31104 = 479001600 / 31104 = 15400 ways.",
+    "trick": "Because the parcels are unlabeled (identical) and hold the same number of items, you must divide by the factorial of the number of parcels (4!) to prevent overcounting.",
+    "tip": "Equal unlabeled grouping: n! / ((r!)^k * k!)."
+  },
+  {
+    "id": 63,
+    "question": "At a corporate board meeting, 8 directors are seated around a circular table. In how many ways can they be seated if the Chairman and the Vice-Chairman refuse to sit adjacent to each other?",
+    "options": ["720", "3600", "4320", "5040"],
+    "answer": "3600",
+    "explanation": "Step 1: First, find the total number of ways 8 directors can be seated around a circular table without any restrictions: (8-1)! = 7! = 5040 ways. Step 2: Now, calculate the number of ways where the Chairman and Vice-Chairman sit together. Treat them as a single block. Total units = 7. Step 3: Circular arrangement of 7 units = (7-1)! = 6! = 720 ways. The two officers can swap positions internally in 2! = 2 ways. Total together = 720 * 2 = 1440 ways. Step 4: Ways they do not sit together = Total unrestricted ways - Ways they sit together = 5040 - 1440 = 3600 ways.",
+    "trick": "Subtracting the 'always together' case from the total unrestricted circular permutations is the most efficient method for a 'never together' condition involving exactly two people.",
+    "tip": "Never together = Total permutations - Always together."
+  },
+  {
+    "id": 64,
+    "question": "A business owner distributes 20 identical ₹500 notes among 4 office staff as a performance bonus. In how many ways can this distribution be done if every staff member must receive at least 2 notes?",
+    "options": ["120", "286", "364", "455"],
+    "answer": "455",
+    "explanation": "Step 1: Since each of the 4 staff members must get at least 2 notes, first distribute exactly 2 notes to each. This uses up 4 * 2 = 8 notes. Step 2: There are 20 - 8 = 12 identical notes remaining to be distributed among the 4 distinct staff members with no further restrictions. Step 3: Use the Stars and Bars formula: C(n + k - 1, k - 1), where n = 12 and k = 4. Step 4: C(12 + 4 - 1, 4 - 1) = 15C3. Step 5: 15C3 = (15 * 14 * 13) / (3 * 2 * 1) = 455 ways.",
+    "trick": "Pre-allocate the minimum required amounts to neutralize the constraints, then apply the standard unrestricted non-negative integer distribution formula.",
+    "tip": "Pre-allocate minimums, then use C(n+k-1, k-1)."
+  },
+  {
+    "id": 65,
+    "question": "A startup needs to form an executive committee of 5 members from a pool of 6 male managers and 5 female managers. In how many ways can this committee be formed if it must include a majority of female managers (i.e., at least 3)?",
+    "options": ["150", "181", "346", "462"],
+    "answer": "181",
+    "explanation": "Step 1: A majority in a 5-member committee means either 3, 4, or 5 female managers must be selected. Step 2: Case 1 (3 Females, 2 Males) = 5C3 * 6C2 = 10 * 15 = 150 ways. Step 3: Case 2 (4 Females, 1 Male) = 5C4 * 6C1 = 5 * 6 = 30 ways. Step 4: Case 3 (5 Females, 0 Males) = 5C5 * 6C0 = 1 * 1 = 1 way. Step 5: Add all valid mutually exclusive cases together: 150 + 30 + 1 = 181 ways.",
+    "trick": "Do not compute 'at least 1' or 'at least 2' and subtract from total. Since 'majority' is strictly defined as >50%, calculating the specific valid cases (3, 4, 5) directly is much faster.",
+    "tip": "Calculate the exact valid majority cases and sum them."
+  },
+  {
+    "id": 66,
+    "question": "In how many distinct ways can the letters of the word 'GURUGRAM' be arranged such that all the vowels strictly appear in alphabetical order?",
+    "options": ["840", "1680", "3360", "5040"],
+    "answer": "1680",
+    "explanation": "Step 1: The word 'GURUGRAM' consists of 8 letters. The vowels are U, U, A and the consonants are G, G, R, R, M. Step 2: First, select 3 positions out of the 8 available slots for the vowels. This is done in 8C3 = 56 ways. Step 3: Since the vowels must appear in strict alphabetical order (A, then U, then U), there is only exactly 1 way to place them into these 3 selected slots. Step 4: The remaining 5 slots must be filled by the consonants (G, G, R, R, M). Since G and R repeat twice each, their arrangement is 5! / (2! * 2!) = 120 / 4 = 30 ways. Step 5: Total arrangements = 56 * 1 * 30 = 1680 ways.",
+    "trick": "When items are forced into a specific relative order, their internal permutation is 1. Simply select the positions (nCr) and arrange the remaining elements.",
+    "tip": "Fixed relative order = Position selection (nCr) * Remaining permutations."
+  },
+  {
+    "id": 67,
+    "question": "Consider a regular 15-sided polygon formed by 15 distinct points placed on the circumference of a circle. How many triangles can be formed using these vertices such that the triangle shares exactly one side with the polygon?",
+    "options": ["165", "180", "360", "455"],
+    "answer": "165",
+    "explanation": "Step 1: To form a triangle sharing exactly one side, we first select that side. The polygon has 15 sides, so there are 15 choices. Step 2: Selecting a side consumes 2 adjacent vertices. To complete the triangle, we need 1 more vertex from the remaining 13 vertices. Step 3: However, picking either of the 2 vertices immediately adjacent to our chosen side would cause the triangle to share TWO sides with the polygon. We must exclude them. Step 4: Remaining valid vertices = 13 - 2 = 11. Step 5: Total valid triangles = 15 (sides) * 11 (valid third vertices) = 165.",
+    "trick": "For an n-sided regular polygon, the direct formula for triangles sharing exactly one side is n * (n - 4). Plugging in n=15 gives 15 * 11 = 165 instantly.",
+    "tip": "Triangles sharing exactly 1 side = n(n-4)."
+  },
+  {
+    "id": 68,
+    "question": "A CEO has 5 distinctly unique corporate awards to distribute among 3 distinct department heads. In how many ways can the awards be distributed such that every department head receives at least one award?",
+    "options": ["90", "120", "150", "243"],
+    "answer": "150",
+    "explanation": "Step 1: This is a classic 'onto function' problem (distributing n distinct items into k distinct boxes with none empty). Step 2: Use the Inclusion-Exclusion Principle. Total unrestricted distributions = 3^5 = 243. Step 3: Subtract cases where exactly 1 head gets nothing: 3C1 * 2^5 = 3 * 32 = 96. Step 4: Add back cases where exactly 2 heads get nothing: 3C2 * 1^5 = 3 * 1 = 3. Step 5: Valid distributions = 243 - 96 + 3 = 150.",
+    "trick": "The Inclusion-Exclusion formula k^n - kC1*(k-1)^n + kC2*(k-2)^n is foolproof for distinct-to-distinct distribution without empty sets.",
+    "tip": "Distinct to distinct without empty = Onto Function PIE."
+  },
+  {
+    "id": 69,
+    "question": "A delivery truck navigates a strict grid layout in a city, moving only East (Right) or North (Up). It needs to travel from coordinates (0,0) to (6,6). However, the major intersection at (3,3) is completely blocked due to protests. How many valid paths exist to complete the delivery?",
+    "options": ["400", "524", "924", "1080"],
+    "answer": "524",
+    "explanation": "Step 1: Calculate total possible paths from (0,0) to (6,6) without restrictions. Requires 6 Right and 6 Up steps. Total paths = 12C6 = 924. Step 2: Calculate paths passing strictly through the blocked intersection (3,3). Step 3: Paths from (0,0) to (3,3) = 6C3 = 20. Step 4: Paths from (3,3) to (6,6) require 3 Right and 3 Up steps = 6C3 = 20. Step 5: Total invalid paths = 20 * 20 = 400. Step 6: Valid paths = Total unrestricted paths - Invalid paths = 924 - 400 = 524.",
+    "trick": "Always isolate the blocked path by breaking it into two independent combinations (Start -> Block) * (Block -> End) and subtract the product from the grand total.",
+    "tip": "Valid Paths = Total Paths - (Path to block * Path from block)."
+  },
+  {
+    "id": 70,
+    "question": "If all the permutations of the letters of the word 'PUNE' are arranged strictly according to English dictionary alphabetical order, what will be the numerical rank of the word 'PUNE'?",
+    "options": ["16", "18", "20", "24"],
+    "answer": "18",
+    "explanation": "Step 1: Arrange the letters alphabetically: E, N, P, U. Step 2: Words starting with E: The remaining 3 letters can be arranged in 3! = 6 ways. Step 3: Words starting with N: Remaining 3 letters = 3! = 6 ways. Step 4: Now we reach 'P', which is the first letter of our target. Lock P. The next alphabetical letter is E. Words starting with PE: 2! = 2 ways. Step 5: Words starting with PN: 2! = 2 ways. Step 6: Next is PU, which matches. Lock PU. Next alphabetical letter is E. Word PUE (leftover N): PUEN = 1 way. Step 7: Word PUN (leftover E): PUNE = 1 way. Step 8: Total Rank = 6 + 6 + 2 + 2 + 1 + 1 = 18.",
+    "trick": "List the letters alphabetically and lock in the target word's letters one by one, summing the factorials of all the alphabetical branches you bypass.",
+    "tip": "Dictionary rank = sum of factorials of bypassed branches."
+  },
+  {
+    "id": 71,
+    "question": "What is the sum of all possible 5-digit numbers that can be formed using the digits 1, 3, 5, 7, and 9 exactly once without any repetition?",
+    "options": ["5555500", "5999940", "6666000", "6666600"],
+    "answer": "6666600",
+    "explanation": "Step 1: The number of permutations formed by these 5 non-zero digits is 5! = 120. Step 2: In each of the 5 decimal places (units, tens, hundreds, thousands, ten-thousands), every digit appears an equal number of times: 120 / 5 = 24 times. Step 3: The sum of the digits is 1 + 3 + 5 + 7 + 9 = 25. Step 4: The sum of any single column is 24 * 25 = 600. Step 5: Since this sum applies to all place values, the grand total is 600 * (10000 + 1000 + 100 + 10 + 1) = 600 * 11111 = 6666600.",
+    "trick": "The direct formula for the sum of n-digit numbers without repetition using non-zero digits is (n-1)! * (Sum of digits) * (111... n times). Here, 4! * 25 * 11111.",
+    "tip": "Sum = (n-1)! * (Sum of digits) * 111...1."
+  },
+  {
+    "id": 72,
+    "question": "A jeweler designs a luxurious wedding garland using 8 entirely distinct rare flowers and 1 highly distinct central diamond pendant. In how many unique ways can this garland be physically assembled?",
+    "options": ["5040", "10080", "20160", "40320"],
+    "answer": "20160",
+    "explanation": "Step 1: The central diamond pendant breaks the normal continuous symmetry of a circular permutation. Placing it acts as an anchor point. Step 2: Because the pendant anchors the circle, the 8 distinct flowers are effectively arranged in a linear sequence originating from the left side of the pendant and wrapping around to the right. Step 3: This linear arrangement is 8! = 40320 ways. Step 4: However, a physical garland exists in 3D space. Turning it over (flipping) makes clockwise and counter-clockwise arrangements identical. Step 5: Therefore, divide by 2: 40320 / 2 = 20160 ways.",
+    "trick": "A fixed anchor in a circular arrangement turns it into a linear (n!) permutation. But the 3D 'necklace/garland' flip rule still dictates a final division by 2.",
+    "tip": "Garland with 1 fixed anchor = n! / 2."
+  },
+  {
+    "id": 73,
+    "question": "In an empty auditorium row, there are 10 identical chairs placed side by side. Four distinct executives (A, B, C, D) enter the row to sit. In how many ways can they occupy the chairs such that no two executives sit next to each other?",
+    "options": ["120", "210", "840", "5040"],
+    "answer": "840",
+    "explanation": "Step 1: Use the Gap Method. The four executives will occupy 4 chairs, leaving 6 identical chairs completely empty. Step 2: Arrange the 6 empty, identical chairs in a row. Since they are identical, there is only 1 way to do this. Step 3: These 6 empty chairs create 7 potential seating gaps (one at each end and 5 in between: _E_E_E_E_E_E_). Step 4: To ensure no executives sit together, we must place the 4 distinct executives into these 7 distinct gaps. Step 5: The number of ways to arrange 4 distinct people in 7 available gaps is 7P4 = 7 * 6 * 5 * 4 = 840 ways.",
+    "trick": "Treat the empty chairs as the base layer for the Gap Method. Since empty chairs are identical, you only calculate the permutations of the distinct people going into the gaps (nP_r).",
+    "tip": "Gap method with identical empty seats = (Empty+1)P(People)."
+  },
+  {
+    "id": 74,
+    "question": "At an anniversary banquet, 12 married couples (24 people) are present. To foster networking, every person shakes hands exactly once with everyone else in the room EXCEPT for their own spouse. How many total handshakes occur?",
+    "options": ["132", "264", "276", "288"],
+    "answer": "264",
+    "explanation": "Step 1: Calculate the total number of handshakes that would occur if there were absolutely no restrictions. 24 people shaking hands is 24C2. Step 2: 24C2 = (24 * 23) / 2 = 276 handshakes. Step 3: Identify the restriction. Each of the 12 couples would generate 1 handshake between spouses if unrestricted. There are exactly 12 such forbidden handshakes. Step 4: Subtract the forbidden handshakes from the total. Valid handshakes = 276 - 12 = 264.",
+    "trick": "Instead of building complex combinatorics matrices for intra-group and inter-group, simply calculate the universal total (nC2) and subtract the isolated restriction cases.",
+    "tip": "Total Handshakes - Spouse Handshakes = Valid Handshakes."
+  },
+  {
+    "id": 75,
+    "question": "A merchant has 8 identical gold coins. He wishes to store them in 3 identical, unmarked velvet pouches such that no pouch remains empty. In how many distinct ways can he partition the coins?",
+    "options": ["5", "10", "21", "56"],
+    "answer": "5",
+    "explanation": "Step 1: Because both the coins and the pouches are identical, this is a classic integer partition problem. We must partition the number 8 into exactly 3 positive integers. Step 2: Systematically list the partitions by keeping them in descending order to avoid permutation duplicates. Step 3: (6, 1, 1). Step 4: (5, 2, 1). Step 5: (4, 3, 1). Step 6: (4, 2, 2). Step 7: (3, 3, 2). Step 8: Count the unique lists. There are exactly 5 valid partitions.",
+    "trick": "Do not use the Stars and Bars formula here! Stars and Bars distributes identical items to DISTINCT boxes. For identical items in IDENTICAL boxes, manual partitioning is required.",
+    "tip": "Identical items into identical boxes = Integer Partitions."
+  },
+  {
+    "id": 76,
+    "question": "Consider a standard 8x8 chessboard formed by an intersecting grid of horizontal and vertical lines. How many perfectly rectangular sections can be formed that are strictly NOT squares?",
+    "options": ["204", "1092", "1152", "1296"],
+    "answer": "1092",
+    "explanation": "Step 1: An 8x8 chessboard is formed by 9 horizontal and 9 vertical lines. Total number of rectangles is formed by choosing 2 horizontal and 2 vertical lines: 9C2 * 9C2 = 36 * 36 = 1296 rectangles. Step 2: Calculate the total number of squares on an n x n board using the sum of squares formula: 8^2 + 7^2 + 6^2 + 5^2 + 4^2 + 3^2 + 2^2 + 1^2. Step 3: Sum = 64 + 49 + 36 + 25 + 16 + 9 + 4 + 1 = 204 squares. Step 4: Subtract the squares from the total rectangles. 1296 - 204 = 1092 non-square rectangles.",
+    "trick": "Total rectangles uses basic combinatorics (nC2 * mC2). Squares use the arithmetic sum of squares. The difference isolates the strict rectangles.",
+    "tip": "Non-square rectangles = Total Rectangles - Total Squares."
+  },
+  {
+    "id": 77,
+    "question": "At a formal corporate dinner, 4 male executives and 4 female executives are to be seated in a single straight row. In how many ways can they be seated such that the genders strictly alternate?",
+    "options": ["288", "576", "1152", "2304"],
+    "answer": "1152",
+    "explanation": "Step 1: For the genders to strictly alternate, there are exactly two possible structural patterns: MFMFMFMF or FMFMFMFM. Step 2: Let's take the first pattern (MFMFMFMF). The 4 men can be arranged in the 4 M-slots in 4! = 24 ways. Step 3: The 4 women can be arranged in the 4 F-slots in 4! = 24 ways. Step 4: Total arrangements for the first pattern = 24 * 24 = 576 ways. Step 5: Since the second pattern (FMFMFMFM) operates identically, we multiply by 2. Total = 576 * 2 = 1152 ways.",
+    "trick": "For equal-sized groups alternating in a straight line, the formula is always 2 * n! * n!. Do not confuse this with circular alternating arrangements, which is (n-1)! * n!.",
+    "tip": "Linear alternating of equal groups = 2 * n! * n!."
+  },
+  {
+    "id": 78,
+    "question": "A team of 9 software developers is lined up for a photograph. In how many ways can they be arranged such that there are exactly 3 people standing strictly between Developer X and Developer Y?",
+    "options": ["12600", "25200", "50400", "100800"],
+    "answer": "50400",
+    "explanation": "Step 1: Create a cohesive block containing X, Y, and the 3 people between them: [X _ _ _ Y]. Step 2: Fill the 3 empty gaps inside the block from the remaining 7 developers. This is an ordered selection: 7P3 = 7 * 6 * 5 = 210 ways. Step 3: X and Y can swap positions at the ends of the block (X...Y or Y...X) in 2! = 2 ways. Step 4: This completed block now acts as 1 single unit. There are 4 developers left outside the block. Total units to arrange linearly = 1 (block) + 4 (people) = 5 units. Step 5: Arrange these 5 units in 5! = 120 ways. Total = 210 * 2 * 120 = 50400.",
+    "trick": "Always treat specific gap conditions as a single rigid multi-slot block. Calculate the internal permutations (fillers and edges) first, then multiply by the external block permutations.",
+    "tip": "Treat specific distance conditions as a cohesive block."
+  },
+  {
+    "id": 79,
+    "question": "Using the digits 0, 1, 2, 3, 4, and 5 exactly once (without repetition), how many 5-digit numbers can be formed that are perfectly divisible by 4?",
+    "options": ["72", "120", "144", "168"],
+    "answer": "144",
+    "explanation": "Step 1: A number is divisible by 4 if its last two digits are divisible by 4. Valid 2-digit endings from the set {0,1,2,3,4,5} are 04, 12, 20, 24, 32, 40, and 52 (7 cases). Step 2: Separate cases containing 0. Endings: 04, 20, 40 (3 cases). Since 0 is used, the first digit can't be 0. We fill 3 remaining spots from 4 digits: 4P3 = 24. Total = 3 * 24 = 72. Step 3: Endings without 0: 12, 24, 32, 52 (4 cases). 0 is available but cannot be the first digit. Choices for first digit = 3. Remaining 2 spots from 3 digits = 3P2 = 6. Total per case = 3 * 6 = 18. Total = 4 * 18 = 72. Step 4: Grand total = 72 + 72 = 144.",
+    "trick": "Always split divisibility problems involving '0' into two distinct categories: cases where '0' is locked in the ending constraint, and cases where '0' is a floating risk for the leading digit.",
+    "tip": "For divisibility by 4, check last 2 digits. Handle 0 separately."
+  },
+  {
+    "id": 80,
+    "question": "A temple offering basket contains 4 identical apples, 5 identical oranges, and 3 distinct bananas. In how many ways can a devotee select a combination of fruits such that they pick at least one fruit in total?",
+    "options": ["119", "120", "239", "240"],
+    "answer": "239",
+    "explanation": "Step 1: The selections for each fruit type are independent. For identical items, the number of choices is (Quantity + 1) because you can pick 0, 1, 2... up to the max quantity. Step 2: Ways to select apples = (4 + 1) = 5 ways. Step 3: Ways to select oranges = (5 + 1) = 6 ways. Step 4: For distinct items, each item can either be picked or not. Ways to select distinct bananas = 2^3 = 8 ways. Step 5: Total unrestricted combinations = 5 * 6 * 8 = 240. Step 6: Since the devotee must pick AT LEAST one fruit, subtract the single scenario where exactly 0 fruits are picked. Valid ways = 240 - 1 = 239.",
+    "trick": "Mix of identical and distinct formulas: Total combinations = [(p+1)(q+1)... * 2^n]. Always subtract 1 if the overall selection cannot be completely empty.",
+    "tip": "Identical items: (p+1) choices. Distinct: 2^n choices."
+  },
+  {
+    "id": 81,
+    "question": "A regional manager has 6 distinct disciplinary notices that must be pinned across 3 distinct departmental notice boards. If the vertical order in which the notices are pinned on any single board matters, in how many ways can all 6 notices be distributed and arranged?",
+    "options": ["720", "4320", "20160", "40320"],
+    "answer": "20160",
+    "explanation": "Distributing 'n' distinct items into 'k' distinct boxes where the order within the box matters is equivalent to arranging the 'n' items in a line along with 'k-1' identical dividers. The formula is (n + k - 1)! / (k - 1)!. Here, n = 6 items and k = 3 boards. Total arrangements = (6 + 3 - 1)! / (3 - 1)! = 8! / 2! = 40320 / 2 = 20160 ways.",
+    "trick": "Whenever sequence matters inside distinct groups, treat it as arranging the items plus (k-1) identical separators. (N+K-1)P(N) is the fastest shortcut.",
+    "tip": "Ordered distribution of n items in k boxes = (n+k-1)! / (k-1)!"
+  },
+  {
+    "id": 82,
+    "question": "A delivery agent must travel on a grid from coordinates (0,0) to (5,4), moving only East (Right) or North (Up). He must drop off a package at either intersection A(2,1) OR intersection B(3,3). How many valid paths can he take that pass through at least one of these two intersections?",
+    "options": ["60", "93", "120", "126"],
+    "answer": "93",
+    "explanation": "Use the Principle of Inclusion-Exclusion: P(A) + P(B) - P(A and B). \nPaths through A(2,1): From (0,0) to A = 3C1 = 3. From A to (5,4) = 6C3 = 20. Total through A = 3 * 20 = 60. \nPaths through B(3,3): From (0,0) to B = 6C3 = 20. From B to (5,4) = 3C1 = 3. Total through B = 20 * 3 = 60. \nPaths through BOTH A and B: (0,0) to A = 3. A to B (dx=1, dy=2) = 3C1 = 3. B to (5,4) = 3. Total through both = 3 * 3 * 3 = 27. \nPaths through A OR B = 60 + 60 - 27 = 93.",
+    "trick": "When an 'OR' condition is present for grid waypoints, always subtract the intersection (path going through both waypoints sequentially) to prevent double counting.",
+    "tip": "Grid paths with OR: Paths(A) + Paths(B) - Paths(A and B)."
+  },
+  {
+    "id": 83,
+    "question": "In how many distinct ways can the letters of the word 'REPUBLIC' be arranged such that all the consonants appear strictly in alphabetical order?",
+    "options": ["120", "336", "672", "40320"],
+    "answer": "336",
+    "explanation": "The word 'REPUBLIC' has 8 distinct letters: 5 consonants (B, C, L, P, R) and 3 vowels (E, I, U). First, we select 5 positions out of the 8 available slots for the consonants. This can be done in 8C5 = 56 ways. Since the consonants must be in a strict alphabetical sequence, there is exactly 1 way to place them into these 5 slots. The remaining 3 slots are filled by the 3 vowels in 3! = 6 ways. Total arrangements = 56 * 1 * 6 = 336 ways. (Alternatively, 8! / 5! = 336).",
+    "trick": "When specific items must retain a fixed relative order, treat them as identical objects for the permutation calculation. Divide the total factorial by the factorial of the restricted group size.",
+    "tip": "Fixed relative order = Total! / (Restricted Group)!"
+  },
+  {
+    "id": 84,
+    "question": "An IT head has to distribute 6 entirely distinct corporate laptops among 4 distinct regional branches. In how many ways can this be done if exactly 1 branch must receive absolutely no laptops?",
+    "options": ["1080", "2160", "4096", "5400"],
+    "answer": "2160",
+    "explanation": "First, choose the 1 branch that receives nothing: 4C1 = 4 ways. Now, we must distribute the 6 distinct laptops among the remaining 3 branches such that none of these 3 branches are empty (onto function). Using the Inclusion-Exclusion principle for the 3 branches: 3^6 - 3C1 * 2^6 + 3C2 * 1^6 = 729 - 3 * 64 + 3 = 729 - 192 + 3 = 540 ways. Total distributions = 4 (branch choice) * 540 (valid distributions) = 2160 ways.",
+    "trick": "First lock down the empty boxes using nCr, then apply the standard Onto-Function Inclusion-Exclusion formula to the remaining boxes and items.",
+    "tip": "Exactly 1 empty box: nC1 * (Onto Function for n-1)."
+  },
+  {
+    "id": 85,
+    "question": "At a corporate retreat, 5 Senior Managers and 5 Junior Analysts are to be seated around a circular table. They must sit in strictly alternating seats. If Senior Manager 'M1' and Junior Analyst 'J1' refuse to sit adjacent to each other, how many valid seating arrangements exist?",
+    "options": ["1152", "1440", "1728", "2880"],
+    "answer": "1728",
+    "explanation": "Total alternating circular arrangements = (5-1)! * 5! = 24 * 120 = 2880 ways. Now, calculate the invalid cases where M1 and J1 sit together. Fix M1 in any seat (1 way). For J1 to sit next to M1, J1 has exactly 2 valid alternating seats (immediate left or immediate right). Place J1 (2 ways). The remaining 4 Senior Managers sit in the remaining 4 manager seats in 4! = 24 ways. The remaining 4 Junior Analysts sit in the remaining 4 analyst seats in 4! = 24 ways. Invalid cases = 1 * 2 * 24 * 24 = 1152 ways. Valid arrangements = 2880 - 1152 = 1728.",
+    "trick": "Calculate the universal alternating total first, then calculate the restricted 'always together' case by fixing one person and plotting the specific adjacent seats for the other.",
+    "tip": "Valid = Total alternating - Together alternating."
+  },
+  {
+    "id": 86,
+    "question": "An HR director must divide 12 distinct employees into 6 pairs to work on 6 completely identical, unlabelled internal projects. In how many ways can these pairs be formed?",
+    "options": ["10395", "46080", "332640", "7484400"],
+    "answer": "10395",
+    "explanation": "We are dividing 12 distinct items into 6 groups of exactly 2 items each. Because the projects (groups) are identical and unlabelled, we must use the unlabelled grouping formula: n! / ((r!)^k * k!). Here, n = 12, r = 2, k = 6. Calculation: 12! / ((2!)^6 * 6!). This simplifies to (12 * 11 * 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1) / (64 * 720) = 11 * 9 * 7 * 5 * 3 * 1 = 10395 ways.",
+    "trick": "When forming groups of 2 (pairs) from n items for unlabelled tasks, the shortcut is the product of all odd numbers up to n-1: 11 * 9 * 7 * 5 * 3 * 1.",
+    "tip": "Unlabelled pairs formula: Product of odd integers up to n-1."
+  },
+  {
+    "id": 87,
+    "question": "What is the total sum of all possible 4-digit numbers that can be formed using the digits 1, 2, 3, and 4, assuming that digits are allowed to repeat within a number?",
+    "options": ["71104", "277750", "711040", "2560000"],
+    "answer": "711040",
+    "explanation": "The total number of 4-digit numbers with repetition is 4^4 = 256. In each decimal place (units, tens, hundreds, thousands), every digit (1, 2, 3, 4) appears an equal number of times. Total appearances per digit per column = 256 / 4 = 64 times. The sum of the digits in any one column is 64 * (1 + 2 + 3 + 4) = 64 * 10 = 640. Since this sum applies to all 4 place values, the grand total is 640 * 1000 + 640 * 100 + 640 * 10 + 640 * 1 = 640 * 1111 = 711040.",
+    "trick": "For numbers with repetition, the frequency of each digit per column is (Total Numbers) / (Number of Unique Digits). Multiply this by the sum of the digits and 111...1.",
+    "tip": "Sum with repetition = (Total/n) * (Sum of digits) * 111...1."
+  },
+  {
+    "id": 88,
+    "question": "At a year-end function, 5 completely distinct employee excellence awards are to be dropped into 3 identical, unlabelled glass collection boxes. If no box is allowed to remain empty, in how many ways can the awards be distributed?",
+    "options": ["15", "25", "50", "150"],
+    "answer": "25",
+    "explanation": "Distributing distinct items into identical, non-empty boxes requires calculating the Stirling numbers of the second kind, S(n, k). The formula is S(n,k) = (1/k!) * [Sum from i=0 to k of (-1)^i * kCi * (k-i)^n]. For n=5, k=3: S(5,3) = (1/3!) * [3C0*3^5 - 3C1*2^5 + 3C2*1^5] = (1/6) * [1(243) - 3(32) + 3(1)] = (1/6) * [243 - 96 + 3] = (1/6) * [150] = 25 ways.",
+    "trick": "Distinct to Unlabelled (none empty) implies Stirling Numbers of the Second Kind. You can also manually sum the grouping cases: (3,1,1) -> 5!/(3!1!1!2!) = 10, and (2,2,1) -> 5!/(2!2!1!2!) = 15. Total = 10+15 = 25.",
+    "tip": "Distinct to Identical (no empty) = Stirling Numbers of Second Kind."
+  },
+  {
+    "id": 89,
+    "question": "A landscape architect places exactly 8 distinct marker pegs on the perfectly circular boundary of a garden. He ties a straight string between every possible pair of these pegs. Assuming no three strings intersect at the exact same point inside the circle, what is the maximum number of distinct regions created inside the garden?",
+    "options": ["64", "99", "128", "256"],
+    "answer": "99",
+    "explanation": "The maximum number of regions created by connecting 'n' points on the circumference of a circle with chords is given by the formula: Regions = 1 + nC2 + nC4. Plugging in n = 8: Regions = 1 + 8C2 + 8C4 = 1 + [(8*7)/2] + [(8*7*6*5)/(4*3*2*1)] = 1 + 28 + 70 = 99 distinct regions.",
+    "trick": "Do not confuse this with 2^(n-1), which only works for n=1,2,3,4,5 but spectacularly fails at n=6 (yields 31, not 32). Always use the exact 1 + nC2 + nC4 formula.",
+    "tip": "Max regions by chords in a circle = 1 + nC2 + nC4."
+  },
+  {
+    "id": 90,
+    "question": "A CEO distributes a ₹10 Lakh overall performance bonus among three departments A, B, and C. Department B is strict and will only accept funds in increments of exactly ₹2 Lakhs (0 is allowed). Departments A and C accept funds in increments of ₹1 Lakh. How many valid distribution plans exist?",
+    "options": ["25", "30", "36", "42"],
+    "answer": "36",
+    "explanation": "Let the amounts given to A, B, and C be x, 2y, and z respectively. The equation is x + 2y + z = 10, where x, y, z are non-negative integers. This simplifies to x + z = 10 - 2y. We test all valid values for y (from 0 to 5): \nIf y=0, x+z=10 -> 11 solutions. \nIf y=1, x+z=8 -> 9 solutions. \nIf y=2, x+z=6 -> 7 solutions. \nIf y=3, x+z=4 -> 5 solutions. \nIf y=4, x+z=2 -> 3 solutions. \nIf y=5, x+z=0 -> 1 solution. \nSum of all solutions = 11 + 9 + 7 + 5 + 3 + 1 = 36 valid distribution plans.",
+    "trick": "When one variable has a different coefficient in a distribution equation, isolate that variable and manually iterate its possible integer values to find the combinations for the remaining standard variables.",
+    "tip": "Iterate the variable with the irregular increment constraint."
+  },
+  {
+    "id": 91,
+    "question": "A local council must select a 4-member budget committee from a pool of 6 Men and 5 Women. Mr. Sharma, one of the men, states a strict condition: he will serve on the committee ONLY IF Mrs. Gupta, one of the women, is also selected. How many valid committee formations are possible?",
+    "options": ["210", "246", "282", "330"],
+    "answer": "246",
+    "explanation": "The condition 'Mr. Sharma serves ONLY IF Mrs. Gupta serves' means that if Mr. Sharma is selected, Mrs. Gupta MUST be selected. Break this into mutually exclusive cases: \nCase 1: Mr. Sharma IS selected. Then Mrs. Gupta is automatically selected. We need 2 more members from the remaining 9 people. Ways = 9C2 = 36. \nCase 2: Mr. Sharma IS NOT selected. We need to select all 4 members from the remaining 10 people (which still includes Mrs. Gupta, as she has no restrictions on her own). Ways = 10C4 = 210. \nTotal valid committees = 36 + 210 = 246.",
+    "trick": "The 'Only If' logic only restricts Mr. Sharma. It does not forbid Mrs. Gupta from serving without him. Splitting by Mr. Sharma's presence perfectly handles the overlap.",
+    "tip": "'A only if B': Split cases into (A is present) and (A is absent)."
+  },
+  {
+    "id": 92,
+    "question": "At a diplomatic summit, there are 10 chairs evenly spaced around a large circular table. Security protocol demands that 3 specific VIP delegates be seated such that no two VIPs are sitting in adjacent chairs. In how many ways can we select the 3 chairs for these VIPs?",
+    "options": ["35", "50", "120", "252"],
+    "answer": "50",
+    "explanation": "Selecting 'k' non-adjacent objects from 'n' objects arranged in a circle is given by the formula: (n / (n - k)) * C(n - k, k). Here, n = 10 chairs and k = 3 chairs to be selected. Plugging in the values: (10 / (10 - 3)) * C(10 - 3, 3) = (10 / 7) * 7C3. Since 7C3 = (7 * 6 * 5) / (3 * 2 * 1) = 35. Therefore, (10 / 7) * 35 = 10 * 5 = 50 ways.",
+    "trick": "Do not use the linear non-adjacent formula (n-k+1)Ck for a circle. The circle wraps around, changing the gap logic. Memorize the circular non-adjacent selection formula.",
+    "tip": "Non-adjacent selection in a circle = (n/(n-k)) * C(n-k, k)."
+  },
+  {
+    "id": 93,
+    "question": "During a ballroom dance mix-up, 6 married couples swap partners. In how many distinct ways can the swap occur such that exactly 2 men end up dancing with their own wives, while the other 4 men dance with someone else's wife?",
+    "options": ["90", "135", "270", "720"],
+    "answer": "135",
+    "explanation": "This is an application of Partial Derangement. First, select the 2 men who will dance with their own wives. This can be done in 6C2 ways = (6 * 5) / 2 = 15 ways. The remaining 4 men must completely mismatch, meaning none of them dances with their own wife. This is a standard derangement of 4 items, denoted as D(4). The value of D(4) is 9. Multiply the correct selections by the derangements: 15 * 9 = 135 ways.",
+    "trick": "Always isolate the 'correctly placed' items using nCr, then apply the pure derangement value D(n-r) to the remaining pool. D(4) is a highly common derangement value (9).",
+    "tip": "Exact 'r' matches = nCr * D(n-r)."
+  },
+  {
+    "id": 94,
+    "question": "Consider a standard 8x8 chessboard. How many perfectly rectangular sections can be formed on this board that completely enclose the specific unit square located at row 3, column 4?",
+    "options": ["256", "360", "400", "1296"],
+    "answer": "360",
+    "explanation": "A rectangle is formed by choosing two horizontal lines and two vertical lines. An 8x8 board has grid lines 0 through 8. For a rectangle to enclose the square at row 3 (between horizontal lines 2 and 3) and column 4 (between vertical lines 3 and 4): \nThe top horizontal boundary must be chosen from lines 0, 1, or 2 (3 choices). \nThe bottom boundary must be chosen from lines 3, 4, 5, 6, 7, or 8 (6 choices). \nThe left vertical boundary must be chosen from lines 0, 1, 2, or 3 (4 choices). \nThe right vertical boundary must be chosen from lines 4, 5, 6, 7, or 8 (5 choices). \nTotal rectangles = 3 * 6 * 4 * 5 = 360.",
+    "trick": "The formula for rectangles containing a specific cell (r, c) on an NxM board is r * (N - r + 1) * c * (M - c + 1). For an 8x8 board, 3*(8-3+1)*4*(8-4+1) = 3*6*4*5 = 360.",
+    "tip": "Rectangles containing cell (r,c) = r*(N-r+1)*c*(M-c+1)."
+  },
+  {
+    "id": 95,
+    "question": "Using the digits 1, 2, 3, 4, and 5 exactly once without any repetition, how many 5-digit numbers can be formed that are perfectly divisible by 8?",
+    "options": ["10", "12", "20", "24"],
+    "answer": "10",
+    "explanation": "A number is divisible by 8 if its last 3 digits form a number divisible by 8. From the set {1, 2, 3, 4, 5}, the ending must be even (2 or 4). Testing permutations for 3-digit endings divisible by 8: 152 (19*8), 312 (39*8), 352 (44*8), 432 (54*8), and 512 (64*8). Endings with 4 (like 124, 234) fail to divide cleanly by 8. Thus, there are exactly 5 valid 3-digit endings. For each of these 5 endings, the remaining 2 digits can be arranged in the first two slots in 2! = 2 ways. Total valid numbers = 5 * 2 = 10.",
+    "trick": "Divisibility by 8 requires checking only the last three digits. Since the available digits are small, manually testing the even endings is the safest approach.",
+    "tip": "Divisible by 8: Check last 3 digits. Handle arrangements for the rest."
+  },
+  {
+    "id": 96,
+    "question": "In how many ways can the letters of the word 'EQUATION' be arranged such that no two consonants are ever placed adjacent to each other?",
+    "options": ["1440", "14400", "28800", "40320"],
+    "answer": "14400",
+    "explanation": "The word 'EQUATION' has 8 distinct letters: 5 vowels (E, U, A, I, O) and 3 consonants (Q, T, N). We must use the Gap Method to keep consonants separated. First, arrange the 5 vowels. Since they are all distinct, this takes 5! = 120 ways. Placing these 5 vowels creates 6 potential gaps (one at each end and 4 between the vowels: _V_V_V_V_V_). To ensure no two consonants are together, we place the 3 distinct consonants into these 6 gaps. The number of ways to arrange 3 items in 6 gaps is 6P3 = 6 * 5 * 4 = 120 ways. Total arrangements = 120 (vowels) * 120 (consonants) = 14400.",
+    "trick": "Always arrange the larger unrestricted group first to maximize the number of valid gaps, then use permutation (nPr) for the restricted group going into those gaps.",
+    "tip": "For 'never together', use Gap Method: (Unrestricted!) * (Gaps)P(Restricted)."
+  },
+  {
+    "id": 97,
+    "question": "A corporate sports tournament features 4 different regional teams, each consisting of exactly 5 players. During the opening ceremony, every player shakes hands exactly once with every player who is NOT on their own team. What is the total number of handshakes?",
+    "options": ["120", "150", "190", "300"],
+    "answer": "150",
+    "explanation": "Method 1: Total players = 4 teams * 5 players = 20 players. Total unrestricted handshakes = 20C2 = 190. Handshakes that happen within teams (intra-team) = 4 teams * 5C2 = 4 * 10 = 40. Valid inter-team handshakes = 190 - 40 = 150. \nMethod 2: Take any 1 player. They cannot shake hands with themselves or their 4 teammates, leaving 15 players from other teams to shake hands with. Since there are 20 players, 20 * 15 = 300 interactions. Since every handshake involves 2 people, divide by 2: 300 / 2 = 150.",
+    "trick": "Subtracting intra-group combinations from the total universal combinations (Total C2 - Sum of Group C2) is the most error-free way to handle cross-group pairing questions.",
+    "tip": "Inter-group pairings = Total nC2 - Intra-group nC2."
+  },
+  {
+    "id": 98,
+    "question": "An IT manager has 5 distinct project modules to assign to 5 distinct developers (1 module per developer). However, Developer A lacks the clearance for Module 1, and Developer B lacks the clearance for Module 2. In how many valid ways can the manager assign all the modules?",
+    "options": ["42", "60", "78", "120"],
+    "answer": "78",
+    "explanation": "Use the Principle of Inclusion-Exclusion. Total unrestricted assignments = 5! = 120. \nCondition X (A gets Module 1): A is fixed, remaining 4 assigned in 4! = 24 ways. \nCondition Y (B gets Module 2): B is fixed, remaining 4 assigned in 4! = 24 ways. \nIntersection (A gets Module 1 AND B gets Module 2): Both fixed, remaining 3 assigned in 3! = 6 ways. \nTotal invalid assignments = P(X) + P(Y) - P(X and Y) = 24 + 24 - 6 = 42. \nValid assignments = Total unrestricted - Invalid = 120 - 42 = 78.",
+    "trick": "This is a variant of derangement with a restricted subset. Direct inclusion-exclusion handles the overlapping forbidden assignments perfectly without overcomplicating conditional probabilities.",
+    "tip": "For restricted task assignments, use PIE: Total - P(A) - P(B) + P(A∩B)."
+  },
+  {
+    "id": 99,
+    "question": "A retail display rack contains 4 distinct pairs of winter gloves (8 gloves total). A customer randomly selects 4 gloves from the rack. In how many ways can the selection be made such that the customer ends up with EXACTLY one matching pair of gloves?",
+    "options": ["24", "48", "72", "96"],
+    "answer": "48",
+    "explanation": "First, select the 1 matching pair from the 4 available pairs: 4C1 = 4 ways. We need to select 2 more gloves from the remaining 6 gloves, but these 2 must NOT form a matching pair. To ensure this, we pick 2 different pairs from the remaining 3 pairs to contribute exactly one glove each: 3C2 = 3 ways. From each of those 2 chosen pairs, we must pick exactly 1 glove (Left or Right): 2C1 * 2C1 = 4 ways. Total combinations = 4 (matching pair) * 3 (pair selection) * 4 (glove selection) = 48 ways.",
+    "trick": "Always isolate the 'pair' conditions first. For the non-matching items, select the parent pairs first, then select individual items from those pairs to guarantee no unintended matches occur.",
+    "tip": "Exact 1 pair = Pick 1 Pair * Pick 2 other Pairs * 2^2."
+  },
+  {
+    "id": 100,
+    "question": "An artist is drawing a regular convex polygon on a large canvas. He connects the vertices to draw exactly 54 distinct diagonals inside the polygon. How many physical sides does this polygon have?",
+    "options": ["10", "12", "14", "16"],
+    "answer": "12",
+    "explanation": "The formula for the number of diagonals in an n-sided polygon is given by: D = n(n - 3) / 2. We are given D = 54. Plugging it into the formula: n(n - 3) / 2 = 54, which gives n(n - 3) = 108. Expanding this yields the quadratic equation: n^2 - 3n - 108 = 0. Factoring the equation: (n - 12)(n + 9) = 0. Since the number of sides 'n' must be a positive integer, n = 12. The polygon is a Dodecagon.",
+    "trick": "Instead of solving the quadratic, you can quickly test the options by multiplying n by (n-3) and seeing which one yields 108. 12 * 9 = 108. Solved in 5 seconds.",
+    "tip": "Diagonals D = n(n-3)/2. Back-test options to save time."
+  }
+]

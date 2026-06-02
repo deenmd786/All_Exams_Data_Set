@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): If you wish to access and manage the exact same email inbox smoothly across your smartphone, office laptop, and home tablet, you must configure your email client to use IMAP rather than POP3. Reason (R): IMAP actively synchronizes the email state with the central mail server across all connected clients, whereas POP3 downloads emails locally and by default removes them from the server, breaking multi-device synchronization. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate the goal: Multi-device email synchronization. Step 2: Understand IMAP (Internet Message Access Protocol). IMAP acts as a remote viewer to the server. If you read or delete an email on your phone, the server updates, and your laptop reflects that change. Step 3: Understand POP3 (Post Office Protocol version 3). POP3 acts as a mailbox. It downloads the email to the local device and typically deletes it from the server. Step 4: If your phone downloads the email via POP3, it's gone from the server, meaning your laptop will never see it. Step 5: Therefore, Assertion A is true, and Reason R perfectly explains the architectural difference causing it.",
+    "trick": "Bank/IT Trap: IMAP = Sync across many devices. POP3 = Download to one local device and delete from server. Modern enterprise environments almost exclusively use IMAP or proprietary protocols like Exchange.",
+    "tip": "IMAP synchronizes email across multiple devices. POP3 downloads locally, breaking multi-device synchronization."
+  },
+  {
+    "id": 2,
+    "question": "In the TCP/IP conceptual architecture, which specific layer is primarily responsible for subsuming the functional duties assigned to the Session and Presentation layers of the legacy OSI model?",
+    "options": ["Internet Layer", "Transport Layer", "Network Access Layer", "Application Layer"],
+    "answer": "Application Layer",
+    "explanation": "Step 1: Compare the 7-layer OSI model to the 4-layer TCP/IP model. Step 2: The OSI Application (L7), Presentation (L6), and Session (L5) layers handle high-level data formatting, encryption, and session teardowns. Step 3: The TCP/IP model's designers deemed the OSI model overly complex and theoretical. Step 4: In TCP/IP, all functions of L5, L6, and L7 are collapsed into a single, unified top layer. Step 5: This unified layer is officially called the TCP/IP Application Layer.",
+    "trick": "Bank/IT Trap: Do not confuse the OSI Application Layer with the TCP/IP Application Layer. The OSI version only does one job. The TCP/IP version does the job of three OSI layers combined!",
+    "tip": "The TCP/IP Application layer condenses the OSI Session, Presentation, and Application layers into one."
+  },
+  {
+    "id": 3,
+    "question": "An IT administrator intercepts a TCP Three-Way Handshake between a Client and a Server using Wireshark. The third packet sent by the Client contains a crucial control flag. What is the specific architectural state of the connection the exact microsecond this third packet leaves the Client's Network Interface Card?",
+    "options": ["The connection is fully 'ESTABLISHED' on the Client side, but the Server remains in the 'SYN-RECEIVED' state until it processes the packet.", "The connection is fully 'ESTABLISHED' on both the Client and Server sides simultaneously.", "The Client transitions into the 'TIME-WAIT' state.", "The Client remains in the 'SYN-SENT' state until the Server replies with a final ACK."],
+    "answer": "The connection is fully 'ESTABLISHED' on the Client side, but the Server remains in the 'SYN-RECEIVED' state until it processes the packet.",
+    "explanation": "Step 1: Analyze the TCP handshake. 1. Client sends SYN (State: SYN-SENT). 2. Server replies SYN-ACK (State: SYN-RECEIVED). Step 2: Step 3: The Client receives the SYN-ACK, realizing the server is ready. The Client immediately transitions its internal socket state to 'ESTABLISHED'. Step 3: The Client then fires off the final 'ACK' packet. Step 4: While this packet is traveling over the wire, the Server has not received it yet. Step 5: Therefore, the Server is still stuck in the 'SYN-RECEIVED' state waiting for confirmation. It only transitions to 'ESTABLISHED' upon successfully processing the incoming ACK.",
+    "trick": "Bank/IT Trap: Network states are strictly local to the machine. A connection isn't magically established everywhere at once; it's established on each host individually as they process the handshake packets.",
+    "tip": "During TCP handshakes, local socket states change instantly upon packet receipt, not transmission."
+  },
+  {
+    "id": 4,
+    "question": "Assertion (A): The legacy Telnet protocol operates securely by establishing a bi-directional, 256-bit encrypted tunnel across Port 23. Reason (R): Telnet natively incorporates SSL/TLS certificates to authenticate remote server connections. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Telnet (Teletype Network) was developed in 1969 for remote command-line access. Step 2: Because it was built before the modern internet existed, security was not a priority. Step 3: Telnet transmits all data, including usernames and passwords, in absolute raw plain text. Step 4: Anyone running a packet sniffer (like Wireshark) can easily read every keystroke. Therefore, Assertion A is completely false. Step 5: Reason R is also false because Telnet natively lacks any encryption or certificate authentication capabilities (which is why it was universally replaced by SSH on Port 22).",
+    "trick": "Bank/IT Trap: Telnet = Plain Text (Port 23) = Dangerous. SSH (Secure Shell) = Encrypted (Port 22) = Safe. Never use Telnet on a public network.",
+    "tip": "Telnet (Port 23) transmits all data in unencrypted plain text, making it highly insecure."
+  },
+  {
+    "id": 5,
+    "question": "A network device powers on and initiates the DHCP DORA process. Which of the four sequential steps is specifically encapsulated as a Unicast transmission under standard modern IP configurations?",
+    "options": ["Discover", "Offer", "Request", "It depends on the Broadcast Flag; generally, the client's Request remains Broadcast, but the server's Acknowledgement can be Unicast."],
+    "answer": "It depends on the Broadcast Flag; generally, the client's Request remains Broadcast, but the server's Acknowledgement can be Unicast.",
+    "explanation": "Step 1: Understand DORA: Discover, Offer, Request, Acknowledge. Step 2: Step 1 (Discover) MUST be a broadcast (Destination IP 255.255.255.255) because the client has no IP and doesn't know the server's IP. Step 3: Step 2 (Offer) is sent by the server. Historically broadcast, modern servers can unicast it back to the client's hardware MAC address. Step 4: Step 3 (Request) is sent by the client. Even though the client now knows the server's IP, it broadcasts the Request to let ALL other DHCP servers on the network know it has accepted an offer (so they can release their reserved IPs). Step 5: Step 4 (ACK) is the final confirmation from the server, often sent as a Unicast directly to the client's newly assigned IP.",
+    "trick": "Bank/IT Trap: Standard textbook DORA teaches all four as broadcasts. Advanced engineering (RFC 2131) reveals that clients set a 'Broadcast Flag' to 0 to explicitly request unicast responses for the Offer and ACK phases to save bandwidth.",
+    "tip": "DHCP Discover and Request are typically broadcasts; Offer and ACK can be unicasted depending on flags."
+  },
+  {
+    "id": 6,
+    "question": "In the context of the TCP/IP Internet Layer, which protocol is specifically architected to report mathematical delivery errors (such as 'Time Exceeded' or 'Destination Unreachable') without attempting to fix them?",
+    "options": ["ARP", "ICMP", "IGMP", "OSPF"],
+    "answer": "ICMP",
+    "explanation": "Step 1: IP (Internet Protocol) handles routing but is inherently unreliable. It doesn't tell the sender if a packet died en route. Step 2: To solve this, the Internet Control Message Protocol (ICMP) was created. Step 3: ICMP sits alongside IP at the Internet Layer. Step 4: If a router drops a packet because its TTL (Time To Live) hit zero, the router generates an ICMP 'Time Exceeded' message and sends it back to the source. Step 5: Crucially, ICMP only REPORTS errors; it does not retransmit or fix them (that is TCP's job at the Transport Layer). Tools like 'Ping' and 'Traceroute' rely entirely on ICMP.",
+    "trick": "Bank/IT Trap: Do not confuse ICMP (reports errors) with IGMP (manages multicast groups). ICMP is the diagnostic backbone of the internet.",
+    "tip": "ICMP is the diagnostic protocol used by routers to report delivery errors back to senders."
+  },
+  {
+    "id": 7,
+    "question": "Assertion (A): To ensure that a specific corporate printer always receives the identical IP address from a DHCP server every time it reboots, the administrator must configure an IP Reservation based strictly on the printer's MAC address. Reason (R): DHCP utilizes the Address Resolution Protocol (ARP) to map dynamic IP leases directly to static hardware MAC addresses. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: DHCP assigns IPs dynamically from a pool. To force a static assignment, an administrator configures an 'IP Reservation' on the DHCP server. Step 2: This reservation explicitly pairs a chosen IP with the printer's burned-in MAC address. Assertion A is completely true. Step 3: However, Reason R claims DHCP uses ARP for this mapping. This is false. Step 4: DHCP uses its own distinct protocol mechanisms (DORA via UDP Ports 67/68) to manage leases and bindings internally within its database. Step 5: While the OS uses ARP later for local communication, the DHCP server itself does not rely on ARP to issue or reserve the leases.",
+    "trick": "Bank/IT Trap: MAC addresses are used by MANY protocols. DHCP uses them for reservations and lease tracking. ARP uses them for local packet delivery. Don't conflate the two protocols just because they both use MACs.",
+    "tip": "DHCP IP Reservations strictly utilize client MAC addresses to guarantee consistent, static IP assignments."
+  },
+  {
+    "id": 8,
+    "question": "Which of the following scenarios accurately describes a 'Half-Open' TCP connection (often exploited in a SYN Flood attack)?",
+    "options": ["The server receives an ACK but drops the subsequent FIN packet.", "The server receives a SYN, replies with a SYN-ACK, but the client deliberately never sends the final ACK.", "The client sends a SYN, but the server firewall drops it entirely.", "The client establishes the connection but refuses to send any application payload data."],
+    "answer": "The server receives a SYN, replies with a SYN-ACK, but the client deliberately never sends the final ACK.",
+    "explanation": "Step 1: The standard TCP handshake requires three steps: SYN, SYN-ACK, ACK. Step 2: When the server receives a SYN, it allocates memory resources to track the new session, replies with SYN-ACK, and enters the 'SYN-RECEIVED' state. Step 3: It sits waiting for the client's final ACK to complete the handshake. Step 4: A 'Half-Open' connection occurs when the client goes silent and intentionally withholds that final ACK. Step 5: In a 'SYN Flood' attack, a hacker sends millions of SYNs and ignores the replies. The server rapidly exhausts all its memory waiting for ACKs that never come, causing a Denial of Service (DoS).",
+    "trick": "Bank/IT Trap: A half-open connection is a hung state on the server side. It is the architectural vulnerability that makes TCP susceptible to basic DoS attacks.",
+    "tip": "A Half-Open TCP connection stalls at the SYN-RECEIVED state because the client withholds the final ACK."
+  },
+  {
+    "id": 9,
+    "question": "When comparing the theoretical OSI model to the implemented TCP/IP model, which two distinct OSI layers are fundamentally merged to form the TCP/IP 'Network Access' (or Link) Layer?",
+    "options": ["Network and Transport", "Application and Presentation", "Data Link and Physical", "Session and Transport"],
+    "answer": "Data Link and Physical",
+    "explanation": "Step 1: The OSI model has 7 layers (Application, Presentation, Session, Transport, Network, Data Link, Physical). Step 2: The TCP/IP model condenses these into 4 layers. Step 3: The top three OSI layers become the TCP/IP Application Layer. Step 4: The OSI Transport Layer maps directly to the TCP/IP Transport Layer. The OSI Network Layer maps directly to the TCP/IP Internet Layer. Step 5: The bottom two OSI layers (Data Link, handling MAC addresses, and Physical, handling electrical bits) are merged into the single TCP/IP 'Network Access' (or Link) Layer, defining how data physically traverses the local wire.",
+    "trick": "Bank/IT Trap: The TCP/IP model treats hardware as an afterthought. It clumps everything physical (cables, MAC addresses, switches) into one giant bottom layer called 'Network Access'.",
+    "tip": "The TCP/IP 'Network Access' layer merges the OSI 'Data Link' and 'Physical' layers."
+  },
+  {
+    "id": 10,
+    "question": "Assertion (A): The Simple Network Management Protocol (SNMP) architecture utilizes 'Agents' installed on network devices (like routers) which constantly stream telemetry data back to a central 'Manager'. Reason (R): SNMP relies entirely on a push-based architecture to guarantee real-time monitoring of CPU usage and bandwidth. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: SNMP is used to monitor network health. The central server is the 'Manager', and the software on the router is the 'Agent'. Step 2: However, SNMP is fundamentally a PULL-based architecture, not a push-based one. Step 3: The Manager explicitly sends a 'GET' request (via UDP Port 161) to the Agent, asking for its CPU usage. The Agent then replies. Step 4: The Agent does not constantly stream data autonomously (Assertion A is false). Step 5: (Note: The only exception is an SNMP 'Trap', an emergency push alert, but standard telemetry relies entirely on pulling data. Reason R is false).",
+    "trick": "Bank/IT Trap: SNMP standard operations (GET, SET) are pull-based to save bandwidth. Only emergency 'TRAPS' are pushed by the agent unprompted.",
+    "tip": "Standard SNMP operations utilize a pull-based polling architecture, not a continuous data stream."
+  },
+  {
+    "id": 11,
+    "question": "During a TCP teardown sequence initiated by the Client, the Server sends a FIN packet to close its side of the transmission. What specific TCP state must the Client transition into immediately upon sending the final ACK to this Server FIN?",
+    "options": ["CLOSED", "FIN_WAIT_2", "TIME_WAIT", "LAST_ACK"],
+    "answer": "TIME_WAIT",
+    "explanation": "Step 1: The TCP 4-way teardown works as follows: Client sends FIN. Server sends ACK. Server sends its own FIN. Client sends final ACK. Step 2: When the Client sends that very last ACK, it cannot immediately transition to the 'CLOSED' state. Step 3: Why? Because if that final ACK gets lost in the network, the Server will retransmit its FIN packet. Step 4: If the Client was fully CLOSED, it would reply with an RST (Reset) error, confusing the Server. Step 5: To prevent this, the Client enters the 'TIME_WAIT' state. It keeps the socket alive (usually for 2 minutes, or 2x Maximum Segment Lifetime) just in case it needs to resend that final ACK. After the timer expires, it officially enters CLOSED.",
+    "trick": "Bank/IT Trap: The initiator of a TCP close ALWAYS finishes in the TIME_WAIT state. It is a mandatory architectural safety buffer to handle lost teardown packets.",
+    "tip": "The initiator of a TCP termination enters the TIME_WAIT state after sending the final ACK."
+  },
+  {
+    "id": 12,
+    "question": "Which of the following advanced protocols operates at the TCP/IP Internet Layer and is heavily utilized by 'Ping' to dynamically trace the exact router hop-path taken to a destination?",
+    "options": ["ARP", "UDP", "IGMP", "ICMP"],
+    "answer": "ICMP",
+    "explanation": "Step 1: The tool 'Traceroute' (or tracert) maps the network path. Step 2: It does this by deliberately sending packets with manipulated TTL (Time-To-Live) values. Step 3: It sends a packet with TTL=1. The very first router drops it and replies with an error. Step 4: It then sends TTL=2, finding the second router, and so on. Step 5: The protocol responsible for generating and returning these 'Time Exceeded' error messages is the Internet Control Message Protocol (ICMP), operating at the Internet Layer.",
+    "trick": "Bank/IT Trap: Both Ping and Traceroute rely entirely on ICMP. Ping uses ICMP Echo Requests/Replies. Traceroute exploits ICMP Time Exceeded errors.",
+    "tip": "Traceroute heavily utilizes ICMP 'Time Exceeded' error messages to map router hops."
+  },
+  {
+    "id": 13,
+    "question": "Assertion (A): The primary architectural flaw of the Telnet protocol is its reliance on UDP, which frequently drops command-line keystrokes during remote server management. Reason (R): Telnet was developed in the 1960s before the Transmission Control Protocol (TCP) was formally standardized. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Telnet provides interactive, remote command-line access. Step 2: Because command-line inputs must be absolutely precise (typing 'rm -rf' requires perfect delivery), Telnet strictly utilizes the reliable, connection-oriented TCP protocol on Port 23. Step 3: Therefore, Assertion A is completely false; Telnet does not use UDP and does not drop keystrokes. Step 4: The actual fatal flaw of Telnet is its lack of encryption (transmitting passwords in plain text). Step 5: Reason R is historically inaccurate; while Telnet predates modern TCP/IP, the protocol was updated to natively use TCP once it was standardized.",
+    "trick": "Bank/IT Trap: The only flaw of Telnet is security (plain text). It is incredibly reliable for data transmission because it runs on TCP.",
+    "tip": "Telnet relies strictly on TCP (Port 23) for reliable delivery, but transmits data unencrypted."
+  },
+  {
+    "id": 14,
+    "question": "An IT manager configures a DHCP server to hand out IP addresses with a 'Lease Time' of 8 days. At what specific day/percentage of the lease will the client PC natively initiate its first attempt to renew the lease with the original DHCP server?",
+    "options": ["At the 8th day (100% of lease time).", "At the 7th day (87.5% of lease time).", "At the 6th day (75% of lease time).", "At the 4th day (50% of lease time)."],
+    "answer": "At the 4th day (50% of lease time).",
+    "explanation": "Step 1: DHCP assigns IPs temporarily to prevent address exhaustion. Step 2: The architecture prevents network drops by demanding early renewal. Step 3: The standard DHCP protocol dictates that a client must attempt to contact the original issuing server at exactly 50% of the lease duration (known as the T1 timer). Step 4: If the lease is 8 days, it attempts renewal at Day 4 via a Unicast request directly to the server. Step 5: If the server is offline, the client keeps the IP and waits until the T2 timer (usually 87.5% of the lease) to broadcast a desperate plea to ANY available DHCP server.",
+    "trick": "Bank/IT Trap: Clients don't wait until the lease expires! They renew at the halfway mark (50% or T1 timer) to ensure seamless network connectivity.",
+    "tip": "DHCP clients natively attempt to renew their IP lease when 50% of the duration expires."
+  },
+  {
+    "id": 15,
+    "question": "In the TCP header, what is the architectural function of the 'Window Size' field, and how does it dynamically prevent network saturation?",
+    "options": ["It indicates the maximum number of network hops the packet can take before being discarded.", "It specifies the exact amount of unacknowledged data bytes the receiver is willing to accept before its internal memory buffers overflow.", "It dictates the encryption cipher block size required for SSL decryption.", "It defines the maximum allowable physical MTU size for fragmentation."],
+    "answer": "It specifies the exact amount of unacknowledged data bytes the receiver is willing to accept before its internal memory buffers overflow.",
+    "explanation": "Step 1: TCP provides robust 'Flow Control' to protect the receiver. Step 2: A smartphone receiving data from a supercomputer server will quickly have its RAM buffers overwhelmed. Step 3: The smartphone uses the 16-bit 'Window Size' field in the TCP header to communicate its buffer capacity dynamically. Step 4: If it sets the Window Size to 64,000 bytes, the server can blast 64,000 bytes without waiting for an ACK. Step 5: If the phone's CPU gets busy, it shrinks the Window Size (e.g., to 10,000 bytes) on the next packet. The server reads this and instantly slows down its transmission rate.",
+    "trick": "Bank/IT Trap: Window Size = Flow Control (Receiver protecting itself). Congestion Control algorithms (like Slow Start) protect the network routers. Distinguish between these two safety mechanisms.",
+    "tip": "The TCP 'Window Size' field enforces Flow Control, dynamically preventing receiver buffer overflow."
+  },
+  {
+    "id": 16,
+    "question": "Assertion (A): SNMPv3 (Version 3) is universally deployed in highly secure environments because it natively encrypts payload data and requires robust user authentication. Reason (R): SNMPv1 and SNMPv2c fundamentally rely on plain-text 'Community Strings' acting as shared passwords, making them highly vulnerable to packet sniffing interception. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Simple Network Management Protocol (SNMP) is used to monitor routers and switches. Step 2: Versions 1 and 2c use a primitive security model called 'Community Strings' (usually 'public' for read, 'private' for write). Step 3: These strings act like passwords but are transmitted in raw, unencrypted plain text (Reason R is true). Step 4: If an attacker sniffs the network, they can steal the 'private' string and maliciously reconfigure the core routers. Step 5: To fix this massive flaw, SNMPv3 was architected with robust cryptographic security (AES encryption and hash-based authentication), making Assertion A true. Reason R accurately identifies the flaw that necessitated Version 3.",
+    "trick": "Bank/IT Trap: For IT exams, associate SNMPv1/v2c with 'Plain-Text Community Strings' (Insecure) and SNMPv3 with 'Authentication and Encryption' (Secure).",
+    "tip": "SNMPv3 introduces mandatory encryption and authentication, replacing the insecure plain-text Community Strings of SNMPv1/v2c."
+  },
+  {
+    "id": 17,
+    "question": "During a UDP data transmission, if the receiving host calculates the mathematical hash of the payload and determines it does not match the 16-bit Checksum value provided in the header, what is the exact architectural protocol response?",
+    "options": ["The receiver replies with a NAK (Negative Acknowledgement) to request retransmission.", "The receiver silently drops and discards the corrupted datagram without notifying the sender.", "The receiver triggers the ICMP protocol to send an 'Error Correct' request to the sender.", "The receiver attempts to rebuild the corrupted bits using parity algorithms."],
+    "answer": "The receiver silently drops and discards the corrupted datagram without notifying the sender.",
+    "explanation": "Step 1: UDP does possess a fundamental error-detection mechanism: the 16-bit Checksum field. Step 2: When a UDP datagram arrives, the receiver hashes the data. If the hash matches the checksum, the data is intact. Step 3: If it fails, the data is corrupted. Step 4: Because UDP is a 'Connectionless, Best-Effort' protocol, it entirely lacks the architecture for retransmission (no sequence numbers, no ACKs, no NAKs). Step 5: Therefore, UDP's only response to corruption is to silently drop the datagram into the void. It relies entirely on the Application layer software to notice missing data and fix it if necessary.",
+    "trick": "Bank/IT Trap: UDP is not 'error-blind', it detects errors perfectly! It is simply 'error-apathetic'—it throws bad data in the trash and refuses to fix it.",
+    "tip": "UDP detects errors via Checksum but silently discards corrupted datagrams without requesting retransmissions."
+  },
+  {
+    "id": 18,
+    "question": "When examining the architecture of a DHCP Offer packet sent from a server to a client, which specific IP address is temporarily placed in the 'Your (Client) IP Address' (yiaddr) field of the payload?",
+    "options": ["The IP address of the DHCP server itself.", "The Subnet Mask gateway address.", "The proposed, unconfirmed IP address being offered to the booting client.", "The Broadcast address (255.255.255.255)."],
+    "answer": "The proposed, unconfirmed IP address being offered to the booting client.",
+    "explanation": "Step 1: The DHCP process is DORA (Discover, Offer, Request, ACK). Step 2: In Step 1, the client broadcasts a Discover, asking for an IP. Step 3: In Step 2, the Server replies with an Offer. This Offer packet contains network configuration data. Step 4: Inside the DHCP payload, there is a field called `yiaddr` (Your IP Address). Step 5: The server populates this field with the specific IP address it is reserving and offering to the client (e.g., 192.168.1.100). The client then sends a Request to officially claim this offered address.",
+    "trick": "Bank/IT Trap: The destination IP in the IP Header of the Offer packet might still be a broadcast (255.255.255.255), but the proposed IP lease is hidden deep inside the DHCP payload in the 'yiaddr' field.",
+    "tip": "The DHCP Offer packet contains the proposed IP lease in its internal 'yiaddr' payload field."
+  },
+  {
+    "id": 19,
+    "question": "Assertion (A): The TCP/IP Internet Layer strictly utilizes MAC addresses to calculate the fastest geographical route for data packets across the global internet backbone. Reason (R): MAC addresses are burned into physical hardware interfaces, ensuring permanent, unchangeable routing metrics for the Open Shortest Path First (OSPF) algorithm. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The TCP/IP Internet Layer (equivalent to the OSI Network Layer) is strictly responsible for logical routing across multiple networks. Step 2: It accomplishes this exclusively using logical IP Addresses. Step 3: MAC addresses exist at the Network Access Layer (OSI Data Link layer) and are only used to move data hop-by-hop across a SINGLE local wire. Step 4: Routers completely strip and discard MAC addresses when moving packets between subnets. Therefore, MAC addresses are completely useless for global internet routing, making Assertion A entirely false. Step 5: Reason R is also false because OSPF uses IP subnets and bandwidth cost metrics, not hardware MAC addresses, to calculate routes.",
+    "trick": "Bank/IT Trap: MAC addresses = Local delivery only (Switches). IP Addresses = Global delivery (Routers). Never mix these foundational routing domains.",
+    "tip": "Global internet routing relies exclusively on logical IP addresses, never hardware MAC addresses."
+  },
+  {
+    "id": 20,
+    "question": "Which of the following scenarios describes the exact functional purpose of the 'Subnet Mask' within the TCP/IP suite architecture?",
+    "options": ["It encrypts the host's IP address to prevent external ping sweeps.", "It dynamically translates private LAN IP addresses into a single public WAN IP address.", "It dictates exactly how many bits of an IP address represent the Network ID versus the Host ID.", "It establishes the Maximum Transmission Unit (MTU) size for the Network Access layer."],
+    "answer": "It dictates exactly how many bits of an IP address represent the Network ID versus the Host ID.",
+    "explanation": "Step 1: An IPv4 address is a 32-bit number (e.g., 192.168.1.50). Step 2: This number serves a dual purpose: part of it identifies the specific neighborhood (Network ID), and part of it identifies the specific house (Host ID). Step 3: However, the IP address alone does not reveal where the split occurs. Step 4: The Subnet Mask acts as the mathematical dividing line. Step 5: A mask of 255.255.255.0 (or /24) explicitly tells the computer that the first 24 bits are the Network ID (192.168.1), and the final 8 bits are the Host ID (.50), allowing the PC to determine if a destination is local or requires a router.",
+    "trick": "Bank/IT Trap: The Subnet Mask is basically a transparency filter. It masks out the host to reveal the network. Without it, computers mathematically cannot determine local vs remote routing.",
+    "tip": "The Subnet Mask mathematically divides an IP address into the Network ID and Host ID."
+  },
+  {
+    "id": 21,
+    "question": "During a UDP broadcast transmission on a local network, what is the exact hexadecimal value populated within the Destination MAC address field of the encapsulating Ethernet Frame?",
+    "options": ["00:00:00:00:00:00", "FF:FF:FF:FF:FF:FF", "255:255:255:255:255:255", "It utilizes the specific Unicast MAC of the Default Gateway."],
+    "answer": "FF:FF:FF:FF:FF:FF",
+    "explanation": "Step 1: When an application wants to reach every device on a local subnet (e.g., DHCP Discover), it sends a broadcast. Step 2: At Layer 3 (IP), the destination broadcast address is 255.255.255.255. Step 3: At Layer 2 (Data Link), this packet must be encapsulated into an Ethernet frame. Step 4: Hardware switches only read MAC addresses. Therefore, the frame must use the universally recognized MAC Broadcast Address. Step 5: MAC addresses are 48-bit hexadecimal numbers. The absolute maximum value (all 1s in binary) translates to FF:FF:FF:FF:FF:FF in hex. A switch floods any frame with this destination MAC out of all ports.",
+    "trick": "Bank/IT Trap: 255.255.255.255 is the IP Broadcast (Layer 3). FF:FF:FF:FF:FF:FF is the MAC Broadcast (Layer 2). Exam questions will mix these formats to trap you.",
+    "tip": "The universal Layer 2 Ethernet Broadcast Destination MAC address is FF:FF:FF:FF:FF:FF."
+  },
+  {
+    "id": 22,
+    "question": "Assertion (A): The Transmission Control Protocol (TCP) ensures absolute data integrity by utilizing a mathematical 32-bit Cyclic Redundancy Check (CRC) algorithm within its header. Reason (R): A CRC provides robust protection against maliciously altered packets in transit, guaranteeing both error-detection and payload encryption. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Evaluate the error-checking mechanisms. TCP uses a basic 16-bit 'Checksum' in its header to detect corrupted bits. Step 2: The complex 32-bit CRC (Cyclic Redundancy Check) is actually located at Layer 2 (in the Ethernet Frame FCS trailer), NOT inside the TCP header. Therefore, Assertion A is false. Step 3: Furthermore, Checksums and CRCs are entirely unencrypted mathematical hashes designed to detect accidental electrical noise corruption. Step 4: They provide absolutely ZERO protection against intentional, malicious hacking, because a hacker altering the payload can simply recalculate and write a new, valid checksum before forwarding the packet. Step 5: True security requires cryptographic hashes (like SHA/IPsec), making Reason R completely false.",
+    "trick": "Bank/IT Trap: Checksums and CRCs prevent accidental physical data corruption (bad cables). They offer zero cryptographic security against malicious tampering.",
+    "tip": "TCP uses a simple 16-bit Checksum, not a CRC, and provides zero cryptographic payload protection natively."
+  },
+  {
+    "id": 23,
+    "question": "In the TCP/IP Application layer, which distinct protocol uses a dual-port architecture, dedicating TCP Port 21 for Control/Commands and TCP Port 20 strictly for raw Data transfer?",
+    "options": ["Secure Shell (SSH)", "File Transfer Protocol (FTP)", "Hypertext Transfer Protocol (HTTP)", "Simple Mail Transfer Protocol (SMTP)"],
+    "answer": "File Transfer Protocol (FTP)",
+    "explanation": "Step 1: Most protocols communicate entirely over a single port (e.g., HTTP on 80, SMTP on 25). Step 2: FTP (File Transfer Protocol) is architecturally unique as it relies on an 'Out-of-Band' control channel. Step 3: The client connects to the server on TCP Port 21. This is the Command channel where authentication and instructions (like 'LIST' or 'RETR file.txt') occur. Step 4: When a file needs to be moved, a completely separate, temporary connection is opened on TCP Port 20. Step 5: This Data channel transmits the raw file. Once the file finishes, Port 20 closes, but the Port 21 command channel remains open for further instructions.",
+    "trick": "Bank/IT Trap: FTP is the classic dual-port protocol. Port 21 (Control) acts as the brain, Port 20 (Data) acts as the muscle. Passive FTP alters the data port behavior, but 21/20 is the textbook standard.",
+    "tip": "FTP utilizes a dual-port architecture: TCP 21 for Out-of-Band Commands, TCP 20 for Data Transfer."
+  },
+  {
+    "id": 24,
+    "question": "Assertion (A): When configuring a network interface, it is architecturally impossible to assign an IP address of '192.168.1.0' with a subnet mask of '255.255.255.0' to a host computer. Reason (R): In any given IPv4 subnet, the first IP address is strictly reserved as the 'Network Identifier' and cannot be assigned to an individual node. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Analyze the subnet mask 255.255.255.0 (or /24). This leaves exactly 8 bits for the Host ID. Step 2: 8 bits provides 256 possible IP addresses (from .0 to .255). Step 3: However, IP architecture enforces strict reservations. Step 4: The very first address (where all host bits are 0, resulting in 192.168.1.0) mathematically represents the Network ID itself. It is used by routing tables, not PCs. Step 5: The very last address (where all host bits are 1, resulting in 192.168.1.255) is the Broadcast Address. Therefore, you cannot assign 192.168.1.0 to a PC, making both A and R true and perfectly linked.",
+    "trick": "Bank/IT Trap: To find usable hosts, the formula is (2^n - 2). The '- 2' exists precisely because the Network ID (.0) and Broadcast ID (.255) are unassignable reservations.",
+    "tip": "In any IPv4 subnet, the lowest IP is reserved for the Network ID and is unassignable."
+  },
+  {
+    "id": 25,
+    "question": "An enterprise router needs to dynamically assign IP addresses to 500 computers on a single network. Which of the following Subnet Masks provides the minimum sufficient number of usable host IPs to accommodate this requirement?",
+    "options": ["255.255.255.0 (/24)", "255.255.254.0 (/23)", "255.255.252.0 (/22)", "255.255.128.0 (/17)"],
+    "answer": "255.255.254.0 (/23)",
+    "explanation": "Step 1: Calculate the required host IPs. You need 500. Step 2: Use the formula: Usable Hosts = (2^n) - 2, where 'n' is the number of remaining Host bits. Step 3: A /24 mask leaves 8 bits (2^8 = 256 - 2 = 254 hosts). Too small. Step 4: A /23 mask steals a bit back from the network, leaving 9 Host bits. (2^9 = 512). Subtract 2 for Network/Broadcast = 510 usable hosts. Step 5: 510 is sufficient to handle the 500 computers. While a /22 (1022 hosts) would also work, the question asks for the 'minimum sufficient' to prevent IP wastage (Subnetting best practices). Therefore, 255.255.254.0 is correct.",
+    "trick": "Bank/IT Trap: Memorize powers of 2. 2^8 = 256, 2^9 = 512. Always subtract 2. The mask 255.255.254.0 provides exactly 510 usable IPs.",
+    "tip": "A /23 subnet mask (255.255.254.0) provides 9 host bits, yielding exactly 510 usable IP addresses."
+  },
+  {
+    "id": 26,
+    "question": "During a UDP packet transmission across a network, what guarantees that the packet is not forwarded endlessly in an infinite routing loop?",
+    "options": ["The Time-To-Live (TTL) field located in the underlying IP Header.", "The Checksum field in the UDP Header.", "The Spanning Tree Protocol (STP) at the Transport Layer.", "Nothing; UDP is connectionless and can loop infinitely if routes are misconfigured."],
+    "answer": "The Time-To-Live (TTL) field located in the underlying IP Header.",
+    "explanation": "Step 1: UDP operates at the Transport Layer (Layer 4). Its header is extremely minimal and contains no loop-prevention mechanisms. Step 2: However, to travel across routers, the UDP Segment MUST be encapsulated inside a Network Layer (Layer 3) IP Packet. Step 3: The IPv4 header contains a mandatory 8-bit field called Time-To-Live (TTL). Step 4: When the sender creates the packet, it sets a TTL value (e.g., 64). Step 5: Every time a router processes the packet, it decrements the TTL by 1. If the TTL reaches 0 due to a routing loop, the router instantly drops the packet and sends an ICMP error back. This underlying IP mechanism protects UDP from infinite loops.",
+    "trick": "Bank/IT Trap: TCP and UDP ride inside IP packets. Neither of them has native loop protection; they rely entirely on the IP layer's TTL field to kill looping data.",
+    "tip": "The IP Layer's Time-To-Live (TTL) field decrements per hop, exclusively preventing infinite network routing loops."
+  },
+  {
+    "id": 27,
+    "question": "Assertion (A): Address Resolution Protocol (ARP) tables must actively clear out cached MAC-to-IP mappings after a brief timeout period (e.g., 2 to 20 minutes). Reason (R): In dynamic networks utilizing DHCP, IP addresses are frequently reassigned to different hardware; an infinite cache would result in frames being sent to the incorrect physical MAC address. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: When a PC ARPs for an IP, it saves the MAC address in its local cache to prevent flooding the network with broadcast requests every second (A is true). Step 2: However, modern networks use DHCP, meaning IP addresses are 'leased'. Step 3: Phone A might have IP 192.168.1.50 at 9:00 AM. It leaves. At 1:00 PM, Phone B connects and gets assigned 192.168.1.50. Step 4: If a PC cached Phone A's MAC address infinitely, it would try to send traffic for 192.168.1.50 to Phone A's MAC, which is no longer there. Step 5: By expiring the cache (flushing), the PC is forced to send a fresh ARP request, ensuring it learns the new hardware MAC associated with the IP. R is the exact architectural reason for A.",
+    "trick": "Bank/IT Trap: Dynamic networks require dynamic caches. Stale ARP caches are the #1 cause of 'Destination Host Unreachable' errors when IP leases renew.",
+    "tip": "ARP caches feature short timeout durations to accommodate the reassignment of dynamic IP addresses."
+  },
+  {
+    "id": 28,
+    "question": "A network features two separate IP subnets (192.168.1.0/24 and 192.168.2.0/24) connected by a single Layer 3 Router. Host A (Subnet 1) pings Host B (Subnet 2). What is the Destination MAC Address of the Ethernet frame leaving Host A?",
+    "options": ["The MAC address of Host B.", "The MAC address of the Router's ingress interface on Subnet 1.", "The Broadcast MAC address (FF:FF:FF:FF:FF:FF).", "The MAC address of the Router's egress interface on Subnet 2."],
+    "answer": "The MAC address of the Router's ingress interface on Subnet 1.",
+    "explanation": "Step 1: Host A compares its own IP and Subnet Mask against Host B's IP. Step 2: It realizes Host B is on a DIFFERENT network. Step 3: Layer 2 MAC addresses cannot traverse routers; they are strictly for local network delivery. Step 4: Therefore, Host A cannot ARP for Host B's MAC address. Step 5: Instead, Host A builds a frame to send the data to its Default Gateway (the Router). The Source IP is Host A, Destination IP is Host B. But the Source MAC is Host A, and the Destination MAC is the Router's local interface on Subnet 1.",
+    "trick": "Bank/IT Trap: IP addresses never change end-to-end (usually). MAC addresses change at EVERY single router hop! The frame is rebuilt by every router in the path.",
+    "tip": "When communicating across subnets, the Destination MAC address is ALWAYS the local Default Gateway's MAC."
+  },
+  {
+    "id": 29,
+    "question": "Assertion (A): The sequence numbers in a TCP connection always start exactly at 0 or 1 for every new communication session to minimize header byte overhead. Reason (R): TCP utilizes Initial Sequence Numbers (ISNs) generated by predictable cryptographic algorithms to prevent session hijacking. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: TCP tracks data bytes using Sequence Numbers. Step 2: A common misconception is that Sequence Numbers start at 0 or 1. Step 3: In reality, during the SYN handshake, the OS generates a massive, pseudo-random 32-bit integer called the Initial Sequence Number (ISN) (e.g., 2,845,102,943). Therefore, Assertion A is completely false. Step 4: Why are they random? To prevent 'TCP Session Hijacking'. If an attacker could guess the next sequence number (which is trivial if they always start at 1), they could forge packets and inject malicious data into an active stream. Step 5: However, Reason R states ISNs are 'predictable' cryptographic algorithms. This is false. They must be explicitly UNPREDICTABLE to prevent hijacking. Both statements are false.",
+    "trick": "Bank/IT Trap: Wireshark often displays sequence numbers as '0' or '1' as a convenience feature ('Relative Sequence Numbers'). The actual raw ISNs are completely randomized 32-bit integers.",
+    "tip": "TCP Initial Sequence Numbers (ISNs) are highly randomized to prevent malicious session hijacking."
+  },
+  {
+    "id": 30,
+    "question": "In the TCP/IP suite, which specific Transport Layer mechanism guarantees that an overloaded web server can differentiate and process returning HTTP traffic for 50 different distinct tabs opened in a single user's web browser?",
+    "options": ["Multiplexing using ephemeral Source Ports.", "Encapsulation using distinct Source IP Addresses.", "Microsegmentation using distinct MAC Addresses.", "Windowing using fragmented Sequence Numbers."],
+    "answer": "Multiplexing using ephemeral Source Ports.",
+    "explanation": "Step 1: The user's PC has one IP address and one MAC address. Step 2: The user opens 50 tabs to 'www.rbi.org.in'. The server's IP and Port (443) are identical for all 50 tabs. Step 3: When the server replies, how does the user's PC know which data goes to Tab 1 vs Tab 50? Step 4: The OS utilizes Transport Layer Multiplexing. When Tab 1 makes a request, the OS assigns it a random, high-numbered 'Ephemeral Source Port' (e.g., Port 50100). Tab 2 gets Port 50101. Step 5: The server replies to these specific unique ports. The OS reads the destination port on the returning packet and routes the payload to the exact correct browser tab.",
+    "trick": "Bank/IT Trap: IP addresses route between computers. Ports route between specific applications/tabs INSIDE the computer. This is the definition of Transport Layer Multiplexing.",
+    "tip": "Ephemeral Source Ports enable Transport Layer multiplexing, distinguishing multiple sessions from a single host IP."
+  },
+  {
+    "id": 31,
+    "question": "Assertion (A): During TCP data transfer, if a sender transmits 3 segments and the receiver replies with 'ACK 5000', it mathematically implies that the receiver has successfully processed all bytes up to sequence number 5000. Reason (R): TCP Acknowledgements are strictly 'cumulative', meaning a single ACK inherently confirms the receipt of all contiguous data preceding that specific byte sequence number. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: TCP does not need to send an ACK for every single segment (which would waste bandwidth). Step 2: TCP uses 'Cumulative ACKs'. Step 3: If the sender transmits Segment 1 (bytes 1000-1999), Segment 2 (2000-2999), and Segment 3 (3000-4999), the receiver buffers them. Step 4: The receiver wants byte 5000 next. It sends a single packet back: 'ACK 5000'. Step 5: This single ACK explicitly tells the sender: 'I have perfectly received and reassembled every single byte up to 4999. Send me 5000.' Both Assertion A and Reason R accurately describe this highly efficient architecture.",
+    "trick": "Bank/IT Trap: Cumulative ACKs save massive bandwidth. One ACK can confirm the successful delivery of thousands of preceding packets simultaneously.",
+    "tip": "TCP ACKs are cumulative; an ACK confirms receipt of all contiguous bytes preceding the ACK number."
+  },
+  {
+    "id": 32,
+    "question": "An enterprise network engineer is troubleshooting a collision domain issue on a legacy network. They replace a 24-port Layer 1 Hub with a 24-port Layer 2 Switch. What is the exact mathematical change in the number of Collision Domains?",
+    "options": ["Decreases from 24 to 1.", "Increases from 1 to 24.", "Remains constant at 24.", "Remains constant at 1."],
+    "answer": "Increases from 1 to 24.",
+    "explanation": "Step 1: Analyze the initial architecture. A Hub is a Layer 1 device that physically connects all ports to a single electrical bus. Step 2: Therefore, a 24-port Hub constitutes exactly 1 giant Collision Domain. Step 3: A Switch is a Layer 2 device that isolates each port using internal buffers and ASICs. Step 4: By replacing the Hub with the Switch, every single port becomes its own isolated electrical environment. Step 5: Consequently, the number of Collision Domains expands from 1 (the Hub) to 24 (the individual switch ports).",
+    "trick": "Bank/IT Trap: Don't let the word 'Increases' trick you into thinking it's a bad thing. In networking, increasing the *number* of collision domains shrinks their *size* to just one PC, which eliminates collisions completely! Microsegmentation = More domains.",
+    "tip": "A Hub is 1 Collision Domain. A Switch provides 1 Collision Domain per port (Microsegmentation)."
+  },
+  {
+    "id": 33,
+    "question": "Assertion (A): The User Datagram Protocol (UDP) is mathematically incapable of executing the 'Three-Way Handshake' utilized by TCP. Reason (R): The UDP header entirely lacks the SYN and ACK flag fields required to synchronize sequence numbers and establish a stateful connection. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The Three-Way Handshake (SYN -> SYN/ACK -> ACK) is the mechanism used to establish a reliable connection. Step 2: To send these signals, the protocol header must have designated bits (flags) that can be flipped to 1 or 0. Step 3: The TCP header contains 6 primary control flags (URG, ACK, PSH, RST, SYN, FIN). Step 4: The UDP header is stripped down to bare minimums for speed: Source Port, Destination Port, Length, and Checksum. Step 5: Because the physical flags do not exist in the UDP architecture, it is structurally impossible for UDP to perform handshakes or track states. R accurately dictates the hardware/software limit causing A.",
+    "trick": "Bank/IT Trap: UDP doesn't just 'choose' not to handshake; it literally doesn't have the data fields (flags) in its header to make it mathematically possible.",
+    "tip": "UDP cannot perform a handshake because its 8-byte header lacks SYN and ACK control flags."
+  },
+  {
+    "id": 34,
+    "question": "A network administrator configures a Layer 2 switch with three separate Virtual LANs (VLAN 10, VLAN 20, VLAN 30). There is NO router connected to this switch. If a PC on VLAN 10 broadcasts an ARP Request, which devices will process it?",
+    "options": ["All PCs connected to the switch, regardless of VLAN.", "Only the PCs assigned to VLAN 10.", "The switch intercepts and drops the packet due to lack of routing.", "Only the Default Gateway."],
+    "answer": "Only the PCs assigned to VLAN 10.",
+    "explanation": "Step 1: Broadcast frames (Destination MAC FF:FF:FF:FF:FF:FF) are forwarded out of all switch ports by default. Step 2: However, VLANs (Virtual LANs) logically partition the physical switch into completely isolated virtual switches. Step 3: VLAN 10 acts as a totally independent broadcast domain from VLAN 20 and 30. Step 4: When a broadcast is sent on VLAN 10, the switch physically restricts the flooding of that frame to ONLY the ports assigned to VLAN 10. Step 5: Without a Layer 3 Router to route traffic between the VLANs (Inter-VLAN routing), the other VLANs will never see or hear the broadcast.",
+    "trick": "Bank/IT Trap: VLANs = Broadcast Domains. They trap broadcasts strictly within their assigned ports. No router is needed to *stop* the broadcast; a router is only needed to *route* between them.",
+    "tip": "VLANs logically partition switches, confining Layer 2 broadcasts strictly within their specific VLAN boundary."
+  },
+  {
+    "id": 35,
+    "question": "During data transmission across a network, which encapsulation layer is responsible for translating logical IP addresses into physical machine addresses, and what specific PDU is generated?",
+    "options": ["Network Layer; Packet", "Transport Layer; Segment", "Data Link Layer; Frame", "Physical Layer; Bits"],
+    "answer": "Data Link Layer; Frame",
+    "explanation": "Step 1: Logical IP addresses govern end-to-end delivery across the globe (Layer 3). Step 2: However, physical hardware switches only understand physical MAC addresses. Step 3: As data moves down the OSI model, Layer 3 (Network) hands the IP Packet down to Layer 2. Step 4: Layer 2 (Data Link) is responsible for resolving the Next-Hop IP into a physical MAC address (using ARP). Step 5: It then wraps the IP Packet in a MAC Header and an FCS Trailer, generating a Protocol Data Unit (PDU) known as a 'Frame' for local wire transmission.",
+    "trick": "Bank/IT Trap: Layer 3 contains the IPs, but it is Layer 2 that TRANSLATES that intent into physical MAC hardware addressing for local delivery.",
+    "tip": "The Data Link Layer (Layer 2) applies MAC addressing, encapsulating IP Packets into Frames."
+  },
+  {
+    "id": 36,
+    "question": "Assertion (A): UDP provides absolute zero error-checking capabilities, passing all corrupted payloads directly to the application layer. Reason (R): UDP prioritizes low latency and eliminates the 16-bit Checksum field present in the TCP header to save bandwidth. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: UDP is famous for lacking 'reliability' (no retransmissions or ACKs). Step 2: However, 'reliability' is different from 'error-checking'. Step 3: UDP DOES contain a 16-bit Checksum field in its header. Step 4: When a UDP datagram arrives, the receiver calculates the hash. If the payload is corrupted (checksum mismatch), UDP does NOT pass it to the application; it silently drops the corrupted datagram to protect the app. Step 5: Therefore, UDP does provide error-checking (A is false), and it does contain a Checksum field (R is false).",
+    "trick": "Bank/IT Trap: A massive misconception is that UDP is completely blind to errors. UDP detects corruption (via Checksum) and drops the bad data; it just refuses to FIX the error via retransmission.",
+    "tip": "UDP contains a 16-bit Checksum for error detection. It drops corrupted datagrams but does not request retransmissions."
+  },
+  {
+    "id": 37,
+    "question": "A network architect designs a topology consisting of 4 Routers, 10 Layer-2 Switches, and 100 PCs. The 4 Routers are connected to each other in a Full Mesh. How many individual Broadcast Domains are created EXCLUSIVELY by the Router-to-Router interconnect links?",
+    "options": ["1", "4", "6", "10"],
+    "answer": "6",
+    "explanation": "Step 1: Understand that every physical link between two router interfaces constitutes a distinct subnet, and therefore a distinct Broadcast Domain. Step 2: The question asks ONLY for the domains created by the Router-to-Router Full Mesh connections (ignoring the switches and PCs). Step 3: To find the number of links in a Full Mesh of 4 nodes, use the formula N(N-1)/2. Step 4: N = 4. 4(3)/2 = 12 / 2 = 6 physical point-to-point links. Step 5: Since each of these 6 dedicated router-to-router links requires its own isolated subnet, they create exactly 6 distinct Broadcast Domains.",
+    "trick": "Bank/IT Trap: Point-to-Point links between routers are isolated networks (usually /30 subnets). Just count the mesh links using the formula to find the broadcast domains!",
+    "tip": "Every point-to-point link between two Routers constitutes exactly one distinct Broadcast Domain."
+  },
+  {
+    "id": 38,
+    "question": "In the event of network congestion, which TCP mechanism actively shrinks the amount of data injected into the network to prevent catastrophic router buffer overflows?",
+    "options": ["Sliding Window Flow Control", "TCP Congestion Avoidance Algorithm (e.g., AIMD)", "Address Resolution Protocol timeout", "MTU Path Discovery"],
+    "answer": "TCP Congestion Avoidance Algorithm (e.g., AIMD)",
+    "explanation": "Step 1: Network bandwidth is finite. If senders transmit too fast, intermediate router buffers fill up and drop packets. Step 2: 'Flow Control' (Sliding Window) protects the RECEIVER'S buffers. Step 3: To protect the overall NETWORK, TCP uses 'Congestion Control' algorithms. Step 4: When TCP detects a dropped packet (via a timeout or 3 duplicate ACKs), it assumes the network is congested. Step 5: It employs AIMD (Additive Increase, Multiplicative Decrease). It aggressively shrinks its Congestion Window (cwnd) by half, massively slowing down transmission to let the network clear, then slowly increases speed again.",
+    "trick": "Bank/IT Trap: Flow Control protects the End-User (Receiver). Congestion Control protects the Middlemen (Routers). Do not confuse the two sliding windows!",
+    "tip": "Flow Control protects the Receiver. Congestion Control (AIMD) protects intermediate network Routers from buffer overflows."
+  },
+  {
+    "id": 39,
+    "question": "Assertion (A): When a router forwards a packet from one subnet to another, it leaves the Source and Destination IP addresses untouched, but completely strips and replaces the Source and Destination MAC addresses. Reason (R): IP addresses provide end-to-end logical routing across the internet, whereas MAC addresses only provide node-to-node physical delivery across a single local segment. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: When a PC sends data to Google, the Destination IP is Google's server. This IP must remain constant so the internet knows the final target (A is true regarding IPs). Step 2: The PC encapsulates this IP Packet inside a Layer 2 Frame. The Destination MAC is the local Router's MAC. Step 3: The Router receives the frame, decapsulates it, and looks at the IP. Step 4: To forward it to the next router, it encapsulates the packet in a BRAND NEW Layer 2 Frame. The new Source MAC is Router 1, the new Destination MAC is Router 2. Step 5: This hop-by-hop hardware delivery is the defining characteristic of Data Link Layer architecture, perfectly explained by Reason R.",
+    "trick": "Bank/IT Trap: IP addresses are like the addresses on an envelope (end-to-end). MAC addresses are like the delivery trucks passing it along the highway (hop-by-hop).",
+    "tip": "IP Addresses remain constant end-to-end. MAC Addresses are stripped and rewritten at every Router hop."
+  },
+  {
+    "id": 40,
+    "question": "Which of the following scenarios describes the architectural function of a 'Default Gateway' in IPv4 networking?",
+    "options": ["It translates the MAC address into an IP address using RARP.", "It is the router interface designated to process and forward packets when a host's subnet mask calculation determines the Destination IP resides on a foreign network.", "It acts as a Layer 2 switch to prevent internal collision domains.", "It negotiates the TCP 3-way handshake on behalf of a UDP client."],
+    "answer": "It is the router interface designated to process and forward packets when a host's subnet mask calculation determines the Destination IP resides on a foreign network.",
+    "explanation": "Step 1: A PC applies its Subnet Mask to its own IP and the Destination IP (via binary ANDing). Step 2: If the network portions match, the target is local. The PC ARPs for the target MAC. Step 3: If the network portions DO NOT match, the target is foreign (e.g., on the Internet). Step 4: A PC cannot talk directly to foreign networks. It requires a routing path. Step 5: The 'Default Gateway' is the IP address of the local router. The PC ARPs for the Default Gateway's MAC and sends all foreign-bound packets to this router, which acts as the 'gateway' out of the local subnet.",
+    "trick": "Bank/IT Trap: The Subnet Mask performs the math to decide IF the Default Gateway is needed. If the math says 'Foreign Network', the Default Gateway acts as the exit door.",
+    "tip": "The Default Gateway routes traffic destined for external networks outside the host's local subnet."
+  },
+  {
+    "id": 41,
+    "question": "Assertion (A): Voice over IP (VoIP) and real-time multiplayer gaming universally mandate the use of the Transmission Control Protocol (TCP) to ensure zero packet loss during execution. Reason (R): TCP's internal buffering and retransmission mechanics mathematically guarantee that corrupted audio frames or player movements are perfectly reconstructed at the destination. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: TCP provides guaranteed delivery by pausing the data stream and waiting for retransmissions if a packet drops (Reason R is technically true regarding TCP mechanics). Step 2: However, for VoIP (phone calls) or live gaming, this pause is catastrophic. Step 3: If you are talking on a VoIP call and a packet containing 50 milliseconds of audio drops, waiting 500 milliseconds for TCP to retransmit it causes massive audio lag and synchronization failure. Step 4: It is better to just drop the 50ms of audio (a minor static click) and keep the conversation in real-time. Step 5: Therefore, VoIP and live gaming strictly mandate UDP, making both Assertion A and the contextual application of Reason R completely false.",
+    "trick": "Bank/IT Trap: Retransmission is toxic for real-time applications. Old data is useless data. Always choose UDP for Voice, Video, and live Gaming.",
+    "tip": "Real-time applications (VoIP/Gaming) explicitly avoid TCP; they use UDP to eliminate retransmission lag."
+  },
+  {
+    "id": 42,
+    "question": "A data segment encapsulates a payload and attaches a header containing Source Port 443 and Destination Port 55320. Which protocol is facilitating this encapsulation, and what is the direction of the traffic?",
+    "options": ["UDP; from a DNS Server to a Client Browser.", "TCP; from a secure Web Server (HTTPS) responding to a Client Browser.", "TCP; from a Client Browser requesting a secure webpage.", "UDP; from an FTP Server sending a file to a Client."],
+    "answer": "TCP; from a secure Web Server (HTTPS) responding to a Client Browser.",
+    "explanation": "Step 1: Analyze the ports. Port 443 is universally recognized as the well-known port for HTTPS (Secure Web Traffic). HTTPS relies strictly on TCP for reliable delivery. Step 2: Port 55320 is a high-numbered 'Ephemeral Port'. Step 3: Clients generate random ephemeral ports (usually > 49152) as their Source Port when making a request. Step 4: When the Server responds, the ports flip. The Server's Source Port is its well-known service port (443), and the Destination Port is the client's ephemeral port (55320). Step 5: Since the Source Port here is 443, the traffic is definitely moving FROM the Web Server TO the Client.",
+    "trick": "Bank/IT Trap: Ports flip during a reply! Request: Src=55320, Dst=443. Reply: Src=443, Dst=55320. Tracing the well-known port (443) identifies the server.",
+    "tip": "Source Port 443 indicates traffic originating from an HTTPS Web Server replying to a client."
+  },
+  {
+    "id": 43,
+    "question": "In the TCP/IP architectural model, which specific protocol resolves the structural issue of a host computer not knowing the IP address of its own local Domain Name System (DNS) server upon initial boot?",
+    "options": ["ARP", "DHCP", "ICMP", "TCP"],
+    "answer": "DHCP",
+    "explanation": "Step 1: When a PC boots, it typically lacks an IP address, Subnet Mask, Default Gateway, and DNS Server IPs. Step 2: Without a DNS server IP, the host cannot resolve domain names (like google.com) to IP addresses, breaking web browsing. Step 3: The host must dynamically acquire this entire configuration package. Step 4: The Dynamic Host Configuration Protocol (DHCP) serves this exact purpose. Step 5: During the DORA process, the DHCP server's 'Offer' packet delivers not just the client's new IP address, but also critical network options, explicitly including the IP address of the local DNS server.",
+    "trick": "Bank/IT Trap: DHCP is famously known for handing out IP addresses, but its 'Options' field is arguably more vital, delivering Gateway and DNS parameters essential for full network functionality.",
+    "tip": "DHCP provides not just the IP address, but also the Subnet Mask, Gateway, and DNS Server IPs."
+  },
+  {
+    "id": 44,
+    "question": "Assertion (A): Operating a network entirely on Layer 1 Hubs is fundamentally more secure than operating on Layer 2 Switches against internal packet sniffing attacks. Reason (R): Layer 2 Switches utilize MAC Address Tables which can be easily poisoned by attackers, whereas Hubs rely on purely electrical, unhackable bus transmission. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Evaluate the security of a Hub. A Layer 1 Hub operates by blindly broadcasting incoming signals out of EVERY port. Step 2: This means if User A sends an email to User B, User C (the attacker) receives a perfect copy of that email natively. User C just needs to turn on Wireshark (Promiscuous Mode) to steal the data. This makes Hubs incredibly INSECURE. Step 3: Therefore, Assertion A is completely false. Step 4: Evaluate a Switch. A Switch only sends data to the specific port of the target MAC address. User C sees nothing. Step 5: While it is true (R) that MAC tables can be poisoned (MAC Flooding), out-of-the-box Switches are still vastly more secure than Hubs, making the reasoning in R contextually flawed as a justification.",
+    "trick": "Bank/IT Trap: Hubs are a hacker's dream. They hand a copy of every single packet to every single port, requiring zero hacking skills to sniff network traffic.",
+    "tip": "Hubs are fundamentally insecure because they blindly broadcast all network traffic to every connected port."
+  },
+  {
+    "id": 45,
+    "question": "A developer writes an application requiring the transmission of a massive 5 Gigabyte file across the internet. Which Transport Layer protocol should they choose, and what mechanism handles the sheer size of the file?",
+    "options": ["UDP; it uses Datagram Fragmentation to split the 5GB file.", "TCP; it uses Segmentation to break the 5GB file into smaller chunks based on the Maximum Segment Size (MSS).", "TCP; it uses Window Scaling to transmit the entire 5GB file in a single packet.", "IP; it uses Subnetting to allocate memory for the 5GB file."],
+    "answer": "TCP; it uses Segmentation to break the 5GB file into smaller chunks based on the Maximum Segment Size (MSS).",
+    "explanation": "Step 1: Moving a 5GB file demands absolute reliability (no missing bytes). Therefore, TCP is mandatory. Step 2: The internet cannot handle a 5GB packet. The physical wire limits frames (MTU is usually 1500 bytes). Step 3: Before TCP sends the data to the IP layer, it must chop the massive 5GB file into manageable pieces. Step 4: This process is called 'Segmentation'. Step 5: TCP uses the Maximum Segment Size (MSS) negotiated during the 3-way handshake to chop the file into roughly 1460-byte segments, sequentially numbering them for reassembly at the destination.",
+    "trick": "Bank/IT Trap: TCP does Segmentation (Layer 4). IP does Fragmentation (Layer 3). Know which layer chops the data!",
+    "tip": "TCP ensures reliable file transfers by performing 'Segmentation', breaking massive files into sequenced chunks."
+  },
+  {
+    "id": 46,
+    "question": "Assertion (A): The 'Default Gateway' configured on a host operating system must always mathematically reside within the exact same IP Subnet as the host itself. Reason (R): The host computer relies entirely on the Layer 2 Address Resolution Protocol (ARP) to deliver the initial packet to the router's physical MAC address. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: When a PC wants to reach the internet, it sends the packet to its Default Gateway. Step 2: To do this, the PC must build a Layer 2 Frame. Step 3: The PC uses ARP to find the MAC address of the Default Gateway. Step 4: ARP strictly utilizes Layer 2 Broadcasts (FF:FF:FF:FF:FF:FF). Layer 2 Broadcasts physically CANNOT cross routers; they are confined to the local subnet. Step 5: Therefore, if the Default Gateway IP was on a different subnet, the PC's ARP request could never reach it. The Gateway must physically sit on the same local wire/subnet to answer the ARP, validating both A and R perfectly.",
+    "trick": "Bank/IT Trap: A gateway is the door out of a room. The door MUST physically touch the room. If your PC is 192.168.1.50/24, your Gateway absolutely must be 192.168.1.X.",
+    "tip": "The Default Gateway must reside on the same local subnet because ARP cannot cross routing boundaries."
+  },
+  {
+    "id": 47,
+    "question": "What is the specific architectural purpose of the 'Time-To-Live' (TTL) field embedded within the IPv4 Header?",
+    "options": ["To dictate how many milliseconds a packet can remain in a router's memory buffer before timing out.", "To specify the cryptographic lifespan of an IPSec security payload.", "To prevent packets from circulating endlessly in infinite routing loops by decrementing a counter at each router hop.", "To guarantee the packet arrives within a timeframe suitable for real-time UDP streaming."],
+    "answer": "To prevent packets from circulating endlessly in infinite routing loops by decrementing a counter at each router hop.",
+    "explanation": "Step 1: The internet is a massive web of interconnected routers. Occasionally, routing tables get misconfigured, creating a loop (Router A sends to B, B sends to C, C sends back to A). Step 2: Without a safety mechanism, a packet caught in this loop would circle the globe at the speed of light forever. Step 3: Millions of these ghost packets would eventually crash the internet. Step 4: The IPv4 header includes an 8-bit TTL field (e.g., set to 64). Step 5: Every time a router touches the packet, it subtracts 1 from the TTL. If the TTL hits 0, the router acts as a garbage collector, dropping the packet permanently and saving the network.",
+    "trick": "Bank/IT Trap: TTL stands for 'Time-To-Live', but it does NOT measure time in seconds! It measures physical 'Router Hops'. It is a hop-counter.",
+    "tip": "The TTL field prevents infinite routing loops by decrementing a counter at every router hop."
+  },
+  {
+    "id": 48,
+    "question": "Assertion (A): In a TCP/IP network, assigning multiple IP addresses to a single physical Network Interface Card (NIC) is architecturally prohibited. Reason (R): A physical NIC possesses a single, hardcoded MAC address, establishing a strict 1:1 mathematical relationship with a single Layer 3 IP address. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Consider enterprise server configurations. A single web server often hosts multiple different websites (Virtual Hosting). Step 2: To support this, OS architectures (Windows/Linux) explicitly allow 'IP Aliasing'. Step 3: A single physical NIC can be configured with dozens of distinct IP addresses simultaneously. Therefore, Assertion A is completely false. Step 4: When an ARP request comes in for ANY of those assigned IPs, the NIC simply responds with its one physical MAC address. Step 5: The ARP table maps multiple IPs to the same MAC without any issue. Thus, there is no strict 1:1 hardware limitation, making Reason R false.",
+    "trick": "Bank/IT Trap: MAC addresses are 1 per physical card. IP addresses are logical software constructs. You can stack as many logical IPs on a card as the OS allows.",
+    "tip": "A single physical Network Interface Card (NIC) can host multiple logical IP addresses simultaneously (IP Aliasing)."
+  },
+  {
+    "id": 49,
+    "question": "Which of the following scenarios perfectly illustrates the concept of 'Microsegmentation' in modern enterprise networking?",
+    "options": ["Replacing a 48-port Hub with a 48-port Layer 2 Switch, ensuring each connected PC enjoys a dedicated, isolated collision domain.", "Configuring a Subnet Mask of /30 to restrict a network to exactly two usable IP addresses.", "Using a firewall to block UDP Port 53 traffic from leaving the local network.", "Installing a Repeater every 100 meters to micro-boost electrical signals."],
+    "answer": "Replacing a 48-port Hub with a 48-port Layer 2 Switch, ensuring each connected PC enjoys a dedicated, isolated collision domain.",
+    "explanation": "Step 1: Traditional Ethernet hubs placed all connected devices onto a single shared wire (One large Collision Domain). Step 2: As networks grew, collisions destroyed performance. Step 3: Engineers solved this by inventing the Switch. Step 4: A switch uses internal buffers to isolate every single port. Step 5: By breaking one massive collision domain into 48 tiny, individual collision domains (one for each PC), the switch eliminates collisions. This architectural isolation is the textbook definition of 'Microsegmentation'.",
+    "trick": "Bank/IT Trap: Microsegmentation is the core superpower of a Layer 2 Switch. It segments collision domains down to the micro-level (a single port).",
+    "tip": "Microsegmentation occurs when a Layer 2 Switch assigns a dedicated, isolated collision domain to every port."
+  },
+  {
+    "id": 50,
+    "question": "Assertion (A): The 'Ping' utility operates entirely at the Application Layer of the TCP/IP model to verify end-to-end software connectivity. Reason (R): Ping utilizes the ICMP protocol, which relies on TCP Port 7 to establish a reliable echo request and reply sequence. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: 'Ping' is a diagnostic tool. While the command-line interface is an application, the protocol doing the actual work is ICMP. Step 2: ICMP operates strictly at the Internet Layer (Layer 3 OSI), working alongside IP. It does not operate at the Application Layer. Therefore, A is false. Step 3: Reason R claims Ping uses TCP Port 7. This is a massive trap. Step 4: ICMP is a Network/Internet layer protocol. It does NOT use Ports. Ports exist only at the Transport Layer (TCP/UDP). Step 5: ICMP Echo Requests (Type 8) and Echo Replies (Type 0) are encapsulated directly inside an IP packet, entirely bypassing TCP/UDP ports. Thus, R is completely false.",
+    "trick": "Bank/IT Trap: ICMP has NO ports! Firewalls block Ping using ICMP 'Types' and 'Codes', not Port numbers. Never let an exam trick you into assigning a port to ICMP.",
+    "tip": "Ping utilizes the ICMP protocol, operating at the Internet Layer without using any TCP/UDP ports."
+  },
+  {
+    "id": 51,
+    "question": "Assertion (A): The TCP/IP network model merges the top three layers of the OSI model into a single comprehensive Application Layer. Reason (R): In practical internet architectures, distinguishing between Session establishment, Data Presentation formatting, and Application interfaces adds unnecessary overhead, so TCP/IP delegates these functions directly to the application itself. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The theoretical OSI model has 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, and Application. Step 2: The practical TCP/IP model condenses this into 4 layers: Network Access, Internet, Transport, and Application. Step 3: Assertion A is true because OSI layers 5, 6, and 7 are grouped into the TCP/IP Application layer. Step 4: Reason R correctly explains that real-world protocols (like HTTP or FTP) handle their own sessions and data formatting (encryption/compression), making distinct OSI middle layers redundant.",
+    "trick": "Bank/IT Trap: Candidates constantly confuse the layer counts of network models. Remember: The OSI model is a theoretical concept with 7 layers, but the TCP/IP model condenses these into just 4 layers!",
+    "tip": "OSI Layers 5, 6, and 7 map directly to the single TCP/IP Application Layer."
+  },
+  {
+    "id": 52,
+    "question": "During a TCP 3-way handshake, Host A sends a SYN packet to Host B. Host B receives it and replies with a SYN-ACK packet. If a malicious attacker intentionally intercepts and drops this SYN-ACK packet before it reaches Host A, what is the immediate state of the connection on Host B?",
+    "options": ["ESTABLISHED", "SYN_RECEIVED", "FIN_WAIT", "CLOSED"],
+    "answer": "SYN_RECEIVED",
+    "explanation": "Step 1: The 3-way handshake starts with a SYN from the client. Step 2: The server receives the SYN and transitions to the SYN_RECEIVED state. Step 3: The server then transmits a SYN-ACK back to the client. Step 4: The server will remain in the half-open SYN_RECEIVED state, consuming memory resources, until it receives the final ACK from the client. Step 5: Since the SYN-ACK was dropped, the client never sends the final ACK, leaving Host B stuck in the SYN_RECEIVED state (a classic SYN Flood vulnerability condition).",
+    "trick": "Bank/IT Trap: Half-open connections are the core mechanism behind SYN Flood DDoS attacks. The server allocates memory waiting for an ACK that never arrives.",
+    "tip": "A server waiting for the final ACK in a handshake is in the SYN_RECEIVED state."
+  },
+  {
+    "id": 53,
+    "question": "Assertion (A): If you wish to access and manage the exact same email inbox smoothly across your smartphone, office laptop, and home tablet, you must configure your email client to use IMAP rather than POP3. Reason (R): IMAP actively synchronizes the email state with the central mail server across all connected clients, whereas POP3 downloads emails locally and by default removes them from the server, breaking multi-device synchronization. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: POP3 (Post Office Protocol version 3) is a legacy protocol that downloads emails to a local device and typically deletes them from the server. Step 2: This makes multi-device management impossible, as the first device to connect removes the mail for the rest. Step 3: IMAP (Internet Message Access Protocol) mirrors the server state. If you read an email on your phone, it marks it as read on the server, reflecting instantly on your laptop. Step 4: Therefore, both the Assertion and the Reason are correct, and R explains A perfectly.",
+    "trick": "Bank/IT Trap: POP3 listens on port 110, while IMAP listens on port 143. IMAP is strictly preferred for modern multi-device synchronization.",
+    "tip": "IMAP synchronizes email across multiple devices; POP3 downloads and isolates mail locally."
+  },
+  {
+    "id": 54,
+    "question": "In the DHCP (Dynamic Host Configuration Protocol) operational cycle, commonly known as DORA, which specific packet does the client broadcast to verify that a offered IP address has been formally accepted and mapped to its MAC address?",
+    "options": ["DHCP DISCOVER", "DHCP OFFER", "DHCP REQUEST", "DHCP ACK"],
+    "answer": "DHCP REQUEST",
+    "explanation": "Step 1: The DHCP process follows four steps: Discover, Offer, Request, Acknowledge (DORA). Step 2: The client broadcasts a DISCOVER packet to find a server. Step 3: The server sends an OFFER containing a proposed IP. Step 4: The client broadcasts a REQUEST packet, informing all DHCP servers on the network that it is formally accepting the specific offered IP (and implicitly rejecting any other offers). Step 5: Finally, the server finalizes the lease with an ACK.",
+    "trick": "Bank/IT Trap: Do not assume 'Acknowledge' is sent by the client. The server sends the final ACK. The client sends the REQUEST to claim the offered IP.",
+    "tip": "DORA sequence: Client Discovers, Server Offers, Client Requests, Server Acknowledges."
+  },
+  {
+    "id": 55,
+    "question": "Assertion (A): Telnet is universally considered a deprecated protocol in modern enterprise networks and has been entirely replaced by Secure Shell (SSH) for remote administrative access. Reason (R): Telnet transmits all data, including administrative usernames and passwords, in unencrypted plaintext, making it highly vulnerable to packet sniffing. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Telnet operates on TCP port 23 and provides remote command-line access. Step 2: Its fundamental flaw is that it performs zero encryption. Anyone running Wireshark on the network can read the exact keystrokes, including passwords. Step 3: SSH (Secure Shell) was developed to fix this. It operates on TCP port 22 and establishes a cryptographically secure tunnel. Step 4: Because of this plaintext vulnerability, security audits mandate removing Telnet, proving both A and R true.",
+    "trick": "Bank/IT Trap: Port numbers are highly tested! Telnet = 23 (Insecure). SSH = 22 (Secure).",
+    "tip": "Telnet transmits in plaintext on port 23; SSH encrypts traffic on port 22."
+  },
+  {
+    "id": 56,
+    "question": "An IT administrator uses SNMP (Simple Network Management Protocol) to monitor the bandwidth usage of an enterprise router. Which component of the SNMP architecture acts as the structured, hierarchical database containing the specific variables (like interface traffic) that the administrator wants to read?",
+    "options": ["SNMP Agent", "Management Information Base (MIB)", "SNMP Trap", "Object Identifier (OID)"],
+    "answer": "Management Information Base (MIB)",
+    "explanation": "Step 1: SNMP consists of Managers, Agents, and an MIB. Step 2: The Manager queries the Agent (software on the router). Step 3: The Agent retrieves data from the Management Information Base (MIB). Step 4: The MIB is a virtual, hierarchical database structured like a tree. Step 5: While an OID (Object Identifier) points to a specific leaf on that tree, the MIB is the database itself containing all queryable device metrics.",
+    "trick": "Bank/IT Trap: OID is the specific address (e.g., 1.3.6.1.2.1...), but the MIB is the overarching database structure that holds these OIDs.",
+    "tip": "The MIB is the hierarchical database containing queryable variables in the SNMP architecture."
+  },
+  {
+    "id": 57,
+    "question": "During data transmission across the TCP/IP stack, which core protocol is exclusively responsible for routing the packet across disparate networks and ensuring it reaches the correct final destination host?",
+    "options": ["Transmission Control Protocol (TCP)", "Address Resolution Protocol (ARP)", "Internet Protocol (IP)", "User Datagram Protocol (UDP)"],
+    "answer": "Internet Protocol (IP)",
+    "explanation": "Step 1: The TCP/IP suite relies on distinct layers for specific duties. Step 2: Transport protocols (TCP/UDP) manage host-to-host delivery and port multiplexing. Step 3: Network Access protocols (like Ethernet) handle hop-to-hop physical delivery using MAC addresses. Step 4: The Internet Protocol (IP) residing at the Internet Layer provides the logical addressing scheme. Step 5: IP is solely responsible for determining the best path and routing the packet across interconnected networks (routers) to the final destination.",
+    "trick": "Bank/IT Trap: TCP provides reliability, but IP provides the actual routing and addressing across boundaries. TCP rides inside the IP payload.",
+    "tip": "The Internet Protocol (IP) handles logical addressing and cross-network routing in TCP/IP."
+  },
+  {
+    "id": 58,
+    "question": "Assertion (A): The UDP protocol is utilized by the Domain Name System (DNS) for standard, rapid hostname-to-IP resolution queries. Reason (R): UDP guarantees the sequential delivery of fragmented DNS records, preventing corrupt website loading. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Assertion A is true. DNS predominantly uses UDP Port 53 for standard client queries because it requires minimal overhead and high speed for tiny query packets. Step 2: Reason R is completely false. UDP is a connectionless protocol that explicitly lacks sequence numbers and does NOT guarantee delivery. Step 3: If a DNS response is too large (like Zone Transfers), DNS falls back to TCP Port 53 precisely to gain those reliability and sequencing guarantees.",
+    "trick": "Bank/IT Trap: DNS uses BOTH protocols! UDP 53 is for standard fast queries. TCP 53 is for large Zone Transfers or DNSSEC responses over 512 bytes.",
+    "tip": "DNS relies on UDP for fast standard queries and TCP for massive zone transfers."
+  },
+  {
+    "id": 59,
+    "question": "In the TCP header, the 'Window Size' field is dynamically manipulated during an active session. What is the fundamental architectural purpose of this specific field?",
+    "options": ["It limits the maximum transmission unit (MTU) size to prevent router fragmentation.", "It dictates Flow Control by telling the sender exactly how many unacknowledged bytes the receiver's buffer can currently accept.", "It establishes the cryptographic block size for secure TCP payloads.", "It determines the maximum number of network hops the packet can traverse before being dropped."],
+    "answer": "It dictates Flow Control by telling the sender exactly how many unacknowledged bytes the receiver's buffer can currently accept.",
+    "explanation": "Step 1: TCP provides robust connection management, including Flow Control. Step 2: If a fast server sends data to a slow client, the client's memory buffer will overflow, causing data loss. Step 3: To prevent this, the client populates the 16-bit 'Window Size' field in its TCP response. Step 4: This integer explicitly states how much free memory space the client currently has available. Step 5: The sender dynamically adjusts its transmission speed to never exceed this byte limit until a new Window Size is advertised.",
+    "trick": "Bank/IT Trap: Do not confuse Flow Control (Receiver limits Sender via Window Size) with Congestion Control (Sender limits itself due to Network router drops).",
+    "tip": "The TCP Window Size explicitly manages Flow Control to prevent receiver buffer overflow."
+  },
+  {
+    "id": 60,
+    "question": "Assertion (A): The Address Resolution Protocol (ARP) is considered a Layer 3 (Network Layer) protocol in the OSI model, but operates at the Internet layer of the TCP/IP model. Reason (R): ARP encapsulates target IP addresses to dynamically resolve them into physical MAC addresses, facilitating communication across local broadcast domains. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: ARP is a critical mapping protocol. Reason R correctly defines its function: finding an unknown MAC address using a known IP address on a local network. Step 2: Assertion A is false due to an architectural classification trap. ARP operates strictly over Layer 2 (Data Link) broadcast frames. Step 3: While it uses Layer 3 addresses (IP) in its payload, the protocol itself does not cross router boundaries and does not possess a Layer 3 IP header. Therefore, it is definitively classified as a Layer 2 Data Link protocol.",
+    "trick": "Bank/IT Trap: ARP is the bridge between L2 and L3, but because an ARP request is an Ethernet broadcast frame with no IP header, it officially belongs to Layer 2.",
+    "tip": "ARP resolves IP to MAC addresses and operates entirely at the Data Link layer."
+  },
+  {
+    "id": 61,
+    "question": "During a graceful TCP connection teardown, what is the sequence of flags exchanged between a Client initiating the closure and the Server responding to it?",
+    "options": ["FIN, FIN-ACK, ACK", "SYN, FIN, RST", "FIN, ACK, FIN, ACK", "RST, ACK, FIN, ACK"],
+    "answer": "FIN, ACK, FIN, ACK",
+    "explanation": "Step 1: TCP is full-duplex, meaning both sides must independently close their transmission pipelines. Step 2: The Client sends a FIN (Finish) segment to close its sending channel. Step 3: The Server receives this and sends an ACK. At this point, the connection is 'half-closed'. The server can still send pending data. Step 4: Once the Server finishes its data transmission, it sends its own FIN segment. Step 5: The Client responds with a final ACK, placing the connection in the TIME_WAIT state before gracefully closing completely.",
+    "trick": "Bank/IT Trap: Connection setup is 3 steps (SYN, SYN-ACK, ACK). Teardown requires 4 distinct steps because the server might need time to finish sending data after acknowledging the client's close request.",
+    "tip": "TCP graceful teardown requires 4 steps: FIN, ACK, FIN, ACK."
+  },
+  {
+    "id": 62,
+    "question": "Which of the following ports is traditionally utilized by the File Transfer Protocol (FTP) to establish the primary 'Control Connection' where administrative commands and authentications are transmitted?",
+    "options": ["TCP Port 20", "TCP Port 21", "UDP Port 69", "TCP Port 22"],
+    "answer": "TCP Port 21",
+    "explanation": "Step 1: FTP is a dual-port protocol. It uses one port for commands and another entirely separate port for moving the actual file data. Step 2: TCP Port 21 is the Control Port. This is where the client authenticates and sends commands like 'GET' or 'PUT'. Step 3: TCP Port 20 is the default Data Port used in 'Active Mode' to physically transfer the file payload. Step 4: UDP Port 69 is used for Trivial FTP (TFTP), and TCP Port 22 is used for SSH/SFTP.",
+    "trick": "Bank/IT Trap: FTP splits its brains! Port 21 is for talking (Control). Port 20 is for walking (Data transmission).",
+    "tip": "FTP utilizes TCP Port 21 for control commands and Port 20 for data transfers."
+  },
+  {
+    "id": 63,
+    "question": "Assertion (A): BGP (Border Gateway Protocol) is an Application Layer protocol that relies on TCP port 179 for establishing reliable communication sessions between internet routers. Reason (R): BGP requires absolute reliability to exchange massive global routing tables without data loss, a guarantee that UDP cannot provide. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Most interior routing protocols (like OSPF or RIP) run directly over IP or UDP. Step 2: BGP is the routing protocol of the global Internet. It exchanges hundreds of thousands of routes. Step 3: Because the dataset is massive and critical, BGP cannot risk packet loss. Step 4: Therefore, BGP delegates reliability to the Transport layer, establishing a strict TCP session on Port 179 between neighbor routers before exchanging any routing data. Both statements are accurate and linked.",
+    "trick": "Bank/IT Trap: While BGP performs Network Layer routing duties, it encapsulates its messages inside a TCP Transport segment, making it structurally an Application Layer protocol in the TCP/IP stack.",
+    "tip": "BGP operates over TCP Port 179 to guarantee reliable exchange of massive routing tables."
+  },
+  {
+    "id": 64,
+    "question": "In the TCP/IP protocol suite, what is the explicit purpose of an 'Ephemeral Port'?",
+    "options": ["It acts as a permanent, reserved port for secure SSL/TLS server communication.", "It is a temporary, high-numbered port dynamically assigned to a client application by the OS to establish an outbound connection.", "It is a reserved port mapped exclusively to ICMP ping responses.", "It serves as a backdoor administrative port used exclusively by SNMP traps."],
+    "answer": "It is a temporary, high-numbered port dynamically assigned to a client application by the OS to establish an outbound connection.",
+    "explanation": "Step 1: Network communication requires a Source Port and a Destination Port. Step 2: Servers listen on 'Well-Known Ports' (e.g., 80 for HTTP, 443 for HTTPS). Step 3: When a client opens a web browser to request a website, the OS must assign the browser a temporary local port to receive the reply. Step 4: The OS dynamically selects a random high-numbered port (typically between 49152 and 65535) called an Ephemeral (short-lived) Port. Step 5: Once the session ends, the ephemeral port is released back to the OS pool.",
+    "trick": "Bank/IT Trap: Servers use static Well-Known ports (0-1023). Clients generate dynamic Ephemeral ports to uniquely identify their own outbound browser tabs or sessions.",
+    "tip": "Ephemeral ports are temporary, high-numbered ports assigned dynamically for client outbound connections."
+  },
+  {
+    "id": 65,
+    "question": "Assertion (A): The 'Network Access Layer' in the TCP/IP model encompasses the exact combined functionalities of both the Physical and Data Link layers from the theoretical OSI model. Reason (R): TCP/IP abstracts hardware-level electrical signaling and MAC addressing into a single foundational layer, treating the underlying local network as a transparent delivery medium. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The OSI model explicitly separates electrical impulses/cables (Physical Layer 1) from MAC addressing and framing (Data Link Layer 2). Step 2: The TCP/IP model was built for practicality. It defines the bottom layer as the 'Network Access' (or Link) layer. Step 3: This single TCP/IP layer handles everything required to get a packet off the host and onto the local physical wire, effectively merging OSI layers 1 and 2. Both A and R are true, and R explains the architectural reasoning.",
+    "trick": "Bank/IT Trap: While exams often test 4-layer vs 5-layer TCP/IP models, the classic DoD TCP/IP architecture strictly defines 4 layers, merging L1/L2 into 'Network Access'.",
+    "tip": "The TCP/IP Network Access layer merges the OSI Physical and Data Link layers."
+  },
+  {
+    "id": 66,
+    "question": "An enterprise firewall is configured to block all UDP traffic. Which of the following network services will suffer immediate and complete operational failure?",
+    "options": ["Remote desktop access via RDP", "Encrypted web browsing via HTTPS", "Dynamic IP assignment via DHCP", "Secure remote administration via SSH"],
+    "answer": "Dynamic IP assignment via DHCP",
+    "explanation": "Step 1: Identify the underlying Transport Layer protocols for each service. Step 2: RDP uses TCP port 3389. Step 3: HTTPS uses TCP port 443. Step 4: SSH uses TCP port 22. All of these survive a UDP block. Step 5: DHCP (Dynamic Host Configuration Protocol) relies entirely on UDP broadcast mechanisms (Ports 67 for servers, 68 for clients) to rapidly discover and assign IP addresses to new, unconfigured hosts. Blocking UDP breaks DHCP completely.",
+    "trick": "Bank/IT Trap: DHCP must use UDP because it acts via raw network broadcasts. A host without an IP cannot establish a formal TCP 3-way handshake to request an IP!",
+    "tip": "DHCP fundamentally requires UDP ports 67 and 68 to execute broadcast-based IP assignments."
+  },
+  {
+    "id": 67,
+    "question": "Assertion (A): The Maximum Transmission Unit (MTU) explicitly dictates the largest total size of an IP packet that a specific network interface can transmit without requiring fragmentation. Reason (R): MTU is calculated by adding the byte size of the Data Link Layer frame header and trailer to the internal IP payload. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Assertion A is true. The MTU (commonly 1500 bytes for standard Ethernet) is the maximum size of the Layer 3 IP Packet that can pass over the link without being fragmented into smaller pieces. Step 2: Reason R is false. The MTU explicitly EXCLUDES the Layer 2 Data Link frame headers and trailers (which add another 18 bytes). Step 3: The MTU measures the payload of the frame, which is the IP packet itself. Therefore, R is mathematically incorrect.",
+    "trick": "Bank/IT Trap: MTU measures the L3 Packet size (1500 bytes). The maximum Ethernet Frame size is 1518 bytes (1500 MTU + 14 byte header + 4 byte trailer).",
+    "tip": "MTU defines maximum IP packet size and explicitly excludes Layer 2 frame headers."
+  },
+  {
+    "id": 68,
+    "question": "A network security analyst observes a flood of packets utilizing ICMP (Internet Control Message Protocol) 'Echo Request' and 'Echo Reply' types. Which fundamental network troubleshooting utility relies entirely on this specific message exchange?",
+    "options": ["Traceroute", "Nslookup", "Ping", "Netstat"],
+    "answer": "Ping",
+    "explanation": "Step 1: ICMP is an Internet Layer protocol used for diagnostics and error reporting. Step 2: Nslookup resolves DNS queries. Netstat displays active TCP/UDP ports. Step 3: Traceroute uses ICMP 'Time Exceeded' messages to map hops. Step 4: The 'Ping' utility is explicitly built on ICMP Type 8 (Echo Request) and Type 0 (Echo Reply). A host sends an Echo Request, and if the target is alive and reachable, it responds with an Echo Reply.",
+    "trick": "Bank/IT Trap: While Traceroute also uses ICMP, it relies on manipulating the TTL field and reading 'Time Exceeded' errors. Only Ping relies specifically on the Echo Request/Reply exchange.",
+    "tip": "The Ping utility strictly relies on ICMP Echo Request and Echo Reply messages."
+  },
+  {
+    "id": 69,
+    "question": "Assertion (A): Trivial File Transfer Protocol (TFTP) is considered superior to standard FTP for transferring highly confidential financial records over the internet. Reason (R): TFTP utilizes a proprietary encryption algorithm built into the UDP transport layer, making it immune to packet sniffing. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: TFTP (Trivial File Transfer Protocol) operates over UDP port 69. Step 2: It is incredibly basic, designed to have zero overhead. It has no directory listing capabilities, no authentication, and absolutely no encryption. Step 3: Because it lacks passwords and encryption, it is incredibly insecure and never used for confidential data (usually used to boot routers or push firmware locally). Step 4: UDP also lacks native encryption. Therefore, both Assertion A and Reason R are factually absurd and entirely false.",
+    "trick": "Bank/IT Trap: The word 'Trivial' means stripped-down. TFTP strips away security and reliability (TCP) for pure, raw, local speed.",
+    "tip": "TFTP operates on UDP, lacks authentication, and provides zero encryption or security."
+  },
+  {
+    "id": 70,
+    "question": "In an IPv4 header, what is the exact function of the 'Fragment Offset' field during data transmission?",
+    "options": ["It calculates the physical delay time of a packet crossing an oceanic fiber cable.", "It provides the receiving host with the necessary byte-position metadata to accurately reassemble a fragmented packet in the correct sequence.", "It identifies the specific Router MAC address that performed the packet fragmentation.", "It flags the packet as a duplicate generated by the TCP retransmission timer."],
+    "answer": "It provides the receiving host with the necessary byte-position metadata to accurately reassemble a fragmented packet in the correct sequence.",
+    "explanation": "Step 1: When a router receives an IP packet larger than the outbound link's MTU, it must chop the packet into smaller fragments. Step 2: These fragments are routed independently and may arrive out of order. Step 3: The 'Fragment Offset' field in the IP header of each fragment tells the receiving host exactly where that specific chunk of data belongs relative to the start of the original, unfragmented payload. Step 4: The destination OS uses this offset value to seamlessly stitch the fragments back together.",
+    "trick": "Bank/IT Trap: Fragmentation happens at Layer 3 (IP), meaning the receiving Network Layer must reassemble it using the Offset field before handing the payload up to Layer 4 (TCP/UDP).",
+    "tip": "The Fragment Offset field ensures receiving hosts can correctly reassemble out-of-order fragmented IP packets."
+  },
+  {
+    "id": 71,
+    "question": "Assertion (A): Utilizing a DHCP Relay Agent is mandatory if enterprise client computers are located on a different subnet/VLAN than the central DHCP server. Reason (R): DHCP Discover messages are Layer 2 hardware broadcasts (MAC: FF:FF:FF:FF:FF:FF), which standard routers inherently block from crossing into other subnets. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: When a PC boots, it has no IP. It broadcasts a DHCP Discover packet to find a server. Step 2: Routers are designed to block broadcast traffic to prevent network storms. Step 3: If the DHCP server is on VLAN 20, and the PC is on VLAN 10, the router will drop the PC's broadcast, leaving it without an IP. Step 4: A DHCP Relay Agent (configured on the router) intercepts the broadcast, converts it into a Unicast packet, and forwards it directly to the remote DHCP server's IP address. Both A and R are true and explicitly linked.",
+    "trick": "Bank/IT Trap: Routers kill broadcasts. Protocols that rely on broadcasts (like DHCP) must use 'Relay Agents' (ip helper-address in Cisco) to cross router boundaries safely.",
+    "tip": "DHCP Relay Agents convert blocked local broadcasts into routable unicast packets for remote servers."
+  },
+  {
+    "id": 72,
+    "question": "During TCP congestion control, what triggers the sender to severely drop its Transmission Window size and reset the 'Slow Start' algorithm back to its minimum threshold?",
+    "options": ["Receiving a Gratuitous ARP broadcast.", "Receiving an ICMP Echo Reply.", "The expiration of the Retransmission Timeout (RTO) timer without receiving an expected ACK.", "A mismatch in the IP header Checksum field."],
+    "answer": "The expiration of the Retransmission Timeout (RTO) timer without receiving an expected ACK.",
+    "explanation": "Step 1: TCP dynamically scales transmission speed (Congestion Window) based on network health. Step 2: If the network is healthy, ACKs arrive quickly, and the window grows. Step 3: If a packet drops due to severe network congestion, the sender's Retransmission Timeout (RTO) timer expires before an ACK is received. Step 4: TCP interprets this timeout as a sign of critical network congestion. Step 5: To prevent making the jam worse, TCP drastically slashes its Congestion Window down to 1 Maximum Segment Size (MSS) and restarts the Slow Start probing phase.",
+    "trick": "Bank/IT Trap: TCP assumes ALL packet loss is caused by network congestion. A dropped packet triggers an immediate, aggressive slowdown in transmission speed.",
+    "tip": "TCP interprets expired ACK timers as network congestion, aggressively reducing transmission window sizes."
+  },
+  {
+    "id": 73,
+    "question": "Assertion (A): The Simple Network Management Protocol Version 3 (SNMPv3) is heavily preferred over SNMPv2c in modern enterprise environments due to its robust authentication and data encryption capabilities. Reason (R): SNMPv2c relies entirely on plaintext 'Community Strings' for authentication, allowing any malicious user with a network sniffer to intercept the string and gain full read/write access to core routers. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: SNMP manages and configures network devices. Step 2: Versions 1 and 2c use 'Community Strings' (acting like passwords) to authenticate managers to agents. Step 3: Because v1/v2c transmit these strings in pure plaintext, a hacker can easily capture the string using Wireshark and use it to reconfigure or disable routers. Step 4: SNMPv3 completely overhauled the architecture, introducing robust user-based authentication, message integrity, and AES payload encryption. Both statements are accurate, and R justifies A.",
+    "trick": "Bank/IT Trap: SNMPv2c added 'Bulk retrieval' for speed, but completely failed to add security. Only v3 added the necessary cryptographic security framework.",
+    "tip": "SNMPv3 introduces robust authentication and payload encryption, solving SNMPv2c's plaintext community string vulnerabilities."
+  },
+  {
+    "id": 74,
+    "question": "Which of the following ports and protocol combinations is correctly associated with the Network Time Protocol (NTP), essential for synchronizing cryptographic certificates and logs across an enterprise network?",
+    "options": ["TCP Port 123", "UDP Port 123", "TCP Port 161", "UDP Port 67"],
+    "answer": "UDP Port 123",
+    "explanation": "Step 1: NTP ensures all computers and servers share the exact same clock time, which is critical for Kerberos authentication and log forensics. Step 2: NTP must be extremely fast and lightweight to prevent transmission delays from skewing the time calculation. Step 3: Therefore, it utilizes the connectionless UDP protocol. Step 4: The internationally standardized Well-Known port for NTP is UDP 123. (Note: 161 is SNMP, 67 is DHCP).",
+    "trick": "Bank/IT Trap: Time synchronization requests are tiny and time-sensitive. The overhead of a TCP 3-way handshake would introduce unacceptable latency to the time calculation.",
+    "tip": "Network Time Protocol (NTP) utilizes UDP Port 123 for rapid, low-latency time synchronization."
+  },
+  {
+    "id": 75,
+    "question": "Assertion (A): Implementing Network Address Translation (NAT) on an edge router inherently forces the router to recalculate the Transport Layer Checksum for every outgoing TCP packet. Reason (R): The TCP Checksum calculation explicitly incorporates a 'Pseudo-Header' containing the Source and Destination IP addresses; changing the Source IP via NAT invalidates the original checksum. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: NAT translates a private internal IP to a public external IP. Step 2: Normally, routers only touch Layer 3 (IP header) and Layer 2 (MAC). Step 3: However, the TCP (Layer 4) protocol uses a Pseudo-Header for its checksum, which includes the Source IP address to guarantee delivery accuracy. Step 4: Because NAT modifies the Source IP, the TCP checksum becomes mathematically invalid. Step 5: Therefore, a NAT router is forced to open the Layer 4 segment, recalculate the TCP checksum, and rewrite it before sending the packet. Both A and R are deeply true.",
+    "trick": "Bank/IT Trap: NAT violates strict OSI layer separation. A Layer 3 NAT router is forced to manipulate Layer 4 TCP/UDP headers, causing high CPU overhead.",
+    "tip": "NAT modifies IP addresses, forcing the router to recalculate TCP/UDP checksums containing pseudo-headers."
+  },
+  {
+    "id": 76,
+    "question": "Within the Domain Name System (DNS) architecture, what is the specific technical difference between an 'Iterative' query and a 'Recursive' query?",
+    "options": ["Iterative queries use UDP, while Recursive queries exclusively use TCP.", "In a Recursive query, the burdened server takes full responsibility to fetch the final IP answer for the client; in an Iterative query, the server simply returns a referral to the next best DNS server.", "Iterative queries require cryptographic DNSSEC signatures, while Recursive queries operate in plaintext.", "Recursive queries are used solely for reverse lookups (IP to Hostname), while Iterative handles standard lookups."],
+    "answer": "In a Recursive query, the burdened server takes full responsibility to fetch the final IP answer for the client; in an Iterative query, the server simply returns a referral to the next best DNS server.",
+    "explanation": "Step 1: When a PC asks its local ISP DNS server for a website IP, it sends a 'Recursive' query. The PC essentially says: 'I only want the final answer, you do all the work.' Step 2: The ISP DNS server must now find the answer. Step 3: It sends 'Iterative' queries to the Root servers, TLD servers, and Authoritative servers. Step 4: Iterative queries mean: 'If you don't know the exact IP, give me the IP of the next server in the chain who might know.' Step 5: The ISP server chases these referrals until it finds the final IP, then hands it back to the PC.",
+    "trick": "Bank/IT Trap: Clients demand Recursion (do the work for me). Servers perform Iteration (chasing referrals down the hierarchical tree).",
+    "tip": "Recursive DNS queries demand a final answer; Iterative queries provide referrals to other servers."
+  },
+  {
+    "id": 77,
+    "question": "Assertion (A): The 'Keepalive' function in TCP prevents active, idle connections from being dropped by intermediate stateful firewalls. Reason (R): TCP Keepalive periodically transmits empty or dummy packet segments to reset the idle timeout counters on network appliances, proving the connection is still alive. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Stateful firewalls track active TCP sessions. To save memory, they aggressively drop connections that sit completely idle for long periods (e.g., an open SSH terminal where the user hasn't typed anything for 30 minutes). Step 2: If the firewall drops the session silently, the endpoints get desynchronized. Step 3: TCP Keepalive solves this. Step 4: The OS periodically sends a tiny packet with no payload. Step 5: This 'dummy' packet forces the firewall to see active traffic, resetting the idle timeout clock and preserving the session indefinitely. Both A and R are accurate.",
+    "trick": "Bank/IT Trap: TCP Keepalives are not enabled by default for all sockets; developers must explicitly enable them in their application code to prevent silent connection death.",
+    "tip": "TCP Keepalives send dummy packets to prevent stateful firewalls from dropping idle connections."
+  },
+  {
+    "id": 78,
+    "question": "During a network forensics investigation, an analyst discovers a packet utilizing TCP Port 443. Upon closer inspection, the initial handshakes reveal a 'Client Hello' containing Cipher Suites, followed by a 'Server Hello' containing a digital certificate. Which protocol encapsulation is taking place?",
+    "options": ["SSH Tunneling", "SSL/TLS Handshake", "IPsec Key Exchange", "SNMPv3 Authentication"],
+    "answer": "SSL/TLS Handshake",
+    "explanation": "Step 1: TCP Port 443 strongly indicates HTTPS traffic. Step 2: Before HTTP data can be sent securely, an encryption layer must be established. Step 3: This is achieved via the SSL (Secure Sockets Layer) or TLS (Transport Layer Security) protocol. Step 4: The TLS process explicitly begins with a 'Client Hello' (proposing encryption algorithms/cipher suites). Step 5: The server responds with a 'Server Hello', attaching its X.509 digital certificate to prove its identity and finalize the cryptographic key exchange.",
+    "trick": "Bank/IT Trap: The TCP 3-way handshake (SYN, SYN-ACK, ACK) must happen FIRST. The SSL/TLS Handshake (Client Hello/Server Hello) happens SECOND, operating essentially at Layer 5/6 before Application Layer 7 HTTP data flows.",
+    "tip": "The TLS Handshake uses 'Client Hello' and 'Server Hello' to establish cryptographic encryption parameters."
+  },
+  {
+    "id": 79,
+    "question": "Assertion (A): An IPv6 header structurally guarantees faster router processing speeds compared to an IPv4 header by completely eliminating the Network Layer Header Checksum field. Reason (R): IPv6 delegates all data corruption verification exclusively to the robust checksums natively integrated into Data Link Layer frames and Transport Layer TCP/UDP headers. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In IPv4, every router hop decrements the TTL field. Step 2: Because the IP header changes at every hop, the router is forced to recalculate the IPv4 Header Checksum before forwarding it, costing massive CPU cycles globally. Step 3: IPv6 designers realized this was redundant. Ethernet (Layer 2) already has an FCS checksum. TCP/UDP (Layer 4) already have strong checksums. Step 4: IPv6 entirely removed the Header Checksum field. Step 5: Routers now blindly forward IPv6 packets without recalculating checksums, drastically reducing latency. Both A and R are true and linked.",
+    "trick": "Bank/IT Trap: IPv6 headers are larger (40 bytes vs 20 bytes) because of massive 128-bit addresses, but they are vastly SIMPLER and faster to process because redundant fields like Checksums and Fragmentation were stripped.",
+    "tip": "IPv6 eliminates the header checksum to dramatically accelerate router processing and reduce latency."
+  },
+  {
+    "id": 80,
+    "question": "What is the specific architectural purpose of the 'Maximum Segment Size' (MSS) parameter negotiated during the TCP 3-Way Handshake?",
+    "options": ["It limits the number of sequential packets the sender can transmit before requiring a TCP Acknowledgment.", "It defines the absolute maximum byte size of the application payload that can be encapsulated into a single TCP segment.", "It restricts the total amount of available bandwidth an application is legally allowed to consume.", "It calculates the physical MTU of the intermediate internet routers to prevent Layer 3 fragmentation."],
+    "answer": "It defines the absolute maximum byte size of the application payload that can be encapsulated into a single TCP segment.",
+    "explanation": "Step 1: During the SYN and SYN-ACK exchange, both endpoints declare their MSS. Step 2: The MSS defines the largest chunk of raw application data (payload) that the TCP layer is willing to stuff into a single segment. Step 3: It explicitly excludes the TCP header and IP header sizes. Step 4: Typically, MSS is derived by taking the physical MTU (e.g., 1500 bytes) and subtracting the IP header (20 bytes) and TCP header (20 bytes), resulting in an MSS of 1460 bytes. Step 5: This ensures the resulting segment smoothly traverses the network without triggering IP fragmentation.",
+    "trick": "Bank/IT Trap: MSS = Payload ONLY. MTU = Payload + TCP Header + IP Header. MSS prevents fragmentation by capping the payload before it even hits Layer 3.",
+    "tip": "TCP MSS restricts the application payload size to prevent downstream Layer 3 IP fragmentation."
+  },
+  {
+    "id": 81,
+    "question": "Assertion (A): HTTP traffic requires significantly less packet overhead than HTTPS traffic. Reason (R): HTTPS utilizes SSL/TLS encapsulation, which adds complex cryptographic headers, padding, and initialization vectors to every transmitted data block, increasing the total byte size. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Standard HTTP transmits data in plaintext directly over TCP. Step 2: HTTPS adds a massive security layer (TLS) between TCP and HTTP. Step 3: This means the payload must be mathematically encrypted. Step 4: Encryption algorithms (like AES) require adding explicit cryptographic metadata, Initialization Vectors (IV), MAC (Message Authentication Code) hashes, and block padding to the packets. Step 5: This extra data increases the physical byte size of the transmission (overhead) compared to raw plaintext HTTP, making both A and R true and perfectly linked.",
+    "trick": "Bank/IT Trap: Security is never free. HTTPS requires extra CPU power for encryption and extra bandwidth for cryptographic packet overhead.",
+    "tip": "HTTPS encapsulates data in TLS, inherently adding cryptographic byte overhead compared to plaintext HTTP."
+  },
+  {
+    "id": 82,
+    "question": "In standard network troubleshooting, what specific protocol discrepancy explains why a host can successfully reach a remote server via 'Ping' but completely fails to access a website hosted on that exact same server?",
+    "options": ["Ping uses UDP Port 53, while the website uses TCP Port 80.", "The firewall is allowing ICMP traffic to pass but actively dropping or filtering TCP Port 80/443 traffic.", "Ping operates at the Data Link layer and bypasses the firewall entirely.", "The website server has an invalid MAC address binding in the ARP cache."],
+    "answer": "The firewall is allowing ICMP traffic to pass but actively dropping or filtering TCP Port 80/443 traffic.",
+    "explanation": "Step 1: The 'Ping' utility operates using ICMP (Internet Control Message Protocol), which is an Internet Layer (Layer 3) protocol. Step 2: Accessing a website relies on HTTP or HTTPS, which use TCP (Layer 4) Ports 80 and 443. Step 3: Firewalls operate using strict Access Control Lists (ACLs) based on ports and protocols. Step 4: It is highly common for a firewall rule to permit ICMP (allowing Ping to succeed) while a restrictive rule explicitly blocks incoming TCP port 80/443 (causing the web request to drop).",
+    "trick": "Bank/IT Trap: Ping proves Layer 3 connectivity (IP routing works). It proves absolutely NOTHING about Layer 4+ connectivity (TCP/UDP ports).",
+    "tip": "Ping verifies Layer 3 ICMP routing, but firewall rules often independently block Layer 4 TCP/UDP ports."
+  },
+  {
+    "id": 83,
+    "question": "Assertion (A): Using the standard FTP protocol to transfer a directory of files across a firewall frequently causes the data connection to be blocked, requiring the use of 'Passive Mode' FTP. Reason (R): In Active Mode FTP, the server explicitly attempts to initiate a new inbound connection to a random high port on the client, a behavior universally blocked by NAT and stateful client firewalls. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: FTP uses two ports. In 'Active Mode', the client opens a Control channel to the Server's Port 21. Step 2: The client tells the server 'Send the file data to my random Port 50000'. Step 3: The Server then actively opens a NEW connection from its Port 20 to the Client's Port 50000. Step 4: Client firewalls and NAT instantly block unrequested inbound connections, causing the transfer to fail. Step 5: 'Passive Mode' (PASV) fixes this. The server opens a random port on its own end and tells the client to connect to it. Since the client initiates both connections outbound, firewalls permit it. A and R are both true and linked.",
+    "trick": "Bank/IT Trap: Active FTP: Server connects to Client (Fails firewalls). Passive FTP: Client connects to Server (Bypasses firewalls).",
+    "tip": "Passive FTP forces the client to initiate all connections, bypassing inbound client NAT/firewall restrictions."
+  },
+  {
+    "id": 84,
+    "question": "Which specific protocol relies on the 'Network Virtual Terminal' (NVT) architecture to translate local keystrokes into a universally standardized format before transmitting them across a TCP connection?",
+    "options": ["Simple Mail Transfer Protocol (SMTP)", "Telnet", "Simple Network Management Protocol (SNMP)", "Address Resolution Protocol (ARP)"],
+    "answer": "Telnet",
+    "explanation": "Step 1: Different operating systems handle keyboards and text rendering differently (e.g., Return keys, Line Feeds on Windows vs Linux). Step 2: Telnet was designed in the 1960s to connect wildly different mainframe terminals. Step 3: To solve the hardware translation issue, Telnet utilizes an intermediate logical framework called the Network Virtual Terminal (NVT). Step 4: The Telnet client translates your physical keystrokes into standard NVT code, sends it over TCP port 23, and the receiving Telnet server translates the NVT code into its own local OS format.",
+    "trick": "Bank/IT Trap: NVT is the hallmark architecture of legacy Telnet. It ensures universal terminal compatibility regardless of the underlying OS hardware.",
+    "tip": "Telnet utilizes the Network Virtual Terminal (NVT) to ensure universal compatibility between disparate operating systems."
+  },
+  {
+    "id": 85,
+    "question": "Assertion (A): When a computer running DHCP nears the expiration of its IP lease, it natively broadcasts a DHCP DISCOVER message to locate a new server for IP assignment. Reason (R): DHCP leases are inherently temporary, requiring the client to explicitly restart the entire DORA process to maintain network connectivity. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: DHCP leases have time limits (e.g., 8 days). Step 2: At 50% of the lease time (T1 timer), the client attempts a 'Renewal'. Step 3: Crucially, it does NOT broadcast a DISCOVER message. It sends a Unicast DHCP REQUEST directly to the original server that granted the lease, asking for an extension. Step 4: Only if the lease completely expires without successful renewal does the client drop the IP and restart the full broadcast DORA process. Therefore, both Assertion A and Reason R incorrectly describe the renewal architecture.",
+    "trick": "Bank/IT Trap: Lease renewal is a Unicast operation to the existing server! It only reverts to Broadcast Discovery if the current lease officially dies.",
+    "tip": "DHCP clients renew leases via targeted Unicast requests, bypassing the full Broadcast DORA process."
+  },
+  {
+    "id": 86,
+    "question": "During a network architecture audit, an engineer notices regular UDP traffic occurring on Port 162. What specific operational function does this port serve in the SNMP protocol suite?",
+    "options": ["It is the port utilized by the Manager to pull data from the Agent using 'SNMP Get'.", "It is the port utilized by the Agent to send unprompted, asynchronous alerts (Traps) to the Manager.", "It is the port used to synchronize the MIB database schema globally.", "It is the port exclusively dedicated to encrypting SNMPv3 payload traffic."],
+    "answer": "It is the port utilized by the Agent to send unprompted, asynchronous alerts (Traps) to the Manager.",
+    "explanation": "Step 1: SNMP utilizes two distinct UDP ports for different data flows. Step 2: UDP Port 161 is the polling port. The Manager sends 'Get' requests to the Agent on Port 161 to poll data (e.g., 'What is your CPU usage?'). Step 3: However, if a router suddenly overheats or an interface goes offline, it cannot wait to be polled. Step 4: The Agent spontaneously generates an 'SNMP Trap' (an asynchronous alert) and sends it to the Manager using UDP Port 162.",
+    "trick": "Bank/IT Trap: SNMP divides polling and alarming. Port 161 = Routine Polling (Get/Set). Port 162 = Emergency Traps (Alerts).",
+    "tip": "SNMP utilizes UDP Port 161 for routine polling and Port 162 for asynchronous Trap alerts."
+  },
+  {
+    "id": 87,
+    "question": "Assertion (A): The Syslog protocol transmits critical system event messages reliably using the TCP protocol to ensure no audit logs are ever lost during transit. Reason (R): Syslog operates on TCP Port 514, mandating a 3-way handshake and strict payload acknowledgments from the central logging server. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Syslog is a standard for message logging used by routers, firewalls, and Unix systems. Step 2: Assertion (A) is completely false. Standard legacy Syslog explicitly utilizes the connectionless UDP protocol. Step 3: It operates on UDP Port 514. The device generates the log and blindly fires it at the Syslog server ('fire and forget'). Step 4: It provides absolutely zero guarantee of delivery, sequence tracking, or acknowledgments. Reason (R) is therefore also fundamentally false.",
+    "trick": "Bank/IT Trap: While modern variants (like Syslog-ng or RSyslog) can be configured to use TCP for reliability, the official original IETF standard for Syslog mandates UDP Port 514.",
+    "tip": "Standard Syslog utilizes unreliable UDP Port 514, offering no guarantee of log delivery."
+  },
+  {
+    "id": 88,
+    "question": "In the context of IPv6 networking, the protocol entirely eliminates the concept of network-wide 'Broadcast' transmissions. What routing mechanism natively replaces it to fulfill functions like address resolution?",
+    "options": ["Unicast looping", "Anycast mapping", "Multicast groups", "Static hardware bindings"],
+    "answer": "Multicast groups",
+    "explanation": "Step 1: In IPv4, broadcasts (sending packets to every single device on a subnet) cause massive CPU interruptions and broadcast storms. Step 2: IPv6 architecture completely abolished the Broadcast address type. Step 3: Instead, IPv6 heavily utilizes 'Multicast'. Step 4: Multicast addresses target a specific 'Group' of listeners. Step 5: For example, instead of ARP broadcasting to everyone, IPv6 uses Neighbor Discovery Protocol (NDP). It sends a multicast specifically to the 'Solicited-Node' multicast group, interrupting ONLY the specific devices that need to hear the request, drastically improving network efficiency.",
+    "trick": "Bank/IT Trap: Broadcasts do not exist in IPv6! All former broadcast duties (like DHCP or ARP) were converted to hyper-efficient Multicast operations.",
+    "tip": "IPv6 eliminates Broadcasts entirely, relying on efficient Multicast groups for network-wide signaling and resolution."
+  },
+  {
+    "id": 89,
+    "question": "Assertion (A): In IPsec (Internet Protocol Security), utilizing 'Tunnel Mode' is strictly required when establishing a secure Site-to-Site VPN between two disparate corporate routers. Reason (R): Tunnel Mode encapsulates the entire original IP packet and generates a brand new IP header, allowing the traffic to successfully route across the public internet between the two gateway routers. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: IPsec operates in two modes: Transport and Tunnel. Step 2: Transport Mode encrypts only the payload, leaving the original IP header intact. This is used for host-to-host local encryption where routing isn't altered. Step 3: In a Site-to-Site VPN, PC-A (192.168.1.5) sends a packet to PC-B (10.0.0.5). Private IPs cannot route over the internet. Step 4: The edge router intercepts it and uses 'Tunnel Mode'. It encrypts the entire original packet (header and all) and wraps it in a NEW public IP header targeted at the remote router's public IP. Step 5: Both A and R are true and logically linked.",
+    "trick": "Bank/IT Trap: Transport Mode = Host to Host (Local). Tunnel Mode = Gateway to Gateway (WAN/Internet). Tunnel mode hides the original private IP routing data.",
+    "tip": "IPsec Tunnel Mode encapsulates the entire original packet, generating a new routable IP header."
+  },
+  {
+    "id": 90,
+    "question": "Which combination of OSI Layers corresponds explicitly to the 'Internet Layer' defined within the TCP/IP architectural model?",
+    "options": ["Layer 1 (Physical) and Layer 2 (Data Link)", "Layer 3 (Network) exclusively", "Layer 4 (Transport) exclusively", "Layer 5 (Session), Layer 6 (Presentation), and Layer 7 (Application)"],
+    "answer": "Layer 3 (Network) exclusively",
+    "explanation": "Step 1: Mapping the 7-layer OSI model to the 4-layer TCP/IP model is critical. Step 2: OSI L1/L2 maps to TCP/IP 'Network Access' (or Link) Layer. Step 3: OSI L4 maps directly to TCP/IP 'Transport' Layer. Step 4: OSI L5/L6/L7 maps to TCP/IP 'Application' Layer. Step 5: The TCP/IP 'Internet Layer' maps directly and exclusively to the OSI Layer 3 (Network Layer). This is where the Internet Protocol (IP), ICMP, and routing functions operate.",
+    "trick": "Bank/IT Trap: The naming convention is tricky. TCP/IP calls it the 'Internet Layer', whereas OSI calls it the 'Network Layer'. They are a 1:1 match in functionality.",
+    "tip": "The TCP/IP Internet Layer maps directly and exclusively to the OSI Network Layer (Layer 3)."
+  },
+  {
+    "id": 91,
+    "question": "Assertion (A): Connecting two computers directly using a standard 'straight-through' Ethernet cable will result in a failure to establish a functional physical network link. Reason (R): A straight-through cable aligns the transmission (Tx) pins of Host A directly to the transmission (Tx) pins of Host B, causing electrical data collisions. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In 10/100 Mbps Ethernet, pins 1 and 2 transmit data (Tx), while pins 3 and 6 receive data (Rx). Step 2: A Switch internally crosses the wiring, so a 'straight-through' cable connecting a PC to a Switch works perfectly (PC Tx goes to Switch Rx). Step 3: If you connect two PCs directly, you bypass the switch. Step 4: A straight-through cable will connect PC-A's Tx pins straight into PC-B's Tx pins. Both are transmitting, neither is listening, causing collision and link failure. Step 5: To fix this, a 'Crossover Cable' must be used to manually cross the Tx and Rx wires. Both A and R are true.",
+    "trick": "Bank/IT Trap: Modern NICs possess 'Auto-MDIX' functionality, which detects the error and digitally flips the pins via software. However, from a strict physical cabling standard perspective, straight-through cables structurally fail peer-to-peer links.",
+    "tip": "Connecting like-devices directly requires a crossover cable to map Tx pins to Rx pins."
+  },
+  {
+    "id": 92,
+    "question": "An enterprise routing protocol implements an algorithm to calculate the optimal path strictly by counting the number of router 'hops' between the source and destination. Which protocol and layer algorithm is being utilized?",
+    "options": ["OSPF (Link-State Algorithm)", "RIP (Distance-Vector Algorithm)", "BGP (Path-Vector Algorithm)", "ARP (Address Resolution Algorithm)"],
+    "answer": "RIP (Distance-Vector Algorithm)",
+    "explanation": "Step 1: Routing protocols use distinct algorithms to determine the 'best' path. Step 2: OSPF is a Link-State protocol; it calculates best paths based on interface bandwidth (cost). Step 3: BGP uses Path-Vector, making decisions based on complex autonomous system policies and path attributes. Step 4: RIP (Routing Information Protocol) is an archaic Distance-Vector protocol. Step 5: RIP calculates the best path entirely by relying on 'Hop Count' (how many routers are in the way). A 2-hop 10Mbps path is chosen over a 3-hop 1Gbps path, highlighting its major architectural flaw.",
+    "trick": "Bank/IT Trap: RIP is notoriously blind to actual link speed. Hop count is its one and only mathematical metric for pathfinding.",
+    "tip": "RIP (Routing Information Protocol) evaluates the best routing path exclusively using Hop Count."
+  },
+  {
+    "id": 93,
+    "question": "Assertion (A): The Domain Name System (DNS) natively prevents malicious actors from spoofing IP addresses and redirecting web traffic by verifying digital cryptographic signatures attached to the DNS query responses. Reason (R): DNS utilizes the TLS protocol over TCP Port 443 to encapsulate all query data within a heavily encrypted tunnel. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The native, original DNS protocol operates over UDP Port 53 in pure plaintext. Step 2: It possesses absolutely zero authentication, encryption, or digital signature capabilities. Step 3: Because of this, standard DNS is extremely vulnerable to DNS Spoofing and Cache Poisoning attacks. Assertion A is completely false. Step 4: Reason R describes 'DNS over HTTPS' (DoH), which is a modern addition, but standard DNS natively relies on UDP 53 without TLS. Reason R is therefore also false.",
+    "trick": "Bank/IT Trap: Standard DNS is fundamentally insecure. DNSSEC adds digital signatures, and DoH adds TLS encryption, but these are optional modern bolt-ons, not native standard behaviors.",
+    "tip": "Standard native DNS operates in plaintext over UDP Port 53, lacking any cryptographic security."
+  },
+  {
+    "id": 94,
+    "question": "In standard network encapsulation, which protocol is responsible for appending the 'Source and Destination MAC Address' fields to a payload to create a routable local Frame?",
+    "options": ["Internet Protocol (IPv4)", "Ethernet Protocol (802.3)", "Transmission Control Protocol (TCP)", "Internet Control Message Protocol (ICMP)"],
+    "answer": "Ethernet Protocol (802.3)",
+    "explanation": "Step 1: MAC addressing strictly occurs at the Data Link layer (Layer 2). Step 2: IPv4 and ICMP operate at the Network Layer (Layer 3) handling logical IP addressing. Step 3: TCP operates at the Transport Layer (Layer 4) handling ports. Step 4: The Ethernet Protocol (IEEE 802.3) dominates the Data Link layer. Step 5: Ethernet takes the Layer 3 IP packet and encapsulates it by slapping an Ethernet header (containing Source MAC, Destination MAC, and EtherType) and a trailer (FCS) onto it, forming the complete Frame.",
+    "trick": "Bank/IT Trap: MAC addresses are physically burned into Ethernet Network Interface Cards (NICs). The Ethernet protocol is the sole manager of MAC-based frame encapsulation.",
+    "tip": "The Ethernet Protocol (Layer 2) applies MAC address headers to construct the physical Frame."
+  },
+  {
+    "id": 95,
+    "question": "Assertion (A): During the execution of a DHCP Discover packet, the Source IP address in the Network Layer header is populated with 0.0.0.0. Reason (R): Because the client computer has not yet been assigned a valid IP address by the server, it mathematically cannot populate a valid routable source address in the IP envelope. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The DHCP process is initiated by a client lacking an IP configuration. Step 2: The client must generate a broadcast packet to locate a DHCP server. Step 3: Layer 3 IP encapsulation rigidly requires a Source and Destination IP field to be filled. Step 4: The destination is set to the absolute broadcast IP (255.255.255.255). Step 5: Because the client has no IP, it fulfills the syntax requirement by explicitly setting the Source IP to 0.0.0.0 (the unspecified address). Both A and R are true and perfectly linked.",
+    "trick": "Bank/IT Trap: 0.0.0.0 acts as a wildcard meaning 'this specific host on this network' when no valid IP is currently leased. It is a mandatory structural placeholder.",
+    "tip": "DHCP Discover packets originate from Source IP 0.0.0.0 and target Destination IP 255.255.255.255."
+  },
+  {
+    "id": 96,
+    "question": "A web browser initiates a TCP connection to a server. In the initial SYN packet, the 'Sequence Number' field is populated with the value 4200. Assuming the packet is successfully received without data payloads, what specific value will the server populate in the 'Acknowledgment Number' field of its returning SYN-ACK packet?",
+    "options": ["4200", "4201", "1", "0"],
+    "answer": "4201",
+    "explanation": "Step 1: The TCP 3-way handshake begins with a SYN packet containing an Initial Sequence Number (ISN) randomly generated by the client (e.g., 4200). Step 2: TCP Acknowledgments are 'Expectational'. They do not repeat what was received; they state what specific byte number is expected NEXT. Step 3: Although the SYN packet contains no application payload data, the SYN flag itself consumes exactly one sequence number space logically. Step 4: To acknowledge the SYN, the server increments the received Sequence Number by 1. Step 5: Therefore, the returning SYN-ACK will contain an Acknowledgment Number of 4201.",
+    "trick": "Bank/IT Trap: SYN and FIN flags are unique; even without payload data, they mathematically consume 1 sequence number space, forcing the ACK to increment by 1.",
+    "tip": "A TCP Acknowledgment to an initial SYN packet always equals the Client's Sequence Number + 1."
+  },
+  {
+    "id": 97,
+    "question": "Assertion (A): BGP (Border Gateway Protocol) natively incorporates a 'Time To Live' (TTL) metric within its routing update algorithms to prevent infinite internet routing loops. Reason (R): As an autonomous system path-vector protocol, BGP identifies loops by scanning the AS-PATH attribute; if a router sees its own Autonomous System Number (ASN) within the path history of an incoming update, it immediately drops the route. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Reason (R) perfectly defines BGP loop prevention. BGP tracks the path of a route using the AS-PATH attribute (e.g., Path: AS100 -> AS200 -> AS300). If router AS100 receives an update that already lists AS100 in the history, it knows a loop exists and rejects the route. Step 2: Assertion (A) is completely false. BGP does NOT use a TTL metric or hop-count algorithms (like RIP or IP headers) to prevent logical routing loops. It relies entirely on the structural AS-PATH attribute checks.",
+    "trick": "Bank/IT Trap: While the underlying IP packets carrying BGP messages have a standard TTL field, BGP's actual logical routing algorithm specifically uses AS-PATH for loop prevention, not TTL.",
+    "tip": "BGP prevents internet routing loops by scanning the AS-PATH attribute for its own ASN."
+  },
+  {
+    "id": 98,
+    "question": "Which specific ICMP message type is generated by a router and sent back to a source host when an IP packet is aggressively dropped because it encountered an MTU bottleneck and had the 'Don't Fragment' (DF) bit set in its IP header?",
+    "options": ["Type 0: Echo Reply", "Type 3: Destination Unreachable (Fragmentation Needed)", "Type 5: Redirect Message", "Type 11: Time Exceeded"],
+    "answer": "Type 3: Destination Unreachable (Fragmentation Needed)",
+    "explanation": "Step 1: An application sets the 'Don't Fragment' (DF) bit to 1 in the IP header to ensure data arrives intact or not at all. Step 2: The packet hits a router where the outbound link MTU (e.g., 1400 bytes) is smaller than the packet (1500 bytes). Step 3: The router normally would fragment the packet, but the DF bit strictly forbids it. Step 4: The router has no choice but to drop the packet. Step 5: To inform the sender, the router generates an ICMP Type 3 (Destination Unreachable), Code 4 message: 'Fragmentation Needed and DF set', commonly utilized in Path MTU Discovery.",
+    "trick": "Bank/IT Trap: PMTUD (Path MTU Discovery) relies entirely on this specific ICMP Type 3 message to dynamically negotiate the maximum packet size across unknown WAN links.",
+    "tip": "Dropping a packet with a 'Don't Fragment' bit triggers an ICMP Type 3 Destination Unreachable error."
+  },
+  {
+    "id": 99,
+    "question": "Assertion (A): The 'Subnet Mask' acts as a strict structural filter allowing a computer to mathematically determine whether a target IP address resides on its own local network or on a foreign remote network. Reason (R): The computer executes a bitwise AND operation comparing its own IP against the Subnet Mask, and repeats the operation against the Target IP; if the two resulting network addresses differ, the packet is instantly routed to the Default Gateway. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The core function of a Subnet Mask (e.g., 255.255.255.0) is to delineate the Network boundary from the Host boundary. Step 2: When PC A wants to send data to PC B, it must decide whether to use ARP locally or send it to the Router. Step 3: PC A takes its own IP and bitwise ANDs it with the Subnet Mask to find its Network ID. Step 4: It performs the exact same bitwise AND operation on PC B's IP. Step 5: If the resulting Network IDs match, it's local. If they differ, the target is remote, and the OS packages the frame targeting the Default Gateway MAC address. Both A and R are perfectly linked.",
+    "trick": "Bank/IT Trap: Subnet Masks do not route traffic; they purely perform the binary math required for a host to realize that it NEEDS to use a router.",
+    "tip": "Hosts perform bitwise AND operations with the Subnet Mask to identify local vs remote IPs."
+  },
+  {
+    "id": 100,
+    "question": "In legacy Hub-based Ethernet environments, what is the specific operational purpose of the 'Jam Signal' within the CSMA/CD protocol framework?",
+    "options": ["To amplify the electrical signal over distances exceeding 100 meters.", "To explicitly inform all devices on the shared medium that a data collision has occurred, ensuring all transmitting stations immediately cease sending data.", "To lock down a specific port to prevent unauthorized MAC addresses from spoofing traffic.", "To act as a heartbeat keepalive preventing the Hub from entering sleep mode."],
+    "answer": "To explicitly inform all devices on the shared medium that a data collision has occurred, ensuring all transmitting stations immediately cease sending data.",
+    "explanation": "Step 1: CSMA/CD manages access to a shared collision domain. Step 2: Two devices listen, hear silence, and transmit data simultaneously. Step 3: The electrical signals crash into each other on the copper wire, increasing the voltage dynamically. Step 4: The transmitting NICs detect this abnormal voltage spike (Collision Detection). Step 5: Upon detection, the NIC instantly aborts transmission and broadcasts a 32-bit 'Jam Signal'. This guarantees that EVERY other device on the network is fully aware of the collision, forcing them all to drop the corrupted frame and initiate their random backoff timers.",
+    "trick": "Bank/IT Trap: The Jam Signal ensures the collision isn't localized. It is a loud broadcast shouting 'Collision happened, everybody stop and back off!'",
+    "tip": "The Jam Signal in CSMA/CD broadcasts collision awareness, forcing all devices to halt transmission."
+  }
+]

@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): Instruction pipelining does not reduce the execution time of an individual instruction. Reason (R): Pipelining increases the overall throughput of the CPU by overlapping the execution stages of multiple instructions, but the latency of a single instruction remains unchanged or slightly increases due to latch delays. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Pipelining divides instruction execution into discrete stages. Step 2: Multiple instructions enter the pipeline, overlapping their stages. Step 3: This overlap massively increases the number of instructions completed per second (throughput). Step 4: However, a single instruction still must pass through every stage sequentially. Step 5: Furthermore, the hardware latches between stages add slight microscopic delays, making single-instruction latency technically slightly longer. Both statements are true and correctly linked.",
+    "trick": "Trap: Students commonly confuse 'throughput' with 'latency'. Pipelining improves the assembly line's output rate, not the speed of building one single unit.",
+    "tip": "Pipelining boosts throughput (overall speed), not latency (single instruction speed)."
+  },
+  {
+    "id": 2,
+    "question": "In a classic 5-stage RISC pipeline (Fetch, Decode, Execute, Memory, Write-back), which type of pipeline hazard occurs when an instruction depends on the result of a previous instruction that has not yet completed its Write-back stage?",
+    "options": ["Structural Hazard", "Control Hazard", "Data Hazard", "Branch Hazard"],
+    "answer": "Data Hazard",
+    "explanation": "Step 1: Pipeline hazards prevent the next instruction from executing in its designated clock cycle. Step 2: A Structural hazard is hardware resource contention. Step 3: A Control hazard involves branching instructions altering the program counter. Step 4: A Data hazard explicitly occurs when an instruction relies on a data operand produced by a preceding, still-in-flight instruction. Step 5: This requires stalling or hardware 'forwarding' to resolve.",
+    "trick": "Trap: Examiners often mix Control and Data hazards. If the dependency is a variable/operand, it is Data. If the dependency is the Program Counter, it is Control.",
+    "tip": "Data Hazard = Waiting for a variable. Control Hazard = Waiting for a jump."
+  },
+  {
+    "id": 3,
+    "question": "Assertion (A): Complex Instruction Set Computer (CISC) architectures heavily utilize microprogramming in their control units. Reason (R): Microprogramming allows complex, multi-cycle instructions to be broken down into simpler, hardware-level micro-operations stored in a ROM, reducing the physical complexity of the control logic. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: CISC processors like x86 have vast, variable-length instruction sets. Step 2: Hardwiring the control unit for hundreds of complex instructions would require an unimaginably massive array of logic gates. Step 3: To solve this, CISC uses microprogrammed control units. Step 4: Complex instructions act as pointers to a sequence of micro-operations stored in an internal ROM (the microcode). Step 5: Thus, R perfectly explains the engineering necessity of A in CISC designs.",
+    "trick": "Trap: Do not assume CISC relies on hardwired logic. RISC uses hardwired control for speed, while CISC relies on microcode ROM to handle complexity.",
+    "tip": "CISC = Microprogrammed Control Unit. RISC = Hardwired Control Unit."
+  },
+  {
+    "id": 4,
+    "question": "Which of the following architectural paradigms enforces a strict 'Load/Store' memory architecture, where arithmetic logic operations can only be performed on data currently residing in CPU registers?",
+    "options": ["Complex Instruction Set Computing (CISC)", "Reduced Instruction Set Computing (RISC)", "Very Long Instruction Word (VLIW)", "Single Instruction Multiple Data (SIMD)"],
+    "answer": "Reduced Instruction Set Computing (RISC)",
+    "explanation": "Step 1: In CISC, an ADD instruction can directly fetch a value from RAM, add it, and store it back to RAM. Step 2: This creates variable execution times and complicates pipelining. Step 3: RISC mandates a 'Load/Store' architecture. Step 4: To add data from RAM, it must first be 'Loaded' into a register, added via an ALU-only instruction, and then 'Stored' back to RAM. Step 5: This isolation ensures arithmetic instructions complete in a single cycle, enabling seamless pipelining.",
+    "trick": "Trap: CISC allows memory-to-memory operations. Only RISC strictly isolates memory access to Load and Store instructions.",
+    "tip": "RISC strictly uses Load/Store architecture to keep instruction cycles uniform."
+  },
+  {
+    "id": 5,
+    "question": "Assertion (A): The von Neumann Bottleneck is primarily a limitation imposed by the maximum clock speed achievable by silicon transistors. Reason (R): The speed disparity between the ultra-fast CPU and the significantly slower Main Memory (RAM) dictates that the CPU spends vast amounts of time idle, waiting for data retrieval. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Assertion (A). The von Neumann Bottleneck is fundamentally an architectural memory access issue, not a transistor clock speed issue. Thus, A is False. Step 2: Evaluate Reason (R). CPU speeds evolved exponentially faster than DRAM access speeds. Step 3: Because instructions and data share the same bus in standard von Neumann designs, the CPU starves for data. Step 4: This disparity is the exact definition of the bottleneck. Step 5: R is true, but A is completely false.",
+    "trick": "Trap: The von Neumann bottleneck has nothing to do with physical transistor limits (like Moore's Law). It is strictly the CPU-RAM bus traffic jam.",
+    "tip": "von Neumann Bottleneck = The speed gap between fast CPU and slow RAM."
+  },
+  {
+    "id": 6,
+    "question": "In advanced processor pipelining, what is the specific function of a 'Branch Target Buffer' (BTB)?",
+    "options": ["To temporarily store data operands to prevent read-after-write hazards.", "To cache the target address of a conditional branch to eliminate branch penalty cycles.", "To translate virtual memory addresses to physical memory addresses during a fetch.", "To synchronize the clock domains between the L1 cache and the main pipeline."],
+    "answer": "To cache the target address of a conditional branch to eliminate branch penalty cycles.",
+    "explanation": "Step 1: Conditional branches (like IF statements) disrupt pipelines because the next instruction address is unknown until the branch is evaluated. Step 2: This delay causes 'pipeline bubbles' or penalty cycles. Step 3: Hardware branch prediction attempts to guess the outcome. Step 4: If the guess is 'taken', the CPU needs the destination address immediately. Step 5: The BTB caches these specific target addresses of previously executed branches, allowing zero-delay fetching if the prediction is correct.",
+    "trick": "Trap: Do not confuse BTB with TLB (Translation Lookaside Buffer). TLB is for virtual memory; BTB is for branch prediction in pipelining.",
+    "tip": "BTB caches branch target addresses to maintain pipeline throughput."
+  },
+  {
+    "id": 7,
+    "question": "Consider a microprocessor with a clock rate of 2 GHz. If it executes a program containing 1 million instructions with an average Cycles Per Instruction (CPI) of 1.5, what is the actual execution time of the program?",
+    "options": ["0.75 milliseconds", "1.5 milliseconds", "0.75 microseconds", "1.5 microseconds"],
+    "answer": "0.75 milliseconds",
+    "explanation": "Step 1: Identify the clock rate: 2 GHz = 2 * 10^9 cycles per second. Step 2: Calculate time per cycle: 1 / (2 * 10^9) = 0.5 nanoseconds per cycle. Step 3: Find total cycles required: 1,000,000 instructions * 1.5 CPI = 1,500,000 cycles. Step 4: Calculate total time: 1,500,000 cycles * 0.5 nanoseconds. Step 5: 1,500,000 * 0.5 * 10^-9 = 0.00075 seconds, which is 0.75 milliseconds.",
+    "trick": "Trap: Pay strict attention to units. 10^6 instructions and 10^9 Hz cancel down to milliseconds (10^-3), not microseconds (10^-6).",
+    "tip": "Execution Time = (Instruction Count * CPI) / Clock Rate."
+  },
+  {
+    "id": 8,
+    "question": "Assertion (A): RISC architectures inherently suffer from larger binary code sizes compared to CISC architectures. Reason (R): RISC utilizes simple, fixed-length instructions, meaning operations that take a single instruction in CISC may require multiple instructions in RISC. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: CISC instructions are semantically rich. One instruction (e.g., multiply value in RAM by a register) does heavy lifting, keeping compiled code compact. Step 2: RISC relies on simple operations. The same task requires Load, Multiply, Store (three instructions). Step 3: Furthermore, RISC generally uses fixed 32-bit instruction widths, whereas CISC can use 8-bit to 120-bit variable lengths. Step 4: Consequently, compiling the same high-level code yields a larger binary executable in RISC. Step 5: Therefore, R correctly explains the memory footprint bloat (A) in RISC.",
+    "trick": "Trap: RISC is faster and more efficient in hardware, but memory footprint is its historical weakness. CISC was invented specifically when RAM was highly expensive.",
+    "tip": "RISC binaries are larger because complex tasks require multiple simple instructions."
+  },
+  {
+    "id": 9,
+    "question": "Which specific hardware technique is employed within a processor pipeline to resolve Read-After-Write (RAW) data hazards without stalling the pipeline?",
+    "options": ["Operand Forwarding (Bypassing)", "Static Branch Prediction", "Register Renaming", "Instruction Flushing"],
+    "answer": "Operand Forwarding (Bypassing)",
+    "explanation": "Step 1: A RAW hazard occurs when Instruction B needs the output of Instruction A, but A hasn't written the result to the register file yet. Step 2: Stalling wastes cycles waiting for the write-back. Step 3: Hardware engineers use Operand Forwarding (or Bypassing). Step 4: This connects the output of the ALU directly back to the input of the ALU. Step 5: As soon as Instruction A calculates the result, it is immediately 'forwarded' to Instruction B's execution phase, bypassing the register file entirely and preventing a stall.",
+    "trick": "Trap: Register Renaming fixes Write-After-Write (WAW) and Write-After-Read (WAR) hazards. Operand Forwarding uniquely fixes true RAW data dependencies.",
+    "tip": "Operand Forwarding routes ALU output directly to the next ALU input."
+  },
+  {
+    "id": 10,
+    "question": "Assertion (A): Superscalar processors achieve greater throughput than purely pipelined scalar processors. Reason (R): Superscalar architectures issue multiple independent instructions simultaneously into distinct execution units within the same clock cycle. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A standard pipelined processor (scalar) initiates exactly one instruction per clock cycle, achieving a maximum CPI of 1. Step 2: Throughput is limited by this single issuance. Step 3: Superscalar designs incorporate multiple independent execution units (e.g., two ALUs, one FPU). Step 4: The hardware dynamically checks for dependencies and issues multiple instructions simultaneously if independent. Step 5: This allows superscalar processors to achieve a CPI of less than 1 (or Instructions Per Cycle > 1), making R the exact mechanism causing A.",
+    "trick": "Trap: Do not confuse Superscalar with Multi-core. Superscalar is Instruction-Level Parallelism within a single core's pipeline. Multi-core is Thread-Level.",
+    "tip": "Superscalar = Multiple execution units = More than 1 instruction per cycle."
+  },
+  {
+    "id": 11,
+    "question": "In the context of CISC versus RISC compilation, how does a modern CISC processor (like an Intel Core i9) actually execute its complex x86 instructions internally?",
+    "options": ["It decodes x86 instructions directly into hardwired control signals using massive logic gate arrays.", "It executes them sequentially via an interpreted software emulation layer in the OS.", "It relies strictly on the compiler to convert complex instructions into pure RISC binaries before execution.", "It decodes complex x86 instructions into simpler, RISC-like 'micro-operations' internally before pipelining them."],
+    "answer": "It decodes complex x86 instructions into simpler, RISC-like 'micro-operations' internally before pipelining them.",
+    "explanation": "Step 1: Modern x86 processors must maintain backwards compatibility with the ancient, complex CISC instruction set. Step 2: However, deep, fast pipelining is practically impossible with complex, variable-length instructions. Step 3: To survive, modern CISC CPUs utilize a hybrid approach. Step 4: The instruction decoder translates the complex x86 CISC instructions into simpler, uniform 'micro-operations' (uOps). Step 5: The internal execution engine then processes these uOps utilizing highly aggressive RISC-style superscalar pipelining.",
+    "trick": "Trap: Modern Intel/AMD CPUs are not pure CISC internally. They are CISC on the outside (ISA level) and RISC on the inside (microarchitecture level).",
+    "tip": "Modern CISC decodes x86 into RISC-like micro-ops (uOps) for fast pipelining."
+  },
+  {
+    "id": 12,
+    "question": "Assertion (A): The adoption of the Harvard Architecture mitigates the von Neumann bottleneck. Reason (R): The Harvard Architecture utilizes physically separate memory spaces and buses for instructions and data, doubling the simultaneous memory access bandwidth. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The von Neumann bottleneck occurs because a single unified bus must multiplex instruction fetches and data reads/writes. Step 2: The CPU must wait for one to finish before doing the other. Step 3: The Harvard Architecture physically splits memory into Instruction Memory and Data Memory. Step 4: Each has its own dedicated bus connected to the CPU. Step 5: This allows the CPU to fetch an instruction and read/write data in the exact same clock cycle, severely diminishing the bottleneck effect.",
+    "trick": "Trap: While most modern main memory (RAM) is von Neumann, internal L1 Cache is almost universally split into L1-Instruction and L1-Data, implementing a strict Harvard architecture internally.",
+    "tip": "Harvard Architecture = Separate data and instruction buses = No von Neumann clash."
+  },
+  {
+    "id": 13,
+    "question": "When analyzing pipeline performance, 'Speedup' is the primary metric. If a non-pipelined processor takes 50ns per instruction, and a 5-stage pipelined version takes 12ns per stage (due to 2ns latch overhead), what is the theoretical maximum speedup as the number of instructions approaches infinity?",
+    "options": ["4.16", "5.0", "1.19", "3.85"],
+    "answer": "4.16",
+    "explanation": "Step 1: Speedup (S) is calculated as execution time of non-pipelined / execution time of pipelined. Step 2: For an infinite number of instructions, a pipeline completes one instruction every clock cycle. Step 3: The clock cycle of the pipelined processor is determined by its slowest stage, which is given as 12ns. Step 4: Thus, the pipelined throughput time is effectively 12ns per instruction. Step 5: Speedup = 50ns / 12ns = 4.16. (Notice it is less than the ideal 5.0 due to the latch overhead).",
+    "trick": "Trap: Do not just pick '5' because it has 5 stages. The overhead (10ns stage + 2ns latch = 12ns cycle) must be factored against the non-pipelined base speed (50ns).",
+    "tip": "Max Pipeline Speedup = Non-pipelined Time / Pipelined Clock Cycle Time."
+  },
+  {
+    "id": 14,
+    "question": "Which of the following describes 'Register Renaming', a technique vital for Out-of-Order (OoO) superscalar execution?",
+    "options": ["Replacing hardware registers with virtual memory pages during deep sleeps.", "Translating programmer-visible architectural registers into a larger pool of physical hardware registers to eliminate false data dependencies.", "Dynamically changing the length of registers from 32-bit to 64-bit depending on the OS context.", "Renaming the opcodes of CISC instructions into RISC equivalents before the fetch stage."],
+    "answer": "Translating programmer-visible architectural registers into a larger pool of physical hardware registers to eliminate false data dependencies.",
+    "explanation": "Step 1: In OoO execution, instructions are executed as soon as their data is ready, not in program order. Step 2: This creates 'false dependencies' like Write-After-Write (WAW) or Write-After-Read (WAR) because there are only a limited number of architectural registers (e.g., 16 in x86). Step 3: Processors actually have hundreds of physical registers hidden inside. Step 4: Register Renaming dynamically maps the architectural register requested by the code to a fresh physical register. Step 5: This eliminates the false dependency, allowing the instruction to execute out-of-order without overwriting needed data.",
+    "trick": "Trap: Register Renaming does NOT fix true data dependencies (RAW), only false ones (WAW, WAR) caused by the compiler reusing the small set of named registers.",
+    "tip": "Register renaming maps small architectural register sets to large physical pools."
+  },
+  {
+    "id": 15,
+    "question": "Assertion (A): Deep pipelining (Super-pipelining) with 20+ stages guarantees a massive increase in processor performance for all types of software. Reason (R): Deeper pipelines allow for higher clock frequencies because each individual stage has less logic to execute, shrinking the clock cycle time. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). Splitting work into 20 stages instead of 5 means each stage does less work. Less work means less propagation delay, allowing engineers to crank up the clock frequency (GHz). R is True. Step 2: Evaluate Assertion (A). Deep pipelines suffer catastrophic penalties when a branch prediction is wrong. Step 3: If a 20-stage pipeline flushes, it loses 20 cycles of work, crippling performance in branch-heavy software (like databases). Step 4: Thus, it does not 'guarantee' massive performance for 'all types' of software (Intel's Pentium 4 proved this failure). A is False.",
+    "trick": "Trap: Higher clock speed via super-pipelining looks good on paper, but branch penalties destroy IPC (Instructions Per Cycle) efficiency.",
+    "tip": "Deep pipelines enable higher clocks but suffer massive branch misprediction penalties."
+  },
+  {
+    "id": 16,
+    "question": "In a processor pipeline, a 'Control Hazard' is most effectively mitigated by which combination of architectural features?",
+    "options": ["Instruction Cache and Operand Forwarding", "Branch Prediction and Branch Target Buffers", "Register Windowing and Write Buffers", "Translation Lookaside Buffers and Paging"],
+    "answer": "Branch Prediction and Branch Target Buffers",
+    "explanation": "Step 1: Control Hazards occur strictly due to branch instructions (jumps, loops, if-statements) changing the Program Counter. Step 2: The pipeline doesn't know where to fetch from next until the branch resolves. Step 3: Branch Prediction logic guesses which way the branch will go based on history. Step 4: The Branch Target Buffer (BTB) instantly provides the memory address of the predicted path. Step 5: Together, they allow the pipeline to continue fetching without stalling, dropping the penalty to zero if the prediction is correct.",
+    "trick": "Trap: Operand forwarding fixes Data hazards, not Control hazards. TLB handles memory paging, not pipeline instruction flow.",
+    "tip": "Control Hazards (Branches) are countered by Predictors and Target Buffers."
+  },
+  {
+    "id": 17,
+    "question": "Assertion (A): A processor with a higher Clock Speed (GHz) will always execute a given program faster than a processor with a lower Clock Speed. Reason (R): Clock speed directly dictates the raw number of cycles executed per second, which dictates the absolute time limit of program execution. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is False"],
+    "answer": "A is False, but R is False",
+    "explanation": "Step 1: Evaluate A. Execution time = (Instruction Count * CPI) / Clock Rate. Step 2: A 4GHz processor might have a horrible pipeline yielding a CPI of 3, while a 2GHz processor might be superscalar yielding a CPI of 0.5. Step 3: The 2GHz processor would run the program faster. Therefore, A is absolutely False. Step 4: Evaluate R. Clock speed dictates cycles per second, but because of differing instruction sets (RISC/CISC) and CPI, it does not dictate the absolute 'time limit' or efficiency of program execution. The 'Megahertz Myth' proves R is False.",
+    "trick": "Trap: The 'Megahertz Myth' is a classic trap. IPC/CPI matters just as much as Clock Speed. Never assume higher GHz equals faster execution automatically.",
+    "tip": "Execution speed relies on Clock Speed AND Cycles Per Instruction (CPI)."
+  },
+  {
+    "id": 18,
+    "question": "Which RISC architectural feature famously introduced in the SPARC architecture minimizes the overhead of saving and restoring registers during function calls?",
+    "options": ["Dynamic Register Renaming", "Register Windows", "Out-of-Order Execution Buffers", "Software Managed TLBs"],
+    "answer": "Register Windows",
+    "explanation": "Step 1: In standard architectures, when a function is called, the current registers must be saved to RAM (stack) and restored upon return, which is slow. Step 2: RISC architectures (like Sun's SPARC) introduced 'Register Windows'. Step 3: The CPU has a massive physical register file (e.g., 128 registers). Step 4: Only a 'window' of 32 registers is visible to the software at any time. Step 5: On a function call, the hardware simply shifts the window pointer to a fresh set of registers natively, requiring zero RAM interaction and accelerating calls massively.",
+    "trick": "Trap: Register Renaming handles OoO execution dependencies. Register Windows explicitly handle function call/return overhead in RISC.",
+    "tip": "Register Windows accelerate function calls by shifting pointers instead of using RAM."
+  },
+  {
+    "id": 19,
+    "question": "In the evolution of cache memory addressing, what is the primary structural disadvantage of a 'Fully Associative Cache' compared to a 'Direct Mapped Cache'?",
+    "options": ["It suffers from massive conflict misses.", "It requires complex and power-hungry associative comparison logic for every tag check.", "It maps every main memory block to exactly one rigid cache line.", "It cannot be utilized within a Harvard architecture."],
+    "answer": "It requires complex and power-hungry associative comparison logic for every tag check.",
+    "explanation": "Step 1: Direct Mapped cache maps a RAM block to only one specific line. It is fast to check but suffers from conflict misses. Step 2: Fully Associative allows a RAM block to be stored anywhere in the cache. This minimizes conflict misses. Step 3: However, when the CPU looks for data, it doesn't know where it is. Step 4: The hardware must simultaneously compare the requested tag against EVERY tag in the entire cache in parallel. Step 5: This requires massive, complex, and slow comparator logic (CAM), making Fully Associative impractical for large L2/L3 caches.",
+    "trick": "Trap: Fully associative eliminates conflict misses, it doesn't suffer from them. Its weakness is the hardware search complexity.",
+    "tip": "Fully Associative = Zero conflict misses, but massive hardware search overhead."
+  },
+  {
+    "id": 20,
+    "question": "Assertion (A): VLIW (Very Long Instruction Word) processors shift the burden of finding instruction-level parallelism from hardware to the software compiler. Reason (R): VLIW compilers explicitly pack multiple independent operations into a single massive instruction word to be executed simultaneously by the hardware. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Superscalar processors use complex hardware logic (during Decode) to find independent instructions to run in parallel. Step 2: VLIW architecture strips away this complex hardware to save power and die space (A is True). Step 3: Instead, the heavy lifting is moved to the Compiler. Step 4: The Compiler analyzes the code, finds independent operations, and explicitly formats them into one giant 128-bit or 256-bit instruction (R is True). Step 5: The hardware simply executes what the compiler packed. R correctly explains A.",
+    "trick": "Trap: Superscalar = Hardware finds parallelism dynamically. VLIW = Software Compiler finds parallelism statically.",
+    "tip": "VLIW relies entirely on the compiler to pack parallel instructions."
+  },
+  {
+    "id": 21,
+    "question": "What is the primary architectural purpose of utilizing a 'Write-Back' cache policy instead of a 'Write-Through' cache policy?",
+    "options": ["To ensure Main Memory is always strictly consistent with Cache.", "To dramatically reduce the traffic congestion on the system memory bus.", "To eliminate the need for a dirty bit in the cache line metadata.", "To accelerate the process of fetching instructions into the pipeline."],
+    "answer": "To dramatically reduce the traffic congestion on the system memory bus.",
+    "explanation": "Step 1: In a Write-Through policy, every time the CPU writes to the cache, the data is immediately sent to RAM as well. This keeps them synced but clogs the memory bus. Step 2: In a Write-Back policy, the CPU only writes to the fast cache. Step 3: The cache line is marked with a 'dirty bit'. Step 4: The data is only written back to the slow RAM when that specific cache line is evicted to make room for new data. Step 5: This massively reduces bus traffic because intermediate values in loops are never sent to RAM.",
+    "trick": "Trap: Write-Through ensures consistency (data safety). Write-Back abandons immediate consistency specifically to save memory bus bandwidth.",
+    "tip": "Write-Back minimizes RAM writes to reduce memory bus traffic."
+  },
+  {
+    "id": 22,
+    "question": "Assertion (A): The ARM architecture, a prominent RISC design, strictly avoids the use of condition codes (flags) for branching. Reason (R): ARM employs predicated execution for nearly all instructions to eliminate short conditional branches entirely from the pipeline. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Assertion (A). ARM relies heavily on condition codes (N, Z, C, V flags in the CPSR register) to control its logic. Therefore, A is completely False. Step 2: Evaluate Reason (R). A unique feature of classic 32-bit ARM (unlike x86 or MIPS) is that almost every instruction has a 4-bit condition code field. Step 3: This 'predicated execution' allows instructions to execute only if a flag is set (e.g., ADDEQ - add if equal). Step 4: This removes the need for branching over single instructions, preventing pipeline flushes. R is historically True and a hallmark of ARM.",
+    "trick": "Trap: ARM uses flags heavily to AVOID branches via predication. It doesn't avoid flags; it avoids the pipeline penalty of the branch.",
+    "tip": "ARM Predicated Execution executes instructions conditionally without branching."
+  },
+  {
+    "id": 23,
+    "question": "During pipelined execution, which of the following scenarios describes a 'Write-After-Read' (WAR) false dependency?",
+    "options": ["Instruction 2 tries to read a register before Instruction 1 has written to it.", "Instruction 2 tries to write to a register before Instruction 1 has written to it.", "Instruction 2 tries to write to a register before Instruction 1 has read from it.", "Instruction 2 and Instruction 1 both attempt to write to RAM simultaneously."],
+    "answer": "Instruction 2 tries to write to a register before Instruction 1 has read from it.",
+    "explanation": "Step 1: Dependencies dictate instruction ordering. Step 2: True dependency (RAW) is when Inst 2 needs the output of Inst 1. Step 3: A WAR hazard occurs in out-of-order pipelines when a later instruction (Inst 2) writes to a register that an earlier instruction (Inst 1) is supposed to read. Step 4: If Inst 2 executes out-of-order and writes first, Inst 1 will read the new, incorrect value instead of the old one. Step 5: This is a 'false' dependency solved by Register Renaming.",
+    "trick": "Trap: Just read the acronym literally. Write-After-Read (WAR) means the later instruction WRITES after the earlier instruction READS (in intended program order). Out-of-order execution violates this sequence.",
+    "tip": "WAR = A later instruction overwrites data an earlier instruction hasn't read yet."
+  },
+  {
+    "id": 24,
+    "question": "Consider a 4-way Set Associative Cache with a capacity of 64KB and a block size of 32 bytes. How many sets does this cache contain?",
+    "options": ["512", "1024", "2048", "4096"],
+    "answer": "512",
+    "explanation": "Step 1: Determine total number of blocks in the cache: Cache Capacity / Block Size. Step 2: 64KB = 65,536 bytes. Step 3: 65,536 / 32 = 2048 blocks. Step 4: The cache is N-way set associative, meaning N blocks reside in one set. Here, N = 4. Step 5: Total Sets = Total Blocks / N. Step 6: 2048 / 4 = 512 sets. The memory address will index exactly into one of these 512 sets.",
+    "trick": "Trap: Don't forget the final division by N (4). 2048 is the number of blocks/lines, but in a 4-way cache, 4 lines make up a single set.",
+    "tip": "Sets = Total Cache Capacity / (Block Size * N-way)."
+  },
+  {
+    "id": 25,
+    "question": "Assertion (A): Loop Unrolling is a compiler optimization technique that increases the binary file size but improves pipeline performance. Reason (R): Loop Unrolling reduces the frequency of branch instructions and loop counter updates, thereby severely reducing control hazards in the pipeline. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A loop executing 100 times has 100 branch instructions evaluating at the end. Every branch is a potential pipeline hazard. Step 2: Loop Unrolling duplicates the loop body (e.g., writing the internal code 4 times sequentially). Step 3: This means the loop only executes 25 times. Step 4: This drastically cuts down the number of conditional branches (Control Hazards) and loop counter arithmetic, freeing the pipeline to run smoothly (R is True). Step 5: However, because the code is duplicated physically, the executable binary size increases (A is True).",
+    "trick": "Trap: Optimization usually means 'smaller/faster'. Loop unrolling explicitly trades memory size (bloat) for speed (pipeline efficiency).",
+    "tip": "Loop unrolling bloats code size but kills branch penalties, boosting speed."
+  },
+  {
+    "id": 26,
+    "question": "In computer architecture, the 'Amdahl’s Law' equation fundamentally bounds the maximum theoretical speedup of a system. If an architectural enhancement speeds up 80% of a program's execution by a factor of 4, but the remaining 20% cannot be improved, what is the overall system speedup?",
+    "options": ["2.5", "4.0", "3.2", "1.8"],
+    "answer": "2.5",
+    "explanation": "Step 1: Amdahl's Law formula is S = 1 / ((1 - P) + (P / N)). Step 2: P is the proportion of the program improved (80% = 0.8). Step 3: N is the speedup factor for that portion (N = 4). Step 4: 1 - P is the un-improved sequential portion (20% = 0.2). Step 5: S = 1 / (0.2 + (0.8 / 4)) = 1 / (0.2 + 0.2) = 1 / 0.4 = 2.5. The system speeds up by 2.5x overall.",
+    "trick": "Trap: Do not just average the speedup. The sequential (un-improved) portion heavily dominates the ceiling of the speedup. 20% un-improved strictly caps speedup at 5x regardless of N.",
+    "tip": "Amdahl's Law: S = 1 / ((Sequential Portion) + (Parallel Portion / Speedup))."
+  },
+  {
+    "id": 27,
+    "question": "Assertion (A): Direct Memory Access (DMA) acts as an alternative execution unit to the CPU for specialized mathematical processing. Reason (R): DMA strictly bypasses the CPU's internal registers to transfer massive blocks of data between peripheral devices and Main Memory, mitigating the von Neumann bottleneck. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Assertion (A). DMA is a data transfer controller, not a mathematical execution unit like an ALU or FPU. A is False. Step 2: Evaluate Reason (R). Without DMA, the CPU must read every byte from a hard drive into its register, then write it back to RAM, wasting cycles. Step 3: The DMA controller takes command of the memory bus and routes data directly from the drive to RAM. Step 4: This frees the CPU to execute instructions, alleviating the memory traffic jam. R is True.",
+    "trick": "Trap: DMA is strictly for Input/Output memory transfer. It does zero computation or logic. Do not confuse it with a math co-processor.",
+    "tip": "DMA transfers data directly to RAM without CPU register involvement."
+  },
+  {
+    "id": 28,
+    "question": "Which of the following cache replacement policies is practically impossible to implement flawlessly in hardware because it requires predicting the future?",
+    "options": ["Least Recently Used (LRU)", "First-In-First-Out (FIFO)", "Belady's Optimal Algorithm", "Random Replacement (RR)"],
+    "answer": "Belady's Optimal Algorithm",
+    "explanation": "Step 1: Cache fills up and must evict old lines to store new ones. Step 2: LRU evicts the oldest untouched data. FIFO evicts the first data loaded. Step 3: Belady's Optimal Algorithm states: 'Evict the block that will not be used for the longest period of time in the future'. Step 4: This yields the absolute lowest possible miss rate. Step 5: However, because processors cannot see the future execution path of a program dynamically, this is an impossible benchmark used only theoretically to measure the efficiency of real algorithms like LRU.",
+    "trick": "Trap: LRU is the best realistic algorithm, but Belady's Optimal is the theoretical ceiling that strictly requires clairvoyance.",
+    "tip": "Belady's Optimal requires predicting the future to evict data."
+  },
+  {
+    "id": 29,
+    "question": "Assertion (A): An increase in processor pipeline depth universally decreases the CPI (Cycles Per Instruction) metric towards an ideal 1.0. Reason (R): Deeper pipelines subdivide instruction complexity, allowing more instructions to be in-flight simultaneously. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). A 5-stage pipeline has 5 instructions in-flight. A 20-stage pipeline has 20. This subdivision is the literal definition of deepening a pipeline. R is True. Step 2: Evaluate Assertion (A). While deeper pipelines increase throughput and clock speed, they do NOT automatically decrease CPI to 1.0. Step 3: In fact, deeper pipelines suffer severe hazard penalties. A single branch misprediction flushes 20 cycles, drastically increasing the average CPI above 1.0. Therefore, A is False.",
+    "trick": "Trap: Ideal pipeline CPI is 1.0. Real CPI is always > 1 due to hazards. Deeper pipelines actually suffer WORSE hazard penalties, heavily damaging CPI efficiency.",
+    "tip": "Deeper pipelines suffer harsher branch penalties, driving average CPI higher."
+  },
+  {
+    "id": 30,
+    "question": "In a CISC microarchitecture utilizing micro-operations (uOps), what is the function of the 'Reorder Buffer' (ROB)?",
+    "options": ["To translate big-endian data structures into little-endian structures before execution.", "To ensure that instructions executed out-of-order are committed to the architectural state in strict program order.", "To reorder the memory fetch sequences to maximize cache hit rates.", "To shuffle RISC instructions to fit securely into a VLIW packet."],
+    "answer": "To ensure that instructions executed out-of-order are committed to the architectural state in strict program order.",
+    "explanation": "Step 1: Modern processors execute instructions out-of-order (OoO) to keep execution units busy. Step 2: If an interrupt occurs or a branch is mispredicted, the processor must be able to restore the exact state as written by the programmer. Step 3: If out-of-order results were saved directly to permanent registers, restoring state would be impossible. Step 4: The Reorder Buffer (ROB) holds the finished results of OoO instructions. Step 5: It only 'commits' them to the permanent architectural registers in the exact sequential order the original code dictated.",
+    "trick": "Trap: OoO execution is chaotic internally. The ROB is the crucial mechanism that hides this chaos and makes the CPU look perfectly sequential to the software.",
+    "tip": "ROB commits out-of-order executions sequentially to maintain correct program state."
+  },
+  {
+    "id": 31,
+    "question": "Assertion (A): Synchronous DRAM (SDRAM) integrates itself with the processor's clock domain. Reason (R): Tying the memory to the processor's external bus clock allows pipelining of memory requests, eliminating the asynchronous wait states required by older DRAM. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Older asynchronous DRAM responded to CPU requests whenever it was ready, forcing the CPU to sit in unpredictable 'wait states'. Step 2: SDRAM (Synchronous DRAM) synchronizes its input/output signals with the motherboard's system bus clock (A is True). Step 3: Because the timing is perfectly predictable, the memory controller can issue a new read request before the data from the previous request has arrived. Step 4: This 'pipelining' of memory commands drastically increases bandwidth and throughput (R is True).",
+    "trick": "Trap: SDRAM doesn't run at the internal CPU speed (e.g., 4GHz), it synchronizes with the external Front-Side Bus / Memory controller clock, enabling queued requests.",
+    "tip": "SDRAM synchronizes with the bus clock to allow pipelined memory requests."
+  },
+  {
+    "id": 32,
+    "question": "Which of the following is a definitive characteristic defining a pure RISC architecture over a CISC architecture?",
+    "options": ["Instructions dictate physical microcode behavior directly.", "A highly complex Instruction Decode pipeline stage.", "A highly orthogonal instruction set with few addressing modes.", "Support for specialized vector arithmetic inside integer ALUs."],
+    "answer": "A highly orthogonal instruction set with few addressing modes.",
+    "explanation": "Step 1: CISC uses specialized instructions (e.g., one instruction specifically to move memory to an accumulator, another to move memory to a general register) and dozens of complex addressing modes. Step 2: RISC architectures strive for 'orthogonality'. Step 3: An orthogonal instruction set means any instruction can use any register, and there is no overlap in instruction purpose. Step 4: RISC severely limits addressing modes to basic register-direct or immediate, relying on Load/Store for everything else to keep the hardware simple.",
+    "trick": "Trap: CISC relies on microcode. RISC does not. CISC has a highly complex decode stage (to translate to uOps). RISC decoders are incredibly simple.",
+    "tip": "RISC = Orthogonal instructions, simple decode, very few addressing modes."
+  },
+  {
+    "id": 33,
+    "question": "Assertion (A): Simultaneous Multithreading (SMT), known commercially as Hyper-Threading, physically duplicates the ALUs and Caches inside a single core. Reason (R): SMT allows a single physical core to appear as two logical cores to the OS, executing two threads by filling idle pipeline slots when one thread stalls. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). SMT (Hyper-Threading) indeed exposes one physical core as two logical threads to the OS. If Thread A stalls on a cache miss, Thread B uses the execution units. R is True. Step 2: Evaluate Assertion (A). SMT does NOT physically duplicate the heavy execution units (ALUs, FPUs) or main Caches. Step 3: It only duplicates the architectural state registers (Program Counter, general-purpose registers) so it can track two threads. Step 4: Because it shares the physical ALUs, A is completely False.",
+    "trick": "Trap: Multi-core physically duplicates ALUs. Hyper-threading (SMT) only duplicates the state registers to share the same ALUs more efficiently.",
+    "tip": "SMT/Hyper-Threading duplicates registers, NOT ALUs or Caches."
+  },
+  {
+    "id": 34,
+    "question": "In the context of multi-level cache hierarchies, what does the principle of 'Inclusivity' mandate regarding an L1 and L2 cache relationship?",
+    "options": ["The L1 cache must be physically larger than the L2 cache.", "Any data residing in the L1 cache must simultaneously exist in the L2 cache.", "The L2 cache contains exclusively data that has been evicted from the L1 cache.", "The L1 and L2 caches must operate on separate synchronous clock domains."],
+    "answer": "Any data residing in the L1 cache must simultaneously exist in the L2 cache.",
+    "explanation": "Step 1: Cache hierarchies (L1, L2, L3) follow specific design policies. Step 2: An 'Inclusive' cache hierarchy mandates that the lower-level cache (L2) contains a strict superset of all data in the upper-level cache (L1). Step 3: If a block is loaded into L1, it is simultaneously placed in L2. Step 4: If it is evicted from L2, it must forcefully be evicted from L1. Step 5: This simplifies cache coherence in multi-core processors, because checking L2 guarantees you know what is in L1. The opposite policy is 'Exclusive'.",
+    "trick": "Trap: 'Exclusive' cache (used by older AMDs) means data is in L1 OR L2, never both, maximizing total space. 'Inclusive' (used by Intel) wastes space but speeds up coherence checks.",
+    "tip": "Inclusive Cache: L2 is a complete superset of everything inside L1."
+  },
+  {
+    "id": 35,
+    "question": "Assertion (A): Using an aggressive 'Branch Prediction' algorithm guarantees that a pipeline will never incur a control penalty cycle. Reason (R): Advanced branch predictors use History Tables to predict outcomes with over 95% accuracy, keeping the instruction fetch stage fully populated. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). Modern branch predictors (like two-level adaptive predictors) are incredibly advanced and do hit 95%+ accuracy rates using Branch History Tables. R is True. Step 2: Evaluate Assertion (A). A 95% accuracy rate is not 100%. Step 3: When the predictor eventually guesses wrong (misprediction), the pipeline has fetched and partially executed the wrong path. Step 4: The pipeline must flush all these incorrect instructions and suffer a massive penalty. It does not 'guarantee' zero penalties. A is False.",
+    "trick": "Trap: Absolutes like 'never' or 'guarantees' are red flags. No prediction algorithm is perfect. Mispredictions are inevitable and costly.",
+    "tip": "Even 99% branch prediction accuracy leaves a 1% chance of pipeline flushes."
+  },
+  {
+    "id": 36,
+    "question": "In a superscalar architecture, hardware logic dynamically checks for instructions that can run in parallel. Which type of data dependency strictly prohibits two instructions from executing simultaneously because it violates data flow logic?",
+    "options": ["Write-After-Write (WAW)", "Read-After-Read (RAR)", "Write-After-Read (WAR)", "Read-After-Write (RAW)"],
+    "answer": "Read-After-Write (RAW)",
+    "explanation": "Step 1: Read-After-Read (RAR) is not a hazard. Two reads don't alter state. Step 2: Write-After-Write (WAW) and Write-After-Read (WAR) are 'name/false' dependencies. They occur because of limited registers and can be entirely eliminated by Register Renaming. Step 3: Read-After-Write (RAW) is a 'True Data Dependency'. Step 4: If Instruction B mathematically requires the calculated sum of Instruction A, B absolutely cannot start executing until A finishes the math. Step 5: Hardware cannot rename away a true mathematical dependency.",
+    "trick": "Trap: WAW and WAR are artifacts of sequential programming limitations. RAW is the immutable physics of math dependency.",
+    "tip": "RAW is a True Data Dependency. It mathematically blocks parallel execution."
+  },
+  {
+    "id": 37,
+    "question": "Assertion (A): Pipelined processors must insert NOP (No Operation) instructions to handle certain data hazards if hardware forwarding is not implemented. Reason (R): Inserting NOPs delays the dependent instruction exactly enough cycles to allow the preceding instruction to complete its Write-Back stage to the register file. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: If Instruction 1 writes to Reg X, and Instruction 2 reads from Reg X in the very next cycle, a RAW hazard occurs. Step 2: If the hardware lacks an Operand Forwarding path, the pipeline must stall Instruction 2. Step 3: The software compiler or hardware resolves this by inserting 'bubbles' or NOPs (No Operations) between the instructions (A is True). Step 4: These NOPs consume clock cycles, giving Instruction 1 the physical time required to reach the Write-Back stage and update Reg X. Step 5: Once updated, Instruction 2 can safely read. (R correctly explains A).",
+    "trick": "Trap: Software compilers historically inserted literal NOPs. Modern processors generate internal 'pipeline bubbles' which are functionally identical to NOPs to create the delay.",
+    "tip": "NOPs/Bubbles waste clock cycles to artificially delay dependent instructions."
+  },
+  {
+    "id": 38,
+    "question": "Consider a system using 'Memory Interleaving' to improve Main Memory performance. What is the fundamental mechanism by which interleaving accelerates sequential data access?",
+    "options": ["It places a layer of SRAM between the DRAM and the CPU cache.", "It maps sequential memory addresses across multiple physical memory banks to allow simultaneous accesses.", "It compresses sequential data into a single bus transmission packet.", "It converts purely von Neumann buses into Harvard buses dynamically."],
+    "answer": "It maps sequential memory addresses across multiple physical memory banks to allow simultaneous accesses.",
+    "explanation": "Step 1: DRAM has a high latency; after a read, a bank needs time to recover (precharge) before it can be read again. Step 2: If a CPU reads a massive sequential array, waiting for a single bank to recover kills performance. Step 3: Memory Interleaving splits memory into independent banks. Step 4: Address 0 is in Bank 0, Address 1 is in Bank 1, Address 2 in Bank 2, etc. Step 5: The CPU can request Address 0, 1, 2, and 3 simultaneously. Bank 0 recovers while Bank 1 is outputting data, completely hiding the latency.",
+    "trick": "Trap: Interleaving does not speed up the individual memory chips. It exploits parallel physical banks to overlap the latency times.",
+    "tip": "Memory Interleaving spreads sequential addresses across banks for parallel access."
+  },
+  {
+    "id": 39,
+    "question": "Assertion (A): The Translation Lookaside Buffer (TLB) acts as a specialized cache strictly for the Data cache and Instruction cache. Reason (R): The TLB stores recent virtual-to-physical address translations, eliminating the severe latency penalty of querying page tables in Main Memory. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). A CPU operates on Virtual Addresses. These must be translated to Physical Addresses via a Page Table in slow RAM. The TLB caches these translations to speed up memory access. R is True. Step 2: Evaluate Assertion (A). The TLB is NOT a cache for the L1/L2 data. The TLB is explicitly a cache for the Memory Management Unit's (MMU) Page Table. Step 3: It stores maps (translations), not instructions or data values themselves. Therefore, A is physically False.",
+    "trick": "Trap: A TLB 'hit' does not give you data. It gives you the physical address map. You then use that physical address to check the L1 data cache.",
+    "tip": "TLB caches Virtual-to-Physical translations, not actual program data."
+  },
+  {
+    "id": 40,
+    "question": "In the context of processor thermal constraints, what describes the phenomenon of 'Dark Silicon'?",
+    "options": ["The physical degradation of silicon atoms under extreme overclocking voltages.", "The percentage of a chip's transistors that must remain unpowered at any given moment to prevent the chip from exceeding thermal limits.", "The dedicated, hidden die area reserved exclusively for microcode storage.", "The silicon area rendered permanently useless due to photolithography defects."],
+    "answer": "The percentage of a chip's transistors that must remain unpowered at any given moment to prevent the chip from exceeding thermal limits.",
+    "explanation": "Step 1: Transistors have scaled down to nanometer sizes, packing billions onto a single chip (Moore's Law). Step 2: However, Dennard Scaling (power density remaining constant as size shrinks) broke down around 2006 due to leakage currents. Step 3: Today, if a processor powers all its billions of transistors simultaneously at full frequency, it will melt. Step 4: To survive, engineers must power off or drastically downclock large portions of the chip dynamically. Step 5: This unusable, dormant silicon real estate is known as 'Dark Silicon'.",
+    "trick": "Trap: 'Dark Silicon' sounds like a manufacturing defect or physical damage, but it is actually a fundamental thermal management necessity in modern design.",
+    "tip": "Dark Silicon = Transistors that must stay off to prevent thermal melting."
+  },
+  {
+    "id": 41,
+    "question": "Assertion (A): Complex Instruction Set Computers (CISC) historically required less RAM to store a program than Reduced Instruction Set Computers (RISC). Reason (R): Memory was astronomically expensive during the inception of CISC, forcing engineers to design highly compact, variable-length instructions that accomplished multiple tasks per byte. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In the 1970s, RAM was measured in Kilobytes and was incredibly expensive. Step 2: To make computing affordable, programs had to be tiny. Step 3: Engineers packed complex operations into single instructions. A single CISC instruction could read memory, modify it, and write it back. Step 4: This kept binary file sizes extremely small (A is True). Step 5: Therefore, the high economic cost of memory drove the physical design of CISC's dense, complex architecture (R correctly explains A).",
+    "trick": "Trap: RISC is technically superior for pure speed, but it bloats binary size. CISC was an economic necessity to save RAM space before memory became cheap.",
+    "tip": "CISC dense code was designed to save money on highly expensive RAM."
+  },
+  {
+    "id": 42,
+    "question": "Which of the following architectural states is saved into a 'Stack' during a Context Switch or an Interrupt?",
+    "options": ["The microcode ROM sequence.", "The Program Counter (PC) and Status Register.", "The L1 Cache lines and TLB mappings.", "The hardwired control logic gates."],
+    "answer": "The Program Counter (PC) and Status Register.",
+    "explanation": "Step 1: An interrupt forces the CPU to abruptly stop its current program to handle an urgent hardware task. Step 2: To return to the exact spot later, the CPU must save its 'architectural state'. Step 3: This state primarily consists of the Program Counter (pointing to the next instruction) and the Status/Flags Register (holding recent ALU math conditions). Step 4: These are pushed onto the stack in RAM. Step 5: Cache lines and TLB mappings are not pushed; they may be naturally overwritten, causing a cache penalty upon return, but not logic failure.",
+    "trick": "Trap: Only the minimal architectural state (PC, Flags, general registers) is saved. Saving the entire Cache to RAM would take millions of cycles and crash the system.",
+    "tip": "Interrupts save the Program Counter and Flags to the stack to resume later."
+  },
+  {
+    "id": 43,
+    "question": "Assertion (A): A processor utilizing an Out-of-Order (OoO) execution pipeline executes instructions entirely independently of the original program order from start to finish. Reason (R): The Instruction Fetch and Decode stages also operate out-of-order to maximize cache hit rates. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is False"],
+    "answer": "A is False, but R is False",
+    "explanation": "Step 1: Evaluate A. OoO processors do NOT execute start-to-finish completely out of order. They fetch and decode in strict order, execute out-of-order, and use a Reorder Buffer to commit results in strict order. A is False. Step 2: Evaluate R. The Fetch unit must follow the Program Counter linearly. It cannot arbitrarily fetch future instructions without decoding the branches first. Therefore, Fetch and Decode are strictly In-Order. R is False.",
+    "trick": "Trap: OoO processors are essentially 'In-order Fetch -> Out-of-order Execute -> In-order Commit'. The chaos is sandwiched between strict sequential ends.",
+    "tip": "OoO processors strictly Fetch in-order and Commit in-order."
+  },
+  {
+    "id": 44,
+    "question": "What is the primary advantage of utilizing a 'Harvard Architecture' within a Digital Signal Processor (DSP)?",
+    "options": ["It unifies the memory bus to allow dynamic reallocation of RAM between code and data.", "It inherently prevents Write-After-Write hazards.", "It allows an instruction and its corresponding data operand to be fetched in a single clock cycle.", "It relies purely on CISC microcode without hardwiring."],
+    "answer": "It allows an instruction and its corresponding data operand to be fetched in a single clock cycle.",
+    "explanation": "Step 1: DSPs perform massive, rapid mathematical operations on continuous streams of data (like audio or video). Step 2: A von Neumann bottleneck would cripple a DSP because fetching an instruction and fetching the data block require sequential clock cycles. Step 3: Harvard architecture isolates Data Memory and Instruction Memory onto entirely separate physical buses. Step 4: The CPU can fetch the next math instruction on Bus A while simultaneously pulling the data sample on Bus B. Step 5: This 1-cycle fetch capability doubles the throughput, essential for DSPs.",
+    "trick": "Trap: Harvard explicitly SEPARATES the buses. Unifying the memory bus is the exact definition of von Neumann.",
+    "tip": "Harvard Architecture allows simultaneous fetch of Instruction and Data."
+  },
+  {
+    "id": 45,
+    "question": "Assertion (A): In a heavily pipelined processor, a cache miss in the L1 Data Cache causes a significant pipeline stall. Reason (R): The Execute and Write-Back stages must halt and wait for the data to be retrieved from the slower L2 cache or Main Memory, preventing subsequent dependent instructions from proceeding. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A pipeline relies on smooth, continuous flow. L1 cache responds in ~1-2 cycles, keeping the pipeline fed. Step 2: If data is missing (Cache Miss), the processor must request it from L2 (~10 cycles) or Main RAM (~100 cycles). Step 3: Because the data isn't present, the Memory/Execute stage freezes. Step 4: Due to RAW dependencies, the subsequent instructions waiting in the decode stage cannot proceed (A is True). Step 5: This massive delay (pipeline stall or bubble) is explicitly caused by waiting for the slower memory tiers (R is True).",
+    "trick": "Trap: Pipelining hides processing time, but it cannot hide Memory Latency. A cache miss destroys pipeline throughput.",
+    "tip": "L1 Cache misses severely disrupt pipelined execution by causing massive stalls."
+  },
+  {
+    "id": 46,
+    "question": "Which of the following processor features is designed explicitly to exploit 'Thread-Level Parallelism' (TLP) rather than 'Instruction-Level Parallelism' (ILP)?",
+    "options": ["Superscalar Execution Units", "Out-of-Order Execution", "Operand Forwarding", "Symmetric Multiprocessing (Multi-core)"],
+    "answer": "Symmetric Multiprocessing (Multi-core)",
+    "explanation": "Step 1: ILP (Instruction-Level Parallelism) finds parallel tasks within a single sequence of code. Superscalar, OoO, and Forwarding are all internal core techniques to squeeze ILP. Step 2: Thread-Level Parallelism (TLP) involves running completely independent programs (or massive parallel chunks of one program) simultaneously. Step 3: To exploit TLP, you need distinct architectural states. Step 4: Symmetric Multiprocessing (placing multiple physical cores on a die) provides distinct, independent processors that OS schedulers use to run separate threads natively.",
+    "trick": "Trap: Superscalar runs multiple instructions per cycle, but strictly from ONE thread (ILP). Multi-core runs multiple threads (TLP).",
+    "tip": "ILP = Superscalar/OoO (within one core). TLP = Multi-core/Hyper-threading."
+  },
+  {
+    "id": 47,
+    "question": "Assertion (A): RISC architectures inherently push compiler designers to create more sophisticated optimizing compilers. Reason (R): With stripped-down, simple hardware instructions, the compiler must heavily optimize instruction scheduling to prevent massive pipeline stalls caused by data hazards. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In CISC, the complex hardware control unit figures out how to execute the messy instructions efficiently. Step 2: RISC relies on 'dumb', simple hardware to maximize clock speed (A is True). Step 3: Because the hardware is simple, it relies on the instructions being fed in an ideal order. Step 4: If a compiler feeds a RISC pipeline a sequence with heavy RAW dependencies, the simple hardware will just stall repeatedly. Step 5: Therefore, RISC compilers must intelligently shuffle and schedule instructions to keep data hazards apart (R perfectly explains A).",
+    "trick": "Trap: RISC is simple hardware + complex compiler. CISC is complex hardware + simpler compiler.",
+    "tip": "RISC shifts complexity from hardware design to compiler optimization."
+  },
+  {
+    "id": 48,
+    "question": "If a processor utilizes a 'Delayed Branch' strategy to minimize control hazards in a pipeline, what specific action does the compiler take?",
+    "options": ["It predicts the branch will not be taken and flushes later if wrong.", "It inserts useful, independent instructions into the delay slot immediately following the branch instruction.", "It completely unrolls the loop to avoid the branch.", "It delegates the branch evaluation to a secondary mathematical co-processor."],
+    "answer": "It inserts useful, independent instructions into the delay slot immediately following the branch instruction.",
+    "explanation": "Step 1: When a branch instruction is fetched, it takes 1 or 2 cycles to compute the destination. Step 2: In older RISC designs (like MIPS), instead of stalling the pipeline, they used a 'Delayed Branch'. Step 3: The architecture dictates that the instruction immediately following the branch (the 'delay slot') is ALWAYS executed, regardless of whether the branch is taken or not. Step 4: The compiler specifically searches for a useful, independent instruction from before the branch and moves it into this delay slot. Step 5: This hides the penalty cycle with useful work.",
+    "trick": "Trap: Delayed branch relies on the compiler moving code. Hardware branch prediction relies on the CPU guessing the outcome.",
+    "tip": "Delayed Branch = Compiler fills the pipeline bubble with a useful instruction."
+  },
+  {
+    "id": 49,
+    "question": "Assertion (A): Increasing the block size (cache line size) of a cache universally decreases the overall miss rate across all applications. Reason (R): Larger blocks maximize spatial locality by bringing in more contiguous memory words alongside the explicitly requested word. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Evaluate Reason (R). Spatial locality dictates that if an address is accessed, nearby addresses will be soon. Larger block sizes fetch more nearby addresses automatically. R is True. Step 2: Evaluate Assertion (A). Cache has a fixed total capacity. Step 3: If you increase block size, you drastically decrease the number of total blocks the cache can hold. Step 4: This forces frequent evictions. If a program relies heavily on random access (lacking spatial locality), fetching huge blocks just wastes bandwidth and kicks out useful data, severely INCREASING the miss rate. Thus, A is False.",
+    "trick": "Trap: Bigger is not always better in architecture. Extremely large blocks increase the 'miss penalty' (takes longer to fetch a huge block) and increase conflict misses.",
+    "tip": "Too large a block size decreases total blocks, causing higher conflict misses."
+  },
+  {
+    "id": 50,
+    "question": "Which specific architectural component is mathematically required to handle multi-bit additions rapidly by predicting the carry bit for higher-order bits, rather than waiting for it to cascade through the chain?",
+    "options": ["Ripple-Carry Adder", "Carry-Lookahead Adder", "Multiplexer Cascader", "Translation Lookaside Buffer"],
+    "answer": "Carry-Lookahead Adder",
+    "explanation": "Step 1: A standard Ripple-Carry Adder connects Full Adders sequentially. The 32nd bit cannot compute its sum until the 31st bit computes its carry. Step 2: This creates a massive sequential latency bottleneck in the ALU. Step 3: To fix this, architects use a Carry-Lookahead Adder (CLA). Step 4: The CLA uses complex boolean logic (Generate and Propagate signals) to calculate the carry bits for higher positions in parallel, ahead of time. Step 5: This changes addition time from O(N) linear time to O(log N) logarithmic time, crucial for fast pipelining.",
+    "trick": "Trap: A Ripple-Carry is simpler but painfully slow due to the 'cascading' or 'rippling' wait state. Lookahead 'predicts/calculates' to bypass the wait.",
+    "tip": "Carry-Lookahead Adders compute carries in parallel to eliminate ripple latency."
+  },
+  {
+    "id": 51,
+    "question": "Assertion (A): Instruction pipelining does not reduce the execution time of an individual instruction; in fact, it may slightly increase it. Reason (R): Pipelining increases CPU throughput by overlapping the execution stages of multiple instructions, but each instruction must still pass through all sequential stages, often with added latch delays between stages. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Pipelining is a throughput-enhancing technique, not a latency-reducing one. Step 2: An individual instruction still goes through Fetch, Decode, Execute, etc., taking the same or slightly more time. Step 3: The slight increase is due to the overhead of pipeline registers (latches) isolating each stage. Step 4: However, because multiple instructions overlap, the overall throughput (instructions completed per unit of time) increases dramatically. Step 5: Therefore, R perfectly explains the counterintuitive fact stated in A.",
+    "trick": "Bank/IT Trap: Candidates often assume 'faster CPU' means 'faster individual instruction'. Pipelining speeds up the assembly line's overall output, not the time to build a single car!",
+    "tip": "Pipelining = High Throughput, NOT lower Latency per instruction."
+  },
+  {
+    "id": 52,
+    "question": "In the context of evaluating RISC versus CISC architectures, which of the following characteristics fundamentally dictates why RISC processors require heavily optimized compilers compared to CISC processors?",
+    "options": ["RISC architectures rely on microprogrammed control units to decode instructions dynamically.", "RISC processors have fewer, simpler instructions, forcing the compiler to synthesize complex operations using multiple basic instructions.", "CISC compilers must handle fixed-length instructions, making their compilation phase computationally lighter.", "RISC processors lack hardware registers, forcing the compiler to manage main memory caching aggressively."],
+    "answer": "RISC processors have fewer, simpler instructions, forcing the compiler to synthesize complex operations using multiple basic instructions.",
+    "explanation": "Step 1: CISC processors contain complex hardware capable of executing high-level multi-step operations (like memory-to-memory additions) in a single instruction. Step 2: RISC relies on a minimal, simple instruction set where operations are purely register-to-register. Step 3: If a high-level program requires a complex operation, a RISC compiler must break it down into several simple machine instructions. Step 4: This places a heavy burden on the RISC compiler to optimize the sequence and register usage to maintain high performance. Step 5: Therefore, software complexity is higher in RISC, while hardware complexity is higher in CISC.",
+    "trick": "Remember the trade-off: CISC puts the burden on hardware (microcode), while RISC puts the burden on software (compiler optimization).",
+    "tip": "RISC = Smart Compiler, Simple Hardware. CISC = Simple Compiler, Smart Hardware."
+  },
+  {
+    "id": 53,
+    "question": "Assertion (A): The von Neumann Bottleneck strictly refers to the performance limitation caused by a CPU possessing fewer arithmetic logic units than required. Reason (R): In a pure von Neumann architecture, data and instructions share the same memory space and system bus, preventing simultaneous fetching of both. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: The von Neumann bottleneck is specifically the disparity in processing speed between the fast CPU and the slower main memory (RAM). Step 2: It is not related to the number of ALUs inside the processor. Therefore, Assertion (A) is completely false. Step 3: Reason (R) states that instructions and data share a bus in von Neumann systems, which is historically and architecturally correct. Step 4: This shared bus restricts the CPU to fetching either data or an instruction at one time, creating the actual bottleneck. Step 5: Thus, A is false and R is true.",
+    "trick": "Trap Alert: Many confuse the bottleneck with internal CPU deficiencies. It is strictly a CPU-to-Memory communication traffic jam!",
+    "tip": "Von Neumann Bottleneck = Speed gap between fast CPU and slow RAM."
+  },
+  {
+    "id": 54,
+    "question": "Consider a classic 5-stage instruction pipeline (Fetch, Decode, Execute, Memory, Write-Back). A 'Structural Hazard' occurs precisely when:",
+    "options": ["An instruction depends on the data result of a previous instruction that has not yet completed its Write-Back stage.", "The processor encounters a conditional branch and fetches the wrong instruction stream.", "Two different pipeline stages attempt to utilize the exact same hardware resource simultaneously.", "The compiler inserts too many NOP (No Operation) instructions, stalling the clock cycle."],
+    "answer": "Two different pipeline stages attempt to utilize the exact same hardware resource simultaneously.",
+    "explanation": "Step 1: Pipeline hazards prevent the next instruction from executing in its designated clock cycle. Step 2: Data hazards relate to missing operand data (Read-After-Write). Step 3: Control hazards relate to branching and jumping. Step 4: Structural hazards occur specifically due to hardware constraints, where two instructions in different stages need the same physical resource (e.g., memory port or ALU) at the identical clock tick. Step 5: The classic example is a unified memory system where Fetch needs an instruction and Memory needs data simultaneously.",
+    "trick": "Match the hazard name to its cause. 'Structure' = Hardware overlap. 'Data' = Variable dependency. 'Control' = Branching logic.",
+    "tip": "Structural Hazard = Hardware conflict. Data = Dependency. Control = Branch."
+  },
+  {
+    "id": 55,
+    "question": "Which of the following describes the most crucial architectural advantage of the Load/Store paradigm utilized in strict RISC architectures?",
+    "options": ["It allows arithmetic operations to directly modify variables located in Main Memory.", "It restricts memory access to explicit Load and Store instructions, ensuring all arithmetic operates only on fast internal registers.", "It completely eliminates the need for Cache memory by pre-fetching all required data.", "It merges the Instruction Fetch and Data Fetch stages into a single clock cycle."],
+    "answer": "It restricts memory access to explicit Load and Store instructions, ensuring all arithmetic operates only on fast internal registers.",
+    "explanation": "Step 1: CISC allows ALU operations directly on memory addresses, leading to variable-length, multi-cycle instructions. Step 2: RISC employs a 'Load/Store' architecture. Step 3: This strictly isolates memory access: 'Load' brings data to a register, and 'Store' sends it back. Step 4: All computational instructions (Add, Sub, etc.) must operate exclusively on registers. Step 5: This uniformity guarantees that arithmetic instructions execute in a single, predictable clock cycle, a foundational requirement for efficient pipelining.",
+    "trick": "If you see 'memory-to-memory' addition, it's CISC. RISC insists on bringing everything into the CPU's registers first via Load!",
+    "tip": "RISC Load/Store: Math only happens in registers, never directly in RAM."
+  },
+  {
+    "id": 56,
+    "question": "Assertion (A): Increasing the clock speed of a microprocessor from 3.0 GHz to 4.0 GHz will reliably decrease the execution time of a memory-bound application by exactly 33%. Reason (R): Clock speed determines the rate of internal CPU operations, but memory-bound applications spend a vast majority of their time waiting for Main Memory (RAM), whose latency does not scale with the CPU clock. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: CPU execution time = Instruction Count * CPI * Clock Cycle Time. Step 2: Increasing clock speed (reducing cycle time) speeds up internal CPU operations. Step 3: However, a memory-bound application's bottleneck is RAM latency, not CPU calculation speed. Step 4: Because RAM operates on its own slower clock bus, the CPU will simply spend more cycles idle (waiting for data). Step 5: Therefore, performance does not scale linearly for memory-bound tasks, making A completely false while R provides the precise engineering truth.",
+    "trick": "The 'Megahertz Myth' is a classic exam trap. Clock speed only linearly improves 'CPU-bound' tasks. Memory-bound tasks barely budge!",
+    "tip": "Clock speed bumps only help CPU-heavy tasks. Memory delays ignore CPU clock rates."
+  },
+  {
+    "id": 57,
+    "question": "In mitigating pipeline hazards, the hardware technique of 'Data Forwarding' (or Bypassing) is specifically deployed to resolve which of the following inefficiencies?",
+    "options": ["The delay caused when flushing the pipeline after a branch misprediction.", "The hardware conflict when unified memory is accessed for both instruction and data simultaneously.", "The stall required when an instruction needs the result of a preceding ALU operation that hasn't reached the Write-Back stage yet.", "The translation delay in the TLB when accessing virtual memory pages."],
+    "answer": "The stall required when an instruction needs the result of a preceding ALU operation that hasn't reached the Write-Back stage yet.",
+    "explanation": "Step 1: In a pipeline, an ALU result is typically not written back to the register file until stage 5 (Write-Back). Step 2: If the very next instruction needs that result, it would normally have to stall (wait) for 2-3 clock cycles. Step 3: Data Forwarding addresses this True Data Dependency (Read-After-Write). Step 4: Hardware pathways are added to 'bypass' the register file, feeding the output of the ALU directly back into the ALU's input for the next clock cycle. Step 5: This eliminates the need for pipeline bubbles/stalls in many data hazard scenarios.",
+    "trick": "Forwarding doesn't fix control hazards (branches) or structural hazards. It is strictly a time-travel trick for Data Hazards (RAW dependencies).",
+    "tip": "Data Forwarding/Bypassing = Instant ALU result sharing to avoid Data Hazard stalls."
+  },
+  {
+    "id": 58,
+    "question": "Assertion (A): Complex Instruction Set Computers (CISC) historically rely on microprogrammed control units. Reason (R): Microprogramming allows complex, variable-length machine instructions to be translated into sequences of simpler internal micro-operations dynamically. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: CISC processors (like x86) feature highly complex, variable-length instructions. Step 2: Hardwiring the control logic for hundreds of complex instructions is extremely rigid and silicon-intensive. Step 3: To solve this, CISC designers use microprogramming (Assertion A is true). Step 4: A microprogrammed control unit uses a tiny internal ROM containing microcode. When a complex instruction arrives, it triggers a sequence of micro-operations stored in this ROM. Step 5: Reason R accurately describes this dynamic translation mechanism, serving as the direct technological explanation for Assertion A.",
+    "trick": "Do not confuse microcode with machine code. Machine code is the compiled program; microcode is the CPU's internal translation layer for CISC processors.",
+    "tip": "CISC = Microprogrammed Control Unit. RISC = Hardwired Control Unit."
+  },
+  {
+    "id": 59,
+    "question": "If a modern processor features a deeply pipelined architecture (e.g., 20 stages), which specific performance penalty becomes disproportionately severe compared to a shallower pipeline (e.g., 5 stages)?",
+    "options": ["The latency of a cache hit in the Level 1 Data Cache.", "The cost in wasted clock cycles when a conditional branch is mispredicted.", "The power consumed by the Arithmetic Logic Unit during floating-point operations.", "The number of cycles required to decode a fixed-length instruction."],
+    "answer": "The cost in wasted clock cycles when a conditional branch is mispredicted.",
+    "explanation": "Step 1: A pipeline keeps the CPU busy by loading instructions sequentially. Step 2: When a conditional branch occurs (e.g., an 'if' statement), the CPU must guess the path (Branch Prediction) to keep the pipeline full. Step 3: If the CPU guesses incorrectly, it must 'flush' the entire pipeline of the wrong instructions. Step 4: In a 5-stage pipeline, flushing costs around 3-4 cycles. In a 20-stage pipeline, an incorrect guess might flush 15+ cycles of work! Step 5: Therefore, deeper pipelines suffer massive performance penalties (branch misprediction overhead) when control flow changes unpredictably.",
+    "trick": "Exam boards love this trade-off. Deeper pipelines = higher clock speeds, but vastly worse branch misprediction penalties! (This killed the Intel Pentium 4).",
+    "tip": "Deep Pipeline = High Branch Misprediction Penalty (massive flushing cost)."
+  },
+  {
+    "id": 60,
+    "question": "Examine the relationship between Instruction Cycle times and architecture. Why does a strict RISC architecture heavily favor fixed-length instruction words (e.g., uniformly 32 bits)?",
+    "options": ["To drastically simplify and accelerate the Instruction Decode and Instruction Fetch stages of the pipeline.", "To allow backward compatibility with 16-bit legacy software applications.", "To ensure that floating-point numbers can be embedded directly within every instruction.", "To force the Operating System to utilize paging rather than segmentation."],
+    "answer": "To drastically simplify and accelerate the Instruction Decode and Instruction Fetch stages of the pipeline.",
+    "explanation": "Step 1: In CISC, instructions can vary from 1 to 15 bytes. Step 2: The CPU does not know where the next instruction begins until it fully decodes the current one, creating a serial bottleneck. Step 3: Pipelining requires stages to operate quickly and independently. Step 4: RISC mandates fixed-length instructions (usually 32 bits). Step 5: This allows the Fetch unit to blindly grab 32-bit chunks sequentially without waiting for the Decode unit, massively improving pipeline efficiency and hardware simplicity.",
+    "trick": "Variable length instructions (CISC) create sequential dependencies in the fetch/decode hardware. Fixed length (RISC) allows blind, rapid fetching.",
+    "tip": "Fixed-length instructions = Easy, fast fetching. Perfect for smooth pipelining."
+  },
+  {
+    "id": 61,
+    "question": "Assertion (A): Modern x86 processors (like Intel Core and AMD Ryzen) are purely CISC architectures at the hardware execution level. Reason (R): They execute standard variable-length x86 machine code by decoding them directly into the Arithmetic Logic Unit without internal translation. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Modern x86 processors are conceptually CISC on the outside (ISA level) because they accept complex x86 instructions to maintain software compatibility. Step 2: However, internally, they have a hardware translation layer that breaks these complex instructions into simpler, RISC-like 'micro-ops'. Step 3: The actual execution core is highly pipelined and superscalar, resembling a RISC engine. Step 4: Therefore, A is false because they are a hybrid (CISC outer, RISC inner). Step 5: Reason R is false because they do NOT decode directly; they explicitly rely on internal translation to micro-ops.",
+    "trick": "The 'x86 is CISC' rule is true for software, but false for modern hardware design. Intel and AMD translate CISC instructions to RISC micro-ops dynamically!",
+    "tip": "Modern x86 = CISC skin over a RISC engine. They translate internally."
+  },
+  {
+    "id": 62,
+    "question": "Which specific memory hierarchy component is fundamentally integrated into processor design to directly alleviate the von Neumann Bottleneck during consecutive memory operations?",
+    "options": ["Direct Memory Access (DMA) Controllers", "Level 1 and Level 2 CPU Caches", "The System BIOS ROM", "Virtual Memory Paging Files on an SSD"],
+    "answer": "Level 1 and Level 2 CPU Caches",
+    "explanation": "Step 1: The von Neumann bottleneck is caused by the speed mismatch between the ultra-fast CPU and slow Main Memory (RAM). Step 2: To prevent the CPU from stalling while waiting for RAM, architects place a small amount of extremely fast SRAM (Static RAM) directly on or near the CPU die. Step 3: This is the CPU Cache (L1, L2, L3). Step 4: The cache stores copies of frequently used data and instructions. Step 5: By fetching from the fast Cache instead of slow RAM, the bottleneck is bypassed for the majority of execution cycles.",
+    "trick": "DMA offloads I/O tasks, and Virtual Memory expands RAM size using disks, but CACHE specifically solves the CPU-to-RAM latency speed gap.",
+    "tip": "Cache Memory = The primary hardware cure for the von Neumann Bottleneck."
+  },
+  {
+    "id": 63,
+    "question": "Assertion (A): In superscalar processor architectures, the Instructions Per Cycle (IPC) metric can mathematically exceed 1.0. Reason (R): Superscalar processors contain multiple redundant execution units (e.g., multiple ALUs) allowing them to dispatch and complete multiple independent instructions in a single clock cycle. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A standard scalar pipeline completes at most 1 instruction per cycle (IPC = 1). Step 2: Superscalar processors scale this up by adding parallel hardware (multiple ALUs, FPUs). Step 3: The processor's dispatch unit dynamically analyzes instructions and sends independent ones to these different execution units simultaneously. Step 4: Because multiple instructions can finish in one clock tick, the average IPC can be 2, 3, or even higher. Step 5: Therefore, R correctly explains the hardware mechanism that makes the mathematical claim in A true.",
+    "trick": "Pipelining overlaps stages but still finishes max 1 per cycle. Superscalar has multiple parallel pipelines, allowing >1 finishes per cycle.",
+    "tip": "Superscalar = Multiple execution units = IPC > 1."
+  },
+  {
+    "id": 64,
+    "question": "A compiler is optimizing code containing a tight mathematical loop with no external branch dependencies. To maximize instruction pipeline efficiency and minimize Control Hazard stalls, which compilation technique is most appropriate?",
+    "options": ["Dynamic Memory Allocation", "Loop Unrolling", "Subroutine Encapsulation", "Context Switching"],
+    "answer": "Loop Unrolling",
+    "explanation": "Step 1: In a loop (e.g., for i=0 to 100), the end of the loop contains a conditional branch to jump back to the top. Step 2: Branches cause Control Hazards in pipelines, forcing flushes or stalls if predicted incorrectly. Step 3: Loop Unrolling is a compiler optimization where the loop body is replicated multiple times (e.g., doing 4 iterations of math sequentially before checking the condition). Step 4: This drastically reduces the total number of jump instructions executed. Step 5: Fewer jumps mean fewer Control Hazards, keeping the pipeline full and increasing overall throughput.",
+    "trick": "Examiners often contrast loop unrolling with code size. Unrolling makes the executable larger (more code) but faster (fewer pipeline branches).",
+    "tip": "Loop Unrolling = Fewer branches = Fewer Control Hazards in the pipeline."
+  },
+  {
+    "id": 65,
+    "question": "Assertion (A): Hardwired control units are predominantly found in RISC architectures rather than CISC architectures. Reason (R): Hardwired control units utilize pure combinational logic circuits to generate control signals, which is highly efficient for simple, fixed-length instruction sets but prohibitively complex for variable-length instruction sets. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A CPU control unit can be either hardwired (logic gates) or microprogrammed (ROM based). Step 2: RISC instructions are simple, uniform, and few in number. Step 3: This simplicity makes it physically feasible and incredibly fast to design a hardwired circuit of logic gates to decode them (Assertion A is true). Step 4: CISC instructions are numerous and complex. Building a pure logic-gate circuit for CISC would be monstrously large and prone to errors. Step 5: Therefore, Reason R provides the exact engineering justification for why RISC uses hardwired logic while CISC uses microcode.",
+    "trick": "Remember the hardware/software tradeoff. Hardwired = Logic Gates (Fast, inflexible, RISC). Microprogrammed = Internal ROM (Slower, flexible, CISC).",
+    "tip": "RISC uses Hardwired Control (fast gates). CISC uses Microprogrammed Control (flexible ROM)."
+  },
+  {
+    "id": 66,
+    "question": "Which fundamental hazard in an instruction pipeline is specifically caused by a 'Write-After-Write' (WAW) dependency, and in which type of advanced architecture does it primarily manifest?",
+    "options": ["It is a Control Hazard, manifesting primarily in strictly scalar RISC processors.", "It is a Structural Hazard, manifesting exclusively in von Neumann designs without separate caches.", "It is a Data Hazard, manifesting primarily in processors utilizing Out-of-Order Execution.", "It is a Data Hazard, manifesting predominantly in standard 5-stage strictly in-order pipelines."],
+    "answer": "It is a Data Hazard, manifesting primarily in processors utilizing Out-of-Order Execution.",
+    "explanation": "Step 1: Data hazards relate to the order of reading and writing variables. Step 2: RAW (Read-After-Write) is a true dependency. WAW (Write-After-Write) and WAR (Write-After-Read) are name dependencies. Step 3: In a standard in-order pipeline, instructions write back in the exact order they were fetched, so WAW cannot occur naturally. Step 4: However, in advanced Out-of-Order superscalar processors, a faster instruction might finish and write its result before an older, slower instruction writes to the same register. Step 5: This creates a WAW hazard, corrupting the final architectural state if not mitigated by techniques like Register Renaming.",
+    "trick": "WAW and WAR hazards do not exist in basic in-order pipelines! They only appear when CPUs start reordering instructions (Out-of-Order execution).",
+    "tip": "WAW and WAR are Data Hazards unique to Out-of-Order superscalar processors."
+  },
+  {
+    "id": 67,
+    "question": "Assertion (A): Increasing the number of pipeline stages arbitrarily from 5 to 50 will yield a near 10x proportional increase in processor performance. Reason (R): Latch delays between pipeline stages become a dominant bottleneck as pipeline depth increases, and instructions cannot be infinitely subdivided into smaller logical tasks. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: While pipelining theoretically increases throughput, it has diminishing returns. Step 2: Every stage must be separated by a hardware latch (register), which takes a tiny, fixed amount of time (latch delay). Step 3: If a stage is made too small, the latch delay becomes larger than the actual computation time, ruining performance. Step 4: Furthermore, branching penalties skyrocket in ultra-deep pipelines (Assertion A is false). Step 5: Reason R accurately describes the physical and logical limits of infinite pipelining, making it a true statement.",
+    "trick": "The theoretical speedup of an N-stage pipeline is N. But the *actual* speedup is limited by latch overhead and branch flushes. Infinite stages = zero performance.",
+    "tip": "Pipeline speedup has a hard limit due to latch overhead and branch misprediction costs."
+  },
+  {
+    "id": 68,
+    "question": "In the CPU performance equation (Time = Instruction Count × CPI × Clock Cycle Time), adopting a strict RISC philosophy predominantly aims to optimize which specific variable, often at the expense of another?",
+    "options": ["It drastically reduces Instruction Count (IC), often at the expense of increasing CPI.", "It drastically minimizes Clock Cycle Time, entirely eliminating the need for CPI calculations.", "It minimizes Cycles Per Instruction (CPI) towards 1.0, often at the expense of increasing total Instruction Count (IC).", "It drastically reduces cache miss penalties, eliminating the Clock Cycle Time variable."],
+    "answer": "It minimizes Cycles Per Instruction (CPI) towards 1.0, often at the expense of increasing total Instruction Count (IC).",
+    "explanation": "Step 1: The CPU time equation involves three main variables: IC (Instructions), CPI (Cycles per Instruction), and Clock Cycle Time. Step 2: CISC attempts to reduce the total Instruction Count by doing many things in one complex instruction, causing CPI to rise (multi-cycle execution). Step 3: RISC takes the opposite approach. It mandates simple instructions that execute in exactly one cycle. Step 4: This drives the average CPI down as close to 1.0 as possible. Step 5: The trade-off is that it takes more simple instructions to do the same job, thus the total Instruction Count (IC) increases.",
+    "trick": "RISC lowers CPI (approaches 1) but increases Code Size (Instruction Count). CISC lowers Code Size but increases CPI.",
+    "tip": "RISC philosophy: Target CPI = 1. Accept higher Instruction Count as the cost."
+  },
+  {
+    "id": 69,
+    "question": "Assertion (A): The Harvard Architecture avoids the structural hazard present in the classic von Neumann Bottleneck. Reason (R): Harvard Architecture provides physically separate memory modules and distinct bus systems for Instructions and Data. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A structural hazard in pipelining occurs when the CPU tries to fetch an instruction and read/write data in the exact same clock cycle. Step 2: The von Neumann architecture shares one bus for both, making simultaneous access impossible (causing a stall). Step 3: Assertion (A) claims Harvard avoids this. Step 4: The Harvard Architecture uses two physically separate buses: one for the Instruction Memory and one for Data Memory. Step 5: Therefore, Reason (R) is true and perfectly explains why the CPU can fetch an instruction and access data simultaneously without a structural hazard.",
+    "trick": "Modern CPUs use a 'Modified Harvard' approach internally. The L1 cache is split into Instruction and Data caches to prevent this exact structural hazard!",
+    "tip": "Harvard Architecture = Separate buses = No memory structural hazards."
+  },
+  {
+    "id": 70,
+    "question": "Which of the following pipeline hazards is uniquely resolved by the implementation of a 'Branch Target Buffer' (BTB) inside the processor's fetch unit?",
+    "options": ["Read-After-Write (RAW) Data Hazards", "Structural Hazards on the system memory bus", "Control Hazards related to determining the destination address of a jump instruction", "Hazards caused by cache misses in the Level 2 Cache"],
+    "answer": "Control Hazards related to determining the destination address of a jump instruction",
+    "explanation": "Step 1: When a CPU encounters a branch instruction, two things must be resolved: the condition (jump or not) and the target address (where to jump). Step 2: Control Hazards stall the pipeline until these are known. Step 3: A Branch Target Buffer (BTB) is a specialized hardware cache. Step 4: It caches the destination addresses of recently executed branch instructions. Step 5: If the instruction is fetched again, the BTB instantly provides the target address, allowing the fetch unit to immediately pull instructions from the new location without waiting for the ALU to calculate the address.",
+    "trick": "A Branch Prediction Unit guesses *if* it will jump. The Branch Target Buffer (BTB) remembers *where* it jumps. Both solve Control Hazards.",
+    "tip": "BTB (Branch Target Buffer) = Solves Control Hazards by caching jump addresses."
+  },
+  {
+    "id": 71,
+    "question": "Assertion (A): The widespread adoption of RISC principles led to an increase in the size of compiled executable files (binary bloat) compared to older CISC architectures. Reason (R): Compilers for RISC machines must generate a sequence of multiple simple instructions to replicate the behavior of a single complex CISC instruction. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: CISC (Complex Instruction Set Computer) packs powerful, multi-step actions into single, dense instructions, keeping memory footprints small. Step 2: When the industry shifted toward RISC (Reduced Instruction Set Computer), those complex instructions were removed. Step 3: To perform the same software task, a RISC compiler must output 3 or 4 simple instructions instead of 1 complex one. Step 4: Consequently, the overall number of instructions (and thus the physical size of the binary executable file) increases on a disk (Assertion A is true). Step 5: Reason R is the exact logistical cause of this binary bloat.",
+    "trick": "Early memory was incredibly expensive, which is why CISC's small code size was originally favored. RISC won later when memory became cheap and pipelining speeds became paramount.",
+    "tip": "RISC = Simpler instructions = More lines of machine code = Larger executable size."
+  },
+  {
+    "id": 72,
+    "question": "In processor architecture, the concept of a 'Delay Slot' is an early software-based mitigation technique specifically designed to address:",
+    "options": ["Data Hazards by inserting NOPs automatically.", "Structural Hazards by disabling the cache.", "Control Hazards by placing a useful instruction immediately after a branch that executes regardless of the branch outcome.", "Cache miss penalties by freezing the system clock entirely."],
+    "answer": "Control Hazards by placing a useful instruction immediately after a branch that executes regardless of the branch outcome.",
+    "explanation": "Step 1: In early RISC pipelines (like MIPS), a branch instruction takes one cycle to resolve, meaning the instruction fetched immediately after it might need to be flushed. Step 2: This creates a 1-cycle penalty (a Control Hazard). Step 3: Instead of wasting that cycle with a stall (bubble), architects created the 'branch delay slot'. Step 4: The instruction placed in this slot is *always* executed, even if the branch is taken. Step 5: The compiler is tasked with finding a useful, independent instruction from before the branch and moving it into this delay slot, hiding the penalty.",
+    "trick": "Delay slots are a historical RISC quirk where software (the compiler) was forced to fix a hardware pipeline delay. Modern CPUs use branch prediction instead.",
+    "tip": "Delay Slot = Software fix for Control Hazards. Instruction executes no matter what."
+  },
+  {
+    "id": 73,
+    "question": "Assertion (A): Microprocessors utilizing dynamic execution (Out-of-Order processing) must include a 'Reorder Buffer' (ROB). Reason (R): The ROB acts as a hardware gateway to ensure that instructions, which may finish out of sequence, commit their final results to architectural registers in the exact original program order. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Out-of-order (OoO) processors fetch instructions in order, execute them whenever their data is ready (out of order), but MUST retire them in order. Step 2: If they retired out of order, a program crash or exception would leave the CPU in an unrecoverable, chaotic state. Step 3: The Reorder Buffer (ROB) is the architectural component that catches the out-of-order results from the ALUs. Step 4: It holds these results temporarily and only writes them back to the permanent register file in strict program sequence. Step 5: Therefore, R correctly explains the absolute necessity of the ROB stated in A.",
+    "trick": "In-Order Fetch -> Out-Of-Order Execute -> In-Order Retire. The ROB is the bouncer ensuring that the retirement phase stays strictly ordered!",
+    "tip": "Reorder Buffer (ROB) = Ensures Out-of-Order CPUs commit results In-Order."
+  },
+  {
+    "id": 74,
+    "question": "When comparing instruction sets, the principle of 'Orthogonality' in an Instruction Set Architecture (ISA) implies which of the following?",
+    "options": ["Instructions can only operate on data situated in registers, not memory.", "Every instruction uses a completely unique and different bit-length format.", "Every register can be used interchangeably for any operation, and any instruction can use any addressing mode.", "The processor uses separate, perpendicular physical buses for address routing and data transmission."],
+    "answer": "Every register can be used interchangeably for any operation, and any instruction can use any addressing mode.",
+    "explanation": "Step 1: In non-orthogonal architectures (like early x86), certain registers were hardcoded for specific tasks (e.g., AX for math, CX for counting). Step 2: Furthermore, some instructions could only use specific addressing modes. Step 3: Orthogonality in an ISA means independence. Step 4: An orthogonal architecture treats all general-purpose registers equally. Any instruction (Add, Sub, Move) can use any register, combined with any valid addressing mode. Step 5: This symmetry drastically simplifies compiler design, as the compiler doesn't have to navigate arbitrary hardware exceptions.",
+    "trick": "Don't confuse geometric 'orthogonal' (perpendicular) with ISA 'orthogonal'. In architecture, it means symmetry, uniformity, and lack of weird exceptions.",
+    "tip": "Orthogonal ISA = All registers and addressing modes are perfectly interchangeable."
+  },
+  {
+    "id": 75,
+    "question": "Assertion (A): Pipelining provides the highest theoretical throughput only when the execution time of every stage is perfectly uniform. Reason (R): The clock cycle time of a pipeline is strictly dictated by the time required for its fastest, most optimized stage to complete. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: A pipeline moves like an assembly line; all stations must move at the same tick. Step 2: If stages are perfectly uniform (e.g., all take 2ns), throughput is flawless. (Assertion A is true). Step 3: However, the clock cycle time is determined by the SLOWEST stage, not the fastest. Step 4: If Fetch is 1ns, Decode is 1ns, and Execute is 4ns, the clock must be set to 4ns, wasting 3ns of idle time in Fetch and Decode. Step 5: Therefore, Reason R is fundamentally false; the slowest bottleneck dictates the pipeline clock speed.",
+    "trick": "A chain is only as strong as its weakest link. A pipeline's clock is only as fast as its SLOWEST hardware stage!",
+    "tip": "Pipeline Clock Cycle = Time of the SLOWEST stage + Latch Delay."
+  },
+  {
+    "id": 76,
+    "question": "Consider a 5-stage pipeline executing 100 consecutive instructions without any hazards. If a single unpipelined instruction takes 5 clock cycles, how many clock cycles are strictly required to execute all 100 instructions in the pipeline?",
+    "options": ["500 cycles", "100 cycles", "104 cycles", "105 cycles"],
+    "answer": "104 cycles",
+    "explanation": "Step 1: Let 'k' be the number of pipeline stages (k = 5). Step 2: Let 'n' be the total number of instructions (n = 100). Step 3: In an ideal pipeline, the first instruction takes 'k' cycles to fill the pipeline and emerge finished. Step 4: After that, one instruction finishes every single clock cycle. Thus, the remaining (n - 1) instructions take (n - 1) cycles. Step 5: The formula for total cycles is k + (n - 1). Here: 5 + (100 - 1) = 5 + 99 = 104 cycles. (An unpipelined CPU would take 100 * 5 = 500 cycles!).",
+    "trick": "Always use the formula: Total Cycles = k + (n - 1). Do not just multiply stages by instructions!",
+    "tip": "Ideal Pipeline Time = (Number of Stages) + (Number of Instructions - 1)."
+  },
+  {
+    "id": 77,
+    "question": "Assertion (A): The 'MIPS' (Millions of Instructions Per Second) metric is highly unreliable for comparing the performance of a RISC processor directly against a CISC processor. Reason (R): RISC processors generally have lower clock speeds, which inherently skews the MIPS calculation downward compared to CISC. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: MIPS measures how many instructions execute per second. Step 2: Since CISC instructions are complex, a task might take 10 CISC instructions. RISC instructions are simple, so the exact same task might take 40 RISC instructions. Step 3: Consequently, a RISC processor will report a vastly higher MIPS rating to do the exact same amount of actual work, making cross-architecture MIPS comparisons meaningless. (Assertion A is true). Step 4: However, Reason R is false; RISC processors historically have HIGHER clock speeds because of simpler pipelines, not lower. Step 5: The true reason is the unequal amount of work done per instruction.",
+    "trick": "Never trust MIPS across different architectures! 1 million complex bricks built per second is vastly different from 1 million simple bricks.",
+    "tip": "MIPS is meaningless between RISC/CISC because an 'Instruction' is not equal work."
+  },
+  {
+    "id": 78,
+    "question": "What is the primary architectural purpose of utilizing 'Register Windowing' in architectures like the SPARC (Scalable Processor Architecture)?",
+    "options": ["To drastically reduce the memory overhead and pipeline latency associated with procedure/function calls.", "To allow out-of-order execution units to predict branch outcomes with higher accuracy.", "To translate variable-length CISC instructions into fixed-length micro-operations.", "To handle virtual memory page faults without invoking the Operating System."],
+    "answer": "To drastically reduce the memory overhead and pipeline latency associated with procedure/function calls.",
+    "explanation": "Step 1: When a program calls a function, the CPU normally pushes all current registers to the slow memory stack, and pops them back upon return. Step 2: This memory access creates severe latency. Step 3: Register windowing provides a massive physical register file (e.g., 128 registers), but the software only sees a small 'window' of them (e.g., 32) at any time. Step 4: Upon a function call, the CPU simply slides the window forward by changing a pointer. No registers are pushed to memory! Step 5: When the function returns, the window slides back. This nearly eliminates memory traffic during procedural calls.",
+    "trick": "SPARC architecture is famous for this. Windowing is a hardware trick to make software function calls lightning-fast by hiding registers instead of saving them to RAM.",
+    "tip": "Register Windowing = Super fast function calls without touching RAM."
+  },
+  {
+    "id": 79,
+    "question": "Assertion (A): A CPU with a deeper pipeline (e.g., 14 stages) will inherently execute a completely linear, branch-free sequence of code faster than a shallower pipeline (e.g., 5 stages) built on the same silicon node. Reason (R): Deeper pipelining enables a higher overall clock frequency by reducing the combinational logic delay within each individual stage. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The maximum clock speed of a CPU is limited by the longest delay in any single pipeline stage. Step 2: If you take a 5-stage pipeline and chop its logic thinner into 14 stages, each stage has less logic to process. Step 3: Less logic means the electrical signal traverses the stage faster. Step 4: This allows the hardware engineers to crank up the master clock frequency (MHz/GHz). Step 5: Assuming the code is perfectly linear (no branch penalties or flushing), the higher clock frequency directly translates to faster execution. Thus, R accurately explains A.",
+    "trick": "The catch is 'branch-free'. In reality, branches cause deep pipelines to suffer. But for purely linear code, deep pipelines win due to sheer clock frequency capability.",
+    "tip": "Deeper Pipeline = Less logic per stage = Higher max Clock Speed."
+  },
+  {
+    "id": 80,
+    "question": "In the context of the memory hierarchy mitigating the von Neumann Bottleneck, the principle of 'Spatial Locality' is heavily relied upon by CPU cache systems. Which operational behavior best demonstrates this principle?",
+    "options": ["A loop continuously accessing the same specific variable 'x' over 1,000 iterations.", "The cache exclusively fetching instructions that are marked as 'Read-Only' by the OS.", "The CPU fetching an entire 64-byte cache block containing array elements [1] to [15] when only element [0] was initially requested.", "The translation of a virtual address into a physical address via the TLB."],
+    "answer": "The CPU fetching an entire 64-byte cache block containing array elements [1] to [15] when only element [0] was initially requested.",
+    "explanation": "Step 1: The von Neumann bottleneck is mitigated by Cache, which relies on the Principle of Locality. Step 2: 'Temporal Locality' means if data is used once, it will likely be used again soon (like a loop variable). Step 3: 'Spatial Locality' means if data at address X is used, data at address X+1 will likely be used next (like iterating through an array). Step 4: Because of Spatial Locality, when the CPU requests one byte, the cache hardware pulls in an entire block (e.g., 64 bytes) surrounding it. Step 5: This prefetching guarantees that subsequent requests in the array hit the ultra-fast cache immediately.",
+    "trick": "Temporal = Time (reusing same data). Spatial = Space (using adjacent data). Block-fetching is the physical manifestation of Spatial Locality.",
+    "tip": "Spatial Locality: If you need item 1, you'll probably need item 2. Fetch both!"
+  },
+  {
+    "id": 81,
+    "question": "Assertion (A): In a pure RISC processor, an arithmetic instruction like 'ADD' can directly combine a value stored in a CPU register with a value stored at a physical RAM address. Reason (R): RISC processors utilize complex addressing modes to minimize the total number of instructions required in a program. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Pure RISC strictly adheres to a Load/Store architecture. Step 2: Arithmetic operations (like ADD) can ONLY operate on values already inside CPU registers. They absolutely cannot touch RAM. Thus, Assertion A is completely false. Step 3: To minimize hardware complexity, RISC utilizes very simple, few addressing modes (unlike CISC). Step 4: RISC accepts that the total instruction count will INCREASE as a trade-off for executing each instruction in a single clock cycle. Step 5: Therefore, Reason R is historically and architecturally false.",
+    "trick": "Any mention of 'Memory-to-Register' or 'Memory-to-Memory' math is an immediate CISC identifier. RISC strictly separates memory access (Load/Store) from math (ALU).",
+    "tip": "RISC math ONLY happens between registers. Never Memory-to-Register."
+  },
+  {
+    "id": 82,
+    "question": "Which of the following pipeline scenarios forces the insertion of a hardware 'Bubble' (a NOP) even if perfect data forwarding/bypassing pathways are implemented?",
+    "options": ["A 'Load' instruction is followed immediately by an ALU instruction that requires the loaded data.", "Two independent ADD instructions execute consecutively.", "An unconditional JUMP instruction is decoded.", "A 'Store' instruction writes a register value to memory."],
+    "answer": "A 'Load' instruction is followed immediately by an ALU instruction that requires the loaded data.",
+    "explanation": "Step 1: Data forwarding solves most RAW (Read-After-Write) hazards by intercepting ALU outputs before Write-Back. Step 2: However, a Load instruction fetches data from RAM during stage 4 (Memory Access). Step 3: If the very next instruction needs that data for its ALU stage (stage 3), a time paradox occurs: Stage 3 of instruction 2 happens simultaneously with Stage 4 of instruction 1. Step 4: Even with forwarding, the data literally does not exist yet when the ALU needs it. Step 5: Therefore, the hardware MUST stall the pipeline by inserting one Bubble (NOP) before forwarding can succeed. This is known as the Load-Use delay.",
+    "trick": "Bypassing fixes ALU-to-ALU dependencies seamlessly. But Load-to-ALU dependencies always cost at least 1 stall cycle, even in advanced CPUs!",
+    "tip": "Load-Use Hazard = The one Data Hazard that forwarding cannot fix without 1 stall."
+  },
+  {
+    "id": 83,
+    "question": "Assertion (A): Tomasulo's Algorithm dynamically eliminates Write-After-Write (WAW) and Write-After-Read (WAR) pipeline hazards at runtime. Reason (R): The algorithm employs 'Register Renaming', utilizing a pool of hidden physical registers to decouple instruction dependencies from the limited number of architectural registers. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In Out-of-Order execution, WAW and WAR (Name Dependencies) occur when instructions reuse the same register name (e.g., R1) for completely different temporary calculations. Step 2: Tomasulo's Algorithm resolves this dynamically (Assertion A is true). Step 3: It does this via Register Renaming. While the programmer only sees 16 architectural registers, the hardware might have 128 physical registers. Step 4: When a new value is written to 'R1', Tomasulo's algorithm maps it to a fresh hidden physical register, breaking the false dependency with previous instructions. Step 5: Therefore, R correctly explains the Register Renaming mechanism inside Tomasulo's Algorithm.",
+    "trick": "WAW and WAR aren't true data dependencies; they are 'Name' dependencies caused by running out of register names. Renaming gives the hardware infinite names to avoid conflicts.",
+    "tip": "Tomasulo's Algorithm + Register Renaming = Solves WAW and WAR hazards dynamically."
+  },
+  {
+    "id": 84,
+    "question": "When analyzing processor architectures, the transition from purely scalar pipelined execution to 'VLIW' (Very Long Instruction Word) architecture primarily shifts the burden of finding instruction-level parallelism to the:",
+    "options": ["Hardware Dispatch Unit", "Operating System Kernel", "Software Compiler", "Microcode ROM Cache"],
+    "answer": "Software Compiler",
+    "explanation": "Step 1: In superscalar out-of-order CPUs, massive hardware components (like the Dispatch Unit and Reorder Buffer) dynamically figure out which instructions can run in parallel on the fly. Step 2: This makes the CPU silicon highly complex and power-hungry. Step 3: VLIW architecture takes a different approach. Step 4: It forces the Software Compiler to analyze the code *before* execution, find independent operations, and pack them together into one massive 'bundle' (a Very Long Instruction Word). Step 5: The simpler VLIW hardware merely executes these pre-packaged bundles blindly, meaning the entire burden of optimization shifted to the compiler.",
+    "trick": "Superscalar = Hardware finds parallelism dynamically. VLIW = Software Compiler finds parallelism statically.",
+    "tip": "VLIW shifts the heavy lifting of parallelism from the Silicon to the Compiler."
+  },
+  {
+    "id": 85,
+    "question": "Assertion (A): A CPU with an IPC (Instructions Per Cycle) of 2.0 running at 2.0 GHz will process the same number of instructions per second as a CPU with an IPC of 1.0 running at 4.0 GHz. Reason (R): Overall instruction throughput is fundamentally the mathematical product of the clock frequency and the Instructions Per Cycle. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Throughput (instructions per second) = Clock Rate (cycles/sec) × IPC (instructions/cycle). Step 2: For CPU 1: 2.0 GHz (2 billion cycles) × 2.0 IPC = 4 billion instructions per second. Step 3: For CPU 2: 4.0 GHz (4 billion cycles) × 1.0 IPC = 4 billion instructions per second. Step 4: Mathematically, both deliver identical raw instruction throughput. (Assertion A is true). Step 5: Reason R correctly states the fundamental throughput equation that validates the calculation.",
+    "trick": "AMD vs Intel historically fought this battle. Intel pushed massive Clock Speeds (GHz) with lower IPC. AMD pushed higher IPC with lower GHz. The mathematical product is what truly matters!",
+    "tip": "Performance = IPC × Clock Speed. Both variables carry equal mathematical weight."
+  },
+  {
+    "id": 86,
+    "question": "Which of the following architectural changes would definitively INCREASE the inherent penalty cost associated with a pipeline flush caused by a branch misprediction?",
+    "options": ["Adding a larger Level 3 Cache memory.", "Implementing aggressive loop unrolling in the compiler.", "Increasing the total number of pipeline stages (Deep Pipelining).", "Transitioning from a CISC instruction set to a RISC instruction set."],
+    "answer": "Increasing the total number of pipeline stages (Deep Pipelining).",
+    "explanation": "Step 1: A pipeline flush happens when a CPU guesses a branch wrong and must discard all partially processed instructions in the pipeline behind the branch. Step 2: If the pipeline has 5 stages, a flush ruins roughly 3-4 cycles of work. Step 3: If the architecture is changed to a 'deep pipeline' (e.g., 20 stages) to achieve higher clock speeds, a branch condition might not be resolved until stage 15. Step 4: If mispredicted, 14 stages of in-flight instructions must be instantly destroyed. Step 5: Therefore, increasing the depth (number of stages) directly mathematically increases the severity of the flush penalty.",
+    "trick": "Deep pipelines = High GHz, but terrible branch penalties. This is why highly accurate Branch Predictors are mandatory in modern deep-pipeline processors.",
+    "tip": "More pipeline stages = Higher penalty for guessing branches incorrectly."
+  },
+  {
+    "id": 87,
+    "question": "Assertion (A): The original Intel 8086 architecture is classified as a strict RISC processor because it lacks an internal floating-point unit (FPU). Reason (R): RISC processors are defined by their omission of complex mathematical hardware, instead relying on software algorithms for all floating-point math. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The Intel 8086 is the foundational x86 architecture, which is the textbook definition of a CISC (Complex Instruction Set Computer) processor. Therefore, Assertion A is completely false. Step 2: It has variable-length instructions, few registers, and complex memory-addressing modes. The lack of an FPU is irrelevant to its CISC classification (it relied on the 8087 co-processor). Step 3: Reason R is also false; RISC processors are defined by simple, uniform instructions and Load/Store memory access, not by lacking FPUs. Modern RISC (like ARM Cortex) have massive hardware FPUs.",
+    "trick": "Don't associate 'Reduced' with 'Missing hardware features'. RISC means the *Instruction Set* is reduced in complexity, not that the silicon lacks calculation units like FPUs.",
+    "tip": "x86 is ALWAYS CISC. 'Reduced' in RISC means simpler instructions, not missing hardware."
+  },
+  {
+    "id": 88,
+    "question": "In resolving pipeline data hazards, if a compiler rearranges the order of instructions to separate dependent operations without changing program semantics, this technique is formally known as:",
+    "options": ["Hardware Forwarding", "Dynamic Out-of-Order Execution", "Static Instruction Scheduling", "Branch Prediction"],
+    "answer": "Static Instruction Scheduling",
+    "explanation": "Step 1: Data hazards occur when instructions are too close together (e.g., Load R1, then immediately ADD R1). Step 2: The hardware can fix this dynamically via forwarding or Out-of-Order execution. Step 3: However, the Software Compiler can also fix this *before* execution. Step 4: The compiler analyzes the code and moves independent, unrelated instructions in between the dependent ones to pad the time delay organically. Step 5: Because this is done prior to runtime by the compiler, it is known as 'Static Instruction Scheduling'.",
+    "trick": "Static = Done by Software Compiler beforehand. Dynamic = Done by CPU Hardware on the fly. Rearranging code beforehand is Static Scheduling.",
+    "tip": "Compiler code rearrangement = Static Instruction Scheduling."
+  },
+  {
+    "id": 89,
+    "question": "Assertion (A): Early RISC processors achieved performance parity with CISC despite executing more total instructions per program. Reason (R): The rigid simplicity of RISC instructions allowed for the first practical implementation of instruction pipelining, dropping the average CPI close to 1.0. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In the 1980s, RISC compiled programs were larger (more Instruction Count) than CISC programs. Yet, they ran just as fast or faster. (Assertion A is true). Step 2: CISC processors of the era were multi-cycle, meaning one instruction took 4 to 10 clock cycles. Step 3: RISC fixed instruction lengths to 32 bits and restricted math to registers. Step 4: This extreme uniformity allowed hardware engineers to easily chop the execution path into a clean Pipeline. Step 5: Pipelining allowed RISC to finish roughly 1 instruction every single clock cycle (CPI ≈ 1). This massive speedup in cycle efficiency (Reason R) perfectly explains how RISC overcame its larger instruction counts.",
+    "trick": "This is the core historical revolution of RISC. Pipelining a messy CISC instruction stream is a nightmare. RISC made pipelining easy, which is why RISC won the early performance wars.",
+    "tip": "RISC uniformity made pipelining easy, dropping CPI to 1 to beat CISC."
+  },
+  {
+    "id": 90,
+    "question": "Consider a deeply pipelined processor encountering a 'Cache Miss' during the Instruction Fetch (IF) stage. What is the immediate architectural consequence on the pipeline?",
+    "options": ["The processor utilizes Branch Prediction to guess the instruction and continues.", "The pipeline completely stalls, freezing all stages behind the IF stage until data is retrieved from Main Memory.", "The Control Unit dynamically translates the missed instruction into a micro-operation.", "The instruction is bypassed, and the subsequent instruction is fetched via Out-of-Order execution."],
+    "answer": "The pipeline completely stalls, freezing all stages behind the IF stage until data is retrieved from Main Memory.",
+    "explanation": "Step 1: The Instruction Fetch (IF) stage pulls the next operation from the L1 Instruction Cache. Step 2: If the instruction is not there (Cache Miss), the processor must retrieve it from the L2 cache or, worse, Main Memory (RAM). Step 3: RAM retrieval takes dozens or hundreds of clock cycles. Step 4: Because the IF stage cannot provide the next instruction, no new work enters the pipeline. Step 5: The pipeline essentially freezes (stalls/inserts bubbles) until the instruction arrives, manifesting the von Neumann bottleneck.",
+    "trick": "You cannot use Out-of-Order execution or Branch prediction if you literally don't have the instruction data yet! A fetch miss is a hard halt.",
+    "tip": "Instruction Cache Miss = Instant Pipeline Stall. No data, no execution."
+  },
+  {
+    "id": 91,
+    "question": "Assertion (A): CISC architectures intrinsically possess superior power efficiency (lower watts) compared to modern RISC architectures, making them ideal for mobile devices. Reason (R): CISC code requires fewer overall instructions, minimizing the active time of the instruction fetch unit. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Historically and currently, RISC architectures (like ARM) completely dominate mobile devices precisely because they are vastly MORE power-efficient than CISC (x86). Step 2: CISC processors require massive, power-hungry decoding hardware to translate complex instructions on the fly. Therefore, Assertion A is entirely false. Step 3: However, Reason R states that CISC code requires fewer instructions (smaller code size), which is a true characteristic of CISC. Step 4: While fewer instructions are fetched, the massive internal translation logic burns far more power, overriding any minor savings from the fetch unit.",
+    "trick": "Don't fall for the logic trap! R is a true standalone fact (CISC = fewer instructions), but A is completely false (CISC = terrible battery life compared to ARM/RISC).",
+    "tip": "RISC (ARM) = High power efficiency (Smartphones). CISC (x86) = High power draw."
+  },
+  {
+    "id": 92,
+    "question": "Which of the following processor features is a direct implementation of the principle of 'Amdahl’s Law' when attempting to optimize pipeline performance?",
+    "options": ["Allocating the majority of silicon die space to the L1 Cache because memory fetching is the most frequently executed and slowest task.", "Adding more general-purpose registers to eliminate WAW hazards.", "Switching from a Load/Store architecture to a Register/Memory architecture.", "Using fixed-length instructions to improve security sandboxing."],
+    "answer": "Allocating the majority of silicon die space to the L1 Cache because memory fetching is the most frequently executed and slowest task.",
+    "explanation": "Step 1: Amdahl's Law dictates that the overall performance improvement gained by optimizing a single part of a system is strictly limited by the fraction of time that part is actually used. Step 2: Put simply: 'Make the common case fast.' Step 3: In processor execution, fetching instructions and data from memory is the most frequent and slowest common action (due to the von Neumann bottleneck). Step 4: Therefore, dedicating massive amounts of silicon space to ultra-fast L1 and L2 Caches optimizes the most common, slowest task. Step 5: This yields the highest overall system speedup, perfectly aligning with Amdahl's Law.",
+    "trick": "Amdahl's law = Optimize the bottleneck! In computing, memory latency is the ultimate bottleneck, making Cache the highest ROI optimization.",
+    "tip": "Amdahl's Law in hardware: Optimize the most common, slowest operation (Memory Fetch via Cache)."
+  },
+  {
+    "id": 93,
+    "question": "Assertion (A): In a superscalar architecture, instructions are always fetched, decoded, executed, and retired strictly in the original compiled order to maintain software compatibility. Reason (R): Superscalar execution relies on software compilers grouping instructions into Very Long Instruction Words (VLIW) prior to runtime. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Superscalar processors fetch instructions in order, but to maximize parallel hardware usage, they usually execute them Out-of-Order dynamically. They only retire them in order. Thus, Assertion A is completely false. Step 2: Superscalar processors use hardware (Dispatch units, reservation stations) to find parallelism dynamically at runtime. Step 3: VLIW (Very Long Instruction Word) is a completely separate architecture paradigm where the compiler does the grouping statically. Step 4: Therefore, superscalar does NOT rely on VLIW compiler bundling. Reason R is false.",
+    "trick": "Superscalar and VLIW are rivals! Superscalar = Dynamic hardware parallelism. VLIW = Static software compiler parallelism.",
+    "tip": "Superscalar executes Out-Of-Order dynamically using hardware, unlike VLIW."
+  },
+  {
+    "id": 94,
+    "question": "A microprocessor designer wants to eliminate 'Structural Hazards' associated with register file access in a 5-stage pipeline, where the Decode stage reads operands and the Write-Back stage saves results simultaneously. What hardware engineering technique solves this?",
+    "options": ["Implementing a Branch Prediction Unit to guess register contents.", "Doubling the clock speed exclusively during the Decode stage.", "Designing the Register File as a multi-ported memory unit (e.g., dual-read, single-write ports).", "Forcing the Operating System to flush the pipeline on every Write-Back."],
+    "answer": "Designing the Register File as a multi-ported memory unit (e.g., dual-read, single-write ports).",
+    "explanation": "Step 1: A structural hazard means two parts of the pipeline need the same hardware at the same time. Step 2: In cycle 5, Instruction A is in Write-Back (writing to the register file). Instruction D is in Decode (reading from the register file). Step 3: If the register file only has one 'door' (port), they crash. Step 4: Engineers solve this by building a multi-ported register file. Step 5: By giving the hardware separate physical read ports and write ports, simultaneous read and write operations can occur in the same clock tick without hazard.",
+    "trick": "Hardware conflicts require hardware solutions. Adding more doors (ports) to the register file immediately solves the traffic jam.",
+    "tip": "Multi-ported Registers = Solve Structural Hazards during simultaneous Decode and Write-Back."
+  },
+  {
+    "id": 95,
+    "question": "Assertion (A): Utilizing a deeper pipeline architecture necessitates the integration of highly advanced Branch Prediction hardware. Reason (R): In a deep pipeline, conditional branch instructions are resolved in much later stages, leading to an exponentially higher number of wasted clock cycles (flushes) if the pipeline stalls or mispredicts. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "A is True but R is False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In a 5-stage pipeline, a branch might be resolved in stage 3. The penalty for a bad guess is 2 flushes. Step 2: In a 20-stage pipeline, a branch might not be mathematically resolved until stage 15. Step 3: If the processor guesses the path wrong, it has loaded 14 useless instructions that must be flushed out. Step 4: Because this penalty is devastating to performance, deep pipelines (Assertion A) absolutely require highly accurate, complex branch predictors (like Tournament Predictors) to rarely guess wrong. Step 5: Reason R perfectly explains the mathematical latency penalty driving this requirement.",
+    "trick": "Deep pipelines are thirsty for instructions. If they guess a branch wrong, the sheer amount of wasted work is catastrophic, mandating smart predictors.",
+    "tip": "Deep Pipeline = High Flush Penalty = Requires advanced Branch Predictor."
+  },
+  {
+    "id": 96,
+    "question": "In the evolution of the x86 architecture, the implementation of 'Micro-operations' (μops) serves to dynamically bridge the gap between which two concepts?",
+    "options": ["Harvard Architecture and von Neumann Architecture", "Static Instruction Scheduling and Loop Unrolling", "CISC Software Code and a RISC Hardware Execution Core", "Level 1 Cache and Main Memory"],
+    "answer": "CISC Software Code and a RISC Hardware Execution Core",
+    "explanation": "Step 1: The x86 ISA is fundamentally CISC, meaning instructions are complex, bulky, and variable in length. Step 2: Designing a fast, superscalar pipeline for complex instructions is an engineering nightmare. Step 3: To achieve modern speeds, Intel and AMD implemented an internal hardware decoder. Step 4: This decoder takes the bulky CISC software instruction and shatters it into several simple, fixed-length 'Micro-operations' (μops). Step 5: These μops are essentially RISC instructions, which are then fed into a highly pipelined, superscalar execution core. It bridges CISC software to RISC hardware.",
+    "trick": "Remember the hybrid nature of modern PCs: Outside it speaks CISC (for software compatibility), inside it speaks RISC (for pipelining speed).",
+    "tip": "Micro-ops bridge the gap: CISC on the outside, RISC on the inside."
+  },
+  {
+    "id": 97,
+    "question": "Assertion (A): The clock speed of a microprocessor determines the exact speed at which data travels across the external motherboard system bus to the RAM. Reason (R): The microprocessor generates the master clock signal that synchronizes all external peripherals and Main Memory automatically. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The CPU's internal clock speed (e.g., 4.0 GHz) dictates the speed of its internal ALUs and pipeline stages. Step 2: It does NOT dictate the external motherboard bus speed. The RAM operates on its own separate clock (e.g., memory bus clock at 3200 MHz). Therefore, Assertion A is completely false. Step 3: Furthermore, the CPU does not generate the master clock for the system. Step 4: The motherboard has dedicated clock generator chips (crystal oscillators) that provide separate base clock frequencies to the CPU, RAM, and PCIe devices. Step 5: Therefore, Reason R is also fundamentally false.",
+    "trick": "The CPU uses a 'multiplier' against a base clock. The CPU's high internal GHz is walled off; outside the CPU, the RAM and bus run at vastly slower speeds!",
+    "tip": "CPU clock speed only applies INTERNALLY. Motherboard and RAM use separate, slower clocks."
+  },
+  {
+    "id": 98,
+    "question": "When defining processor architectural metrics, the concept of 'Dark Silicon' primarily represents a physical limitation related to:",
+    "options": ["The inability to manufacture pure silicon wafers without microscopic impurities.", "The inability to power on all transistors on a chip simultaneously due to thermal and power delivery constraints.", "The hidden instruction sets utilized solely by the Operating System kernel.", "The physical area of a microchip dedicated entirely to unused L3 Cache padding."],
+    "answer": "The inability to power on all transistors on a chip simultaneously due to thermal and power delivery constraints.",
+    "explanation": "Step 1: Moore's law allowed engineers to pack billions of transistors onto a small silicon die. Step 2: However, Dennard Scaling (the rule that transistors use less power as they shrink) broke down due to leakage currents. Step 3: Consequently, if a modern CPU powers up all its billions of transistors simultaneously at max clock speed, it will literally melt. Step 4: To prevent thermal destruction, parts of the processor must remain powered down (or clocked extremely low) at any given moment. Step 5: This physically unpowered, unusable silicon is termed 'Dark Silicon' in architectural engineering.",
+    "trick": "It sounds like a sci-fi term, but it purely refers to the thermal wall. We have the transistors, we just can't turn them all on without melting the chip!",
+    "tip": "Dark Silicon = Transistors that must stay powered off to prevent the chip from melting."
+  },
+  {
+    "id": 99,
+    "question": "Assertion (A): Register Renaming completely resolves all True Data Dependencies (Read-After-Write) in an out-of-order execution pipeline. Reason (R): By allocating hidden physical registers, the CPU ensures the dependent instruction does not have to wait for the preceding instruction's ALU result. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A True Data Dependency (RAW) means Instruction B physically needs the mathematical result of Instruction A to perform its own math. Step 2: Register renaming fixes Name Dependencies (WAW, WAR) by giving them different addresses. Step 3: However, no amount of renaming can fix a True RAW dependency. If B needs A's math answer, B must wait until A calculates it. Assertion A is absolutely false. Step 4: Reason R is also false because renaming does not bypass the wait time for the actual ALU calculation; data forwarding (bypassing) is the tool used to mitigate the RAW delay, but the fundamental dependency remains.",
+    "trick": "Renaming fixes fake dependencies (reused register names). Bypassing/Forwarding mitigates True Data Dependencies (RAW). Never mix them up!",
+    "tip": "Register Renaming fixes WAW/WAR. It CANNOT fix RAW (True Data dependencies)."
+  },
+  {
+    "id": 100,
+    "question": "In advanced superscalar pipeline design, what is the specific function of the 'Reservation Stations' within Tomasulo’s dynamic scheduling algorithm?",
+    "options": ["They permanently store the final execution results before sending them to Main Memory.", "They buffer decoded instructions and hold them until their specific required data operands become available, enabling out-of-order dispatch.", "They translate CISC machine code into fixed-length RISC micro-operations.", "They act as physical memory pages mapped to Virtual Memory for fast paging."],
+    "answer": "They buffer decoded instructions and hold them until their specific required data operands become available, enabling out-of-order dispatch.",
+    "explanation": "Step 1: In a strict in-order processor, if one instruction stalls waiting for data, everything behind it stalls. Step 2: Tomasulo's algorithm solves this using Out-of-Order execution. Step 3: It utilizes hardware buffers called 'Reservation Stations' placed directly in front of the execution units (ALUs). Step 4: When an instruction is decoded, it goes to a Reservation Station. If its data is ready, it executes. Step 5: If its data is NOT ready, it just waits in the station. Crucially, the dispatch unit can skip past it and send the next instruction to a different station, allowing younger independent instructions to execute immediately.",
+    "trick": "Think of Reservation Stations as waiting rooms right outside the doctor's office (ALU). If your test results (data operands) aren't ready, you sit there while the next patient goes in!",
+    "tip": "Reservation Stations = Waiting rooms that enable Out-of-Order Execution."
+  }
+]

@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): Renaming a '.docx' file to '.docm' manually in the Windows File Explorer automatically enables the execution of VBA Macros within that document. Reason (R): The Microsoft Office architecture strictly relies on the file extension string to compile and execute underlying Visual Basic for Applications code. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A .docx file is a ZIP archive of XML files strictly designed to exclude VBA macro storage. Step 2: Manually changing the extension to .docm does not alter the underlying XML architecture. Step 3: MS Word inspects the internal MIME type and XML structure, not just the file extension. Step 4: Because the required 'vbaProject.bin' binary file is physically missing from the archive, Macros cannot execute. Step 5: Therefore, both the assertion and reason are structurally false.",
+    "trick": "Bank/IT Trap: Extensions don't magically change file structures! A .docx file lacks the internal binary folder required to store VBA code. MS Word will detect the mismatch and throw a corruption error.",
+    "tip": "File extensions are just labels; the internal XML architecture dictates true macro capability."
+  },
+  {
+    "id": 2,
+    "question": "In the Windows Operating System architecture, what is the primary technical advantage of utilizing '.dll' (Dynamic Link Library) files for MS Office applications like Word and Excel?",
+    "options": ["They permanently embed necessary code into the executable, making the application standalone.", "They allow multiple running applications to share a single copy of code in the physical RAM, drastically reducing memory footprint.", "They convert high-level VBA scripts into machine-level Assembly code.", "They automatically backup MS Office documents to the registry."],
+    "answer": "They allow multiple running applications to share a single copy of code in the physical RAM, drastically reducing memory footprint.",
+    "explanation": "Step 1: DLL files contain functional code (like printing or spell-check dialogues). Step 2: If Word and Excel both need to print, they do not each load their own printing code into RAM. Step 3: Instead, the OS loads a single 'print.dll' into physical memory. Step 4: Both Word and Excel dynamically link to this single memory address. Step 5: This shared architecture drastically reduces the overall RAM consumption of the system.",
+    "trick": "Bank/IT Trap: Static linking (embedding code) makes files huge. Dynamic linking (.dll) shares code, saving massive amounts of physical RAM and disk space.",
+    "tip": "DLLs are shared libraries that reduce RAM usage by servicing multiple applications simultaneously."
+  },
+  {
+    "id": 3,
+    "question": "Assertion (A): When inserting an '.svg' (Scalable Vector Graphics) image into a PowerPoint slide, enlarging the image to 500% will not result in pixelation or blurring. Reason (R): SVG files store image data as fixed grids of colored pixels that MS Office automatically interpolates using AI upscaling. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: Raster images (like PNG or JPG) store data as fixed grids of colored pixels, causing pixelation when enlarged. Step 2: SVG files are vector images. Step 3: Vector images store visual data as mathematical formulas (points, lines, curves, and polygons). Step 4: When you enlarge an SVG in PowerPoint, the software simply recalculates the math for the new dimensions, maintaining absolute crispness (Assertion A is true). Step 5: Reason R incorrectly describes SVG as a pixel grid using AI upscaling, which is completely false.",
+    "trick": "Bank/IT Trap: Memorize the difference: Raster = Pixels (Blurry when zoomed). Vector = Math (Infinitely scalable and crisp). SVG is strictly math-based.",
+    "tip": "SVGs use mathematical formulas, not pixels, allowing infinite scaling without losing resolution."
+  },
+  {
+    "id": 4,
+    "question": "Which of the following developer extensions is specifically executed by the 'cmd.exe' command-line interpreter in Windows, typically used by IT admins to automate sequential system tasks?",
+    "options": [".ps1", ".bat", ".apk", ".sys"],
+    "answer": ".bat",
+    "explanation": "Step 1: The .bat (Batch) file is a legacy script file originating from DOS. Step 2: It contains a sequence of plain text commands. Step 3: When executed, the Windows Command Prompt (cmd.exe) reads and executes these commands line-by-line. Step 4: The .ps1 extension is for PowerShell (a different, more advanced interpreter). Step 5: The .sys is a system driver, and .apk is an Android package, leaving .bat as the correct command-line automation tool.",
+    "trick": "Bank/IT Trap: Do not confuse .bat with .ps1. Batch files use cmd.exe (legacy DOS commands), while .ps1 uses the modern PowerShell environment.",
+    "tip": "Batch files (.bat) automate sequential command-line tasks using the cmd.exe interpreter."
+  },
+  {
+    "id": 5,
+    "question": "Assertion (A): A malicious script embedded in an '.xlsm' file can automatically execute the moment the file is opened by a user. Reason (R): MS Excel features 'Event Handlers' such as 'Workbook_Open()' that automatically trigger VBA macros upon initialization of the file. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: An .xlsm file explicitly supports VBA macros. Step 2: In VBA, developers can write code inside specific Object Event Handlers. Step 3: The 'Workbook_Open()' event is hardcoded to fire immediately when the Excel file loads into memory. Step 4: If a malicious payload is placed inside this event, it executes instantly upon opening (assuming the user has Macros enabled in the Trust Center). Step 5: Therefore, both A and R are structurally accurate and directly linked.",
+    "trick": "Bank/IT Trap: This is exactly why email providers block macro-enabled Office files. 'Workbook_Open' acts as an automatic detonator for malware.",
+    "tip": "The 'Workbook_Open' VBA event triggers macros automatically the moment an Office file opens."
+  },
+  {
+    "id": 6,
+    "question": "In the context of operating system architecture, what is the specific execution privilege level required for most '.sys' files to function correctly?",
+    "options": ["Ring 3 (User Mode)", "Ring 0 (Kernel Mode)", "Safe Mode only", "Java Virtual Machine (JVM)"],
+    "answer": "Ring 0 (Kernel Mode)",
+    "explanation": "Step 1: A .sys file in Windows is typically a hardware device driver or core operating system file. Step 2: These files must interact directly with physical hardware (like memory, hard drives, and graphics cards). Step 3: The CPU architecture divides privileges into rings to protect the system. Step 4: User applications run in restricted Ring 3. Step 5: Drivers (.sys) require unrestricted access to hardware, meaning they must execute in the highly privileged Ring 0 (Kernel Mode).",
+    "trick": "Bank/IT Trap: If a Ring 3 application crashes, the app closes. If a Ring 0 (.sys) driver crashes, it takes down the entire OS, causing the infamous Blue Screen of Death (BSOD).",
+    "tip": "System driver files (.sys) execute in Ring 0 (Kernel Mode) for direct hardware access."
+  },
+  {
+    "id": 7,
+    "question": "Assertion (A): The '.rtf' (Rich Text Format) extension is universally preferred over '.docx' for securely transferring documents with complex VBA macros across different operating systems. Reason (R): RTF is a proprietary Microsoft format exclusively designed to encrypt and obfuscate macro scripts. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: RTF (Rich Text Format) was developed by Microsoft as a cross-platform document format. Step 2: A fundamental architectural feature of RTF is that it only supports text formatting (like bold, italics, fonts) and images. Step 3: RTF files structurally CANNOT store or execute VBA macros. Step 4: Therefore, it is impossible to use RTF to transfer macros securely (Assertion A is false). Step 5: Furthermore, RTF is essentially plain text with markup tags; it does not encrypt or obfuscate code (Reason R is false).",
+    "trick": "Bank/IT Trap: RTF is safe from native macro viruses specifically because it lacks a macro engine. Hackers use RTF to exploit buffer overflows, not macros.",
+    "tip": "The Rich Text Format (.rtf) structurally cannot contain or execute VBA Macros."
+  },
+  {
+    "id": 8,
+    "question": "An IT administrator finds a file named 'app_update.apk' on a Windows 10 server. What is the fundamental architecture of this file, and what natively executes it?",
+    "options": ["It is an Apple Package Kit, executed by iOS.", "It is an Advanced PowerShell Key, executed by Windows Command Prompt.", "It is an Android Package, executed by the Dalvik/ART runtime on an Android OS.", "It is an Application Patch Kernel, executed by Windows Update."],
+    "answer": "It is an Android Package, executed by the Dalvik/ART runtime on an Android OS.",
+    "explanation": "Step 1: The .apk extension stands for Android Package (or Android Package Kit). Step 2: It is the standard archive file format used to distribute and install applications on Google's Android operating system. Step 3: Architecturally, it is a ZIP-formatted archive containing the app's compiled code, resources, assets, and manifest file. Step 4: The compiled code (.dex files) is executed by the Android Runtime (ART) or the older Dalvik virtual machine. Step 5: It cannot run natively on Windows 10 without an emulator.",
+    "trick": "Bank/IT Trap: APK files are essentially ZIP files. You can rename an .apk to .zip and extract it in Windows to view its internal assets and manifest XML.",
+    "tip": "APK files are Android installation packages, unexecutable natively on Windows operating systems."
+  },
+  {
+    "id": 9,
+    "question": "What is the specific architectural difference between an '.xlsx' file and an '.xlsb' file in Microsoft Excel?",
+    "options": [".xlsx supports macros, while .xlsb strips all VBA code.", ".xlsx uses a ZIP-compressed XML structure, while .xlsb uses a proprietary Binary structure.", ".xlsx can only hold 65,536 rows, while .xlsb can hold 1,048,576 rows.", ".xlsx is open-source, while .xlsb requires an active internet connection to authenticate."],
+    "answer": ".xlsx uses a ZIP-compressed XML structure, while .xlsb uses a proprietary Binary structure.",
+    "explanation": "Step 1: In Office 2007, Microsoft transitioned to the Open XML format, utilizing extensions ending in 'x' (like .xlsx). Step 2: These files are actually ZIP archives containing readable XML text files. Step 3: The '.xlsb' format stands for Excel Binary Workbook. Step 4: Instead of text-based XML, .xlsb stores data in raw binary format. Step 5: Binary format allows massive spreadsheets to load, save, and calculate significantly faster than XML, though it sacrifices third-party readability.",
+    "trick": "Bank/IT Trap: Both .xlsm AND .xlsb can contain macros! However, .xlsb is strictly a binary format, making it the fastest option for heavily bloated corporate workbooks.",
+    "tip": "Excel Binary (.xlsb) loads massive files faster than XML-based (.xlsx) workbooks."
+  },
+  {
+    "id": 10,
+    "question": "Assertion (A): The phenomenon known as 'DLL Hell' occurs when multiple applications require different versions of the exact same Dynamic Link Library file to function. Reason (R): Early Windows operating systems stored shared .dll files in a single central directory (System32), leading to older versions being overwritten by newer, incompatible installations. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: DLL files are designed to be shared across applications. Step 2: Historically, installers dumped these shared files into the central C:/Windows/System32 folder. Step 3: If Application A installed 'library_v1.dll', it worked fine. Step 4: If Application B later installed 'library_v2.dll' over the same file, Application A might crash if v2 removed or changed functions it relied upon. Step 5: This version-conflict nightmare is universally termed 'DLL Hell', making both statements accurate and perfectly linked.",
+    "trick": "Bank/IT Trap: Microsoft solved 'DLL Hell' using the .NET Global Assembly Cache (GAC) and 'Side-by-Side' (SxS) assemblies, allowing multiple versions of a DLL to exist simultaneously.",
+    "tip": "DLL Hell refers to application crashes caused by overwritten, incompatible shared library versions."
+  },
+  {
+    "id": 11,
+    "question": "Which open standard file format, native to LibreOffice and OpenOffice, utilizes a ZIP-compressed directory of XML files to represent text documents, competing directly with Microsoft's .docx format?",
+    "options": [".odt", ".rtf", ".csv", ".xps"],
+    "answer": ".odt",
+    "explanation": "Step 1: Microsoft Office uses Office Open XML formats (.docx, .xlsx). Step 2: Open-source suites like Apache OpenOffice and LibreOffice utilize a competing standard called the OpenDocument Format (ODF). Step 3: Specifically for word processing text documents, the extension is .odt (OpenDocument Text). Step 4: Similar to .docx, it is architecturally a ZIP container holding XML files, images, and styling data. Step 5: It is widely adopted by governments to avoid proprietary software lock-in.",
+    "trick": "Bank/IT Trap: Don't confuse ODT with RTF. RTF is a legacy Microsoft format. ODT is the modern, open-source XML standard for text documents.",
+    "tip": "The .odt format is the open-source XML equivalent to Microsoft's .docx format."
+  },
+  {
+    "id": 12,
+    "question": "Assertion (A): Saving an MS Word template with macros as a '.dotm' file ensures that whenever a user double-clicks the file, the original master copy is overwritten with their new data. Reason (R): Template files are designed to permanently retain user input to streamline repetitive data entry tasks. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A .dotm file is a Word Macro-Enabled Template. Step 2: The fundamental architectural purpose of a template is to protect the original master layout. Step 3: When a user double-clicks a .dotm file, Windows does not 'Open' the file. Instead, it issues a 'New' command. Step 4: MS Word generates a fresh, unnamed document ('Document1') cloned from the template. Step 5: Therefore, the original master template is entirely protected from being overwritten, making both A and R completely false.",
+    "trick": "Bank/IT Trap: To actually edit a .dotm master file, you cannot double-click it. You must open MS Word first, go to File -> Open, and explicitly select the template.",
+    "tip": "Double-clicking a template (.dotm) spawns a new clone document, protecting the original file."
+  },
+  {
+    "id": 13,
+    "question": "An IT technician downloads a new hardware driver. The folder contains a '.sys' file and a '.inf' file. What is the specific architectural role of the '.inf' file in the Windows ecosystem?",
+    "options": ["It is the executable binary that interacts directly with the hardware.", "It is a Setup Information text file containing the installation scripts, registry keys, and paths required to install the driver.", "It is an Infected file quarantine container used by Windows Defender.", "It is an Infinite loop script that keeps the device driver running in the background."],
+    "answer": "It is a Setup Information text file containing the installation scripts, registry keys, and paths required to install the driver.",
+    "explanation": "Step 1: Hardware requires drivers (.sys files) to communicate with the OS Kernel. Step 2: However, the OS needs to know HOW to install the .sys file, where to put it, and what registry keys to modify. Step 3: The .inf (Setup Information) file serves this exact purpose. Step 4: Architecturally, it is a plain text file structured into sections (like [Version], [Manufacturer]) that the Windows Device Manager parses. Step 5: Without the .inf script, Windows cannot natively map the .sys driver to the physical hardware.",
+    "trick": "Bank/IT Trap: The .sys file is the actual brain (the driver). The .inf file is just the instruction manual telling Windows how to install the brain.",
+    "tip": "An .inf file provides the plain-text installation instructions for Windows hardware drivers."
+  },
+  {
+    "id": 14,
+    "question": "Assertion (A): Scalable Vector Graphics (.svg) files can be animated and styled using standard web technologies like CSS and JavaScript. Reason (R): SVG files are fundamentally written in XML (eXtensible Markup Language), making their internal elements accessible via the Document Object Model (DOM). Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Raster images (JPEG/PNG) are flat grids of pixels and cannot be internally modified by web code. Step 2: SVG is a text-based format written entirely in XML. Step 3: Because it is XML, every shape (circle, path, rectangle) is a distinct node within the file. Step 4: When loaded into a web browser, these XML nodes become part of the DOM. Step 5: Consequently, CSS can target an SVG path to change its color, and JavaScript can manipulate it to create animation, making both A and R true and functionally linked.",
+    "trick": "Bank/IT Trap: You can literally open an .svg file in Windows Notepad and edit its math, colors, and shapes purely by typing text!",
+    "tip": "Because SVGs are written in XML text, they can be styled and animated dynamically."
+  },
+  {
+    "id": 15,
+    "question": "Which Microsoft Office file format is considered highly vulnerable to 'Object Linking and Embedding (OLE)' exploitation, frequently used by attackers to hide malicious executables inside seemingly safe text documents?",
+    "options": [".rtf", ".txt", ".csv", ".ini"],
+    "answer": ".rtf",
+    "explanation": "Step 1: The .txt and .csv formats are pure text; they structurally cannot contain embedded objects. Step 2: The .ini format is a configuration text file, also incapable of embedding objects. Step 3: The Rich Text Format (.rtf) was designed to support rich text and OLE (Object Linking and Embedding). Step 4: Hackers exploit this by embedding malicious executables or scripts as OLE objects inside the .rtf. Step 5: Because RTF bypasses standard macro security warnings (as it isn't a macro), it is a notoriously common vector for malware delivery.",
+    "trick": "Bank/IT Trap: While RTF cannot run VBA macros natively, its support for OLE makes it highly dangerous. Attackers hide exploits in the OLE stream.",
+    "tip": "RTF files are frequently exploited by hackers using malicious embedded OLE (Object Linking) objects."
+  },
+  {
+    "id": 16,
+    "question": "Assertion (A): To ensure a batch script (.bat) suppresses the display of its internal commands on the command-line interface during execution, the first line should be `@ECHO OFF`. Reason (R): The `@ECHO OFF` command forces the cmd.exe interpreter to permanently delete the script file after execution. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: By default, when a batch file runs, the cmd.exe interpreter prints every single command to the screen before executing it, causing messy visual output. Step 2: To clean the UI, developers place `@ECHO OFF` at the very top of the script. Step 3: This command instructs the interpreter to hide the underlying code, displaying only the actual outputs (Assertion A is true). Step 4: However, it has absolutely no effect on file retention. Step 5: It does not delete the script file, making Reason R completely false.",
+    "trick": "Bank/IT Trap: The `@` symbol in front of ECHO OFF prevents the 'ECHO OFF' command itself from being printed to the screen. It is purely a visual UI command.",
+    "tip": "`@ECHO OFF` hides underlying script commands from the console screen; it doesn't delete files."
+  },
+  {
+    "id": 17,
+    "question": "In the Windows Registry and older application architectures, what is the specific function of a file ending with the '.ini' extension?",
+    "options": ["It is an Initialization file containing plain text configuration settings, parameters, and preferences for an application.", "It is an Initial Network Interface file containing IPv4 routing tables.", "It is an Injector script used exclusively by antivirus software to quarantine .dll files.", "It is an Integrated Native Image file containing application icons."],
+    "answer": "It is an Initialization file containing plain text configuration settings, parameters, and preferences for an application.",
+    "explanation": "Step 1: Before the widespread adoption of the central Windows Registry and XML configs, applications needed a place to save user preferences. Step 2: They used Initialization (.ini) files. Step 3: Architecturally, an .ini file is a simple text file organized into bracketed sections (e.g., [Settings]) with key-value pairs (e.g., Volume=100). Step 4: When the application launches, it reads the .ini file to establish its initial state. Step 5: While legacy, they are still heavily used in portable applications and game configurations.",
+    "trick": "Bank/IT Trap: The '.ini' extension stands for Initialization. It is strictly a text-based configuration file and poses zero executable threat natively.",
+    "tip": "Initialization (.ini) files store application configuration settings as simple plain-text key-value pairs."
+  },
+  {
+    "id": 18,
+    "question": "Assertion (A): PowerShell scripts (.ps1) are fundamentally more powerful than legacy Batch files (.bat) because PowerShell is built entirely on the .NET framework. Reason (R): Unlike Batch files that only process string text, PowerShell handles inputs and outputs as structured Object-Oriented data. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Batch files (.bat) are an ancient DOS technology. They pipe plain text strings from one command to another, requiring complex string parsing (Regex) to extract data. Step 2: Microsoft built PowerShell (.ps1) on the .NET framework to modernize IT administration (A is true). Step 3: Because of the .NET integration, when you run a command in PowerShell, it returns a .NET Object, complete with properties and methods. Step 4: You can pass these objects directly to the next command without losing structural data. Step 5: This object-oriented pipeline is the exact architectural reason PowerShell is vastly superior to Batch, validating both statements.",
+    "trick": "Bank/IT Trap: The defining feature of PowerShell is the 'Object Pipeline'. It passes rich objects, not just flat text like Linux bash or Windows batch.",
+    "tip": "PowerShell (.ps1) is vastly superior to Batch (.bat) because it uses object-oriented data pipelines."
+  },
+  {
+    "id": 19,
+    "question": "An IT security officer prevents users from saving files with the '.xltm' extension on a shared corporate network drive. What specific type of file does this extension represent?",
+    "options": ["Excel Macro-Enabled Template", "Excel Lock-Time Manager", "Extensible Lightweight Text Module", "Excel Legacy Text Macro"],
+    "answer": "Excel Macro-Enabled Template",
+    "explanation": "Step 1: Decode the standard Microsoft Office extensions. Step 2: The 'x' usually denotes the application (Excel). Step 3: The 'l' and 't' stand for 'Template'. Step 4: The final letter 'm' universally designates 'Macro-enabled' in the modern Office Open XML architecture. Step 5: Therefore, '.xltm' stands for an Excel Macro-Enabled Template. Like all 'm' files, it contains a 'vbaProject.bin' payload capable of executing code, prompting the security officer's restriction.",
+    "trick": "Bank/IT Trap: Focus on the last two letters: 'tm' = Template Macro. 'tx' = Template XML (no macro). 'sm' = Spreadsheet Macro.",
+    "tip": "The '.xltm' extension signifies an MS Excel Macro-Enabled Template file."
+  },
+  {
+    "id": 20,
+    "question": "Assertion (A): The 'svchost.exe' process often appears dozens of times simultaneously in the Windows Task Manager, indicating a high probability of a systemic virus infection. Reason (R): Windows isolates dynamic link library (.dll) services into separate Service Host (svchost) groups to prevent a single crashing driver from taking down the entire operating system. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Many core Windows services are not standalone .exe files; they are compiled as .dll files. Step 2: A .dll cannot launch itself; it requires a host process. Step 3: Windows uses 'svchost.exe' (Service Host) to run these DLLs. Step 4: To improve stability, Windows groups related services together and assigns each group its own distinct svchost.exe process (Reason R is true). Step 5: Consequently, seeing 20-30 instances of svchost.exe is perfectly normal system architecture, making Assertion A entirely false.",
+    "trick": "Bank/IT Trap: While malware *can* disguise itself as svchost, the mere presence of multiple svchost processes is a fundamental requirement of Windows architecture, not a sign of infection.",
+    "tip": "Multiple 'svchost.exe' instances are normal; they host and isolate critical OS .dll services."
+  },
+  {
+    "id": 21,
+    "question": "When developing a VBA Macro in an MS Office document, which specific hotkey combination compiles and executes the code line-by-line within the Visual Basic Editor for debugging purposes?",
+    "options": ["F5", "F8", "Ctrl + Space", "Alt + F11"],
+    "answer": "F8",
+    "explanation": "Step 1: Alt + F11 opens the Visual Basic Editor (VBE) interface. Step 2: Once inside the editor, pressing F5 will execute the entire macro continuously from start to finish. Step 3: If a developer encounters a bug, they need to trace the execution path and variable states slowly. Step 4: Pressing the 'F8' key triggers the 'Step Into' debug command. Step 5: This highlights and executes the VBA code exactly one line at a time, making it the primary debugging hotkey.",
+    "trick": "Bank/IT Trap: In the main Word/Excel window, Alt+F8 opens the Macro List. Inside the VBA coding window, F8 runs the code line-by-line. Know the context!",
+    "tip": "Inside the VBA Editor, pressing F8 executes macro code line-by-line for active debugging."
+  },
+  {
+    "id": 22,
+    "question": "Assertion (A): Executing a file named 'payload.cmd' in Windows provides identical operational results to executing a file named 'payload.bat'. Reason (R): Both '.cmd' and '.bat' extensions invoke the exact same command-line interpreter engine (cmd.exe) utilizing the exact same syntax architecture. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The '.bat' extension is a legacy artifact from MS-DOS and Windows 9x systems (which used command.com). Step 2: When Windows NT was released (bringing cmd.exe), Microsoft introduced the '.cmd' extension to designate scripts meant for the newer 32-bit environment. Step 3: However, for absolute backwards compatibility, modern Windows treats both extensions identically. Step 4: Both are passed directly to the cmd.exe interpreter and process the exact same syntax environment variables. Step 5: Therefore, they are functionally indistinguishable in modern IT administration.",
+    "trick": "Bank/IT Trap: While '.cmd' was intended to replace '.bat', the global standard remained '.bat'. Today, Windows processes both equally via cmd.exe.",
+    "tip": "Both .bat and .cmd extensions represent batch scripts processed identically by the Windows cmd.exe interpreter."
+  },
+  {
+    "id": 23,
+    "question": "Which of the following internal components is mandatory within an Android Application Package (.apk) to declare the application's required operating system permissions (e.g., Camera or Internet access)?",
+    "options": ["classes.dex", "resources.arsc", "AndroidManifest.xml", "META-INF/CERT.RSA"],
+    "answer": "AndroidManifest.xml",
+    "explanation": "Step 1: An .apk file is an archive containing several distinct architectural components. Step 2: 'classes.dex' holds the compiled Dalvik bytecode. Step 3: 'resources.arsc' contains precompiled resources like strings and colors. Step 4: The 'META-INF' folder holds cryptographic signatures guaranteeing file integrity. Step 5: The 'AndroidManifest.xml' is the absolute structural core. It explicitly defines the app's name, version, entry points, and demands the specific hardware/software permissions required to run on the Android OS.",
+    "trick": "Bank/IT Trap: The Android system reads the Manifest *before* installing the app to warn the user about privacy permissions. Without the Manifest, the APK is invalid.",
+    "tip": "The 'AndroidManifest.xml' file within an APK dictates application structure and required system permissions."
+  },
+  {
+    "id": 24,
+    "question": "Assertion (A): The Office Open XML format (.docx) is structurally safer from macro-viruses than the legacy Binary format (.doc). Reason (R): The Office Open XML specification mathematically separates document data components into isolated XML text files, explicitly sandboxing any embedded macros into a highly visible, separate binary file. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The legacy .doc format was a proprietary binary blob. Text, formatting, and macros were mashed together, making it incredibly easy for viruses to hide stealthily. Step 2: Microsoft introduced Office Open XML (.docx, .docm) to fix this. Step 3: Architecturally, the new format is a ZIP container containing organized XML text files (word/document.xml, etc.). Step 4: If macros are present, they CANNOT hide in the XML. They are strictly segregated into an isolated file called 'vbaProject.bin'. Step 5: This modular separation (R) makes it trivially easy for antivirus scanners to detect macro threats, thus making the format structurally safer (A).",
+    "trick": "Bank/IT Trap: Even in a .docm file, the macro code isn't mixed with your paragraph text. The XML architecture forces all code into an isolated bin file.",
+    "tip": "Modern Office XML formats isolate macro code into a specific binary file, enhancing security scanning."
+  },
+  {
+    "id": 25,
+    "question": "An advanced user opens the Command Prompt and types `regsvr32 mylibrary.dll`. What is the specific architectural purpose of executing this command?",
+    "options": ["It deletes the DLL from the Windows System32 directory permanently.", "It translates the DLL file into a readable C++ source code text file.", "It registers the DLL's internal Component Object Model (COM) interfaces into the Windows Registry.", "It forces the DLL to execute as an independent standalone background process."],
+    "answer": "It registers the DLL's internal Component Object Model (COM) interfaces into the Windows Registry.",
+    "explanation": "Step 1: For a program to use a shared DLL, the operating system must know exactly what functions the DLL offers and where it resides. Step 2: Some DLLs utilize the Component Object Model (COM) architecture, meaning they provide reusable class objects. Step 3: Before an application can call these COM objects, they must be indexed in the central Windows Registry. Step 4: The 'regsvr32.exe' (Register Server) command-line utility achieves this. Step 5: Executing it maps the DLL's Class IDs (CLSID) into the registry, making its functions globally available to the OS.",
+    "trick": "Bank/IT Trap: A DLL cannot run as a standalone process (like an .exe). Regsvr32 doesn't 'run' the DLL; it merely indexes it in the registry so other apps can find it.",
+    "tip": "The 'regsvr32' command registers DLL COM objects into the Windows Registry for system-wide access."
+  },
+  {
+    "id": 26,
+    "question": "Assertion (A): Windows 10 relies on a critical system file named 'ntoskrnl.exe' to manage physical hardware and process memory. Reason (R): 'ntoskrnl.exe' is the primary executable representing the Windows NT kernel and the executive subsystems operating in Ring 0. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The Windows operating system requires a core program to manage the bridge between software and hardware. Step 2: This core is known as the Kernel. Step 3: In the Windows NT architecture (which powers Windows XP, 7, 10, and 11), the file 'ntoskrnl.exe' is the physical embodiment of this kernel. Step 4: It controls process scheduling, memory management, and interacts heavily with the Hardware Abstraction Layer (HAL). Step 5: Because it commands the entire system, it executes in the unrestricted Ring 0 privilege mode. Both A and R are true and perfectly linked.",
+    "trick": "Bank/IT Trap: If 'ntoskrnl.exe' gets corrupted or deleted, Windows fundamentally cannot boot. It is the absolute heart of the operating system.",
+    "tip": "The file 'ntoskrnl.exe' is the core Windows Kernel, responsible for memory and hardware management."
+  },
+  {
+    "id": 27,
+    "question": "When examining the architecture of a Batch file (.bat), what is the functional outcome of inserting the command `ERRORLEVEL` within an IF statement logic block?",
+    "options": ["It overrides system administrative privileges to force execution.", "It evaluates the integer exit code returned by the previously executed command to determine success or failure.", "It triggers a Blue Screen of Death (BSOD) memory dump for debugging.", "It scans the subsequent lines for syntax errors before running them."],
+    "answer": "It evaluates the integer exit code returned by the previously executed command to determine success or failure.",
+    "explanation": "Step 1: Batch scripts execute commands sequentially. Step 2: When a command finishes (e.g., copying a file), it silently returns an exit code to the OS. Step 3: In Windows, an exit code of 0 traditionally means 'Success', while 1 or higher indicates a specific failure or error. Step 4: The system environment variable `%ERRORLEVEL%` stores this integer. Step 5: Using `IF %ERRORLEVEL% NEQ 0` allows the script to mathematically detect a failure and execute a fallback command or error message dynamically.",
+    "trick": "Bank/IT Trap: In standard programming, 1=True/Success. In OS command-line execution, 0=Success, and 1=Error. Do not mix these up!",
+    "tip": "The ERRORLEVEL variable in Batch scripts captures the integer exit status (0=Success) of commands."
+  },
+  {
+    "id": 28,
+    "question": "Assertion (A): Distributing an image in the Scalable Vector Graphics (.svg) format guarantees that the file size will always be significantly smaller than an equivalent JPEG or PNG image. Reason (R): SVG files compress image data using the lossless LZW algorithm rather than standard pixel array mapping. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: SVGs use mathematical paths to draw shapes, making them incredibly small for simple logos or icons compared to a high-res PNG. Step 2: However, if a user attempts to represent a complex, highly detailed photograph (like a forest landscape) in SVG format, it requires millions of mathematical path calculations. Step 3: In this scenario, the SVG file size will balloon exponentially, becoming far larger than a compressed JPEG. Thus, A is false (it is not guaranteed). Step 4: SVG is an XML-based text format; it does not natively use LZW compression (which is used by GIF/TIFF), making Reason R completely false.",
+    "trick": "Bank/IT Trap: SVGs are best for simple graphics (logos/icons). For photographs, JPEGs are vastly superior in file size and rendering efficiency.",
+    "tip": "SVG files are XML text documents defining shapes mathematically; they are unsuitable for complex photographs."
+  },
+  {
+    "id": 29,
+    "question": "Within the Microsoft Office Trust Center, a user selects the setting: 'Disable all macros without notification'. What is the exact architectural outcome when this user subsequently opens a '.docm' file containing embedded VBA code?",
+    "options": ["The file will refuse to open entirely, displaying an 'Access Denied' system prompt.", "The file will open as a standard document, but the VBA project bin is completely blocked from executing, with no warning bar provided.", "The file will open in Protected View, and the macros will execute strictly within a safe, isolated memory sandbox.", "The file's extension will be automatically downgraded and saved as a '.docx'."],
+    "answer": "The file will open as a standard document, but the VBA project bin is completely blocked from executing, with no warning bar provided.",
+    "explanation": "Step 1: The Office Trust Center governs security policies for active content (like macros). Step 2: The default setting is 'Disable all macros WITH notification', which throws a yellow warning bar asking the user to click 'Enable Content'. Step 3: By selecting 'Disable all macros WITHOUT notification', the user enacts a strict zero-trust policy. Step 4: When a .docm file is loaded, Word still parses the XML and displays the text and images perfectly. Step 5: However, the macro execution engine outright rejects loading the 'vbaProject.bin' file. The user receives no prompt, and the macros are silently neutralized.",
+    "trick": "Bank/IT Trap: The document still opens! Macros are disabled, but the visible text content of the .docm file remains fully accessible and editable.",
+    "tip": "Disabling macros without notification allows files to open normally but silently neutralizes all VBA code execution."
+  },
+  {
+    "id": 30,
+    "question": "Assertion (A): The Windows execution policy specifically targets Batch files (.bat) to prevent unauthorized scripts from running natively on the command prompt. Reason (R): Execution policies are Microsoft's primary defense mechanism against malicious DOS-based scripting attacks. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Windows 'Execution Policies' (like Restricted, RemoteSigned, Unrestricted) are a security feature exclusively designed for PowerShell (.ps1) scripts. Step 2: Legacy Batch files (.bat) and command prompt (.cmd) scripts completely bypass these execution policies. Step 3: If you double-click a .bat file, cmd.exe executes it immediately, regardless of PowerShell security policies. Step 4: Therefore, Assertion A is completely false (Execution policies do not target .bat files). Step 5: Reason R is also false because execution policies govern modern .NET PowerShell objects, not legacy DOS scripting.",
+    "trick": "Bank/IT Trap: A massive security loophole! Hackers often use .bat files precisely because Windows does not enforce Execution Policies on them, unlike modern .ps1 scripts.",
+    "tip": "Windows Execution Policies only restrict PowerShell scripts (.ps1), completely ignoring legacy Batch files (.bat)."
+  },
+  {
+    "id": 31,
+    "question": "When examining a DLL file, an IT developer utilizes a dependency walker tool to view the 'Export Table'. What is the architectural purpose of the Export Table within the dynamic link library?",
+    "options": ["It lists the memory addresses of all the internal functions that the DLL makes available for other applications to call and utilize.", "It acts as a firewall log, tracking which external applications have attempted to modify the DLL.", "It contains the public cryptographic keys necessary to verify the digital signature of the software vendor.", "It dictates the maximum amount of physical RAM the DLL is permitted to consume upon execution."],
+    "answer": "It lists the memory addresses of all the internal functions that the DLL makes available for other applications to call and utilize.",
+    "explanation": "Step 1: A DLL contains dozens or hundreds of programmed functions (e.g., DrawWindow, PrintDocument). Step 2: However, internal functions meant only for the DLL's private math shouldn't be accessible to outside apps. Step 3: The developer explicitly tags certain functions as 'Exports'. Step 4: The compiler generates an 'Export Table' in the file header. Step 5: When an external .exe loads the DLL, it reads the Export Table to find the exact memory addresses of the public functions it is allowed to execute.",
+    "trick": "Bank/IT Trap: The Export Table is the menu of services the DLL offers. Conversely, the 'Import Table' lists the services the DLL itself needs from *other* DLLs.",
+    "tip": "The Export Table acts as a directory, exposing a DLL's public functions to external applications."
+  },
+  {
+    "id": 32,
+    "question": "Assertion (A): Extracting an Android '.apk' file yields a 'classes.dex' file, which can be directly executed by a standard Java Virtual Machine (JVM) on a Windows desktop. Reason (R): Android applications are written in Java, and the compilation process produces universal Java bytecode compatible with any JVM. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Android apps are predominantly written in Java or Kotlin. Step 2: However, the Google compilation pipeline does not output standard Java bytecode (.class files). Step 3: Instead, a specialized compiler (D8 or DX) converts standard .class files into Dalvik Executable (.dex) files. Step 4: Dalvik bytecode uses a register-based architecture, which is fundamentally incompatible with standard Oracle JVMs (which use a stack-based architecture). Step 5: Therefore, a Windows JVM physically cannot execute a .dex file. Both Assertion A and Reason R are entirely false.",
+    "trick": "Bank/IT Trap: Android Java != Desktop Java. Google custom-engineered the Dalvik/ART runtime, creating a massive architectural and legal separation from Oracle's JVM.",
+    "tip": "Android APKs contain Dalvik Executable (.dex) files, fundamentally incompatible with standard desktop Java Virtual Machines."
+  },
+  {
+    "id": 33,
+    "question": "An IT teacher creates a script to automate network pings. Inside the `.bat` file, they use the `%CD%` syntax. What does this specific syntax architecturally represent during script execution?",
+    "options": ["It triggers the internal CD-ROM drive hardware.", "It acts as a dynamic environment variable holding the absolute path of the Current Directory from which the script is running.", "It clears the Command Display, emptying the visual console output.", "It initiates a Continuous Download protocol over TCP/IP."],
+    "answer": "It acts as a dynamic environment variable holding the absolute path of the Current Directory from which the script is running.",
+    "explanation": "Step 1: Batch scripting relies heavily on environment variables to make scripts portable. Step 2: Variables in Batch are enclosed in percentage signs (e.g., `%PATH%`, `%USERPROFILE%`). Step 3: `%CD%` is a built-in pseudo-variable provided by the cmd.exe interpreter. Step 4: When evaluated at runtime, the interpreter replaces `%CD%` with the text string of the Current Directory path (e.g., 'C:\\Scripts'). Step 5: This allows developers to reference local files relative to the script's location without hardcoding absolute drive paths.",
+    "trick": "Bank/IT Trap: Don't confuse the command `cd` (Change Directory) with the variable `%CD%` (Current Directory string). The percentage signs denote variable expansion.",
+    "tip": "In Batch scripts, `%CD%` expands dynamically to the full path of the current working directory."
+  },
+  {
+    "id": 34,
+    "question": "Assertion (A): The 'Safe Mode' boot sequence in Windows heavily bypasses standard system architecture by intentionally refusing to load third-party '.sys' driver files. Reason (R): Safe Mode isolates the Operating System by loading only absolute minimum, Microsoft-signed generic drivers (like standard VGA and basic storage) to ensure a stable diagnostic environment. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A Windows crash (BSOD) is almost always caused by a faulty or malicious third-party hardware driver (.sys file) running in Ring 0 Kernel Mode. Step 2: If the system crashes on boot, the user cannot reach the desktop to uninstall the bad driver. Step 3: Booting into 'Safe Mode' acts as a bypass architecture. Step 4: The Windows Loader reads a restricted registry hive and intentionally ignores third-party .sys files (Assertion A is true). Step 5: It loads generic Microsoft drivers, granting the user a stable desktop to hunt down and delete the problematic third-party driver (Reason R accurately explains A).",
+    "trick": "Bank/IT Trap: Safe Mode doesn't fix your PC; it just provides a sterile environment (free from third-party .sys interference) so YOU can fix it.",
+    "tip": "Safe Mode loads only generic Microsoft drivers, intentionally bypassing third-party '.sys' files for diagnostic stability."
+  },
+  {
+    "id": 35,
+    "question": "Which of the following Office automation tasks would absolutely REQUIRE a '.pptm' file instead of a standard '.pptx' file in Microsoft PowerPoint?",
+    "options": ["Embedding a live YouTube video directly into a slide presentation.", "Applying advanced 3D Morph transitions between multiple slides.", "Utilizing an 'Action Button' that triggers a custom Visual Basic loop to randomly shuffle slide order.", "Exporting the final slideshow as a 4K resolution MP4 video file."],
+    "answer": "Utilizing an 'Action Button' that triggers a custom Visual Basic loop to randomly shuffle slide order.",
+    "explanation": "Step 1: The 'm' in .pptm stands for Macro-enabled. Step 2: A standard .pptx file natively supports rich media (YouTube embeds), advanced transitions (Morph), and 4K video rendering exports. Step 3: However, standard 'x' files strictly prohibit the inclusion of VBA (Visual Basic for Applications) programming code. Step 4: Creating a custom script to randomly shuffle slides requires coding a macro loop. Step 5: To save and execute this custom VBA script via an Action Button, the file must be structurally saved as a .pptx macro-enabled (.pptm) container.",
+    "trick": "Bank/IT Trap: Action buttons themselves do NOT require .pptm (you can use them to jump to the next slide in a .pptx). But if an action button triggers a custom MACRO, the file must be .pptm.",
+    "tip": "Custom VBA programming in PowerPoint strictly demands the Macro-Enabled Presentation format (.pptm)."
+  },
+  {
+    "id": 36,
+    "question": "Assertion (A): An application installer places a file named 'config.xml' in the installation directory. This file serves an identical architectural purpose to the legacy 'config.ini' file. Reason (R): Both XML and INI formats execute background services in the Windows operating system to modify registry keys dynamically. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: Both .xml and .ini files are plain-text configuration files. Step 2: Modern applications prefer XML over INI because XML supports hierarchical, nested data structures, whereas INI is largely flat (A is true; they serve the same configuration purpose). Step 3: However, neither file format is an executable script. Step 4: They are purely static text files holding data variables (like Theme=Dark). Step 5: They do not execute background services or dynamically modify the registry themselves (the application reads them and applies the settings). Therefore, Reason R is completely false.",
+    "trick": "Bank/IT Trap: Configuration files (.ini, .xml, .json) are passive text files. They do nothing on their own; they must be parsed by an active executable.",
+    "tip": "XML and INI files are passive, plain-text configuration containers, completely incapable of autonomous execution."
+  },
+  {
+    "id": 37,
+    "question": "In the context of software exploitation, what is a 'DLL Injection' attack?",
+    "options": ["A method of forcing a legitimate running process to load a malicious dynamic link library into its memory space.", "A technique where a virus deletes all .dll files in System32 to crash the operating system.", "A script that converts executable .exe files into non-executable .dll files.", "A brute-force attack against the Windows Registry to steal COM interface keys."],
+    "answer": "A method of forcing a legitimate running process to load a malicious dynamic link library into its memory space.",
+    "explanation": "Step 1: Applications routinely load shared DLLs to access standard functions. Step 2: These DLLs reside inside the application's trusted virtual memory space. Step 3: In a 'DLL Injection' attack, a hacker writes a malicious script compiled as a .dll file. Step 4: The attacker uses API calls (like CreateRemoteThread in Windows) to force a legitimate, highly-privileged process (like explorer.exe) to dynamically load the malicious DLL. Step 5: Once injected, the malware executes with the full permissions and trusted status of the host application, bypassing standard antivirus monitors.",
+    "trick": "Bank/IT Trap: DLL Injection doesn't destroy files; it parasitically attaches malicious code to a trusted, running host process to evade detection.",
+    "tip": "DLL injection forces a legitimate process to execute malicious code hidden inside a dynamic library."
+  },
+  {
+    "id": 38,
+    "question": "Assertion (A): Applying the 'Read-Only' file attribute to a Batch script (.bat) via Windows Properties prevents users from executing the automated commands within the file. Reason (R): The cmd.exe interpreter must temporarily write execution logs directly into the batch file during runtime, which fails if the file is locked. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The 'Read-Only' attribute prevents a file from being modified or overwritten. Step 2: Executing a Batch script only requires the cmd.exe interpreter to READ the text commands inside the file. Step 3: It does not need to alter the file, nor does it write execution logs back into the original .bat file. Step 4: Therefore, making a .bat file Read-Only has zero effect on its ability to execute. Step 5: Consequently, Assertion A is false, and Reason R misrepresents how interpreters process script files.",
+    "trick": "Bank/IT Trap: Read-Only prevents *editing* (like opening it in Notepad and saving). It has no bearing on *execution* (running the script).",
+    "tip": "The 'Read-Only' attribute prevents file modification but does not block script execution."
+  },
+  {
+    "id": 39,
+    "question": "Which of the following describes the precise architectural role of the 'Hardware Abstraction Layer' (HAL), represented by the 'hal.dll' file in Windows?",
+    "options": ["It provides a unified, generic software interface to the Windows Kernel, hiding the complex differences between diverse motherboard chipsets and CPUs.", "It translates 32-bit application requests to run on 64-bit hardware architectures dynamically.", "It compresses raw graphics data before sending it to the GPU to maintain high frame rates.", "It is the primary security module that encrypts files using BitLocker."],
+    "answer": "It provides a unified, generic software interface to the Windows Kernel, hiding the complex differences between diverse motherboard chipsets and CPUs.",
+    "explanation": "Step 1: Windows must run on thousands of different hardware configurations (Intel, AMD, different motherboards). Step 2: If the core Windows Kernel had to understand every single hardware variation, it would be impossibly massive and unstable. Step 3: Microsoft solved this using the Hardware Abstraction Layer (hal.dll). Step 4: The HAL sits directly between the physical hardware and the Kernel. Step 5: It translates generic OS commands into specific hardware signals, allowing the exact same OS Kernel to operate flawlessly across completely different computer builds.",
+    "trick": "Bank/IT Trap: Do not confuse 'hal.dll' (Hardware Abstraction Layer) with 'WOW64' (Windows 32-bit on Windows 64-bit). HAL abstracts motherboards/CPUs, WOW64 abstracts 32-bit emulation.",
+    "tip": "hal.dll (Hardware Abstraction Layer) hides hardware differences, providing a universal interface to the OS Kernel."
+  },
+  {
+    "id": 40,
+    "question": "Assertion (A): Sending an MS Excel file formatted as a 'Comma Separated Values' (.csv) file guarantees that all VBA Macro viruses are stripped out. Reason (R): The CSV format is a pure plain-text standard that utilizes commas to delineate columns and returns to delineate rows, making it structurally impossible to embed binary macro code. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Excel supports saving spreadsheets as .csv files. Step 2: While Excel formats CSVs into grids visually, the actual underlying file is just a basic text file (e.g., 'Name, Age, City\\nJohn, 30, NY'). Step 3: Because it is literally just ASCII/UTF-8 text, it strips away all font colors, formulas, and binary attachments. Step 4: Crucially, this means any embedded VBA Macro code (vbaProject.bin) is completely destroyed upon saving to CSV. Step 5: Therefore, CSVs are universally safe from native macro-viruses, validating both A and R.",
+    "trick": "Bank/IT Trap: If a user needs a 100% macro-safe, cross-platform data dump from Excel, .csv is the absolute gold standard due to its raw text architecture.",
+    "tip": "CSV files are pure plain-text, structurally destroying all formulas, formatting, and embedded VBA macros."
+  },
+  {
+    "id": 41,
+    "question": "When developing a complex batch script (.bat) utilizing a 'FOR' loop, a user notices that a variable updated within the loop keeps returning its original pre-loop value. What critical system execution behavior must be enabled to fix this architecture flaw?",
+    "options": ["Run as Administrator", "Delayed Expansion (`setlocal enabledelayedexpansion`)", "Safe Mode Scripting", "PowerShell Emulation"],
+    "answer": "Delayed Expansion (`setlocal enabledelayedexpansion`)",
+    "explanation": "Step 1: In standard batch scripting, the cmd.exe interpreter evaluates and expands variables (`%VAR%`) at parse time, not at execution time. Step 2: When a `FOR` loop is parsed, the entire block of code is loaded into memory at once. Step 3: Any variable updated inside the loop will visually retain its original value because the interpreter evaluated the variable before the loop even started. Step 4: To solve this, developers must use `setlocal enabledelayedexpansion`. Step 5: This forces the interpreter to evaluate variables at execution time (using `!VAR!` syntax), allowing dynamic updates within loops.",
+    "trick": "Bank/IT Trap: Variables enclosed in `%` are evaluated when read. Variables enclosed in `!` (delayed expansion) are evaluated when executed. Essential for Batch looping logic!",
+    "tip": "Use 'Delayed Expansion' in batch scripts to update and read variables dynamically inside loops."
+  },
+  {
+    "id": 42,
+    "question": "Assertion (A): Unlike Microsoft's .docx format, the OpenDocument Text (.odt) format is legally immune from being restricted or monetized by any single corporate entity. Reason (R): The ODF standard is managed by the OASIS consortium and recognized as an ISO/IEC international standard, guaranteeing perpetual open access. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Microsoft retains proprietary control over elements of the Office ecosystem, historically causing vendor lock-in. Step 2: To combat this, the open-source community rallied behind the OpenDocument Format (ODF, encompassing .odt, .ods, .odp). Step 3: The standard was handed over to OASIS (Organization for the Advancement of Structured Information Standards). Step 4: It was subsequently ratified as ISO/IEC 26300. Step 5: Because it is a recognized, publicly governed ISO standard, no single company (like Oracle or Microsoft) can revoke access, charge royalties, or monopolize the format. Both A and R are accurate.",
+    "trick": "Bank/IT Trap: Microsoft eventually adopted ISO standards for Office Open XML (.docx), but .odt was the pioneer of vendor-neutral government document standardization.",
+    "tip": "The .odt format is an ISO-certified, vendor-neutral standard managed by the OASIS consortium."
+  },
+  {
+    "id": 43,
+    "question": "In the context of Android application security, what is the architectural significance of the digital signature applied to an '.apk' file before distribution?",
+    "options": ["It encrypts the Java source code to prevent competitors from reverse-engineering the application.", "It acts as a DRM (Digital Rights Management) lock, ensuring the app is only installed on purchased hardware.", "It verifies the author's identity and ensures that subsequent updates to the application are provided by the exact same author.", "It allows the app to bypass Dalvik verification and execute natively in the Android Linux kernel."],
+    "answer": "It verifies the author's identity and ensures that subsequent updates to the application are provided by the exact same author.",
+    "explanation": "Step 1: Every Android APK must be cryptographically signed by its developer before installation. Step 2: The signature does NOT encrypt the code (APKs can be easily decompiled). Step 3: It does NOT provide DRM protection. Step 4: The primary architectural purpose is identity verification and update continuity. Step 5: If Developer A signs 'App v1', and later someone tries to publish a malicious 'App v2', the Android OS checks the signature. If the cryptographic keys don't match exactly, Android aggressively blocks the update.",
+    "trick": "Bank/IT Trap: APK signing is about trust and continuity, not secrecy. Anyone can decompile an APK to see the source code; the signature just prevents tampering with updates.",
+    "tip": "APK digital signatures ensure secure application updates by confirming the developer's cryptographic identity."
+  },
+  {
+    "id": 44,
+    "question": "Assertion (A): Placing the 'Autorun.inf' file in the root directory of a USB flash drive guarantees that an associated executable will launch silently the moment the drive is inserted into a modern Windows 10 PC. Reason (R): The 'Autorun.inf' standard instructs the Windows shell to immediately mount and execute defined binaries to enhance plug-and-play convenience. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: In the Windows XP era, 'Autorun.inf' was a legitimate feature used by CD-ROMs to auto-start installers. Step 2: Hackers exploited this heavily. They put malware on USB drives via 'Autorun.inf', infecting computers the instant the drive was inserted. Step 3: Due to this massive security flaw, Microsoft patched the OS (starting in later Windows 7 builds and universally in Windows 10). Step 4: Modern Windows operating systems entirely ignore 'Autorun.inf' execution commands on removable USB drives. Step 5: Therefore, Assertion A is completely false today, making the legacy logic in Reason R moot for modern systems.",
+    "trick": "Bank/IT Trap: AutoRun was killed for USB drives due to the infamous Conficker worm. Modern Windows relies on 'AutoPlay' (which safely asks the user what to do) instead of auto-execution.",
+    "tip": "Modern Windows strictly disables 'Autorun.inf' automatic execution on USB drives to prevent malware infections."
+  },
+  {
+    "id": 45,
+    "question": "Which specific Windows component is responsible for loading and resolving imported '.dll' dependencies immediately after a user double-clicks an executable (.exe) file?",
+    "options": ["Task Scheduler", "Windows Defender", "The OS Loader (PE Loader)", "The Registry Editor"],
+    "answer": "The OS Loader (PE Loader)",
+    "explanation": "Step 1: When an executable (.exe) is launched, it cannot run blindly; it relies on external shared libraries (.dll files). Step 2: The executable contains an 'Import Table' listing these required DLLs. Step 3: The Windows OS uses a core component called the OS Loader (specifically the Portable Executable or PE Loader). Step 4: The PE Loader maps the .exe into virtual memory. Step 5: It then reads the Import Table, hunts down the required DLLs (like user32.dll), loads them into memory, and patches the memory addresses so the .exe can successfully call them.",
+    "trick": "Bank/IT Trap: The Linker links files during *compile time*. The OS Loader resolves dynamic links during *run time* (when the user double-clicks the file).",
+    "tip": "The Windows PE Loader loads executables into memory and dynamically resolves required .dll dependencies."
+  },
+  {
+    "id": 46,
+    "question": "Assertion (A): Applying CSS styling directly to an SVG element via an external stylesheet requires the SVG to be embedded inline in the HTML document, rather than referenced via an `<img>` tag. Reason (R): When an SVG is loaded via the standard HTML `<img>` tag, the browser isolates it inside a Shadow DOM, shielding its internal paths from external CSS selectors. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: SVGs are XML text files. Because they are code, web developers love to style them dynamically (e.g., changing a logo's color on hover using CSS). Step 2: If the developer places the raw SVG code directly into the HTML (Inline SVG), CSS can easily target its internal `<path>` elements. Step 3: If the developer links the SVG like a normal picture (`<img src=\"logo.svg\">`), it renders perfectly. Step 4: However, browsers enforce strict security boundaries. Loading it via `<img>` treats it as a static asset, hiding its internal XML structure in a locked DOM. Step 5: Consequently, external CSS cannot penetrate the `<img>` tag to change the SVG's internal color. Both A and R are true and linked.",
+    "trick": "Bank/IT Trap: To animate or style the *insides* of an SVG, you MUST use inline `<svg>` code. Linking it as an `<img>` turns it into a 'dumb' static graphic.",
+    "tip": "SVGs referenced via HTML `<img>` tags block external CSS styling due to DOM isolation."
+  },
+  {
+    "id": 47,
+    "question": "An enterprise employs a legacy application that relies heavily on a specialized 16-bit '.sys' driver. Which of the following modern Windows environments will natively refuse to load or execute this driver?",
+    "options": ["Windows 10 32-bit architecture", "Windows 10 64-bit architecture", "Windows 7 running in Safe Mode", "A Virtual Machine running MS-DOS"],
+    "answer": "Windows 10 64-bit architecture",
+    "explanation": "Step 1: 16-bit applications are relics of the MS-DOS and Windows 3.1 era. Step 2: Windows 32-bit operating systems included a subsystem called NTVDM (NT Virtual DOS Machine), which natively allowed 16-bit software to run. Step 3: However, when Microsoft transitioned to 64-bit architectures, they completely dropped the NTVDM subsystem. Step 4: 64-bit Windows utilizes 'WOW64' to run 32-bit apps, but absolutely zero native support exists for 16-bit execution. Step 5: Furthermore, 64-bit Windows enforces strict Driver Signature Enforcement, categorically refusing to load unsigned 16-bit legacy '.sys' drivers.",
+    "trick": "Bank/IT Trap: 64-bit Windows can run 32-bit apps perfectly. It CANNOT run 16-bit apps or drivers. You need a dedicated emulator (like DOSBox) for that.",
+    "tip": "Modern 64-bit Windows operating systems permanently removed all native execution support for 16-bit applications."
+  },
+  {
+    "id": 48,
+    "question": "Assertion (A): Compressing a massive Word document containing dozens of high-resolution images into a `.docx` file is highly inefficient because `.docx` is a text-based format. Reason (R): The user should manually zip the `.docx` file using a third-party archive tool like WinRAR to achieve significant file size reduction for email attachment. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A `.docx` file is NOT just a text file. It is the Office Open XML format. Step 2: Architecturally, a `.docx` file is ALREADY a ZIP archive. It compresses the XML text and the inserted media (JPEGs/PNGs) using standard Deflate compression algorithms. Step 3: Because the file is already maximally compressed by MS Word upon saving, Assertion A is false. Step 4: Attempting to ZIP an already compressed file (like a .docx or a .jpg) yields almost zero additional reduction in file size. Step 5: Therefore, Reason R is an ineffective and redundant methodology, making both statements false.",
+    "trick": "Bank/IT Trap: Try it yourself: change a `.docx` extension to `.zip` and double-click it. You will see folders for 'word', 'media', etc. It is already a compressed ZIP container!",
+    "tip": "Modern Office files (.docx, .xlsx) are inherently ZIP-compressed archives, rendering third-party zipping redundant."
+  },
+  {
+    "id": 49,
+    "question": "In the context of Microsoft Office security mechanisms, what is the exact function of 'Protected View' when opening an '.rtf' or '.docm' file downloaded directly from an internet browser?",
+    "options": ["It translates the file into a pure PDF to prevent any code execution.", "It opens the file in a restricted, read-only sandbox environment stripped of macro and OLE execution privileges until the user explicitly enables editing.", "It automatically deletes the vbaProject.bin file from the archive container.", "It requires a Microsoft Authenticator multi-factor approval prompt before displaying the text."],
+    "answer": "It opens the file in a restricted, read-only sandbox environment stripped of macro and OLE execution privileges until the user explicitly enables editing.",
+    "explanation": "Step 1: Files downloaded from the internet are tagged by Windows with a hidden 'Mark of the Web' (MoTW). Step 2: When MS Office detects this tag on a file (like an RTF or DOCM), it assumes the file is inherently dangerous. Step 3: To protect the user, it launches the file in 'Protected View'. Step 4: Protected View is an architectural sandbox. The document is displayed visually, but it is strictly read-only. Crucially, background processes like OLE connections and VBA Macros are entirely blocked from running. Step 5: The user must click the yellow banner 'Enable Editing' to trust the file and break it out of the sandbox.",
+    "trick": "Bank/IT Trap: Protected View does not delete macros or convert to PDF. It puts the document in a digital cage. Once you click 'Enable Editing', you let it out of the cage.",
+    "tip": "Protected View sandboxes internet-downloaded files, safely blocking macro and OLE execution until explicitly trusted."
+  },
+  {
+    "id": 50,
+    "question": "Assertion (A): A dynamically linked library (.dll) file can be directly executed by a user double-clicking its icon in the Windows File Explorer. Reason (R): DLL files contain standard executable machine code matching the architecture of the host operating system. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Reason R is entirely true. DLL files DO contain standard, compiled, executable machine code (x86/x64). Step 2: However, despite containing executable code, a DLL lacks a standard 'main()' entry point required by the OS to launch an independent process. Step 3: Instead, it acts as a library of functions waiting to be called. Step 4: A user physically cannot double-click a .dll to run it (Assertion A is false). Step 5: A DLL MUST be called and hosted by a primary executable (.exe) or a system utility (like rundll32.exe) to execute its internal functions.",
+    "trick": "Bank/IT Trap: Just because code is 'executable' doesn't mean it can run autonomously. DLLs are passengers; they require an .exe driver to steer them.",
+    "tip": "DLL files contain executable machine code but require a host '.exe' process to run."
+  },
+  {
+    "id": 51,
+    "question": "Assertion (A): Renaming a '.docx' file to '.docm' natively converts it into a Macro-enabled document and allows VBA scripts to be executed. Reason (R): The 'm' at the end of the modern Office Open XML extension strictly dictates to the application layer that the internal architecture contains executable Visual Basic for Applications (VBA) code. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: The Office Open XML format uses specific extensions to denote content type. Step 2: Reason (R) is true; the 'm' specifies a macro-enabled container capable of holding a vbaProject.bin file. Step 3: Assertion (A) is completely false. Merely renaming the file extension in Windows Explorer does not alter the underlying internal XML schema. Step 4: If you rename a .docx to .docm, MS Word will either throw an open error or recognize it lacks the macro-enabled schema, preventing any VBA injection. Step 5: True conversion requires using 'Save As' and selecting the Macro-Enabled Document format.",
+    "trick": "Bank/IT Trap: Renaming file extensions never changes the underlying file architecture. It only confuses the OS regarding which default application to use for opening the file.",
+    "tip": "File extensions dictate OS application association, not the underlying structural file architecture."
+  },
+  {
+    "id": 52,
+    "question": "In the Windows operating system architecture, what is the primary memory-management advantage of utilizing '.dll' (Dynamic Link Library) files instead of statically linking code directly into an executable ('.exe')?",
+    "options": ["DLL files execute directly in Ring 0 Kernel Mode, bypassing User Mode restrictions entirely.", "A single DLL loaded into RAM can be shared by multiple running applications simultaneously, drastically reducing overall memory consumption.", "DLL files automatically compress their code using the NTFS file system, saving hard drive space.", "DLL files bypass the Windows Registry, preventing application crash dependencies."],
+    "answer": "A single DLL loaded into RAM can be shared by multiple running applications simultaneously, drastically reducing overall memory consumption.",
+    "explanation": "Step 1: Statically linked executables embed all required library code directly into the .exe file. Step 2: If 10 programs use the same library statically, that code is loaded into RAM 10 times. Step 3: A Dynamic Link Library (.dll) is a modular file containing shared code. Step 4: When multiple applications call the same DLL (like user32.dll), Windows loads it into physical RAM only once. Step 5: The OS then maps that single physical memory location to the virtual address spaces of all 10 applications, saving massive amounts of RAM.",
+    "trick": "Bank/IT Trap: DLLs don't make programs run faster natively; their core architectural design is to promote code reusability and reduce physical memory (RAM) overhead.",
+    "tip": "DLLs allow shared RAM allocation across multiple active applications, reducing memory bloat."
+  },
+  {
+    "id": 53,
+    "question": "Assertion (A): For security reasons, enterprise email servers frequently block files with '.bat' or '.exe' extensions from being sent or received as attachments. Reason (R): These extensions represent executable scripts and programs that can run directly on the host operating system, making them the primary vectors for distributing autonomous viruses and malware. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Executable files (.exe) and Batch scripts (.bat) contain instructions that the Windows OS can run natively without requiring a parent application like MS Word. Step 2: Malicious actors use these files to autonomously deploy ransomware or spyware upon double-click. Step 3: To mitigate this, Reason (R) correctly identifies them as high-risk execution vectors. Step 4: Consequently, Assertion (A) is true as enterprise Exchange servers and Gmail actively strip or block these extensions at the network edge to prevent accidental user execution.",
+    "trick": "Bank/IT Trap: Even if you zip a .bat file, modern email scanners will look inside the .zip archive and block the email based on the internal executable contents.",
+    "tip": "Email servers block .bat and .exe files because they execute natively on Windows."
+  },
+  {
+    "id": 54,
+    "question": "Which of the following file formats utilizes a fundamentally XML-based text structure to render graphics, allowing the image to be opened and edited mathematically using a basic text editor like Notepad?",
+    "options": [".png (Portable Network Graphics)", ".svg (Scalable Vector Graphics)", ".bmp (Bitmap Image File)", ".gif (Graphics Interchange Format)"],
+    "answer": ".svg (Scalable Vector Graphics)",
+    "explanation": "Step 1: Formats like .png, .bmp, and .gif are 'raster' or 'bitmap' graphics, storing image data as a grid of colored pixels. Step 2: Raster files appear as gibberish binary code if opened in Notepad. Step 3: .svg stands for Scalable Vector Graphics. Step 4: SVG is a W3C standard based entirely on Extensible Markup Language (XML). Step 5: It stores images as mathematical coordinates, shapes, and paths written in plain text XML tags, allowing developers to manually type or edit the code in Notepad to alter the graphic.",
+    "trick": "Bank/IT Trap: Vector images don't store pixels; they store math equations. This is why SVG files are infinitely scalable without losing quality and can be edited via text.",
+    "tip": "SVG files are plain text XML documents containing mathematical formulas for drawing shapes."
+  },
+  {
+    "id": 55,
+    "question": "Assertion (A): A '.sys' file executing on a Windows system is generally considered more critical and potentially dangerous than a standard '.exe' application. Reason (R): System files (.sys) typically operate as hardware device drivers functioning in 'Kernel Mode' (Ring 0), granting them unrestricted access to system memory and hardware. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Standard applications (.exe) run in 'User Mode' (Ring 3), which restricts their ability to crash the entire system or overwrite core memory. Step 2: '.sys' files are reserved for core operating system files and hardware device drivers (e.g., graphics or network drivers). Step 3: These drivers require direct hardware communication, necessitating execution in 'Kernel Mode' (Ring 0). Step 4: In Kernel Mode, any fault or malicious code can trigger a catastrophic system failure (BSOD), making them inherently more critical and dangerous.",
+    "trick": "Bank/IT Trap: A crashed .exe just closes the program with an error. A crashed .sys file brings down the entire Windows OS with a Blue Screen of Death.",
+    "tip": "System files (.sys) run in Kernel Mode, possessing unrestricted access to system memory."
+  },
+  {
+    "id": 56,
+    "question": "When saving an Excel workbook that contains extensive Visual Basic for Applications (VBA) automation, a developer is forced to choose between '.xlsm' and '.xlsb'. What is the architectural difference favoring '.xlsb'?",
+    "options": ["It converts the VBA macros into secure C++ executables.", "It utilizes a binary architecture instead of XML, significantly reducing file size and improving read/write speeds for massive datasets.", "It forces the document into a strict 'Read-Only' format to prevent macro tampering.", "It uploads the macro payload to Microsoft Azure for cloud execution."],
+    "answer": "It utilizes a binary architecture instead of XML, significantly reducing file size and improving read/write speeds for massive datasets.",
+    "explanation": "Step 1: The standard macro-enabled format (.xlsm) is based on the Office Open XML architecture, making it highly compatible but text-heavy. Step 2: The Excel Binary Workbook format (.xlsb) stores data in a proprietary binary format rather than XML text. Step 3: Binary encoding is substantially more efficient for a computer to process. Step 4: For massive workbooks (e.g., 500,000+ rows) containing macros, .xlsb cuts file size drastically and accelerates opening/saving times compared to .xlsm.",
+    "trick": "Bank/IT Trap: Both .xlsm and .xlsb fully support VBA macros. The 'b' stands for Binary, which is an optimization format for incredibly large enterprise workbooks.",
+    "tip": "Excel .xlsb files use binary architecture for faster loading of massive macro-enabled workbooks."
+  },
+  {
+    "id": 57,
+    "question": "Assertion (A): Extracting the contents of an Android '.apk' file using standard archive software like WinZip or 7-Zip is fundamentally impossible without specialized reverse-engineering decompilers. Reason (R): An APK (Android Package Kit) file is structurally just a standard ZIP archive containing compiled code, resources, and a manifest file. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Reason (R) accurately defines the structural architecture of an APK file; it is functionally a standard ZIP file format standardized by Google. Step 2: Because it is a ZIP archive, you can simply rename 'app.apk' to 'app.zip' and extract it using 7-Zip or WinZip natively. Step 3: Inside, you will find files like AndroidManifest.xml and classes.dex. Step 4: Therefore, Assertion (A) is completely false; extracting the raw files requires no special decompilers, though reading the compiled .dex code inside does.",
+    "trick": "Bank/IT Trap: Many modern application packages (like .apk, .docx, .jar) are literally just renamed .zip archives. You can extract them natively on any OS.",
+    "tip": "An APK is simply a ZIP archive; renaming it to .zip allows standard extraction."
+  },
+  {
+    "id": 58,
+    "question": "An IT professional uses the Command Prompt to automate a backup process by executing a text file containing a sequence of sequential DOS commands. Which legacy system file extension is primarily utilized for this execution script?",
+    "options": [".msi", ".dll", ".bat", ".vbs"],
+    "answer": ".bat",
+    "explanation": "Step 1: A Windows Installer Package (.msi) is used for software installation. Step 2: A Dynamic Link Library (.dll) holds shared code. Step 3: VBScript (.vbs) uses the Windows Script Host to run visual basic scripts. Step 4: A Batch file (.bat) is the legacy standard script file for DOS and Windows command-line environments. Step 5: It contains a plain-text list of commands (like copy, xcopy, or del) that the Command Prompt (cmd.exe) reads and executes line-by-line sequentially.",
+    "trick": "Bank/IT Trap: While PowerShell (.ps1) is the modern replacement, .bat remains the core legacy extension for basic Command Prompt sequential automation scripts.",
+    "tip": "Batch files (.bat) contain sequential command-line instructions executed by the Windows Command Prompt."
+  },
+  {
+    "id": 59,
+    "question": "Assertion (A): OpenDocument Format (ODF) files such as '.odt' and '.ods' are proprietary file types strictly controlled and licensed by Microsoft. Reason (R): These formats were developed specifically to replace the legacy '.doc' and '.xls' formats in older versions of Microsoft Office. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The OpenDocument Format (ODF) includes extensions like .odt (text), .ods (spreadsheet), and .odp (presentation). Step 2: Assertion (A) is false; ODF is an open, non-proprietary standard maintained by the OASIS consortium, primarily used by free suites like LibreOffice and OpenOffice. Step 3: Reason (R) is false; Microsoft created the Office Open XML standard (.docx, .xlsx) to replace its legacy formats, not ODF. Step 4: While MS Office can open ODF files, it does not own or control them.",
+    "trick": "Bank/IT Trap: Do not confuse OpenDocument Format (.odt, LibreOffice) with Office Open XML (.docx, Microsoft). They are competing standards.",
+    "tip": "The .odt format is an open, non-proprietary standard used heavily by LibreOffice."
+  },
+  {
+    "id": 60,
+    "question": "If a malicious actor successfully places a rogue '.dll' file into an application's local directory with the same name as a legitimate system DLL, causing the application to execute the rogue code instead of the safe system code, what specific cybersecurity exploit has occurred?",
+    "options": ["Cross-Site Scripting (XSS)", "SQL Injection", "DLL Hijacking (DLL Search Order Hijacking)", "Buffer Overflow"],
+    "answer": "DLL Hijacking (DLL Search Order Hijacking)",
+    "explanation": "Step 1: When a Windows application launches and requests a shared DLL (e.g., 'version.dll'), it follows a strict Search Order hierarchy. Step 2: The very first location Windows checks is the application's own local launch directory. Step 3: If an attacker places a malicious 'version.dll' in that local folder, the application finds it and loads it immediately, ignoring the legitimate 'version.dll' located in the secure System32 folder. Step 4: This architectural vulnerability is formally known as DLL Hijacking or Search Order Hijacking.",
+    "trick": "Bank/IT Trap: Windows trusts the local application folder before the secure System folder. Attackers exploit this search priority to force apps to load malicious DLLs.",
+    "tip": "DLL Hijacking exploits the Windows search priority by placing malicious libraries in local directories."
+  },
+  {
+    "id": 61,
+    "question": "Assertion (A): Changing the file extension of a Microsoft Word document from '.docx' to '.zip' allows a user to browse the internal folder structure and directly extract embedded images. Reason (R): The '.docx' file format is architecturally defined as a compressed ZIP archive encapsulating a collection of raw XML text files, media assets, and structural folders. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Prior to Office 2007, Microsoft used binary proprietary formats (.doc). Step 2: The modern Office Open XML format (.docx, .xlsx, .pptx) revolutionized this architecture. Step 3: Reason (R) correctly identifies that a .docx file is physically just a standard ZIP compression container holding folders of XML code, fonts, and an 'media' folder for images. Step 4: Therefore, Assertion (A) is true; renaming the file to .zip allows any unzipping software to open it, revealing the internal structure and allowing easy image extraction without opening Word.",
+    "trick": "Bank/IT Trap: Modern Office formats are literally just zipped folders. You can manually repair corrupt .docx files by unzipping them and fixing the broken XML lines in Notepad.",
+    "tip": "A .docx file is a compressed ZIP archive containing XML structures and media folders."
+  },
+  {
+    "id": 62,
+    "question": "In software distribution and installation on Windows architectures, what is the primary technical distinction between executing an '.msi' file versus a standard '.exe' installer?",
+    "options": [".msi files execute inside the Chrome browser, while .exe files run on the desktop.", ".msi files are strictly plain-text scripts, whereas .exe files are compiled machine code.", ".msi files strictly utilize the built-in Windows Installer service relational database for standardized installation, maintenance, and uninstallation, whereas .exe is a custom executable wrapper.", ".msi files install Apple MacOS software on Windows, whereas .exe is native."],
+    "answer": ".msi files strictly utilize the built-in Windows Installer service relational database for standardized installation, maintenance, and uninstallation, whereas .exe is a custom executable wrapper.",
+    "explanation": "Step 1: An '.exe' (Executable) is a generic application file. When used as an installer, it contains custom code written by the developer to handle file copying and registry edits. Step 2: An '.msi' (Microsoft Installer) is not a standalone executable program. Step 3: It is a relational database containing structural instructions. Step 4: When double-clicked, the Windows OS hands the .msi file to the built-in 'msiexec.exe' service. Step 5: This service provides a standardized, deeply integrated method for installing, repairing, or rolling back software changes, highly favored in enterprise deployments.",
+    "trick": "Bank/IT Trap: IT admins love .msi packages because they can be deployed silently via Group Policy without complex scripting, unlike generic .exe installers.",
+    "tip": "An .msi is a relational installation database processed by the Windows Installer service."
+  },
+  {
+    "id": 63,
+    "question": "Assertion (A): Opening an unknown '.csv' (Comma Separated Values) file poses the exact same risk of macro-virus infection as opening an unknown '.xlsm' file. Reason (R): Microsoft Excel is the default application for opening '.csv' files, and Excel automatically triggers hidden VBA macros upon launch regardless of the file extension. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A .csv file is a plain-text file where data values are separated by commas. It contains zero formatting, zero formulas, and absolutely zero macro capabilities. Step 2: Assertion (A) is completely false; .csv files are inherently safe from macro-viruses because they structurally cannot store VBA code. Step 3: Reason (R) is false; while Excel is the default reader, it cannot trigger macros from a file format that fundamentally cannot contain them. Both statements are factually incorrect.",
+    "trick": "Bank/IT Trap: CSVs are plain text. They are the safest data transfer format available. However, a malicious user might spoof the extension (e.g., file.csv.exe) to trick you.",
+    "tip": "CSV files are plain text structures and physically cannot contain executable VBA macros."
+  },
+  {
+    "id": 64,
+    "question": "Which of the following configuration file extensions utilizes a strict, lightweight, language-independent data interchange architecture composed exclusively of attribute-value pairs and array data types, heavily favored in modern web development APIs?",
+    "options": [".ini", ".xml", ".json", ".sys"],
+    "answer": ".json",
+    "explanation": "Step 1: System files use `.ini` for basic Windows initialization. Step 2: `.xml` (Extensible Markup Language) uses heavy, verbose opening and closing tags `<data></data>`. Step 3: `.json` (JavaScript Object Notation) was designed as a lightweight alternative to XML. Step 4: It structures data purely as human-readable text using simple key/value pairs (e.g., 'name': 'John') and arrays enclosed in brackets `[]` and braces `{}`. Step 5: Due to its minimal syntax, .json has become the universal standard for modern REST API data interchange.",
+    "trick": "Bank/IT Trap: While XML is still used in Office formats (.docx), JSON has entirely replaced XML in modern web APIs because it transmits less redundant text data over networks.",
+    "tip": "JSON (JavaScript Object Notation) uses lightweight attribute-value pairs for modern data interchange."
+  },
+  {
+    "id": 65,
+    "question": "Assertion (A): When a user opens a large Microsoft Word document, a hidden temporary file with a '.~tmp' or '~$' prefix is often created in the same directory. Reason (R): This temporary file acts as a protective 'lock' file to prevent other users on a network from modifying the document simultaneously, and stores incremental auto-recovery data. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: When you open 'Report.docx', Word creates a hidden file named '~$Report.docx'. Step 2: This is an owner file (lock file). Step 3: It records the username of the person who opened it. If a second user on the network tries to open it, Word reads this temp file and alerts them that the file is 'Locked for editing by User X'. Step 4: Temporary files also cache data to facilitate the AutoRecover feature if the application crashes. Step 5: Closing the document safely deletes these temporary files. Therefore, both A and R are accurate.",
+    "trick": "Bank/IT Trap: If Word crashes abruptly, the '~$ lock file' is not deleted. The next time you open the document, Word will falsely claim it is still locked until you manually delete the hidden file.",
+    "tip": "Hidden '~$ lock' temporary files prevent concurrent editing conflicts on network drives."
+  },
+  {
+    "id": 66,
+    "question": "A Windows administrator utilizes a '.cab' file to distribute a corporate software update. What is the fundamental nature of this file extension in the Microsoft ecosystem?",
+    "options": ["It is a core system driver required for booting the motherboard BIOS.", "It is a native Microsoft archive format utilized for lossless data compression and software installation packages.", "It is an encrypted macro file designed to execute safely inside the Office Trust Center.", "It is a vector graphic format used strictly for rendering Windows desktop icons."],
+    "answer": "It is a native Microsoft archive format utilized for lossless data compression and software installation packages.",
+    "explanation": "Step 1: The '.cab' extension stands for Cabinet. Step 2: It is a native archive file format for Microsoft Windows. Step 3: Similar to .zip or .rar, it is used for data compression to bundle multiple files together into a single package. Step 4: Its primary architectural use is within the Windows installation engine, system updates (Windows Update), and hardware driver packages, allowing the OS to extract and install compressed system files securely.",
+    "trick": "Bank/IT Trap: Cabinet (.cab) files are fundamentally just Microsoft's proprietary version of a .zip file, heavily optimized for OS-level installation engines.",
+    "tip": "Cabinet (.cab) files are Microsoft's native archive format for software and system updates."
+  },
+  {
+    "id": 67,
+    "question": "Assertion (A): Attempting to execute a standalone '.dll' file by double-clicking it in Windows Explorer will result in a system error or an 'Open With' prompt. Reason (R): Unlike standard executables, a Dynamic Link Library lacks a 'main()' entry point function, meaning it cannot be launched independently and must be called by a host executable process. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: An executable (.exe) file contains an entry point (usually `main()` or `WinMain()`). The OS knows exactly where to start reading instructions. Step 2: A `.dll` is a repository of functions (e.g., a function to draw a window or calculate math). Step 3: It does not have a master `main()` function to initiate a standalone process. Step 4: Therefore, it cannot run by itself. It passively waits for an active `.exe` process (like Word.exe) to load it into memory and call its specific internal functions. Both A and R are true and linked.",
+    "trick": "Bank/IT Trap: While you cannot double-click a DLL, hackers and admins can force a DLL to run its internal functions using the Windows command-line utility 'rundll32.exe'.",
+    "tip": "DLLs lack a main execution entry point and must be hosted by an executable."
+  },
+  {
+    "id": 68,
+    "question": "In modern software development, a Java application is often distributed as a '.jar' file. Which of the following accurately describes the technical execution requirement for this file extension?",
+    "options": ["It compiles directly into native Windows machine code and runs seamlessly as a standalone executable.", "It requires the presence of a pre-installed Java Virtual Machine (JVM) on the host operating system to interpret and execute its internal bytecode.", "It must be converted into a .bat file to run sequentially on a Linux terminal.", "It can only be executed if uploaded to an Apache web server for cloud-based compilation."],
+    "answer": "It requires the presence of a pre-installed Java Virtual Machine (JVM) on the host operating system to interpret and execute its internal bytecode.",
+    "explanation": "Step 1: A JAR (Java Archive) file is a package file format typically used to aggregate many Java class files and associated metadata. Step 2: Java compiles source code not into native machine code (which is OS specific), but into universal 'bytecode'. Step 3: This bytecode is platform-independent. Step 4: To execute this bytecode, the host machine (Windows, Mac, or Linux) MUST have the Java Runtime Environment (JRE) installed, specifically the Java Virtual Machine (JVM), which translates the bytecode into native machine instructions on the fly.",
+    "trick": "Bank/IT Trap: JAR files provide the 'Write Once, Run Anywhere' paradigm, but the strict catch is 'Run Anywhere... that has a JVM installed.'",
+    "tip": "Java Archive (.jar) files execute platform-independent bytecode requiring a host Java Virtual Machine."
+  },
+  {
+    "id": 69,
+    "question": "Assertion (A): Opening a '.csv' file in Microsoft Excel will frequently result in the permanent loss of leading zeros in data columns such as ZIP codes or Employee IDs. Reason (R): Excel utilizes an automated data-parsing engine that assumes strings composed entirely of digits are mathematical integers, thereby stripping preceding zeros before rendering the data. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A CSV (Comma Separated Values) file is plain text (e.g., 'Name, ZipCode', 'John, 01234'). Step 2: When Excel opens the file, it automatically parses the text into columns. Step 3: The engine attempts to be 'smart' and evaluates data types. Step 4: It sees '01234' and logically categorizes it as the integer one thousand two hundred thirty-four. Step 5: Because integers do not mathematically require leading zeros, Excel strips the '0', displaying '1234'. If the file is saved, the data loss is permanent. Both A and R are true.",
+    "trick": "Bank/IT Trap: To protect leading zeros, users must import the CSV via the 'Data > From Text' wizard and explicitly define the specific column as 'Text', bypassing the mathematical integer parser.",
+    "tip": "Excel's automatic parser strips leading zeros from CSV files by converting them to integers."
+  },
+  {
+    "id": 70,
+    "question": "Which Windows system file extension contains plain-text installation directives defining hardware configurations, registry modifications, and driver catalog paths necessary for the OS to correctly install a new hardware device?",
+    "options": [".reg", ".sys", ".inf", ".ini"],
+    "answer": ".inf",
+    "explanation": "Step 1: `.sys` files are the actual compiled device drivers that run in kernel mode. Step 2: `.reg` files specifically add or modify Windows Registry keys. Step 3: `.ini` files are generic initialization configuration files. Step 4: The `.inf` (Setup Information) file is the critical roadmap for device installation. Step 5: When you plug in new hardware, Windows reads the plain-text `.inf` file provided by the manufacturer. It tells the OS exactly where to copy the `.sys` files, what registry edits to make, and how to name the device in Device Manager.",
+    "trick": "Bank/IT Trap: You cannot install a raw `.sys` file. Windows Device Manager absolutely requires the `.inf` script file to orchestrate the installation process.",
+    "tip": "Setup Information (.inf) files provide plain-text installation instructions for Windows hardware drivers."
+  },
+  {
+    "id": 71,
+    "question": "Assertion (A): Saving an Excel file with the '.xltm' extension creates a macro-enabled blueprint that spawns a fresh, unnamed copy of the workbook when double-clicked, rather than opening the original file. Reason (R): The 't' in the extension designates it as a Template file, designed structurally to protect the original macro code and formatting from accidental overwriting by end-users. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Excel formats follow strict naming conventions. '.xlsx' is a standard workbook. '.xlsm' is macro-enabled. Step 2: Extensions featuring a 't' (.xltx, .xltm) indicate a Template. Step 3: Templates are architectural blueprints. Step 4: When an end-user double-clicks an '.xltm' file, the OS does not open the original file. Instead, Excel loads the blueprint into memory and spawns a brand-new file (e.g., 'Book1') containing all the template's macros and formatting. Step 5: This guarantees the original template remains pristine. Both A and R are true and linked.",
+    "trick": "Bank/IT Trap: If a developer actually needs to edit the original template, they must open Excel first, go to File > Open, and select the .xltm file manually, bypassing the auto-clone mechanism.",
+    "tip": "Template extensions (.xltx, .xltm) spawn fresh copies to protect the original document structure."
+  },
+  {
+    "id": 72,
+    "question": "An Android developer shifts from uploading traditional '.apk' files to the Google Play Store to uploading '.aab' files. What is the fundamental architectural advantage of the Android App Bundle (.aab) format?",
+    "options": ["It encrypts the source code to prevent reverse engineering by competing developers.", "It converts Java bytecode directly into Apple iOS Swift code for cross-platform deployment.", "It allows the Play Store to dynamically generate an optimized, device-specific APK containing only the resources (like screen resolution assets) required by the downloading user's specific phone.", "It permanently bypasses Android permission requests during app installation."],
+    "answer": "It allows the Play Store to dynamically generate an optimized, device-specific APK containing only the resources (like screen resolution assets) required by the downloading user's specific phone.",
+    "explanation": "Step 1: A traditional APK contains every single asset for every possible device (e.g., 4K images, low-res images, English text, Spanish text, ARM code, x86 code). This creates massive, bloated download sizes. Step 2: The Android App Bundle (.aab) acts as a master publishing format. Step 3: The developer uploads the massive .aab to Google Play. Step 4: When a user with a 1080p phone set to English clicks 'Download', Google servers extract ONLY the 1080p images and English text from the .aab, package them into a tiny, custom APK, and send it to the phone. This drastically reduces bandwidth and storage usage.",
+    "trick": "Bank/IT Trap: You cannot install an .aab file directly onto your phone. It is strictly a server-side publishing format used by Google to generate custom APKs.",
+    "tip": "Android App Bundles (.aab) reduce download sizes by serving device-specific optimized resources."
+  },
+  {
+    "id": 73,
+    "question": "Assertion (A): Unlike older '.doc' files, a modern Microsoft Word document saved as '.docx' is structurally immune to macro-virus infections. Reason (R): The Office Open XML specification rigidly segregates macro code into a separate container format ('.docm'), ensuring that the standard '.docx' parser will ignore and strip any embedded executable scripts upon opening. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The legacy binary format (.doc) allowed text, formatting, and executable VBA macros to be tangled together, leading to devastating global macro viruses in the 1990s. Step 2: Microsoft solved this with Office 2007's XML format. Step 3: They created a rigid architectural split: '.docx' for safe text, and '.docm' for code. Step 4: If an attacker hacks a .docx file and embeds a macro binary inside its ZIP structure, the Word rendering engine will see the 'x' extension, apply strict schema validation, and refuse to parse or execute the macro payload. Both A and R are true.",
+    "trick": "Bank/IT Trap: This forced segregation is the greatest security upgrade in MS Office history. If the file ends in 'x', the engine physically refuses to load any macro data.",
+    "tip": "The '.docx' specification acts as a security firewall, fundamentally ignoring executable VBA macros."
+  },
+  {
+    "id": 74,
+    "question": "A system administrator needs to automate complex administrative tasks across a Windows Server environment. They choose to write a '.ps1' script instead of a legacy '.bat' file. What is the primary execution environment and architectural advantage of the '.ps1' extension?",
+    "options": ["It executes via the Windows Command Prompt (cmd.exe) but processes code twice as fast.", "It executes within PowerShell, utilizing an advanced object-oriented framework based on .NET rather than simple text string parsing.", "It executes within the Windows Subsystem for Linux (WSL), allowing native Bash commands.", "It executes directly on the BIOS firmware to modify hardware boot sequences."],
+    "answer": "It executes within PowerShell, utilizing an advanced object-oriented framework based on .NET rather than simple text string parsing.",
+    "explanation": "Step 1: A `.bat` file runs on the legacy Command Prompt (cmd.exe), which handles variables as flat text strings. Step 2: The `.ps1` extension denotes a PowerShell script. Step 3: PowerShell is a modern task automation framework built entirely on the .NET framework. Step 4: This means `.ps1` scripts don't just output text; they output rich data objects with properties and methods (e.g., retrieving a 'Process' object and directly stopping it based on memory usage criteria). This object-oriented approach is vastly superior for complex administrative scripting.",
+    "trick": "Bank/IT Trap: Due to security policies (ExecutionPolicy), Windows prevents double-clicking a `.ps1` file from running it natively to protect against accidental script execution, unlike `.bat` files.",
+    "tip": "PowerShell scripts (.ps1) utilize advanced .NET object-oriented architecture, superseding legacy text-based batch files."
+  },
+  {
+    "id": 75,
+    "question": "Assertion (A): When a user double-clicks a '.reg' file on their Windows desktop, the operating system launches a plain text editor for safe viewing. Reason (R): A Registry file (.reg) contains critical hierarchical configuration data, and direct execution is disabled by default to prevent unauthorized modification of the Windows Registry database. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A `.reg` file is indeed a text file containing registry keys and values. Step 2: However, Assertion (A) is completely false. The default Windows association for a `.reg` file is the Registry Editor executable (regedit.exe), NOT Notepad. Step 3: Reason (R) is also false. When you double-click a `.reg` file, Windows does not disable execution; it actively prompts the user with a warning ('Adding information can unintentionally change or delete values...'), and if accepted, it immediately merges the file's payload directly into the system Registry.",
+    "trick": "Bank/IT Trap: Because `.reg` files auto-merge upon a double-click, they are highly dangerous. Advanced users right-click and select 'Edit' to read the payload safely in Notepad before merging.",
+    "tip": "Double-clicking a '.reg' file immediately attempts to merge its contents into the Windows Registry."
+  },
+  {
+    "id": 76,
+    "question": "Within the Microsoft Excel ecosystem, what is the specific operational purpose of an '.xlam' file?",
+    "options": ["It is a temporary swap file generated when Excel crashes unexpectedly.", "It is an Excel Add-In file containing hidden VBA code and custom functions that launch in the background every time Excel is opened.", "It is a legacy Excel 2003 template file restricted to single-sheet architecture.", "It is an encrypted data model exported directly from Microsoft Power BI."],
+    "answer": "It is an Excel Add-In file containing hidden VBA code and custom functions that launch in the background every time Excel is opened.",
+    "explanation": "Step 1: Developers often create custom VBA functions (UDFs) or complex macros that they want available across EVERY workbook on their computer. Step 2: Saving code in a standard `.xlsm` only makes it available in that specific file. Step 3: By saving the file as an Excel Add-In (`.xlam`), the file format changes operationally. Step 4: When an `.xlam` is activated via Excel Options, it opens silently in the background (hidden from the user interface) every time the application launches, providing global access to its custom functions and macro toolbars.",
+    "trick": "Bank/IT Trap: The 'a' stands for Add-in. An `.xlam` file has no visible worksheets when opened; its entire purpose is to inject backend code silently into the application instance.",
+    "tip": "Excel Add-In (.xlam) files silently load custom macros globally across all open workbooks."
+  },
+  {
+    "id": 77,
+    "question": "Assertion (A): The Encapsulated PostScript (.eps) file format is primarily utilized in professional printing and publishing because it encapsulates a highly compressed raster image grid. Reason (R): Raster compression ensures that complex photographic gradients map perfectly onto commercial printing plates without pixelation. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The `.eps` format is heavily used in professional printing and Adobe Illustrator. Step 2: However, Assertion (A) is completely false because EPS is fundamentally a VECTOR graphics format, not a raster grid. Step 3: It uses mathematical PostScript language to define geometry, ensuring logos and text remain infinitely scalable and perfectly crisp on high-resolution commercial printers. Step 4: Reason (R) describes raster graphics (like JPEG/PNG), which are entirely the opposite of EPS architecture. Both statements are false.",
+    "trick": "Bank/IT Trap: EPS (Encapsulated PostScript) and SVG are the two dominant Vector formats. They rely on math, not pixel grids (rasters), ensuring infinite scaling.",
+    "tip": "Encapsulated PostScript (.eps) is a standard vector graphic format, preventing resolution loss in printing."
+  },
+  {
+    "id": 78,
+    "question": "A developer writes a Python script named `calculator.py`. After executing the script, a new file named `calculator.pyc` is generated in a hidden `__pycache__` directory. What is the precise nature of this newly generated file extension?",
+    "options": ["It is a temporary backup file storing the developer's original source code.", "It contains compiled bytecode translated from the source script, optimizing execution speed for subsequent runs.", "It is a configuration file linking the Python script to the Windows Registry.", "It is an error log detailing syntax failures encountered during script execution."],
+    "answer": "It contains compiled bytecode translated from the source script, optimizing execution speed for subsequent runs.",
+    "explanation": "Step 1: Python is an interpreted language, but it utilizes a two-step execution process. Step 2: When you run `script.py`, the Python interpreter first parses the human-readable source code. Step 3: It translates this source code into a lower-level, machine-independent representation called 'bytecode'. Step 4: To save translation time during future executions, the interpreter caches this compiled bytecode into a `.pyc` (Python Compiled) file. Step 5: The next time the script is run, Python bypasses the parsing phase and directly executes the optimized `.pyc` bytecode, accelerating startup.",
+    "trick": "Bank/IT Trap: Python is technically both compiled (to bytecode) and interpreted (the bytecode executed by the PVM). The `.pyc` file is the physical evidence of this compilation phase.",
+    "tip": "The '.pyc' extension stores pre-compiled Python bytecode to accelerate subsequent script execution speeds."
+  },
+  {
+    "id": 79,
+    "question": "Assertion (A): Opening an unknown presentation file with a '.pptx' extension is completely safe from autonomous macro execution. Reason (R): The Office Open XML security model strictly forces presentations containing executable VBA code to be saved with the '.pptm' extension. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Prior to Office 2007, a `.ppt` file could contain malicious macros, triggering immediately upon launch. Step 2: The modern XML format separated data and code. Step 3: A `.pptx` file is an architecture that strictly rejects macro payloads. Step 4: To store and execute macros in a PowerPoint presentation, the file must be explicitly saved as a `.pptm` (PowerPoint Macro-Enabled Presentation). Step 5: Because the rendering engine will strip code from a `.pptx`, Assertion (A) is true, and Reason (R) perfectly explains the XML security model enforcing this.",
+    "trick": "Bank/IT Trap: While `.pptx` is safe from VBA macros, PowerPoint files can still contain malicious hyperlinks or embedded OLE objects. However, autonomous VBA execution is structurally impossible.",
+    "tip": "The '.pptx' extension fundamentally lacks the structural container required to execute embedded VBA macros."
+  },
+  {
+    "id": 80,
+    "question": "In Java programming architecture, what is the fundamental technical relationship between a '.java' file and a '.class' file?",
+    "options": ["The .java file is the compiled Windows executable, while the .class file stores web-based configurations.", "The .java file contains the human-readable source code, which the compiler translates into platform-independent bytecode stored in the .class file.", "The .java file is an outdated applet format, entirely superseded by the modern .class format.", "The .java file stores graphical user interface data, while the .class file stores backend database connections."],
+    "answer": "The .java file contains the human-readable source code, which the compiler translates into platform-independent bytecode stored in the .class file.",
+    "explanation": "Step 1: A programmer writes code using standard Java syntax and saves it as a plain-text `.java` file. Step 2: This source code cannot be run directly. Step 3: The developer uses the Java Compiler (`javac`) to process the `.java` file. Step 4: The compiler generates a corresponding `.class` file. Step 5: This `.class` file contains universal 'bytecode' (not native machine code). The Java Virtual Machine (JVM) reads this `.class` file and executes the instructions on any operating system.",
+    "trick": "Bank/IT Trap: A single `.java` file can generate multiple `.class` files if the source code contains nested or multiple class definitions. One `.class` file per defined class.",
+    "tip": "A '.java' file holds source code; a '.class' file holds compiled bytecode for JVM execution."
+  },
+  {
+    "id": 81,
+    "question": "Assertion (A): It is impossible for a standard '.sys' driver file to bypass Windows User Account Control (UAC) prompts if executed manually by an administrator. Reason (R): UAC acts as an absolute security barrier requiring explicit graphical consent for any file attempting to write to the System32 directory or alter the Kernel, regardless of the extension. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: `.sys` files are kernel-mode drivers. You do not 'execute' them manually by double-clicking; they are loaded by the OS during hardware initialization or via a service manager. Therefore, Assertion (A) presents a flawed premise regarding manual execution. Step 2: Reason (R) is false. UAC is a User-Mode security feature. Step 3: If a malicious `.sys` file is already successfully loaded into Kernel space (Ring 0) via an exploit, it operates BELOW the UAC mechanism. Step 4: Code running in Kernel mode has supreme authority and bypasses UAC entirely.",
+    "trick": "Bank/IT Trap: UAC only stops User Mode (Ring 3) applications from elevating privileges. Kernel Mode (Ring 0) drivers own the entire system and answer to no pop-ups.",
+    "tip": "Kernel mode drivers (.sys) operate with absolute system authority, bypassing User Mode UAC restrictions."
+  },
+  {
+    "id": 82,
+    "question": "A user downloads an optical disc image file ending in '.iso'. What is the most common native method utilized by modern Windows operating systems (Windows 10/11) to interact with the internal data of this file format?",
+    "options": ["Windows automatically burns the file to a physical CD/DVD upon double-clicking.", "Windows mounts the file to a virtual disk drive, allowing it to be browsed as if a physical disc were inserted.", "Windows converts the file into a compressed .zip folder for permanent storage.", "Windows executes the file through the MS-DOS command prompt emulator."],
+    "answer": "Windows mounts the file to a virtual disk drive, allowing it to be browsed as if a physical disc were inserted.",
+    "explanation": "Step 1: An ISO file is a sector-by-sector copy (an image) of an entire optical disc (CD/DVD/Blu-ray), capturing its filesystem perfectly. Step 2: In older Windows versions, users needed third-party software (like Daemon Tools) to extract or mount these files. Step 3: Starting with Windows 8, Microsoft integrated native ISO mounting. Step 4: When a user double-clicks an `.iso` file, the OS creates a virtual DVD drive (e.g., Drive E:) and mounts the image. The user can then browse, install software, or copy files exactly as if a physical disc was present.",
+    "trick": "Bank/IT Trap: While you can extract an ISO using 7-Zip, the native, intended OS behavior is 'mounting' to a virtual drive.",
+    "tip": "Modern Windows natively 'mounts' ISO files to virtual drives for immediate browsing and installation."
+  },
+  {
+    "id": 83,
+    "question": "Assertion (A): The native Windows WordPad application defaults to saving documents in the '.rtf' (Rich Text Format) extension rather than '.docx' or '.txt'. Reason (R): The '.rtf' format supports complex styling like fonts and colors across different operating systems, while inherently lacking the architecture to support executable macro viruses. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Notepad saves in `.txt`, stripping all formatting (bold, italics). Step 2: Microsoft Word saves in `.docx` for advanced typesetting. Step 3: WordPad occupies the middle ground. It defaults to `.rtf` (Rich Text Format). Step 4: `.rtf` is an incredibly resilient, cross-platform format developed by Microsoft. It uses control words to save complex styling (fonts, colors, margins) that can be read by Mac, Linux, and Windows alike. Step 5: Crucially, RTF specifications do not support VBA macros, making it an extremely safe format for sharing styled documents. Both A and R are accurate.",
+    "trick": "Bank/IT Trap: While RTF cannot execute VBA macros, malicious actors have occasionally embedded OLE exploit objects into RTF files. However, the lack of native macro support makes it vastly safer than legacy .doc files.",
+    "tip": "WordPad defaults to the secure, cross-platform '.rtf' format, retaining text styling without macro support."
+  },
+  {
+    "id": 84,
+    "question": "A developer runs the command `regsvr32.exe custom_library.dll` in the command prompt. What is the precise architectural objective of executing this specific system tool?",
+    "options": ["It securely deletes the DLL file to clean the Windows Registry.", "It forces the DLL to execute in User Mode instead of Kernel Mode.", "It registers the DLL's internal COM objects and functions within the Windows Registry, making them accessible to other applications.", "It compiles C++ source code into a functional DLL file."],
+    "answer": "It registers the DLL's internal COM objects and functions within the Windows Registry, making them accessible to other applications.",
+    "explanation": "Step 1: A DLL contains code that other programs can use. Step 2: However, an operating system needs a map to know what functions are inside the DLL and where it resides on the hard drive. Step 3: For specific types of DLLs (like ActiveX controls or COM objects), simply placing the file in a folder is insufficient. Step 4: The `regsvr32` (Register Server) command-line utility executes the DLL's internal `DllRegisterServer` function. Step 5: This writes necessary configuration data directly into the Windows Registry, officially broadcasting the DLL's availability to all applications on the system.",
+    "trick": "Bank/IT Trap: If a program throws an error saying 'Class not registered' or a DLL is missing, running `regsvr32` on the target DLL often repairs the corrupted registry link.",
+    "tip": "The 'regsvr32' tool records a DLL's functions into the Windows Registry for system-wide access."
+  },
+  {
+    "id": 85,
+    "question": "Assertion (A): Using an '.xml' file is more efficient for data transmission over low-bandwidth mobile networks compared to utilizing a '.json' file. Reason (R): XML natively compresses data into binary format during transmission, whereas JSON relies on uncompressed plain text. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Both Extensible Markup Language (.xml) and JavaScript Object Notation (.json) are plain text data interchange formats. Reason (R) is false; XML does not natively compress into binary. Step 2: Assertion (A) is completely reversed. XML is structurally 'verbose'. It requires closing tags for every element (e.g., `<name>John</name>`). Step 3: JSON uses lightweight syntax (e.g., `\"name\":\"John\"`). Step 4: Because JSON eliminates redundant tags, the resulting file is significantly smaller in byte size. Step 5: Therefore, JSON is vastly superior and more efficient for low-bandwidth mobile network API transmissions.",
+    "trick": "Bank/IT Trap: The shift from XML to JSON in modern web development was driven entirely by JSON's smaller payload size and faster parsing speed in JavaScript engines.",
+    "tip": "JSON is vastly more efficient for network transmission than XML due to its lightweight syntax."
+  },
+  {
+    "id": 86,
+    "question": "An IT administrator receives a Windows system file ending in '.wsf'. What makes the Windows Script File (.wsf) format uniquely distinct and structurally advantageous compared to a standard '.vbs' or '.js' script file?",
+    "options": ["It completely bypasses antivirus scanning by executing directly from RAM.", "It encapsulates multiple scripting languages (like VBScript and JScript) within a single XML-structured file.", "It acts as a compiled executable, hiding the source code from end-users.", "It executes exclusively on Windows Web Servers to handle HTML requests."],
+    "answer": "It encapsulates multiple scripting languages (like VBScript and JScript) within a single XML-structured file.",
+    "explanation": "Step 1: A `.vbs` file only executes VBScript. A `.js` file only executes JScript. Step 2: The Windows Script Host (WSH) architecture supports `.wsf` (Windows Script File). Step 3: A `.wsf` file is formatted as an XML document containing `<job>` and `<script>` tags. Step 4: The primary advantage is modularity: a developer can write one function in VBScript, another in JScript, and include external script files, all executed seamlessly within a single unified `.wsf` file environment.",
+    "trick": "Bank/IT Trap: `.wsf` files are powerful because they allow language-mixing. An admin can leverage the best features of different scripting languages in one execution sequence.",
+    "tip": "Windows Script Files (.wsf) use XML structure to mix multiple scripting languages like VBScript and JScript."
+  },
+  {
+    "id": 87,
+    "question": "Assertion (A): When creating a new Microsoft Access database, saving the file with the modern '.accdb' extension enables advanced features like multi-valued fields and encryption, which were unavailable in the legacy '.mdb' format. Reason (R): The '.accdb' extension relies on the newer Access Database Engine (ACE), which replaced the legacy Joint Engine Technology (JET) engine used by '.mdb' files. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Prior to Office 2007, Access used the `.mdb` extension powered by the JET database engine. Step 2: Microsoft introduced the `.accdb` extension to support modernized capabilities. Step 3: Assertion (A) is true; `.accdb` allows multi-valued fields (storing multiple items in one cell), Attachment data types, and stronger AES encryption. Step 4: Reason (R) is true and explains the architecture; these new features are physically impossible on the old JET engine, requiring the deployment of the new ACE (Access Database Engine) to process the `.accdb` format.",
+    "trick": "Bank/IT Trap: While `.accdb` is superior, it dropped support for user-level security (workgroup security files) that existed in `.mdb`. This is a classic exam edge-case.",
+    "tip": "The modern '.accdb' format uses the ACE engine, enabling advanced encryption and multi-valued fields."
+  },
+  {
+    "id": 88,
+    "question": "Which mathematical rendering technique allows Scalable Vector Graphics (.svg) files to be resized infinitely without suffering from pixelation or 'jaggies'?",
+    "options": ["Anti-aliasing pixel interpolation", "Bézier curves and geometric polygon algorithms", "High-frequency raster compression", "Dynamic CSS media queries"],
+    "answer": "Bézier curves and geometric polygon algorithms",
+    "explanation": "Step 1: Raster images (.jpg, .png) map a static grid of colored pixels. Zooming in stretches the pixels, creating jagged edges. Step 2: Vector images (.svg) do not store pixels. Step 3: An SVG file stores mathematical instructions in XML format (e.g., `<circle cx=\"50\" cy=\"50\" r=\"40\" />`). Step 4: Complex shapes are drawn using Bézier curves, which define paths using control points and mathematical algorithms. Step 5: When you zoom in, the computer simply recalculates the math for the new size, rendering perfectly smooth edges at any resolution.",
+    "trick": "Bank/IT Trap: Anti-aliasing is a trick used to blur the edges of rasters to make them look smooth. Vectors don't need anti-aliasing because they are mathematically absolute.",
+    "tip": "SVG files use Bézier curves and mathematical geometry to render infinitely scalable, crisp images."
+  },
+  {
+    "id": 89,
+    "question": "Assertion (A): Running a standard Batch file ('.bat') by double-clicking it executes the commands with the highest level of system administrative privileges by default. Reason (R): The Command Prompt (cmd.exe) implicitly bypasses User Account Control (UAC) to ensure sequential automation scripts do not halt pending user input. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Assertion (A) is completely false. By default, double-clicking a `.bat` file executes it with the standard, restricted permissions of the currently logged-in user. Step 2: Reason (R) is also false. The Command Prompt is bound by the exact same UAC security restrictions as any other application. Step 3: If a `.bat` script contains a command requiring elevated privileges (like modifying the Registry or System32), it will simply fail with an 'Access Denied' error. Step 4: To execute with administrative rights, the user must explicitly right-click the `.bat` file and select 'Run as administrator'.",
+    "trick": "Bank/IT Trap: Automation does not equate to absolute power. A batch script will ruthlessly fail if it lacks explicitly granted administrative rights.",
+    "tip": "Double-clicking a '.bat' file runs it with standard, restricted user permissions, not administrative rights."
+  },
+  {
+    "id": 90,
+    "question": "An IT teacher is explaining MS Excel file architectures. They demonstrate that opening an '.xlsm' file with a ZIP extraction tool reveals a specific internal directory structure. In which exact internal sub-directory does the actual compiled VBA macro code reside?",
+    "options": ["xl/media", "docProps/core.xml", "xl/vbaProject.bin", "_rels/.rels"],
+    "answer": "xl/vbaProject.bin",
+    "explanation": "Step 1: The `.xlsm` format is an Office Open XML container, which is functionally a ZIP archive. Step 2: Unzipping it reveals several folders: `_rels`, `docProps`, and `xl`. Step 3: The `xl` folder contains the core workbook data (worksheets, styles, shared strings). Step 4: If the file is macro-enabled, the `xl` folder will contain a specific, proprietary binary file named `vbaProject.bin`. Step 5: This binary file is the exact container holding the compiled Visual Basic for Applications (VBA) macro modules, forms, and code.",
+    "trick": "Bank/IT Trap: While the overall container is XML (text), the macro payload itself is stored in a proprietary binary (`.bin`) format to protect the execution logic.",
+    "tip": "Inside an extracted .xlsm archive, macros are physically stored in the 'xl/vbaProject.bin' file."
+  },
+  {
+    "id": 91,
+    "question": "Assertion (A): Converting an '.eps' file into a '.png' file is considered a destructive, lossy operation in graphic design architecture. Reason (R): The conversion process translates infinitely scalable vector mathematics into a fixed, rigid grid of colored pixels. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Encapsulated PostScript (.eps) is a vector format. It uses math to remain perfectly sharp at any size. Step 2: Portable Network Graphics (.png) is a raster format. It uses a fixed grid of pixels (e.g., 1920x1080). Step 3: Converting vector to raster is called 'rasterization'. Step 4: During this process, the mathematical curves are permanently locked into a static pixel grid based on the export resolution. Step 5: If you try to enlarge the resulting `.png`, it will pixelate. The infinite scalability is permanently destroyed. Therefore, both statements are true and perfectly aligned.",
+    "trick": "Bank/IT Trap: Rasterization is a one-way street. Going from Vector to Raster destroys the math. Going from Raster to Vector requires complex AI 'tracing' and is rarely perfect.",
+    "tip": "Rasterizing a vector (.eps) to a raster (.png) permanently destroys its infinite scalability math."
+  },
+  {
+    "id": 92,
+    "question": "When troubleshooting a Windows Blue Screen of Death (BSOD), an administrator identifies a fault in 'ntoskrnl.exe'. What is the foundational architectural role of this specific system file?",
+    "options": ["It is the graphical desktop shell that renders the Windows Taskbar and Start Menu.", "It is the Windows NT Operating System Kernel, responsible for hardware virtualization, process scheduling, and memory management.", "It is the primary bootloader responsible for initializing the motherboard BIOS.", "It is the Dynamic Link Library responsible for establishing secure internet network connections."],
+    "answer": "It is the Windows NT Operating System Kernel, responsible for hardware virtualization, process scheduling, and memory management.",
+    "explanation": "Step 1: `explorer.exe` handles the GUI desktop shell (Taskbar/Start Menu). Step 2: The bootmgr or UEFI bootloader handles the BIOS handoff. Step 3: `ntoskrnl.exe` stands for Windows NT Operating System Kernel. Step 4: It is the absolute core of the Windows operating system. Step 5: It executes in Ring 0 (Kernel Mode) and acts as the bridge between software applications and physical hardware, managing RAM, CPU thread scheduling, and hardware abstraction. A crash here instantly triggers a BSOD.",
+    "trick": "Bank/IT Trap: Every piece of software ultimately answers to `ntoskrnl.exe`. If a malicious driver corrupts the memory space owned by this file, the OS halts itself immediately to prevent physical hardware damage.",
+    "tip": "The 'ntoskrnl.exe' file is the core Windows OS kernel managing memory, CPU, and hardware."
+  },
+  {
+    "id": 93,
+    "question": "Assertion (A): LibreOffice Impress utilizes the '.odp' file extension to save presentations natively. Reason (R): The '.odp' extension denotes OpenDocument Presentation, an open XML-based standard designed to ensure software independence and long-term data archiving. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The OpenDocument Format (ODF) suite maps extensions to application types. Step 2: Text uses `.odt` (Text). Spreadsheets use `.ods` (Spreadsheet). Step 3: Presentations (like those made in LibreOffice Impress) use `.odp` (Presentation). Step 4: Assertion (A) accurately identifies this native format. Step 5: Reason (R) correctly explains the architectural intent; ODF is an internationally standardized, open XML format (ISO/IEC 26300) specifically designed so that users are not locked into proprietary ecosystems like Microsoft PowerPoint (.pptx).",
+    "trick": "Bank/IT Trap: Microsoft PowerPoint can open `.odp` files natively today due to regulatory pressures from governments demanding open standards for public archiving.",
+    "tip": "LibreOffice Impress saves presentations natively as '.odp' (OpenDocument Presentation) files."
+  },
+  {
+    "id": 94,
+    "question": "An IT security analyst notices an unknown script running on a server via the executable `wscript.exe`. Which file extension is primarily associated with this specific execution engine?",
+    "options": [".bat", ".vbs", ".ps1", ".sh"],
+    "answer": ".vbs",
+    "explanation": "Step 1: `cmd.exe` executes batch files (`.bat`). Step 2: `powershell.exe` executes PowerShell scripts (`.ps1`). Step 3: `/bin/bash` executes Linux shell scripts (`.sh`). Step 4: `wscript.exe` is the Windows-based script host that provides a graphical interface environment for executing scripts. Step 5: Its primary association is with VBScript (`.vbs`) and JScript (`.js`). When a user double-clicks a `.vbs` file, the OS uses `wscript.exe` to run the Visual Basic script autonomously in the background.",
+    "trick": "Bank/IT Trap: `cscript.exe` is the command-line version of `wscript.exe`. Both run `.vbs` files, but `cscript` outputs text to a console window, while `wscript` pops up graphical Windows dialog boxes.",
+    "tip": "The 'wscript.exe' engine is the native Windows host for executing VBScript (.vbs) files."
+  },
+  {
+    "id": 95,
+    "question": "Assertion (A): The 'x' in the modern Microsoft Excel extension '.xlsx' signifies that the workbook is fundamentally free of potentially dangerous VBA macros. Reason (R): The 'x' stands for XML, denoting that the file strictly adheres to the Office Open XML standard, which structurally prevents the embedding of the 'vbaProject.bin' file. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The Office Open XML format uses specific letter designators. Step 2: The 'm' in `.xlsm` designates a macro-enabled XML container. Step 3: The 'x' in `.xlsx` designates a standard XML container. Step 4: This is not just a naming convention; it is a rigid architectural rule enforced by the application. Step 5: Excel's rendering engine strictly validates `.xlsx` files against a schema that does not allow the `vbaProject.bin` component to load, rendering them immune to VBA viruses. Both statements are accurate and linked.",
+    "trick": "Bank/IT Trap: You can physically zip a `vbaProject.bin` into a renamed `.xlsx` file, but Excel will detect the schema violation and instantly strip the macro code upon opening. The 'x' is an absolute security barrier.",
+    "tip": "The 'x' in modern Office extensions (.docx, .xlsx) structurally guarantees the file contains no VBA macros."
+  },
+  {
+    "id": 96,
+    "question": "What is the primary technical function of an '.ini' file within the architecture of older Windows applications?",
+    "options": ["It compiles C# source code into an executable application.", "It acts as a lightweight text database to store configuration settings and user preferences, such as window size or file paths.", "It defines the network routing tables required for the application to access the internet.", "It injects DLLs into the system registry upon installation."],
+    "answer": "It acts as a lightweight text database to store configuration settings and user preferences, such as window size or file paths.",
+    "explanation": "Step 1: `.ini` stands for Initialization. Step 2: Before the widespread adoption of the central Windows Registry or modern `.json`/`.xml` files, applications needed a place to save settings. Step 3: An `.ini` file is a simple, human-readable text file organized into sections (denoted by square brackets `[Section]`) and properties (`key=value`). Step 4: When the application launches, it reads the `.ini` file to remember user preferences, like `WindowHeight=1080` or `LastSavePath=C:/Temp`.",
+    "trick": "Bank/IT Trap: While Microsoft pushed developers to use the Windows Registry instead of `.ini` files for security, many modern portable apps still use `.ini` files so they can run from a USB drive without touching the host OS registry.",
+    "tip": "Initialization (.ini) files are simple text documents storing basic application settings and preferences."
+  },
+  {
+    "id": 97,
+    "question": "Assertion (A): When an application crashes on a Windows system, the OS often generates a '.dmp' (Dump) file to assist developers in troubleshooting. Reason (R): A '.dmp' file captures a snapshot of the exact contents of the computer's physical RAM, including CPU registers and process threads, at the precise millisecond the crash occurred. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A crash happens abruptly, often leaving no traditional error log. Step 2: To solve the mystery, Windows triggers a crash dump process. Step 3: It takes whatever data the application (or the OS during a BSOD) was currently holding in volatile memory (RAM) and writes it permanently to the hard drive as a `.dmp` file. Step 4: Developers use debugging tools (like WinDbg) to open the `.dmp` file, analyze the memory snapshot, and pinpoint exactly which line of code or DLL caused the fatal fault. Both statements are accurate and linked.",
+    "trick": "Bank/IT Trap: A 'Full Memory Dump' saves the entire contents of RAM (requiring gigabytes of space). A 'Minidump' saves only the specific memory block associated with the crashed application (requiring mere kilobytes).",
+    "tip": "Crash dump (.dmp) files record a snapshot of RAM contents at the exact moment of a system failure."
+  },
+  {
+    "id": 98,
+    "question": "Which of the following extensions identifies a compiled, executable Java package that can be run natively with a double-click on a Windows OS, provided the JVM is installed, acting functionally similar to a Windows '.exe'?",
+    "options": [".java", ".class", ".jar", ".jsp"],
+    "answer": ".jar",
+    "explanation": "Step 1: `.java` is uncompiled source code. Step 2: `.class` is compiled bytecode for a single class. Step 3: `.jsp` is JavaServer Pages, used for web backend rendering. Step 4: A `.jar` (Java ARchive) file is a zipped container holding multiple `.class` files, images, and a manifest file. Step 5: The manifest specifies a 'Main-Class'. If the host OS has the Java Runtime Environment installed, double-clicking the `.jar` triggers `javaw.exe`, reading the manifest and executing the application globally, much like a `.exe`.",
+    "trick": "Bank/IT Trap: A `.class` file cannot be executed with a simple double-click; it must be run via the command line (`java ClassName`). The `.jar` encapsulates it into a double-clickable package.",
+    "tip": "A Java Archive (.jar) bundles compiled bytecode and a manifest to create executable Java applications."
+  },
+  {
+    "id": 99,
+    "question": "Assertion (A): Opening a Microsoft Excel '.csv' file that contains numbers with a leading apostrophe (e.g., '01234) will permanently delete the apostrophe and convert the value into a mathematical integer. Reason (R): The leading apostrophe is a strict UI instruction native to the CSV format, commanding the text parser to treat the subsequent numbers as text. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: In native Excel (`.xlsx`), typing an apostrophe before a number (`'01234`) forces Excel to treat it as text, hiding the apostrophe from the user interface. Step 2: However, `.csv` is NOT an Excel format; it is universal plain text. Step 3: The CSV standard does not recognize the apostrophe as a UI instruction. Step 4: If you save `'01234` in a CSV, the apostrophe is saved literally as a character. Opening it elsewhere will physically display the apostrophe. Step 5: Therefore, Excel does not delete it upon opening a CSV; it reads it literally as part of the text string. Both A and R are false.",
+    "trick": "Bank/IT Trap: The apostrophe trick ONLY works in proprietary Excel files. In CSVs, formatting hacks are printed as literal raw text characters.",
+    "tip": "CSV files are plain text; Excel-specific formatting tricks like leading apostrophes are saved literally as characters."
+  },
+  {
+    "id": 100,
+    "question": "A network security analyst spots an unauthorized '.tmp' file rapidly growing in size inside a system directory. What is the standard architectural purpose of files utilizing this specific extension?",
+    "options": ["To permanently store encrypted passwords for the Windows Active Directory.", "To act as a universal driver for plug-and-play USB hardware.", "To hold temporary data generated by an application during execution, typically deleted when the application closes gracefully.", "To compress legacy MS-DOS games for modern emulation."],
+    "answer": "To hold temporary data generated by an application during execution, typically deleted when the application closes gracefully.",
+    "explanation": "Step 1: Applications often need to process more data than can fit in RAM, or they need a scratchpad to write auto-recovery backups. Step 2: They generate Temporary (`.tmp`) files. Step 3: These files are meant to be highly volatile. A well-programmed application deletes its `.tmp` files immediately upon a graceful exit. Step 4: If the program crashes, the `.tmp` files are left behind, often leading to hard drive bloat. Step 5: In a security context, malware might use `.tmp` extensions to hide data exfiltration or unpacking routines, disguising malicious activity as normal system behavior.",
+    "trick": "Bank/IT Trap: `.tmp` files are inherently harmless scratchpads, but their frequent creation/deletion makes them the perfect disguise for malware trying to evade heuristic behavioral scanners.",
+    "tip": "Temporary (.tmp) files act as volatile application scratchpads and should auto-delete upon graceful closure."
+  }
+]

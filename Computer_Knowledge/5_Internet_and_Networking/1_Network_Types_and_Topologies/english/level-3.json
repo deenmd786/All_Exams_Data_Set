@@ -1,0 +1,875 @@
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): To fully connect a 'Full Mesh' topology network containing 10 computers, exactly 45 physical cables will be required. Reason (R): The total number of cables in a full mesh network is calculated using the formula N(N-1)/2, where N is the total number of nodes in the network. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Identify the topology as Full Mesh and the number of nodes (N) as 10. Step 2: Recall the mathematical formula for full mesh physical links: N(N-1)/2. Step 3: Substitute N=10 into the formula: 10(10-1)/2. Step 4: Calculate the numerator: 10 * 9 = 90. Step 5: Divide by 2 to find the total cables: 90 / 2 = 45. Thus, both statements are true and correctly related.",
+    "trick": "Bank/IT Trap: Always double-check if the question asks for TOTAL cables or cables PER NODE. Total is N(N-1)/2, while per node is simply N-1.",
+    "tip": "Full Mesh total cables formula: N(N-1)/2. It prevents double-counting links."
+  },
+  {
+    "id": 2,
+    "question": "A corporate IT department decides to upgrade their existing 5-node Full Mesh network by adding 3 new computers. How many ADDITIONAL physical cables must be purchased to maintain the Full Mesh topology?",
+    "options": ["18", "15", "21", "28"],
+    "answer": "18",
+    "explanation": "Step 1: Calculate the cables required for the original 5-node network using N(N-1)/2: 5(4)/2 = 10 cables. Step 2: Calculate the new total number of nodes: 5 + 3 = 8 nodes. Step 3: Calculate the total cables required for the new 8-node network: 8(7)/2 = 28 cables. Step 4: Determine the difference to find the additional cables needed: 28 (new total) - 10 (existing) = 18 additional cables. Step 5: Therefore, 18 new cables must be purchased.",
+    "trick": "Bank/IT Trap: Don't just calculate the cables for a 3-node network (which is 3)! You must calculate the new total and subtract the old total to account for cross-connections.",
+    "tip": "Delta Mesh = New Total Links - Old Total Links."
+  },
+  {
+    "id": 3,
+    "question": "An advanced network architect observes that a Full Mesh topology utilizes exactly 66 physical links. Based on this, how many input/output (I/O) ports are required ON EACH INDIVIDUAL NODE to support this network?",
+    "options": ["11", "12", "13", "66"],
+    "answer": "11",
+    "explanation": "Step 1: Use the given total links (66) and the formula N(N-1)/2 = 66. Step 2: Multiply both sides by 2 to get N(N-1) = 132. Step 3: Solve the quadratic equation or find consecutive integers that multiply to 132 (12 * 11 = 132), so N = 12 nodes. Step 4: The question specifically asks for the number of I/O ports per individual node. Step 5: The formula for ports per node is N-1. Thus, 12 - 1 = 11 ports per node.",
+    "trick": "Bank/IT Trap: Reverse engineering the formula gives you the total nodes (12). But the question sneakily asks for the ports PER NODE, which is N-1 (11).",
+    "tip": "If N(N-1)/2 = Links, find consecutive multipliers. Ports per node = N-1."
+  },
+  {
+    "id": 4,
+    "question": "Assertion (A): In a standard Bus topology, the failure of a single terminating resistor (terminator) will cause the entire network to fail. Reason (R): Without a terminator, the electrical signals reach the end of the cable and reflect backward, causing massive data collisions and a broadcast storm. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Understand the architecture of a Bus topology, which relies on a single shared backbone cable. Step 2: Signals sent on this cable travel in both directions until they reach the ends. Step 3: Terminators at the ends absorb the electrical signals to prevent them from bouncing back. Step 4: If a terminator is removed or fails, the signal reflects (signal reflection). Step 5: This reflection collides with new data being transmitted, corrupting all communication and bringing down the entire network.",
+    "trick": "Bank/IT Trap: People often think only a cable break destroys a Bus network. A missing terminator is equally fatal due to infinite signal reflection.",
+    "tip": "Bus terminators absorb signals. Failure causes signal reflection and total network collapse."
+  },
+  {
+    "id": 5,
+    "question": "A financial institution uses a pure Star topology with 50 client machines connected to a central Layer 2 Switch. If exactly three client machines suffer simultaneous hardware failure, what is the impact on the overall network fault tolerance?",
+    "options": ["The network partitions into three separate isolated segments.", "The entire network fails because the loop is broken.", "The network continues to function normally for the remaining 47 machines.", "The switch experiences a Single Point of Failure (SPOF) cascade and shuts down."],
+    "answer": "The network continues to function normally for the remaining 47 machines.",
+    "explanation": "Step 1: Analyze the Star topology architecture, where all nodes connect individually to a central device (switch). Step 2: Fault tolerance in a Star network isolates node-level failures. Step 3: If a single cable or a single node fails, only that specific connection drops. Step 4: The central switch continues routing traffic for all active connections. Step 5: Therefore, the failure of three independent client machines has zero impact on the network infrastructure and the remaining 47 machines.",
+    "trick": "Bank/IT Trap: Do not confuse node failure with central switch failure! In a Star topology, only the central hub/switch is the Single Point of Failure.",
+    "tip": "Star topology isolates node failures perfectly. Only the central device is a SPOF."
+  },
+  {
+    "id": 6,
+    "question": "In a Dual-Ring topology (such as FDDI), how does the network architecturally handle a complete cable cut that severs both the primary and secondary rings simultaneously?",
+    "options": ["It continues functioning seamlessly as data automatically hops to the central switch.", "The nodes adjacent to the break loop the primary ring back into the secondary ring, creating a single self-healing 'C-shaped' ring.", "The entire network fails instantly because the unidirectional flow is permanently interrupted.", "It reverts to a pure Bus topology using the outer ring as a passive backbone."],
+    "answer": "The nodes adjacent to the break loop the primary ring back into the secondary ring, creating a single self-healing 'C-shaped' ring.",
+    "explanation": "Step 1: Dual-ring topologies use two counter-rotating rings (Primary and Secondary) for high fault tolerance. Step 2: Under normal operations, data flows on the primary ring while the secondary is a backup. Step 3: If a cable is severed, the rings are broken. Step 4: To survive, the network hardware at the nodes immediately adjacent to the cut perform 'wrap-around' logic. Step 5: They connect the primary ring's broken end to the secondary ring's broken end, effectively forming one continuous, albeit longer, C-shaped ring (Self-Healing).",
+    "trick": "Bank/IT Trap: Dual-rings don't just 'switch' to the backup ring if both cables are cut. They 'wrap' or fold the two rings into a single continuous loop.",
+    "tip": "FDDI Dual-Rings survive cable cuts by 'wrapping' the primary and secondary rings together."
+  },
+  {
+    "id": 7,
+    "question": "A hybrid network combines a Star topology with a Bus topology (Tree/Extended Star). What represents the most critical Single Point of Failure (SPOF) for the ENTIRE integrated infrastructure?",
+    "options": ["The failure of any single leaf node.", "The failure of the main central backbone cable connecting the hubs.", "The failure of an edge switch connected to the backbone.", "The failure of a terminating resistor on a child star segment."],
+    "answer": "The failure of the main central backbone cable connecting the hubs.",
+    "explanation": "Step 1: Analyze the Star-Bus (Tree) hybrid topology structure. Step 2: Multiple central devices (hubs/switches) form the centers of individual Star networks. Step 3: These hubs are then daisy-chained together using a single Bus backbone cable. Step 4: If an edge switch fails, only that specific star segment drops. Step 5: However, if the main Bus backbone cable breaks, communication between all different star segments is severed, partitioning and destroying the entire global network infrastructure.",
+    "trick": "Bank/IT Trap: In a Tree/Star-Bus hybrid, the hierarchical root or the central bus backbone is always the ultimate Single Point of Failure.",
+    "tip": "In a Star-Bus hybrid, the central connecting Bus backbone is the ultimate SPOF."
+  },
+  {
+    "id": 8,
+    "question": "Assertion (A): Implementing a Partial Mesh topology instead of a Full Mesh topology reduces overall network implementation costs but mathematically decreases strict fault tolerance. Reason (R): In a Partial Mesh, not every node is directly connected to every other node, meaning the failure of a critical routing node could partition the network. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A Full Mesh connects every single node to every other node, maximizing fault tolerance but scaling costs exponentially (O(N^2)). Step 2: A Partial Mesh connects only critical or highly communicative nodes directly, reducing cable count and cost (Assertion A is true). Step 3: Because some nodes rely on intermediate nodes to route their traffic, a central routing node acts as a potential failure choke point. Step 4: If that specific intermediate node fails, the dependent nodes lose their path to the network. Step 5: Therefore, fault tolerance drops, making Reason R the exact correct explanation for Assertion A.",
+    "trick": "Bank/IT Trap: Partial Mesh is a compromise between cost and reliability. It introduces isolated SPOFs (Single Points of Failure) where Full Mesh has absolutely none.",
+    "tip": "Partial Mesh sacrifices absolute fault tolerance to save on exponential cabling costs."
+  },
+  {
+    "id": 9,
+    "question": "A network architect is designing a Full Mesh topology for 15 server racks. Assuming each physical port on a server costs $50, and each cable costs $10, what is the total hardware cost strictly for the ports and cables?",
+    "options": ["$16,800", "$11,550", "$15,750", "$14,250"],
+    "answer": "$11,550",
+    "explanation": "Step 1: Identify N = 15 nodes. Step 2: Calculate total cables using N(N-1)/2: 15(14)/2 = 210/2 = 105 cables. Step 3: Calculate total cable cost: 105 * $10 = $1,050. Step 4: Calculate total ports in the network. Each node needs N-1 ports, so 15-1 = 14 ports per node. Total ports = 15 nodes * 14 ports = 210 ports. Step 5: Calculate total port cost: 210 * $50 = $10,500. Total cost = $10,500 (ports) + $1,050 (cables) = $11,550.",
+    "trick": "Bank/IT Trap: Don't forget that EVERY cable requires TWO ports (one on each end)! If there are 105 cables, there are exactly 210 ports. Total port cost is 210 * $50.",
+    "tip": "Total ports in a mesh network is always exactly double the total number of cables."
+  },
+  {
+    "id": 10,
+    "question": "Which of the following topological fault scenarios accurately describes the concept of 'Network Partitioning'?",
+    "options": ["A Star network where the central switch fails, shutting down all devices instantly.", "A Full Mesh network where two random cables are cut, reducing bandwidth.", "A Bus network where the backbone cable breaks in the middle, splitting the nodes into two isolated, non-communicating sub-networks.", "A Ring network where a single node reboots, triggering token regeneration."],
+    "answer": "A Bus network where the backbone cable breaks in the middle, splitting the nodes into two isolated, non-communicating sub-networks.",
+    "explanation": "Step 1: Network Partitioning refers to a failure that divides a unified network into two or more separated segments that cannot reach each other. Step 2: If a Star switch fails, the whole network dies (it doesn't partition into working sub-groups). Step 3: If a Full Mesh loses two cables, alternative routes exist, preventing partitioning. Step 4: In a Bus network, if the main backbone breaks in the middle, the left side can still talk to the left side, and the right side to the right side (assuming terminators magically exist at the break, though in reality reflection ruins it). Theoretically and architecturally, a backbone break strictly defines the concept of 'partitioning'. Step 5: Therefore, the Bus backbone break represents partitioning logic.",
+    "trick": "Bank/IT Trap: Partitioning implies the creation of 'islands' of nodes. A broken bus or a broken link in a tree topology physically cuts the bridge between these islands.",
+    "tip": "Network Partitioning divides a single network into two or more isolated, unreachable sub-networks."
+  },
+  {
+    "id": 11,
+    "question": "Assertion (A): In a classic Unidirectional Ring topology, the entire network possesses zero fault tolerance regarding physical link failures. Reason (R): Data tokens must travel strictly in one direction through every single sequential node; a single severed link mathematically destroys the complete transmission loop. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A unidirectional ring (like standard Token Ring) relies on a continuous loop to circulate the token. Step 2: Every node acts as a repeater, reading and passing the token to the next adjacent node. Step 3: If one cable is cut, the signal hits a dead end (Assertion A is true). Step 4: Because it is unidirectional, the signal cannot turn around and go backwards to find a new path. Step 5: The loop is irreparably broken, verifying that Reason R perfectly explains the absolute lack of fault tolerance in A.",
+    "trick": "Bank/IT Trap: Do not confuse a Unidirectional Ring with a Dual-Ring (FDDI). Standard rings have exactly ZERO fault tolerance against a cable cut.",
+    "tip": "A standard Unidirectional Ring has 0% fault tolerance. One break destroys the entire network."
+  },
+  {
+    "id": 12,
+    "question": "An enterprise expands its Full Mesh topology by adding exactly one new computer. The installation of this single computer required the purchasing of 15 new physical cables. How many total computers exist in the network AFTER this expansion?",
+    "options": ["14", "15", "16", "17"],
+    "answer": "16",
+    "explanation": "Step 1: In a Full Mesh topology, when you add a new node, it must connect to every pre-existing node. Step 2: Therefore, the number of new cables required to add one node is exactly equal to the number of existing nodes. Step 3: The question states 15 new cables were required. Step 4: This means there were exactly 15 pre-existing nodes in the network before the expansion. Step 5: The total number of computers AFTER the expansion is the original 15 plus the 1 new computer, yielding 16 total nodes.",
+    "trick": "Bank/IT Trap: The delta cables for adding 1 node = N (where N is the old number of nodes). Don't forget to add the new node to the final count!",
+    "tip": "Adding 1 node to a Full Mesh requires 'X' cables, where X is the OLD node count."
+  },
+  {
+    "id": 13,
+    "question": "Evaluate the fault tolerance of a 'Star-Ring' hybrid topology (commonly implemented using a Multistation Access Unit - MAU). If a single client computer connected to the MAU violently loses power and dies, what is the architectural outcome?",
+    "options": ["The entire ring breaks and the network fails due to the Token Ring logical architecture.", "The MAU senses the voltage drop, closes the internal ring loop to bypass the dead node, and the network survives.", "The network partitions into two separate logical rings.", "The MAU instantly converts the logical ring into a physical bus to maintain connectivity."],
+    "answer": "The MAU senses the voltage drop, closes the internal ring loop to bypass the dead node, and the network survives.",
+    "explanation": "Step 1: A Star-Ring topology looks like a Star physically but acts like a Ring logically. Step 2: All nodes plug into a central hub called a MAU (Multistation Access Unit). Step 3: Inside the MAU, the wiring forms a circular ring. Step 4: In a pure Ring, a dead node breaks the loop. But in a MAU, relays monitor the connection. Step 5: If a node dies, the MAU's internal relay simply clicks shut, instantly bypassing the dead node's port and maintaining the continuous logical ring for the rest of the network.",
+    "trick": "Bank/IT Trap: The MAU is the magic box that fixes the fatal flaw of Token Ring networks. It provides physical Star fault-tolerance to a logical Ring.",
+    "tip": "In a Star-Ring hybrid, the MAU physically bypasses dead nodes to prevent logical ring failure."
+  },
+  {
+    "id": 14,
+    "question": "Assertion (A): A physical Bus topology requires less overall cabling than a Star topology of the exact same node count. Reason (R): In a Bus topology, nodes tap into a single centralized backbone cable, whereas a Star topology requires a dedicated, full-length cable running from every single node back to the central switch. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Consider the physical layout of a Bus topology. One long backbone cable runs through the building, and nodes use short 'drop lines' to tap into it. Step 2: This minimizes the total linear footage of copper wire needed. Step 3: Consider a Star topology. If you have 50 computers in a building, you must run 50 individual, full-length cables from each desk all the way back to the server room switch. Step 4: This vastly increases the linear cabling required compared to a shared backbone. Step 5: Thus, Assertion A is correct regarding cost/cable length, and Reason R perfectly describes the structural difference driving this.",
+    "trick": "Bank/IT Trap: While Bus uses less cable (cheaper), Star is universally preferred today because it vastly improves fault tolerance and eliminates collision domains.",
+    "tip": "Bus topology minimizes cable length by sharing a backbone, unlike the dedicated cables of Star."
+  },
+  {
+    "id": 15,
+    "question": "If a network architect is tasked with creating a highly fault-tolerant backbone that requires exactly 435 physical interconnecting cables to achieve a Full Mesh, what is the exact number of routers (nodes) deployed in this architecture?",
+    "options": ["28", "29", "30", "31"],
+    "answer": "30",
+    "explanation": "Step 1: Set up the mathematical formula for a Full Mesh network: Total Cables = N(N-1)/2. Step 2: Substitute the known value into the equation: 435 = N(N-1)/2. Step 3: Multiply both sides by 2 to isolate the numerator: N(N-1) = 870. Step 4: You need to find two consecutive integers that multiply to 870. Step 5: Since 30 * 30 = 900, the numbers must be close to 30. Check 30 * 29 = 870. Therefore, N = 30 routers.",
+    "trick": "Bank/IT Trap: When solving N(N-1) = X, look for the nearest perfect square root to guess the numbers quickly. The square root of 870 is roughly 29.5, pointing directly to 29 and 30.",
+    "tip": "To reverse-engineer mesh nodes, multiply links by 2 and find the nearest perfect square root."
+  },
+  {
+    "id": 16,
+    "question": "Which of the following logical failure states is unique to a pure Bus topology and completely non-existent in pure Star or Mesh topologies?",
+    "options": ["Single Point of Failure (SPOF)", "Signal Reflection / Bounce", "MAC Address Spoofing", "Routing Table Corruption"],
+    "answer": "Signal Reflection / Bounce",
+    "explanation": "Step 1: Evaluate the physical layers of the given topologies. Step 2: Mesh and Star topologies use point-to-point links terminated directly inside the network interface cards (NICs) or switch ports. Step 3: A pure Bus topology uses a single shared, open-ended coaxial backbone. Step 4: Because the cable has physical 'ends' not plugged into a device, it requires physical 50-ohm terminating resistors. Step 5: If a terminator is missing, the electrical signal bounces back off the open end (Signal Reflection), destroying the data flow. This physical phenomenon cannot occur in closed-loop or point-to-point topologies.",
+    "trick": "Bank/IT Trap: Signal reflection is exclusively a physics problem inherent to open-ended coaxial bus networks. It is the defining vulnerability of older 10Base2 architectures.",
+    "tip": "Signal Reflection (bounce) is a failure state exclusive to open-ended, shared-media Bus topologies."
+  },
+  {
+    "id": 17,
+    "question": "Assertion (A): In a large-scale enterprise network, transitioning from a Full Mesh topology to a Star topology increases the overall vulnerability to a localized physical disaster (like a fire in a server closet). Reason (R): A Star topology relies entirely on a centralized hardware nexus, meaning the physical destruction of that single nexus instantly brings down the entire network segment. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate the fault tolerance of Full Mesh. Nodes are distributed and directly connected. A fire destroying one node leaves all others communicating perfectly. Step 2: Evaluate Star topology. All connections funnel into one physical switch (the nexus) typically located in a single wiring closet. Step 3: Assertion A is true because migrating from Mesh to Star concentrates the risk into one physical location. Step 4: Reason R correctly identifies that this concentrated switch acts as the ultimate Single Point of Failure (SPOF) for that segment. Step 5: Therefore, physical destruction of that nexus drops the network, making R the correct explanation.",
+    "trick": "Bank/IT Trap: Fault tolerance isn't just about cables breaking; it's about hardware concentration. Star topologies sacrifice physical redundancy for easier centralized management.",
+    "tip": "Star topologies consolidate hardware, making them highly vulnerable to localized physical disasters (central SPOF)."
+  },
+  {
+    "id": 18,
+    "question": "A network contains 8 computers. How many FEWER cables are required to wire these 8 computers in a pure Star topology (excluding uplinks) compared to a Full Mesh topology?",
+    "options": ["20", "28", "8", "14"],
+    "answer": "20",
+    "explanation": "Step 1: Calculate the cables needed for a Full Mesh topology with 8 nodes. Formula: N(N-1)/2. Step 2: 8(7)/2 = 56 / 2 = 28 cables. Step 3: Calculate the cables needed for a pure Star topology with 8 nodes. Formula: Each node needs exactly 1 cable connecting it to the central switch. Step 4: Therefore, a Star topology requires exactly 8 cables (N cables). Step 5: Calculate the difference to find how many FEWER cables are needed: 28 (Mesh) - 8 (Star) = 20 fewer cables.",
+    "trick": "Bank/IT Trap: Read carefully! The question asks for how many FEWER cables, not the total cables of either topology. Calculate both and subtract.",
+    "tip": "Mesh cables = N(N-1)/2. Star cables = N. Difference = [N(N-1)/2] - N."
+  },
+  {
+    "id": 19,
+    "question": "In the event of a network hardware failure, what is the fundamental difference in the resulting failure domain between a Layer 1 Hub and a Layer 2 Switch operating at the center of a Star topology?",
+    "options": ["A Hub failure causes a broadcast storm, while a Switch failure only drops internet access.", "A Hub failure partitions the network, while a Switch failure loops the network.", "There is no architectural difference in the failure domain; the catastrophic death of either device equally severs all node connectivity in the Star.", "A Hub failure only drops half the nodes due to shared collision domains, while a Switch drops all nodes."],
+    "answer": "There is no architectural difference in the failure domain; the catastrophic death of either device equally severs all node connectivity in the Star.",
+    "explanation": "Step 1: Understand the physical topology. Both Hubs and Switches act as the central nexus in a physical Star topology. Step 2: A Layer 1 Hub broadcasts data to all ports. A Layer 2 Switch intelligently routes frames via MAC addresses. Step 3: Despite their internal logical differences, their physical role in the architecture is identical. Step 4: They both represent the absolute Single Point of Failure (SPOF). Step 5: If the device loses power or suffers a motherboard burn-out, ALL cables connected to it go dead. The failure domain (100% of attached nodes) is identical.",
+    "trick": "Bank/IT Trap: Exam questions love to distract you with OSI layers (Layer 1 vs Layer 2). But in physical topology SPOF analysis, a dead box is a dead box. Both kill the network.",
+    "tip": "In physical SPOF analysis, catastrophic failure of either a Hub or a Switch equally drops the Star network."
+  },
+  {
+    "id": 20,
+    "question": "Assertion (A): In mathematical graph theory applied to network topologies, a Full Mesh network is formally categorized as a 'Complete Graph'. Reason (R): In a Complete Graph, every single pair of distinct vertices (nodes) is connected by a unique, dedicated edge (link), perfectly mirroring the architecture of a Full Mesh. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Network topologies are based on discrete mathematics and graph theory. Step 2: Assertion A states a Full Mesh is a 'Complete Graph'. This is the exact terminology used in computer science. Step 3: Reason R defines a Complete Graph: a graph where every vertex has a direct edge to every other vertex. Step 4: This definition aligns identically with the physical definition of a Full Mesh network (every computer wired to every other computer). Step 5: Therefore, Reason R validates and explains the graph theory classification presented in Assertion A.",
+    "trick": "Bank/IT Trap: 'Complete Graph' is the formal academic term for Full Mesh. Know this synonym, as advanced IT exams often blend networking with discrete math concepts.",
+    "tip": "In graph theory, a 'Complete Graph' is the exact mathematical equivalent of a Full Mesh topology."
+  },
+  {
+    "id": 21,
+    "question": "A network engineer wants to interconnect 4 remote branch offices for absolute maximum fault tolerance. If they use a Full Mesh topology instead of a Ring topology, what is the exact multiplier increase in the number of required WAN links?",
+    "options": ["1.5x", "2.0x", "2.5x", "3.0x"],
+    "answer": "1.5x",
+    "explanation": "Step 1: Calculate the links required for a Ring topology for N=4 nodes. In a ring, nodes connect in a circle, so Total Links = N. Therefore, 4 links are needed. Step 2: Calculate the links required for a Full Mesh topology for N=4 nodes. Formula: N(N-1)/2. Step 3: 4(3)/2 = 12/2 = 6 links needed. Step 4: The question asks for the multiplier increase from Ring to Mesh. Step 5: Divide Mesh links by Ring links: 6 / 4 = 1.5. Therefore, a Full Mesh requires 1.5x more links than a Ring.",
+    "trick": "Bank/IT Trap: Always read if it's asking for the delta (difference) or the multiplier (ratio). 6 - 4 = 2 (difference), but 6 / 4 = 1.5 (multiplier).",
+    "tip": "Links in a Ring = N. Links in a Mesh = N(N-1)/2. Calculate both to find ratios."
+  },
+  {
+    "id": 22,
+    "question": "Assertion (A): The 'Tree' topology inherently suffers from cascading fault domains based on hierarchical levels. Reason (R): A Tree topology is an interconnected hierarchy of Star networks; if a parent switch at Level 2 fails, all child switches and nodes at Level 3 and below lose connection to the rest of the network. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A Tree topology is a hierarchical structure (Root -> Core -> Distribution -> Access). Step 2: It is essentially a hierarchy of linked Star topologies. Step 3: Assertion A states it has cascading fault domains. If a lower-level switch dies, only a few PCs die. If a higher-level switch dies, everything below it dies. Step 4: Reason R explains this mechanism perfectly. A Level 2 switch acts as the sole gateway for all Level 3 child devices connected beneath it. Step 5: Its failure severs the trunk, cascading the outage downward. Thus, R is the correct architectural explanation of A.",
+    "trick": "Bank/IT Trap: Hierarchical topologies (Tree) don't have just ONE Single Point of Failure. They have MULTIPLE SPOFs at different levels, each dictating the size of the resulting outage blast radius.",
+    "tip": "Tree topologies feature cascading SPOFs; parent node failures isolate all dependent child hierarchies."
+  },
+  {
+    "id": 23,
+    "question": "An enterprise employs an archaic 10Base5 'Thicknet' Bus topology network. A malicious actor uses a knife to cleanly cut the coaxial backbone cable exactly in the middle. What is the immediate technical state of the computers on the left half of the cut?",
+    "options": ["They form a fully functional, isolated sub-network and can communicate with each other.", "They immediately experience continuous signal reflection, resulting in total communication failure.", "They attempt to route traffic through the nearest working gateway, causing a broadcast storm.", "They fall back to half-duplex token passing to bypass the cut."],
+    "answer": "They immediately experience continuous signal reflection, resulting in total communication failure.",
+    "explanation": "Step 1: A Bus topology relies on a continuous coaxial cable with terminators at both ends. Step 2: The terminators absorb the electrical signals to prevent them from bouncing. Step 3: When the cable is cut in the middle, the left half now has one terminator (at its original end) and one exposed, open copper wire (at the cut). Step 4: When a computer on the left tries to send data, the electrical signal hits the open cut and bounces back (signal reflection). Step 5: This bounced signal collides with original signals, causing massive interference. Therefore, even the isolated left half completely fails to communicate.",
+    "trick": "Bank/IT Trap: Many assume cutting a bus creates two working mini-buses. False! A cut creates open, un-terminated ends. Open ends cause signal bounce, destroying ALL data transmission on both sides.",
+    "tip": "A severed Bus cable creates un-terminated ends, causing fatal signal reflection across all remaining segments."
+  },
+  {
+    "id": 24,
+    "question": "If you have a Partial Mesh network designed for 6 nodes where exactly 3 non-critical links were removed to save costs, how many physical cables are actively maintaining this network?",
+    "options": ["15", "12", "18", "9"],
+    "answer": "12",
+    "explanation": "Step 1: First, calculate the number of cables required if the network were a Full Mesh. Step 2: Use the formula N(N-1)/2 with N=6. Step 3: 6(5)/2 = 30 / 2 = 15 total theoretical cables. Step 4: The question states that the architect removed 3 non-critical links to create the Partial Mesh. Step 5: Subtract the removed links from the Full Mesh total: 15 - 3 = 12 active physical cables remaining.",
+    "trick": "Bank/IT Trap: Partial Mesh doesn't have a fixed formula because you can arbitrarily remove links. You MUST calculate the Full Mesh maximum first, then subtract the removed links.",
+    "tip": "Partial Mesh Links = (Full Mesh Links) minus (Removed Links)."
+  },
+  {
+    "id": 25,
+    "question": "Assertion (A): Point-to-Point (P2P) topology offers the highest possible dedicated bandwidth between two nodes and zero risk of network collisions. Reason (R): P2P topology physically wires exactly two nodes together with an exclusive cable, isolating them from any other network traffic or shared media contention. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Point-to-Point (P2P) is the simplest topology, consisting of just two computers connected by a single cable. Step 2: Because the cable is completely dedicated to these two machines, they have access to 100% of the wire's bandwidth bandwidth (Assertion A is true). Step 3: In shared media (like Bus or Hub-Star), multiple computers try to talk at once, causing collisions (CSMA/CD domain). Step 4: In P2P, there are no other computers to interrupt or compete for the wire. Step 5: Therefore, Reason R accurately explains the physical isolation that guarantees the high bandwidth and zero collision environment stated in A.",
+    "trick": "Bank/IT Trap: Don't confuse physical P2P topology (two PCs wired together) with P2P software architecture (like BitTorrent over the internet). The question is strictly physical.",
+    "tip": "Physical P2P topologies provide exclusive, unshared bandwidth between exactly two nodes, eliminating collisions."
+  },
+  {
+    "id": 26,
+    "question": "A massive data center relies on a highly fault-tolerant Full Mesh network. Due to budget constraints, management demands reducing the cables. If they drop the node count from 20 to 10, what percentage of the original cabling is ELIMINATED?",
+    "options": ["50%", "76.3%", "23.7%", "80%"],
+    "answer": "76.3%",
+    "explanation": "Step 1: Calculate the cables for the original 20-node network. N(N-1)/2 -> 20(19)/2 = 380/2 = 190 cables. Step 2: Calculate the cables for the new 10-node network. N(N-1)/2 -> 10(9)/2 = 90/2 = 45 cables. Step 3: Calculate the number of cables eliminated: 190 - 45 = 145 cables eliminated. Step 4: Calculate the percentage eliminated relative to the original amount. Formula: (Eliminated / Original) * 100. Step 5: (145 / 190) * 100 = 0.76315 * 100 = 76.3%.",
+    "trick": "Bank/IT Trap: Mesh complexity scales quadratically (O(N^2)), not linearly! Halving the nodes (20 to 10) eliminates roughly 76% of the cables, not 50%. Always do the exact math.",
+    "tip": "Mesh scaling is quadratic. Halving the node count eliminates significantly more than 50% of cables."
+  },
+  {
+    "id": 27,
+    "question": "Assertion (A): Implementing a 'Spanning Tree Protocol' (STP) on switches logically transforms a highly redundant physical Mesh topology into a logical Tree topology. Reason (R): STP intentionally disables redundant physical links to prevent catastrophic broadcast storms (Layer 2 loops) caused by the multiple pathways inherent in a Mesh. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A physical Mesh provides multiple redundant paths between switches. Step 2: At Layer 2 (Ethernet), multiple paths cause infinite broadcast loops, which rapidly crash the network (broadcast storm). Step 3: To survive this, switches run STP. Step 4: STP evaluates all the redundant physical cables and logically shuts down ports (blocking state) until only a single, loop-free path exists between any two devices. Step 5: This loop-free path mathematically forms a 'Tree' graph structure. If a primary link fails, STP re-enables a blocked link to heal the tree. Thus, R perfectly explains the logical transformation in A.",
+    "trick": "Bank/IT Trap: Redundancy at Layer 2 is actually fatal without STP. You wire it as a Mesh physically, but the protocol enforces it as a Tree logically.",
+    "tip": "STP prevents Layer 2 loops by logically pruning physical Mesh redundancies into a loop-free Tree."
+  },
+  {
+    "id": 28,
+    "question": "Consider an Internet Service Provider evaluating backbone topologies. Which of the following topologies mathematically guarantees a 'Diameter' of exactly 1 hop between any two randomly selected nodes?",
+    "options": ["Star Topology", "Bus Topology", "Ring Topology", "Full Mesh Topology"],
+    "answer": "Full Mesh Topology",
+    "explanation": "Step 1: Network 'Diameter' is the longest shortest-path between any two nodes (how many hops it takes to get from the worst-case source to destination). Step 2: In a Star topology, Node A must talk to the Switch, then to Node B (Diameter = 2 hops). Step 3: In a Ring, Node A might have to pass through N/2 nodes to reach the far side. Step 4: In a Bus, frames traverse the shared medium without specific node-hopping, but logical collision domains apply. Step 5: In a Full Mesh, EVERY node is wired directly to EVERY other node. Therefore, the distance between any Node A and Node B is a direct, dedicated cable. The Diameter is mathematically guaranteed to be exactly 1 hop.",
+    "trick": "Bank/IT Trap: 'Hops' refer to intermediate devices. Because Mesh nodes are all direct neighbors, there are zero intermediate devices, meaning the transmission is exactly 1 hop.",
+    "tip": "A Full Mesh topology mathematically guarantees a maximum network diameter of exactly 1 hop."
+  },
+  {
+    "id": 29,
+    "question": "A defense contractor requires a network where the total number of physical links must be exactly 3 times the number of nodes. Assuming the contractor wants the most interconnected symmetric network possible without exceeding this ratio, what is the maximum number of nodes they can deploy?",
+    "options": ["5", "6", "7", "8"],
+    "answer": "7",
+    "explanation": "Step 1: Set up the algebraic equation based on the prompt. The total number of links (L) must equal 3 times the number of nodes (N). So, L = 3N. Step 2: The prompt asks for the most interconnected network, implying a Full Mesh formula: L = N(N-1)/2. Step 3: Equate the two formulas: 3N = N(N-1)/2. Step 4: Solve for N. Divide both sides by N (since N cannot be 0): 3 = (N-1)/2. Step 5: Multiply by 2: 6 = N - 1. Step 6: Add 1: N = 7. A 7-node Full Mesh has exactly 21 links (which is 3 * 7).",
+    "trick": "Bank/IT Trap: This is a pure algebraic translation of network formulas. Set 3N equal to N(N-1)/2 and solve. Don't waste time plugging in all options.",
+    "tip": "If Links = 3 * Nodes in a Mesh, solve 3N = N(N-1)/2 to find N=7."
+  },
+  {
+    "id": 30,
+    "question": "Assertion (A): In a Token Ring topology, the failure of the active 'Token' itself (e.g., getting corrupted or lost due to cosmic radiation) permanently halts all network communication until physically rebooted. Reason (R): The Active Monitor node acts as an internal fault-tolerance mechanism, detecting token loss and generating a fresh token to restore network functionality. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Token Ring networks use a 3-byte 'Token' that circulates. A node can only transmit if it catches the free token. Step 2: If the token is destroyed (electrical spike, bad NIC), no node can transmit. Step 3: However, the network does NOT permanently halt (making Assertion A false). Step 4: Token Ring protocol designates one specific node as the 'Active Monitor'. Step 5: The Active Monitor watches the loop. If it doesn't see a token pass by within a specific millisecond timer, it clears the ring and injects a brand new token, automatically self-healing the logical failure (validating Reason R).",
+    "trick": "Bank/IT Trap: Token rings are fragile physically (cable cuts) but incredibly robust logically. The 'Active Monitor' prevents logical deadlocks like lost tokens or endless circulating frames.",
+    "tip": "The 'Active Monitor' in Token Ring topologies detects lost tokens and generates new ones, preventing logical deadlock."
+  },
+  {
+    "id": 31,
+    "question": "What is the specific architectural term for the phenomenon in a Star network where a failing Network Interface Card (NIC) rapidly and endlessly transmits garbage data, crippling the central switch's processing power and causing a denial of service to all other nodes?",
+    "options": ["Jabbering Node", "Signal Bounce", "Token Hoarding", "Split Horizon"],
+    "answer": "Jabbering Node",
+    "explanation": "Step 1: A Star topology relies on a central switch to handle all traffic. Step 2: If a PC's network card malfunctions, it can get stuck in a transmit loop, firing millions of corrupted frames per second. Step 3: This specific hardware malfunction is called a 'Jabbering Node'. Step 4: The central switch tries to process all these garbage frames. Its CPU hits 100%, and its buffers overflow. Step 5: Consequently, it drops legitimate traffic from healthy nodes, causing an infrastructure-wide Denial of Service. (Modern switches use 'Broadcast Storm Control' to mitigate this).",
+    "trick": "Bank/IT Trap: Signal Bounce is for Bus. Token Hoarding is for Ring. Jabbering is the classic hardware fault where a broken NIC screams garbage data endlessly.",
+    "tip": "A 'Jabbering Node' is a broken NIC that continuously transmits garbage data, overwhelming network switches."
+  },
+  {
+    "id": 32,
+    "question": "Assertion (A): Upgrading a standard Star topology to an 'Extended Star' topology inherently increases the network's overall resistance to localized switch failures. Reason (R): An Extended Star introduces multiple interconnected central switches; if one edge switch fails, the other branches of the network continue to operate via the core switch. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: A standard Star uses one central switch. If it fails, 100% of the network dies. Step 2: An Extended Star links multiple edge switches to a core switch. Step 3: If an edge switch fails, only its local clients die. The rest of the network survives (Reason R is True). Step 4: However, does this INCREASE overall resistance? No. By adding MORE switches in a hierarchy, you introduce MORE Single Points of Failure. If the Core switch dies, the whole network still drops. Step 5: You haven't added redundancy (like a Mesh); you've just added more points that can fail and partition the network. Therefore, Assertion A is technically false—it increases the *number* of failure domains, but doesn't improve ultimate fault tolerance unless redundant links (STP) are added.",
+    "trick": "Bank/IT Trap: Extended Star != Redundancy. It just breaks one big SPOF into a hierarchy of SPOFs. True fault tolerance requires alternative paths (Mesh/Ring).",
+    "tip": "Extended Star networks introduce hierarchical SPOFs; they distribute failure domains but lack redundant pathing."
+  },
+  {
+    "id": 33,
+    "question": "A university campus wants to interconnect 6 separate department buildings. They want the reliability of a Full Mesh but can only afford to lay 10 physical fiber optic cables. How many links short of a Full Mesh will their final network be?",
+    "options": ["3", "4", "5", "6"],
+    "answer": "5",
+    "explanation": "Step 1: Identify the number of nodes (buildings). N = 6. Step 2: Calculate the number of physical cables required for a Full Mesh topology using the formula N(N-1)/2. Step 3: 6(5)/2 = 30 / 2 = 15 cables required for Full Mesh. Step 4: The university can only afford to lay 10 cables. Step 5: Subtract the affordable cables from the required cables: 15 (required) - 10 (affordable) = 5 cables short.",
+    "trick": "Bank/IT Trap: Read carefully. The question asks 'how many links short', meaning the difference between the ideal Full Mesh and the actual constrained budget.",
+    "tip": "Calculate Full Mesh requirement (15), subtract affordable budget (10), result is the shortfall (5)."
+  },
+  {
+    "id": 34,
+    "question": "In a logical Ring topology utilizing physical Star wiring (like Token Ring over RJ-45), what specific component prevents the network from collapsing when a client manually unplugs their Ethernet cable from the wall?",
+    "options": ["The Media Access Control (MAC) protocol", "The Terminating Resistor", "The Multistation Access Unit (MAU)", "The Spanning Tree Protocol (STP)"],
+    "answer": "The Multistation Access Unit (MAU)",
+    "explanation": "Step 1: Standard Token Ring is highly vulnerable because a broken connection breaks the loop. Step 2: To fix this, IBM designed a physical Star architecture using a central hub called a MAU. Step 3: The clients plug into the MAU. Inside the MAU, the physical wiring forms the loop. Step 4: Each port on the MAU has a mechanical relay. Step 5: When a user unplugs their cable, the voltage drops. The relay instantly snaps shut, bypassing the empty port and instantly restoring the logical ring circuit inside the box.",
+    "trick": "Bank/IT Trap: STP prevents loops in a Mesh/Star. Terminators are for Bus. The MAU is explicitly designed to self-heal logical Token Rings.",
+    "tip": "The MAU uses internal relays to automatically bypass unplugged cables, preserving the logical Ring."
+  },
+  {
+    "id": 35,
+    "question": "Assertion (A): Utilizing a Wireless Mesh Network (WMN) allows for dynamic self-healing and dynamic routing if a wireless node is powered off. Reason (R): Wireless nodes broadcast omnidirectionally, allowing routing algorithms to dynamically recalculate paths through overlapping radio frequencies without relying on physical copper constraints. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A physical mesh requires digging trenches and running cables. If a cable is cut, that specific path is dead. Step 2: A Wireless Mesh Network (WMN) uses radio nodes. Step 3: Radios broadcast omnidirectionally. A single node can 'hear' and connect to 3, 4, or 5 neighboring nodes simultaneously (Assertion A is true). Step 4: Because there are no physical wires, if Node A dies, Node B simply listens for Node C's radio signal and dynamically updates its routing table to pass data through C instead. Step 5: This flexibility and overlapping RF coverage is exactly what enables dynamic self-healing (Reason R accurately explains A).",
+    "trick": "Bank/IT Trap: WMNs don't use the N(N-1)/2 formula for physical links because links are invisible RF fields. Their fault tolerance is based on RF overlap and dynamic routing tables.",
+    "tip": "Wireless Mesh Networks rely on overlapping RF signals and dynamic routing for autonomous self-healing."
+  },
+  {
+    "id": 36,
+    "question": "An IT manager is auditing a legacy network and discovers a device that intercepts all incoming data on one port and blindly forces it out of every single other port simultaneously, regardless of the destination. What topology and device is this, and what is its primary failure risk?",
+    "options": ["Star Topology using a Hub; Risk: Broadcast Storms and Collision Domain saturation.", "Star Topology using a Switch; Risk: MAC Address Table overflow.", "Bus Topology using a Repeater; Risk: Signal Attenuation.", "Ring Topology using a MAU; Risk: Token Hoarding."],
+    "answer": "Star Topology using a Hub; Risk: Broadcast Storms and Collision Domain saturation.",
+    "explanation": "Step 1: Identify the device. A device that receives data on one port and blindly repeats it out of ALL other ports is a Layer 1 Hub. Step 2: Hubs are the central devices in legacy physical Star topologies. Step 3: Because a hub blindly broadcasts, every node hears every conversation. Step 4: If two nodes talk at the exact same time, the electrical signals crash into each other inside the hub. This is called a Collision. Step 5: The entire hub is one massive Collision Domain. Under heavy traffic, collisions multiply, causing catastrophic network lag and failure.",
+    "trick": "Bank/IT Trap: Switches are smart (Layer 2, use MAC addresses to forward selectively). Hubs are dumb (Layer 1, blind broadcast). Hubs cause collisions; Switches prevent them.",
+    "tip": "Layer 1 Hubs blindly broadcast data to all ports, creating massive, highly inefficient single collision domains."
+  },
+  {
+    "id": 37,
+    "question": "Assertion (A): In mathematical graph theory, adding an additional node to a Bus topology increases the network's complexity linearly, whereas adding a node to a Full Mesh topology increases the complexity quadratically. Reason (R): Adding a node to a Bus requires adding only 1 drop line, but adding a node to a Mesh requires adding N links, where N is the current number of nodes. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate Bus scaling. To add a PC to a Bus backbone, you just tap into the cable with a single T-connector and a drop line. Adding 10 PCs means adding 10 drop lines. This is linear scaling O(N). Step 2: Evaluate Mesh scaling. The formula is N(N-1)/2. This is a quadratic equation O(N^2). Step 3: If you have a 50-node mesh, adding the 51st node requires dragging 50 brand new cables across the building to connect to the existing 50 nodes. Step 4: This extreme cable scaling is precisely why Full Mesh is rarely used outside of core router backbones. Step 5: Both A and R are mathematically accurate and perfectly linked.",
+    "trick": "Bank/IT Trap: Linear O(N) = Bus/Star. Quadratic O(N^2) = Full Mesh. This exponential cost curve is the primary disadvantage of Mesh topologies.",
+    "tip": "Mesh topologies scale quadratically O(N^2), making them prohibitively expensive for large-scale endpoint deployments."
+  },
+  {
+    "id": 41,
+    "question": "In a Full Mesh network, an intern accidentally configures the network interface cards so they only possess half the required physical ports. The network has 9 nodes in total. How many ports were actually installed per node, and how many are missing per node?",
+    "options": ["4 installed, 4 missing", "8 installed, 8 missing", "3 installed, 6 missing", "9 installed, 9 missing"],
+    "answer": "4 installed, 4 missing",
+    "explanation": "Step 1: Calculate the correct number of required ports per node for a Full Mesh network. Step 2: The formula for ports per individual node is N-1. Step 3: For 9 nodes, N-1 = 9-1 = 8 ports required per node. Step 4: The intern installed exactly half of the required ports. Half of 8 is 4. Step 5: Therefore, 4 ports were installed per node, and 4 ports are missing per node.",
+    "trick": "Bank/IT Trap: Do not use the N(N-1)/2 formula here! That gives you TOTAL cables for the whole room. The question specifically asks for ports PER NODE, which is just N-1.",
+    "tip": "Ports required per single node in a Full Mesh is always N-1."
+  },
+  {
+    "id": 42,
+    "question": "Assertion (A): The 'Daisy Chain' topology (Linear Ring) is highly susceptible to failure because data must pass through the NIC (Network Interface Card) of every intermediate computer to reach its destination. Reason (R): Daisy chaining physically wires nodes in a straight line from PC to PC; if any middle PC loses power, its NIC turns off, acting as a severed cable. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A Daisy Chain topology links computers consecutively (A -> B -> C -> D). Step 2: If Node A wants to send data to Node D, the data must physically enter Node B's network card, be processed, and be sent back out to Node C. Step 3: Because the computers themselves act as active repeaters, they are structural elements of the cable path. Step 4: If Node C loses power, its network card dies. Step 5: A dead NIC cannot repeat the signal, meaning the chain is physically severed. Therefore, intermediate nodes are massive Single Points of Failure, validating both A and R.",
+    "trick": "Bank/IT Trap: A Daisy Chain is basically a Ring topology that hasn't had the two ends connected. It suffers from the exact same active-node failure vulnerability.",
+    "tip": "In Daisy Chain topologies, intermediate computers act as active repeaters; powering one off breaks the network."
+  },
+  {
+    "id": 43,
+    "question": "A corporate building employs a hybrid 'Extended Star' topology. There are 4 edge switches (each with 10 PCs) connected to a single central Core Switch. If the Core Switch suffers a total motherboard failure, how many total computers lose the ability to communicate with computers OUTSIDE of their own local 10-PC group?",
+    "options": ["10", "40", "0", "4"],
+    "answer": "40",
+    "explanation": "Step 1: Visualize the hierarchy. 40 total PCs are divided into 4 isolated groups of 10. Step 2: Each group of 10 connects to an edge switch. Step 3: The 4 edge switches connect to the central Core Switch. Step 4: If the Core Switch dies, the 'bridges' between the 4 edge switches are destroyed. Step 5: However, the edge switches themselves are still powered on. The 10 PCs on Switch A can still talk to each other. But NO PC can talk to a PC on Switch B, C, or D. Therefore, all 40 computers lose inter-group communication capabilities.",
+    "trick": "Bank/IT Trap: Edge switches survive a core failure! Local LAN traffic (within the 10 PCs) continues fine. Only inter-LAN (crossing the core) fails.",
+    "tip": "In an Extended Star, Core switch failure partitions the network, but local edge switch traffic survives."
+  },
+  {
+    "id": 44,
+    "question": "Which specific network topology relies heavily on the 'CSMA/CD' (Carrier Sense Multiple Access with Collision Detection) protocol to maintain basic operational stability and mitigate its inherent architectural flaws?",
+    "options": ["Full Mesh", "Bus Topology", "Token Ring", "Point-to-Point"],
+    "answer": "Bus Topology",
+    "explanation": "Step 1: Evaluate the architectures. Point-to-Point and Full Mesh have dedicated cables; there is no competition for the wire, so collisions don't happen. Step 2: Token Ring uses a digital 'token'. You can only speak if you hold the token, eliminating collisions by design. Step 3: A Bus topology is a single shared wire. Anyone can broadcast at any time. Step 4: If two computers talk simultaneously, the electrical signals crash (Collision). Step 5: To survive this, Bus networks use CSMA/CD. Computers 'listen' to the wire (Carrier Sense). If a crash happens (Collision Detection), they wait a random microsecond before trying again. It is a necessary band-aid for the Bus's flawed shared-media architecture.",
+    "trick": "Bank/IT Trap: CSMA/CD is the protocol that keeps legacy Ethernet (Bus/Hubs) alive. Modern switched Star topologies use Full-Duplex, making CSMA/CD largely obsolete.",
+    "tip": "Bus topologies require CSMA/CD to manage collisions occurring on their shared, open-access backbone cables."
+  },
+  {
+    "id": 45,
+    "question": "Assertion (A): Migrating an enterprise network from IPv4 to IPv6 inherently changes the physical topology of the local area network (LAN) from a Star to a Mesh. Reason (R): IPv6 introduces massive 128-bit addresses that require dedicated point-to-point hardware links to process efficiently. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Network Topology (Star, Mesh, Bus) operates primarily at Layer 1 (Physical) and Layer 2 (Data Link) of the OSI model. Step 2: IPv4 and IPv6 are routing protocols that operate at Layer 3 (Network). Step 3: Layer 3 logical addressing is completely decoupled from the physical wiring. You can run IPv6 over a Star, a Mesh, or a Ring perfectly fine. Step 4: Therefore, migrating to IPv6 has absolutely zero effect on the physical cabling or topology of the network (Assertion A is false). Step 5: Reason R is also false because IPv6 does not require dedicated point-to-point hardware; standard switches process 128-bit packets routinely.",
+    "trick": "Bank/IT Trap: Do not mix OSI layers! IP addresses (Layer 3) are logical. Topologies (Layer 1) are physical. Changing IP versions never forces you to rewire the building.",
+    "tip": "Physical topologies (Layer 1) are entirely independent of logical IP addressing protocols (Layer 3)."
+  },
+  {
+    "id": 46,
+    "question": "A proprietary military network utilizes a physical topology where exactly one central node has a direct link to all other nodes, but none of the other nodes have links to each other. What is the fault tolerance mechanism if the central node goes offline?",
+    "options": ["The network automatically wraps the cables into a token ring.", "The nodes fall back to wireless ad-hoc mesh routing.", "There is absolutely no fault tolerance mechanism; the entire network fails permanently.", "The longest cable acts as a passive bus backbone to restore connectivity."],
+    "answer": "There is absolutely no fault tolerance mechanism; the entire network fails permanently.",
+    "explanation": "Step 1: Read the description carefully: One central node connected to all others, and no other nodes connected to each other. Step 2: This is the exact architectural definition of a pure Star topology. Step 3: In a pure Star, all communication MUST route through the central nexus (switch/hub). Step 4: There are zero alternate physical paths. Step 5: Therefore, if that central node dies, it is the ultimate Single Point of Failure (SPOF). The network cannot magically re-wire itself into a bus or ring. It is dead.",
+    "trick": "Bank/IT Trap: Exam questions will dress up basic topologies with military or high-tech scenarios to confuse you. Strip away the fluff. A Star topology has ZERO fault tolerance against a core switch failure.",
+    "tip": "A Star topology's central node is a fatal SPOF. Without redundant core switches, failure is absolute."
+  },
+  {
+    "id": 47,
+    "question": "Calculate the exact difference in total necessary communication links between a 10-node Full Mesh topology and a 10-node Ring topology.",
+    "options": ["35", "45", "10", "25"],
+    "answer": "35",
+    "explanation": "Step 1: Identify the two topologies and the node count (N = 10). Step 2: Calculate the links for the Full Mesh. Formula: N(N-1)/2. Calculation: 10(9)/2 = 45 links. Step 3: Calculate the links for the Ring topology. In a ring, each node connects to exactly two neighbors forming a circle. Therefore, Formula: Total Links = N. Calculation: 10 links. Step 4: The question asks for the mathematical difference between the two totals. Step 5: Subtract the Ring links from the Mesh links: 45 - 10 = 35 links. The difference is 35.",
+    "trick": "Bank/IT Trap: Ring topology link count is the easiest formula in networking: Links = Nodes (L = N). Don't overcomplicate it.",
+    "tip": "Difference = Mesh Links [N(N-1)/2] minus Ring Links [N]."
+  },
+  {
+    "id": 48,
+    "question": "Assertion (A): In modern Data Center architectures, a 'Spine-Leaf' topology is highly preferred over a traditional Three-Tier (Tree) topology because it guarantees consistent latency and non-blocking bandwidth between servers. Reason (R): Spine-Leaf architecture is essentially a massive, highly structured Partial Mesh where every Leaf switch connects directly to every single Spine switch. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Traditional Tree topologies (Core -> Aggregation -> Edge) suffer from bottlenecks because traffic from edge servers must jump multiple, unpredictable hops to reach other servers. Step 2: Data centers now use Spine-Leaf architecture (Assertion A is true). Step 3: In Spine-Leaf, there are two layers: Spine (core) and Leaf (edge). Step 4: The strict rule is that EVERY Leaf switch runs a cable to EVERY Spine switch. Step 5: This creates a structured Partial Mesh (Reason R is true). Because of this mesh, any server can reach any other server in exactly the same number of hops (Leaf -> Spine -> Leaf), mathematically guaranteeing consistent, ultra-low latency. Both are true and linked.",
+    "trick": "Bank/IT Trap: Spine-Leaf is the modern evolution of Data Center networking. It uses a structured partial mesh to flatten the traditional 3-tier tree, optimizing horizontal (East-West) server traffic.",
+    "tip": "Spine-Leaf topologies use a structured partial mesh to guarantee equidistant, single-hop latency between any two leaf switches."
+  },
+  {
+    "id": 49,
+    "question": "If a network administrator installs a Full Mesh topology containing 'N' nodes, and the total number of physical cables deployed is precisely equal to 120, what is the value of 'N'?",
+    "options": ["14", "15", "16", "18"],
+    "answer": "16",
+    "explanation": "Step 1: Write down the Full Mesh cable formula: N(N-1)/2 = Total Cables. Step 2: Substitute the known total: N(N-1)/2 = 120. Step 3: Multiply both sides by 2: N(N-1) = 240. Step 4: You need two consecutive integers that multiply to 240. Step 5: Test the options. 14 * 13 = 182. 15 * 14 = 210. 16 * 15 = 240. Therefore, the network contains exactly 16 nodes.",
+    "trick": "Bank/IT Trap: To quickly solve N(N-1) = X on an exam, find the square root of X. The square root of 240 is ~15.49. The two integers will perfectly bracket this root (15 and 16). The larger integer is always N.",
+    "tip": "When solving N(N-1) = X, the square root of X sits perfectly between (N-1) and N."
+  },
+  {
+    "id": 50,
+    "question": "Assertion (A): Connecting three separate Layer 2 switches together in a physical triangle (Delta configuration) without enabling the Spanning Tree Protocol (STP) will result in a catastrophic network failure. Reason (R): The triangle configuration creates a physical Layer 2 loop, allowing broadcast frames (like ARP requests) to circulate infinitely, eventually saturating the CPU and bandwidth of all three switches. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Connecting Switch A to B, B to C, and C to A creates a physical triangle (a micro Mesh). Step 2: In Ethernet, when a switch receives a broadcast frame (like an ARP request), it floods it out of all ports. Step 3: Switch A sends it to B and C. Switch B blindly forwards it to C and A. Switch C forwards it to A and B. Step 4: Because Ethernet frames do not have a TTL (Time To Live) field like IP packets do, they never die. Step 5: They loop at the speed of light, cloning exponentially. This is a Broadcast Storm. Within seconds, the network crashes (Assertion A is true). The architectural loop mechanism perfectly explains this (Reason R is true).",
+    "trick": "Bank/IT Trap: IP packets (Layer 3) have a TTL that kills them if they loop. Ethernet frames (Layer 2) do NOT. A physical loop at Layer 2 is instantly fatal without STP blocking a port.",
+    "tip": "Physical loops between switches without STP cause fatal broadcast storms due to missing Layer 2 TTL controls."
+  },
+  {
+    "id": 51,
+    "question": "Assertion (A): To fully connect a 'Full Mesh' topology network containing 12 computers, exactly 66 physical cables will be required. Reason (R): The total number of cables in a full mesh network is calculated using the formula N(N-1)/2, where N is the total number of nodes in the network. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Identify the number of nodes (N) = 12. Step 2: Apply the full mesh link formula: Links = N(N-1)/2. Step 3: Substitute the values: 12(12-1)/2. Step 4: Calculate: 12 * 11 = 132. Step 5: Divide by 2: 132 / 2 = 66. The assertion and reason are both mathematically and logically correct.",
+    "trick": "Bank/IT Trap: Pay close attention to whether the question asks for the TOTAL cables or the ports PER COMPUTER! Total cables = N(N-1)/2, but ports per computer is simply N-1.",
+    "tip": "Full Mesh total cables formula: N(N-1)/2. Ports per node: N-1."
+  },
+  {
+    "id": 52,
+    "question": "An enterprise plans to upgrade its critical database cluster to a Full Mesh topology to ensure absolute fault tolerance. If each Network Interface Card (NIC) costs Rs. 500 and the network has 8 servers, what is the total cost incurred strictly for the NIC ports required to achieve this topology?",
+    "options": ["Rs. 28,000", "Rs. 14,000", "Rs. 32,000", "Rs. 24,000"],
+    "answer": "Rs. 28,000",
+    "explanation": "Step 1: In a Full Mesh, each node requires (N-1) ports. Step 2: For 8 servers, each server needs 8-1 = 7 ports. Step 3: Total ports in the network = Total Nodes * Ports per Node = 8 * 7 = 56 ports. (Alternatively, 2 ports per cable, 28 cables * 2 = 56). Step 4: Total cost = Total Ports * Cost per NIC. Step 5: 56 * 500 = Rs. 28,000.",
+    "trick": "Bank/IT Trap: Candidates often calculate the number of links (28) and multiply by 500, yielding 14,000. But every link requires TWO NICs (one at each end)!",
+    "tip": "Total NICs in a Full Mesh equals N*(N-1), not N(N-1)/2."
+  },
+  {
+    "id": 53,
+    "question": "Assertion (A): In a unidirectional Ring topology, a single cable cut partitions the network into two functional sub-networks. Reason (R): Token-passing mechanisms in a standard Ring topology require a complete, unbroken physical loop to circulate the token and authorize data transmission. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Analyze Assertion A. A single cable cut in a unidirectional Ring topology breaks the entire loop. Step 2: It does not partition it into two functional sub-networks; it halts ALL communication. Step 3: Assertion A is therefore false. Step 4: Analyze Reason R. Standard Ring topologies (like Token Ring) do require an unbroken physical path for the token to circulate. Step 5: Reason R is correct and highlights why A is false.",
+    "trick": "Bank/IT Trap: Do not confuse Ring topologies with Bus topologies. A cut in a Bus creates two partitioned (though improperly terminated) segments, but a cut in a Ring destroys the entire network.",
+    "tip": "A single break in a unidirectional Ring causes total network failure."
+  },
+  {
+    "id": 54,
+    "question": "Consider a Hybrid 'Star-Bus' (Tree) topology used in a multi-story banking branch. Multiple Star-configured departmental switches are connected to a vertical coaxial backbone. What represents the Single Point of Failure (SPOF) for inter-departmental communication?",
+    "options": ["The departmental Star switches.", "The vertical coaxial backbone cable.", "The end-user client machines.", "The patch cables connecting switches to the backbone."],
+    "answer": "The vertical coaxial backbone cable.",
+    "explanation": "Step 1: Analyze the Star-Bus hybrid structure. Step 2: End-devices connect to switches (Star). Switches connect to a central backbone (Bus). Step 3: If a departmental switch fails, only that specific department goes offline. Step 4: If the central vertical backbone cable fails, all inter-departmental routing halts. Step 5: Therefore, the backbone acts as the primary SPOF for the entire inter-departmental network.",
+    "trick": "Bank/IT Trap: While switches are SPOFs for their specific local subnets, the question explicitly asks for the SPOF regarding 'inter-departmental communication', which relies entirely on the backbone.",
+    "tip": "In a Tree/Star-Bus topology, the main backbone is the ultimate SPOF."
+  },
+  {
+    "id": 55,
+    "question": "Assertion (A): Implementing a Dual-Ring topology like FDDI (Fiber Distributed Data Interface) provides fault tolerance against a single node failure. Reason (R): FDDI utilizes two counter-rotating rings; if a node fails, the primary and secondary rings can wrap around the failed node to form a single, continuous C-shaped ring. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: FDDI is a Dual-Ring topology designed for high fault tolerance. Step 2: It transmits data on a primary ring, while a secondary counter-rotating ring remains on standby. Step 3: If a physical cable is cut or a node fails, the stations adjacent to the fault wrap the primary ring into the secondary ring. Step 4: This action bypasses the fault and maintains a complete, albeit larger, logical loop. Step 5: Both A and R are true, and R correctly explains the 'wrapping' mechanism.",
+    "trick": "Bank/IT Trap: FDDI does not 'skip' the node using a separate path; the adjacent nodes actively loop the signal backward onto the secondary ring, a process explicitly called 'wrapping'.",
+    "tip": "FDDI survives a single failure by 'wrapping' the primary and secondary rings."
+  },
+  {
+    "id": 56,
+    "question": "A telecommunications company wants to connect 15 regional offices. They opt for a 'Partial Mesh' topology instead of a 'Full Mesh' to reduce cabling costs. If they decide to install exactly 40 physical links, how many links did they save compared to a Full Mesh implementation?",
+    "options": ["105", "65", "45", "50"],
+    "answer": "65",
+    "explanation": "Step 1: Calculate the links required for a Full Mesh with 15 nodes using N(N-1)/2. Step 2: 15 * (15 - 1) / 2 = 15 * 14 / 2. Step 3: 210 / 2 = 105 total links required for Full Mesh. Step 4: The company decided to install only 40 links. Step 5: Links saved = 105 (Full Mesh) - 40 (Partial Mesh) = 65 links saved.",
+    "trick": "Bank/IT Trap: Read carefully! The question asks for the 'links saved', not the total links of a full mesh. Always subtract the implemented links from the theoretical maximum.",
+    "tip": "Calculate theoretical maximum links first, then subtract the actual installed links."
+  },
+  {
+    "id": 57,
+    "question": "Assertion (A): In a standard Bus topology, removing a terminator from one end of the backbone cable will cause immediate network failure due to signal reflection. Reason (R): Terminators are active electronic components that regenerate and amplify the data signals to prevent attenuation over long distances. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Assertion A is true. Removing a terminator from a Bus backbone causes electrical signals to reflect back down the cable, creating massive data collisions. Step 2: Reason R is false. Terminators are completely passive components (usually a 50-ohm resistor). Step 3: They do not regenerate or amplify signals; their sole purpose is to absorb the electrical signal to prevent bounce-back. Step 4: Repeaters or active hubs are used for signal regeneration, not terminators.",
+    "trick": "Bank/IT Trap: Examiners frequently swap the definitions of 'Terminators' (passive absorbers) and 'Repeaters' (active amplifiers).",
+    "tip": "Terminators are passive resistors that absorb signals to prevent reflection."
+  },
+  {
+    "id": 58,
+    "question": "Which of the following topological models intrinsically provides the highest level of fault tolerance and redundancy at the cost of extreme scalability challenges?",
+    "options": ["Dual-Ring Topology", "Full Mesh Topology", "Hierarchical Star Topology", "Bus Topology"],
+    "answer": "Full Mesh Topology",
+    "explanation": "Step 1: Fault tolerance is measured by how many simultaneous link failures a network can sustain while maintaining connectivity. Step 2: A Dual-Ring survives one failure. A Hierarchical Star relies on core switches. Step 3: A Full Mesh topology connects every node directly to every other node. Step 4: It can sustain multiple link failures seamlessly. Step 5: However, the scaling formula N(N-1)/2 means adding a 100th node requires 99 new cables, making it practically unscalable for large networks.",
+    "trick": "Bank/IT Trap: While Dual-Ring is highly fault-tolerant, Full Mesh is the absolute mathematical peak of redundancy, though virtually impossible to scale physically.",
+    "tip": "Full Mesh offers absolute redundancy but suffers from catastrophic physical scalability limits."
+  },
+  {
+    "id": 59,
+    "question": "Assertion (A): A Hub-based Star topology is inherently more prone to security sniffing and packet collisions than a Switch-based Star topology. Reason (R): A Hub operates at the Physical Layer (Layer 1) and broadcasts incoming data to all connected ports, whereas a Switch operates at the Data Link Layer (Layer 2) and forwards frames exclusively to the target MAC address. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A Hub is a 'dumb' Layer 1 device. It repeats any incoming electrical signal out of all other ports. Step 2: Because all nodes receive all traffic, a malicious user can easily sniff packets using Wireshark, and collisions are frequent (single collision domain). Step 3: A Switch is a 'smart' Layer 2 device. It learns MAC addresses and builds a MAC table. Step 4: A switch forwards unicast frames only to the specific destination port. Step 5: This eliminates collisions (multiple collision domains) and prevents passive sniffing, validating both A and R.",
+    "trick": "Bank/IT Trap: Both Hubs and Switches form physical Star topologies, but they form entirely different logical topologies (Logical Bus vs. Logical Star/Point-to-Point).",
+    "tip": "Hubs create a single collision domain (Logical Bus); Switches separate collision domains."
+  },
+  {
+    "id": 60,
+    "question": "A network architect is designing a routing architecture for 6 routers. To ensure full fault tolerance, a Full Mesh is proposed. However, due to budget constraints, the architect removes 4 links. How many physical links remain, and what is the new topology technically classified as?",
+    "options": ["11 links, Partial Mesh", "15 links, Partial Mesh", "26 links, Hybrid Star", "11 links, Logical Ring"],
+    "answer": "11 links, Partial Mesh",
+    "explanation": "Step 1: Calculate Full Mesh links for 6 routers: 6(6-1)/2 = 6 * 5 / 2 = 15 links. Step 2: The architect removes 4 links due to budget constraints. Step 3: Remaining links = 15 - 4 = 11 links. Step 4: Because the routers are highly interconnected but no longer completely connected to every single peer, the topology degrades from a Full Mesh to a Partial Mesh. Step 5: Partial meshes provide high (but not absolute) fault tolerance at a lower cost.",
+    "trick": "Bank/IT Trap: Any mesh network that is missing even a single theoretical link from the N(N-1)/2 formula is instantly downgraded to a 'Partial Mesh' classification.",
+    "tip": "A Full Mesh missing any links is definitively classified as a Partial Mesh."
+  },
+  {
+    "id": 61,
+    "question": "Assertion (A): In a fully switched Star topology network, if one of the client computers suffers a catastrophic hardware failure and powers off, the rest of the network experiences an immediate drop in throughput. Reason (R): Modern switches rely on active heartbeat polling; an unresponsive node forces the switch to broadcast error frames, consuming significant bandwidth. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: In a Star topology, all clients connect individually to a central switch. Step 2: The defining fault-tolerance characteristic of a Star is isolation. If a client node fails, it affects only that node. Step 3: The rest of the network continues to function with zero impact on throughput, making Assertion A false. Step 4: Switches do not flood the network with error frames when a port goes dead; they simply update their MAC table to remove the inactive interface. Reason R is also completely false.",
+    "trick": "Bank/IT Trap: Star topologies isolate node failures perfectly. Do not confuse switch behavior with routing protocol convergence (like OSPF/BGP) which does broadcast state changes.",
+    "tip": "In a Star topology, client node failures are completely isolated and do not impact network throughput."
+  },
+  {
+    "id": 62,
+    "question": "A financial data center utilizes a hybrid network containing 5 isolated Star topologies. To achieve inter-communication, the central switch of each Star is connected to every other central switch. What is the total number of physical links exclusively connecting these core switches?",
+    "options": ["20", "15", "10", "25"],
+    "answer": "10",
+    "explanation": "Step 1: Understand the topology. We have 5 central switches. Step 2: The problem states each central switch is connected to every other central switch. Step 3: This specific core arrangement is a Full Mesh of 5 nodes. Step 4: Apply the Mesh formula: N(N-1)/2 where N = 5. Step 5: 5 * 4 / 2 = 20 / 2 = 10 links. The internal star links to clients are irrelevant to the core switch interconnect calculation.",
+    "trick": "Bank/IT Trap: The question presents a 'Hybrid' topology, but the math only applies to the 'Core' switches which are described as being in a Full Mesh. Filter out distracting data.",
+    "tip": "Apply the mesh formula only to the specific nodes described as being fully interconnected."
+  },
+  {
+    "id": 63,
+    "question": "Assertion (A): A logical Ring topology can be implemented over a physical Star topology wiring layout. Reason (R): A Multi-Station Access Unit (MAU) connects devices via physical star cabling, but internally passes the token sequentially from port to port in a logical loop. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Physical topology defines how cables are run. Logical topology defines how data flows. Step 2: IBM's Token Ring networks typically use physical Star cabling. Step 3: All computers plug into a central device called a MAU (Multi-Station Access Unit). Step 4: Physically, it looks exactly like a Star. Step 5: However, internally, the MAU connects the 'Receive' pin of one port to the 'Transmit' pin of the next, creating a logical ring that circulates the token. Both A and R are true and linked.",
+    "trick": "Bank/IT Trap: Distinguish between Logical and Physical topologies. Physical Star + Logical Ring = Token Ring via MAU. Physical Star + Logical Bus = Ethernet via Hub.",
+    "tip": "Token Ring uses a Physical Star (MAU) but operates as a Logical Ring."
+  },
+  {
+    "id": 64,
+    "question": "In the context of network reliability and fault tolerance, what does the metric 'MTBF' primarily quantify?",
+    "options": ["The maximum time a backbone failure can persist before data loss occurs.", "The statistical average time a system or component operates without encountering a hardware or software failure.", "The mandatory time required to bypass a failed node in a Dual-Ring FDDI topology.", "The absolute maximum bandwidth threshold before a switch drops packets."],
+    "answer": "The statistical average time a system or component operates without encountering a hardware or software failure.",
+    "explanation": "Step 1: MTBF stands for Mean Time Between Failures. Step 2: It is a critical reliability metric used in network engineering and hardware manufacturing. Step 3: It calculates the average anticipated lifespan of a repairable component (like a router, switch, or hard drive) before it breaks down. Step 4: Higher MTBF indicates higher reliability and better fault tolerance planning. Step 5: (Note: MTTR is Mean Time To Repair, which measures recovery speed).",
+    "trick": "Bank/IT Trap: Do not confuse MTBF (Mean Time Between Failures - operational lifespan) with MTTF (Mean Time To Failure - lifespan of non-repairable items) or MTTR (recovery time).",
+    "tip": "MTBF measures the average operational time before a repairable failure occurs."
+  },
+  {
+    "id": 65,
+    "question": "Assertion (A): Adding redundancy to a network architecture inherently eliminates the Single Point of Failure (SPOF) at the core layer. Reason (R): Redundancy protocols like VRRP (Virtual Router Redundancy Protocol) allow multiple physical routers to share a single virtual IP address, seamless acting as a backup if the primary master fails. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A SPOF is a component whose failure brings down the entire system. Step 2: The primary method to eliminate a SPOF is implementing hardware and logical redundancy. Step 3: At the routing layer, if clients point to one default gateway (router), that router is a SPOF. Step 4: Reason (R) introduces VRRP. VRRP clusters multiple routers into a single Virtual IP. Step 5: If the Master router dies, a Backup router instantly assumes the Virtual IP, maintaining network flow without client reconfiguration. Thus, R perfectly explains how A is achieved.",
+    "trick": "Bank/IT Trap: Redundancy requires both hardware duplication AND logical protocols (like VRRP/HSRP) to successfully eliminate a SPOF invisibly to end-users.",
+    "tip": "VRRP and HSRP protocols eliminate default gateway SPOFs via Virtual IP redundancy."
+  },
+  {
+    "id": 66,
+    "question": "A massive data center relies on a highly scalable 'Spine-and-Leaf' architecture. From a fault-tolerance perspective, which topology does the connection between the Leaf layer and the Spine layer most closely mathematically resemble?",
+    "options": ["A Pure Bus Topology", "A Full Mesh Topology", "A Full Bipartite Graph (Partial Mesh)", "A Token-passing Dual Ring"],
+    "answer": "A Full Bipartite Graph (Partial Mesh)",
+    "explanation": "Step 1: In modern Spine-and-Leaf architectures, every Leaf switch connects to every single Spine switch. Step 2: However, Leaf switches NEVER connect to other Leaf switches, and Spine switches NEVER connect to other Spine switches. Step 3: This means the nodes are divided into two distinct sets. Step 4: Mathematically, this is a 'Full Bipartite Graph'. Step 5: From a standard networking topology perspective, because not *every* node connects to *every* other node in the entire facility, it is classified as a Partial Mesh, highly optimized for east-west fault tolerance.",
+    "trick": "Bank/IT Trap: Spine-Leaf is often mistaken for a Full Mesh. Because spines don't link to spines, and leaves don't link to leaves, it fundamentally violates Full Mesh rules.",
+    "tip": "Spine-and-Leaf architectures operate as a Partial Mesh (Full Bipartite Graph)."
+  },
+  {
+    "id": 67,
+    "question": "Assertion (A): In a wireless ad-hoc network (IBSS), the failure of a single laptop device generally causes the entire localized network to collapse. Reason (R): Ad-hoc networks operate without a centralized Access Point (AP), meaning data must be routed sequentially through a strict logical ring of all participating devices. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: An ad-hoc network (Independent Basic Service Set - IBSS) is a decentralized type of wireless network. Step 2: Devices communicate directly peer-to-peer without a central router/AP. Step 3: This essentially forms a wireless mesh. If one laptop dies, the other laptops simply continue communicating directly with each other. Assertion A is false. Step 4: Reason R is false because ad-hoc networks do not use a 'strict logical ring'; they use decentralized CSMA/CA mesh routing protocols.",
+    "trick": "Bank/IT Trap: Ad-hoc networks are incredibly resilient precisely because they lack central infrastructure (no AP SPOF). They are dynamic, self-healing wireless partial meshes.",
+    "tip": "Wireless ad-hoc networks act as resilient peer-to-peer meshes, surviving individual node failures."
+  },
+  {
+    "id": 68,
+    "question": "To connect 5 isolated remote testing facilities in a Full Mesh layout, a contractor charges Rs. 1000 per cable run. However, the exact same facilities can be connected using a central Hub in a Star topology for Rs. 1500 per cable run. Which solution is strictly cheaper in total cable installation cost, and by how much?",
+    "options": ["Star Topology is cheaper by Rs. 2500", "Mesh Topology is cheaper by Rs. 2500", "Star Topology is cheaper by Rs. 5000", "Both cost exactly Rs. 10,000"],
+    "answer": "Star Topology is cheaper by Rs. 2500",
+    "explanation": "Step 1: Calculate Full Mesh cables: N(N-1)/2 = 5 * 4 / 2 = 10 cables. Step 2: Calculate Mesh Cost: 10 cables * Rs. 1000 = Rs. 10,000. Step 3: Calculate Star cables: A Star topology requires exactly N cables (each node connects to the central hub once). For 5 nodes, 5 cables. Step 4: Calculate Star Cost: 5 cables * Rs. 1500 = Rs. 7,500. Step 5: Difference: 10,000 - 7,500 = Rs. 2,500. The Star topology is cheaper.",
+    "trick": "Bank/IT Trap: A Star topology scales linearly (N cables). A Mesh scales exponentially (N^2). Even if Star cables cost more per unit, the linear scaling makes it drastically cheaper overall.",
+    "tip": "Star topology requires exactly N cables to connect N devices to a central switch."
+  },
+  {
+    "id": 69,
+    "question": "Assertion (A): The primary vulnerability of a Bus topology is 'Attenuation', which limits the physical length of the backbone cable. Reason (R): Without centralized active regeneration hubs, the electrical data signal naturally degrades and weakens as it travels down the length of the shared copper coaxial cable. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A traditional Bus topology uses a single, continuous coaxial backbone cable (like 10Base2). Step 2: It is a completely passive architecture; there are no central switches to amplify power. Step 3: As an electrical signal travels through copper, physical resistance causes the voltage to drop. This is called Attenuation. Step 4: If the backbone is too long, the signal becomes unreadable before reaching the end. Step 5: Thus, Attenuation represents the primary scalability vulnerability of a Bus, making both A and R true and linked.",
+    "trick": "Bank/IT Trap: While collisions are a logical flaw of Bus topologies, attenuation is the physical limit forcing backbone restrictions (usually 185 meters for Thinnet).",
+    "tip": "Attenuation is the natural degradation of electrical signals over long, passive copper cables."
+  },
+  {
+    "id": 70,
+    "question": "Consider an advanced network protocol utilizing Spanning Tree Protocol (STP) on redundant Ethernet switches. How does STP actively contribute to network fault tolerance?",
+    "options": ["By physically regenerating the data signal at Layer 1 to prevent attenuation.", "By encrypting switch-to-switch communication to prevent malicious packet injection.", "By logically blocking redundant paths to prevent broadcast storms, while dynamically unblocking them if the primary path fails.", "By automatically upgrading the network from a Star topology to a Full Mesh topology during peak load."],
+    "answer": "By logically blocking redundant paths to prevent broadcast storms, while dynamically unblocking them if the primary path fails.",
+    "explanation": "Step 1: To provide fault tolerance, network admins install multiple redundant links between switches. Step 2: However, redundant links in Layer 2 networks cause infinite looping of broadcast frames, known as 'Broadcast Storms', which instantly crash networks. Step 3: Spanning Tree Protocol (STP) solves this paradox. Step 4: STP maps the network and logically blocks the extra redundant links. Step 5: If the primary active link breaks, STP detects the fault and instantly unblocks the redundant link, restoring connectivity without loops.",
+    "trick": "Bank/IT Trap: Redundancy is deadly in Layer 2 without STP. Redundancy causes loops; STP turns loops into safe, standby backup paths.",
+    "tip": "STP prevents Layer 2 broadcast storms while maintaining dynamic fault-tolerant backup links."
+  },
+  {
+    "id": 71,
+    "question": "Assertion (A): In a fully meshed network of 20 nodes, adding just one more node (the 21st) requires laying exactly 20 new physical cables. Reason (R): In a full mesh architecture, any newly introduced node must independently establish a direct physical link with every single pre-existing node in the network. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The definition of a Full Mesh is that every node connects directly to every other node. Step 2: If there are currently 20 nodes, the network is already fully interconnected. Step 3: When node 21 arrives, it must establish a link with node 1, node 2, node 3... all the way to node 20. Step 4: Therefore, exactly 20 new cables must be pulled from the 21st node to the existing nodes. Step 5: Reason R correctly defines the scaling burden of a mesh network.",
+    "trick": "Bank/IT Trap: Don't recalculate the entire N(N-1)/2 formula unless asked for total links. To find the cables required for a *single new node*, the formula is simply N-1 (where N is the new total).",
+    "tip": "Adding the Nth node to a Full Mesh requires exactly N-1 new physical cables."
+  },
+  {
+    "id": 72,
+    "question": "A network suffers a catastrophic failure. Diagnostics show that an improper MAC address table update caused frames to endlessly circulate between three core switches, crashing the CPU of all three. Which fault tolerance protocol failed to operate correctly?",
+    "options": ["BGP (Border Gateway Protocol)", "ARP (Address Resolution Protocol)", "STP (Spanning Tree Protocol)", "DHCP (Dynamic Host Configuration Protocol)"],
+    "answer": "STP (Spanning Tree Protocol)",
+    "explanation": "Step 1: The scenario describes a classic 'Layer 2 Switching Loop' or 'Broadcast Storm'. Step 2: Switches use MAC address tables to forward frames. If multiple redundant paths exist without a control mechanism, broadcast frames circulate infinitely. Step 3: This rapidly consumes all switch CPU and bandwidth. Step 4: Spanning Tree Protocol (STP) is specifically designed to detect these loops and logically block ports to break the circle. Step 5: If frames are infinitely looping, STP has critically failed.",
+    "trick": "Bank/IT Trap: Routers have TTL (Time to Live) to stop infinite loops at Layer 3. Switches do not have TTL; they rely entirely on STP to prevent Layer 2 loops.",
+    "tip": "Layer 2 loops and broadcast storms are strictly prevented by the Spanning Tree Protocol (STP)."
+  },
+  {
+    "id": 73,
+    "question": "Assertion (A): In a Token Ring network, the failure of a single end-user workstation automatically breaks the token circulation, halting the entire network. Reason (R): Token Ring physical architecture utilizes an active Hub that acts as a serial repeater; if a workstation dies, the electrical circuit is physically broken. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Assertion A is false. Modern Token Ring uses a physical Star layout via a Multi-Station Access Unit (MAU). Step 2: The MAU possesses bypass relays. If a workstation dies or is unplugged, the MAU's internal relay audibly 'clicks' closed. Step 3: This bypasses the dead node and maintains the logical ring for the surviving nodes. Step 4: Reason R is false because an MAU is not a simple serial repeater hub; it contains these active electromechanical bypass mechanisms precisely to prevent total network failure.",
+    "trick": "Bank/IT Trap: While a pure physical ring dies on a single break, IBM's Token Ring (MAU) is a Star-Ring hybrid designed specifically with bypass relays to survive individual node deaths.",
+    "tip": "MAUs in Token Ring networks use bypass relays to survive individual workstation failures."
+  },
+  {
+    "id": 74,
+    "question": "An IT administrator wants to merge a reliable Star topology with a highly fault-tolerant Full Mesh core for their 4 main regional data centers. If each data center contains 50 client machines connected to a central Star switch, what is the exact number of physical cables forming the 'Full Mesh' core backbone?",
+    "options": ["200", "1225", "6", "10"],
+    "answer": "6",
+    "explanation": "Step 1: The network is a Hybrid Star-Mesh. Step 2: The 50 client machines in each of the 4 locations are wired in a Star topology (200 client cables). Step 3: The question specifically asks for the number of cables forming the 'Full Mesh' core. Step 4: The core consists exclusively of the 4 regional central switches. Step 5: Apply the mesh formula N(N-1)/2 to the 4 core switches: 4 * 3 / 2 = 12 / 2 = 6 cables.",
+    "trick": "Bank/IT Trap: Extract the relevant parameters. The 50 clients are a distractor. The mesh only applies to the 4 core switches.",
+    "tip": "Identify the specific tier of the network utilizing the Mesh to apply the formula correctly."
+  },
+  {
+    "id": 75,
+    "question": "Assertion (A): Utilizing a Load Balancer completely eliminates Single Points of Failure (SPOF) for web server traffic routing. Reason (R): A Load Balancer intelligently distributes incoming traffic across multiple redundant backend servers, ensuring no single server failure crashes the application. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Reason R is true. A load balancer distributes traffic across a server farm. If Server A dies, the load balancer routes traffic to Server B, providing excellent fault tolerance for the backend servers. Step 2: However, Assertion A is false. The Load Balancer itself sits directly in front of the server farm. Step 3: If the single Load Balancer hardware fails, NO traffic reaches ANY backend server. Step 4: Therefore, introducing a single Load Balancer actually CREATES a new critical SPOF. You must cluster two load balancers (Active/Passive) to truly eliminate the SPOF.",
+    "trick": "Bank/IT Trap: Adding a single central management device (Hub, Switch, Load Balancer) always introduces a new SPOF, regardless of how much backend redundancy it manages.",
+    "tip": "A single Load Balancer protects backend servers but becomes a SPOF itself."
+  },
+  {
+    "id": 76,
+    "question": "A network features a standard Bus topology with a 500-meter backbone. A rogue employee violently cuts the cable at the 250-meter mark. Which of the following best describes the immediate network condition?",
+    "options": ["The network automatically re-routes traffic through the intact 250-meter segments as two independent LANs.", "The entire 500-meter network instantly fails because both newly created segments lack proper termination at the cut site.", "The left side continues to function, while the right side fails due to power loss.", "The network transitions into a wireless fallback mode."],
+    "answer": "The entire 500-meter network instantly fails because both newly created segments lack proper termination at the cut site.",
+    "explanation": "Step 1: A Bus backbone requires 50-ohm terminators at BOTH physical ends of the cable to absorb signals and prevent reflection. Step 2: When the cable is cut in half, it creates two segments. Step 3: Each segment now has one terminated end (the original end) and one open, exposed copper wire (the cut site). Step 4: Electrical signals reaching the cut site will instantly bounce back, causing massive reflection and catastrophic data collisions. Step 5: Both segments are rendered completely useless.",
+    "trick": "Bank/IT Trap: A cut bus does not create two smaller functional buses. Open wire ends act as mirrors for electrical signals, destroying all communication via collisions.",
+    "tip": "A cut Bus backbone destroys the entire network due to signal reflection at the open break."
+  },
+  {
+    "id": 77,
+    "question": "Assertion (A): 'Port Channel' or 'Link Aggregation' combines multiple physical cables between two switches into a single logical link, providing both increased bandwidth and fault tolerance. Reason (R): If one physical cable in a Link Aggregation Group (LAG) is severed, the logical link remains active and traffic seamlessly continues over the surviving physical cables. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Link Aggregation (LACP/EtherChannel) bundles 2 to 8 physical Ethernet cables into one logical interface. Step 2: Assertion A states this provides bandwidth (e.g., 4 x 1Gbps = 4Gbps logic link) and fault tolerance. Step 3: Reason R explains the fault tolerance mechanics: the switches treat the bundle as one link. Step 4: If a backhoe cuts one of the four cables, the hardware dynamically hashes traffic over the remaining three. Step 5: The logical link never drops, routing protocols do not flap, and fault tolerance is achieved seamlessly.",
+    "trick": "Bank/IT Trap: Link aggregation is the ultimate Layer 2 fault tolerance mechanism. It fools STP into seeing only one link, preventing blocking while surviving physical cuts.",
+    "tip": "Link Aggregation (LAG) provides seamless Layer 2 fault tolerance if individual cables fail."
+  },
+  {
+    "id": 78,
+    "question": "Which specific routing architecture dynamically bypasses failed network links by recalculating the shortest path based on link-state advertisements and topological databases?",
+    "options": ["Static Routing", "RIP (Routing Information Protocol)", "OSPF (Open Shortest Path First)", "NAT (Network Address Translation)"],
+    "answer": "OSPF (Open Shortest Path First)",
+    "explanation": "Step 1: Fault tolerance across WANs requires dynamic routing. Step 2: Static routing requires manual administrator updates if a link dies. Step 3: RIP is a distance-vector protocol relying purely on hop count, slow to converge. Step 4: OSPF is a Link-State protocol. Every router maintains a full topological map of the network (database). Step 5: If a link fails, OSPF instantly floods Link-State Advertisements (LSAs), and all routers run Dijkstra's algorithm to calculate a new fault-tolerant bypass route in milliseconds.",
+    "trick": "Bank/IT Trap: OSPF is the gold standard for internal network fault tolerance routing because of its rapid convergence and topological awareness.",
+    "tip": "OSPF dynamically recalculates network paths to bypass link failures using Dijkstra's algorithm."
+  },
+  {
+    "id": 79,
+    "question": "Assertion (A): Network fault tolerance is mathematically impossible to achieve in a pure Star topology environment. Reason (R): A pure Star topology relies exclusively on a singular central switch; if this switch experiences a power failure, no two nodes can communicate. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A pure Star topology consists of end-devices wired directly to one central device (Hub/Switch). Step 2: There are no interconnected backup links between the end-devices. Step 3: If the central switch loses power, the physical bridging path is destroyed. Step 4: Client A cannot reach Client B. Step 5: Because the entire design relies on this single chokepoint, absolute fault tolerance is mathematically and physically impossible without upgrading to a hybrid/redundant design.",
+    "trick": "Bank/IT Trap: While Star topologies isolate end-node failures well, their core design fundamentally harbors an unresolvable SPOF (the switch).",
+    "tip": "A pure Star topology cannot be fault-tolerant because the central switch is an absolute SPOF."
+  },
+  {
+    "id": 80,
+    "question": "An IT startup has exactly 4 servers. They want to test a proprietary distributed ledger. First, they wire the servers in a logical Ring. Finding the latency too high, they rewire the exact same 4 servers into a Full Mesh. How many additional cables did they have to purchase to make this upgrade?",
+    "options": ["2", "4", "6", "10"],
+    "answer": "2",
+    "explanation": "Step 1: Calculate the cables used in the initial Ring topology. In a Ring, Cables = N. So, for 4 servers, 4 cables are used. Step 2: Calculate the cables required for a Full Mesh topology. Formula: N(N-1)/2. Step 3: 4 * 3 / 2 = 12 / 2 = 6 cables. Step 4: The startup already owns the 4 cables from the Ring setup. Step 5: Additional cables needed = Full Mesh (6) - Ring (4) = 2 cables.",
+    "trick": "Bank/IT Trap: A 4-node Ring uses 4 cables (forming a square). A 4-node Mesh simply requires adding the two diagonal cross-connections. Math verifies logic.",
+    "tip": "Ring topology requires N cables. Full Mesh requires N(N-1)/2 cables."
+  },
+  {
+    "id": 81,
+    "question": "Assertion (A): CSMA/CD (Carrier Sense Multiple Access with Collision Detection) provides robust fault tolerance against physical cable cuts in legacy Ethernet networks. Reason (R): CSMA/CD detects electrical voltage anomalies caused by physical breaks and dynamically reroutes packets through secondary collision domains. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: CSMA/CD is a media access control method used in early half-duplex Ethernet (like Hubs/Bus topologies). Step 2: Its sole purpose is to manage how devices take turns transmitting on a shared wire. Step 3: If a collision occurs (two devices talk at once), it detects it, sends a jam signal, and forces a random back-off timer. Step 4: It provides ZERO physical fault tolerance. It cannot reroute traffic, nor does it detect 'cable cuts' for redundancy purposes. Both statements are entirely false.",
+    "trick": "Bank/IT Trap: Collision Detection resolves logical timing errors on shared mediums, not physical layer hardware failures.",
+    "tip": "CSMA/CD manages data collisions on shared mediums; it offers no physical fault tolerance."
+  },
+  {
+    "id": 82,
+    "question": "Which layer of the OSI model is primarily responsible for establishing logical fault tolerance by acknowledging received data segments and requesting retransmission of lost or corrupted packets?",
+    "options": ["Layer 2: Data Link Layer", "Layer 3: Network Layer", "Layer 4: Transport Layer", "Layer 7: Application Layer"],
+    "answer": "Layer 4: Transport Layer",
+    "explanation": "Step 1: Fault tolerance isn't just physical cables; it's also data integrity. Step 2: If a router drops a packet due to congestion, the network must recover. Step 3: Layer 2 (Ethernet) checks for corruption (FCS) but drops bad frames without asking for a resend. Layer 3 (IP) is connectionless 'best effort'. Step 4: Layer 4 (specifically the TCP protocol) establishes a connection, sequences segments, and strictly requires Acknowledgments (ACKs). Step 5: If an ACK is missing, TCP automatically retransmits the lost data, providing logical fault tolerance.",
+    "trick": "Bank/IT Trap: IP (Layer 3) does not care if data arrives. TCP (Layer 4) actively guarantees delivery via retransmission mechanics.",
+    "tip": "The Transport Layer (TCP) provides logical fault tolerance via sequence tracking and retransmission."
+  },
+  {
+    "id": 83,
+    "question": "Assertion (A): 'Anycast' routing improves service fault tolerance by assigning the exact same IP address to multiple geographically distributed servers. Reason (R): Internet routers dynamically direct incoming client requests to the topologically nearest healthy server broadcasting that Anycast IP, seamlessly bypassing offline servers. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In Unicast, one IP = one server. If it dies, the service dies. Step 2: In Anycast, 50 servers worldwide share the same IP (e.g., Google DNS 8.8.8.8). Step 3: Routing protocols like BGP announce this IP from all 50 locations. Step 4: A user's traffic is naturally routed to the 'closest' (shortest BGP path) server. Step 5: If the London server catches fire, its BGP route drops. The network instantly and automatically routes London users to the next closest server (e.g., Paris), ensuring absolute fault tolerance.",
+    "trick": "Bank/IT Trap: Anycast is the magic behind global CDN fault tolerance. It abuses standard routing metrics to provide seamless geographical redundancy.",
+    "tip": "Anycast provides geographical fault tolerance by assigning one IP to multiple global servers."
+  },
+  {
+    "id": 84,
+    "question": "A network uses a Bus topology with 20 workstations. To increase reliability, the administrator replaces the central coaxial cable with a 24-port Gigabit Switch and connects each workstation using Cat6 twisted-pair cabling. What is the newly established topology, and what vulnerability was eliminated?",
+    "options": ["Mesh Topology; eliminated the switch SPOF.", "Star Topology; eliminated backbone attenuation and single collision domains.", "Ring Topology; eliminated token circulation delays.", "Tree Topology; eliminated broadcast storms."],
+    "answer": "Star Topology; eliminated backbone attenuation and single collision domains.",
+    "explanation": "Step 1: The original Bus used a single shared coaxial cable. All devices shared the same collision domain, and a cable cut destroyed the network. Step 2: The administrator installed a central Switch and connected each client directly to it. Step 3: This physical layout is the definitive definition of a Star topology. Step 4: By doing this, each client gets its own dedicated collision domain. If one Cat6 cable is cut, only that one workstation drops offline, eliminating the Bus backbone vulnerability.",
+    "trick": "Bank/IT Trap: Switching from Bus to Star removes the backbone vulnerability but introduces a new central switch SPOF. However, the question asks what was ELIMINATED.",
+    "tip": "Replacing a Bus backbone with a central Switch converts the network to a Star topology."
+  },
+  {
+    "id": 85,
+    "question": "Assertion (A): In a standard Hierarchical Tree topology, the failure of an intermediate 'Distribution' layer switch causes a complete network outage for the entire enterprise. Reason (R): A Tree topology chains Star networks together sequentially; losing a middle link severs the connection to the root core switch. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "Both A and R are False"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Analyze Reason R. A Tree topology (Star-Bus) is hierarchical. Access switches connect to Distribution switches, which connect to the Core. This structural description is correct. Step 2: Analyze Assertion A. If an intermediate Distribution switch fails, only the specific Access switches (and end-users) connected beneath it are orphaned. Step 3: The rest of the enterprise connected to other functioning Distribution switches remains perfectly fine. Step 4: Therefore, it does NOT cause a 'complete network outage', making Assertion A false.",
+    "trick": "Bank/IT Trap: Hierarchical networks isolate failure domains. Only a Core switch failure causes an enterprise-wide outage. Intermediate failures only cause localized branch outages.",
+    "tip": "Intermediate node failures in a Tree topology cause localized, not global, network outages."
+  },
+  {
+    "id": 86,
+    "question": "To achieve 99.999% ('Five Nines') availability, a network engineer designs a server cluster. If the system operates 24/7/365, what is the maximum cumulative amount of downtime (network failure) permitted across the entire year?",
+    "options": ["Approximately 5 minutes", "Approximately 52 minutes", "Approximately 5 hours", "Approximately 5 seconds"],
+    "answer": "Approximately 5 minutes",
+    "explanation": "Step 1: A standard non-leap year has 365 days * 24 hours * 60 minutes = 525,600 minutes. Step 2: 'Five Nines' means the system must be functional 99.999% of the time. Step 3: The allowed downtime is 0.001%. Step 4: Convert percentage to decimal: 0.001 / 100 = 0.00001. Step 5: Multiply by total minutes: 525,600 * 0.00001 = 5.256 minutes. Step 6: Therefore, absolute network failure cannot exceed ~5.26 minutes annually.",
+    "trick": "Bank/IT Trap: Five nines (99.999%) is the industry gold standard for High Availability (HA). It mathematically dictates less than 5.26 minutes of downtime per year.",
+    "tip": "99.999% (Five Nines) network availability allows slightly less than 5.26 minutes of annual downtime."
+  },
+  {
+    "id": 87,
+    "question": "Assertion (A): Utilizing a Proxy Server enhances local network fault tolerance by caching frequent external webpage requests. Reason (R): If the primary WAN ISP link fails, the proxy server can dynamically assume the role of an ISP and generate internet routing tables to maintain external connectivity. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Assertion A is true. A proxy server caches (stores) frequently accessed web assets locally. If the ISP briefly drops or slows down, users might still access cached assets locally, giving a perception of fault tolerance/resilience. Step 2: Reason R is completely false. A proxy server does NOT magically become an Internet Service Provider. Step 3: It cannot route packets across a dead physical WAN link. If the WAN dies, external uncached internet access dies. A secondary redundant WAN link (BGP multi-homing) is required for true ISP fault tolerance.",
+    "trick": "Bank/IT Trap: Caching proxies mask latency and minor drops, but they cannot replace a physical internet connection. Proxies are Application Layer, not Physical WAN layers.",
+    "tip": "Proxy servers cache web data but cannot reroute or restore dead physical WAN connections."
+  },
+  {
+    "id": 88,
+    "question": "Which of the following topological designs fundamentally requires a 'Token' to prevent data collisions, inherently sacrificing speed for organized fault management?",
+    "options": ["Ethernet Star Topology", "Point-to-Point Topology", "Ring Topology", "Full Mesh Topology"],
+    "answer": "Ring Topology",
+    "explanation": "Step 1: In Ethernet (Star/Bus), devices talk whenever they want using CSMA/CD, which leads to collisions. Step 2: Ring topologies (like IBM Token Ring or FDDI) are deterministic. Step 3: A small data frame called a 'Token' circulates around the logical ring continuously. Step 4: A device can ONLY transmit data if it seizes the token. Step 5: Because only one device holds the token at any time, data collisions are mathematically impossible, providing high structural reliability at the cost of latency (waiting for the token).",
+    "trick": "Bank/IT Trap: Tokens are exclusive to logical ring architectures to prevent collisions. Star/Mesh use switches to isolate collision domains instead.",
+    "tip": "Ring topologies use circulating tokens to guarantee zero data collisions on the network."
+  },
+  {
+    "id": 89,
+    "question": "Assertion (A): 'NIC Teaming' creates a Single Point of Failure (SPOF) on the server side because multiple network cables are funneled into a single logical network card. Reason (R): The primary objective of NIC Teaming is to restrict server bandwidth to prevent flooding the core switches during malware attacks. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: NIC Teaming (or Link Aggregation on servers) groups multiple physical Network Interface Cards together. Step 2: This explicitly ELIMINATES a SPOF. If one physical NIC dies, or its cable is cut, the server stays online using the surviving teamed NICs. Assertion A is false. Step 3: Reason R is false. NIC Teaming is used to COMBINE bandwidth (e.g., bonding four 1Gbps NICs for 4Gbps throughput) and provide fault tolerance, not to restrict bandwidth.",
+    "trick": "Bank/IT Trap: Teaming/Bonding always increases redundancy and throughput. It combines physical hardware to eliminate SPOFs.",
+    "tip": "NIC Teaming combines physical network cards to provide fault tolerance and increased bandwidth."
+  },
+  {
+    "id": 90,
+    "question": "A military base utilizes a proprietary Partial Mesh network. There are 8 command nodes. Rather than a full 28-cable mesh, the base uses exactly 12 encrypted cables. If an attacker destroys a single random cable, what is the absolute worst-case scenario regarding network connectivity?",
+    "options": ["The network is instantly split into two isolated 4-node networks.", "One node becomes completely isolated, while the other 7 remain interconnected.", "Depending on the exact cable layout, the network might remain fully connected, or a node/segment might become isolated.", "The network collapses because Partial Meshes require STP to function, which fails upon cable destruction."],
+    "answer": "Depending on the exact cable layout, the network might remain fully connected, or a node/segment might become isolated.",
+    "explanation": "Step 1: A Partial Mesh lacks the absolute mathematical guarantees of a Full Mesh. Step 2: With 8 nodes and 12 cables, some nodes might have 4 connections, while another might have only 1. Step 3: If the attacker cuts a redundant cable connecting two heavily linked nodes, the routing protocol simply bypasses it (no loss of connectivity). Step 4: If the attacker cuts a cable serving as the ONLY link to a specific node, that node is isolated. Step 5: Therefore, the outcome is entirely dependent on the specific internal wiring layout.",
+    "trick": "Bank/IT Trap: Partial Meshes have uneven fault tolerance. Some paths are highly redundant; others might be hidden Single Points of Failure.",
+    "tip": "Fault tolerance in a Partial Mesh is entirely dependent on the specific custom wiring layout."
+  },
+  {
+    "id": 91,
+    "question": "Assertion (A): Implementing 'Hot Standby Router Protocol' (HSRP) eliminates the need for physical redundant links between edge switches and core routers. Reason (R): HSRP virtually clones the MAC and IP addresses of the primary router over the airwaves, maintaining connectivity even if the physical cables are removed. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: HSRP is a logical protocol that provides a Virtual IP/MAC for default gateways. Step 2: However, HSRP still absolutely relies on physical infrastructure. You need two physical routers and redundant physical cables connecting them to the switches. Step 3: If you remove the cables, no logical protocol can magically transmit data 'over the airwaves' on standard wired Ethernet. Step 4: Redundancy always requires physical duplication layered with logical protocols. Both statements are false.",
+    "trick": "Bank/IT Trap: Software redundancy protocols (HSRP, VRRP, STP) are utterly useless without physical hardware and cable redundancy to back them up.",
+    "tip": "Logical redundancy protocols like HSRP strictly require physical hardware and cable redundancy."
+  },
+  {
+    "id": 92,
+    "question": "Which specific network topology guarantees that every router contains exactly two physical connections, making fault isolation relatively simple but establishing high vulnerability to dual concurrent failures?",
+    "options": ["Point-to-Point Topology", "Ring Topology", "Full Mesh Topology", "Star Topology"],
+    "answer": "Ring Topology",
+    "explanation": "Step 1: Analyze the geometric rules of topologies. Step 2: In a Point-to-Point, routers have 1 connection. In Star, the hub has N connections, clients have 1. In Full Mesh, routers have N-1 connections. Step 3: In a Ring topology, devices are wired in a closed circle. Step 4: This dictates that every single device connects exactly to its left neighbor and its right neighbor (exactly two physical connections). Step 5: If two concurrent cuts happen, the ring is fractured into isolated unroutable fragments.",
+    "trick": "Bank/IT Trap: Recognizing topological properties by their mathematical port counts is crucial. Ring = exactly 2 ports per node. Star client = exactly 1.",
+    "tip": "In a Ring topology, every node physically possesses exactly two network connections."
+  },
+  {
+    "id": 93,
+    "question": "Assertion (A): Network Address Translation (NAT) acts as an inherent fault-tolerance mechanism for internal IP routing tables. Reason (R): By masking private internal IPs behind a single public IP, NAT prevents external route flapping on the ISP side from dropping internal LAN sessions. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: NAT translates private IPs (like 192.168.x.x) to a public IP to allow internet access and conserve IPv4 space. Step 2: NAT provides a minor security side-effect (hiding internal architecture). Step 3: However, NAT provides ZERO fault tolerance. It does not reroute traffic, it does not provide redundancy, and if the NAT router dies, all internet access dies. Step 4: Route flapping and LAN sessions are entirely unrelated to NAT's fundamental translation mechanics.",
+    "trick": "Bank/IT Trap: Do not confuse security or address conservation tools (NAT, Firewalls) with high-availability/fault-tolerance protocols (HSRP, STP, OSPF).",
+    "tip": "NAT provides IP conservation and basic obscuration, but offers absolutely no fault tolerance."
+  },
+  {
+    "id": 94,
+    "question": "A massive distributed database requires high fault tolerance. The engineers link 10 regional servers using 45 physical connections. Based on the cable count, what exact topology is deployed?",
+    "options": ["Partial Mesh", "Full Mesh", "Decentralized Ring", "Hierarchical Star"],
+    "answer": "Full Mesh",
+    "explanation": "Step 1: Identify the number of nodes (N = 10). Step 2: Check the theoretical maximum cables for a Full Mesh using N(N-1)/2. Step 3: 10 * (10 - 1) / 2 = 10 * 9 / 2. Step 4: 90 / 2 = 45 cables. Step 5: Since the actual installed cables (45) perfectly matches the mathematical maximum for 10 nodes, the network is definitively a Full Mesh topology.",
+    "trick": "Bank/IT Trap: Use reverse engineering. If given nodes and cables, plug N into the Mesh formula. If it matches, it's Full Mesh. If it's less, it's Partial Mesh. If it equals N, it's a Ring.",
+    "tip": "Calculate N(N-1)/2. If the result equals the installed cables, the topology is Full Mesh."
+  },
+  {
+    "id": 95,
+    "question": "Assertion (A): A 'Brownout' (prolonged drop in electrical voltage) poses a greater threat to network hardware fault tolerance than a complete 'Blackout' (total power loss). Reason (R): Network switches and routers contain auto-shutdown fail-safes for blackouts, but the sustained under-voltage of a brownout causes excessive heat and severe degradation of internal electronic components. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Fault tolerance includes environmental factors. A Blackout is a 0V state. Equipment simply turns off. Step 2: A Brownout is a voltage sag (e.g., running at 90V instead of 120V). Step 3: Network hardware power supplies attempt to draw more current (amps) to compensate for low voltage to maintain wattage (P = V * I). Step 4: Increased current generates massive internal heat, silently cooking capacitors and silicon logic gates. Step 5: Therefore, brownouts are statistically deadlier to hardware lifespan, requiring UPS (Uninterruptible Power Supply) systems for power conditioning.",
+    "trick": "Bank/IT Trap: Environmental fault tolerance is highly tested. UPS devices don't just provide battery backup (for blackouts); they 'condition' line power to block brownouts and spikes.",
+    "tip": "Prolonged low voltage (Brownout) destroys hardware via overheating faster than total power loss."
+  },
+  {
+    "id": 96,
+    "question": "In the context of Wide Area Network (WAN) fault tolerance, what does the implementation of 'BGP Multi-Homing' specifically achieve?",
+    "options": ["It bonds multiple 4G cellular connections into a single high-speed Wi-Fi hotspot.", "It connects an enterprise network to two or more different Internet Service Providers (ISPs) to ensure continuous external routing if one ISP suffers a core outage.", "It duplicates the internal MAC address tables across multiple local Area Network switches.", "It encrypts VPN tunnels using dual overlapping IPSec algorithms."],
+    "answer": "It connects an enterprise network to two or more different Internet Service Providers (ISPs) to ensure continuous external routing if one ISP suffers a core outage.",
+    "explanation": "Step 1: 'Homing' refers to how a network connects to the internet. Step 2: Single-homed means one link to one ISP (massive SPOF). Step 3: Multi-homing means connecting to multiple ISPs (e.g., AT&T and Verizon). Step 4: BGP (Border Gateway Protocol) is the routing protocol of the internet. Step 5: By running BGP Multi-homing, an enterprise advertises its IP space to multiple ISPs. If AT&T's backbone goes down, BGP instantly recalculates and routes all global traffic through the surviving Verizon link.",
+    "trick": "Bank/IT Trap: Multi-homing is the definitive enterprise solution to ISP SPOFs. BGP is the mandatory protocol to achieve this because standard internal protocols (OSPF) cannot route the global internet.",
+    "tip": "BGP Multi-Homing provides absolute WAN fault tolerance by connecting to multiple different ISPs."
+  },
+  {
+    "id": 97,
+    "question": "Assertion (A): Utilizing a RAID 0 disk configuration on a central network attached storage (NAS) server drastically improves the fault tolerance of the network's data repository. Reason (R): RAID 0 utilizes block-level striping to mirror data across multiple hard drives, ensuring complete data recovery if a single drive mechanically fails. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: RAID 0 stands for 'Striping'. It writes half a file to Drive A and half to Drive B. Step 2: It provides immense read/write speed. Step 3: However, it provides ZERO redundancy. If Drive A dies, the entire array is destroyed because you only have halves of files. Assertion A is false. Step 4: Reason R describes RAID 1 (Mirroring), which duplicates data across drives for fault tolerance. Because Reason R falsely attributes mirroring to RAID 0, both are false.",
+    "trick": "Bank/IT Trap: RAID 0 = 0% redundancy. RAID 1 = Mirroring. RAID 5 = Parity fault tolerance. Never use RAID 0 for critical network fault tolerance.",
+    "tip": "RAID 0 (Striping) offers massive speed but zero fault tolerance. RAID 1 offers mirroring."
+  },
+  {
+    "id": 98,
+    "question": "A network architect designs a 3-tier hierarchical topology (Core, Distribution, Access). To prevent a Single Point of Failure at the highest level, they install two Core switches. How many physical links are required to create a 'Full Mesh' strictly between these two core switches?",
+    "options": ["1", "2", "3", "0"],
+    "answer": "1",
+    "explanation": "Step 1: The question asks for a 'Full Mesh' strictly between TWO nodes (the two core switches). Step 2: Apply the full mesh formula: N(N-1)/2. Step 3: 2 * (2 - 1) / 2. Step 4: 2 * 1 / 2 = 2 / 2 = 1. Step 5: Logically, to connect two devices directly to each other, you only need exactly 1 cable. (Though in reality, admins will use port-channels for bandwidth, the mathematical definition of a mesh requires only 1).",
+    "trick": "Bank/IT Trap: Do not overthink. The mesh formula works for any integer > 1. Two nodes only ever require 1 link to be 'fully meshed' with each other.",
+    "tip": "A Full Mesh between exactly 2 devices mathematically requires only 1 physical link."
+  },
+  {
+    "id": 99,
+    "question": "Assertion (A): In a Token Ring network, the token itself is immune to destruction; if collisions occur, the token automatically clones itself to restore the network pace. Reason (R): Token Ring physical architecture utilizes an active Hub that regenerates lost tokens based on a master internal clock. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Assertion A is false. Tokens can be lost or corrupted due to electrical noise or hardware glitches. There are no collisions in a Token Ring, and tokens do not 'clone' themselves (multiple tokens crash the network). Step 2: Reason R is false. If a token is lost, the network relies on a specific computer elected as the 'Active Monitor'. Step 3: The Active Monitor detects the absence of the circulating token via timeouts and generates a brand new token to restore the network. The hub (MAU) does not generate tokens.",
+    "trick": "Bank/IT Trap: Token Ring relies heavily on the 'Active Monitor' station for logical fault tolerance. If the Active Monitor fails, the standby stations hold an election to replace it.",
+    "tip": "Lost tokens in a Token Ring network are regenerated by an elected 'Active Monitor' workstation."
+  },
+  {
+    "id": 100,
+    "question": "Which of the following scenarios best demonstrates an application of 'Fail-Open' fault tolerance mechanics in a physical network security environment?",
+    "options": ["A firewall detecting a DDOS attack shuts off all external WAN interfaces to protect internal servers.", "A biometric electronic door lock loses power during a fire and automatically unlocks to allow employees to evacuate safely.", "A core router loses its primary routing table and defaults to blocking all packet forwarding.", "An Intrusion Prevention System (IPS) encrypts its hard drive upon detecting unauthorized physical access."],
+    "answer": "A biometric electronic door lock loses power during a fire and automatically unlocks to allow employees to evacuate safely.",
+    "explanation": "Step 1: Fault tolerance includes 'Fail-Safe' (Fail-Closed) and 'Fail-Open' designs. Step 2: Fail-Closed prioritizes security. If a system breaks, it locks down (e.g., a firewall losing power drops all traffic). Step 3: Fail-Open prioritizes availability and safety. If the system breaks, it opens up, bypassing restrictions. Step 4: Electronic locks dropping their magnetic seal during a power outage to allow human escape is the textbook definition of Fail-Open engineering.",
+    "trick": "Bank/IT Trap: Fail-Open = Prioritizes Availability/Safety. Fail-Closed = Prioritizes Confidentiality/Security. Firewalls fail-closed; basic network switches generally fail-open (reverting to dumb hubs).",
+    "tip": "Fail-Open systems bypass security restrictions upon failure to guarantee availability and human safety."
+  }
+]

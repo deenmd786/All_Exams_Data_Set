@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): Modern secure web applications store user passwords in databases using Hashing algorithms rather than Encryption algorithms. Reason (R): Hashing is a one-way cryptographic function that cannot be mathematically reversed or decrypted, ensuring that even if the database is stolen, the hackers cannot read the original passwords. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Encryption is two-way, meaning encrypted data can be decrypted if the key is compromised. Step 2: Hashing (like SHA-256) is mathematically one-way. Step 3: When a user logs in, the entered password is hashed and compared to the stored hash. Step 4: This prevents attackers from accessing plaintext passwords even during a database breach. Step 5: Therefore, R correctly explains the security necessity stated in A.",
+    "trick": "Bank/IT Trap: Never confuse Hashing with Encryption. If someone says they 'decrypted a hash', they are technically wrong; they likely used a rainbow table to find a collision.",
+    "tip": "Hashing is one-way (passwords). Encryption is two-way (data transit)."
+  },
+  {
+    "id": 2,
+    "question": "In the context of Public Key Infrastructure (PKI), how does a Digital Signature ensure Non-Repudiation?",
+    "options": ["By encrypting the document with the receiver's Public Key.", "By hashing the document and encrypting the hash with the sender's Private Key.", "By encrypting the document with a symmetric session key.", "By hashing the document and encrypting the hash with the receiver's Private Key."],
+    "answer": "By hashing the document and encrypting the hash with the sender's Private Key.",
+    "explanation": "Step 1: Non-repudiation means the sender cannot deny sending the message. Step 2: The sender hashes the document to create a unique digest. Step 3: The sender encrypts this digest using their own Private Key, creating the digital signature. Step 4: Anyone can use the sender's Public Key to decrypt it, proving it could only have come from the sender. Step 5: This unique use of the private key guarantees authenticity.",
+    "trick": "Bank/IT Trap: Digital Signatures reverse the normal rules of encryption! In a Digital Signature, the sender uses their own PRIVATE Key to 'sign', and the receiver uses the PUBLIC Key to verify!",
+    "tip": "Digital Signatures use the sender's Private Key to sign data."
+  },
+  {
+    "id": 3,
+    "question": "Assertion (A): A Stateful Packet Inspection (SPI) firewall is inherently more secure than a Stateless Packet Filter against IP spoofing and DoS attacks. Reason (R): A Stateful firewall maintains a dynamic state table that tracks the context of active TCP connections (like SYN, SYN-ACK, ACK handshakes) rather than examining each packet in isolation. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Stateless firewalls only check source/destination IPs and ports per packet. Step 2: Attackers easily bypass stateless firewalls by spoofing packet headers. Step 3: SPI firewalls record the state of ongoing connections in a state table. Step 4: If a packet arrives claiming to be part of an established session but no TCP handshake was recorded, the SPI firewall drops it. Step 5: Thus, tracking connection states (R) makes SPI more secure (A).",
+    "trick": "Bank/IT Trap: Stateless = Amnesia (forgets previous packets). Stateful = Perfect memory (remembers the entire conversation context).",
+    "tip": "Stateful Firewalls track the entire TCP handshake and connection state."
+  },
+  {
+    "id": 4,
+    "question": "Which of the following best describes the primary limitation of Heuristic Scanning in Antivirus software compared to Signature-based Scanning?",
+    "options": ["Heuristic scanning cannot detect Zero-day exploits.", "Heuristic scanning requires constant daily updates to its virus database to function.", "Heuristic scanning generates a significantly higher rate of False Positives by flagging legitimate software that behaves suspiciously.", "Heuristic scanning is strictly limited to scanning boot sectors and cannot analyze executable files."],
+    "answer": "Heuristic scanning generates a significantly higher rate of False Positives by flagging legitimate software that behaves suspiciously.",
+    "explanation": "Step 1: Signature-based scanning looks for known exact matches (hashes), resulting in low false positives but failing on new threats. Step 2: Heuristic scanning looks for suspicious behavior (e.g., a program trying to modify system registries). Step 3: Because many legitimate administrative tools also modify registries, heuristics can mistakenly flag them as malware. Step 4: This mistaken identity is called a False Positive. Step 5: This is the major trade-off for zero-day protection.",
+    "trick": "Bank/IT Trap: Heuristics act like a suspicious security guard. It catches unknown thieves (zero-days), but often tackles innocent employees running fast (False Positives).",
+    "tip": "Heuristic Scanning detects unknown threats but causes high False Positives."
+  },
+  {
+    "id": 5,
+    "question": "Assertion (A): Adding a random 'Salt' to a password before hashing it prevents attackers from using precomputed Rainbow Tables. Reason (R): The Salt converts the one-way hash into a two-way encryption scheme, requiring the attacker to decrypt the salt first. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "A is True but R is False.",
+    "explanation": "Step 1: A Rainbow Table is a database of precomputed hashes for common passwords. Step 2: Adding a unique random string (Salt) to each password before hashing means identical passwords will have completely different hashes. Step 3: This renders precomputed tables useless (A is True). Step 4: However, salting does NOT make hashing a two-way encryption scheme. It remains mathematically irreversible (R is False). Step 5: Therefore, A is true, but the reasoning is fundamentally flawed.",
+    "trick": "Bank/IT Trap: Salting never turns a hash into encryption. Hashing is ALWAYS one-way. Salting just ensures that two users with the password 'admin' get different hashes in the database.",
+    "tip": "Salting defends against Rainbow Tables but keeps hashing one-way."
+  },
+  {
+    "id": 6,
+    "question": "In a corporate network, what specific layer of the OSI model does a Next-Generation Firewall (NGFW) primarily leverage to perform Deep Packet Inspection (DPI) and application awareness?",
+    "options": ["Layer 2 (Data Link Layer)", "Layer 3 (Network Layer)", "Layer 4 (Transport Layer)", "Layer 7 (Application Layer)"],
+    "answer": "Layer 7 (Application Layer)",
+    "explanation": "Step 1: Traditional stateless firewalls operate at Layer 3 (IPs) and Layer 4 (Ports). Step 2: Stateful firewalls also operate primarily at Layers 3 and 4 while tracking session states. Step 3: NGFWs go deeper using Deep Packet Inspection (DPI). Step 4: DPI looks at the actual payload of the packet to identify specific applications (e.g., blocking Facebook chat but allowing Facebook login). Step 5: Application awareness inherently requires Layer 7 functionality.",
+    "trick": "Bank/IT Trap: If the question mentions 'Application Awareness' or 'DPI', it's immediately referring to Layer 7. Traditional firewalls only see IPs and ports, not the apps themselves.",
+    "tip": "NGFW and Deep Packet Inspection operate at Layer 7 (Application)."
+  },
+  {
+    "id": 7,
+    "question": "Assertion (A): When implementing RSA encryption for secure email communication, Bob must use Alice's Private Key to encrypt the message he sends to her. Reason (R): Asymmetric encryption requires that the sender uses the receiver's Public Key to encrypt data, ensuring that only the receiver's Private Key can decrypt it. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "A is False but R is True.",
+    "explanation": "Step 1: Analyze Assertion A. Bob cannot use Alice's Private Key because a Private Key is never shared with anyone. Step 2: If Bob wants to send a secure message to Alice, he uses Alice's PUBLIC Key to encrypt it. Step 3: Therefore, A is completely false. Step 4: Analyze Reason R. It correctly states the fundamental rule of asymmetric encryption: encrypt with receiver's Public, decrypt with receiver's Private. Step 5: Thus, A is False but R is True.",
+    "trick": "Bank/IT Trap: Private keys are NEVER shared. If a scenario suggests someone is using someone else's Private Key, the statement is factually incorrect by design.",
+    "tip": "To send securely, encrypt with the receiver's Public Key."
+  },
+  {
+    "id": 8,
+    "question": "Which cryptographic principle is directly violated by a 'Hash Collision'?",
+    "options": ["Confidentiality", "Data Integrity", "Non-repudiation", "Availability"],
+    "answer": "Data Integrity",
+    "explanation": "Step 1: A hash function takes data of any size and outputs a fixed-length string. Step 2: A 'Collision' occurs when two entirely different pieces of input data produce the exact same hash output. Step 3: Hashing is primarily used to verify that a file has not been altered (Integrity). Step 4: If an attacker modifies a file but manages to generate a collision (same hash), the receiver will wrongly believe the file is original. Step 5: This shatters the principle of Data Integrity.",
+    "trick": "Bank/IT Trap: Hashing does not provide Confidentiality (it's not encryption). It provides Integrity. A collision means the integrity check can be bypassed.",
+    "tip": "Hash Collisions destroy the guarantee of Data Integrity."
+  },
+  {
+    "id": 9,
+    "question": "Assertion (A): Dynamic Heuristic Analysis (Sandboxing) is generally slower and more resource-intensive than Static Heuristic Analysis. Reason (R): Dynamic analysis executes the suspicious file in an isolated virtual environment to observe its actual runtime behavior, whereas static analysis only decompiles and examines the source code structure without running it. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Define Static Analysis. It looks at the file's code (API calls, structure) without executing it. It is fast. Step 2: Define Dynamic Analysis. It detonates the file in a Sandbox. Step 3: Executing a file in a VM and monitoring its memory, registry changes, and network calls takes time and CPU power. Step 4: Therefore, A is a true statement regarding performance. Step 5: R accurately describes the operational differences that cause the performance gap, making it the correct explanation.",
+    "trick": "Bank/IT Trap: Sandboxing (Dynamic) is powerful but slow. That's why email attachments take a few minutes to be scanned in advanced corporate environments.",
+    "tip": "Dynamic Heuristics (Sandboxing) runs files; Static Heuristics only reads them."
+  },
+  {
+    "id": 10,
+    "question": "In the context of Digital Certificates, what is the role of a Certificate Authority (CA) like VeriSign or Let's Encrypt?",
+    "options": ["To encrypt all HTTP traffic passing between a client and a web server.", "To generate symmetric session keys for clients during the TLS handshake.", "To digitally sign the server's Public Key, vouching for the identity of the organization owning that key.", "To securely store the Private Keys of all registered websites on the internet."],
+    "answer": "To digitally sign the server's Public Key, vouching for the identity of the organization owning that key.",
+    "explanation": "Step 1: When you visit a secure website (HTTPS), the server sends its Public Key. Step 2: How do you know it's not an imposter's Public Key? You need a trusted third party. Step 3: A CA verifies the identity of the website owner. Step 4: The CA then uses its own highly secure Private Key to 'sign' the website's Public Key, creating a Digital Certificate. Step 5: Your browser trusts the CA, so it trusts the signed certificate. CAs do not store private keys or perform the actual traffic encryption.",
+    "trick": "Bank/IT Trap: CAs do NOT store your website's Private Key. If they did, a breach at the CA would compromise the entire internet. They only sign Public Keys.",
+    "tip": "CAs act as trusted third parties verifying Public Key ownership."
+  },
+  {
+    "id": 11,
+    "question": "Assertion (A): Symmetric encryption is generally preferred over Asymmetric encryption for encrypting large volumes of data, such as a full hard drive. Reason (R): Symmetric algorithms like AES use a single shared key, making the computational process significantly faster and less CPU-intensive than Asymmetric algorithms like RSA. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Asymmetric encryption uses complex mathematical problems (like prime factorization in RSA), which are computationally heavy. Step 2: Symmetric encryption uses bitwise operations (like XOR in AES), which are extremely fast for CPUs. Step 3: Therefore, encrypting gigabytes of data with RSA would take an unreasonable amount of time. Step 4: AES is the standard for bulk encryption (A is True). Step 5: The performance difference based on key architecture (R) is the exact reason for this preference.",
+    "trick": "Bank/IT Trap: In the real world, systems use BOTH. Asymmetric is used briefly to securely exchange a Symmetric key, and then Symmetric is used for the heavy data lifting (TLS/SSL).",
+    "tip": "Symmetric = Fast (Bulk Data). Asymmetric = Slow (Key Exchange)."
+  },
+  {
+    "id": 12,
+    "question": "Which firewall feature explicitly prevents a compromised internal host from establishing a reverse-shell connection back to an external attacker's Command and Control (C2) server?",
+    "options": ["Ingress Filtering", "Egress Filtering", "Network Address Translation (NAT)", "Port Forwarding"],
+    "answer": "Egress Filtering",
+    "explanation": "Step 1: Understand traffic flow. Ingress is incoming traffic; Egress is outgoing traffic. Step 2: A reverse-shell occurs when an internal compromised machine initiates a connection OUT to the attacker. Step 3: Many basic firewalls are configured to allow all outgoing traffic by default. Step 4: Egress filtering enforces rules on outbound traffic, blocking connections to unauthorized external IP addresses or unusual ports. Step 5: Thus, strict egress filtering blocks the reverse-shell.",
+    "trick": "Bank/IT Trap: Don't assume firewalls only block bad guys getting IN. Egress filtering is crucial because it stops infected machines from calling OUT to the botmaster.",
+    "tip": "Egress Filtering controls outbound traffic, blocking reverse shells."
+  },
+  {
+    "id": 13,
+    "question": "Assertion (A): The SHA-256 algorithm is deterministic, meaning the exact same input will always produce the exact same 256-bit output. Reason (R): SHA-256 employs a pseudo-random number generator (PRNG) during the hashing process to ensure output unpredictability. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "A is True but R is False.",
+    "explanation": "Step 1: Evaluate Assertion (A). A core property of any cryptographic hash function is that it is deterministic (same input = same output). A is True. Step 2: Evaluate Reason (R). If a hash function used a PRNG, the same input would produce a different output every time. Step 3: This would make password verification impossible. Hash functions use fixed mathematical operations, not randomness. Step 4: Therefore, R is a fundamentally false statement about how hashing works. Step 5: A is True, R is False.",
+    "trick": "Bank/IT Trap: Hashing looks random, but it has ZERO randomness. It is a strict mathematical formula. The 'unpredictability' comes from the Avalanche Effect, not PRNGs.",
+    "tip": "Hash functions are entirely deterministic and contain no randomness."
+  },
+  {
+    "id": 14,
+    "question": "In the context of Antivirus evasion techniques, what is the specific purpose of a 'Polymorphic' malware engine?",
+    "options": ["To rapidly change the IP address of the Command and Control server.", "To dynamically alter the malware's decryptor routine and signature upon every infection while keeping the core payload intact.", "To disable the host system's Stateful Firewall by spoofing MAC addresses.", "To convert a two-way encrypted file into a one-way hashed file."],
+    "answer": "To dynamically alter the malware's decryptor routine and signature upon every infection while keeping the core payload intact.",
+    "explanation": "Step 1: Antiviruses traditionally rely on static signatures (a specific string of bytes). Step 2: Polymorphic malware attempts to defeat this by looking different every time it replicates. Step 3: It does this by encrypting its main payload and using a different decryption key and a slightly modified decryptor code for each victim. Step 4: While the underlying destructive logic is the same, the file hash changes completely. Step 5: This renders signature-based scanning largely ineffective, forcing the use of Heuristics.",
+    "trick": "Bank/IT Trap: Polymorphic changes its 'clothing' (encryption/decryptor), but its 'body' (payload) stays the same. Metamorphic malware goes further and actually rewrites its 'body' code.",
+    "tip": "Polymorphic malware constantly alters its signature to evade static AV."
+  },
+  {
+    "id": 15,
+    "question": "Assertion (A): When deploying an Intrusion Prevention System (IPS) alongside a Stateful Firewall, the IPS is typically configured to fail 'open' rather than fail 'closed'. Reason (R): Failing 'open' ensures that if the IPS hardware crashes, network traffic continues to flow, maintaining business availability even at the cost of temporary security degradation. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: An IPS sits inline with network traffic. If it blocks a packet, the packet drops. Step 2: If the IPS appliance loses power or crashes, it must default to a state. Step 3: 'Fail closed' means all traffic stops (high security, zero availability). 'Fail open' means traffic bypasses the dead IPS (lower security, high availability). Step 4: Enterprise environments prioritize uptime (Availability in the CIA triad). Step 5: Therefore, designing it to fail open (A) is driven precisely by the business need to maintain connectivity (R).",
+    "trick": "Bank/IT Trap: Firewalls typically 'Fail Closed' (block everything if broken). IPS typically 'Fail Open' (let traffic pass if broken) to avoid taking down the whole corporate network.",
+    "tip": "Inline security devices often 'fail open' to preserve network availability."
+  },
+  {
+    "id": 16,
+    "question": "Which of the following scenarios describes the cryptographic vulnerability known as the 'Avalanche Effect' failing in a hashing algorithm?",
+    "options": ["A 1TB database takes significantly longer to hash than a 1MB text file.", "Changing the first letter of a password from lowercase to uppercase results in only a 2% change in the final hash output bits.", "An attacker successfully uses a Rainbow Table to find the plaintext of a hashed password.", "The hash function is unable to process a file larger than 4GB."],
+    "answer": "Changing the first letter of a password from lowercase to uppercase results in only a 2% change in the final hash output bits.",
+    "explanation": "Step 1: The Avalanche Effect is a highly desirable property in cryptography. Step 2: It dictates that a tiny change in the input (even a single bit) must cause a massive, unpredictable change in the output (usually flipping ~50% of the bits). Step 3: If changing one letter only changes 2% of the hash, the algorithm is severely flawed. Step 4: Attackers could use this similarity to guess how close they are to the real password. Step 5: Thus, a small output change indicates a failure of the Avalanche Effect.",
+    "trick": "Bank/IT Trap: The Avalanche Effect is NOT a vulnerability; the LACK of it is the vulnerability! Good hashing requires a massive 'avalanche' of changes for tiny input tweaks.",
+    "tip": "Avalanche Effect: Minor input changes must radically alter the hash output."
+  },
+  {
+    "id": 17,
+    "question": "Assertion (A): A Digital Signature provides robust encryption, guaranteeing that a third party intercepting the signed message cannot read its contents. Reason (R): Digital Signatures utilize the sender's Private Key to lock the hashing digest, hiding the original plaintext from unauthorized viewers. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are False.",
+    "explanation": "Step 1: Analyze Assertion (A). Digital Signatures provide Authentication, Integrity, and Non-repudiation. They do NOT provide Confidentiality (encryption of the message itself). A signed email is sent in plaintext unless separately encrypted. A is False. Step 2: Analyze Reason (R). The Private Key locks the HASH, not the plaintext message. The message itself remains readable. Step 3: Therefore, R is also False. Step 4: Both statements fundamentally misrepresent the purpose of a digital signature.",
+    "trick": "Bank/IT Trap: Read carefully! Digital Signatures DO NOT ENCRYPT THE MESSAGE. They only encrypt the HASH of the message. If you want secrecy, you must use encryption IN ADDITION to signing.",
+    "tip": "Digital Signatures prove identity and integrity, NOT confidentiality."
+  },
+  {
+    "id": 18,
+    "question": "How does a Stateful Firewall handle 'UDP packet tracking' since User Datagram Protocol (UDP) is inherently stateless and lacks a formal handshake mechanism?",
+    "options": ["It completely drops all UDP traffic by default as it cannot be tracked.", "It converts incoming UDP packets into TCP packets to force a stateful handshake.", "It creates a pseudo-state using source/destination IPs and ports, maintaining the session table entry for a specific timeout period after each packet.", "It relies on Layer 7 Deep Packet Inspection exclusively for all UDP traffic."],
+    "answer": "It creates a pseudo-state using source/destination IPs and ports, maintaining the session table entry for a specific timeout period after each packet.",
+    "explanation": "Step 1: UDP (unlike TCP) has no SYN/ACK flags; it just fires packets. Step 2: A Stateful Firewall must track all traffic, including UDP (like DNS or streaming). Step 3: To do this, the firewall tracks the 'pseudo-state'. It notes the Source IP, Source Port, Dest IP, and Dest Port of an outbound UDP packet. Step 4: It opens a temporary window in the state table for returning UDP packets matching that tuple. Step 5: If no packet arrives before the timer expires, the 'state' is closed. This is how SPI handles stateless protocols.",
+    "trick": "Bank/IT Trap: Even though UDP is a 'stateless protocol', a 'stateful firewall' can still track it by using a countdown timer based on IP and Port pairing.",
+    "tip": "Stateful firewalls track UDP via IP/Port tuples and inactivity timers."
+  },
+  {
+    "id": 19,
+    "question": "Assertion (A): Modern operating systems utilize 'Salting' alongside 'Key Stretching' algorithms (like PBKDF2 or bcrypt) for storing passwords. Reason (R): Key Stretching intentionally slows down the hashing process, making brute-force and dictionary attacks computationally infeasible for attackers, while only adding a fraction of a second to legitimate user logins. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Fast hashes (like MD5 or standard SHA-256) are dangerous for passwords because modern GPUs can calculate billions of them per second. Step 2: To counter this, security engineers use algorithms like bcrypt or PBKDF2. Step 3: These algorithms hash the password thousands of times in a loop (Key Stretching). Step 4: This delay (e.g., 0.5 seconds) is unnoticeable to a logging-in user, but catastrophic to a hacker trying to guess millions of passwords. Step 5: R perfectly explains why A is the modern industry standard.",
+    "trick": "Bank/IT Trap: In password hashing, SLOW is GOOD. You want the algorithm to be computationally expensive to defeat high-speed GPU brute-forcing.",
+    "tip": "Key Stretching (bcrypt) slows down hashing to defeat brute-force attacks."
+  },
+  {
+    "id": 20,
+    "question": "Which of the following is a primary vulnerability of behavioral Heuristic Antivirus scanning when dealing with 'Living off the Land' (LotL) cyberattacks?",
+    "options": ["LotL attacks utilize 256-bit encryption, rendering behavioral analysis blind.", "LotL attacks exclusively target the Master Boot Record, which heuristics cannot scan.", "LotL attacks abuse legitimate, built-in system tools (like PowerShell) for malicious purposes, making it extremely difficult for heuristics to distinguish from normal administrative tasks.", "LotL attacks flood the antivirus with UDP traffic, causing the heuristic engine to crash."],
+    "answer": "LotL attacks abuse legitimate, built-in system tools (like PowerShell) for malicious purposes, making it extremely difficult for heuristics to distinguish from normal administrative tasks.",
+    "explanation": "Step 1: 'Living off the Land' means attackers don't drop new malware files; they use tools already on the OS. Step 2: A primary example is using Microsoft PowerShell to run a script that downloads a payload into memory. Step 3: Heuristics look for suspicious behavior. Step 4: However, IT admins use PowerShell every day to run scripts and manage networks. Step 5: Therefore, the heuristic engine struggles to decide if the PowerShell activity is an admin fixing the network or a hacker destroying it, often failing to detect LotL attacks.",
+    "trick": "Bank/IT Trap: Heuristics look for 'bad behavior'. But if a hacker uses a 'good tool' (like PowerShell) to do bad things, the AV often assumes it's just the system administrator working.",
+    "tip": "LotL attacks evade heuristics by weaponizing trusted administrative tools."
+  },
+  {
+    "id": 21,
+    "question": "Assertion (A): An HMAC (Hash-based Message Authentication Code) is more secure against tampering than simply sending a message with its standard SHA-256 hash attached. Reason (R): An HMAC incorporates a secret cryptographic key into the hashing process, ensuring that only entities possessing the shared secret can generate or verify the valid hash. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: If Alice sends a message and a standard hash to Bob, an attacker (Eve) can intercept it, change the message, generate a NEW standard hash, and forward it to Bob. Bob won't know it was tampered with. Step 2: To prevent this, Alice and Bob share a secret key. Step 3: Alice hashes the (Message + Secret Key) using HMAC. Step 4: Eve cannot generate a valid new hash for her altered message because she doesn't know the secret key. Step 5: Therefore, incorporating the secret key (R) is the exact reason HMAC prevents tampering (A).",
+    "trick": "Bank/IT Trap: A standard hash provides integrity against ACCIDENTAL corruption (like static on a wire). An HMAC provides integrity against INTENTIONAL tampering (hackers), because of the secret key.",
+    "tip": "HMAC combines a Hash with a Secret Key to prevent malicious tampering."
+  },
+  {
+    "id": 22,
+    "question": "What is the primary operational difference between a Stateful Firewall and an Application Layer (Layer 7) Proxy Firewall?",
+    "options": ["A stateful firewall analyzes the TCP handshake, whereas a proxy firewall terminates the connection entirely, acts as a middleman, and creates a separate new connection to the destination.", "A stateful firewall relies on MAC addresses, whereas a proxy firewall relies on IP addresses.", "A proxy firewall cannot inspect encrypted traffic, whereas a stateful firewall can natively decrypt TLS sessions.", "There is no difference; they are synonymous terms in modern Cisco network architectures."],
+    "answer": "A stateful firewall analyzes the TCP handshake, whereas a proxy firewall terminates the connection entirely, acts as a middleman, and creates a separate new connection to the destination.",
+    "explanation": "Step 1: A Stateful Firewall tracks packets as they pass directly through it (like a border guard checking passports). Step 2: An Application Proxy Firewall does not let packets pass directly. Step 3: The client connects to the proxy. The proxy fully establishes the session. Step 4: The proxy inspects the payload, and if safe, the proxy initiates a brand NEW connection to the destination server. Step 5: This 'middleman' termination break is the defining characteristic of a proxy, offering higher security but lower performance.",
+    "trick": "Bank/IT Trap: Stateful firewalls allow end-to-end connections. Proxies BREAK the end-to-end connection into two separate pieces (Client-to-Proxy, and Proxy-to-Server).",
+    "tip": "Proxies terminate the connection and act as a secure middleman."
+  },
+  {
+    "id": 23,
+    "question": "Assertion (A): Zero-Day vulnerabilities cannot be detected by traditional Signature-based Antivirus engines. Reason (R): A Zero-Day vulnerability is a software flaw that is unknown to the vendor, meaning no patch exists, and therefore, no signature has been created for the antivirus database to recognize. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Signature-based AV works like a wanted poster; it needs an exact picture (hash) of the criminal. Step 2: A Zero-Day exploit is a brand new attack vector that has never been seen before in the wild. Step 3: Because it has never been seen, researchers haven't created a hash for it. Step 4: Without a signature in the database, the traditional AV engine is completely blind to it (A is True). Step 5: R perfectly explains the chronological timeline that makes detection impossible.",
+    "trick": "Bank/IT Trap: Zero-Day refers to the vendor having 'zero days' of notice to fix it. This is exactly why Heuristic (behavioral) scanning was invented—to catch things that have no signature.",
+    "tip": "Signature AV fails on Zero-Days because no known hash exists yet."
+  },
+  {
+    "id": 24,
+    "question": "In cryptographic terminology, what is a 'Ciphertext-only attack'?",
+    "options": ["An attack where the hacker has access to both the plaintext and its corresponding ciphertext.", "An attack where the hacker forces the system to encrypt specific plaintexts chosen by the attacker.", "An attack where the hacker has access to the public key but not the private key.", "An attack where the hacker only has access to the encrypted data and must attempt to deduce the plaintext or the key without any other information."],
+    "answer": "An attack where the hacker only has access to the encrypted data and must attempt to deduce the plaintext or the key without any other information.",
+    "explanation": "Step 1: Cryptanalysis defines several attack models based on what the attacker possesses. Step 2: In a 'Known-plaintext attack', the attacker has pairs of encrypted and unencrypted text. Step 3: In a 'Chosen-plaintext attack', they can feed text into the encryptor. Step 4: A 'Ciphertext-only attack' is the hardest scenario. The attacker has snooped on the network and captured the garbled, encrypted data, but has nothing else. Step 5: They must use statistical analysis or brute force to break it.",
+    "trick": "Bank/IT Trap: This is the most common real-world scenario (sniffing Wi-Fi traffic). It is also the most difficult cryptographic attack to pull off successfully against modern AES.",
+    "tip": "Ciphertext-only attack: Attacker has only the garbled, encrypted data."
+  },
+  {
+    "id": 25,
+    "question": "Assertion (A): When implementing a stateful firewall rule to allow web browsing (HTTP/HTTPS) for internal employees, the network administrator only needs to open ports 80 and 443 for outbound traffic, not inbound traffic. Reason (R): The stateful inspection engine will dynamically and temporarily open a return path for the inbound HTTP/HTTPS response packets, closing it as soon as the session ends. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: If a user inside a company requests a webpage (outbound on port 443), the web server must send the webpage back (inbound). Step 2: In a stateless firewall, the admin must permanently open inbound high-numbered ports, which is a massive security risk. Step 3: A stateful firewall remembers the outbound request in its state table. Step 4: When the response arrives, the firewall checks the table, sees it belongs to a valid outbound request, and temporarily allows it in (A is True). Step 5: R accurately describes this dynamic, secure process.",
+    "trick": "Bank/IT Trap: This is the core magic of Stateful Firewalls! You do NOT open inbound ports for web browsing. The firewall dynamically manages the return traffic based on outbound requests.",
+    "tip": "Stateful firewalls dynamically allow return traffic; no inbound rules needed."
+  },
+  {
+    "id": 26,
+    "question": "Which cryptographic algorithm is a symmetric block cipher widely adopted as the current global standard (e.g., used in WPA3 and government data), replacing the outdated Data Encryption Standard (DES)?",
+    "options": ["RSA (Rivest-Shamir-Adleman)", "AES (Advanced Encryption Standard)", "SHA-3 (Secure Hash Algorithm 3)", "ECC (Elliptic Curve Cryptography)"],
+    "answer": "AES (Advanced Encryption Standard)",
+    "explanation": "Step 1: The question asks for a Symmetric Block Cipher. Step 2: RSA and ECC are Asymmetric (Public Key) algorithms. Step 3: SHA-3 is a Hashing algorithm, not encryption. Step 4: DES was the old symmetric standard, but its 56-bit key was easily brute-forced. Step 5: AES (Rijndael) was adopted by NIST to replace DES. It supports 128, 192, and 256-bit keys and is the current gold standard for symmetric encryption.",
+    "trick": "Bank/IT Trap: Learn to classify algorithms instantly. AES = Symmetric Encryption. RSA = Asymmetric Encryption. SHA = Hashing. This immediately eliminates wrong options.",
+    "tip": "AES is the current global standard for Symmetric block encryption."
+  },
+  {
+    "id": 27,
+    "question": "Assertion (A): To ensure a downloaded software patch is authentic and unaltered, the software vendor should provide an AES-256 encrypted version of the file. Reason (R): An attacker cannot alter an AES-256 encrypted file without possessing the symmetric decryption key, guaranteeing its integrity during transit. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are False.",
+    "explanation": "Step 1: Analyze Assertion (A). Encryption provides secrecy, not authentication or integrity for public downloads. If the vendor encrypts the file with AES, they must give you the key to decrypt it. If the key is public, an attacker can encrypt a malicious file with the same key. A is False. Step 2: Analyze Reason (R). An attacker CAN alter encrypted bits in transit; the resulting decrypted file will just be corrupted (or maliciously altered if they understand the block structure). Step 3: To ensure authenticity and integrity, the vendor must use a Digital Signature (Hashing + Asymmetric crypto), not symmetric encryption. Step 4: Both statements are false.",
+    "trick": "Bank/IT Trap: Never use encryption to prove 'who sent it' or 'it wasn't changed' in a public setting. That is the exclusive job of Digital Signatures and Hashing.",
+    "tip": "Use Digital Signatures, not Encryption, to prove software authenticity."
+  },
+  {
+    "id": 28,
+    "question": "In the context of Heuristic Antivirus scanning, what is 'API Hooking' monitoring used for?",
+    "options": ["To intercept and encrypt network traffic before it reaches the router.", "To observe when an unknown program attempts to call critical operating system functions, such as writing to system directories or injecting code into other processes.", "To bypass the stateful firewall by disguising malware traffic as standard HTTP requests.", "To dynamically generate a public-private key pair for ransomware encryption."],
+    "answer": "To observe when an unknown program attempts to call critical operating system functions, such as writing to system directories or injecting code into other processes.",
+    "explanation": "Step 1: An API (Application Programming Interface) is how software asks the Operating System to do things (e.g., 'Windows, please save this file'). Step 2: Malware must use these APIs to cause damage (e.g., 'Windows, please delete the backup folder'). Step 3: Heuristic AV uses 'API Hooking' to insert itself between the software and the OS. Step 4: When an unknown program makes a suspicious API call (like injecting memory into Explorer.exe), the AV intercepts it and blocks it. Step 5: This is a core behavioral monitoring technique.",
+    "trick": "Bank/IT Trap: API Hooking is a double-edged sword. Antiviruses use it to monitor malware, but advanced Rootkits also use API Hooking to hide themselves from the Antivirus!",
+    "tip": "API Hooking monitors software requests to the OS for suspicious behavior."
+  },
+  {
+    "id": 29,
+    "question": "Assertion (A): When Bob creates a Digital Signature for a contract, he generates a hash of the document and encrypts that hash using his Private Key. Reason (R): By utilizing his Private Key, Bob guarantees the Confidentiality of the contract, ensuring that only Alice can read it. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "A is True but R is False.",
+    "explanation": "Step 1: Evaluate Assertion (A). The mechanics of a digital signature are correctly described: Hash the document -> Encrypt hash with sender's Private Key. A is True. Step 2: Evaluate Reason (R). A digital signature does NOT provide Confidentiality. Anyone with Bob's Public Key can decrypt the signature to verify it. Step 3: Furthermore, the document itself is not encrypted by this process, only the hash is. Step 4: Therefore, R's claim about guaranteeing confidentiality is fundamentally False. Step 5: A is True, but R is False.",
+    "trick": "Bank/IT Trap: Remember the CIA triad. Digital Signatures = Integrity + Authentication + Non-Repudiation. They provide ZERO Confidentiality. Anyone can read a digitally signed unencrypted email.",
+    "tip": "Digital signatures lock the hash, not the document. No confidentiality provided."
+  },
+  {
+    "id": 30,
+    "question": "Which of the following scenarios best demonstrates a network attack specifically designed to exhaust the state table of a Stateful Packet Inspection (SPI) firewall?",
+    "options": ["SQL Injection attack against a backend database.", "A SYN Flood DDoS attack.", "A phishing campaign targeting network administrators.", "A ransomware infection spreading via Server Message Block (SMB)."],
+    "answer": "A SYN Flood DDoS attack.",
+    "explanation": "Step 1: A Stateful Firewall tracks connections by allocating memory in its 'state table' for every incomplete and active TCP handshake. Step 2: A normal handshake is SYN -> SYN-ACK -> ACK. Step 3: In a SYN Flood, the attacker sends thousands of spoofed SYN packets per second. Step 4: The firewall logs each SYN and waits for the final ACK, which never comes. Step 5: The state table fills up entirely with these 'half-open' connections, consuming all memory and causing the firewall to drop legitimate new connections (Denial of Service).",
+    "trick": "Bank/IT Trap: A stateless firewall doesn't care about SYN floods because it doesn't remember anything. A stateful firewall's greatest strength (its memory) is weaponized against it in a SYN flood.",
+    "tip": "SYN Floods weaponize the Stateful Firewall's memory by exhausting its state table."
+  },
+  {
+    "id": 31,
+    "question": "Assertion (A): Elliptic Curve Cryptography (ECC) is rapidly replacing RSA in mobile devices and IoT sensors. Reason (R): ECC requires significantly shorter key lengths to provide the same level of cryptographic strength as RSA, drastically reducing CPU usage and battery consumption. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: RSA relies on the computational difficulty of factoring massive prime numbers, requiring large keys (e.g., 2048-bit or 4096-bit). Step 2: Processing 2048-bit keys drains battery and processing power on small devices like smartphones or smart thermostats. Step 3: ECC relies on the algebraic structure of elliptic curves. Step 4: A 256-bit ECC key provides roughly the same security as a 3072-bit RSA key. Step 5: Because the keys are vastly smaller, computations are faster and use less power, perfectly explaining why ECC is replacing RSA in mobile/IoT (R explains A).",
+    "trick": "Bank/IT Trap: Shorter keys usually mean weaker security, but ECC is the exception. The mathematics of curves are so complex that a tiny ECC key beats a massive RSA key.",
+    "tip": "ECC provides equal security to RSA but uses significantly smaller keys."
+  },
+  {
+    "id": 32,
+    "question": "In a corporate environment using a Stateful Firewall, what is the purpose of a 'Drop rule' placed at the very bottom of the Access Control List (ACL)?",
+    "options": ["To explicitly block ICMP Ping requests from external sources.", "To ensure the firewall operates in a 'Fail Open' state if the CPU overloads.", "To act as an 'Implicit Deny', ensuring that any traffic not explicitly permitted by the rules above it is discarded.", "To drop the state table periodically to free up RAM."],
+    "answer": "To act as an 'Implicit Deny', ensuring that any traffic not explicitly permitted by the rules above it is discarded.",
+    "explanation": "Step 1: Firewalls process rules sequentially from top to bottom. Step 2: If a packet matches Rule 1 (Allow Port 80), it passes. If not, it checks Rule 2, and so on. Step 3: What happens if a packet doesn't match ANY rule? Step 4: By default, secure firewalls use the 'Implicit Deny' principle. A 'Drop All' rule at the bottom enforces this. Step 5: It guarantees that unless traffic is expressly permitted by the admin, it is treated as hostile and dropped.",
+    "trick": "Bank/IT Trap: Security revolves around 'Least Privilege'. You don't make rules for every bad thing to block; you make rules for the good things to allow, and drop absolutely everything else.",
+    "tip": "Implicit Deny: The final firewall rule drops all unapproved traffic."
+  },
+  {
+    "id": 33,
+    "question": "Assertion (A): MD5 is considered cryptographically broken and should never be used to hash passwords in modern applications. Reason (R): MD5 produces a relatively short 128-bit hash output, making it highly susceptible to collision attacks where attackers can easily generate two different inputs that yield the exact same hash. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: MD5 (Message-Digest algorithm 5) was a global standard for hashing. Step 2: It is now universally deprecated for security purposes (A is True). Step 3: The vulnerability stems from its mathematical structure and 128-bit length. Step 4: Security researchers and attackers have demonstrated algorithms that can generate MD5 collisions in seconds using a standard laptop. Step 5: Because collisions break data integrity, R accurately explains the technical flaw causing MD5's deprecation.",
+    "trick": "Bank/IT Trap: While MD5 is broken for security (passwords/certificates), IT admins still use it for simple file integrity checks (e.g., checking if a downloaded ISO file is corrupted).",
+    "tip": "MD5 is cryptographically broken due to easy collision generation."
+  },
+  {
+    "id": 34,
+    "question": "How does a Heuristic Antivirus engine utilize a 'Sandbox' to protect a host computer from unknown malware?",
+    "options": ["By encrypting the Master Boot Record so the malware cannot overwrite it.", "By forcing the malware to establish a TCP handshake through a proxy server.", "By executing the suspicious file within a heavily restricted, isolated virtual environment and monitoring its behavioral intent before allowing it to run on the real OS.", "By comparing the file's hash against a cloud-based database of known safe applications."],
+    "answer": "By executing the suspicious file within a heavily restricted, isolated virtual environment and monitoring its behavioral intent before allowing it to run on the real OS.",
+    "explanation": "Step 1: Unknown files lack signatures, so they must be analyzed behaviorally. Step 2: If the AV runs the file on the real OS to see what it does, it risks infecting the computer. Step 3: A Sandbox is a safe, simulated Operating System (often a hidden Virtual Machine). Step 4: The AV 'detonates' the file in the Sandbox. Step 5: If the file attempts to delete system logs or encrypt virtual files, the Heuristic engine flags it as malware and deletes the real file without the host OS ever being harmed.",
+    "trick": "Bank/IT Trap: Advanced malware is now 'Sandbox Aware'. If the malware detects it is running inside a VM (e.g., checking for VMware drivers), it will behave perfectly normally to trick the Heuristics!",
+    "tip": "Sandboxing safely detonate files in isolated VMs to observe behavior."
+  },
+  {
+    "id": 35,
+    "question": "Assertion (A): When implementing a Virtual Private Network (VPN), IPsec uses the Encapsulating Security Payload (ESP) protocol to provide data confidentiality. Reason (R): ESP utilizes symmetric encryption algorithms like AES to encrypt the payload of the IP packet, ensuring it cannot be read during transit across the public internet. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: IPsec is a suite of protocols for secure VPNs. It has two main protocols: AH (Authentication Header) and ESP. Step 2: AH only provides integrity and authentication, NOT encryption. Step 3: ESP provides confidentiality by encrypting the data. Thus, A is True. Step 4: To achieve fast, bulk data encryption across a VPN, ESP uses Symmetric ciphers like AES. Step 5: Because the data is encrypted via AES within the ESP protocol, R perfectly explains the mechanism behind A.",
+    "trick": "Bank/IT Trap: Know the IPsec twins: AH = Authentication/Integrity ONLY (No secrecy). ESP = Encryption/Confidentiality. VPNs need ESP to actually hide your web traffic.",
+    "tip": "IPsec ESP provides confidentiality (encryption); AH provides only integrity."
+  },
+  {
+    "id": 36,
+    "question": "Which of the following describes the 'Man-in-the-Middle' (MitM) vulnerability that Public Key Infrastructure (PKI) and Digital Certificates are designed to solve?",
+    "options": ["An attacker brute-forces the symmetric AES key during a file transfer.", "An attacker intercepts a request for a Public Key and substitutes their own Public Key, allowing them to decrypt and read all subsequent 'secure' communication.", "An attacker floods the network with UDP packets, preventing legitimate users from completing the TLS handshake.", "An attacker uses a Rainbow Table to reverse a hashed password intercepted on the network."],
+    "answer": "An attacker intercepts a request for a Public Key and substitutes their own Public Key, allowing them to decrypt and read all subsequent 'secure' communication.",
+    "explanation": "Step 1: In basic asymmetric crypto, Alice asks Bob for his Public Key to send him a secret. Step 2: Eve (the MitM) intercepts the request. Eve sends ALICE her own (Eve's) Public Key, pretending to be Bob. Step 3: Alice encrypts the secret with Eve's key. Eve intercepts it, decrypts it, reads it, re-encrypts it with Bob's real key, and sends it to Bob. Step 4: Neither Alice nor Bob knows they are compromised. Step 5: PKI solves this via Digital Certificates (signed by CAs), proving the Public Key actually belongs to Bob, not Eve.",
+    "trick": "Bank/IT Trap: Without a trusted Certificate Authority verifying ownership, Public Keys are useless. Anyone can generate a key pair and claim to be 'Google.com'.",
+    "tip": "Digital Certificates prevent MitM attacks by proving Public Key ownership."
+  },
+  {
+    "id": 37,
+    "question": "Assertion (A): Static NAT (Network Address Translation) is primarily used as a security mechanism to hide internal private IP addresses from the public internet. Reason (R): Static NAT maps a single internal private IP address to a single, dedicated public IP address on a one-to-one basis. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "A is False but R is True.",
+    "explanation": "Step 1: Evaluate Assertion (A). While NAT inherently hides internal IPs, NAT was invented for IPv4 address conservation, not primarily as a security firewall. Furthermore, Static NAT exposes a machine directly to the internet via a permanent 1:1 mapping, making it the LEAST secure form of NAT. A is False. Step 2: Evaluate Reason (R). Static NAT is strictly defined as a 1-to-1 mapping (e.g., an internal web server mapped permanently to a public IP). R is True. Step 3: Therefore, A is False and R is True.",
+    "trick": "Bank/IT Trap: PAT (Port Address Translation / NAT Overload) hides many private IPs behind one public IP. Static NAT assigns a dedicated public IP to a single machine (like a web server), providing NO hiding.",
+    "tip": "Static NAT is a 1-to-1 mapping and is NOT a security mechanism."
+  },
+  {
+    "id": 38,
+    "question": "What happens in a cryptographic 'Replay Attack', and how do modern protocols defend against it?",
+    "options": ["The attacker forces the server to use outdated encryption protocols (like SSLv3); defended by disabling legacy protocols.", "The attacker records a legitimate, encrypted authentication session and retransmits it later to gain unauthorized access; defended by using nonces or timestamps.", "The attacker decrypts a hashed password; defended by adding a salt.", "The attacker alters the TCP sequence numbers to hijack a session; defended by a Stateful Firewall."],
+    "answer": "The attacker records a legitimate, encrypted authentication session and retransmits it later to gain unauthorized access; defended by using nonces or timestamps.",
+    "explanation": "Step 1: Imagine Alice logs into a server. Her credentials are encrypted, so the attacker (Eve) can't read them. Step 2: However, Eve simply records the entire encrypted transmission. Step 3: The next day, Eve 'replays' the exact same encrypted packet to the server. The server verifies the crypto math is correct and logs Eve in as Alice. Step 4: This is a Replay Attack. Step 5: To fix this, protocols include a 'nonce' (number used once) or a timestamp in the encryption. If Eve replays yesterday's packet, the server rejects the old timestamp.",
+    "trick": "Bank/IT Trap: In a replay attack, the hacker DOES NOT DECRYPT anything. They just act like a tape recorder playing back a valid digital conversation to trick the door into opening.",
+    "tip": "Replay attacks resend recorded encrypted packets; stopped by Nonces/Timestamps."
+  },
+  {
+    "id": 39,
+    "question": "Assertion (A): Advanced Heuristic engines often incorporate 'Entropy Analysis' to detect compressed or encrypted malware payloads. Reason (R): Entropy measures the randomness of data within a file; a heavily encrypted or packed executable will have near-maximum entropy, which triggers a red flag for the Heuristic scanner. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Normal software code has recognizable patterns and structures (lower entropy). Step 2: Malware authors use 'Packers' or encrypt their payloads to hide the malicious code from static AV scanners. Step 3: Encrypted and compressed data looks completely random mathematically. Step 4: Entropy is the scientific measure of this randomness. Step 5: Heuristic engines calculate the entropy of an executable. If it approaches 8.0 (maximum randomness), it strongly suggests the file is deliberately hiding its true code, flagging it as suspicious. R correctly explains the mechanism behind A.",
+    "trick": "Bank/IT Trap: High entropy doesn't guarantee a file is malware (it could just be a legitimate zipped file), but an executable (.exe) with high entropy is highly anomalous and suspicious.",
+    "tip": "High Entropy (randomness) in an executable indicates packed/encrypted malware."
+  },
+  {
+    "id": 40,
+    "question": "In the TLS/SSL handshake protocol, what is the specific function of the 'Session Key'?",
+    "options": ["It is an Asymmetric key used permanently by the server to identify itself to clients.", "It is a Symmetric key generated dynamically for a single connection to securely encrypt the bulk data transfer between client and server.", "It is a one-way Hash used to verify the Digital Certificate of the Certificate Authority.", "It is a Private Key embedded in the web browser by the manufacturer."],
+    "answer": "It is a Symmetric key generated dynamically for a single connection to securely encrypt the bulk data transfer between client and server.",
+    "explanation": "Step 1: TLS uses a hybrid cryptographic approach. Step 2: Asymmetric encryption (RSA/ECC) is too slow for streaming video or downloading files. Step 3: During the initial handshake, Asymmetric crypto is used securely to agree upon a shared secret. Step 4: This shared secret is used to generate a Symmetric 'Session Key' (like AES). Step 5: The Session Key is then used for the fast, bulk encryption of the actual web session, and is discarded when the browser is closed.",
+    "trick": "Bank/IT Trap: Asymmetric crypto (Public/Private keys) is the 'handshake'. Symmetric crypto (Session Key) is the actual 'conversation'.",
+    "tip": "Session Keys are temporary Symmetric keys used for fast bulk encryption."
+  },
+  {
+    "id": 41,
+    "question": "Assertion (A): When implementing a 'Zero Trust' network architecture, internal corporate LANs are no longer considered implicitly safe, requiring Stateful Firewalls to inspect internal East-West traffic. Reason (R): Traditional firewall models only inspect North-South traffic (internet to internal network), leaving the network vulnerable to lateral movement once an attacker breaches the perimeter. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: The old 'Castle and Moat' model assumed outside = bad (North-South traffic), inside = good. Step 2: If an attacker phished a user, they gained internal access and could move freely across the LAN (Lateral/East-West movement). Step 3: Zero Trust dictates 'Never Trust, Always Verify'. Step 4: This requires deploying micro-segmentation and internal firewalls to inspect traffic moving between internal departments. Step 5: Therefore, the vulnerability of lateral movement (R) explains the necessity of internal East-West firewalling in Zero Trust (A).",
+    "trick": "Bank/IT Trap: North-South = Outside to Inside. East-West = Inside to Inside. Zero trust means putting checkpoints on every internal road, not just the border.",
+    "tip": "Zero Trust requires internal (East-West) firewall inspection to stop lateral movement."
+  },
+  {
+    "id": 42,
+    "question": "Which cryptographic concept ensures that if an attacker somehow compromises a server's long-term RSA Private Key today, they cannot use it to decrypt network traffic they recorded months ago?",
+    "options": ["Digital Signature Algorithm (DSA)", "Perfect Forward Secrecy (PFS)", "Cipher Block Chaining (CBC)", "Steganography"],
+    "answer": "Perfect Forward Secrecy (PFS)",
+    "explanation": "Step 1: In older TLS protocols, the server's Private Key was used to directly exchange the Symmetric session key. Step 2: If an attacker recorded years of encrypted traffic and finally stole the server's Private Key, they could retroactively decrypt every single past session. Step 3: Perfect Forward Secrecy (using Diffie-Hellman Ephemeral - DHE/ECDHE) fixes this. Step 4: In PFS, a completely new, temporary key exchange happens for EVERY session, without relying on the long-term Private Key for the secret math. Step 5: Thus, past traffic remains permanently secure even if the main server key is later compromised.",
+    "trick": "Bank/IT Trap: PFS means the keys are 'ephemeral' (temporary). There is no master key that unlocks past conversations. Each conversation has a unique, instantly destroyed key.",
+    "tip": "Perfect Forward Secrecy protects past encrypted traffic from future key compromises."
+  },
+  {
+    "id": 43,
+    "question": "Assertion (A): Adding 'Pepper' to a hashed password database provides an additional layer of security beyond 'Salting', specifically mitigating the risk of database theft via SQL Injection. Reason (R): Unlike a Salt, which is stored in the same database alongside the hashed password, a Pepper is a secret cryptographic key stored separately in the application server's code or configuration files. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: A 'Salt' is a random value added to a password. It is stored publicly in the database right next to the hash. It stops rainbow tables, but if the database is stolen, the attacker gets both the hashes and the salts. Step 2: A 'Pepper' is an additional random string added to the password. Step 3: Crucially, the Pepper is NOT stored in the database. It is hardcoded into the web server. Step 4: If an attacker uses SQL Injection to steal the database, they don't get the Pepper. Step 5: Without the Pepper, they cannot crack the hashes. Thus, physical separation (R) explains the security benefit (A).",
+    "trick": "Bank/IT Trap: Salt = Stored in Database (Unique per user). Pepper = Stored in App Server (Usually global for all users). You need both the DB and the App Server to crack peppered passwords.",
+    "tip": "Salt is stored in the DB; Pepper is stored securely in the app server."
+  },
+  {
+    "id": 44,
+    "question": "In the context of Firewall filtering, what is 'IP Spoofing' and how does it attempt to bypass network security controls?",
+    "options": ["It involves altering the MAC address of the network interface card to impersonate a switch.", "It involves sending malformed ICMP packets to crash the firewall's processing unit.", "It involves an attacker forging the Source IP address in the packet header to make it appear as though the traffic is coming from a trusted, internal machine.", "It involves encrypting the IP header so the firewall cannot read the destination routing information."],
+    "answer": "It involves an attacker forging the Source IP address in the packet header to make it appear as though the traffic is coming from a trusted, internal machine.",
+    "explanation": "Step 1: Firewalls use Access Control Lists (ACLs) to permit or deny traffic based on IPs. Step 2: Often, firewalls are configured to trust packets originating from specific internal subnets (e.g., the HR department). Step 3: IP Spoofing is when an external attacker artificially modifies the TCP/IP packet header. Step 4: They change the 'Source IP' field to match a trusted internal IP. Step 5: A poorly configured stateless firewall might see the trusted IP and allow the malicious packet through.",
+    "trick": "Bank/IT Trap: This is why 'Anti-Spoofing' rules are critical. A firewall must know that a packet claiming to be from the internal network should NEVER arrive on the external internet interface.",
+    "tip": "IP Spoofing forges the Source IP header to impersonate a trusted machine."
+  },
+  {
+    "id": 45,
+    "question": "Assertion (A): Cloud-based Heuristic Antivirus solutions offer superior protection against Zero-day threats compared to traditional local Heuristic engines running exclusively on a user's CPU. Reason (R): Cloud-based engines leverage crowdsourced threat intelligence and utilize massive, centralized server clusters to run complex Machine Learning models and sandboxing in real-time without slowing down the user's local machine. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Local heuristics require significant CPU/RAM to analyze behavior or run sandboxes. This slows down the user's PC. Step 2: Because of PC limits, local heuristics must be simplified. Step 3: Cloud AV uploads suspicious file hashes (or the files themselves) to vendor servers (e.g., CrowdStrike, Microsoft). Step 4: The cloud has infinite compute power for deep AI analysis and sandboxing. Step 5: Furthermore, if one user in Japan encounters a zero-day, the cloud immediately protects a user in India. R perfectly explains the technical superiority of A.",
+    "trick": "Bank/IT Trap: 'Next-Gen Antivirus' (NGAV) relies heavily on the cloud. The local agent is just a lightweight sensor; the heavy brain-power analyzing the heuristics lives in the cloud.",
+    "tip": "Cloud Heuristics offload heavy ML/Sandboxing to servers, improving speed and detection."
+  },
+  {
+    "id": 46,
+    "question": "Which of the following Hash Algorithms was specifically designed by the NSA, published by NIST, and is the underlying cryptographic mechanism used in Bitcoin mining?",
+    "options": ["MD5", "SHA-1", "SHA-256", "RIPEMD-160"],
+    "answer": "SHA-256",
+    "explanation": "Step 1: Identify the creator: NSA/NIST. Step 2: MD5 was created by Ron Rivest. Step 3: SHA-1 was NSA/NIST but is deprecated due to collisions (160-bit). Step 4: SHA-256 (part of the SHA-2 family) is currently the global standard. Step 5: Satoshi Nakamoto famously selected SHA-256 for Bitcoin's Proof-of-Work algorithm, where miners constantly hash block headers to find a specific target.",
+    "trick": "Bank/IT Trap: While Bitcoin uses RIPEMD-160 for generating wallet addresses (to make them shorter), the actual heavy lifting of MINING and securing the blockchain is purely SHA-256.",
+    "tip": "SHA-256 is the NSA-designed hashing algorithm powering Bitcoin's Proof-of-Work."
+  },
+  {
+    "id": 47,
+    "question": "Assertion (A): When configuring a Stateful Firewall, implementing 'Port Knocking' makes internal services like SSH entirely invisible to automated network scanners like Nmap. Reason (R): Port Knocking requires the client to send a specific sequence of closed-port connection attempts (the 'knock'); only upon receiving the correct sequence will the firewall dynamically open the hidden SSH port for that specific client IP. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: An automated scanner (Nmap) checks sequential ports to see what is open. Step 2: If SSH (Port 22) is open, the scanner finds it, and hackers will try to brute-force the password. Step 3: Port Knocking closes Port 22 by default. The firewall monitors logs. Step 4: The admin pings port 7000, then 8000, then 9000. Step 5: The firewall recognizes this secret sequence and temporarily modifies the state table to allow port 22 access ONLY for the admin's IP. R explains exactly how it defeats scanners (A).",
+    "trick": "Bank/IT Trap: Port Knocking is 'Security through Obscurity'. It shouldn't be your ONLY defense, but it is a brilliant way to hide services from script kiddies and automated bots.",
+    "tip": "Port Knocking hides closed ports until a secret sequence of pings is received."
+  },
+  {
+    "id": 48,
+    "question": "In Public Key Infrastructure (PKI), what is a Certificate Revocation List (CRL)?",
+    "options": ["A list of symmetric AES keys that have been compromised by hackers.", "A database maintained by the Certificate Authority containing the serial numbers of digital certificates that have been invalidated before their expiration date.", "A whitelist of approved IP addresses permitted through a Stateful Firewall.", "A hashing algorithm used to detect tampered software."],
+    "answer": "A database maintained by the Certificate Authority containing the serial numbers of digital certificates that have been invalidated before their expiration date.",
+    "explanation": "Step 1: A Digital Certificate (which binds a Public Key to an identity) has an expiration date (e.g., valid for 1 year). Step 2: What happens if a server is hacked and its Private Key is stolen after only 2 months? Step 3: The company must immediately tell the CA that the certificate is no longer trustworthy. Step 4: The CA adds the certificate's serial number to the CRL. Step 5: When browsers connect to the site, they check the CRL. If the cert is listed, the browser displays a massive security warning.",
+    "trick": "Bank/IT Trap: Certificates don't automatically disappear when compromised. They must be explicitly revoked via a CRL or OCSP (Online Certificate Status Protocol) so browsers know to reject them.",
+    "tip": "CRL lists digital certificates revoked early due to private key compromise."
+  },
+  {
+    "id": 49,
+    "question": "Assertion (A): An Asymmetric encryption algorithm is fundamentally a one-way mathematical function. Reason (R): In Asymmetric cryptography, data encrypted with a Public Key cannot be mathematically reversed or decrypted using that same Public Key. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A.", "Both A and R are True, but R is not the correct explanation of A.", "A is True but R is False.", "A is False but R is True."],
+    "answer": "A is False but R is True.",
+    "explanation": "Step 1: Evaluate Assertion (A). Encryption, by absolute definition, is a TWO-WAY process (plaintext -> ciphertext -> plaintext). Hashing is a one-way function. Therefore, calling Asymmetric encryption a one-way function is false. Step 2: Evaluate Reason (R). Asymmetric uses a mathematically linked pair. The Public Key locks it, but CANNOT unlock it. Only the Private key can unlock it. Step 3: R accurately describes the behavior of the Public Key in the asymmetric process. Step 4: Thus, A is False, but R is technically a True statement regarding the mechanics of the Public key.",
+    "trick": "Bank/IT Trap: Do not confuse 'one-way function' with 'a key that only works in one direction'. Encryption is always two-way (recoverable). Hashing is one-way (unrecoverable).",
+    "tip": "Encryption is ALWAYS two-way. A Public Key only locks; Private Key unlocks."
+  },
+  {
+    "id": 50,
+    "question": "Which of the following scenarios best illustrates the concept of 'False Negatives' in Heuristic Antivirus scanning?",
+    "options": ["The Antivirus quarantines a brand new, custom-built corporate accounting application because it attempts to modify a registry key.", "The Antivirus successfully identifies and deletes the 'WannaCry' ransomware based on its SHA-256 hash.", "A highly sophisticated Zero-Day polymorphic worm behaves normally during the sandbox analysis phase to evade detection, and is allowed to execute on the host OS.", "The Antivirus blocks a user from visiting a known malicious phishing website."],
+    "answer": "A highly sophisticated Zero-Day polymorphic worm behaves normally during the sandbox analysis phase to evade detection, and is allowed to execute on the host OS.",
+    "explanation": "Step 1: Understand the terminology. 'Positive' = AV says it is malware. 'Negative' = AV says it is safe. Step 2: 'False' means the AV was wrong. Step 3: Therefore, a 'False Negative' means the AV said a file was safe (Negative), but it was actually malware (False). Step 4: Option 1 is a False Positive (quarantining safe software). Step 5: Option 3 perfectly describes a False Negative: the heuristic sandbox failed to catch the threat, letting malware slip through the defenses.",
+    "trick": "Bank/IT Trap: False Positive = False Alarm (annoying for users/admins). False Negative = Silent Breach (catastrophic for security). Sandbox evasion directly causes False Negatives.",
+    "tip": "False Negative = Malware bypasses the AV undetected. False Positive = Safe file blocked."
+  },
+  {
+    "id": 51,
+    "question": "Assertion (A): Stuxnet is classified as a kinetic cyber-weapon rather than standard malware because it targeted Industrial Control Systems (ICS). Reason (R): Stuxnet utilized four zero-day vulnerabilities to manipulate Siemens PLCs, destroying physical centrifuges while feeding false, normal telemetry back to the human operators. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Standard malware focuses on data theft or ransom. Step 2: Stuxnet specifically targeted SCADA/ICS environments. Step 3: It bridged the digital-to-physical gap (kinetic impact) by altering the rotational speed of uranium enrichment centrifuges. Step 4: It hid its actions by intercepting sensor data and playing back normal readings. Step 5: Therefore, R perfectly explains the mechanism that justifies A's classification.",
+    "trick": "Bank/IT Trap: Do not confuse standard data-wipers with kinetic weapons. Stuxnet caused actual physical machinery destruction, which was unprecedented.",
+    "tip": "Stuxnet = First digital kinetic weapon targeting SCADA/PLCs."
+  },
+  {
+    "id": 52,
+    "question": "Which of the following techniques is predominantly used by Kernel-mode Rootkits to hide malicious processes from native OS monitoring tools like Windows Task Manager?",
+    "options": ["Cross-Site Scripting (XSS) payload injection", "Direct Kernel Object Manipulation (DKOM)", "Domain Generation Algorithms (DGA)", "Border Gateway Protocol (BGP) Hijacking"],
+    "answer": "Direct Kernel Object Manipulation (DKOM)",
+    "explanation": "Step 1: Task Manager reads from a specific kernel data structure (like the EPROCESS block in Windows) to list active processes. Step 2: A Kernel-mode Rootkit operates at Ring 0, granting it direct memory access. Step 3: DKOM involves unlinking the malicious process from the active processes list. Step 4: The process still executes via thread scheduling, but the OS reporting tools cannot see it. Step 5: Hence, DKOM is the definitive hiding technique.",
+    "trick": "Bank/IT Trap: Students often confuse API Hooking with DKOM. While both hide things, DKOM actively unlinks data structures in memory without intercepting function calls.",
+    "tip": "DKOM unlinks active processes; invisibility without altering code."
+  },
+  {
+    "id": 53,
+    "question": "Assertion (A): The 2016 Mirai botnet attack reached unprecedented DDoS traffic volumes, primarily exploiting default factory credentials in IoT devices rather than complex Zero-Day vulnerabilities. Reason (R): IoT devices inherently lack processing power, preventing them from participating in distributed denial of service attacks without relying on an external amplification server. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Mirai successfully amassed hundreds of thousands of compromised CCTV cameras and routers using hardcoded default telnet/SSH passwords. Step 2: Assertion A is completely true. Step 3: Reason R claims IoT devices cannot perform DDoS directly. This is false. Step 4: Mirai utilized the sheer aggregate volume of these devices (direct flooding) to overwhelm DNS providers like Dyn, proving low-power devices can collectively execute massive direct attacks. Step 5: Thus, A is True and R is False.",
+    "trick": "Bank/IT Trap: Never underestimate low-power IoT devices. A million tiny water guns firing at once will still cause a massive flood.",
+    "tip": "Mirai botnet = Default credentials on IoT devices causing massive DDoS."
+  },
+  {
+    "id": 54,
+    "question": "Consider the operational architecture of a modern Botnet. What specific evolutionary mechanism allows a Botmaster to prevent security researchers from easily taking down their Command and Control (C2) infrastructure by hardcoding a single IP address?",
+    "options": ["Symmetric Key Cryptography", "Fast Flux DNS and Domain Generation Algorithms (DGA)", "Heuristic Analysis Evasion", "Address Resolution Protocol (ARP) Poisoning"],
+    "answer": "Fast Flux DNS and Domain Generation Algorithms (DGA)",
+    "explanation": "Step 1: Early botnets used static, hardcoded IP addresses for their C2 servers. Step 2: Researchers could simply block or seize that IP to decapitate the botnet. Step 3: To adapt, botnets introduced DGA, generating thousands of random domain names daily. Step 4: Fast Flux constantly rotates the IP addresses associated with a domain name across a network of compromised proxies. Step 5: Together, they make finding and blocking the actual C2 server extremely difficult.",
+    "trick": "Bank/IT Trap: ARP poisoning is a local network attack (MITM). C2 evasion requires global DNS manipulation techniques like DGA and Fast Flux.",
+    "tip": "DGA and Fast Flux ensure botnet C2 servers remain hidden and active."
+  },
+  {
+    "id": 55,
+    "question": "Assertion (A): A 'Zero-Day' vulnerability represents a critical window of exposure where signature-based Antivirus software is almost completely ineffective. Reason (R): Signature-based detection relies on a database of known malware hashes; since a Zero-Day exploit has never been seen before, no signature exists to match against it. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A Zero-Day vulnerability is a software flaw unknown to the vendor. Step 2: When attackers exploit it, the resulting malware payload is completely novel. Step 3: Traditional Antivirus works like a criminal database, checking file hashes against known bad lists (signatures). Step 4: Because the Zero-Day is new, its hash is not in the database. Step 5: Therefore, R accurately explains why A is true. Advanced heuristic or behavioral analysis is required instead.",
+    "trick": "Bank/IT Trap: Zero-Day refers to the vulnerability itself, but the 'Zero-Day Exploit' is the active attack. Both evade legacy signature-based AV.",
+    "tip": "Zero-Day exploits require behavioral/heuristic AV, not signature-based AV."
+  },
+  {
+    "id": 56,
+    "question": "In the context of the 2017 global cyber crisis, what distinct architectural feature classified WannaCry as a 'Ransomworm' rather than traditional Ransomware?",
+    "options": ["It utilized RSA-2048 encryption for file locking.", "It demanded payment strictly in Monero cryptocurrency.", "It utilized the EternalBlue exploit to autonomously propagate across LANs via SMBv1 without user interaction.", "It deleted the Volume Shadow Copies to prevent file restoration."],
+    "answer": "It utilized the EternalBlue exploit to autonomously propagate across LANs via SMBv1 without user interaction.",
+    "explanation": "Step 1: Traditional ransomware requires a user to click a phishing link or download a malicious payload. Step 2: A 'Worm' is a standalone malware that self-replicates across networks. Step 3: WannaCry combined both. Step 4: Once a single machine was infected, it scanned the local network for port 445 and used the leaked NSA exploit 'EternalBlue' to infect other vulnerable SMBv1 machines automatically. Step 5: This worm-like capability caused its unprecedented spread.",
+    "trick": "Bank/IT Trap: Ransomware encrypts and deletes shadow copies, but the self-propagation without human interaction is what makes it a 'worm'.",
+    "tip": "WannaCry = Ransomware payload + Worm propagation (via EternalBlue)."
+  },
+  {
+    "id": 57,
+    "question": "Advanced Persistent Threats (APTs) often employ a technique known as 'Living off the Land' (LotL). Which of the following best describes this zero-day evasion methodology?",
+    "options": ["Deploying custom-built executable files to bypass network firewalls.", "Using pre-installed, legitimate administrative tools like PowerShell or WMI to execute malicious activities.", "Encrypting the hard drive using standard AES-256 to extort the organization.", "Hijacking an organization's physical routers to redirect traffic."],
+    "answer": "Using pre-installed, legitimate administrative tools like PowerShell or WMI to execute malicious activities.",
+    "explanation": "Step 1: Traditional malware introduces foreign malicious files (.exe) onto a system, which AV tools scan and block. Step 2: To evade detection, attackers use 'Living off the Land' techniques. Step 3: This involves executing attacks using dual-use, native tools already trusted by the OS, such as PowerShell, Windows Management Instrumentation (WMI), or PsExec. Step 4: Because the tools are legitimate, standard security solutions often ignore the malicious commands running within them. Step 5: This facilitates stealthy, fileless attacks.",
+    "trick": "Bank/IT Trap: LotL is about avoiding custom malware drops altogether. If you see 'fileless malware', think LotL and PowerShell.",
+    "tip": "Living off the Land uses native OS tools (PowerShell) for stealth."
+  },
+  {
+    "id": 58,
+    "question": "Assertion (A): NotPetya, initially disguised as ransomware in 2017, was eventually classified by cybersecurity experts as a 'Wiper' malware. Reason (R): Unlike standard ransomware where purchasing the decryption key restores access, NotPetya's encryption algorithm irreversibly corrupted the Master File Table (MFT), making data recovery impossible even if the ransom was paid. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: NotPetya hit global networks shortly after WannaCry, demanding $300 in Bitcoin. Step 2: Analysts discovered its code was a modified version of Petya. Step 3: However, the installation mechanism deliberately threw away the decryption key and permanently scrambled the MFT. Step 4: Because the damage was irreversible, its true intent was sabotage (destruction), not financial gain. Step 5: Thus, R correctly explains why it is classified as a Wiper (Assertion A).",
+    "trick": "Bank/IT Trap: Ransomware = extortion (recoverable). Wiper = sabotage (unrecoverable). NotPetya was state-sponsored sabotage disguised as ransomware.",
+    "tip": "NotPetya was a destructive Wiper disguised as ransomware."
+  },
+  {
+    "id": 59,
+    "question": "When analyzing OS architectures in the context of Rootkits, what does 'Ring 0' signify, and why is a Ring 0 Rootkit exceptionally dangerous?",
+    "options": ["It signifies User Mode; it is dangerous because it can read user keystrokes easily.", "It signifies Kernel Mode; it is dangerous because it has unrestricted access to hardware and can intercept fundamental OS operations.", "It signifies the Application Layer; it is dangerous because it bypasses application sandboxes.", "It signifies the BIOS level; it is dangerous because it survives hard drive formatting."],
+    "answer": "It signifies Kernel Mode; it is dangerous because it has unrestricted access to hardware and can intercept fundamental OS operations.",
+    "explanation": "Step 1: Modern operating systems use hierarchical protection domains known as protection rings. Step 2: Ring 3 is User Mode (least privileged), where normal apps run. Step 3: Ring 0 is Kernel Mode (most privileged), the core of the OS. Step 4: A rootkit operating at Ring 0 can intercept system calls, modify OS structures, and subvert any Ring 3 security tool (like Antivirus). Step 5: Therefore, it achieves ultimate stealth and control.",
+    "trick": "Bank/IT Trap: Do not confuse Ring 0 with the BIOS/UEFI level (which is technically below Ring 0, often referred to as Ring -1 or -2, where Bootkits live).",
+    "tip": "Ring 0 = Kernel Mode. Unrestricted OS and hardware access."
+  },
+  {
+    "id": 60,
+    "question": "A massive Distributed Denial of Service (DDoS) attack overwhelms a target server with 1.2 Tbps of traffic. Security analysis reveals the traffic consists entirely of DNS response packets, even though the botnet only sent a few megabytes of queries. Which specific attack vector was utilized?",
+    "options": ["SYN Flood Attack", "HTTP POST Flood", "Reflective Amplification Attack", "Ping of Death"],
+    "answer": "Reflective Amplification Attack",
+    "explanation": "Step 1: The attacker wants to send massive traffic without using immense bandwidth themselves. Step 2: They spoof the target's IP address. Step 3: They send small DNS queries to open DNS resolvers globally (Reflection). Step 4: They request large DNS records (e.g., DNSSEC keys), turning a 60-byte query into a 4000-byte response (Amplification). Step 5: The resolvers send the massive responses to the spoofed target IP, crushing the server with amplified traffic.",
+    "trick": "Bank/IT Trap: SYN floods exhaust server state tables, not pure bandwidth. Massive disparity between attacker effort and target impact signifies Amplification.",
+    "tip": "Spoofed IP + Small Request = Massive Response to Target -> Amplification DDoS."
+  },
+  {
+    "id": 61,
+    "question": "Assertion (A): Exploit Kits (EKs) automate the process of serving Zero-Day or n-day exploits to unsuspecting victims primarily through 'Drive-by Downloads'. Reason (R): EKs require the user to actively download and install an executable file from a malicious email attachment to trigger the infection chain. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Exploit Kits are malicious toolkits hosted on compromised websites. Step 2: When a user visits the site, the EK invisibly profiles the user's browser for vulnerabilities (Java, Flash, PDF). Step 3: It then silently drops a payload without user interaction—this is a 'Drive-by Download' (A is True). Step 4: Reason R states it requires active downloading via email. This contradicts the fundamental stealth nature of a drive-by download via an EK. Step 5: Therefore, R is entirely false.",
+    "trick": "Bank/IT Trap: Drive-by downloads mean NO user interaction is required beyond visiting the compromised web page. Simply viewing the page is enough to get infected.",
+    "tip": "Exploit Kits use Drive-by Downloads (no user clicks required)."
+  },
+  {
+    "id": 62,
+    "question": "To circumvent deep packet inspection and intrusion detection systems, modern Botnets often implement a decentralized Command and Control (C2) architecture. Which protocol model fundamentally eliminates the 'Single Point of Failure' inherent in traditional centralized C2 servers?",
+    "options": ["Internet Relay Chat (IRC) based C2", "Peer-to-Peer (P2P) network C2", "Hypertext Transfer Protocol (HTTP) C2", "Simple Mail Transfer Protocol (SMTP) C2"],
+    "answer": "Peer-to-Peer (P2P) network C2",
+    "explanation": "Step 1: Early botnets used IRC or HTTP to connect back to a single central server. Step 2: If authorities took down that server, the entire botnet died (Single Point of Failure). Step 3: In a P2P botnet architecture, there is no central server. Step 4: Every infected zombie node acts as both a client and a server, passing commands to its neighbors. Step 5: This decentralized web makes it nearly impossible to dismantle the botnet in one strike.",
+    "trick": "Bank/IT Trap: IRC was the original protocol for botnets, but it is highly centralized and easy to monitor. P2P is the decentralized evolution.",
+    "tip": "P2P Botnets have no central server, preventing single point of failure."
+  },
+  {
+    "id": 63,
+    "question": "Assertion (A): Metamorphic malware is significantly harder for signature-based Antivirus engines to detect compared to Polymorphic malware. Reason (R): While polymorphic malware only encrypts its payload and changes its decryption routine, metamorphic malware completely rewrites its own core logic and structure in every iteration without changing its ultimate function. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Signature-based AV looks for static bytes. Step 2: Polymorphic viruses encrypt their main body and use a different decryption key/stub each time, but the underlying code remains the same once decrypted. Step 3: Metamorphic viruses do not rely on encryption; instead, they act like an advanced compiler. Step 4: They translate, rewrite, and obfuscate their own instructions (adding dead code, swapping registers) so every generation looks completely different structurally. Step 5: Therefore, R perfectly explains why A is true.",
+    "trick": "Bank/IT Trap: Polymorphic = Changes the 'wrapper' (encryption stub). Metamorphic = Changes the 'body' (core code). Metamorphic is much deadlier to static analysis.",
+    "tip": "Polymorphic changes encryption stub; Metamorphic rewrites its own core code."
+  },
+  {
+    "id": 64,
+    "question": "Which specific Windows OS mechanism is most frequently targeted by User-Mode (Ring 3) Rootkits to intercept and modify function calls, allowing them to hide files or network connections?",
+    "options": ["Master Boot Record (MBR) Modification", "System Service Descriptor Table (SSDT) Manipulation", "Application Programming Interface (API) Hooking", "Direct Memory Access (DMA) overriding"],
+    "answer": "Application Programming Interface (API) Hooking",
+    "explanation": "Step 1: Rootkits need to intercept requests from the OS to hide their presence. Step 2: Kernel-mode rootkits use SSDT manipulation or DKOM. Step 3: User-mode rootkits operate at Ring 3 and cannot access kernel structures. Step 4: Instead, they inject malicious code into a running application (like Windows Explorer) and 'hook' the legitimate API calls (e.g., FindFirstFile or EnumProcesses). Step 5: By intercepting these API responses, they filter out their own malicious files from being displayed.",
+    "trick": "Bank/IT Trap: SSDT and DKOM are strictly Kernel-mode (Ring 0) techniques. API Hooking (like IAT hooking) is the primary weapon of User-mode (Ring 3) rootkits.",
+    "tip": "User-mode Rootkits rely heavily on API Hooking to intercept data."
+  },
+  {
+    "id": 65,
+    "question": "In the analysis of the Stuxnet worm, researchers identified a highly sophisticated technique used to bridge 'air-gapped' networks. Which vulnerability played the most critical role in allowing the malware to execute automatically upon physical insertion of a USB drive?",
+    "options": ["CVE-2017-0144 (EternalBlue SMB exploit)", "Windows Shortcut (.LNK) Auto-Execution Zero-Day", "Print Spooler Remote Code Execution", "SQL Injection in the SCADA HMI"],
+    "answer": "Windows Shortcut (.LNK) Auto-Execution Zero-Day",
+    "explanation": "Step 1: An air-gapped network has no connection to the internet. Step 2: To infect the Iranian nuclear facility, Stuxnet relied on physical USB drives. Step 3: Relying on a user to click an infected file is too risky for a state-sponsored APT. Step 4: Stuxnet exploited a Zero-Day in how Windows processed .LNK (shortcut) files. Step 5: The mere act of inserting the USB and viewing it in Windows Explorer triggered the payload automatically, bypassing all need for human interaction.",
+    "trick": "Bank/IT Trap: EternalBlue is WannaCry (2017). Stuxnet (2010) utilized four zero-days, but the .LNK vulnerability was the specific vector for jumping the air-gap via USB.",
+    "tip": "Stuxnet jumped air-gapped networks using a Windows .LNK shortcut Zero-Day."
+  },
+  {
+    "id": 66,
+    "question": "Assertion (A): The technique of 'Sinkholing' is an effective strategy deployed by cybersecurity authorities to dismantle active Botnets. Reason (R): Sinkholing involves reverse-engineering the malware's Domain Generation Algorithm (DGA), predicting future C2 domain names, and registering them to redirect bot traffic to a server controlled by law enforcement. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Botnets use DGAs to randomly generate thousands of C2 domains to avoid hardcoded IP blocking. Step 2: To stop this, authorities analyze the malware code to extract the DGA seed. Step 3: By predicting which domains the bots will try to contact tomorrow, authorities proactively register those domains. Step 4: When the bots 'phone home', they connect to the police server (the Sinkhole) instead of the hacker. Step 5: This isolates the bots, cutting off the Botmaster's control. A and R are completely aligned.",
+    "trick": "Bank/IT Trap: Sinkholing doesn't 'cure' the infected computers (they still have the malware), but it neutralizes the botnet's offensive capabilities by severing C2 communication.",
+    "tip": "Sinkholing redirects botnet C2 traffic to law enforcement servers."
+  },
+  {
+    "id": 67,
+    "question": "Which of the following best defines a 'Watering Hole' attack, a common initial compromise vector utilized by Advanced Persistent Threats (APTs)?",
+    "options": ["Sending thousands of generic, malicious emails hoping a few employees click the link.", "Compromising a specific, legitimate website frequently visited by the target organization's employees to serve a Zero-Day exploit.", "Overwhelming a target's network edge routers with fragmented UDP packets.", "Physically dropping infected USB drives in the parking lot of the target organization."],
+    "answer": "Compromising a specific, legitimate website frequently visited by the target organization's employees to serve a Zero-Day exploit.",
+    "explanation": "Step 1: APTs need stealthy access to high-value targets. Step 2: Spear-phishing targets users via email. Step 3: A Watering Hole attack relies on profiling the target organization's web habits. Step 4: Instead of attacking the hardened corporate network directly, the APT compromises an insecure third-party website the employees trust (like an industry forum). Step 5: The site is laced with an exploit kit. When the employee visits, they are infected via a drive-by download, granting the APT access to the corporate network.",
+    "trick": "Bank/IT Trap: USB dropping is 'Baiting'. Email targeting is 'Spear Phishing'. Compromising a trusted third-party website is a 'Watering Hole' attack.",
+    "tip": "Watering Hole attacks infect trusted websites frequented by the target."
+  },
+  {
+    "id": 68,
+    "question": "When examining modern Ransomware-as-a-Service (RaaS) architectures, how do threat actors ensure that local file encryption is extremely fast, yet the decryption key remains securely in their possession?",
+    "options": ["By encrypting files using exclusively RSA asymmetric encryption.", "By utilizing a hybrid approach: encrypting files with symmetric AES, and then encrypting the AES key with an asymmetric RSA public key.", "By storing the decryption key in the local Windows Registry in plain text.", "By relying entirely on Hash algorithms like SHA-256 to lock the files."],
+    "answer": "By utilizing a hybrid approach: encrypting files with symmetric AES, and then encrypting the AES key with an asymmetric RSA public key.",
+    "explanation": "Step 1: Asymmetric encryption (RSA) is very slow, unsuitable for encrypting gigabytes of user files quickly. Step 2: Symmetric encryption (AES) is incredibly fast. Step 3: Ransomware generates a unique, fast AES key on the victim's machine to lock the files. Step 4: To prevent the user from finding the AES key in memory, the malware immediately encrypts that AES key using the attacker's embedded RSA public key. Step 5: Only the attacker possesses the RSA private key required to decrypt the AES key, ensuring extortion leverage.",
+    "trick": "Bank/IT Trap: Hashing is one-way and cannot be decrypted. Pure RSA is too slow. The AES+RSA hybrid approach is the hallmark of modern ransomware.",
+    "tip": "Ransomware uses fast AES for files, and slow RSA for the AES key."
+  },
+  {
+    "id": 69,
+    "question": "Assertion (A): Emotet was originally designed as a simplistic banking trojan but evolved into one of the most dangerous malware distribution botnets in history. Reason (R): Emotet transitioned into a 'Malware-as-a-Service' (MaaS) provider, utilizing its massive network of infected hosts specifically to drop other high-profile malware, such as TrickBot and Ryuk ransomware, onto victim networks. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Emotet appeared in 2014 primarily to steal banking credentials. Step 2: Over time, its creators realized their persistent network of infected machines was highly valuable. Step 3: They altered Emotet to act as an initial access broker (a loader). Step 4: They rented out their botnet to other cybercriminal gangs (MaaS). Step 5: A classic attack chain became: Emotet infects -> loads TrickBot (credential theft) -> loads Ryuk (Ransomware). R perfectly explains the evolution stated in A.",
+    "trick": "Bank/IT Trap: Emotet is a classic example of malware evolution. It stopped stealing money directly and started charging 'rent' to other malware gangs to use its botnet infrastructure.",
+    "tip": "Emotet evolved from a banking trojan into a massive malware loader."
+  },
+  {
+    "id": 70,
+    "question": "Which of the following scenarios best demonstrates a 'Zero-Click' exploit, heavily favored by advanced spyware vendors like the NSO Group (creators of Pegasus)?",
+    "options": ["A user downloads a PDF manual from a forum, clicks to open it, and triggers a malicious macro.", "An attacker sends a specially crafted iMessage that exploits a flaw in the image rendering library, compromising the phone without the user ever opening the message.", "A user visits a compromised website and is infected via a drive-by download in the background.", "An attacker physically accesses an unlocked phone and installs a hidden rootkit."],
+    "answer": "An attacker sends a specially crafted iMessage that exploits a flaw in the image rendering library, compromising the phone without the user ever opening the message.",
+    "explanation": "Step 1: Exploits require a vector to trigger. Step 2: Traditional attacks require user interaction (opening a file, clicking a link). Step 3: Drive-by downloads require the user to actively browse to a web page. Step 4: A 'Zero-Click' exploit requires absolutely zero action from the target. Step 5: The malicious packet is parsed by a background process (like an OS handling an incoming SMS/iMessage notification), triggering a memory corruption flaw and granting total device control silently.",
+    "trick": "Bank/IT Trap: Drive-by downloads still require the user to 'click' to visit the website. Zero-click means the phone can be sitting untouched on a table and become compromised merely by receiving a network packet.",
+    "tip": "Zero-Click requires zero user interaction; exploits background parsers."
+  },
+  {
+    "id": 71,
+    "question": "Assertion (A): The historic ILOVEYOU virus (2000) is technically classified as a Worm rather than a standard Virus. Reason (R): Upon execution by the user, ILOVEYOU accessed the Windows Address Book and autonomously sent copies of itself to all contacts via Microsoft Outlook, demonstrating self-propagation across a network. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A traditional virus requires a host file and user action to spread (e.g., sharing an infected floppy disk). Step 2: A worm is characterized by its ability to replicate and transmit itself automatically over a network. Step 3: ILOVEYOU was a VBScript. Step 4: Once a user clicked it once, it took over Outlook and emailed itself globally without further human intervention. Step 5: This network-based self-propagation is the defining trait of a worm, making R the correct explanation for A.",
+    "trick": "Bank/IT Trap: Even though it was called the 'ILOVEYOU Virus' in media, technically it was a Worm because of its autonomous email propagation mechanism.",
+    "tip": "Worms self-propagate across networks; Viruses infect local host files."
+  },
+  {
+    "id": 72,
+    "question": "In the context of defending against Advanced Persistent Threats (APTs), which cybersecurity architecture assumes that the internal network is already compromised and therefore demands strict identity verification for every single request, regardless of the device's physical location?",
+    "options": ["Perimeter-based Defense in Depth", "Zero Trust Architecture (ZTA)", "Intrusion Prevention System (IPS) isolation", "Air-Gapping"],
+    "answer": "Zero Trust Architecture (ZTA)",
+    "explanation": "Step 1: Legacy security focused on a hard perimeter (firewall), trusting everything inside the network. Step 2: APTs easily bypass perimeters via phishing or watering holes, moving laterally once inside. Step 3: Zero Trust Architecture operates on the principle 'Never trust, always verify'. Step 4: It assumes breach. Therefore, an internal IP address grants zero privileges. Step 5: Every user, device, and application must mutually authenticate and be authorized for every individual network flow.",
+    "trick": "Bank/IT Trap: Defense in Depth involves multiple layers, but still often trusts internal zones. Zero Trust inherently removes the concept of a 'trusted internal network'.",
+    "tip": "Zero Trust = 'Never trust, always verify', assuming internal network is breached."
+  },
+  {
+    "id": 73,
+    "question": "What is the primary technical objective of 'Shadow IT' in the context of enterprise vulnerability, and why does it frequently serve as a vector for Zero-Day exploits?",
+    "options": ["It refers to hacker groups operating on the dark web selling zero-day vulnerabilities.", "It refers to unauthorized software or devices used by employees without IT department approval, lacking patches and monitoring.", "It is an advanced rootkit technique that creates 'shadow' copies of malicious files to evade antivirus deletion.", "It is the backup network infrastructure used when the primary network suffers a DDoS attack."],
+    "answer": "It refers to unauthorized software or devices used by employees without IT department approval, lacking patches and monitoring.",
+    "explanation": "Step 1: Shadow IT is an organizational vulnerability concept. Step 2: Employees use unauthorized tools (cloud storage, personal laptops, unapproved SaaS apps) to bypass restrictive corporate policies. Step 3: The IT department cannot secure, monitor, or patch what it does not know exists. Step 4: Consequently, these unmanaged systems become highly susceptible to newly discovered flaws (Zero-Days). Step 5: Hackers exploit these unmonitored shadow systems to gain a foothold before pivoting into the secure corporate network.",
+    "trick": "Bank/IT Trap: Shadow IT sounds like a hacker term, but it describes employee behavior. It's an administrative nightmare that creates massive blind spots for corporate security.",
+    "tip": "Shadow IT = Unapproved, unmonitored employee tech bridging corporate networks."
+  },
+  {
+    "id": 74,
+    "question": "Assertion (A): Bootkits are generally considered more persistent and dangerous than Kernel-mode Rootkits. Reason (R): Bootkits infect the Master Boot Record (MBR) or Volume Boot Record (VBR), allowing them to load into memory before the Operating System and its Antivirus software even begin to boot. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Rootkits intercept OS calls. Step 2: If an Antivirus starts before a Kernel-mode rootkit, the AV might detect it. Step 3: Malware developers created Bootkits to win this 'race condition'. Step 4: By overwriting the MBR, the Bootkit executes immediately after the BIOS hands off control, long before Windows loads. Step 5: This allows the Bootkit to patch the OS kernel in memory as it loads, ensuring the malware has supreme authority over all subsequent security software.",
+    "trick": "Bank/IT Trap: Secure Boot (UEFI) was specifically designed to prevent Bootkits by checking cryptographic signatures of bootloaders before executing them.",
+    "tip": "Bootkits load before the OS (via MBR/UEFI), achieving ultimate persistence."
+  },
+  {
+    "id": 75,
+    "question": "In a sophisticated Botnet, a 'Bot Herder' often utilizes the Border Gateway Protocol (BGP) Route Hijacking technique. What is the primary purpose of this specific attack within the botnet lifecycle?",
+    "options": ["To rapidly encrypt the hard drives of all infected zombie machines.", "To illegitimately acquire IP space to host bulletproof Command and Control (C2) servers without being traced to a legitimate ISP.", "To inject SQL queries into backend databases.", "To brute-force Administrator passwords over SSH."],
+    "answer": "To illegitimately acquire IP space to host bulletproof Command and Control (C2) servers without being traced to a legitimate ISP.",
+    "explanation": "Step 1: BGP is the routing protocol of the internet backbone. Step 2: A BGP hijack occurs when an autonomous system (AS) falsely announces it owns a block of IP addresses. Step 3: Botmasters use this to temporarily 'steal' dormant IP blocks. Step 4: They set up their C2 servers on these hijacked IPs. Step 5: Because the IPs are stolen, law enforcement cannot easily trace the hosting infrastructure to a real hosting provider, creating a highly resilient, untraceable 'bulletproof' C2 node.",
+    "trick": "Bank/IT Trap: BGP hijacking is a core internet infrastructure attack, not a local LAN issue. It manipulates global routing tables to hide illicit operations.",
+    "tip": "BGP Hijacking steals dormant IP blocks for untraceable Botnet C2 servers."
+  },
+  {
+    "id": 76,
+    "question": "Assertion (A): The concept of 'Fuzzing' is heavily utilized by both cybersecurity researchers and malicious actors to discover Zero-Day vulnerabilities. Reason (R): Fuzzing involves injecting massive amounts of random, malformed, or unexpected data into a software application's input fields to intentionally cause memory leaks or crashes, revealing exploitable flaws. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A Zero-Day is an unknown vulnerability. Step 2: To find them, humans cannot manually test every possible input combination. Step 3: Fuzzing automates this process by bombarding a program with malformed data. Step 4: If the program crashes (e.g., a buffer overflow occurs), the tester analyzes the crash dump. Step 5: This crash data points directly to a flaw in the code's logic, which can then be weaponized into a Zero-Day exploit. Both A and R are true and correlated.",
+    "trick": "Bank/IT Trap: Fuzzing doesn't 'patch' or 'exploit' anything directly; it is strictly a discovery mechanism. It forces errors to map out vulnerable memory boundaries.",
+    "tip": "Fuzzing = Automated injection of malformed data to find zero-day crashes."
+  },
+  {
+    "id": 77,
+    "question": "The historical 'Conficker' worm (2008) introduced an incredibly resilient botnet architecture. Which of the following features made Conficker exceptionally difficult to eradicate compared to earlier malware?",
+    "options": ["It relied solely on symmetric key encryption to hide its files.", "It utilized an advanced Domain Generation Algorithm (DGA) that generated 50,000 domains daily across multiple Top Level Domains (TLDs).", "It physically destroyed network interface cards by over-volting them.", "It required the user to actively run a macro in a Word document every day."],
+    "answer": "It utilized an advanced Domain Generation Algorithm (DGA) that generated 50,000 domains daily across multiple Top Level Domains (TLDs).",
+    "explanation": "Step 1: Early botnets used static IP addresses for C2. Step 2: Conficker introduced highly aggressive DGAs. Step 3: In its later variant (Conficker.C), the malware generated up to 50,000 randomized domain names every single day. Step 4: The bot only needed to successfully contact ONE of these domains to receive updates from the Botmaster. Step 5: Security researchers could not realistically pre-register or block 50,000 domains across 116 different TLDs daily, making the C2 structure nearly indestructible.",
+    "trick": "Bank/IT Trap: Conficker is the textbook standard for modern DGA implementation. The sheer volume of generated domains made traditional 'sinkholing' impossible for a time.",
+    "tip": "Conficker popularized massive Domain Generation Algorithms (DGA) for C2 survival."
+  },
+  {
+    "id": 78,
+    "question": "Assertion (A): Advanced Persistent Threats (APTs) often deploy logic bombs during their lateral movement phase to ensure long-term, dormant persistence. Reason (R): A logic bomb is a piece of code intentionally inserted into software that executes a malicious function only when a specific, predefined condition or event is met. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: APTs want to remain undetected for months or years. Step 2: If they constantly execute malicious actions, they will be caught. Step 3: They implant 'Logic Bombs'. Step 4: This code lies completely dormant (evading behavioral AV) until a trigger occurs—such as a specific date (time bomb), a user logging in, or the hacker sending a hidden signal. Step 5: This delayed-execution tactic provides stealthy, long-term persistence, making R the exact technical explanation for A.",
+    "trick": "Bank/IT Trap: A logic bomb is not an independent virus; it is a mechanism embedded within malware. The defining trait is 'conditional execution'.",
+    "tip": "Logic Bomb = Malicious code triggered by specific conditions or dates."
+  },
+  {
+    "id": 79,
+    "question": "During a forensic analysis of a compromised corporate server, investigators find that the server is participating in an Application Layer (Layer 7) DDoS attack. The malicious traffic uses complete, legitimate HTTP requests but sends the headers incredibly slowly to exhaust the target server's concurrent connection pool. What is the name of this specific attack technique?",
+    "options": ["UDP Amplification Attack", "Smurf Attack", "Slowloris Attack", "Ping Flood"],
+    "answer": "Slowloris Attack",
+    "explanation": "Step 1: Layer 3/4 DDoS attacks rely on massive bandwidth (Volume). Layer 7 attacks target the application logic. Step 2: Web servers (like Apache) have a limited pool of threads to handle concurrent connections. Step 3: Slowloris opens multiple legitimate HTTP connections to the target. Step 4: Instead of completing the request, it sends partial HTTP headers very slowly, keeping the connection alive indefinitely. Step 5: The server's thread pool fills up waiting for complete requests, causing a denial of service for legitimate users without requiring high bandwidth from the attacker.",
+    "trick": "Bank/IT Trap: UDP, Smurf, and Ping floods are all volumetric (Layer 3/4). Slowloris is the classic 'low and slow' Application Layer (Layer 7) attack.",
+    "tip": "Slowloris = Low-bandwidth Layer 7 DDoS exhausting server connections slowly."
+  },
+  {
+    "id": 80,
+    "question": "Assertion (A): Supply Chain Attacks, such as the 2020 SolarWinds Orion breach, are favored by nation-state APTs because they allow the simultaneous compromise of thousands of hardened targets. Reason (R): Instead of attacking a highly secure organization directly, the APT compromises a trusted third-party software vendor and inserts a backdoor into legitimate software updates, which are then autonomously downloaded by the target organizations. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: High-value targets (Gov, Fortune 500) have massive security perimeters, making direct attacks difficult. Step 2: However, they universally trust signed software updates from their vendors. Step 3: APTs hack the vendor (e.g., SolarWinds) and inject malware (Sunburst) into the build process. Step 4: The vendor unwittingly signs the malicious update and pushes it globally. Step 5: The hardened targets download it, bypassing all firewalls because it comes from a 'trusted' source. R completely explains the scalability and success of A.",
+    "trick": "Bank/IT Trap: Supply Chain attacks bypass the target's direct security by weaponizing 'Trust'. If you control the updater, you control the client.",
+    "tip": "Supply Chain Attack compromises a trusted vendor to infect downstream clients."
+  },
+  {
+    "id": 81,
+    "question": "Which of the following malware architectures specifically utilizes a hypervisor to drop the host Operating System into a virtual machine, granting the malware higher privileges than the OS kernel itself?",
+    "options": ["User-mode Rootkit", "Bootkit", "Hardware/Firmware Rootkit", "Blue Pill / Hypervisor-level Rootkit"],
+    "answer": "Blue Pill / Hypervisor-level Rootkit",
+    "explanation": "Step 1: Security models operate on privilege levels (Rings). Kernel is Ring 0. Step 2: Virtualization hardware introduced Ring -1 (the Hypervisor). Step 3: A Hypervisor-level rootkit (conceptually proven by the 'Blue Pill' project) intercepts the boot sequence. Step 4: It loads its own malicious hypervisor and then boots the actual Operating System as a Virtual Machine inside it. Step 5: The OS thinks it has total control, but the rootkit actually controls the hardware layer underneath it.",
+    "trick": "Bank/IT Trap: Firmware rootkits live in BIOS (Ring -2). Hypervisor rootkits leverage hardware virtualization features (VT-x/AMD-V) to sandbox the entire OS.",
+    "tip": "Hypervisor Rootkit (Blue Pill) moves the host OS into a malicious VM."
+  },
+  {
+    "id": 82,
+    "question": "Assertion (A): The use of Domain Shadowing by modern Exploit Kits makes IP blacklisting highly ineffective for defenders. Reason (R): Domain Shadowing involves the attacker legally purchasing thousands of new domain names daily and registering them with legitimate hosting providers to bypass reputation filters. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Domain Shadowing is a stealth technique. (A is True, it defeats blacklists). Step 2: However, attackers do NOT purchase new domains (R is false). Step 3: Purchasing domains costs money and leaves financial trails. Step 4: Instead, they compromise the domain registrar accounts of legitimate website owners (e.g., a popular blog). Step 5: They silently create hundreds of subdomains (e.g., xyz.trustedblog.com) under the trusted parent domain to host their exploit kits, hijacking the good reputation of the parent domain.",
+    "trick": "Bank/IT Trap: DGA involves algorithmically generating/buying domains. Domain Shadowing involves hijacking the DNS records of existing, trusted domains to create malicious subdomains.",
+    "tip": "Domain Shadowing creates malicious subdomains under hijacked legitimate domains."
+  },
+  {
+    "id": 83,
+    "question": "In the context of Botnet architectures, what is the primary operational advantage of utilizing the Tor network (Onion routing) to host Command and Control (C2) servers?",
+    "options": ["It increases the bandwidth available for conducting volumetric DDoS attacks.", "It provides highly resilient encryption and cryptographic anonymity, preventing authorities from physically locating the C2 server.", "It allows the botnet to spread rapidly via automated email phishing campaigns.", "It forces infected hosts to bypass the local Antivirus by running solely in RAM."],
+    "answer": "It provides highly resilient encryption and cryptographic anonymity, preventing authorities from physically locating the C2 server.",
+    "explanation": "Step 1: A botnet's weakest link is its C2 server. If authorities find it, they seize the hardware. Step 2: The Tor network bounces traffic through multiple encrypted relays globally. Step 3: Botmasters configure their C2 as a Tor Hidden Service (.onion address). Step 4: When a bot communicates with the C2, neither the bot nor the network can determine the true IP address or physical location of the C2 server. Step 5: This renders traditional takedowns via ISP cooperation impossible.",
+    "trick": "Bank/IT Trap: Tor is famously slow and high-latency. It is terrible for DDoS bandwidth. Its sole purpose for C2 is absolute geographical anonymity.",
+    "tip": "Tor C2 servers provide geographic anonymity, hiding the Botmaster."
+  },
+  {
+    "id": 84,
+    "question": "Assertion (A): A 'Fileless Malware' attack heavily leverages the Windows Registry to maintain persistence across system reboots. Reason (R): Fileless malware resides entirely in volatile memory (RAM); therefore, it must hide malicious PowerShell execution strings within auto-run registry keys to ensure it gets re-injected into RAM upon restart without dropping an executable file on the disk. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Fileless malware avoids the hard drive to evade AV signature scanning, existing only in RAM. Step 2: However, RAM is volatile; a reboot wipes it. Step 3: To survive a reboot, it needs persistence. Step 4: It achieves this by writing a tiny, obfuscated script (often PowerShell or JavaScript) directly into a legitimate Windows Registry run key. Step 5: Upon reboot, the OS reads the registry, executes the script, and pulls the malicious payload straight from the internet back into RAM, leaving no file trace. A and R are perfectly aligned.",
+    "trick": "Bank/IT Trap: 'Fileless' doesn't mean 'footprint-less'. It still has to hide a trigger somewhere, and the Windows Registry is the primary hiding spot.",
+    "tip": "Fileless malware uses the Windows Registry for persistent, fileless re-execution."
+  },
+  {
+    "id": 85,
+    "question": "The historic 2003 'SQL Slammer' worm caused massive global internet congestion within 10 minutes of its release. Despite its name, which of the following is technically accurate regarding its mechanism?",
+    "options": ["It utilized SQL Injection to steal credit card data from web applications.", "It resided entirely in memory and exploited a buffer overflow in Microsoft SQL Server's UDP port 1434.", "It relied on the Tor network to coordinate a synchronized DDoS attack.", "It was a bootkit that overwrote the Master Boot Record of database servers."],
+    "answer": "It resided entirely in memory and exploited a buffer overflow in Microsoft SQL Server's UDP port 1434.",
+    "explanation": "Step 1: Despite the term 'SQL', SQL Slammer did NOT use SQL injection. Step 2: It targeted a buffer overflow vulnerability in the Microsoft SQL Server resolution service. Step 3: It was incredibly small (only 376 bytes). Step 4: It operated entirely in memory (RAM) and sent itself continuously in single UDP packets to random IP addresses. Step 5: Because it used connectionless UDP, it fired outward as fast as the network card allowed, creating an unintentional, massive DDoS effect globally.",
+    "trick": "Bank/IT Trap: 'SQL Slammer' didn't steal data or execute SQL queries. It was a memory-resident buffer overflow worm that brought down the internet via UDP packet storms.",
+    "tip": "SQL Slammer was a 376-byte, memory-only UDP worm, not SQL injection."
+  },
+  {
+    "id": 86,
+    "question": "Assertion (A): Cryptojacking botnets are generally designed to be as stealthy and low-impact as possible, avoiding destructive actions like wiping drives or encrypting files. Reason (R): Cryptojacking relies on stealing the victim's CPU/GPU processing power to mine cryptocurrency; therefore, keeping the host machine stable and the user unaware maximizes the botmaster's long-term mining revenue. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Cryptojacking is unauthorized cryptocurrency mining (usually Monero). Step 2: Unlike Ransomware, which announces its presence immediately to extort money, Cryptojacking requires time to solve cryptographic hashes. Step 3: If a machine crashes or the user notices severe lag, they will investigate, run AV, or reinstall the OS. Step 4: Therefore, advanced cryptojackers throttle their CPU usage to remain unnoticed. Step 5: Long-term stability equals continuous profit. R logically explains the stealth behavior in A.",
+    "trick": "Bank/IT Trap: Malware isn't always loud and destructive. Cryptojackers act like parasites—they keep the host alive to continue feeding off its resources.",
+    "tip": "Cryptojacking relies on stealth and stability for long-term illicit mining."
+  },
+  {
+    "id": 87,
+    "question": "During the cyber kill chain phase of an Advanced Persistent Threat (APT), attackers frequently employ 'Pass-the-Hash' attacks. What is the primary objective of this specific technique?",
+    "options": ["To crack stored password hashes offline using rainbow tables.", "To authenticate to remote servers or services by directly providing the NTLM hash of a user's password, without ever needing to decrypt it into plain text.", "To inject a malicious cryptographic hash into an Antivirus signature database, blinding it to the malware.", "To bypass Web Application Firewalls (WAF) using hashed SQL injection payloads."],
+    "answer": "To authenticate to remote servers or services by directly providing the NTLM hash of a user's password, without ever needing to decrypt it into plain text.",
+    "explanation": "Step 1: When a user logs into Windows, the OS stores a hash (NTLM) of the password in memory (LSASS) for Single Sign-On purposes. Step 2: An APT dumps this memory to steal the hash. Step 3: The attacker does not need to waste time cracking the hash to find the plain text password. Step 4: The authentication protocol accepts the hash itself as proof of identity. Step 5: The attacker 'passes the hash' to other machines on the network, achieving lateral movement instantly.",
+    "trick": "Bank/IT Trap: 'Pass-the-Hash' skips the cracking phase entirely. The hash itself becomes the key. It is the premier technique for lateral movement in Windows Active Directory environments.",
+    "tip": "Pass-the-Hash bypasses cracking, using the hash directly for authentication."
+  },
+  {
+    "id": 88,
+    "question": "Assertion (A): The widespread impact of the 2017 WannaCry attack was ultimately halted by a security researcher who registered a specific, hardcoded domain name found in the malware's code. Reason (R): This hardcoded domain functioned as a 'Kill Switch'; WannaCry was programmed to check if the domain was active, and if so, to immediately cease its self-propagation routine. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Security researcher Marcus Hutchins analyzed the WannaCry code during the outbreak. Step 2: He noticed it attempted an HTTP GET request to a long, unregistered gibberish domain name before encrypting/spreading. Step 3: He registered the domain for $10 to sinkhole the traffic. Step 4: The malware authors designed this as an anti-analysis mechanism (sandboxes often fake internet connections by replying to all requests). Step 5: When Hutchins registered it, the live internet replied. The malware thought it was in a sandbox and shut itself down, accidentally activating a global kill switch.",
+    "trick": "Bank/IT Trap: The kill switch wasn't intended by the hackers to stop the attack globally; it was a poorly implemented anti-sandbox evasion trick that backfired spectacularly.",
+    "tip": "WannaCry's Kill Switch was an anti-sandbox evasion trick that backfired."
+  },
+  {
+    "id": 89,
+    "question": "Which of the following describes the mechanism by which a modern Botmaster utilizes a 'Fast Flux' service network to protect malicious hosting infrastructure?",
+    "options": ["Rapidly rotating the IP addresses associated with a fully qualified domain name (FQDN) via low TTL (Time To Live) DNS records, mapping the domain to hundreds of compromised zombie proxies.", "Executing a Distributed Denial of Service attack using purely ICMP echo requests.", "Using quantum cryptography to instantly alter the malware's signature every millisecond.", "Accelerating the hardware clock of infected machines to bypass time-based software trials."],
+    "answer": "Rapidly rotating the IP addresses associated with a fully qualified domain name (FQDN) via low TTL (Time To Live) DNS records, mapping the domain to hundreds of compromised zombie proxies.",
+    "explanation": "Step 1: Authorities block malware by blacklisting the C2 server's IP address. Step 2: A Fast Flux network counters this using DNS. Step 3: The botmaster sets the DNS record's Time-To-Live (TTL) to a very short duration (e.g., 3 minutes). Step 4: Every few minutes, the domain resolves to a different IP address. Step 5: These rotating IP addresses do not belong to the real C2 server; they belong to infected home routers (zombies) acting as blind proxies that forward traffic to the hidden C2. This constant shifting makes tracking impossible.",
+    "trick": "Bank/IT Trap: Fast Flux = DNS technique to hide C2 servers by rapidly changing IP proxies. It is essentially cyber-criminal load balancing.",
+    "tip": "Fast Flux rapidly rotates DNS IP addresses to hide C2 servers."
+  },
+  {
+    "id": 90,
+    "question": "Assertion (A): Heuristic-based Antivirus engines often experience higher False Positive rates compared to traditional Signature-based engines. Reason (R): Heuristics rely on analyzing the behavior and intent of a program (such as attempts to inject code into other processes) rather than matching a known bad hash, which can cause them to flag legitimate but aggressive administrative tools as malicious. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Signatures are binary: a hash matches or it doesn't. False positives are rare. Step 2: Zero-Days bypass signatures, requiring Heuristics (behavioral analysis). Step 3: Heuristics look for suspicious actions (e.g., modifying the registry, acting as a keylogger). Step 4: However, legitimate IT administration tools (like Remote Desktop or troubleshooting scripts) also perform these actions. Step 5: Therefore, the engine must 'guess' intent, leading to a higher likelihood of incorrectly flagging safe software (False Positive). R perfectly explains A.",
+    "trick": "Bank/IT Trap: False Positive = Good file marked as Bad. False Negative = Bad file marked as Good. Heuristics sacrifice some accuracy (False Positives) to catch unknown threats (reducing False Negatives).",
+    "tip": "Heuristics analyze behavior, increasing zero-day detection but raising false positives."
+  },
+  {
+    "id": 91,
+    "question": "In the analysis of the notorious 'Zeus' Trojan, which primary architectural component allowed it to successfully bypass Two-Factor Authentication (2FA) mechanisms used by financial institutions?",
+    "options": ["Form Grabbing and Man-in-the-Browser (MitB) capabilities", "Massive brute-forcing of SMS gateways", "Hardware token cloning via NFC", "BGP Route Hijacking to intercept banking SMS packets"],
+    "answer": "Form Grabbing and Man-in-the-Browser (MitB) capabilities",
+    "explanation": "Step 1: Zeus was the king of banking trojans. Step 2: Banks implemented 2FA (SMS or Tokens) to stop simple keyloggers. Step 3: Zeus evolved by hooking directly into the web browser's API (MitB). Step 4: When a user logged into a bank, Zeus injected fake fields into the legitimate bank page requesting the 2FA code. Step 5: The user typed the code, Zeus grabbed the data before it was encrypted by SSL/TLS, and the attacker instantly used it in a parallel hidden session to steal funds.",
+    "trick": "Bank/IT Trap: Man-in-the-Middle (MitM) intercepts network traffic. Man-in-the-Browser (MitB) lives inside the browser application itself, bypassing SSL encryption entirely because it grabs data before encryption occurs.",
+    "tip": "Zeus used Man-in-the-Browser (MitB) to defeat SSL and steal 2FA."
+  },
+  {
+    "id": 92,
+    "question": "Assertion (A): Hardware-based rootkits are exceptionally difficult to detect and remove, often requiring physical replacement of the compromised component. Reason (R): These rootkits reside within the volatile RAM of a system, making them invisible to standard Antivirus scans that only check the hard drive sectors. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is True, but R is False",
+    "explanation": "Step 1: Hardware/Firmware rootkits infect physical components (BIOS/UEFI, network cards, hard drive controller chips). Step 2: Because they reside in non-volatile flash memory, they survive OS reinstalls and hard drive replacements (A is True). Step 3: Reason R states they reside in volatile RAM. This is false. Volatile RAM is wiped upon reboot. Step 4: Hardware rootkits are dangerous specifically because they reside in NON-volatile firmware, fundamentally contradicting R. Step 5: Therefore, A is true, but R is false.",
+    "trick": "Bank/IT Trap: Volatile = RAM (wiped on power loss). Non-Volatile = ROM/Flash/Firmware (persists on power loss). Hardware rootkits MUST be non-volatile to survive.",
+    "tip": "Hardware Rootkits survive in non-volatile firmware, not volatile RAM."
+  },
+  {
+    "id": 93,
+    "question": "During a malware analysis, you discover a botnet client that does not use hardcoded IP addresses or DGAs. Instead, it parses metadata from public images hosted on legitimate social media platforms (like Instagram or Pinterest) to extract hidden Command and Control instructions. What is this evasion technique called?",
+    "options": ["Steganography for C2 communications", "Cross-Site Request Forgery (CSRF)", "Domain Fronting", "Polymorphic Encoding"],
+    "answer": "Steganography for C2 communications",
+    "explanation": "Step 1: Botnets need to receive commands from the Botmaster. Step 2: Network defenders monitor outbound connections to known bad domains. Step 3: To evade this, the botmaster hides commands inside the pixel data of seemingly innocent photos (Steganography). Step 4: The botmaster posts the photo to a public site like Twitter or Instagram. Step 5: The infected host connects to the legitimate social media site (which is never blocked by corporate firewalls), downloads the image, and extracts the hidden commands.",
+    "trick": "Bank/IT Trap: Steganography is the art of hiding data within data. It's not just for spies hiding messages; modern malware uses it to bypass corporate firewall blacklists by communicating via trusted sites.",
+    "tip": "Steganography hides Botnet C2 commands inside legitimate social media images."
+  },
+  {
+    "id": 94,
+    "question": "Assertion (A): The 'Cyber Kill Chain', developed by Lockheed Martin, emphasizes that defenders must successfully stop an attacker at every single phase of the chain to prevent a breach. Reason (R): The model consists of sequential phases (Reconnaissance, Weaponization, Delivery, etc.), and disrupting the attacker at any one phase breaks the chain and successfully thwarts the entire attack. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: The Cyber Kill Chain is a phased model of a cyberattack. Step 2: A chain is only as strong as its weakest link. Step 3: For an attacker to succeed, they must successfully execute EVERY phase sequentially. Step 4: Therefore, for a defender to succeed, they only need to break the chain at ANY SINGLE phase (e.g., blocking the delivery phase stops the whole attack). Step 5: Assertion A incorrectly claims defenders must stop *every* phase. Reason R correctly states stopping *any one* phase thwarts the attack. Thus, A is False, R is True.",
+    "trick": "Bank/IT Trap: Asymmetry in cyber warfare: The attacker must be perfect 100% of the time across the kill chain. The defender only needs to be successful once to break the specific chain.",
+    "tip": "Breaking the Cyber Kill Chain at ANY single phase defeats the attack."
+  },
+  {
+    "id": 95,
+    "question": "What is the specific vulnerability exploited in a 'Reflection' based DDoS attack, such as an NTP or DNS Amplification attack?",
+    "options": ["The reliance on connection-oriented TCP handshake protocols.", "The use of connectionless UDP protocols combined with IP spoofing.", "The lack of multi-factor authentication on core routing hardware.", "The ability to inject cross-site scripting payloads into DNS zone files."],
+    "answer": "The use of connectionless UDP protocols combined with IP spoofing.",
+    "explanation": "Step 1: TCP requires a 3-way handshake. If an attacker spoofs an IP in TCP, the response goes to the target, but the handshake fails, limiting amplification. Step 2: UDP is connectionless. There is no handshake. Step 3: An attacker sends a UDP request (like DNS or NTP) with a forged (spoofed) source IP address belonging to the victim. Step 4: The server processes the request and sends the much larger response blindly back to the spoofed victim's IP. Step 5: This relies entirely on the stateless nature of UDP to reflect and amplify the traffic.",
+    "trick": "Bank/IT Trap: You cannot easily perform massive amplification via TCP. UDP is the engine of almost all reflection-amplification DDoS attacks due to its connectionless nature.",
+    "tip": "Reflection DDoS relies on stateless UDP and spoofed IP addresses."
+  },
+  {
+    "id": 96,
+    "question": "Assertion (A): Advanced Sandbox evasion techniques allow Zero-Day malware to detect if it is running inside a security researcher's virtual environment and alter its behavior accordingly. Reason (R): The malware queries the system for indicators such as specific MAC address OUI prefixes (like VMware or VirtualBox), screen resolution constraints, and lack of human mouse movements. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Security systems detonate suspicious files in a safe, isolated Virtual Machine (a Sandbox) to observe their behavior. Step 2: Malware authors know this. Step 3: They program the malware to check its environment before executing the malicious payload. Step 4: If the malware detects VMware drivers, a perfectly squared 800x600 resolution, or a mouse cursor that hasn't moved for 5 minutes, it deduces it is in a lab. Step 5: It then acts benignly or self-terminates. R perfectly lists the indicators used to achieve A.",
+    "trick": "Bank/IT Trap: Malware is 'environmentally aware'. If it detects a Sandbox, it plays dead. This is why automated behavioral analysis isn't foolproof.",
+    "tip": "Sandbox evasion: Malware detects virtual environments and acts benignly."
+  },
+  {
+    "id": 97,
+    "question": "In the realm of Zero-Day exploits, the term 'Use-After-Free' (UAF) is frequently encountered. What fundamental software engineering flaw does a UAF vulnerability target?",
+    "options": ["Improper sanitization of SQL input fields.", "Memory corruption involving the incorrect management of dynamic memory pointers.", "Hardcoding cryptographic keys within the source code.", "Failing to encrypt data at rest on the hard drive."],
+    "answer": "Memory corruption involving the incorrect management of dynamic memory pointers.",
+    "explanation": "Step 1: Software applications allocate memory dynamically in RAM (the heap). Step 2: When the program is done with the data, it 'frees' the memory block. Step 3: A UAF vulnerability occurs if the program's pointer continues to reference that memory location after it has been freed. Step 4: An attacker can allocate their own malicious code into that newly freed memory space. Step 5: When the vulnerable program attempts to 'use' the old pointer again, it inadvertently executes the attacker's code, leading to system compromise.",
+    "trick": "Bank/IT Trap: UAF is not a web vulnerability like XSS or SQLi. It is a low-level, binary memory management flaw heavily exploited in web browsers and operating systems to achieve remote code execution.",
+    "tip": "Use-After-Free (UAF) is a severe dynamic memory pointer vulnerability."
+  },
+  {
+    "id": 98,
+    "question": "Assertion (A): The Mirai botnet source code was released to the public by its original creators on a hacker forum specifically to democratize DDoS attacks for script kiddies. Reason (R): The creators realized law enforcement was closing in on them, and by releasing the code to everyone, they sought to create a massive surge of copycat attacks, hiding their own tracks in the noise and creating plausible deniability. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: The Mirai source code was indeed released publicly. Step 2: However, Assertion A's claim about the motive ('democratize DDoS for script kiddies') is historically false regarding the creator's true intent. Step 3: The creators (Paras Jha and associates) had used Mirai heavily for extortion and gaming advantages. Step 4: When the FBI started investigating the massive Dyn attack, they panicked. Step 5: Reason R correctly outlines their true motive: releasing the code so that thousands of others would use it, muddying the waters and making attribution nearly impossible ('plausible deniability'). Thus, A is false regarding intent, R is the true motive.",
+    "trick": "Bank/IT Trap: Source code leaks are rarely for 'altruistic' hacker reasons. They are almost always deployed as a smoke screen by cybercriminals to avoid federal prison.",
+    "tip": "Mirai code was leaked to create copycats and obscure the original authors."
+  },
+  {
+    "id": 99,
+    "question": "Which component of an Advanced Persistent Threat (APT) framework is specifically responsible for establishing the initial, covert communication tunnel out of a compromised network, thereby bypassing strict egress firewall rules?",
+    "options": ["The Payload Dropper", "The Command and Control (C2) Beacon", "The Rootkit Hook", "The Master Boot Record Infector"],
+    "answer": "The Command and Control (C2) Beacon",
+    "explanation": "Step 1: Corporate firewalls block unauthorized inbound connections. Step 2: To establish control, the malware must initiate an outbound connection from the inside (egress). Step 3: Firewalls generally allow outbound HTTP/HTTPS traffic. Step 4: The 'Beacon' is the specific module that 'phones home' at random intervals over allowed ports. Step 5: It sends a small ping to the C2 server asking 'Are there any commands for me?', blending in with normal web browsing traffic and establishing the remote control tunnel.",
+    "trick": "Bank/IT Trap: Firewalls stop things coming IN. Beacons work by reaching OUT. The connection originates from inside the trusted network, which firewalls usually permit.",
+    "tip": "C2 Beacons initiate outbound connections to bypass inbound firewall rules."
+  },
+  {
+    "id": 100,
+    "question": "Assertion (A): The Morris Worm (1988) is historically significant because it was the first malicious payload designed by a nation-state to conduct espionage on early internet infrastructure. Reason (R): Robert Tappan Morris designed the worm to rapidly map the size of the internet, but a logical error in its replication mechanism caused it to infect machines multiple times, resulting in the internet's first massive Denial of Service event. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: The Morris Worm was the first widespread internet worm. Step 2: However, it was NOT designed by a nation-state, nor was it intended for espionage or sabotage. It was created by a graduate student. Therefore, A is False. Step 3: Morris wrote it as an intellectual experiment to measure the internet's size. Step 4: He included a mechanism asking machines 'Are you already infected?' Knowing admins would lie, he programmed it to infect 1 out of 7 times regardless. Step 5: This caused rapid re-infection, draining CPU resources and crashing the early internet. Reason R correctly describes the flaw.",
+    "trick": "Bank/IT Trap: Not all historic malware was malicious in intent. The Morris Worm was an academic experiment gone catastrophically wrong due to a poor replication algorithm.",
+    "tip": "The Morris Worm was an experimental gauge that accidentally crashed the internet."
+  }
+]

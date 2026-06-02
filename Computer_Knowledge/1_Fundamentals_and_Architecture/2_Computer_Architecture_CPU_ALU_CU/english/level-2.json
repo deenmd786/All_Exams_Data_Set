@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "Match the following registers with their primary functions: List I: A. Program Counter (PC) B. Instruction Register (IR) C. Accumulator. List II: 1. Holds the instruction currently being decoded and executed 2. Stores intermediate or final results of ALU operations 3. Holds the memory address of the next instruction to be fetched.",
+    "options": ["A-3, B-1, C-2", "A-1, B-2, C-3", "A-3, B-2, C-1", "A-2, B-1, C-3"],
+    "answer": "A-3, B-1, C-2",
+    "explanation": "Step 1: The Program Counter (PC) always tracks the flow of execution by pointing to the next instruction's address. Step 2: The Instruction Register (IR) holds the actual current instruction code that the Control Unit is decoding. Step 3: The Accumulator is a specific working register used by the ALU to store operational results.",
+    "trick": "Trap: Students often confuse 'IR' and 'PC'. Remember, 'PC' looks to the future (Next Instruction), while 'IR' holds onto the present (Current Instruction).",
+    "tip": "PC = Next Address. IR = Current Instruction. Accumulator = ALU Results."
+  },
+  {
+    "id": 2,
+    "question": "Consider the following statements regarding the System Bus: Statement 1: The Address Bus is unidirectional and carries memory addresses from the CPU to memory or I/O devices. Statement 2: The Data Bus is bidirectional and transfers actual data between the CPU, memory, and peripherals. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Both Statement 1 and 2",
+    "explanation": "Step 1: The CPU dictates where data should be read from or written to, making the Address Bus unidirectional (CPU to Memory/IO). Step 2: Data must flow into the CPU during a Read cycle and out of the CPU during a Write cycle. Step 3: Therefore, the Data Bus must be bidirectional to handle two-way traffic.",
+    "trick": "Trap: A common misconception is that all buses are bidirectional. The CPU is the sole master of addresses, so the address bus is one-way.",
+    "tip": "Address Bus = Unidirectional (CPU -> Out). Data Bus = Bidirectional."
+  },
+  {
+    "id": 3,
+    "question": "Match the following phases of the Machine Cycle with their descriptions: List I: A. Fetch B. Decode C. Execute. List II: 1. The Control Unit translates the opcode into control signals 2. The ALU performs the requested arithmetic or logical operation 3. The CPU retrieves the instruction from main memory.",
+    "options": ["A-3, B-1, C-2", "A-1, B-2, C-3", "A-2, B-3, C-1", "A-3, B-2, C-1"],
+    "answer": "A-3, B-1, C-2",
+    "explanation": "Step 1: The Fetch phase involves getting the instruction from memory using the address in the PC. Step 2: The Decode phase uses the Control Unit to interpret the fetched instruction inside the IR. Step 3: The Execute phase activates the necessary circuitry (like the ALU) to perform the instruction's task.",
+    "trick": "Trap: Execution doesn't happen immediately after Fetch. Decoding by the Control Unit is the mandatory middleman step.",
+    "tip": "Cycle sequence: Fetch (Memory) -> Decode (CU) -> Execute (ALU)."
+  },
+  {
+    "id": 4,
+    "question": "Consider the following statements regarding memory registers: Statement 1: The Memory Address Register (MAR) is directly connected to the Data Bus. Statement 2: The Memory Data Register (MDR) or Memory Buffer Register (MBR) is directly connected to the Address Bus. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Neither Statement 1 nor 2",
+    "explanation": "Step 1: The MAR holds the address of the memory location to be accessed and is directly connected to the Address Bus. Step 2: The MDR holds the data being transferred to or from memory and is directly connected to the Data Bus. Step 3: Both statements have swapped the bus connections of MAR and MDR.",
+    "trick": "Trap: MAR sounds like it holds data, but it strictly holds addresses. MDR holds the actual data traversing the bus.",
+    "tip": "MAR connects to Address Bus. MDR connects to Data Bus."
+  },
+  {
+    "id": 5,
+    "question": "Match the following system bus lines with their specific signal examples: List I: A. Data Bus B. Address Bus C. Control Bus. List II: 1. Memory Read / Memory Write signals 2. 32-bit binary memory location coordinates 3. Actual integer values or instruction opcodes being transferred.",
+    "options": ["A-3, B-2, C-1", "A-2, B-1, C-3", "A-1, B-3, C-2", "A-3, B-1, C-2"],
+    "answer": "A-3, B-2, C-1",
+    "explanation": "Step 1: The Data Bus carries the actual payload, such as numbers to be added or the instruction opcode itself. Step 2: The Address Bus strictly carries the binary coordinates identifying a memory cell. Step 3: The Control Bus carries command signals like Read, Write, or Interrupt Acknowledge to orchestrate operations.",
+    "trick": "Trap: Do not mistake instruction opcodes for control signals. Opcodes travel on the Data bus to the CPU, which then generates Control signals.",
+    "tip": "Data = Payload. Address = Coordinates. Control = Commands."
+  },
+  {
+    "id": 6,
+    "question": "Consider the following statements about the Program Counter (PC): Statement 1: During the Fetch phase, the contents of the PC are placed onto the Address Bus via the MAR. Statement 2: The PC is incremented after the Execute phase is completely finished. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 1",
+    "explanation": "Step 1: To fetch an instruction, the CPU must output the PC's value to memory; it does this by copying PC to MAR, which connects to the Address Bus. Step 2: The PC is typically incremented during or immediately after the Fetch phase, well before the Execute phase. Step 3: Statement 2 is incorrect because waiting until Execution finishes wastes cycle time.",
+    "trick": "Trap: Students assume the PC waits for an instruction to finish executing before pointing to the next. It actually increments during Fetch.",
+    "tip": "PC increments during the Fetch phase, not Execution."
+  },
+  {
+    "id": 7,
+    "question": "Match the register transfer operations during a Fetch cycle: List I: A. PC -> MAR B. Memory -> MDR C. MDR -> IR. List II: 1. The fetched instruction is moved into the CPU for decoding 2. The CPU sends the target memory location to the address bus 3. The memory places the requested instruction onto the data bus.",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: PC -> MAR moves the address to the hardware pin outputs (Address Bus). Step 2: Memory -> MDR occurs when main memory outputs the data onto the Data Bus, which the CPU reads into the MDR. Step 3: MDR -> IR transfers the now-internal data (the instruction) into the instruction register for decoding.",
+    "trick": "Trap: Memory doesn't dump directly into the IR. It must pass through the MDR (Memory Data Register) first as a buffer.",
+    "tip": "Fetch path: PC -> MAR -> Memory -> MDR -> IR."
+  },
+  {
+    "id": 8,
+    "question": "Consider the following statements regarding CPU flags/Status Register: Statement 1: The Status Register is considered a general-purpose register. Statement 2: The Zero Flag in the Status Register is set to 1 if the result of an ALU operation is zero. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: The Status Register (or Flags Register) is a special-purpose register, not general-purpose, as it implicitly tracks processor states. Step 2: It contains individual bits (flags) like Carry, Zero, Sign, and Overflow. Step 3: The Zero Flag is explicitly set to binary 1 when the ALU outputs a result of exactly zero.",
+    "trick": "Trap: The term 'set' means setting a bit to 1. So, if a result is 0, the Zero Flag bit becomes 1 (True).",
+    "tip": "Status Register is special-purpose. Zero result = Zero Flag is 1."
+  },
+  {
+    "id": 9,
+    "question": "Match the Control Bus signals to their functional description: List I: A. MEMR (Memory Read) B. IOW (I/O Write) C. INTA (Interrupt Acknowledge). List II: 1. Instructs an output device to receive data from the data bus 2. Tells main memory to place data onto the data bus 3. Informs a peripheral that its request for CPU attention is granted.",
+    "options": ["A-2, B-1, C-3", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-3, C-1"],
+    "answer": "A-2, B-1, C-3",
+    "explanation": "Step 1: MEMR is a control signal instructing main memory to output its addressed contents onto the data bus. Step 2: IOW instructs an Input/Output port to latch onto the data currently on the data bus. Step 3: INTA is the CPU's response to an Interrupt Request (INTR) from a peripheral.",
+    "trick": "Trap: Do not confuse Memory Write with I/O Write. The Control Bus has distinct lines for Memory operations versus Peripheral operations.",
+    "tip": "Control signals distinguish between Memory and I/O operations."
+  },
+  {
+    "id": 10,
+    "question": "Consider the following statements about the Instruction Register (IR): Statement 1: The IR is accessible to the programmer for storing temporary loop variables. Statement 2: The output of the IR is directly fed into the Instruction Decoder of the Control Unit. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: The Instruction Register is strictly a special-purpose architectural register hidden from the programmer. Step 2: Programmers use general-purpose registers (like R1, R2) for variables. Step 3: The IR's sole job is to hold the fetched instruction and feed it directly to the Control Unit's decoder circuitry.",
+    "trick": "Trap: IR sounds useful for programming, but it is invisible to assembly language programmers. It's strictly for hardware decode.",
+    "tip": "IR is invisible to programmers and feeds the CU decoder."
+  },
+  {
+    "id": 11,
+    "question": "Match the hardware component with its role in the instruction cycle: List I: A. Control Unit B. Arithmetic Logic Unit C. Main Memory. List II: 1. Supplies the fetched instruction 2. Generates timing and read/write signals 3. Calculates effective memory addresses for execution.",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: Main Memory physically holds the code and supplies the instruction during the Fetch phase. Step 2: The Control Unit acts as the brain's conductor, issuing timing and control signals (read/write). Step 3: The ALU handles math and logic, which often includes calculating complex target addresses during Execution.",
+    "trick": "Trap: Address calculation is often assumed to be the CU's job, but mathematical offset calculations are performed by the ALU.",
+    "tip": "CU generates signals. ALU does math/address offsets. Memory holds code."
+  },
+  {
+    "id": 12,
+    "question": "Consider the following statements regarding the Stack Pointer (SP): Statement 1: The Stack Pointer holds the memory address of the next instruction to be fetched. Statement 2: The Stack Pointer is a special-purpose register that points to the top of the stack. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: The register holding the address of the next instruction is the Program Counter (PC), not the SP. Step 2: The Stack Pointer (SP) is a special-purpose register used to track the top of the LIFO (Last-In-First-Out) stack memory. Step 3: It is crucial during subroutine calls and interrupts.",
+    "trick": "Trap: Confusing PC with SP. PC tracks code execution sequence; SP tracks subroutine return addresses and local data in memory.",
+    "tip": "PC tracks instructions. SP tracks the top of the stack."
+  },
+  {
+    "id": 13,
+    "question": "Match the memory operations with their required bus states: List I: A. Memory Read B. Memory Write. List II: 1. Address placed on Address Bus, Data placed on Data Bus, Write signal enabled 2. Address placed on Address Bus, Read signal enabled, Data received from Data Bus.",
+    "options": ["A-2, B-1", "A-1, B-2", "Both are identical", "Invalid combinations"],
+    "answer": "A-2, B-1",
+    "explanation": "Step 1: For a Read operation, the CPU outputs the address, asserts the Read control signal, and waits for memory to put data on the Data Bus. Step 2: For a Write operation, the CPU outputs the address, outputs the data onto the Data Bus, and asserts the Write control signal. Step 3: The direction of data flow dictates the sequence.",
+    "trick": "Trap: In a Read, the Data Bus is driven by Memory. In a Write, the Data Bus is driven by the CPU.",
+    "tip": "Read: CPU listens to Data Bus. Write: CPU drives Data Bus."
+  },
+  {
+    "id": 14,
+    "question": "Consider the following statements regarding bus widths: Statement 1: The width of the Address Bus determines the maximum addressing capacity of the memory. Statement 2: The width of the Data Bus determines the word size of the processor. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Both Statement 1 and 2",
+    "explanation": "Step 1: If an Address Bus has 'n' lines, the CPU can directly address 2^n unique memory locations. Step 2: The Data Bus width dictates how many bits can be fetched or processed simultaneously, defining the processor's native word size (e.g., 32-bit or 64-bit). Step 3: Both statements accurately describe architectural constraints.",
+    "trick": "Trap: Word size is not determined by the address bus. A 32-bit processor (word size) can have a 36-bit address bus.",
+    "tip": "Address Bus = Memory Capacity. Data Bus = Word Size."
+  },
+  {
+    "id": 15,
+    "question": "Match the cycle phase with its dominant active component: List I: A. Fetch B. Decode C. Store. List II: 1. General Registers / Memory Write circuitry 2. MAR and Memory Read circuitry 3. Instruction Decoder in Control Unit.",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: Fetch relies heavily on the Memory Address Register and Memory Read circuitry to get the code. Step 2: Decode relies entirely on the Instruction Decoder inside the Control Unit. Step 3: Store uses Memory Write circuitry to save ALU results from general registers back to main memory.",
+    "trick": "Trap: Store isn't always to memory; it can be to a register, but it requires write circuitry activation.",
+    "tip": "Fetch = MAR. Decode = CU Decoder. Store = Write circuits."
+  },
+  {
+    "id": 16,
+    "question": "Consider the following statements about the Accumulator: Statement 1: Every modern CPU strictly requires a single Accumulator register for all arithmetic operations. Statement 2: In a pure Accumulator architecture, one operand is implicitly sourced from the Accumulator. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: Modern CPUs (like x86 or ARM) use General Purpose Register (GPR) architectures, not a single Accumulator, making Statement 1 false. Step 2: In classic Accumulator-based architectures (like the 8085), an instruction like 'ADD B' implies adding register B to the Accumulator. Step 3: The Accumulator serves as an implicit operand.",
+    "trick": "Trap: Modern CPUs don't rely on a single Accumulator. They have multiple general-purpose registers that can act as accumulators.",
+    "tip": "Accumulator architectures use implicit operands. Modern CPUs use GPRs."
+  },
+  {
+    "id": 17,
+    "question": "Match the state of the Program Counter (PC) to the event: List I: A. Sequential Execution B. Subroutine Call C. Unconditional Branch (JMP). List II: 1. PC is loaded with the exact operand address provided in the instruction 2. PC is incremented automatically by the instruction length 3. PC is pushed to the stack, then loaded with the target address.",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: In normal execution, PC naturally increments to point to the next contiguous instruction. Step 2: A subroutine call requires saving the return address (the current PC) onto the stack before jumping. Step 3: A simple JMP instruction forcibly overwrites the PC with the target jump address.",
+    "trick": "Trap: A JMP doesn't save the PC; it destroys the old value. A CALL saves the PC to the stack first.",
+    "tip": "JMP overwrites PC. CALL saves PC to stack."
+  },
+  {
+    "id": 18,
+    "question": "Consider the following statements regarding the Interrupt Cycle: Statement 1: The Interrupt cycle usually occurs immediately after the Fetch phase. Statement 2: When an interrupt is acknowledged, the current contents of the PC are discarded. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Neither Statement 1 nor 2",
+    "explanation": "Step 1: The CPU checks for interrupts at the END of the Execute phase, not after the Fetch phase, to ensure an instruction finishes properly. Step 2: The PC contents are NEVER discarded during an interrupt; they are saved (usually to the stack) so the CPU can resume the main program later. Step 3: Both statements are false.",
+    "trick": "Trap: Interrupts do not break an instruction mid-execution. They wait until the current Execute phase completes.",
+    "tip": "Interrupts are checked post-Execute. PC is always saved."
+  },
+  {
+    "id": 19,
+    "question": "Match the register with its typical bit-width constraint: List I: A. MAR (Memory Address Register) B. MDR (Memory Data Register) C. IR (Instruction Register). List II: 1. Matches the processor's data bus width 2. Matches the length of the system's machine instructions 3. Matches the processor's address bus width.",
+    "options": ["A-3, B-1, C-2", "A-1, B-2, C-3", "A-2, B-3, C-1", "A-3, B-2, C-1"],
+    "answer": "A-3, B-1, C-2",
+    "explanation": "Step 1: Since MAR interfaces with the Address Bus, its bit-width matches the Address Bus width. Step 2: MDR interfaces with the Data Bus, so its width matches the Data Bus. Step 3: IR holds the fetched instruction, so its width must accommodate the length of a machine instruction (or part of it).",
+    "trick": "Trap: Assuming MAR and MDR are the same size. Address buses are often larger (e.g., 36-bit) than data buses (e.g., 32-bit).",
+    "tip": "MAR width = Address Bus. MDR width = Data Bus."
+  },
+  {
+    "id": 20,
+    "question": "Consider the following statements about Multiplexed Buses: Statement 1: In a multiplexed bus system, the same physical wires are used for both addresses and data. Statement 2: Multiplexed buses increase the overall speed of the instruction cycle. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 1",
+    "explanation": "Step 1: Multiplexing means sharing lines (e.g., AD0-AD7 in 8085) to reduce pin count on the CPU chip. Step 2: While it reduces cost and size, it actually DECREASES speed because addresses and data must be sent sequentially rather than simultaneously. Step 3: Therefore, Statement 2 is incorrect.",
+    "trick": "Trap: 'Multiplexing' sounds like a speed upgrade. In hardware bus design, it's a space-saving measure that costs time.",
+    "tip": "Multiplexed buses save pins but cost execution time."
+  },
+  {
+    "id": 21,
+    "question": "Match the indirect memory addressing steps to their cycle phases: List I: A. Fetching the instruction B. Fetching the effective address C. Fetching the actual operand. List II: 1. Execute Cycle (or separate Indirect Cycle) 2. Fetch Cycle 3. Execute Cycle.",
+    "options": ["A-2, B-1, C-3", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-3, C-1"],
+    "answer": "A-2, B-1, C-3",
+    "explanation": "Step 1: The instruction itself is always brought in during the standard Fetch cycle. Step 2: In indirect addressing, the operand field contains a pointer. The CPU must use an 'Indirect Cycle' (often part of execute) to read the pointer. Step 3: Finally, the actual data is fetched from that pointer address during the Execute phase.",
+    "trick": "Trap: Indirect addressing adds extra memory access overhead, technically creating a sub-cycle before true execution.",
+    "tip": "Indirect addressing requires two memory accesses for data."
+  },
+  {
+    "id": 22,
+    "question": "Consider the following statements regarding the System Clock: Statement 1: The clock speed dictates the exact number of instructions executed per second. Statement 2: A single instruction cycle may span multiple clock cycles. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: Clock speed (e.g., 3 GHz) indicates billion cycles per second, but different instructions take different numbers of clock cycles (CPI - Cycles Per Instruction). Step 2: A complex MUL instruction might take 10 clock cycles, while an ADD takes 1. Step 3: Therefore, clock speed doesn't strictly equal instructions per second (IPS).",
+    "trick": "Trap: Equating Hertz (clock cycles) to IPS (Instructions Per Second). Complex instructions require multiple clock ticks.",
+    "tip": "Clock cycles ≠ Instructions. One instruction = multiple clock cycles."
+  },
+  {
+    "id": 23,
+    "question": "Match the register transfer notation to its physical bus activity: List I: A. MAR <- IR(address) B. MDR <- Memory C. A <- A + B. List II: 1. Read signal active on Control Bus, Data Bus active 2. Internal ALU operation, system bus idle 3. Address Bus driven by CPU.",
+    "options": ["A-3, B-1, C-2", "A-1, B-2, C-3", "A-2, B-3, C-1", "A-3, B-2, C-1"],
+    "answer": "A-3, B-1, C-2",
+    "explanation": "Step 1: Moving an address into MAR prepares the CPU to drive the Address Bus. Step 2: Loading MDR from Memory means the CPU is reading, requiring the Read control signal and Data bus payload. Step 3: An ALU addition (A + B) happens entirely inside the CPU core, leaving the external system bus idle.",
+    "trick": "Trap: Not all CPU operations use the system bus. Internal register math (ALU) keeps external buses free.",
+    "tip": "Internal ALU ops leave the external system bus idle."
+  },
+  {
+    "id": 24,
+    "question": "Consider the following statements about wait states: Statement 1: A wait state is inserted by the CPU when main memory is faster than the processor. Statement 2: Wait states prolong the bus cycle to allow slower memory to keep up. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: CPUs are generally much faster than standard DRAM (main memory). Step 2: When the CPU requests data, it may have to insert empty clock cycles ('wait states') while memory retrieves the data. Step 3: Statement 1 is false because wait states accommodate SLOWER memory, not faster memory.",
+    "trick": "Trap: Wait states sound like a processor flaw, but they are a deliberate sync mechanism for slow RAM.",
+    "tip": "Wait states synchronize a fast CPU with slow memory."
+  },
+  {
+    "id": 25,
+    "question": "Match the CPU components with their corresponding bus interfaces: List I: A. ALU Output B. PC (Program Counter) C. Control Unit logic. List II: 1. Address Bus (via MAR) 2. Control Bus 3. Data Bus (via Accumulator/GPR).",
+    "options": ["A-3, B-1, C-2", "A-1, B-2, C-3", "A-2, B-3, C-1", "A-3, B-2, C-1"],
+    "answer": "A-3, B-1, C-2",
+    "explanation": "Step 1: The ALU outputs results to registers, which can then be placed on the Data Bus for storage. Step 2: The PC sends its target addresses out onto the Address Bus (after buffering in MAR). Step 3: The Control Unit generates the signals that physically drive the Control Bus lines.",
+    "trick": "Trap: The PC doesn't connect to the Data bus. It's strictly an address generator.",
+    "tip": "ALU -> Data. PC -> Address. CU -> Control."
+  },
+  {
+    "id": 26,
+    "question": "Consider the following statements regarding Pipelining: Statement 1: Pipelining allows the Fetch phase of a new instruction to overlap with the Execute phase of the previous instruction. Statement 2: Pipelining reduces the execution time of an individual instruction. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 1",
+    "explanation": "Step 1: Pipelining acts like an assembly line, overlapping Fetch, Decode, and Execute stages of successive instructions. Step 2: It increases overall CPU throughput (instructions completing per second). Step 3: However, it does NOT reduce the time it takes for one single instruction to pass completely through the pipeline.",
+    "trick": "Trap: Pipelining improves total throughput, but an individual instruction still takes the same total time to travel from Fetch to Store.",
+    "tip": "Pipelining increases throughput, not single-instruction speed."
+  },
+  {
+    "id": 27,
+    "question": "Match the bus characteristic to its logical function: List I: A. Synchronous Bus B. Asynchronous Bus C. Bus Arbitration. List II: 1. Uses a master clock to time all transfers 2. Resolves conflicts when multiple devices request the bus 3. Uses handshake signals (ACK/REQ) instead of a clock.",
+    "options": ["A-1, B-3, C-2", "A-2, B-1, C-3", "A-3, B-2, C-1", "A-1, B-2, C-3"],
+    "answer": "A-1, B-3, C-2",
+    "explanation": "Step 1: Synchronous buses coordinate every action on the rising/falling edge of a global clock. Step 2: Asynchronous buses lack a common clock and rely on request/acknowledge handshakes, making them flexible for mixed speeds. Step 3: Arbitration logic decides which device gets control (Bus Mastership) if multiple request it.",
+    "trick": "Trap: Asynchronous sounds chaotic, but handshake signals (REQ/ACK) make it highly reliable for varying device speeds.",
+    "tip": "Sync = Clock. Async = Handshake. Arbitration = Conflict Resolution."
+  },
+  {
+    "id": 28,
+    "question": "Consider the following statements about the Instruction Decoder: Statement 1: It is a component of the Arithmetic Logic Unit. Statement 2: It receives its input directly from the Instruction Register (IR). Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: The Instruction Decoder is a critical component of the Control Unit (CU), not the ALU. Step 2: Once the Fetch phase places the instruction into the IR, the IR feeds it to the Decoder. Step 3: The Decoder translates the opcode into specific hardware activation signals.",
+    "trick": "Trap: The ALU does math, it doesn't decode. The CU is the brain that decodes.",
+    "tip": "Decoder lives in the Control Unit, fed by IR."
+  },
+  {
+    "id": 29,
+    "question": "Match the register size implications: List I: A. 16-bit PC B. 32-bit MDR C. 8-bit IR. List II: 1. The processor can fetch instructions with a maximum of 256 unique opcodes 2. The processor can access up to 64 KB of memory 3. The processor transfers 4 bytes of data per bus cycle.",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: A 16-bit PC outputs a 16-bit address, limiting memory addressing to 2^16 bytes (64 Kilobytes). Step 2: A 32-bit MDR transfers 32 bits (4 bytes) of data over the bus per operation. Step 3: An 8-bit IR means the opcode part of the instruction is limited to 2^8 (256) possible variations.",
+    "trick": "Trap: Do the math. 2^16 = 65,536 bytes (64 KB). 32 bits / 8 = 4 bytes.",
+    "tip": "PC width dictates memory size limit. MDR width = Transfer rate."
+  },
+  {
+    "id": 30,
+    "question": "Consider the following statements regarding internal vs. external buses: Statement 1: The Internal CPU Bus runs at the same speed as the System Bus (Front Side Bus). Statement 2: The MAR and MDR act as the bridge between the internal CPU bus and the external system buses. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: The Internal CPU bus usually operates much faster (at the core clock multiplier speed) than the external System bus. Step 2: Registers inside the CPU communicate via the internal bus, but to talk to RAM, they must pass data through the MAR/MDR buffer bridge to the external System bus. Step 3: Therefore, Statement 1 is false.",
+    "trick": "Trap: Assuming all buses in a computer run at the same speed. Internal CPU buses are vastly faster.",
+    "tip": "Internal bus > External bus speed. MAR/MDR bridge them."
+  },
+  {
+    "id": 31,
+    "question": "Match the addressing mode to how the effective address is resolved during the instruction cycle: List I: A. Immediate Addressing B. Direct Addressing C. Register Addressing. List II: 1. Operand is located in a CPU register 2. The operand value is hardcoded directly inside the instruction 3. The instruction contains the exact memory address of the operand.",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: Immediate addressing involves zero effective address calculation; the data is the operand. Step 2: Direct addressing gives the explicit memory location (e.g., Load 1005). Step 3: Register addressing is fastest because the operand is sitting in an internal CPU register, bypassing main memory entirely.",
+    "trick": "Trap: 'Immediate' doesn't mean fast memory; it means NO memory lookup is needed because the value is baked into the code.",
+    "tip": "Immediate = Value in code. Direct = Memory address in code."
+  },
+  {
+    "id": 32,
+    "question": "Consider the following statements regarding Instruction Set Architecture (ISA): Statement 1: CISC processors rely heavily on microprogramming in the Control Unit. Statement 2: RISC processors emphasize single-cycle execution for most instructions. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Both Statement 1 and 2",
+    "explanation": "Step 1: CISC (Complex Instruction Set Computer) instructions are complex and require the Control Unit to run internal micro-routines (microprogramming) to execute one instruction over many cycles. Step 2: RISC (Reduced Instruction Set Computer) relies on simpler, hardware-wired instructions that execute in a single clock cycle. Step 3: Both reflect foundational ISA philosophies.",
+    "trick": "Trap: CISC seems faster because it does more per instruction, but RISC achieves higher speeds via pipelining single-cycle tasks.",
+    "tip": "CISC = Microprogrammed, multi-cycle. RISC = Hardwired, single-cycle."
+  },
+  {
+    "id": 33,
+    "question": "Match the register-level event to its trigger: List I: A. Zero Flag Set B. Carry Flag Set C. Overflow Flag Set. List II: 1. Addition of two positive signed numbers yields a negative result 2. The result of a subtraction is exactly zero 3. An arithmetic operation generates a bit beyond the MSB of the register.",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: The Zero flag is triggered if the ALU output is '0' (e.g., 5 - 5). Step 2: The Carry flag is triggered for unsigned operations when a bit 'spills over' the Most Significant Bit (MSB). Step 3: The Overflow flag is triggered in signed operations when the sign bit flips incorrectly due to a boundary crossing.",
+    "trick": "Trap: Carry and Overflow seem identical. Carry is for Unsigned arithmetic errors; Overflow is for Signed arithmetic errors.",
+    "tip": "Carry = Unsigned overflow. Overflow flag = Signed overflow."
+  },
+  {
+    "id": 34,
+    "question": "Consider the following statements about Bus Mastership: Statement 1: The CPU is the only component that can ever act as a Bus Master. Statement 2: A DMA (Direct Memory Access) controller can take over Bus Mastership to bypass the CPU. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: A Bus Master is any device capable of initiating a bus transfer (driving the address and control lines). Step 2: While the CPU is the default master, DMA controllers routinely request and take over bus mastership to transfer data directly between I/O and RAM, halting the CPU's bus access. Step 3: Thus, Statement 1 is false.",
+    "trick": "Trap: Assuming the CPU is the absolute dictator of the bus. DMA exists specifically to steal the bus from the CPU.",
+    "tip": "DMA acts as a Bus Master, bypassing the CPU."
+  },
+  {
+    "id": 35,
+    "question": "Match the pipeline hazards with their core causes: List I: A. Structural Hazard B. Data Hazard C. Control Hazard. List II: 1. Two instructions need the same hardware resource simultaneously 2. A branch instruction alters the expected sequence of the PC 3. An instruction depends on the result of a previous incomplete instruction.",
+    "options": ["A-1, B-3, C-2", "A-2, B-1, C-3", "A-3, B-2, C-1", "A-1, B-2, C-3"],
+    "answer": "A-1, B-3, C-2",
+    "explanation": "Step 1: Structural hazards occur when hardware (like memory or ALU) is requested by two stages at once. Step 2: Data hazards occur due to Read-After-Write (RAW) dependencies. Step 3: Control hazards (branch hazards) occur when the PC changes unexpectedly (JMP/CALL), invalidating the fetched pipeline instructions.",
+    "trick": "Trap: Branching disrupts the pipeline heavily; this is why modern CPUs use complex 'Branch Prediction'.",
+    "tip": "Structural = Hardware clash. Data = Dependency. Control = Branching."
+  },
+  {
+    "id": 36,
+    "question": "Consider the following statements regarding the Fetch sequence 'PC -> MAR': Statement 1: It requires the activation of the internal CPU data bus. Statement 2: It requires the memory Read signal to be activated simultaneously. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 1",
+    "explanation": "Step 1: Transferring the value from the Program Counter to the Memory Address Register happens over the CPU's internal data paths. Step 2: The Memory Read signal is asserted in the NEXT step, only after the address has safely settled on the external Address Bus via MAR. Step 3: Asserting Read simultaneously would cause unpredictable reads.",
+    "trick": "Trap: Hardware requires address stabilization before asserting control signals. Timing is strictly sequential.",
+    "tip": "Address must settle in MAR before READ signal is sent."
+  },
+  {
+    "id": 37,
+    "question": "Match the register transfer notation to its description: List I: A. M[MAR] B. (PC) C. IR(opcode). List II: 1. The contents of the memory location currently addressed 2. The opcode portion of the instruction register 3. The data stored inside the program counter.",
+    "options": ["A-1, B-3, C-2", "A-2, B-1, C-3", "A-3, B-2, C-1", "A-1, B-2, C-3"],
+    "answer": "A-1, B-3, C-2",
+    "explanation": "Step 1: In RTL (Register Transfer Language), brackets M[ ] denote 'the memory contents at address'. M[MAR] is the memory data at the address held in MAR. Step 2: Parentheses ( ) denote 'the contents of'. (PC) means the value inside the PC. Step 3: IR(opcode) refers to a specific bit-field within the IR.",
+    "trick": "Trap: Confusing the address with the contents. MAR is the address; M[MAR] is the actual data living at that address.",
+    "tip": "M[ ] = Memory contents. ( ) = Register contents."
+  },
+  {
+    "id": 38,
+    "question": "Consider the following statements about micro-operations: Statement 1: A single clock pulse always executes one complete machine instruction. Statement 2: A micro-operation is the most basic, indivisible atomic operation performed on data in registers. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: A machine instruction (like ADD) is broken down into several smaller steps called micro-operations (e.g., PC to MAR). Step 2: Micro-operations are atomic and usually complete in one clock cycle. Step 3: Therefore, a full machine instruction takes MULTIPLE clock pulses, making Statement 1 false.",
+    "trick": "Trap: Do not equate 'instruction' with 'micro-operation'. An instruction is a recipe; micro-operations are the individual cooking steps.",
+    "tip": "Machine instruction = Multiple micro-operations over multiple clock cycles."
+  },
+  {
+    "id": 39,
+    "question": "Match the CPU internal element with its logical categorization: List I: A. Instruction Register B. Program Counter C. ALU. List II: 1. Data Processing Element 2. Data Storage Element (Instruction state) 3. Control Element (Sequencing).",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: The IR acts as a storage element for the state of the current instruction being worked on. Step 2: The PC is a sequence controller, dictating the flow of the program. Step 3: The ALU is the pure data processing engine performing transformations.",
+    "trick": "Trap: PC feels like storage, but its architectural role is control/sequencing, guiding the CU on what to fetch next.",
+    "tip": "PC = Control/Sequencing. IR = Instruction Storage. ALU = Processing."
+  },
+  {
+    "id": 40,
+    "question": "Consider the following statements regarding the Store phase: Statement 1: It is mandatory for every instruction cycle. Statement 2: It can involve writing data back to either a CPU register or Main Memory. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: Not all instructions require a Store phase (e.g., a simple JMP instruction alters the PC but doesn't store data results). Step 2: When an instruction DOES store data (like ADD or STORE), the destination can be an internal register (fast) or main memory (slow). Step 3: Therefore, Statement 1 is false.",
+    "trick": "Trap: Branching or comparative instructions don't always use the 'Store' phase. The cycle can end at Execute.",
+    "tip": "Store phase is optional (e.g., JMP doesn't store data)."
+  },
+  {
+    "id": 41,
+    "question": "Match the register size to the processor architecture bit-labeling (e.g., 'A 32-bit CPU'): List I: A. General Purpose Registers B. Address Bus C. Instruction Register. List II: 1. Often varies depending on ISA design, sometimes fixed, sometimes variable 2. Size strictly matches the CPU 'bit' label (e.g., 32-bit) 3. Sized based on required memory addressability, not CPU bit label.",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: A '32-bit CPU' primarily means its GPRs and ALU process 32 bits natively. Step 2: The Address Bus size is independent (a 32-bit CPU might have a 36-bit address bus for PAE). Step 3: Instruction length in IR varies wildly; CISC instructions can be 1 to 15 bytes long.",
+    "trick": "Trap: Assuming a '32-bit CPU' means EVERYTHING is 32-bit. It refers to ALU/GPR width. IR and Address Bus vary.",
+    "tip": "CPU bit size = ALU and GPR width."
+  },
+  {
+    "id": 42,
+    "question": "Consider the following statements regarding conditional branching: Statement 1: A conditional branch instruction requires the Control Unit to check the Status Register before updating the PC. Statement 2: If the condition is false, the PC is reset to zero. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 1",
+    "explanation": "Step 1: Conditional branches (like 'Jump if Zero') rely on the CU inspecting the flags (Zero, Carry, etc.) set by the ALU in the Status Register. Step 2: If the condition is false, the PC simply continues to the next sequential instruction; it does NOT reset to zero. Step 3: Thus, Statement 2 is entirely false.",
+    "trick": "Trap: Failing a condition doesn't crash or reset the system; it just means the branch is ignored and normal execution continues.",
+    "tip": "Failed branch = PC continues normally. Check Status Register."
+  },
+  {
+    "id": 43,
+    "question": "Match the system buses with the type of connection topology they typically use on a motherboard: List I: A. System Bus (CPU to Memory) B. PCI/PCIe Bus C. USB (External). List II: 1. Serial Point-to-Point or Tree topology 2. High-speed parallel traces strictly between Northbridge/CPU and RAM 3. Multipoint parallel or high-speed serial expansion slots.",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: The core System Bus (Front Side Bus/Memory Bus) consists of dense parallel traces dedicated to CPU/RAM communication. Step 2: Expansion buses like PCI/PCIe provide multipoint or point-to-point slots for peripherals. Step 3: USB acts as an external serial tree topology.",
+    "trick": "Trap: 'Bus' doesn't always mean parallel lines. PCIe and USB are technically serial 'buses' architecturally.",
+    "tip": "System bus = Parallel internal. USB = Serial external."
+  },
+  {
+    "id": 44,
+    "question": "Consider the following statements about instruction format: Statement 1: An instruction consists solely of an Opcode field. Statement 2: The Operand field can contain actual data or a memory address. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: An instruction must have an Opcode (Operation Code - what to do) but almost always requires an Operand field (what to do it ON). Statement 1 is false. Step 2: The Operand field can hold an immediate value (actual data) or a reference (memory address or register).",
+    "trick": "Trap: Opcode = Action. Operand = Subject. You cannot have an action without specifying what it acts upon.",
+    "tip": "Instruction = Opcode (Verb) + Operand (Noun)."
+  },
+  {
+    "id": 45,
+    "question": "Match the specific bus contention resolution method to its definition: List I: A. Daisy Chaining B. Polling C. Independent Request. List II: 1. Each device has a dedicated request line to the arbiter 2. The arbiter asks each device sequentially if it needs the bus 3. The bus grant signal passes through devices in physical order.",
+    "options": ["A-3, B-2, C-1", "A-1, B-2, C-3", "A-2, B-3, C-1", "A-3, B-1, C-2"],
+    "answer": "A-3, B-2, C-1",
+    "explanation": "Step 1: Daisy Chaining physically connects devices in a line; the grant signal cascades, giving priority to closer devices. Step 2: Polling uses a central controller to query devices one by one. Step 3: Independent Request gives every device its own dedicated wire, maximizing speed but increasing complexity.",
+    "trick": "Trap: Daisy chaining sounds democratic but is highly biased towards devices physically closer to the CPU.",
+    "tip": "Daisy Chain = Physical priority. Polling = Query. Independent = Direct."
+  },
+  {
+    "id": 46,
+    "question": "Consider the following statements about the Memory Buffer Register (MBR/MDR): Statement 1: It buffers data flowing strictly FROM the CPU TO Memory. Statement 2: It is used to compensate for the speed disparity between CPU and Memory. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: The MDR is bidirectional; it buffers data flowing to AND from memory, making Statement 1 false. Step 2: As a buffer, it holds the data stable on the data bus while the slower memory latches it, compensating for speed differences.",
+    "trick": "Trap: 'Buffer' implies a temporary holding zone to stabilize signals, crucial for two-way communication with slow RAM.",
+    "tip": "MDR is bidirectional and stabilizes data for slow memory."
+  },
+  {
+    "id": 47,
+    "question": "Match the micro-operation sequence to the Instruction Cycle Phase: List I: A. t1: MAR <- PC, t2: MDR <- M, PC <- PC + 1, t3: IR <- MDR. B. t1: MAR <- IR(address), t2: MDR <- M. C. t1: A <- A + MDR. List II: 1. Execute Phase 2. Indirect/Operand Fetch Phase 3. Instruction Fetch Phase.",
+    "options": ["A-3, B-2, C-1", "A-1, B-2, C-3", "A-2, B-3, C-1", "A-3, B-1, C-2"],
+    "answer": "A-3, B-2, C-1",
+    "explanation": "Step 1: Sequence A is the classic Instruction Fetch: address to MAR, read memory to MDR while incrementing PC, then MDR to IR. Step 2: Sequence B is an operand fetch, extracting an address from IR to get data into MDR. Step 3: Sequence C is an ALU execute: adding MDR to Accumulator.",
+    "trick": "Trap: Memorize the Fetch RTL: MAR<-PC, MDR<-M, IR<-MDR. It's the most tested micro-operation sequence.",
+    "tip": "Fetch ends with IR <- MDR. Execute ends with ALU op."
+  },
+  {
+    "id": 48,
+    "question": "Consider the following statements regarding direct addressing: Statement 1: The operand field of the instruction contains the actual data. Statement 2: Direct addressing requires only one memory reference to retrieve the operand. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: If the operand field contained actual data, it would be 'Immediate Addressing'. Step 2: Direct addressing means the operand field contains a memory pointer. Step 3: It requires exactly one memory reference (access) to follow that pointer and get the data.",
+    "trick": "Trap: Immediate = 0 memory accesses for data. Direct = 1 access. Indirect = 2 accesses.",
+    "tip": "Direct addressing requires exactly 1 memory access for data."
+  },
+  {
+    "id": 49,
+    "question": "Match the register with its access privilege: List I: A. Program Counter (PC) B. Status Register (Flags) C. General Purpose Register (GPR). List II: 1. Directly readable/writable by user programs 2. Readable by conditional branches, writable mostly by ALU 3. Implicitly updated by hardware, altered explicitly only via jump/call instructions.",
+    "options": ["A-3, B-2, C-1", "A-1, B-2, C-3", "A-2, B-1, C-3", "A-3, B-1, C-2"],
+    "answer": "A-3, B-2, C-1",
+    "explanation": "Step 1: The PC is managed by hardware logic; users change it indirectly via JMP or CALL. Step 2: Flags are set automatically by the ALU and read by Branch instructions. Step 3: GPRs (like AX, BX in x86) are explicitly designed for programmer manipulation.",
+    "trick": "Trap: Programmers cannot 'move' data directly into the PC like a normal register; they must use flow-control instructions.",
+    "tip": "PC is updated by hardware/JMPs. GPRs are for programmers."
+  },
+  {
+    "id": 50,
+    "question": "Consider the following statements about bus architecture: Statement 1: In a single-bus architecture, I/O devices, memory, and the CPU share the same system bus. Statement 2: Single-bus architectures suffer from severe bottlenecking compared to multiple-bus architectures. Which of the statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Both Statement 1 and 2",
+    "explanation": "Step 1: Early/simple computers used a single shared bus for everything (CPU, Memory, I/O). Step 2: Because only one device can transmit at a time, this creates a massive bottleneck (the Von Neumann bottleneck). Step 3: Modern PCs use multiple buses (Memory Bus, PCIe bus, USB bus) connected via bridges.",
+    "trick": "Trap: Sharing a bus sounds efficient for wiring, but it destroys parallel data transfer capabilities.",
+    "tip": "Single-bus = Bottleneck. Multi-bus = Modern parallel throughput."
+  },
+  {
+    "id": 51,
+    "question": "Consider the following statements regarding CPU registers: Statement I: The Program Counter (PC) holds the address of the instruction currently being executed. Statement II: The Instruction Register (IR) holds the instruction currently being decoded and executed. Which of the statements is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only II",
+    "explanation": "Step 1: The Program Counter (PC) stores the memory address of the 'next' instruction, not the current one. Step 2: The Instruction Register (IR) specifically holds the current instruction that has just been fetched. Step 3: Therefore, Statement I is false and Statement II is true.",
+    "trick": "Trap: Students often assume 'Counter' implies current tracking. Remember, PC always looks to the future (next instruction).",
+    "tip": "PC holds the NEXT address; IR holds the CURRENT instruction."
+  },
+  {
+    "id": 52,
+    "question": "Match the System Bus components with their directional properties: List I (A. Address Bus, B. Data Bus, C. Control Bus) with List II (1. Bidirectional, 2. Unidirectional, 3. Both Unidirectional and Bidirectional lines).",
+    "options": ["A-2, B-1, C-3", "A-1, B-2, C-3", "A-2, B-3, C-1", "A-3, B-1, C-2"],
+    "answer": "A-2, B-1, C-3",
+    "explanation": "Step 1: The Address Bus is Unidirectional (CPU sends address to memory). Step 2: The Data Bus is Bidirectional (CPU reads from and writes to memory). Step 3: The Control Bus contains individual lines that can be unidirectional or bidirectional depending on the specific signal.",
+    "trick": "Trap: Assuming the Control Bus is strictly one way. It has multiple individual lines with varied directionality.",
+    "tip": "Address bus is unidirectional; Data bus is bidirectional."
+  },
+  {
+    "id": 53,
+    "question": "Consider the following statements about the Machine Cycle: Statement I: The Decode phase uses the Arithmetic Logic Unit (ALU) to understand the instruction. Statement II: The Execute phase performs the mathematical or logical operation. Which of the statements is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only II",
+    "explanation": "Step 1: The Decode phase is handled by the Control Unit (CU), not the ALU. Step 2: The Control Unit translates the instruction into control signals. Step 3: The Execute phase utilizes the ALU to perform the actual calculations or logic, making Statement II correct.",
+    "trick": "Trap: Confusing the roles of ALU and CU. The CU decodes (thinks), while the ALU executes (does the heavy lifting).",
+    "tip": "Control Unit decodes; Arithmetic Logic Unit executes."
+  },
+  {
+    "id": 54,
+    "question": "Match the following CPU registers to their specific functions: List I (A. MAR, B. MDR, C. Accumulator) with List II (1. Holds intermediate ALU results, 2. Holds the memory address being accessed, 3. Holds the actual data fetched from memory).",
+    "options": ["A-2, B-3, C-1", "A-3, B-2, C-1", "A-1, B-2, C-3", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: MAR (Memory Address Register) holds the address location in memory. Step 2: MDR (Memory Data Register) holds the actual data read from or written to that address. Step 3: The Accumulator is a general-purpose register storing ALU results.",
+    "trick": "Trap: Mixing up MAR and MDR. 'A' stands for Address, 'D' stands for Data.",
+    "tip": "MAR points to the location; MDR holds the payload."
+  },
+  {
+    "id": 55,
+    "question": "Consider the following sequence of the Instruction Cycle: 1. Decode, 2. Fetch, 3. Store, 4. Execute. What is the correct chronological order of these phases?",
+    "options": ["2, 1, 4, 3", "1, 2, 4, 3", "2, 4, 1, 3", "4, 2, 1, 3"],
+    "answer": "2, 1, 4, 3",
+    "explanation": "Step 1: The CPU first Fetches the instruction from memory. Step 2: The Control Unit then Decodes the fetched instruction. Step 3: The ALU Executes the operation. Step 4: Finally, the result is Stored back into a register or memory.",
+    "trick": "Trap: Thinking execution happens immediately after fetching. The instruction must always be decoded first.",
+    "tip": "Standard cycle: Fetch -> Decode -> Execute -> Store."
+  },
+  {
+    "id": 56,
+    "question": "Consider the following statements regarding the Accumulator register: Statement I: It is intimately connected to the Arithmetic Logic Unit (ALU). Statement II: It determines the sequence in which instructions are executed. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only I",
+    "explanation": "Step 1: The Accumulator holds the operands and the results of ALU operations. Step 2: Therefore, it is closely tied to the ALU. Step 3: The Program Counter (PC), not the Accumulator, determines the execution sequence.",
+    "trick": "Trap: Confusing the Accumulator with the Program Counter. Accumulators deal with math results, PC deals with sequence.",
+    "tip": "Accumulator equals ALU results; PC equals execution order."
+  },
+  {
+    "id": 57,
+    "question": "Match the system bus with the specific type of information it carries during the Fetch cycle: List I (A. Control Bus, B. Address Bus, C. Data Bus) with List II (1. Carries the 'Memory Read' signal, 2. Carries the location of the next instruction, 3. Carries the actual binary instruction back to CPU).",
+    "options": ["A-1, B-2, C-3", "A-2, B-3, C-1", "A-3, B-1, C-2", "A-1, B-3, C-2"],
+    "answer": "A-1, B-2, C-3",
+    "explanation": "Step 1: The Control bus sends the command (e.g., Memory Read). Step 2: The Address bus points to where the instruction is located. Step 3: The Data bus transports the fetched instruction back to the CPU's MDR.",
+    "trick": "Trap: Assuming the Address Bus carries data. It only points to the address; the Data Bus does the carrying.",
+    "tip": "Control = Command; Address = Location; Data = Payload."
+  },
+  {
+    "id": 58,
+    "question": "Consider the following statements: Statement I: The Memory Address Register (MAR) provides input directly to the Address Bus. Statement II: The width of the Address Bus determines the maximum memory capacity of the system. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Both I and II",
+    "explanation": "Step 1: The MAR holds the address, which is placed onto the Address Bus to locate data. Step 2: The number of lines (width) in the Address Bus (e.g., 32-bit or 64-bit) mathematically dictates the maximum addressable memory (2^n). Step 3: Both statements are factually correct.",
+    "trick": "Trap: Thinking data bus width limits memory capacity. Data bus limits transfer speed; Address bus limits total memory.",
+    "tip": "Address bus width dictates maximum RAM capacity."
+  },
+  {
+    "id": 59,
+    "question": "Which of the following registers acts as a direct buffer between the main memory and the internal CPU bus?",
+    "options": ["Program Counter (PC)", "Instruction Register (IR)", "Memory Data Register (MDR)", "Accumulator (ACC)"],
+    "answer": "Memory Data Register (MDR)",
+    "explanation": "Step 1: When data or an instruction is fetched from memory, it travels along the data bus. Step 2: Before it can be processed by the IR or ALU, it must be temporarily stored. Step 3: The MDR acts as this crucial buffer between external memory and internal CPU operations.",
+    "trick": "Trap: Choosing IR. While instructions end up in the IR, they must first pass through the MDR buffer.",
+    "tip": "MDR (also called MBR) is the gateway to the CPU."
+  },
+  {
+    "id": 60,
+    "question": "Consider the following statements regarding the Instruction Register (IR): Statement I: The IR is visible to the programmer and can be directly manipulated using high-level languages. Statement II: The output of the IR feeds directly into the Control Unit for decoding. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only II",
+    "explanation": "Step 1: The IR is an internal CPU operating register, completely invisible to programmers. Step 2: Once the IR receives the instruction from the MDR, it passes it to the Control Unit. Step 3: The Control Unit decodes it to generate necessary control signals.",
+    "trick": "Trap: Thinking all registers are accessible. General purpose registers are; IR, PC, MAR, and MDR are strictly for CPU control.",
+    "tip": "IR is for CPU internal use only, not for programmers."
+  },
+  {
+    "id": 61,
+    "question": "Match the machine cycle steps with their corresponding active components: List I (A. Fetch, B. Decode, C. Execute) with List II (1. Control Unit, 2. Arithmetic Logic Unit, 3. PC and Memory).",
+    "options": ["A-3, B-1, C-2", "A-1, B-2, C-3", "A-3, B-2, C-1", "A-2, B-1, C-3"],
+    "answer": "A-3, B-1, C-2",
+    "explanation": "Step 1: The Fetch phase heavily involves the Program Counter and Memory to retrieve the instruction. Step 2: The Decode phase relies on the Control Unit to interpret the binary code. Step 3: The Execute phase relies on the ALU for processing.",
+    "trick": "Trap: Associating ALU with the Decode phase. ALU only calculates; CU decodes.",
+    "tip": "Fetch = Memory; Decode = CU; Execute = ALU."
+  },
+  {
+    "id": 62,
+    "question": "Consider the following statements: Statement I: A wider data bus allows more data to be transferred simultaneously per clock cycle. Statement II: The data bus strictly carries user data and never carries instructions. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only I",
+    "explanation": "Step 1: A wider data bus (e.g., 64-bit vs 32-bit) transfers more bits in a single cycle, improving throughput. Step 2: The data bus carries BOTH user data and machine instructions fetched from memory. Step 3: Statement II is false because the CPU cannot distinguish data from instructions on the bus itself.",
+    "trick": "Trap: Taking the term 'Data Bus' too literally. It transports everything, including executable instructions.",
+    "tip": "The Data Bus carries both data and binary instructions."
+  },
+  {
+    "id": 63,
+    "question": "In the context of the CPU instruction cycle, what specifically happens immediately after an instruction is fetched and placed into the Instruction Register (IR)?",
+    "options": ["The ALU executes the instruction.", "The Program Counter (PC) is incremented.", "The data is stored in the Accumulator.", "The address bus is cleared."],
+    "answer": "The Program Counter (PC) is incremented.",
+    "explanation": "Step 1: During the fetch cycle, the current instruction is retrieved. Step 2: Once it is safely in the IR, the PC must immediately update. Step 3: The PC increments to point to the address of the next sequential instruction before decoding begins.",
+    "trick": "Trap: Thinking execution or decoding is the immediate next micro-step. Incrementing the PC ensures the cycle continues seamlessly.",
+    "tip": "PC increments immediately after the instruction is fetched."
+  },
+  {
+    "id": 64,
+    "question": "Match the register transfer operation to its corresponding cycle phase: List I (A. PC contents copied to MAR, B. MDR contents copied to IR, C. IR opcode sent to CU) with List II (1. End of Fetch, 2. Start of Decode, 3. Start of Fetch).",
+    "options": ["A-3, B-1, C-2", "A-1, B-2, C-3", "A-2, B-3, C-1", "A-3, B-2, C-1"],
+    "answer": "A-3, B-1, C-2",
+    "explanation": "Step 1: The very first step of Fetch is moving the PC address to the MAR (Start of Fetch). Step 2: Once data arrives from memory, it moves from MDR to IR (End of Fetch). Step 3: Finally, the IR sends the opcode to the CU to begin interpreting (Start of Decode).",
+    "trick": "Trap: Confusing the direction of data flow between registers. It always flows PC -> MAR -> Memory -> MDR -> IR.",
+    "tip": "Fetch path: PC -> MAR -> Mem -> MDR -> IR."
+  },
+  {
+    "id": 65,
+    "question": "Consider the following statements regarding the Control Bus: Statement I: It manages the timing and coordination of all system activities. Statement II: It is strictly a unidirectional bus transmitting signals away from the CPU. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only I",
+    "explanation": "Step 1: The Control Bus carries clock signals, read/write commands, and interrupt requests. Step 2: While some lines (like memory write) go from CPU to memory, others (like interrupt requests) go from hardware back to the CPU. Step 3: Therefore, it contains both unidirectional and bidirectional components, making Statement II false.",
+    "trick": "Trap: Assuming control only flows outwards. Devices must send control signals (like ready/wait) back to the CPU.",
+    "tip": "Control bus carries signals in multiple directions."
+  },
+  {
+    "id": 66,
+    "question": "Which specific component inside the CPU acts as a traffic director, relying heavily on the Control Bus to orchestrate the Fetch-Decode-Execute cycle?",
+    "options": ["Arithmetic Logic Unit (ALU)", "Control Unit (CU)", "Memory Address Register (MAR)", "Accumulator"],
+    "answer": "Control Unit (CU)",
+    "explanation": "Step 1: The ALU only performs math. Step 2: The registers hold data temporarily. Step 3: The Control Unit (CU) interprets instructions and generates the specific timing and control signals sent across the Control Bus to orchestrate the entire cycle.",
+    "trick": "Trap: Students may pick the ALU because it sounds powerful. The CU is the actual 'brain' directing the system.",
+    "tip": "The Control Unit is the CPU's internal traffic director."
+  },
+  {
+    "id": 67,
+    "question": "Consider the following statements regarding the interplay of registers: Statement I: To read a value from memory, the address must first be loaded into the MAR. Statement II: The read value immediately appears in the Accumulator without passing through any other register. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only I",
+    "explanation": "Step 1: All memory accesses require the target address to be in the MAR. Statement I is true. Step 2: Data fetched from memory always arrives via the Data Bus into the MDR first. Step 3: It does not skip straight to the Accumulator, making Statement II false.",
+    "trick": "Trap: Skipping the buffer. The MDR is mandatory for all data entering the CPU from main memory.",
+    "tip": "Data from memory ALWAYS lands in the MDR first."
+  },
+  {
+    "id": 68,
+    "question": "Match the CPU internal components with their respective descriptions: List I (A. Clock, B. General Purpose Registers, C. Status Register/Flags) with List II (1. Holds condition codes like Zero or Carry, 2. Synchronizes CPU operations, 3. Stores temporary variables during execution).",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: The System Clock provides the rhythmic pulses that synchronize all cycle phases. Step 2: General Purpose Registers (GPRs) hold temporary data to speed up execution without accessing RAM. Step 3: The Status Register contains flags that reflect ALU outcomes (like a negative result).",
+    "trick": "Trap: Confusing General Purpose Registers with the Accumulator. Modern CPUs have multiple GPRs alongside the Accumulator.",
+    "tip": "Flags store ALU states; Clock synchronizes; GPRs store temporaries."
+  },
+  {
+    "id": 69,
+    "question": "If a processor has an 8-bit Data Bus and a 16-bit Address Bus, what is the maximum number of distinct memory locations it can address?",
+    "options": ["256", "65,536", "1,048,576", "4,096"],
+    "answer": "65,536",
+    "explanation": "Step 1: Memory capacity depends strictly on the Address Bus. Step 2: The formula for maximum addressable locations is 2 raised to the power of the number of address lines. Step 3: 2^16 equals 65,536 distinct locations (64 KB). The 8-bit Data Bus affects data speed, not addressable size.",
+    "trick": "Trap: Multiplying the data and address bus widths. Only the Address bus determines addressable memory limits.",
+    "tip": "Capacity = 2^(Address Bus Width). Data bus is irrelevant."
+  },
+  {
+    "id": 70,
+    "question": "Consider the following statements regarding the execution phase of a conditional branching instruction (e.g., JUMP IF ZERO): Statement I: The ALU calculates the condition to be tested. Statement II: If the condition is met, the Program Counter (PC) is updated with a new target address. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Both I and II",
+    "explanation": "Step 1: The ALU sets status flags based on previous operations (e.g., checking if a result is zero). Step 2: A conditional branch instruction evaluates this flag. Step 3: If true, the normal sequential flow is broken by overwriting the PC with the jump address.",
+    "trick": "Trap: Believing the PC only ever increments by 1. Branch instructions explicitly rewrite the PC to change program flow.",
+    "tip": "Branching works by manually changing the Program Counter value."
+  },
+  {
+    "id": 71,
+    "question": "Which sequence correctly represents the flow of an address when the CPU wants to read an instruction from memory?",
+    "options": ["PC -> MAR -> Address Bus -> Memory", "IR -> PC -> Data Bus -> Memory", "MAR -> PC -> Control Bus -> Memory", "MDR -> MAR -> Address Bus -> Memory"],
+    "answer": "PC -> MAR -> Address Bus -> Memory",
+    "explanation": "Step 1: The Program Counter (PC) contains the address of the next instruction. Step 2: This address is copied to the Memory Address Register (MAR). Step 3: The MAR places this address onto the physical Address Bus, which carries it to Main Memory.",
+    "trick": "Trap: Thinking the PC connects directly to the Address Bus. It must pass through the MAR buffer first.",
+    "tip": "Flow: Program Counter -> MAR -> Address Bus."
+  },
+  {
+    "id": 72,
+    "question": "Match the specific bus lines to their functions: List I (A. Memory Read, B. Interrupt Request, C. System Clock) with List II (1. Control Bus line from CPU to Memory, 2. Control Bus line to synchronize operations, 3. Control Bus line from I/O to CPU).",
+    "options": ["A-1, B-3, C-2", "A-2, B-1, C-3", "A-3, B-2, C-1", "A-1, B-2, C-3"],
+    "answer": "A-1, B-3, C-2",
+    "explanation": "Step 1: 'Memory Read' is a command issued by the CPU to memory. Step 2: 'Interrupt Request' is a signal generated by external I/O devices sent back to the CPU. Step 3: The 'System Clock' is a timing signal distributed to all components.",
+    "trick": "Trap: Grouping them all as 'bidirectional'. Control lines have specific, fixed directions individually.",
+    "tip": "Read is CPU->Mem. Interrupt is I/O->CPU. Both are Control."
+  },
+  {
+    "id": 73,
+    "question": "Consider the following statements regarding an Interrupt during the Instruction Cycle: Statement I: An interrupt causes the CPU to pause its current execution. Statement II: The CPU saves the current state of the Program Counter (PC) before handling the interrupt. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Both I and II",
+    "explanation": "Step 1: When an interrupt occurs, the CPU must pause normal operations to handle the priority event. Step 2: To return to where it left off later, it must push the current Program Counter (PC) value onto the system stack. Step 3: Therefore, both statements are correct.",
+    "trick": "Trap: Assuming interrupts abort the program. They only pause it by safely saving the PC.",
+    "tip": "Interrupts save the PC to resume the program later."
+  },
+  {
+    "id": 74,
+    "question": "In a hypothetical system, the CPU needs to write data to memory. Which register holds the actual data payload before it is pushed onto the bus?",
+    "options": ["Accumulator", "Memory Data Register (MDR)", "Memory Address Register (MAR)", "Program Counter (PC)"],
+    "answer": "Memory Data Register (MDR)",
+    "explanation": "Step 1: While the Accumulator might generate the result, it must move to the MDR. Step 2: The MDR is the strict gateway for any data leaving the CPU for memory. Step 3: Once in the MDR, it is pushed onto the Data Bus during a write cycle.",
+    "trick": "Trap: Choosing the Accumulator. The Accumulator does the math, but the MDR handles the physical bus transfer.",
+    "tip": "MDR handles ALL data entering or exiting the CPU."
+  },
+  {
+    "id": 75,
+    "question": "Consider the following statements regarding Von Neumann architecture: Statement I: It features a single shared memory space for both data and instructions. Statement II: It implies the use of a shared system bus, which leads to the 'Von Neumann Bottleneck'. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Both I and II",
+    "explanation": "Step 1: Von Neumann architecture stores both executable code and data in the same RAM block. Step 2: Consequently, both must be fetched using the same single System Bus. Step 3: This shared pathway limits throughput, a phenomenon known as the Von Neumann bottleneck.",
+    "trick": "Trap: Believing data and instructions have separate buses in this model. That defines the Harvard architecture, not Von Neumann.",
+    "tip": "Von Neumann = Shared Memory and Shared Bus."
+  },
+  {
+    "id": 76,
+    "question": "Match the register size characteristics for a 32-bit processor architecture: List I (A. Width of Data Bus, B. Size of standard general register, C. Width of Instruction Register) with List II (1. Usually 32 bits, 2. Usually 32 bits, 3. Usually 32 bits). (Assume standard architecture)",
+    "options": ["A-1, B-2, C-3", "A-2, B-3, C-1", "A-3, B-1, C-2", "All of them are 32 bits"],
+    "answer": "All of them are 32 bits",
+    "explanation": "Step 1: In a standard 32-bit architecture, the 'word size' is 32 bits. Step 2: This means the CPU processes 32 bits at a time, requiring 32-bit general registers. Step 3: The Data Bus and Instruction Register are also typically matched to this 32-bit word width for efficiency.",
+    "trick": "Trap: Thinking bus width and register size must differ. In balanced standard architectures, they commonly match the word size.",
+    "tip": "In an N-bit CPU, data paths and standard registers are N-bits."
+  },
+  {
+    "id": 77,
+    "question": "Consider the following statements regarding the Decode phase: Statement I: The opcode portion of the instruction is analyzed by the Control Unit. Statement II: The operand portion specifies the data or memory location to be acted upon. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Both I and II",
+    "explanation": "Step 1: Every machine instruction generally has an opcode (operation code) and an operand. Step 2: The Control Unit decodes the opcode to figure out the action (e.g., ADD). Step 3: The operand part tells the CPU what data to add or where to find it. Both are true.",
+    "trick": "Trap: Confusing opcode with operand. Opcode = What to do; Operand = What to do it to.",
+    "tip": "Opcode is the verb; Operand is the noun."
+  },
+  {
+    "id": 78,
+    "question": "Which component is strictly responsible for providing the timing signals that dictate the speed of the Fetch-Decode-Execute cycle?",
+    "options": ["System Clock", "Control Unit", "Program Counter", "ALU"],
+    "answer": "System Clock",
+    "explanation": "Step 1: The CPU operates in discrete steps dictated by a vibrating quartz crystal. Step 2: This System Clock generates regular electrical pulses. Step 3: The speed of these pulses (measured in GHz) determines how fast the machine cycles are executed.",
+    "trick": "Trap: Thinking the Control Unit generates its own timing. The CU relies on the external System Clock to pace its operations.",
+    "tip": "System Clock sets the tempo for all CPU operations."
+  },
+  {
+    "id": 79,
+    "question": "Consider the following statements regarding the Address Bus: Statement I: It is used by the CPU to specify the location of an I/O device. Statement II: The memory controller uses it to send data back to the CPU. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only I",
+    "explanation": "Step 1: The Address Bus identifies locations in memory AND mapped I/O devices. Statement I is true. Step 2: The Address Bus is unidirectional (CPU -> Out). Memory cannot use it to send data back; it uses the Data Bus for that. Statement II is false.",
+    "trick": "Trap: Forgetting that I/O devices also have addresses. Address bus handles both Memory and I/O mapped addresses.",
+    "tip": "Address bus points; Data bus transports."
+  },
+  {
+    "id": 80,
+    "question": "Match the phase of the machine cycle with its dominant internal bus activity: List I (A. Fetch, B. Execute) with List II (1. Data Bus actively transfers instruction, 2. Internal CPU bus transfers operands to ALU).",
+    "options": ["A-1, B-2", "A-2, B-1", "Both use Data Bus equally", "Neither use Data Bus"],
+    "answer": "A-1, B-2",
+    "explanation": "Step 1: During Fetch, the external Data Bus is heavily utilized to bring the instruction code from RAM to the MDR. Step 2: During Execute, external buses may be idle while internal CPU buses route data from general registers to the ALU for math.",
+    "trick": "Trap: Believing the external Data Bus is always active. Much of execution happens entirely on internal CPU pathways.",
+    "tip": "Fetch uses external buses; Execute often uses internal buses."
+  },
+  {
+    "id": 81,
+    "question": "Consider the following statements: Statement I: A Program Counter (PC) is required in systems that do not execute instructions sequentially. Statement II: The Instruction Register (IR) holds data that is yet to be mathematically processed by the ALU. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Neither I nor II",
+    "explanation": "Step 1: The PC is fundamentally designed for sequential execution (incrementing by 1 step). Statement I is false. Step 2: The IR holds the binary instruction (opcode), not mathematical data operands. Operands go to general registers or the accumulator. Statement II is false.",
+    "trick": "Trap: Thinking the IR holds mathematical variables. IR only holds the machine command.",
+    "tip": "IR holds instructions; Accumulators/GPRs hold data operands."
+  },
+  {
+    "id": 82,
+    "question": "Which of the following scenarios would directly cause the system's Control Bus to carry an 'Interrupt Acknowledge' (INTA) signal?",
+    "options": ["The ALU dividing by zero", "A keyboard key being pressed", "The PC incrementing", "The MAR receiving an address"],
+    "answer": "A keyboard key being pressed",
+    "explanation": "Step 1: A hardware interrupt is triggered by external I/O devices needing immediate attention, like a keyboard. Step 2: The device sends an Interrupt Request (INTR). Step 3: The CPU responds via the Control Bus with an Interrupt Acknowledge (INTA) signal.",
+    "trick": "Trap: Dividing by zero causes an internal 'Exception' or 'Trap', not an external hardware interrupt requiring bus acknowledgment.",
+    "tip": "Hardware interrupts come from I/O devices like keyboards."
+  },
+  {
+    "id": 83,
+    "question": "Consider the following statements regarding Data Flow in a CPU: Statement I: Data can flow directly from the Data Bus into the Program Counter (PC). Statement II: Data flows from the Memory Data Register (MDR) to the Instruction Register (IR) during the fetch cycle. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only II",
+    "explanation": "Step 1: The PC only receives data from the ALU (during a branch) or its own incrementer, not directly from the external Data Bus. Statement I is false. Step 2: Fetched instructions land in the MDR from the bus, and are then transferred internally to the IR. Statement II is true.",
+    "trick": "Trap: Assuming the PC reads directly from memory. The PC generates addresses; it rarely reads them from standard data flow.",
+    "tip": "PC calculates addresses; it doesn't receive data."
+  },
+  {
+    "id": 84,
+    "question": "Match the operational delay to its memory hierarchy component: List I (A. Cache Hit, B. RAM Access, C. Register Access) with List II (1. ~1 CPU Cycle, 2. ~10-20 CPU Cycles, 3. ~50-100 CPU Cycles).",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: Registers are built directly into the CPU core and operate at absolute CPU speed (~1 cycle). Step 2: Cache memory is very fast but slightly slower than registers (~10-20 cycles). Step 3: Accessing main RAM over the system bus takes the longest (~50-100 cycles).",
+    "trick": "Trap: Thinking Cache is as fast as a Register. Cache still requires minimal bus routing compared to instant register access.",
+    "tip": "Speed rank: Registers > Cache > RAM."
+  },
+  {
+    "id": 85,
+    "question": "Consider the following statements regarding CPU performance: Statement I: Increasing the clock speed will uniformly decrease the execution time of all instructions. Statement II: A wider data bus increases the system's overall throughput by fetching more bytes per cycle. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only II",
+    "explanation": "Step 1: Clock speed improves CPU internal speed, but if the instruction relies heavily on slow RAM (memory bound), execution time won't decrease uniformly. Statement I is false. Step 2: A wider data bus physically pulls more data per fetch, directly increasing throughput. Statement II is true.",
+    "trick": "Trap: Assuming clock speed solves all bottlenecks. Memory latency often bottlenecks high clock speeds.",
+    "tip": "Bus width improves throughput; clock speed improves processing rate."
+  },
+  {
+    "id": 86,
+    "question": "In the context of the Instruction Cycle, what is the role of the 'Instruction Decoder' circuit inside the Control Unit?",
+    "options": ["To convert high-level language to assembly code", "To convert the opcode into specific hardware control signals", "To fetch the next operand from memory", "To perform binary arithmetic"],
+    "answer": "To convert the opcode into specific hardware control signals",
+    "explanation": "Step 1: The Instruction Decoder is a complex combinational logic circuit. Step 2: It takes the binary opcode (like 1011) as input. Step 3: It outputs electrical signals on specific control lines to activate the ALU, registers, and memory for execution.",
+    "trick": "Trap: Confusing hardware decoding with software compilation. The CU handles raw binary opcodes, not high-level code.",
+    "tip": "Decoder maps binary opcodes to electrical control signals."
+  },
+  {
+    "id": 87,
+    "question": "Consider the following statements: Statement I: The Control Bus is responsible for carrying the 'Write Enable' signal to memory. Statement II: The Address Bus determines which specific memory cell receives the written data. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Both I and II",
+    "explanation": "Step 1: When writing data, the CPU uses the Control Bus to send a 'Write' command to RAM. Statement I is true. Step 2: It uses the Address Bus to physically select the correct target row/column in the RAM chip. Statement II is true.",
+    "trick": "Trap: Assuming writing only needs the data bus. A successful write requires all three buses simultaneously.",
+    "tip": "Write operation uses Address, Data, and Control buses."
+  },
+  {
+    "id": 88,
+    "question": "Match the CPU architectural terms to their basic definitions: List I (A. Micro-operation, B. Machine Cycle, C. Instruction Set) with List II (1. The entire vocabulary of commands a CPU understands, 2. The smallest indivisible step within a cycle phase, 3. The full process of fetching, decoding, and executing).",
+    "options": ["A-2, B-3, C-1", "A-1, B-2, C-3", "A-3, B-1, C-2", "A-2, B-1, C-3"],
+    "answer": "A-2, B-3, C-1",
+    "explanation": "Step 1: A Micro-operation is a tiny elemental step (like moving data from MAR to Bus). Step 2: The Machine Cycle is the macro process (Fetch-Decode-Execute). Step 3: The Instruction Set Architecture (ISA) defines all available commands.",
+    "trick": "Trap: Confusing machine cycle with micro-operations. A cycle consists of several sequential micro-operations.",
+    "tip": "Micro-operations combine to form a full machine cycle."
+  },
+  {
+    "id": 89,
+    "question": "Which of the following scenarios describes the correct use of the bidirectional nature of the Data Bus?",
+    "options": ["CPU sends an address, Memory receives it.", "Memory sends an interrupt, CPU acknowledges it.", "CPU writes a variable to RAM, then later reads it back.", "CPU updates the Program Counter internally."],
+    "answer": "CPU writes a variable to RAM, then later reads it back.",
+    "explanation": "Step 1: The Address Bus is unidirectional (CPU -> Mem). Step 2: The Control Bus handles interrupts. Step 3: The Data Bus handles the actual payload. Because a variable can be pushed (written) and pulled (read), the bus must handle data flowing in both directions.",
+    "trick": "Trap: Selecting PC update. PC updates are entirely internal and don't involve the external system data bus.",
+    "tip": "Data Bus handles read (inbound) and write (outbound)."
+  },
+  {
+    "id": 90,
+    "question": "Consider the following statements regarding RISC architecture in relation to the instruction cycle: Statement I: RISC processors aim to execute one instruction per clock cycle. Statement II: RISC instructions generally take longer to decode than CISC instructions. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only I",
+    "explanation": "Step 1: Reduced Instruction Set Computing (RISC) simplifies instructions so they can be pipelined and executed rapidly, ideally one per cycle. Statement I is true. Step 2: Because they are simple and uniform in length, RISC instructions are actually much faster to decode than complex CISC instructions. Statement II is false.",
+    "trick": "Trap: Assuming 'reduced' means slower. Reduced complexity allows for lightning-fast hardware decoding.",
+    "tip": "RISC means simpler decoding and faster clock cycles."
+  },
+  {
+    "id": 91,
+    "question": "What is the primary function of the 'Flag Register' or 'Status Register' during the execute phase of the instruction cycle?",
+    "options": ["It holds the next instruction to be fetched.", "It indicates the conditions resulting from ALU operations like zero, carry, or overflow.", "It generates the system clock pulses.", "It decodes the operand addresses."],
+    "answer": "It indicates the conditions resulting from ALU operations like zero, carry, or overflow.",
+    "explanation": "Step 1: When the ALU performs a calculation (e.g., subtracting two equal numbers), the result is zero. Step 2: The ALU updates the Status Register, flipping the 'Zero Flag' bit to 1. Step 3: Subsequent branch instructions use these flags to make decisions.",
+    "trick": "Trap: Confusing flags with control signals. Flags are post-execution results; control signals are pre-execution commands.",
+    "tip": "Flags reflect math outcomes: Carry, Zero, Sign, Overflow."
+  },
+  {
+    "id": 92,
+    "question": "Consider the following statements about pipelining: Statement I: Pipelining allows the CPU to fetch a new instruction while executing the previous one. Statement II: Pipelining completely eliminates the need for the Decode phase. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only I",
+    "explanation": "Step 1: Pipelining overlaps the stages of the machine cycle (e.g., fetching Instruction 2 while decoding Instruction 1). Statement I is true. Step 2: Every instruction must physically go through decoding to be understood; pipelining just does it concurrently with other steps. Statement II is false.",
+    "trick": "Trap: Believing pipelining skips steps. It runs them in parallel, like a factory assembly line.",
+    "tip": "Pipelining acts like an assembly line for instructions."
+  },
+  {
+    "id": 93,
+    "question": "Match the register transfer language (RTL) notation to the corresponding bus action: List I (A. MAR <- PC, B. MDR <- M[MAR], C. IR <- MDR) with List II (1. Fetching data from RAM over Data Bus, 2. Internal CPU transfer of fetched instruction, 3. Internal CPU transfer to initiate address lookup).",
+    "options": ["A-3, B-1, C-2", "A-1, B-2, C-3", "A-2, B-3, C-1", "A-3, B-2, C-1"],
+    "answer": "A-3, B-1, C-2",
+    "explanation": "Step 1: PC to MAR is internal to the CPU, setting up the address. Step 2: MDR getting data from Memory[MAR] represents the actual external read over the Data Bus. Step 3: Moving data from MDR to IR is internal, preparing for the decode phase.",
+    "trick": "Trap: Confusing external bus action with internal register transfer. M[MAR] specifically denotes external memory interaction.",
+    "tip": "M[MAR] implies Data Bus usage across the motherboard."
+  },
+  {
+    "id": 94,
+    "question": "Consider the following statements: Statement I: The Control Unit contains an internal clock that replaces the system clock. Statement II: The Instruction Register width is typically determined by the architecture's word size. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only II",
+    "explanation": "Step 1: The Control Unit relies on the motherboard's external System Clock (oscillator) for its pacing; it does not replace it. Statement I is false. Step 2: The IR holds the fetched instruction word, so its physical bit-width matches the CPU's word size (e.g., 32-bit or 64-bit). Statement II is true.",
+    "trick": "Trap: Thinking the CPU is entirely self-sufficient for timing. The crystal oscillator is usually external on the board.",
+    "tip": "IR width usually matches the processor's word size."
+  },
+  {
+    "id": 95,
+    "question": "During the execution phase of an ADD instruction, where do the two operands typically reside immediately before entering the ALU?",
+    "options": ["One in PC, one in IR", "One in MAR, one in MDR", "In General Purpose Registers or the Accumulator", "In the Control Unit"],
+    "answer": "In General Purpose Registers or the Accumulator",
+    "explanation": "Step 1: The operands must be readily available at maximum CPU speed. Step 2: They are pre-loaded from memory (via MDR) into the internal General Purpose Registers (GPRs) or the Accumulator. Step 3: The ALU takes its inputs directly from these high-speed internal registers.",
+    "trick": "Trap: Selecting MAR/MDR. While data passes through MDR, arithmetic operands are staged in GPRs for computation.",
+    "tip": "ALU inputs come directly from GPRs and Accumulators."
+  },
+  {
+    "id": 96,
+    "question": "Consider the following statements regarding the System Bus: Statement I: A System Bus is technically composed of three separate sub-buses: Address, Data, and Control. Statement II: Adding more devices to the System Bus increases electrical capacitance and can slow down transmission speeds. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Both I and II",
+    "explanation": "Step 1: The 'System Bus' is a collective term for the Address, Data, and Control buses. Statement I is true. Step 2: Physically, extending a shared bus to many components adds electrical load (capacitance), which can degrade signal integrity and reduce maximum clock speed. Statement II is true.",
+    "trick": "Trap: Assuming 'System Bus' is a single monolithic cable. It is a logical grouping of three distinct physical pathways.",
+    "tip": "System Bus = Address + Data + Control."
+  },
+  {
+    "id": 97,
+    "question": "Which of the following correctly describes the relationship between the Program Counter (PC) and branching?",
+    "options": ["Branch instructions disable the PC.", "Branch instructions overwrite the PC with a non-sequential address.", "Branch instructions cause the PC to reset to zero.", "Branch instructions move the PC data to the Data Bus."],
+    "answer": "Branch instructions overwrite the PC with a non-sequential address.",
+    "explanation": "Step 1: Normally, the PC automatically increments to the next memory line. Step 2: A branch instruction (like a loop or IF statement) intends to jump to a different part of the code. Step 3: It accomplishes this by forcing a new memory address directly into the PC, altering execution flow.",
+    "trick": "Trap: Thinking branches bypass the PC entirely. They actually rely on manipulating the PC to work.",
+    "tip": "Branching works by manually overwriting the PC."
+  },
+  {
+    "id": 98,
+    "question": "Match the architectural component to its primary bottleneck or limitation: List I (A. Data Bus, B. Address Bus, C. ALU) with List II (1. Limits maximum addressable RAM, 2. Limits mathematical complexity per cycle, 3. Limits rate of data transfer from memory).",
+    "options": ["A-3, B-1, C-2", "A-1, B-2, C-3", "A-2, B-3, C-1", "A-3, B-2, C-1"],
+    "answer": "A-3, B-1, C-2",
+    "explanation": "Step 1: The width of the Data Bus creates a bottleneck on how fast large chunks of data can move (Bandwidth). Step 2: The Address Bus width sets a hard mathematical limit on RAM capacity. Step 3: The ALU's design dictates how complex the math operations can be natively.",
+    "trick": "Trap: Confusing Data Bus limits with Address Bus limits. Data = Speed/Bandwidth; Address = Total Size.",
+    "tip": "Data Bus limits speed; Address Bus limits RAM size."
+  },
+  {
+    "id": 99,
+    "question": "Consider the following statements regarding the Fetch phase: Statement I: During fetch, the Memory Address Register (MAR) receives data from the Data Bus. Statement II: The Instruction Register (IR) cannot be loaded directly from the Data Bus; data must pass through the MDR first. Which is/are correct?",
+    "options": ["Only I", "Only II", "Both I and II", "Neither I nor II"],
+    "answer": "Only II",
+    "explanation": "Step 1: The MAR only outputs to the Address Bus; it does not receive from the Data Bus. Statement I is false. Step 2: All incoming data from memory lands in the Memory Data Register (MDR) first, which then passes the instruction to the IR. Statement II is true.",
+    "trick": "Trap: Reversing MAR and MDR roles. MAR handles addresses going OUT. MDR handles data coming IN/OUT.",
+    "tip": "MDR acts as the middleman for the Data Bus."
+  },
+  {
+    "id": 100,
+    "question": "Which of the following sequences best describes a 'Memory Write' operation during the execute phase?",
+    "options": ["PC -> Address Bus, IR -> Data Bus, CU sends Write", "MAR -> Address Bus, MDR -> Data Bus, CU sends Write", "ALU -> Address Bus, ACC -> Data Bus, Clock sends Write", "MDR -> Address Bus, MAR -> Data Bus, CU sends Write"],
+    "answer": "MAR -> Address Bus, MDR -> Data Bus, CU sends Write",
+    "explanation": "Step 1: The target address is loaded into the MAR and pushed to the Address Bus. Step 2: The data to be written is loaded into the MDR and pushed to the Data Bus. Step 3: The Control Unit (CU) activates the 'Write Enable' line on the Control Bus to finalize the operation.",
+    "trick": "Trap: Reversing MAR and MDR. The address ALWAYS comes from the MAR, and the payload ALWAYS comes from the MDR.",
+    "tip": "Write = MAR points, MDR provides data, CU commands."
+  }
+]

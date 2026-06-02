@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): Operating systems based on the Windows NT architecture (like Windows 10) are far more stable and less prone to full system crashes than Windows 98. Reason (R): The NT architecture uses a Hybrid Kernel where user-mode applications and kernel-mode system processes are strictly isolated in different memory spaces. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Windows 9x relied on MS-DOS with shared memory architectures. Step 2: A crashing application in 9x could easily corrupt the core OS memory. Step 3: Windows NT introduced strict privilege rings separating User Mode and Kernel Mode. Step 4: The hybrid kernel uses the hardware MMU to isolate these memory spaces. Step 5: Therefore, application crashes are contained in user space, completely justifying R as the explanation for A.",
+    "trick": "Bank/IT Trap: Never assume Windows 9x and NT share the same foundation. NT brought true protected memory isolation to the Windows ecosystem.",
+    "tip": "NT kernel guarantees stability through strict user and kernel memory isolation."
+  },
+  {
+    "id": 2,
+    "question": "An advanced IT teacher asks: Which root key in the Windows Registry is not actually an independent database, but rather a dynamic link to a specific subkey within HKEY_USERS?",
+    "options": ["HKEY_LOCAL_MACHINE", "HKEY_CLASSES_ROOT", "HKEY_CURRENT_CONFIG", "HKEY_CURRENT_USER"],
+    "answer": "HKEY_CURRENT_USER",
+    "explanation": "Step 1: The registry consists of primary hives and virtual (derived) hives. Step 2: HKEY_USERS (HKU) contains the profiles of all users loaded on the system. Step 3: When a specific user logs in, their profile gets mapped dynamically. Step 4: HKEY_CURRENT_USER (HKCU) simply acts as a pointer to that user's Security Identifier (SID) subkey inside HKU. Step 5: This architectural shortcut prevents data duplication.",
+    "trick": "Trap: HKCU looks like a main hive, but it is just a convenient shortcut to a specific SID in the HKEY_USERS hive.",
+    "tip": "HKCU is simply a dynamic alias for the currently logged-on user's HKU profile."
+  },
+  {
+    "id": 3,
+    "question": "Assertion (A): Unlike the traditional Command Prompt (CMD), passing data between commands in Windows PowerShell using the pipe operator (|) preserves the structural integrity of the data. Reason (R): PowerShell pipelines pass fully structured .NET objects rather than plain text strings. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: CMD uses a legacy text-based pipeline where outputs are raw strings. Step 2: Parsing strings in CMD requires complex tools like awk or findstr. Step 3: PowerShell is built on the .NET framework. Step 4: When a cmdlet outputs data, it outputs objects containing properties and methods. Step 5: Piping these objects allows the next cmdlet to interact directly with the object's properties, making R the exact reason for A.",
+    "trick": "Bank/IT Trap: CMD pipes text strings; PowerShell pipes objects. This object-oriented nature is PowerShell's biggest superpower.",
+    "tip": "PowerShell pipelines transfer rich .NET objects, not just flat text strings."
+  },
+  {
+    "id": 4,
+    "question": "During the boot process of a Windows 10 system, if the Master Boot Record (MBR) successfully executes, which critical system file is subsequently invoked to read the Boot Configuration Data (BCD) and display the boot menu?",
+    "options": ["ntldr", "bootmgr", "winload.exe", "ntoskrnl.exe"],
+    "answer": "bootmgr",
+    "explanation": "Step 1: The MBR or EFI boot sector hands off control to the boot loader. Step 2: In legacy Windows (XP and older), this loader was 'ntldr'. Step 3: From Windows Vista onwards (including Windows 10), the boot loader was rewritten as 'bootmgr'. Step 4: 'bootmgr' reads the BCD hive to find installed operating systems. Step 5: It then passes control to 'winload.exe' to load the OS kernel.",
+    "trick": "Trap: NTLDR is dead! Modern NT architectures strictly use BOOTMGR to read the BCD store.",
+    "tip": "BOOTMGR replaced NTLDR and reads the BCD to manage the boot sequence."
+  },
+  {
+    "id": 5,
+    "question": "Assertion (A): When a system experiences 'Thrashing', the CPU utilization drops significantly while the hard disk activity LED remains constantly illuminated. Reason (R): Thrashing occurs when the Virtual Memory 'pagefile.sys' is disabled, forcing the OS to run entirely in RAM. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: Thrashing happens when RAM is full and the OS constantly swaps pages to disk. Step 2: The CPU spends all its time waiting for the disk (I/O wait), causing low CPU utilization (A is True). Step 3: The disk works continuously to swap data. Step 4: However, Thrashing relies on 'pagefile.sys' being ACTIVE, not disabled. Step 5: If pagefile is disabled and RAM fills up, the OS simply crashes (OOM), proving R is False.",
+    "trick": "Bank/IT Trap: Thrashing proves the pagefile is heavily active, not disabled. The system is choking on its own virtual memory swaps.",
+    "tip": "Thrashing means excessive swapping to pagefile.sys, drastically lowering active CPU processing time."
+  },
+  {
+    "id": 6,
+    "question": "In the context of the Windows NT Hybrid Kernel architecture, what is the specific role of the Hardware Abstraction Layer (HAL)?",
+    "options": ["It translates .NET object code into native machine code.", "It isolates the Windows Kernel and device drivers from hardware-specific architectural differences.", "It acts as a firewall preventing user-mode applications from accessing the internet.", "It manages the Virtual Memory paging process strictly within the pagefile.sys file."],
+    "answer": "It isolates the Windows Kernel and device drivers from hardware-specific architectural differences.",
+    "explanation": "Step 1: Different computers use different motherboard chipsets, interrupt controllers, and timers. Step 2: Writing a unique OS kernel for every hardware variation is inefficient. Step 3: The HAL (hal.dll) sits directly between the hardware and the rest of the OS. Step 4: It provides a generic, universal interface to the kernel. Step 5: This allows the exact same NT kernel to run on diverse hardware platforms seamlessly.",
+    "trick": "Trap: HAL does not deal with software translation or memory paging; it strictly abstracts physical motherboard hardware from the OS.",
+    "tip": "HAL (hal.dll) makes the OS hardware-independent by translating generic kernel commands."
+  },
+  {
+    "id": 7,
+    "question": "An SBI PO IT Officer is troubleshooting a corrupted Windows server. The 'sfc /scannow' command fails to fix the files because the local backup source is also corrupted. Which advanced command-line tool must be used to repair the underlying Windows Component Store image?",
+    "options": ["chkdsk /r", "bootrec /fixmbr", "DISM", "diskpart"],
+    "answer": "DISM",
+    "explanation": "Step 1: SFC (System File Checker) replaces corrupt files using the local Windows Component Store (WinSxS). Step 2: If the WinSxS folder itself is corrupt, SFC fails. Step 3: DISM (Deployment Image Servicing and Management) is designed to service Windows images. Step 4: Using 'DISM /Online /Cleanup-Image /RestoreHealth', the tool connects to Windows Update to download fresh files. Step 5: Once DISM fixes the image, SFC can run successfully.",
+    "trick": "Trap: SFC relies on the local component store. When the store itself is broken, only DISM can reach out to the internet to fix it.",
+    "tip": "Use DISM to repair the Windows image store so SFC can fix system files."
+  },
+  {
+    "id": 8,
+    "question": "Assertion (A): Deleting a critical key in HKEY_LOCAL_MACHINE\\SYSTEM can render a Windows computer completely unbootable. Reason (R): This registry hive contains the hardware profiles, boot configurations, and startup parameters for low-level kernel drivers. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: HKEY_LOCAL_MACHINE (HKLM) is the central configuration database for the computer. Step 2: The 'SYSTEM' subkey specifically tracks the boot control set (CurrentControlSet). Step 3: It maps which kernel-mode drivers and system services must start during boot. Step 4: Deleting these entries blinds the kernel to necessary hardware or boot drivers. Step 5: This results in a Blue Screen (e.g., INACCESSIBLE_BOOT_DEVICE), proving both A and R are true and linked.",
+    "trick": "Trap: While HKCU manages user wallpaper, HKLM\\SYSTEM manages life-or-death boot drivers. Deleting it is fatal.",
+    "tip": "HKLM\\SYSTEM holds the critical CurrentControlSet required for the OS kernel to boot."
+  },
+  {
+    "id": 9,
+    "question": "In the Windows operating system, which of the following processes acts as the primary 'Session Manager', responsible for initializing the user-mode subsystem and launching the Windows logon process (winlogon.exe)?",
+    "options": ["svchost.exe", "smss.exe", "lsass.exe", "explorer.exe"],
+    "answer": "smss.exe",
+    "explanation": "Step 1: During boot, the kernel (ntoskrnl.exe) finishes its phase and hands control to user-mode. Step 2: The very first user-mode process created is the Session Manager Subsystem (smss.exe). Step 3: smss.exe sets up environment variables and creates DOS device mappings. Step 4: It then launches csrss.exe (Client/Server Runtime) and winlogon.exe. Step 5: Winlogon handles the secure attention sequence (Ctrl+Alt+Del) to log the user in.",
+    "trick": "Trap: Don't confuse it with 'svchost.exe' which hosts services, or 'lsass.exe' which verifies passwords. SMSS is the root session manager.",
+    "tip": "smss.exe is the Session Manager Subsystem, the first user-mode process during Windows boot."
+  },
+  {
+    "id": 10,
+    "question": "Assertion (A): PowerShell's default 'Execution Policy' on a fresh Windows 10 installation acts as a foolproof security boundary that completely prevents malware execution. Reason (R): The 'Restricted' execution policy blocks all .ps1 scripts from running unless they are digitally signed by a trusted publisher. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: The default policy is 'Restricted', which blocks scripts (R is technically describing a mix of Restricted/AllSigned, but effectively Restricted blocks them). Step 2: However, Execution Policy is NOT a security boundary; it's a safety feature to prevent accidental execution. Step 3: Malware can easily bypass it by invoking 'powershell.exe -ExecutionPolicy Bypass'. Step 4: Alternatively, attackers can pipe a script string directly into PowerShell's standard input. Step 5: Therefore, A is completely false as it is not a 'foolproof security boundary'.",
+    "trick": "Bank/IT Trap: Microsoft explicitly states Execution Policy is a 'user friction' safety net, NOT a hard security boundary against hackers.",
+    "tip": "PowerShell Execution Policy prevents accidents, not hackers; it is easily bypassed intentionally."
+  },
+  {
+    "id": 11,
+    "question": "When an application requests memory, the Windows Virtual Memory Manager allocates spaces called 'Pages'. What is the standard default size of a memory page in a 64-bit Windows architecture (x64)?",
+    "options": ["4 KB", "64 KB", "2 MB", "8 KB"],
+    "answer": "4 KB",
+    "explanation": "Step 1: Memory is divided into fixed-size blocks to manage paging efficiently. Step 2: In x86 and x64 architectures, the hardware Memory Management Unit (MMU) natively supports 4 KB pages. Step 3: Windows bases its standard Virtual Memory Management around this 4 KB size. Step 4: While Windows supports 'Large Pages' (2 MB), the default standard page remains 4 KB. Step 5: This size balances allocation efficiency with minimal internal fragmentation.",
+    "trick": "Trap: Despite RAM growing to gigabytes, the fundamental default architectural page size on x64 Windows remains 4 Kilobytes.",
+    "tip": "The standard virtual memory page size on x86/x64 Windows is exactly 4 KB."
+  },
+  {
+    "id": 12,
+    "question": "Assertion (A): Executing 'chkdsk /f' on the system root drive (C:) requires a system reboot to perform the requested repairs. Reason (R): The /f parameter fixes file system errors, and Windows cannot dismount the active OS drive to gain the required exclusive access while running. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The 'chkdsk' utility scans the disk for file system metadata corruption. Step 2: The '/f' switch explicitly tells it to fix those errors. Step 3: Fixing errors requires modifying the Master File Table (MFT) safely, which mandates an exclusive lock on the volume. Step 4: The system drive (C:) is actively in use by the OS Kernel and pagefile. Step 5: Therefore, Windows schedules the scan for the next reboot before the OS fully locks the drive.",
+    "trick": "Bank/IT Trap: Read-only 'chkdsk' runs live, but fixing (/f) or recovering bad sectors (/r) on the C: drive strictly requires a reboot lock.",
+    "tip": "Modifying the active C: drive's file system requires an exclusive lock during reboot."
+  },
+  {
+    "id": 13,
+    "question": "In the context of the Windows Registry, what is the specific function of the data type 'REG_DWORD'?",
+    "options": ["It stores text strings of variable length.", "It stores 64-bit numerical values.", "It stores 32-bit numerical values, commonly used for boolean toggles or small parameters.", "It stores binary data in an encrypted hexadecimal format."],
+    "answer": "It stores 32-bit numerical values, commonly used for boolean toggles or small parameters.",
+    "explanation": "Step 1: Registry keys hold different types of structured data. Step 2: REG_SZ is used for standard text strings. Step 3: REG_BINARY holds raw hardware data. Step 4: REG_DWORD stands for Double Word. In standard x86 computing, a 'Word' is 16 bits. Step 5: Therefore, a Double Word is 32 bits, frequently used in the registry to store 0 or 1 (boolean) or specific integer parameters.",
+    "trick": "Trap: DWORD implies 'Double Word'. Since a legacy Word is 16 bits, DWORD is strictly 32 bits, not 64 (which is QWORD).",
+    "tip": "REG_DWORD is a 32-bit integer, widely used for on/off (1/0) registry switches."
+  },
+  {
+    "id": 14,
+    "question": "Assertion (A): The 'svchost.exe' process often appears multiple times in the Windows Task Manager, representing a severe malware infection. Reason (R): Windows isolates different functional groups of DLL-based services into separate svchost.exe instances for stability and security. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Many Windows services are compiled as Dynamic Link Libraries (DLLs) rather than standalone EXEs. Step 2: DLLs cannot execute themselves; they require a host process. Step 3: 'svchost.exe' (Service Host) is the designated Microsoft host for these DLLs. Step 4: To prevent a crash in an audio service from crashing the network service, Windows groups them into multiple separate svchost.exe processes. Step 5: Therefore, multiple instances are normal architectural behavior, making A absolutely false.",
+    "trick": "Bank/IT Trap: Seeing 20+ svchost.exe processes is completely normal architecture, not inherently a sign of a virus.",
+    "tip": "Multiple svchost.exe instances are normal; they isolate different DLL services for system stability."
+  },
+  {
+    "id": 15,
+    "question": "A State PSC Mains candidate must identify the specific Windows command-line utility used to view the exact routing path taken by a packet across an IP network. Which tool is correct?",
+    "options": ["ping", "netstat", "tracert", "nslookup"],
+    "answer": "tracert",
+    "explanation": "Step 1: 'ping' tests basic connectivity and latency but does not show the path. Step 2: 'netstat' displays active local network connections and ports. Step 3: 'nslookup' queries DNS to resolve names to IP addresses. Step 4: 'tracert' (Trace Route) sends ICMP Echo Request messages with incrementally increasing Time-To-Live (TTL) values. Step 5: This forces each router along the path to return an ICMP Time Exceeded message, revealing the exact path.",
+    "trick": "Trap: 'tracert' maps the journey hop-by-hop using TTL expiration, whereas 'ping' only checks the final destination.",
+    "tip": "Use 'tracert' to trace network hops; 'ping' only tests final destination reachability."
+  },
+  {
+    "id": 16,
+    "question": "Assertion (A): The 'hiberfil.sys' file is typically exactly the same size as the physical RAM installed on the Windows machine. Reason (R): Hibernation saves the entire volatile state of the RAM to the hard drive so the system can completely power down without losing the user's active session. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Sleep mode keeps RAM powered on. Step 2: Hibernation (ACPI S4 state) cuts power to RAM to save battery. Step 3: To preserve the session, the OS writes the exact contents of the RAM to the disk. Step 4: This file is named 'hiberfil.sys' and resides in the root directory. Step 5: Because it must hold the contents of RAM, its size roughly correlates 1:1 with installed physical RAM (though modern Windows compresses it slightly, the core principle holds true).",
+    "trick": "Trap: Do not confuse hiberfil.sys (RAM dump for power off) with pagefile.sys (virtual memory extension during uptime).",
+    "tip": "hiberfil.sys stores active RAM contents to disk to survive a complete power loss."
+  },
+  {
+    "id": 17,
+    "question": "In the Windows NT architecture, what is the primary structural difference between Kernel-Mode Drivers (KMDF) and User-Mode Drivers (UMDF)?",
+    "options": ["KMDF drivers use PowerShell Cmdlets, while UMDF uses CMD.", "UMDF drivers interact with physical hardware directly, bypassing the OS.", "A crash in a UMDF driver only terminates the specific service, whereas a crash in a KMDF driver causes a Blue Screen of Death (BSOD).", "UMDF drivers are stored in the Registry, whereas KMDF drivers are stored in the Boot Configuration Data (BCD)."],
+    "answer": "A crash in a UMDF driver only terminates the specific service, whereas a crash in a KMDF driver causes a Blue Screen of Death (BSOD).",
+    "explanation": "Step 1: Kernel mode (Ring 0) has unrestricted access to all hardware and memory. Step 2: User mode (Ring 3) is isolated and restricted. Step 3: Traditional drivers ran in Kernel Mode; if they contained a bug, they corrupted core OS memory, causing a BSOD. Step 4: Microsoft introduced UMDF to move non-critical drivers (like USB cameras) to User Mode. Step 5: If a UMDF driver crashes, the host process simply restarts without taking down the entire OS.",
+    "trick": "Bank/IT Trap: User-mode drivers sacrifice a tiny bit of direct speed for massive gains in overall system stability.",
+    "tip": "User-Mode drivers prevent BSODs by isolating driver crashes away from the kernel."
+  },
+  {
+    "id": 18,
+    "question": "Assertion (A): The 'ipconfig /flushdns' command resolves IP conflict errors on a local network by releasing the DHCP lease. Reason (R): The Windows DNS client service caches domain name resolutions locally, and flushing it clears outdated or corrupted domain-to-IP mappings. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: R is completely accurate: the command clears the local DNS resolver cache to fix domain name resolution issues. Step 2: However, an 'IP conflict' occurs when two machines on a local network share the same IP address. Step 3: This is a DHCP (Dynamic Host Configuration Protocol) issue, not a DNS issue. Step 4: To fix an IP conflict, you use 'ipconfig /release' and 'ipconfig /renew'. Step 5: Therefore, A is structurally false because flushdns has nothing to do with DHCP IP conflicts.",
+    "trick": "Trap: Read the command carefully! DNS resolves names to IPs. DHCP assigns IPs. Flushing DNS won't fix an IP address conflict.",
+    "tip": "ipconfig /flushdns clears name resolution cache; use /release to fix IP conflicts."
+  },
+  {
+    "id": 19,
+    "question": "Which specific Windows PowerShell feature allows an administrator to run scripts or commands on multiple remote computers simultaneously using the WS-Management protocol?",
+    "options": ["PowerShell Pipeline", "PowerShell Remoting (WinRM)", "Windows Management Instrumentation (WMI)", "Command Prompt Telnet Client"],
+    "answer": "PowerShell Remoting (WinRM)",
+    "explanation": "Step 1: WMI queries system data but is not primarily an execution environment. Step 2: The Telnet client is an insecure legacy tool native to CMD, not PowerShell. Step 3: The Pipeline passes objects locally between cmdlets. Step 4: PowerShell Remoting utilizes the Windows Remote Management (WinRM) service, based on the WS-Management protocol. Step 5: This allows secure, scalable execution of commands (like Invoke-Command) across an entire Active Directory domain.",
+    "trick": "Trap: While WMI can trigger remote processes, PowerShell Remoting via WinRM is the dedicated, secure feature for executing distributed cmdlets.",
+    "tip": "WinRM enables PowerShell Remoting, allowing secure command execution across multiple network PCs."
+  },
+  {
+    "id": 20,
+    "question": "Assertion (A): The 'ntoskrnl.exe' file represents the absolute core of the Windows Operating System. Reason (R): It houses the Executive Services (like memory management and IPC) and the internal Kernel, running entirely in Ring 0 privileged mode. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: ntoskrnl.exe stands for Windows NT Operating System Kernel. Step 2: It is the heart of the system architecture. Step 3: It is divided into two main layers: The Executive (managing processes, memory, I/O) and the core Kernel (managing thread scheduling and interrupt handling). Step 4: Because it controls the fundamental hardware and OS operations, it must execute in the CPU's highest privilege level, Ring 0. Step 5: Thus, R precisely explains the architectural significance of A.",
+    "trick": "Bank/IT Trap: Ntoskrnl.exe IS the Windows Kernel. If this file is missing or corrupt, Windows fundamentally cannot exist or boot.",
+    "tip": "ntoskrnl.exe contains the Windows Executive and Kernel, operating securely in Ring 0."
+  },
+  {
+    "id": 21,
+    "question": "An IT administrator notices a legacy application writing configuration data directly to 'C:\\Windows\\System32'. However, when navigating there with File Explorer, the files are missing. Where does the Windows Virtual Store architecture redirect these legacy write attempts?",
+    "options": ["C:\\Windows\\SysWOW64", "HKEY_LOCAL_MACHINE\\Software", "C:\\Users\\<User>\\AppData\\Local\\VirtualStore", "C:\\Program Files\\WindowsApps"],
+    "answer": "C:\\Users\\<User>\\AppData\\Local\\VirtualStore",
+    "explanation": "Step 1: Modern Windows enforces User Account Control (UAC). Step 2: Standard users lack permissions to write to core directories like System32 or Program Files. Step 3: Legacy applications built before UAC (Windows XP era) assume they have admin rights and crash if denied. Step 4: To maintain compatibility, Windows intercepts these write attempts. Step 5: It silently redirects them to the user's hidden 'VirtualStore' folder, making the app think it succeeded.",
+    "trick": "Trap: SysWOW64 is for 32-bit architecture redirection, not UAC file virtualization. UAC uses the AppData VirtualStore.",
+    "tip": "UAC redirects unauthorized legacy file writes to AppData\\Local\\VirtualStore to prevent crashes."
+  },
+  {
+    "id": 22,
+    "question": "Assertion (A): On a 64-bit Windows system, 32-bit applications are executed identically to 64-bit applications with no performance overhead. Reason (R): The 'SysWOW64' subsystem dynamically translates 32-bit API calls into 64-bit API calls in real-time. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: WOW64 (Windows 32-bit on Windows 64-bit) is the emulator subsystem. Step 2: R is true; WOW64 catches 32-bit system calls, converts the 32-bit parameters to 64-bit, and passes them to the 64-bit kernel. Step 3: This translation (thunking) inherently incurs a slight CPU performance overhead. Step 4: 32-bit apps are also restricted to a 4GB virtual address space, unlike native 64-bit apps. Step 5: Therefore, A is false because execution is not identical and does incur overhead.",
+    "trick": "Bank/IT Trap: SysWOW64 holds 32-bit DLLs (not 64-bit ones). The translation process ('thunking') costs CPU cycles.",
+    "tip": "SysWOW64 emulates a 32-bit environment on x64 OS, causing minor translation overhead."
+  },
+  {
+    "id": 23,
+    "question": "When modifying the Windows Registry, what is the architectural purpose of creating a .REG file?",
+    "options": ["To compile registry keys into a binary executable format.", "To export, backup, or batch-import a specific hierarchy of keys and values in plain text.", "To permanently lock a registry key from being deleted by the system.", "To compress the SAM database for faster boot times."],
+    "answer": "To export, backup, or batch-import a specific hierarchy of keys and values in plain text.",
+    "explanation": "Step 1: The Registry Editor (regedit.exe) stores data in complex binary hive files on disk. Step 2: Modifying them manually is risky. Step 3: A .REG file is a standard text file containing specific registry paths and key values. Step 4: It is used by administrators to backup specific settings or to deploy identical settings to multiple machines. Step 5: Double-clicking a .REG file parses the text and merges it directly into the active registry.",
+    "trick": "Trap: .REG files are not executables or encrypted blobs; they are simple, human-readable text files used for merging data.",
+    "tip": ".REG files are plain text scripts used to backup or merge registry data."
+  },
+  {
+    "id": 24,
+    "question": "Assertion (A): The 'Task Scheduler' in Windows operates entirely independently of the Windows Event Log subsystem. Reason (R): Task Scheduler allows administrators to trigger scripts based on specific time intervals or system events. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Reason (R) is true; Task Scheduler executes actions based on time or triggers. Step 2: However, one of the most powerful triggers in Task Scheduler is an 'Event Trigger'. Step 3: This trigger actively listens to the Windows Event Log subsystem (e.g., triggering a backup script when a specific Error ID is logged). Step 4: Therefore, they are highly integrated, not independent. Step 5: Thus, A is structurally false.",
+    "trick": "Bank/IT Trap: Task Scheduler and Event Viewer are deeply linked; events can dynamically trigger scheduled tasks.",
+    "tip": "Task Scheduler is heavily integrated with the Event Log to trigger automated responses."
+  },
+  {
+    "id": 25,
+    "question": "Which Windows Command Line utility specifically allows an administrator to modify the Boot Configuration Data (BCD) store, replacing the legacy 'boot.ini' text file editing method?",
+    "options": ["bcdedit", "bootrec", "diskpart", "msconfig"],
+    "answer": "bcdedit",
+    "explanation": "Step 1: In Windows XP, boot options were stored in a simple text file called 'boot.ini'. Step 2: Since Windows Vista, boot data is stored in a secure, registry-like database called the BCD. Step 3: You cannot edit the BCD with notepad. Step 4: The 'bcdedit.exe' command-line tool is the primary utility designed to modify this store. Step 5: While 'msconfig' offers a GUI for basic tweaks, 'bcdedit' provides the granular architectural control.",
+    "trick": "Trap: 'bootrec' is used in the recovery environment to fix MBR/BCD, but 'bcdedit' is the standard editor within the live OS.",
+    "tip": "bcdedit is the CLI tool used to manage the modern Boot Configuration Data database."
+  },
+  {
+    "id": 26,
+    "question": "Assertion (A): Defragmenting a modern Solid State Drive (SSD) using the Windows disk optimization tool drastically improves system performance. Reason (R): SSDs rely on spinning magnetic platters, and defragmentation organizes data sequentially to reduce the physical seek time of the read/write head. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Hard Disk Drives (HDDs) use physical spinning platters and read heads (described in R). Step 2: SSDs use NAND flash memory with no moving parts. Step 3: Because SSDs access any memory cell instantly, file fragmentation has almost zero impact on performance. Step 4: Defragmenting an SSD actually causes unnecessary write cycles, wearing out the flash memory faster. Step 5: Therefore, modern Windows issues 'TRIM' commands to SSDs rather than defragmenting them, making both A and R false.",
+    "trick": "Bank/IT Trap: Never defragment an SSD! It damages the drive's lifespan without providing any performance benefit.",
+    "tip": "SSDs use flash memory with zero seek time; defragmentation only damages their lifespan."
+  },
+  {
+    "id": 27,
+    "question": "In the Windows registry, the 'HKEY_CLASSES_ROOT' (HKCR) hive is primarily responsible for storing which critical set of operating system data?",
+    "options": ["User passwords and security identifiers.", "Hardware driver configurations and IRQ mappings.", "File extension associations and COM object registrations.", "Network configurations and active TCP/IP sockets."],
+    "answer": "File extension associations and COM object registrations.",
+    "explanation": "Step 1: Each Registry Hive has a distinct architectural purpose. Step 2: HKLM\\SAM stores security and passwords. Step 3: HKLM\\SYSTEM stores hardware and driver configs. Step 4: HKEY_CLASSES_ROOT (HKCR) is a merged view of HKLM\\Software\\Classes and HKCU\\Software\\Classes. Step 5: It stores OLE/COM object registrations and dictates which application opens when you double-click a specific file extension (e.g., .pdf mapped to Adobe).",
+    "trick": "Trap: The term 'Classes' here refers to Object-Oriented programming classes (COM objects) and file type mappings, not network classes.",
+    "tip": "HKCR manages file extension associations so Windows knows which app opens which file."
+  },
+  {
+    "id": 28,
+    "question": "Assertion (A): Using the 'Get-Process' cmdlet in PowerShell is functionally superior to using 'tasklist' in CMD for IT automation. Reason (R): 'Get-Process' outputs sortable, filterable .NET objects containing deep process metrics, whereas 'tasklist' outputs a static block of text. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: 'tasklist' is a legacy DOS command that dumps a formatted text table of running processes. Step 2: If you want to find processes using over 1GB of RAM, parsing that text in CMD is highly complex. Step 3: 'Get-Process' returns objects. Step 4: You can simply pipe it: 'Get-Process | Where-Object WS -gt 1GB'. Step 5: R accurately highlights the object-oriented nature of PowerShell, validating why A is functionally superior for automation.",
+    "trick": "Bank/IT Trap: Object-oriented outputs allow programmatic filtering without complex string parsing (regex).",
+    "tip": "PowerShell cmdlets return rich objects; CMD commands return difficult-to-parse static text."
+  },
+  {
+    "id": 29,
+    "question": "An SBI PO accesses the Windows 'Event Viewer' to investigate a system crash. Which specific log file extension is used natively by the modern Windows Event Logging service?",
+    "options": [".log", ".txt", ".evtx", ".dat"],
+    "answer": ".evtx",
+    "explanation": "Step 1: Legacy Windows (XP and earlier) used the '.evt' format for event logs. Step 2: Starting with Windows Vista, Microsoft entirely rebuilt the event logging architecture (Windows Event Log). Step 3: The new format is XML-based. Step 4: These new files use the '.evtx' extension. Step 5: They offer advanced filtering, custom views, and better corruption resistance compared to plain .log or legacy .evt files.",
+    "trick": "Trap: While applications might write to simple .log files, the core OS Event Viewer strictly uses the structured .evtx format.",
+    "tip": "Modern Windows Event Viewer files use the XML-based .evtx file extension."
+  },
+  {
+    "id": 30,
+    "question": "Assertion (A): The 'Secure Boot' feature prevents rootkits from compromising the Windows OS during the startup process. Reason (R): Secure Boot is a Windows kernel software feature that encrypts the 'ntoskrnl.exe' file using BitLocker before execution. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: Rootkits hide deep in the OS, often altering the bootloader to load themselves before antivirus software starts (A is true). Step 2: Secure Boot counters this. Step 3: However, Secure Boot is NOT a Windows software feature; it is a hardware-level UEFI firmware standard. Step 4: It validates the digital signatures of the bootloader (bootmgr) before handing over control to the OS. Step 5: It does not encrypt the kernel, making R structurally false.",
+    "trick": "Bank/IT Trap: Secure Boot lives in the motherboard's UEFI firmware, not in the Windows Kernel. It checks signatures, not encryption.",
+    "tip": "Secure Boot is a UEFI hardware standard verifying bootloader signatures, not an OS encryption feature."
+  },
+  {
+    "id": 31,
+    "question": "Which core subsystem process in the Windows NT architecture is responsible for handling hard error pop-ups and managing the creation/deletion of console windows?",
+    "options": ["lsass.exe", "wininit.exe", "csrss.exe", "services.exe"],
+    "answer": "csrss.exe",
+    "explanation": "Step 1: In early NT versions, CSRSS (Client/Server Runtime Subsystem) handled the entire graphical interface. Step 2: To improve performance, most graphics handling was moved into the kernel (win32k.sys). Step 3: However, CSRSS retained critical user-mode functions. Step 4: Today, csrss.exe is responsible for managing console windows (like CMD) and generating critical hard error message boxes. Step 5: Terminating this process immediately causes a Blue Screen.",
+    "trick": "Trap: Don't confuse it with 'explorer.exe' which manages the desktop GUI. CSRSS manages the invisible underlying console/error structures.",
+    "tip": "csrss.exe manages console windows and critical system error message dialogs."
+  },
+  {
+    "id": 32,
+    "question": "Assertion (A): Advanced administrators often disable the Windows 'Pagefile' completely on systems with 64GB of RAM to force the OS to run entirely in hyper-fast physical memory. Reason (R): The Windows OS architecture does not strictly require a pagefile if physical RAM is never exhausted. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: While systems with huge RAM rarely run out, disabling the pagefile (A) is considered a terrible practice. Step 2: The Windows memory manager relies on the pagefile to dump unused memory pages, freeing up RAM for active disk caching. Step 3: Furthermore, if a system crashes, Windows requires the pagefile to generate a crash dump (.dmp) for diagnostics. Step 4: Though R is technically true (the OS won't crash just from lacking a pagefile if RAM isn't full), A is a bad practice that breaks system diagnostics and degrades cache performance.",
+    "trick": "Bank/IT Trap: Never disable the pagefile, regardless of RAM size! It breaks crash dumps and hinders optimal memory management.",
+    "tip": "Disabling the pagefile prevents OS crash dumps and degrades internal memory cache management."
+  },
+  {
+    "id": 33,
+    "question": "When analyzing the Windows Registry, the 'HKEY_LOCAL_MACHINE\\SAM' hive appears empty to standard administrators. What is the architectural reason for this?",
+    "options": ["The SAM database is no longer used in modern NT architectures.", "The SAM database is encrypted and only accessible to the built-in 'SYSTEM' account.", "The SAM database is dynamically loaded into RAM and doesn't exist on disk.", "The SAM database only populates during Active Directory domain login."],
+    "answer": "The SAM database is encrypted and only accessible to the built-in 'SYSTEM' account.",
+    "explanation": "Step 1: SAM stands for Security Accounts Manager. Step 2: It stores local user accounts and password hashes (NTLM). Step 3: If administrators or users could easily read this, they could steal password hashes for offline cracking. Step 4: To protect it, Windows assigns exclusive access rights to the NT AUTHORITY\\SYSTEM account. Step 5: Even an Administrator must use specialized tools (like PsExec) to elevate to SYSTEM to view its contents.",
+    "trick": "Trap: Just because you are an 'Administrator' doesn't mean you have the highest privileges. The 'SYSTEM' account outranks you.",
+    "tip": "The SAM hive contains password hashes and is heavily restricted to the SYSTEM account."
+  },
+  {
+    "id": 34,
+    "question": "Assertion (A): The 'Stop Process' cmdlet in PowerShell gracefully asks an application to close by sending a close message to its main window. Reason (R): PowerShell cmdlets always execute in User Mode and must respect application GUI loops to prevent data corruption. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: 'Stop-Process' (or 'kill' in CMD) does NOT ask gracefully. Step 2: It invokes a low-level system API (TerminateProcess) that immediately destroys the process. Step 3: It bypasses the application's internal shutdown logic entirely, risking data loss in unsaved files (making A false). Step 4: While PowerShell runs in User Mode, it asks the Kernel (Ring 0) to execute the termination, making R's assertion about respecting GUI loops completely false.",
+    "trick": "Bank/IT Trap: 'Stop-Process' is a brutal termination. To close gracefully, you must use methods like 'CloseMainWindow()'.",
+    "tip": "Stop-Process abruptly terminates apps via kernel APIs; it does not close them gracefully."
+  },
+  {
+    "id": 35,
+    "question": "Which advanced Windows Command Line utility is primarily utilized to manage disk partitions, volumes, and virtual hard disks natively, superseding the legacy 'fdisk' tool?",
+    "options": ["chkdsk", "diskpart", "format", "fsutil"],
+    "answer": "diskpart",
+    "explanation": "Step 1: 'fdisk' was the DOS/Windows 9x tool for partitioning drives. Step 2: 'chkdsk' checks file system integrity, it doesn't create partitions. Step 3: 'format' lays down a file system (like NTFS) on an existing partition. Step 4: 'diskpart' is the modern, powerful command-line disk partitioning utility in Windows NT. Step 5: It supports advanced features like converting MBR to GPT, extending volumes, and mounting VHDs.",
+    "trick": "Trap: 'format' only prepares an existing slice of a pie. 'diskpart' is the knife that cuts the pie into slices.",
+    "tip": "diskpart is the modern CLI utility used to create, resize, and manage disk partitions."
+  },
+  {
+    "id": 36,
+    "question": "Assertion (A): In an Active Directory domain, Local Group Policy settings applied via 'gpedit.msc' always override Domain Group Policy settings. Reason (R): Local policies are processed last during the boot and logon sequence, thereby overwriting earlier configurations. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Group Policy is applied in a strict architectural order: LSDOU. Step 2: L = Local, S = Site, D = Domain, OU = Organizational Unit. Step 3: Policies are applied chronologically in that order. Step 4: Because Local policies are applied FIRST, they are overwritten by Site, Domain, and OU policies. Step 5: Therefore, Domain policies easily override Local policies, making both A and R completely false.",
+    "trick": "Bank/IT Trap: Remember LSDOU! The last one applied wins. Local is applied first, meaning it is the weakest policy.",
+    "tip": "Group Policy application order is Local, Site, Domain, OU (LSDOU). The last applied wins."
+  },
+  {
+    "id": 37,
+    "question": "When auditing the Windows Registry for malware persistence, an IT Security Officer should primarily check which of the following registry keys known for autostarting applications upon user logon?",
+    "options": ["HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services", "HKEY_CLASSES_ROOT\\Directory\\Background\\shell", "HKEY_CURRENT_USER\\Environment"],
+    "answer": "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+    "explanation": "Step 1: Malware wants to survive a reboot (persistence). Step 2: The 'Run' and 'RunOnce' registry keys dictate which executable files are automatically launched by the OS when a user logs in. Step 3: HKLM\\...\\Run applies to all users on the machine. Step 4: HKCU\\...\\Run applies only to the current user. Step 5: Checking these keys is step one in identifying standard persistent malware like trojans or adware.",
+    "trick": "Trap: 'Services' start before login (system level), but the 'Run' key is the most common target for user-level startup malware.",
+    "tip": "The 'Run' registry key dictates which programs automatically launch upon user login."
+  },
+  {
+    "id": 38,
+    "question": "Assertion (A): The 'lsass.exe' process is a critical system component responsible for enforcing the local security policy and verifying user logons. Reason (R): If 'lsass.exe' is unexpectedly terminated, the Windows operating system will immediately initiate a forced system reboot. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: lsass.exe stands for Local Security Authority Subsystem Service. Step 2: It validates users logging on to a Windows computer, handles password changes, and creates access tokens. Step 3: Because it is the cornerstone of NT security, the system relies on it continuously. Step 4: If malware or an admin kills lsass.exe, the security subsystem crashes. Step 5: Windows protects itself by instantly halting and triggering a 60-second reboot countdown (or a BSOD), linking A and R flawlessly.",
+    "trick": "Bank/IT Trap: The infamous Sasser worm targeted lsass.exe, causing millions of Windows XP machines to reboot continuously.",
+    "tip": "lsass.exe handles logon authentication; its termination triggers an immediate forced OS reboot."
+  },
+  {
+    "id": 39,
+    "question": "In the Windows memory management architecture, what is the specific role of the 'Non-Paged Pool' memory segment?",
+    "options": ["It holds background application data waiting to be swapped to the SSD.", "It stores critical kernel and driver code that must permanently remain in physical RAM and cannot be swapped to disk.", "It is the designated memory area for user-mode applications like web browsers.", "It caches recent DNS query results to speed up internet browsing."],
+    "answer": "It stores critical kernel and driver code that must permanently remain in physical RAM and cannot be swapped to disk.",
+    "explanation": "Step 1: RAM is divided into Paged and Non-Paged pools by the kernel. Step 2: 'Paged Pool' memory can be moved (swapped) to the pagefile.sys on the hard drive if RAM is full. Step 3: 'Non-Paged Pool' contains core kernel functions and critical driver interrupt routines. Step 4: If a driver needed to process an immediate hardware interrupt, waiting for its code to be fetched from a slow hard drive would crash the system. Step 5: Therefore, Non-Paged data is permanently locked into physical RAM.",
+    "trick": "Trap: 'Non-Paged' literally means 'Cannot be sent to the pagefile'. It is untouchable by the swapping mechanism.",
+    "tip": "Non-Paged Pool memory is locked in physical RAM; it is never swapped to disk."
+  },
+  {
+    "id": 40,
+    "question": "Assertion (A): The Windows command 'systeminfo' provides a faster way to check a machine's uptime than navigating through the Task Manager GUI. Reason (R): 'systeminfo' queries the WMI repository to output a comprehensive text list of hardware, OS version, and exact boot time. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Opening Task Manager and navigating to the Performance tab takes multiple clicks. Step 2: Opening CMD and typing 'systeminfo' retrieves the exact 'System Boot Time'. Step 3: The command works by querying Windows Management Instrumentation (WMI) classes (like Win32_OperatingSystem). Step 4: It parses this data into a formatted console output. Step 5: This makes it a highly efficient administrative shortcut, validating both A and R.",
+    "trick": "Bank/IT Trap: While Task Manager shows an uptime counter, 'systeminfo' logs the exact date and timestamp of the last boot.",
+    "tip": "Use 'systeminfo' in CMD to quickly retrieve the OS version, hardware, and boot time."
+  },
+  {
+    "id": 41,
+    "question": "An IT teacher explains the difference between CMD and PowerShell. Which of the following statements correctly identifies the architectural structure of a PowerShell 'Cmdlet'?",
+    "options": ["It is a standalone executable (.exe) file compiled in C++.", "It is an internal DOS command like 'dir' or 'echo'.", "It is a lightweight command built into PowerShell, typically following a 'Verb-Noun' naming convention.", "It is a batch file script (.bat) translated by the Command Prompt."],
+    "answer": "It is a lightweight command built into PowerShell, typically following a 'Verb-Noun' naming convention.",
+    "explanation": "Step 1: CMD uses external executables (ping.exe) or internal shell commands (dir). Step 2: PowerShell uses Cmdlets (Command-lets). Step 3: These are not standalone .exe files; they are instances of .NET framework classes residing inside the PowerShell runtime. Step 4: To make them discoverable and standardized, Microsoft enforced a strict 'Verb-Noun' syntax. Step 5: Examples include Get-Process, Stop-Service, and New-Item.",
+    "trick": "Trap: Cmdlets are native .NET objects, not separate .exe files. The strict Verb-Noun naming is PowerShell's signature.",
+    "tip": "PowerShell cmdlets are lightweight .NET commands utilizing a strict Verb-Noun naming convention."
+  },
+  {
+    "id": 42,
+    "question": "Assertion (A): Creating a backup of the Windows Registry using the 'System Restore' feature ensures that all personal user documents are also safely backed up. Reason (R): System Restore creates a Volume Shadow Copy that snapshots the entire C: drive, including the SAM, SYSTEM, and user file directories. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: System Restore is designed to reverse OS instability caused by bad drivers or updates. Step 2: It takes a snapshot of the Registry, system files, and installed programs. Step 3: Crucially, System Restore is explicitly programmed to IGNORE personal user files (like Word documents, photos, or emails). Step 4: If you roll back the system to last week, your newly created documents remain untouched. Step 5: Therefore, A is completely false, and R is false because it does not snapshot user file directories.",
+    "trick": "Bank/IT Trap: System Restore fixes the OS, not your data. It will never recover a deleted Word document.",
+    "tip": "System Restore backs up system files and the Registry, actively ignoring personal user data."
+  },
+  {
+    "id": 43,
+    "question": "Which Windows architecture mechanism physically limits a 32-bit (x86) version of Windows 10 from effectively utilizing 16 GB of installed RAM?",
+    "options": ["The Registry restricts RAM usage to save battery power.", "A 32-bit processor register can only address 2^32 unique memory locations, capping limits around 4 GB.", "The pagefile.sys cannot grow larger than 4 GB on 32-bit systems.", "The Hardware Abstraction Layer (HAL) artificially caps RAM to prevent BSODs."],
+    "answer": "A 32-bit processor register can only address 2^32 unique memory locations, capping limits around 4 GB.",
+    "explanation": "Step 1: Memory is addressed using binary values. Step 2: A 32-bit CPU uses 32 bits to track memory addresses. Step 3: 2 raised to the power of 32 equals 4,294,967,296 bytes. Step 4: This perfectly translates to 4 Gigabytes. Step 5: The OS physically cannot map pointers to any RAM beyond the 4 GB line, rendering the remaining 12 GB completely invisible and unusable.",
+    "trick": "Trap: It is purely a mathematical hardware limit (2^32), not an artificial software restriction or pagefile limit.",
+    "tip": "32-bit architecture is mathematically limited to addressing a maximum of 4 GB of RAM."
+  },
+  {
+    "id": 44,
+    "question": "Assertion (A): The 'winload.exe' (or winload.efi) component is responsible for loading the core NT kernel and boot-class device drivers into physical memory. Reason (R): After BOOTMGR reads the boot configuration, it hands execution to winload, which prepares the environment for the kernel to initialize. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The boot sequence flows from BIOS/UEFI to BOOTMGR. Step 2: BOOTMGR reads the BCD and displays the OS selection menu. Step 3: Once an OS is selected, BOOTMGR invokes 'winload.exe'. Step 4: Winload's specific architectural job is to load 'ntoskrnl.exe', 'hal.dll', and drivers marked as 'Boot Start' into RAM. Step 5: Once loaded, winload passes execution control to the kernel, perfectly mapping A and R.",
+    "trick": "Bank/IT Trap: BOOTMGR manages the menu; winload.exe manages pushing the actual kernel into RAM.",
+    "tip": "winload.exe bridges the bootloader (BOOTMGR) and the OS Kernel by loading ntoskrnl.exe into RAM."
+  },
+  {
+    "id": 45,
+    "question": "When utilizing the advanced Command Line tool 'robocopy' (Robust File Copy), what distinct architectural advantage does it have over the standard 'copy' or 'xcopy' commands?",
+    "options": ["It automatically encrypts files using BitLocker during the transfer.", "It can resume interrupted transfers, mirror directories, and copy NTFS file permissions. ", "It bypasses the Windows Kernel to copy files directly via RAM.", "It converts FAT32 file systems to NTFS on the fly."],
+    "answer": "It can resume interrupted transfers, mirror directories, and copy NTFS file permissions. ",
+    "explanation": "Step 1: 'copy' is a basic DOS command that cannot copy hidden files or permissions. Step 2: 'xcopy' is better but still fails on network interruptions. Step 3: 'robocopy' is designed for enterprise environments. Step 4: If a network connection drops mid-transfer, robocopy automatically waits and resumes exactly where it left off. Step 5: It also perfectly mirrors entire directory trees, including complex NTFS security ACLs (Access Control Lists).",
+    "trick": "Trap: 'Robust' implies resilience. Robocopy survives network drops and preserves deep NTFS permissions that older tools lose.",
+    "tip": "Robocopy is an enterprise tool that resumes broken transfers and preserves NTFS file permissions."
+  },
+  {
+    "id": 46,
+    "question": "Assertion (A): The 'Task Manager' provides a completely comprehensive view of every single file handle and registry key actively being accessed by a process. Reason (R): Task Manager is the highest-level diagnostic tool available in the Windows operating system. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Task Manager provides a high-level overview of CPU, RAM, and basic process IDs. Step 2: However, it absolutely cannot show granular data like real-time file handles or registry reads/writes. Step 3: For that level of architectural insight, administrators must use advanced Sysinternals tools like 'Process Explorer' or 'Process Monitor'. Step 4: Therefore, A is false. Step 5: R is also false because Task Manager is a basic consumer-level tool, far outclassed by the Sysinternals suite.",
+    "trick": "Bank/IT Trap: Task Manager is just the tip of the iceberg. True IT pros use Microsoft Sysinternals (ProcMon/ProcExp) for deep analysis.",
+    "tip": "Task Manager shows basics; use Sysinternals Process Monitor for deep file and registry analysis."
+  },
+  {
+    "id": 47,
+    "question": "Within the Windows Registry, the 'HKEY_CURRENT_CONFIG' (HKCC) hive serves a highly specialized function. What data does it primarily hold?",
+    "options": ["The user's customized desktop background and screen resolution.", "The current hardware profile loaded during system boot, especially useful for older laptops with docking stations.", "The cached passwords for Wi-Fi networks.", "The digital signatures for secure boot drivers."],
+    "answer": "The current hardware profile loaded during system boot, especially useful for older laptops with docking stations.",
+    "explanation": "Step 1: Just like HKCU is a shortcut to HKU, HKCC is actually a dynamic shortcut. Step 2: It points to HKLM\\SYSTEM\\CurrentControlSet\\Hardware Profiles\\Current. Step 3: Historically, laptops had 'docking stations' that radically changed the hardware (adding monitors, network cards) when docked. Step 4: HKCC stores the specific hardware profile active at that very moment. Step 5: It allows the OS to adapt on the fly without confusing the main registry hardware list.",
+    "trick": "Trap: HKCC is not about software configuration; it strictly tracks the active physical hardware state (profiles).",
+    "tip": "HKCC is a shortcut to HKLM tracking the dynamically active hardware profile during boot."
+  },
+  {
+    "id": 48,
+    "question": "Assertion (A): The 'sfc /scannow' command does not require an active internet connection to repair corrupted core system files. Reason (R): The System File Checker relies on a hidden local repository located at '%WinDir%\\WinSxS' to replace missing or damaged files. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: SFC is the first line of defense for OS corruption. Step 2: When it detects a hash mismatch on a system file (e.g., a corrupted DLL), it needs a clean copy to replace it. Step 3: It does NOT go to the internet. Step 4: It pulls the clean copy from the Windows Component Store (the WinSxS folder in the Windows directory). Step 5: This local cache guarantees that R fully explains why A is true.",
+    "trick": "Bank/IT Trap: SFC is local-only (WinSxS). DISM is the tool that goes to the internet (Windows Update) if the local store is broken.",
+    "tip": "SFC replaces corrupted files using the local WinSxS (Windows Side-by-Side) component store."
+  },
+  {
+    "id": 49,
+    "question": "What is the architectural purpose of the 'svchost.exe -k netsvcs' command structure when viewed in a process explorer?",
+    "options": ["It is malware attempting to hide as a network service.", "It terminates all active internet connections to prevent data theft.", "It instructs the Service Host process to load a specific grouping of network-related DLL services into a shared memory space.", "It is a PowerShell cmdlet invoking a remote background job."],
+    "answer": "It instructs the Service Host process to load a specific grouping of network-related DLL services into a shared memory space.",
+    "explanation": "Step 1: As established, svchost.exe hosts DLL-based services. Step 2: To manage them, Windows groups related services together in the registry. Step 3: The '-k' parameter stands for 'Key'. Step 4: '-k netsvcs' tells svchost to look in the registry for the 'netsvcs' group and load all the DLLs listed there (like Task Scheduler, BITS, Themes) into one unified process. Step 5: This reduces memory overhead compared to launching a separate process for each service.",
+    "trick": "Trap: The '-k' flag is standard OS architecture, defining the specific service 'group' the svchost instance is responsible for.",
+    "tip": "svchost.exe uses the '-k' flag to group and load specific related DLL services together."
+  },
+  {
+    "id": 50,
+    "question": "Assertion (A): The Windows command 'diskpart > clean' completely securely erases a hard drive, making data recovery impossible for forensic teams. Reason (R): The 'clean' command overwrites every sector on the disk with cryptographic zeroes. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The 'clean' command in diskpart is fast and dangerous, but NOT secure. Step 2: It simply deletes the Master Boot Record (MBR) or GUID Partition Table (GPT) and the hidden sector info. Step 3: The actual user data remains entirely intact on the magnetic platters or flash cells. Step 4: Forensic recovery software can easily rebuild the partition table and recover the files. Step 5: To securely wipe a drive, you must use 'clean all', which actually writes zeroes, proving both A and R false for the basic 'clean' command.",
+    "trick": "Bank/IT Trap: 'clean' just removes the index. 'clean all' securely wipes the book by writing zeroes.",
+    "tip": "Diskpart 'clean' only deletes the partition table; 'clean all' securely overwrites disk sectors."
+  },
+  {
+    "id": 51,
+    "question": "Assertion (A): Operating systems based on the Windows NT architecture (like Windows 10) are far more stable and less prone to full system crashes than Windows 98. Reason (R): The NT architecture uses a Hybrid Kernel where user-mode applications and kernel-mode system processes are strictly isolated in different memory spaces. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Windows 9x relied on a DOS-based monolithic-like structure lacking memory protection. Step 2: A crashed user application could overwrite critical system memory, causing a Blue Screen of Death (BSOD). Step 3: Windows NT introduced strict separation between Ring 3 (User Mode) and Ring 0 (Kernel Mode). Step 4: Because of this isolation, a user app crash is contained within its own virtual memory space. Step 5: Thus, R perfectly explains the enhanced stability stated in A.",
+    "trick": "Bank/IT Trap: Do not confuse Windows NT's Hybrid Kernel with a pure Microkernel. NT keeps essential services in kernel space for performance while isolating user apps.",
+    "tip": "NT Architecture isolates user and kernel memory, preventing app crashes from crashing the OS."
+  },
+  {
+    "id": 52,
+    "question": "When comparing the traditional Command Prompt (CMD) to Windows PowerShell, which fundamental architectural difference makes PowerShell significantly more powerful for automation in enterprise IT environments?",
+    "options": ["CMD processes commands in parallel, whereas PowerShell processes them sequentially.", "CMD outputs raw text strings, whereas PowerShell outputs fully structured .NET objects.", "CMD runs directly in Kernel Mode, whereas PowerShell is restricted to User Mode.", "CMD utilizes the Verb-Noun naming convention, whereas PowerShell relies on legacy DOS executables."],
+    "answer": "CMD outputs raw text strings, whereas PowerShell outputs fully structured .NET objects.",
+    "explanation": "Step 1: Traditional CMD tools (like ping or ipconfig) return flat text strings to the console. Step 2: Parsing text strings requires complex regular expressions (regex) or text-scraping scripts. Step 3: PowerShell is built on the .NET framework. Step 4: PowerShell 'cmdlets' output objects with distinct properties and methods. Step 5: This object-oriented pipeline allows administrators to easily filter, sort, and manipulate data without string parsing.",
+    "trick": "Bank/IT Trap: Always remember the keyword 'Objects'. PowerShell pipes objects; CMD pipes plain text.",
+    "tip": "PowerShell outputs manipulatable .NET objects, unlike CMD's raw text strings."
+  },
+  {
+    "id": 53,
+    "question": "In the Windows Registry, if a network administrator wants to deploy a security policy that affects every user who logs into a specific physical workstation regardless of their account, which Root Key (Hive) must be modified?",
+    "options": ["HKEY_CURRENT_USER (HKCU)", "HKEY_LOCAL_MACHINE (HKLM)", "HKEY_USERS (HKU)", "HKEY_CLASSES_ROOT (HKCR)"],
+    "answer": "HKEY_LOCAL_MACHINE (HKLM)",
+    "explanation": "Step 1: The Windows Registry is divided into logical sections called Hives. Step 2: HKEY_CURRENT_USER (HKCU) stores settings specific to the currently logged-in user. Step 3: HKEY_USERS (HKU) contains profiles for all users on the PC. Step 4: HKEY_CLASSES_ROOT (HKCR) handles file associations. Step 5: HKEY_LOCAL_MACHINE (HKLM) stores hardware, OS, and software settings that apply globally to the entire computer, regardless of who logs in.",
+    "trick": "Trap: 'Local Machine' means the physical hardware and OS level, overriding individual user preferences.",
+    "tip": "HKLM applies settings to the entire computer; HKCU applies only to the active user."
+  },
+  {
+    "id": 54,
+    "question": "Assertion (A): If a computer with 16GB of physical RAM runs out of memory, it will immediately crash all running applications. Reason (R): Windows utilizes a critical system file named 'pagefile.sys' to temporarily swap inactive RAM blocks to the hard drive, providing Virtual Memory to prevent system crashes. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is False, but R is True", "A is True, but R is False"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: Physical RAM has a finite limit (e.g., 16GB). Step 2: When this limit is reached, the OS does not immediately crash applications (making A false). Step 3: The OS uses Virtual Memory management via 'Demand Paging'. Step 4: It moves least-recently-used memory pages from RAM into a hidden file on the hard drive called 'pagefile.sys'. Step 5: This frees up physical RAM for active processes, validating R as true.",
+    "trick": "Bank/IT Trap: Virtual Memory extends RAM virtually, preventing instant crashes at the cost of disk I/O performance (paging).",
+    "tip": "Pagefile.sys acts as Virtual Memory, preventing app crashes when physical RAM is full."
+  },
+  {
+    "id": 55,
+    "question": "An IT administrator notices that several core Windows DLL files have been corrupted by malware. Which command-line utility should be primarily executed to scan and restore these protected system files from the Windows component store?",
+    "options": ["chkdsk /f", "sfc /scannow", "bootrec /fixmbr", "ipconfig /flushdns"],
+    "answer": "sfc /scannow",
+    "explanation": "Step 1: 'chkdsk' checks for physical and logical file system errors on the hard drive, not specific OS file integrity. Step 2: 'bootrec' is used for repairing the master boot record. Step 3: 'ipconfig /flushdns' clears the network DNS cache. Step 4: 'sfc' stands for System File Checker. Step 5: Executing 'sfc /scannow' verifies the integrity of all protected system files and replaces corrupted ones with a cached copy located in the WinSxS folder.",
+    "trick": "Trap: While DISM can also repair system images, SFC is the primary, immediate tool specifically designed for restoring corrupted protected system files.",
+    "tip": "Use 'sfc /scannow' to verify and repair corrupted Windows system files."
+  },
+  {
+    "id": 56,
+    "question": "Assertion (A): The transition from Windows XP to Windows Vista/7 saw the replacement of 'NTLDR' with 'BOOTMGR' as the primary boot loader. Reason (R): BOOTMGR reads the Boot Configuration Data (BCD) store, which replaced the legacy plain-text 'boot.ini' file used by NTLDR. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Legacy NT systems (Windows 2000/XP) used NTLDR (NT Loader) to boot the OS. Step 2: NTLDR relied on a simple text file named 'boot.ini' to locate the OS partition. Step 3: Starting with Vista, Microsoft overhauled the boot architecture for better security (like UEFI support). Step 4: 'BOOTMGR' (Windows Boot Manager) became the new standard. Step 5: BOOTMGR relies on the BCD (Boot Configuration Data) registry-like database, totally replacing 'boot.ini'.",
+    "trick": "Bank/IT Trap: Editing 'boot.ini' on modern Windows systems (10/11) will do absolutely nothing; you must use the 'bcdedit' command line tool.",
+    "tip": "BOOTMGR and BCD replaced NTLDR and boot.ini starting from Windows Vista."
+  },
+  {
+    "id": 57,
+    "question": "In the context of the Windows Kernel architecture, what is the fundamental advantage of using the User-Mode Driver Framework (UMDF) over the Kernel-Mode Driver Framework (KMDF) for non-critical hardware like USB webcams?",
+    "options": ["UMDF drivers process data significantly faster than KMDF drivers by bypassing the OS.", "If a UMDF driver crashes, it only terminates the driver host process, whereas a KMDF crash causes a system-wide Blue Screen (BSOD).", "UMDF drivers can directly interact with CPU registers, whereas KMDF drivers are blocked by hardware abstraction.", "UMDF drivers are stored entirely within the Windows Registry, avoiding disk fragmentation."],
+    "answer": "If a UMDF driver crashes, it only terminates the driver host process, whereas a KMDF crash causes a system-wide Blue Screen (BSOD).",
+    "explanation": "Step 1: Kernel Mode (Ring 0) has unrestricted access to system hardware. A crash here (KMDF) takes down the entire OS. Step 2: User Mode (Ring 3) is a restricted, isolated environment. Step 3: By moving non-critical drivers (like webcams or printers) to User Mode via UMDF, system stability is vastly improved. Step 4: If a UMDF driver crashes, the OS simply restarts the driver process in the background. Step 5: UMDF is actually slower than KMDF due to context switching, making option A explicitly false.",
+    "trick": "Trap: User-mode is always slower than Kernel-mode due to overhead, but it is infinitely safer for system stability.",
+    "tip": "UMDF improves stability because driver crashes in User-Mode do not cause a BSOD."
+  },
+  {
+    "id": 58,
+    "question": "When examining a Registry Key in 'regedit', you encounter a value that stores a simple on/off toggle configuration using a 32-bit number (like 0x00000001). Which Windows Registry data type is primarily being used?",
+    "options": ["REG_SZ", "REG_BINARY", "REG_DWORD", "REG_MULTI_SZ"],
+    "answer": "REG_DWORD",
+    "explanation": "Step 1: REG_SZ is a standard null-terminated text string. Step 2: REG_BINARY stores raw binary data in hexadecimal format. Step 3: REG_MULTI_SZ contains multiple text strings separated by null characters. Step 4: REG_DWORD stands for 'Double Word'. Step 5: A 'Word' is 16 bits, so a 'Double Word' is exactly 32 bits. It is the standard type used for boolean (0 or 1) and standard integer parameters in the Registry.",
+    "trick": "Bank/IT Trap: DWORD is 32-bit. QWORD (Quad Word) is 64-bit. They are the most common ways to store integer toggles.",
+    "tip": "REG_DWORD stores 32-bit numbers, widely used for on/off toggles in the Registry."
+  },
+  {
+    "id": 59,
+    "question": "Assertion (A): By default, a newly installed Windows 10/11 system prevents the execution of any custom PowerShell scripts (.ps1 files). Reason (R): The default Execution Policy in PowerShell is set to 'Restricted' to prevent malicious scripts from compromising the system. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: PowerShell is a powerful administrative tool capable of deep system changes. Step 2: To mitigate malware risks, Microsoft implemented Execution Policies. Step 3: The default policy is 'Restricted'. Step 4: 'Restricted' permits individual commands but completely blocks all scripts, including those written by the local administrator. Step 5: An admin must explicitly change this (e.g., to 'RemoteSigned') using the 'Set-ExecutionPolicy' cmdlet, validating both A and R.",
+    "trick": "Bank/IT Trap: 'Restricted' does not stop PowerShell from working; it only stops scripts (.ps1) from running automatically.",
+    "tip": "PowerShell's default 'Restricted' policy allows single commands but blocks all script files."
+  },
+  {
+    "id": 60,
+    "question": "An IT professional uses the Command Prompt to troubleshoot network connectivity. Which command strictly utilizes the ICMP (Internet Control Message Protocol) 'Echo Request' to measure the round-trip time and packet loss to a destination IP address?",
+    "options": ["nslookup", "netstat", "ping", "arp"],
+    "answer": "ping",
+    "explanation": "Step 1: 'nslookup' queries Domain Name System (DNS) servers to resolve hostnames to IP addresses. Step 2: 'netstat' displays active TCP/UDP connections and listening ports on the local machine. Step 3: 'arp' displays the IP-to-MAC address resolution tables. Step 4: 'ping' sends an ICMP Echo Request packet to the target IP. Step 5: The target replies with an ICMP Echo Reply, allowing the ping utility to calculate round-trip latency and packet loss.",
+    "trick": "Trap: While 'tracert' also uses ICMP packets (by manipulating the TTL), 'ping' is the explicit standard for pure Echo Request/Reply latency testing.",
+    "tip": "The 'ping' command uses ICMP Echo Requests to test basic network connectivity and latency."
+  },
+  {
+    "id": 61,
+    "question": "Which of the following accurately describes the 'Preemptive Multitasking' model utilized by the Windows NT Kernel Architecture compared to legacy cooperative multitasking?",
+    "options": ["Applications voluntarily yield CPU time to other applications when they are idle.", "The Kernel strictly controls CPU allocation, forcibly suspending processes to ensure fair resource distribution.", "The OS allocates a single CPU core permanently to one application until it is closed.", "The Registry assigns priority tokens that allow user-mode apps to bypass the CPU scheduler."],
+    "answer": "The Kernel strictly controls CPU allocation, forcibly suspending processes to ensure fair resource distribution.",
+    "explanation": "Step 1: Legacy OSs like Windows 3.1 used Cooperative Multitasking. Step 2: In cooperative models, the OS relied on apps to voluntarily yield CPU control. If an app froze, the whole OS froze. Step 3: Windows NT introduced Preemptive Multitasking. Step 4: The NT Kernel's scheduler allocates strict 'time slices' (quanta) to threads. Step 5: Once a time slice expires, a hardware interrupt forcibly preempts the thread, shifting control back to the Kernel to run another thread, guaranteeing system responsiveness.",
+    "trick": "Trap: 'Preemptive' means the OS is the boss and can forcibly interrupt apps. 'Cooperative' means the apps decide when to share.",
+    "tip": "Preemptive multitasking means the OS Kernel forcibly controls CPU time allocation."
+  },
+  {
+    "id": 62,
+    "question": "In the Windows boot process, immediately after the system BIOS/UEFI finishes the POST (Power-On Self-Test) and hands over control, which file is responsible for reading the Boot Configuration Data (BCD) to display the OS selection menu?",
+    "options": ["ntoskrnl.exe", "winload.exe", "bootmgr", "smss.exe"],
+    "answer": "bootmgr",
+    "explanation": "Step 1: The BIOS/UEFI executes POST to initialize hardware. Step 2: It passes execution to the boot sector on the storage drive. Step 3: The boot sector code locates and launches 'bootmgr' (Windows Boot Manager). Step 4: 'bootmgr' reads the BCD (Boot Configuration Data) to find installed OS instances. Step 5: If multiple OSs exist, bootmgr displays the boot menu. Once an OS is chosen, bootmgr loads 'winload.exe', which then loads the kernel ('ntoskrnl.exe').",
+    "trick": "Bank/IT Trap: Ntoskrnl.exe is the actual kernel, but it does not load itself. Bootmgr reads the BCD to figure out which kernel to load.",
+    "tip": "Bootmgr reads the BCD and displays the OS selection menu before the kernel loads."
+  },
+  {
+    "id": 63,
+    "question": "Assertion (A): The Registry Hive 'HKEY_CLASSES_ROOT' (HKCR) does not exist as an independent, physical hive file on the hard drive. Reason (R): HKCR is a dynamic alias generated at runtime by merging specific subkeys from HKEY_LOCAL_MACHINE and HKEY_CURRENT_USER. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: HKLM and HKU are backed by physical files (like SOFTWARE, SYSTEM, NTUSER.DAT) stored on the disk. Step 2: HKCR is dedicated to OLE class registrations and file extension associations. Step 3: Instead of having its own separate file, the OS dynamically generates HKCR in memory. Step 4: It merges 'HKLM\\Software\\Classes' (machine-wide settings) and 'HKCU\\Software\\Classes' (user-specific settings). Step 5: Therefore, A is true and R accurately explains its structural behavior.",
+    "trick": "Trap: When editing HKCR, you are actually modifying data stored within HKLM or HKCU beneath the surface.",
+    "tip": "HKCR is a dynamic memory alias merged from HKLM and HKCU class data."
+  },
+  {
+    "id": 64,
+    "question": "A system administrator suspects that a hard drive is developing physical defects (bad sectors). Which specific parameter must be added to the 'chkdsk' command line tool to instruct it to locate bad sectors and recover readable information?",
+    "options": ["chkdsk /f", "chkdsk /v", "chkdsk /x", "chkdsk /r"],
+    "answer": "chkdsk /r",
+    "explanation": "Step 1: 'chkdsk' without parameters only scans in read-only mode and reports errors. Step 2: The '/f' switch tells the utility to 'fix' logical file system errors on the disk. Step 3: The '/v' switch enables verbose mode (displaying every file checked). Step 4: The '/x' switch forces the volume to dismount first. Step 5: The '/r' switch (which implies /f) explicitly tells the utility to perform a rigorous surface scan to identify physical bad sectors and 'recover' readable data from them.",
+    "trick": "Bank/IT Trap: /f fixes logical software errors. /r is required for physical hardware sector checking and recovery.",
+    "tip": "Use 'chkdsk /r' to scan for and recover data from physical bad sectors."
+  },
+  {
+    "id": 65,
+    "question": "Assertion (A): In PowerShell, piping the output of 'Get-Process' to 'Stop-Process' (e.g., Get-Process notepad | Stop-Process) works flawlessly because PowerShell transfers structured objects, not text. Reason (R): The 'Stop-Process' cmdlet inherently understands the Process ID (PID) property contained within the .NET object passed down the pipeline. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In traditional CMD, the 'tasklist' command generates plain text. Piping text requires complex string extraction to find the Process ID (PID). Step 2: PowerShell cmdlets generate rich .NET objects. Step 3: 'Get-Process notepad' generates an array of Process objects, each possessing properties like Name, CPU usage, and Id (PID). Step 4: When piped '|', the 'Stop-Process' cmdlet automatically binds the incoming object's 'Id' property to its own execution parameters. Step 5: This makes object-oriented piping seamless and verifies both A and R.",
+    "trick": "Trap: PowerShell object binding handles the parameter matching automatically in the background, a massive advantage over Linux bash or Windows CMD.",
+    "tip": "PowerShell pipelines transfer .NET objects, allowing cmdlets to automatically bind to properties like PID."
+  },
+  {
+    "id": 66,
+    "question": "What is the technical term used in Windows OS memory management when the CPU tries to access a block of memory mapped into a process's virtual address space, but discovers the data is currently located in 'pagefile.sys' on the hard drive?",
+    "options": ["Memory Leak", "Buffer Overflow", "Hard Page Fault", "Segmentation Fault"],
+    "answer": "Hard Page Fault",
+    "explanation": "Step 1: Virtual memory maps logical addresses to physical locations (RAM or Disk). Step 2: When the CPU accesses an address, the Memory Management Unit (MMU) checks the Page Table. Step 3: If the page is marked as 'invalid', a 'Page Fault' interrupt is generated. Step 4: A 'Soft Page Fault' means the data is still somewhere in RAM (e.g., standby list). Step 5: A 'Hard Page Fault' means the data was swapped out to 'pagefile.sys', forcing the OS to perform a slow disk I/O operation to retrieve it into RAM.",
+    "trick": "Bank/IT Trap: A 'fault' sounds like an error, but in Virtual Memory, a Page Fault is a standard, intentional operational mechanism.",
+    "tip": "A Hard Page Fault occurs when the CPU must retrieve memory from the disk pagefile."
+  },
+  {
+    "id": 67,
+    "question": "Which crucial component of the Windows NT Architecture acts as an intermediary layer, preventing the Core Kernel (ntoskrnl.exe) and device drivers from directly hardcoding commands to specific motherboard chipsets and processors?",
+    "options": ["The Executive Services", "The Hardware Abstraction Layer (HAL)", "The Win32 Subsystem", "The Session Manager Subsystem (smss.exe)"],
+    "answer": "The Hardware Abstraction Layer (HAL)",
+    "explanation": "Step 1: Windows NT was designed to be portable across different CPU architectures (x86, ARM, Alpha, MIPS). Step 2: If the Kernel directly addressed hardware, a different kernel would be needed for every motherboard. Step 3: Microsoft introduced the HAL (Hardware Abstraction Layer), typically implemented as 'hal.dll'. Step 4: The HAL translates generic OS commands into platform-specific machine instructions. Step 5: This allows standard Windows drivers and the Kernel to function uniformly regardless of the underlying silicon chipset.",
+    "trick": "Trap: 'ntoskrnl.exe' is the brain, but 'hal.dll' is the universal translator that lets the brain talk to different hardware.",
+    "tip": "The HAL prevents the Kernel from being tied to specific hardware chipsets."
+  },
+  {
+    "id": 68,
+    "question": "A forensic investigator is trying to physically locate the system-wide Windows Registry files (like SYSTEM, SOFTWARE, and SAM) on an offline Windows 10 hard drive. In which directory are these physical hive files stored?",
+    "options": ["C:\\Windows\\System32\\config\\", "C:\\Users\\Default\\AppData\\", "C:\\Windows\\WinSxS\\", "C:\\Windows\\System32\\drivers\\etc\\"],
+    "answer": "C:\\Windows\\System32\\config\\",
+    "explanation": "Step 1: The Registry is viewed dynamically via 'regedit', but it is backed by physical files on the disk. Step 2: The HKCU hive is stored in the user's profile folder as 'NTUSER.DAT'. Step 3: However, the system-wide hives (HKLM\\SYSTEM, HKLM\\SOFTWARE, SAM, SECURITY) govern the OS itself. Step 4: These critical, locked files are strictly stored in 'C:\\Windows\\System32\\config\\'. Step 5: (Note: The drivers\\etc\\ folder holds the 'hosts' file, not registry hives).",
+    "trick": "Bank/IT Trap: While user registries are in user folders (NTUSER.DAT), system hives are always centralized in System32\\config.",
+    "tip": "Core Registry hive files (SYSTEM, SOFTWARE) are stored in C:\\Windows\\System32\\config\\."
+  },
+  {
+    "id": 69,
+    "question": "Assertion (A): The 'syswow64' folder on a 64-bit Windows installation primarily contains pure 64-bit system files and executables. Reason (R): 'WOW64' stands for 'Windows 64-bit on Windows', representing the native 64-bit architecture layer. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The folder naming convention is historically paradoxical. Step 2: On 64-bit Windows, the standard 'System32' folder actually holds the native 64-bit files. Step 3: WOW64 stands for 'Windows 32-bit on Windows 64-bit'. It is a compatibility subsystem emulator. Step 4: Therefore, the 'syswow64' folder contains 32-bit files used to run legacy 32-bit applications on the 64-bit OS. Step 5: Thus, A is false (it holds 32-bit files) and R is false (WOW64 means 32-on-64).",
+    "trick": "Bank/IT Trap: This is a classic Microsoft naming paradox. System32 holds 64-bit files; SysWOW64 holds 32-bit files.",
+    "tip": "SysWOW64 contains 32-bit compatibility files, while System32 holds native 64-bit files."
+  },
+  {
+    "id": 70,
+    "question": "A network security analyst wants to list all active TCP and UDP network connections, along with the specific numerical Process ID (PID) of the application responsible for each connection. Which CMD command syntax is correct?",
+    "options": ["netstat -r", "netstat -ano", "ipconfig /all", "arp -a"],
+    "answer": "netstat -ano",
+    "explanation": "Step 1: 'ipconfig' shows IP configuration, not active connections. 'arp' shows MAC-IP mapping. Step 2: 'netstat' is the core command for network statistics. Step 3: The switch '-a' displays all active connections and listening ports. Step 4: The switch '-n' forces addresses and port numbers to be displayed numerically (bypassing slow DNS resolution). Step 5: The critical switch '-o' displays the owning Process ID (PID) associated with each connection. Combined, '-ano' yields the required data.",
+    "trick": "Trap: 'netstat -a' will not show PIDs. The '-o' switch is mandatory for mapping a network port to a specific application task.",
+    "tip": "Use 'netstat -ano' to view all network connections mapped to numerical Process IDs."
+  },
+  {
+    "id": 71,
+    "question": "Assertion (A): PowerShell uses a strictly enforced 'Verb-Noun' naming convention for its native Cmdlets. Reason (R): This standardized taxonomy (like Get-Process, Set-ExecutionPolicy) makes it easier for administrators to predict command names and parameters without extensive memorization. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Unlike Linux Bash or legacy CMD where command names are often arbitrary abbreviations (e.g., 'grep', 'awk', 'chdir'). Step 2: PowerShell was designed from the ground up for consistency. Step 3: Every native PowerShell cmdlet is structured with an approved Action Verb, a hyphen, and a target Noun. Step 4: For example, to read a file, you use 'Get-Content'. To clear a console, 'Clear-Host'. Step 5: This predictable architecture (R) directly explains why the naming convention (A) was strictly enforced.",
+    "trick": "Bank/IT Trap: Even if you type 'dir' or 'ls' in PowerShell, these are merely 'Aliases' that transparently point to the true Verb-Noun cmdlet 'Get-ChildItem'.",
+    "tip": "PowerShell enforces a Verb-Noun structure (e.g., Get-Service) for absolute command predictability."
+  },
+  {
+    "id": 72,
+    "question": "In the Windows Virtual Memory system, what critical condition triggers the performance-destroying state known as 'Thrashing'?",
+    "options": ["When the system completely disables the pagefile.sys file.", "When the CPU spends more time swapping memory pages between RAM and disk than executing actual application processes.", "When Virtual Memory addresses conflict with physical memory addresses.", "When the Registry exceeds its maximum allocated hive size."],
+    "answer": "When the CPU spends more time swapping memory pages between RAM and disk than executing actual application processes.",
+    "explanation": "Step 1: When physical RAM is full, the OS moves data to the hard drive (paging). Step 2: Disk I/O is exponentially slower than RAM access. Step 3: If too many applications actively demand memory simultaneously, a 'Hard Page Fault' loop begins. Step 4: The OS frantically swaps data out to disk, only to immediately need it back, swapping another block out in its place. Step 5: This endless cycle of I/O gridlock is called 'Thrashing', effectively bringing system performance to a halt.",
+    "trick": "Trap: Thrashing is not an error code; it is an architectural bottleneck caused by extreme physical RAM starvation.",
+    "tip": "Thrashing occurs when excessive RAM paging causes the disk I/O to paralyze CPU execution."
+  },
+  {
+    "id": 73,
+    "question": "A developer writes a custom User-Mode application utilizing the Win32 API to read a file. Which Windows component is responsible for intercepting this Win32 API call and securely transitioning it into a Kernel-Mode System Call?",
+    "options": ["The Command Prompt (cmd.exe)", "The Windows Subsystem for Linux (WSL)", "The Native API (ntdll.dll)", "The Session Manager (smss.exe)"],
+    "answer": "The Native API (ntdll.dll)",
+    "explanation": "Step 1: A user application operates in Ring 3 and cannot touch hardware or files directly. Step 2: The app calls a high-level Win32 function (like ReadFile in kernel32.dll). Step 3: Win32 is just a subsystem. The request is passed to the Native API layer. Step 4: 'ntdll.dll' is the core gateway file for this Native API. Step 5: Ntdll.dll executes a software interrupt (a Trap) that flips the CPU to Ring 0 (Kernel Mode) and passes the parameters to the Executive Services.",
+    "trick": "Bank/IT Trap: 'kernel32.dll' exposes the Win32 API, but 'ntdll.dll' executes the actual CPU privilege transition to Ring 0.",
+    "tip": "Ntdll.dll acts as the secure gateway transitioning User-Mode Win32 calls to Kernel-Mode."
+  },
+  {
+    "id": 74,
+    "question": "Assertion (A): On a Windows laptop, the 'hiberfil.sys' file is typically roughly equivalent to the physical RAM size of the machine. Reason (R): Hibernation requires the OS to dump the entire volatile contents of physical RAM into a non-volatile disk file before powering off. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Unlike 'Sleep' mode which keeps RAM powered, 'Hibernation' powers off the system completely. Step 2: To prevent data loss, the active OS state must be saved. Step 3: The OS writes the entire contents of physical RAM to a dedicated file named 'hiberfil.sys' located on the root directory (C:\\). Step 4: Upon reboot, the bootloader reads 'hiberfil.sys' and loads it back into RAM, instantly resuming the session. Step 5: Because it holds the RAM state, its size correlates directly to the installed physical RAM capacity.",
+    "trick": "Trap: 'pagefile.sys' is for active virtual memory swapping; 'hiberfil.sys' is exclusively for saving state during hibernation.",
+    "tip": "Hiberfil.sys must be large enough to hold all active RAM data during hibernation."
+  },
+  {
+    "id": 75,
+    "question": "Within an Active Directory domain environment, an administrator has updated a Group Policy Object (GPO) on the server. If they want a client workstation to apply these new policies immediately without restarting, which command must be run on the client?",
+    "options": ["sfc /scannow", "gpupdate /force", "chkdsk /f", "ipconfig /renew"],
+    "answer": "gpupdate /force",
+    "explanation": "Step 1: Group Policy dictates registry settings, security, and behavior on domain computers. Step 2: By default, Windows clients refresh Group Policy automatically in the background at set intervals (usually 90 minutes). Step 3: To bypass this wait time, the Group Policy Update tool is used. Step 4: Typing 'gpupdate' initiates a refresh. Step 5: Adding the '/force' switch ignores optimization checks and forcefully reapplies all policies from the Domain Controller immediately.",
+    "trick": "Bank/IT Trap: 'ipconfig /renew' only refreshes the DHCP IP address, it has nothing to do with Active Directory policies.",
+    "tip": "Use 'gpupdate /force' to immediately apply Active Directory Group Policy changes without waiting."
+  },
+  {
+    "id": 76,
+    "question": "Which crucial early-boot system process is specifically responsible for creating user sessions, initializing the Win32 subsystem (csrss.exe), and launching the Windows logon process (winlogon.exe)?",
+    "options": ["explorer.exe", "svchost.exe", "smss.exe", "taskmgr.exe"],
+    "answer": "smss.exe",
+    "explanation": "Step 1: The bootloader loads the Kernel (ntoskrnl.exe). Step 2: The Kernel executes the very first user-mode process, the Session Manager Subsystem ('smss.exe'). Step 3: 'smss.exe' finishes registry initialization. Step 4: It then creates Session 0 (for system services) and Session 1 (for the user UI). Step 5: For the user UI, it launches the Client/Server Runtime Subsystem ('csrss.exe') and the logon prompt interface ('winlogon.exe'). explorer.exe only loads AFTER a user successfully authenticates.",
+    "trick": "Trap: Explorer.exe is the GUI desktop shell. Winlogon is the login screen. SMSS.exe is the master architect that launches them.",
+    "tip": "Smss.exe (Session Manager) is the first user-mode process that launches the login subsystem."
+  },
+  {
+    "id": 77,
+    "question": "Assertion (A): The Windows Registry avoids catastrophic corruption during power failures by utilizing transaction logs, specifically the 'ntuser.dat.LOG' and similar hive log files. Reason (R): The Registry operates on a transactional database model, ensuring that changes are either fully committed or entirely rolled back upon reboot. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: The Registry is critical to OS survival. Corruption means a non-bootable system. Step 2: To protect it, Windows employs a transactional model, similar to SQL databases. Step 3: When a program modifies the registry, the change is first written to a temporary log file (e.g., .LOG1, .LOG2). Step 4: Once the log write is verified, it is formally committed to the main physical hive file. Step 5: If power is lost mid-write, the OS uses the log file at next boot to roll back the incomplete transaction, ensuring stability.",
+    "trick": "Bank/IT Trap: The registry is not a simple text file; it is a highly fault-tolerant transactional database.",
+    "tip": "The Registry uses transaction logs (.LOG files) to prevent corruption during sudden power losses."
+  },
+  {
+    "id": 78,
+    "question": "In Windows Operating Systems, what is the primary architectural purpose of the 'svchost.exe' (Service Host) executable process commonly seen running multiple times in Task Manager?",
+    "options": ["It is a malware containment sandbox that isolates untrusted web traffic.", "It acts as a generic host process that groups and runs dynamic-link libraries (DLLs) as background system services.", "It is the primary GUI rendering engine for the Windows Desktop environment.", "It is an exclusive legacy emulator allowing 16-bit MS-DOS games to run."],
+    "answer": "It acts as a generic host process that groups and runs dynamic-link libraries (DLLs) as background system services.",
+    "explanation": "Step 1: Many Windows services are compiled as DLL files (Dynamic Link Libraries) rather than standalone .exe files for reusability. Step 2: A DLL cannot execute itself; it requires a host executable. Step 3: Microsoft created 'svchost.exe' to load and host these DLL-based services. Step 4: To improve performance, services with similar security requirements are grouped into a single svchost process. Step 5: This is why you see dozens of 'svchost.exe' processes running simultaneously in Task Manager.",
+    "trick": "Trap: If you terminate a critical svchost.exe, you might crash the network stack or the audio service, causing an immediate reboot.",
+    "tip": "Svchost.exe hosts DLL-based system services, grouping them to optimize OS memory usage."
+  },
+  {
+    "id": 79,
+    "question": "If an administrator types '$ServerName = \"DC-01\"' in a console, which shell environment is being used, and what does the '$' signify?",
+    "options": ["CMD; it signifies a batch script parameter.", "PowerShell; it declares a dynamically typed variable.", "Linux Bash via WSL; it executes a root-level system call.", "VBScript; it designates an array index."],
+    "answer": "PowerShell; it declares a dynamically typed variable.",
+    "explanation": "Step 1: In traditional CMD, variables are set using 'set var=value' and referenced with %var%. Step 2: In PowerShell, the architecture mirrors .NET/C# scripting conventions. Step 3: Every variable name in PowerShell must be prefixed with the dollar sign ($). Step 4: The variable is dynamically typed, meaning PowerShell automatically understands 'DC-01' is a String object without the user explicitly declaring it. Step 5: The syntax explicitly belongs to PowerShell.",
+    "trick": "Bank/IT Trap: While Bash also uses '$' to *call* a variable, PowerShell uses '$' to both *declare and call* variables.",
+    "tip": "In PowerShell, all variable names must begin with the '$' symbol prefix."
+  },
+  {
+    "id": 80,
+    "question": "Assertion (A): In modern Windows NT architectures, user-mode applications can directly execute the 'CLI' (Clear Interrupts) assembly instruction to pause hardware input while calculating complex algorithms. Reason (R): User-Mode applications operate in Ring 3, which lacks the necessary hardware privileges to modify the CPU interrupt flag. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: R is completely true. User-Mode applications execute in Ring 3. Step 2: Ring 3 is restricted by the CPU hardware silicon. It physically cannot execute privileged instructions like CLI (Clear Interrupts) or HALT. Step 3: Because R is true, A must be false. Step 4: If a user-mode application attempts to execute 'CLI', the CPU hardware will intercept it and generate a trap/exception. Step 5: The Kernel will then catch the exception and typically terminate the offending application.",
+    "trick": "Bank/IT Trap: Never assume an application has control over hardware interrupts. That authority strictly belongs to the Ring 0 Kernel.",
+    "tip": "Ring 3 User-Mode apps are hardware-restricted from executing privileged instructions like disabling interrupts."
+  },
+  {
+    "id": 81,
+    "question": "Which of the following command-line tools is considered deprecated and has been superseded by the 'diskpart' utility for managing drive partitions via the command line in Windows NT based systems?",
+    "options": ["format", "fdisk", "chkdsk", "defrag"],
+    "answer": "fdisk",
+    "explanation": "Step 1: 'format' is still used to apply a file system to a volume. Step 2: 'chkdsk' verifies file system integrity. Step 3: 'defrag' optimizes mechanical hard drive sector layouts. Step 4: 'fdisk' was the primary partition table creation tool in MS-DOS and Windows 9x. Step 5: With the shift to the Windows NT architecture (and its complex logical disk management and NTFS requirements), 'fdisk' was entirely removed and replaced by the highly advanced 'diskpart' utility.",
+    "trick": "Trap: 'fdisk' still exists in Linux, but in the Windows ecosystem, it died with Windows ME. Diskpart is the modern standard.",
+    "tip": "The legacy 'fdisk' partition tool was replaced by 'diskpart' in Windows NT systems."
+  },
+  {
+    "id": 82,
+    "question": "A system administrator needs to retrieve hardware management data, such as BIOS serial numbers and CPU thermal states, across 500 network computers. Which specific Microsoft framework, tightly integrated with PowerShell, is designed exactly for this enterprise querying task?",
+    "options": ["Active Directory (AD)", "Windows Management Instrumentation (WMI)", "Volume Shadow Copy Service (VSS)", "Component Object Model (COM)"],
+    "answer": "Windows Management Instrumentation (WMI)",
+    "explanation": "Step 1: AD manages user authentication and security policies, not physical hardware telemetry. Step 2: VSS handles file backups and snapshots. Step 3: COM is a software component interface standard. Step 4: WMI (Windows Management Instrumentation) is Microsoft's implementation of Web-Based Enterprise Management (WBEM). Step 5: WMI exposes a vast database of OS, network, and physical hardware data that PowerShell can easily query using cmdlets like 'Get-WmiObject' or 'Get-CimInstance'.",
+    "trick": "Bank/IT Trap: WMI is the 'nervous system' database of the OS hardware state. PowerShell is just the tool used to query it.",
+    "tip": "WMI provides the underlying framework for querying deep hardware and OS configuration telemetry."
+  },
+  {
+    "id": 83,
+    "question": "Assertion (A): The 'Environment Variables' %APPDATA% and %LOCALAPPDATA% point to the exact same directory, but one is accessed by CMD and the other by PowerShell. Reason (R): Both variables exist to provide a standardized path for applications to store user-specific configuration files regardless of the OS installation drive. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: R is true; environment variables abstract absolute folder paths so developers don't have to guess where the 'C:\\Users\\...' folder is. Step 2: However, A is totally false. Both CMD and PowerShell can access both variables. Step 3: More importantly, they point to different locations for a specific architectural reason. Step 4: %APPDATA% points to 'Roaming' app data, which syncs across a network domain if the user logs into another PC. Step 5: %LOCALAPPDATA% points to 'Local' app data, which is usually large cache files that strictly stay on that specific physical PC.",
+    "trick": "Trap: Roaming (%APPDATA%) follows the user across the network. Local (%LOCALAPPDATA%) never leaves the physical hard drive.",
+    "tip": "APPDATA is for Roaming network profiles; LOCALAPPDATA is strictly for local machine storage."
+  },
+  {
+    "id": 84,
+    "question": "When examining registry values, a developer utilizes the 'REG_EXPAND_SZ' data type instead of the standard 'REG_SZ'. What is the functional purpose of this specific data type?",
+    "options": ["It automatically encrypts the string data at rest.", "It allows the string to contain variables like '%WINDIR%' that the OS dynamically resolves at runtime.", "It compresses text data to save space in the physical hive file.", "It translates the text string into binary code for the Kernel to process natively."],
+    "answer": "It allows the string to contain variables like '%WINDIR%' that the OS dynamically resolves at runtime.",
+    "explanation": "Step 1: REG_SZ is a static string. If you write '%SystemRoot%\\System32', it treats it literally as those characters. Step 2: REG_EXPAND_SZ is an 'expandable' string. Step 3: When an application or the OS queries a REG_EXPAND_SZ value, the registry API intercepts it. Step 4: It identifies the environment variable (e.g., %SystemRoot%) and dynamically 'expands' or resolves it to the absolute path (e.g., 'C:\\Windows'). Step 5: This prevents OS path breakage if Windows is installed on a non-standard drive letter.",
+    "trick": "Bank/IT Trap: 'Expand' does not mean file compression/decompression. It means dynamically resolving environment variables inside the string.",
+    "tip": "REG_EXPAND_SZ strings contain environment variables (like %USERPROFILE%) that resolve dynamically."
+  },
+  {
+    "id": 85,
+    "question": "Assertion (A): The User Account Control (UAC) feature enhances security by forcing even Administrators to run applications with standard user privileges by default. Reason (R): If an application is compromised by malware, it inherits the execution token of the user; standard privileges prevent the malware from modifying critical system files without explicit admin consent. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Before Windows Vista, if you logged in as Administrator, every app you ran had full OS control. Malware loved this. Step 2: UAC changed the architecture. Now, when an Admin logs in, they are issued two security tokens: a Standard token and an Admin token. Step 3: By default (A), the desktop and all apps run using only the restricted Standard token. Step 4: If an app wants to change system files, it must ask for elevation (the UAC prompt). Step 5: This mechanism (R) perfectly explains the security intent stated in A.",
+    "trick": "Trap: Administrators do not operate with admin rights 100% of the time. UAC deprivileges them down to standard users until elevation is requested.",
+    "tip": "UAC restricts Admins to standard user tokens until elevation, isolating malware damage."
+  },
+  {
+    "id": 86,
+    "question": "Which Windows internal mechanism allows the OS to seamlessly create 'shadow' backups of files that are currently locked or open by another application, enabling reliable system restores and backups?",
+    "options": ["NTFS File Journaling", "Volume Shadow Copy Service (VSS)", "Windows Management Instrumentation (WMI)", "The Pagefile Swap subsystem"],
+    "answer": "Volume Shadow Copy Service (VSS)",
+    "explanation": "Step 1: Normally, if an application (like a database or registry) holds an exclusive lock on a file, backup software cannot read it. Step 2: NTFS Journaling prevents metadata corruption during power loss, but doesn't bypass file locks. Step 3: Microsoft created the Volume Shadow Copy Service (VSS). Step 4: VSS operates at the block level on the hard drive. It coordinates with apps to briefly freeze I/O, takes an instantaneous snapshot of the volume blocks, and thaws I/O. Step 5: This creates a frozen, point-in-time 'shadow' copy that backup software can read without disturbing active applications.",
+    "trick": "Bank/IT Trap: 'System Restore' points and 'Previous Versions' rely entirely on VSS snapshots to function.",
+    "tip": "VSS takes block-level volume snapshots, allowing backups of locked and active files."
+  },
+  {
+    "id": 87,
+    "question": "Assertion (A): On a Windows system utilizing the NTFS file system, the maximum theoretical file size is severely limited to 4 Gigabytes. Reason (R): NTFS relies on a 32-bit File Allocation Table architecture that cannot mathematically address more than 4GB per file. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: Legacy MS-DOS/Windows 9x systems utilized FAT32. Step 2: FAT32 has a hard architectural limit: a single file cannot exceed 4GB. Step 3: Windows NT introduced the New Technology File System (NTFS). Step 4: NTFS utilizes a 64-bit Master File Table (MFT) addressing scheme. Step 5: The theoretical file size limit for NTFS is 16 Exabytes (though practically limited by OS implementations to ~16-256 Terabytes). Thus, both A and R are completely false, as they incorrectly describe FAT32 limits as NTFS limits.",
+    "trick": "Trap: The 4GB limit that prevents large ISOs from copying to USB drives is a FAT32 limitation, not an NTFS one.",
+    "tip": "FAT32 restricts single files to 4GB. NTFS supports massive files up to Exabytes."
+  },
+  {
+    "id": 88,
+    "question": "A network engineer wants to automate the creation of 50 new Active Directory users using a single command line script. Which combination of tool and input mechanism provides the most native and efficient object-oriented approach in a modern Windows Server environment?",
+    "options": ["Using CMD with a batch file (.bat) executing 'net user' commands in a loop.", "Using PowerShell importing a comma-separated values (CSV) file and piping it to 'New-ADUser'.", "Using the Registry Editor (regedit.exe) to import a .reg file.", "Using the Windows Subsystem for Linux (WSL) to execute a Python script targeting the SAM file."],
+    "answer": "Using PowerShell importing a comma-separated values (CSV) file and piping it to 'New-ADUser'.",
+    "explanation": "Step 1: 'net user' in CMD is legacy, string-based, and lacks complex Active Directory attribute support. Step 2: The Registry SAM file cannot be directly edited safely for AD users. Step 3: PowerShell is object-oriented. Step 4: By using 'Import-Csv', PowerShell reads a text file and instantly converts each row into a structured custom object. Step 5: By piping '|' these objects to the 'New-ADUser' cmdlet, the parameters (Name, Title, Department) are automatically bound and executed in bulk efficiently.",
+    "trick": "Bank/IT Trap: PowerShell's ability to seamlessly translate a flat CSV into rich pipeline objects is its greatest automation advantage over legacy CMD.",
+    "tip": "PowerShell imports CSVs as rich objects, easily piping data to Active Directory cmdlets."
+  },
+  {
+    "id": 89,
+    "question": "When modifying system parameters via the Command Line Interface, which command specifically allows an administrator to directly add, delete, or query keys and values inside the Windows Registry?",
+    "options": ["regsvr32", "regedit.exe", "reg", "edit"],
+    "answer": "reg",
+    "explanation": "Step 1: 'regedit.exe' launches the Graphical User Interface (GUI) for the Registry. Step 2: 'regsvr32' is used to register and unregister OLE controls like DLL and ActiveX controls. Step 3: 'edit' is the legacy MS-DOS text editor. Step 4: 'reg' is the dedicated console tool for manipulating the Registry from the CLI or batch scripts. Step 5: It uses subcommands like 'reg add', 'reg delete', and 'reg query' to perform operations without requiring a GUI.",
+    "trick": "Trap: 'regedit' can be run silently from CLI (regedit /s file.reg), but 'reg' is the native CLI command designed for direct key/value manipulation.",
+    "tip": "The 'reg' CLI command enables direct querying, adding, and deleting of Registry keys."
+  },
+  {
+    "id": 90,
+    "question": "Assertion (A): The 'ipconfig /release' command forces a Windows client to permanently delete its network adapter drivers and halt all network traffic. Reason (R): Releasing the IP address removes the logical link between the OSI Network Layer and Data Link Layer, terminating driver functionality. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A is completely false. 'ipconfig /release' does not delete hardware drivers; it simply sends a DHCPRelease message to the DHCP server to relinquish its current dynamic IP address. Step 2: Network traffic stops because there is no IP address (Layer 3), but the driver and NIC (Layer 1/2) remain fully functional. Step 3: R is false because the logical link is suspended, but driver functionality is completely unaffected. Step 4: The system can immediately regain an IP via 'ipconfig /renew'.",
+    "trick": "Bank/IT Trap: IP configuration commands affect software protocol states (DHCP), never physical hardware drivers.",
+    "tip": "Ipconfig /release drops the DHCP lease; it does not touch or uninstall network drivers."
+  },
+  {
+    "id": 91,
+    "question": "In the context of the Windows Registry, what is a 'Hive'?",
+    "options": ["A graphical interface window used to view settings.", "A logical group of keys, subkeys, and values that has a corresponding physical file and .LOG transaction file stored on disk.", "An encrypted tunnel used to transfer settings between two domain computers.", "A backup snapshot taken by the Volume Shadow Copy Service."],
+    "answer": "A logical group of keys, subkeys, and values that has a corresponding physical file and .LOG transaction file stored on disk.",
+    "explanation": "Step 1: The Registry is organized in a tree-like hierarchy. Step 2: At the top level are Root Keys (like HKLM). Step 3: A 'Hive' is a discrete, logical branch of the registry (e.g., HKLM\\SYSTEM). Step 4: Crucially, a Hive is defined by the fact that it is backed by a specific set of physical files on the hard drive (a data file with no extension, and a .LOG file for transactions). Step 5: Therefore, it is both a logical structure and a physical disk component.",
+    "trick": "Trap: Keys and Subkeys are just folders within the GUI. A Hive is the absolute root node that actually ties to a physical file on the hard drive.",
+    "tip": "A Registry Hive is a major logical branch backed by a physical file."
+  },
+  {
+    "id": 92,
+    "question": "If a critical Windows update replaces a core system DLL, the old version of the DLL is kept safe on the hard drive rather than being deleted. This prevents applications that rely on the older version from breaking (solving DLL Hell). Which architectural component manages this storage?",
+    "options": ["The System Volume Information folder", "The Windows Component Store (WinSxS)", "The Registry Hive HKEY_CURRENT_CONFIG", "The PreFetch cache"],
+    "answer": "The Windows Component Store (WinSxS)",
+    "explanation": "Step 1: 'DLL Hell' occurred in Windows 9x when new app installations overwrote shared DLLs, breaking older apps. Step 2: Windows NT solved this using Side-by-Side (SxS) assembly. Step 3: The Windows Component Store, located at 'C:\\Windows\\WinSxS', is the massive repository handling this. Step 4: It stores multiple versions of the exact same DLL file simultaneously. Step 5: Applications use manifest files to request the specific version they need, allowing old and new software to coexist peacefully.",
+    "trick": "Bank/IT Trap: System Volume Information is for VSS snapshots (System Restore), whereas WinSxS manages hard-links and DLL versioning.",
+    "tip": "WinSxS (Side-by-Side) stores multiple DLL versions simultaneously to solve 'DLL Hell'."
+  },
+  {
+    "id": 93,
+    "question": "Assertion (A): The Windows NT architecture employs a purely Monolithic Kernel design, exactly like standard Linux kernels. Reason (R): A pure monolithic kernel executes all operating system services (VFS, IPC, drivers) in the same Ring 0 memory space for maximum performance. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: R provides an accurate definition of a pure monolithic kernel (like Linux), where everything runs in Ring 0. Step 2: However, A is false. Windows NT is NOT purely monolithic. Step 3: Windows NT uses a 'Hybrid Kernel' architecture (sometimes called Macrokernel). Step 4: While it keeps core executive services in Ring 0 for speed, it moves environmental subsystems (like the Win32 API) and some drivers into User Mode (Ring 3) like a Microkernel. Step 5: This hybrid approach balances performance and stability.",
+    "trick": "Trap: Linux is monolithic. Windows NT is Hybrid. macOS/XNU is also Hybrid. Minix is Microkernel.",
+    "tip": "Windows NT uses a Hybrid Kernel, balancing monolithic speed with microkernel stability."
+  },
+  {
+    "id": 94,
+    "question": "When troubleshooting a completely unbootable system, an administrator accesses the Command Prompt via the Windows Recovery Environment (WinRE). They type 'bootrec /RebuildBcd'. What is the specific purpose of this command?",
+    "options": ["To reinstall the Windows Registry from a backup hive.", "To scan all disks for Windows installations and write them into a new Boot Configuration Data store.", "To completely erase the hard drive and prepare a new partition table.", "To physically rewrite the NT Loader (NTLDR) onto the floppy disk sector."],
+    "answer": "To scan all disks for Windows installations and write them into a new Boot Configuration Data store.",
+    "explanation": "Step 1: The BCD (Boot Configuration Data) is the database that tells the bootloader (BOOTMGR) where the OS is located. Step 2: If the BCD is corrupted, Windows will display a 'BOOTMGR is missing' or BCD error, refusing to boot. Step 3: By entering WinRE and running 'bootrec', the administrator accesses the boot sector repair utility. Step 4: The '/RebuildBcd' switch forces the system to scan all connected hard drives for Windows OS installations. Step 5: It prompts the user to add found installations to a freshly generated BCD file, restoring boot functionality.",
+    "trick": "Bank/IT Trap: Bootrec fixes the boot menu database (BCD); SFC fixes the OS system files. Do not confuse their roles.",
+    "tip": "Bootrec /RebuildBcd scans drives for Windows installations to repair a corrupted boot menu."
+  },
+  {
+    "id": 95,
+    "question": "Assertion (A): When an administrator uses the 'Get-Help' cmdlet in PowerShell, it relies on local HTML files pre-installed with the Operating System. Reason (R): PowerShell does not support internet-based command updates to maintain strict air-gapped security protocols. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A is false. By default, modern PowerShell versions ship with minimal or no pre-installed local help files to save disk space. Step 2: R is false. PowerShell absolutely supports internet-based updates. Step 3: Administrators are expected to run the 'Update-Help' cmdlet. Step 4: This cmdlet connects to Microsoft servers via the internet, downloads the latest XML-based (not HTML) help documentation, and installs it locally. Step 5: Once updated, 'Get-Help' accesses these downloaded XML files.",
+    "trick": "Trap: PowerShell Help is no longer static. It is dynamically updated via the web to ensure administrators have the latest cmdlet syntax.",
+    "tip": "PowerShell requires running 'Update-Help' to download the latest XML documentation from Microsoft."
+  },
+  {
+    "id": 96,
+    "question": "In the Windows kernel architecture, what is the specific role of the 'Executive Services' (part of ntoskrnl.exe) as opposed to the 'Microkernel' component?",
+    "options": ["The Executive Services manage high-level policies like Memory, Process, and I/O management, while the Microkernel handles low-level CPU thread scheduling and interrupt dispatching.", "The Executive Services render the graphical user interface, while the Microkernel runs the command prompt.", "The Executive Services handle User-Mode applications, while the Microkernel exclusively manages hardware drivers.", "The Executive Services intercept network traffic, while the Microkernel encrypts hard drive data."],
+    "answer": "The Executive Services manage high-level policies like Memory, Process, and I/O management, while the Microkernel handles low-level CPU thread scheduling and interrupt dispatching.",
+    "explanation": "Step 1: The 'ntoskrnl.exe' binary consists of two main architectural layers: The Executive and the Kernel. Step 2: The Kernel (often called the microkernel layer) sits at the very bottom, right above the HAL. It handles raw CPU math, thread scheduling, multiprocessor synchronization, and interrupt dispatching. Step 3: The Executive layer sits above the Kernel. Step 4: The Executive implements the OS management logic: The I/O Manager, the Virtual Memory Manager, the Process/Thread Manager, and the Security Reference Monitor. Step 5: They work together in Ring 0 to form the Hybrid kernel.",
+    "trick": "Bank/IT Trap: The 'Kernel' schedules the threads on the CPU, but the 'Executive' creates and manages the processes that own those threads.",
+    "tip": "Executive layer manages high-level OS policies; Microkernel layer handles low-level CPU scheduling."
+  },
+  {
+    "id": 97,
+    "question": "Assertion (A): The 'Task Manager' (taskmgr.exe) in Windows 10 has the absolute highest system authority and can terminate any process, including Kernel-mode drivers. Reason (R): Task Manager operates in Ring 0 (Kernel Mode) to ensure administrators can recover from catastrophic system freezes. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "Both A and R are False"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A is false. Task Manager cannot terminate critical system processes (like wininit.exe or ntoskrnl.exe); trying to do so results in an 'Access Denied' error or a system crash warning. Step 2: It certainly cannot terminate kernel-mode drivers directly. Step 3: R is false. Task Manager is a standard GUI application that runs entirely in Ring 3 (User Mode). Step 4: To terminate a process, Task Manager issues a Win32 API request (TerminateProcess) to the Kernel. The Kernel then decides whether the user has the security privileges to execute that termination.",
+    "trick": "Trap: Task Manager is just a User-Mode request GUI. The Kernel is the true boss that actually kills the process.",
+    "tip": "Task Manager is a User-Mode app; it asks the Kernel to terminate processes."
+  },
+  {
+    "id": 98,
+    "question": "An advanced persistent threat (APT) malware achieves persistence by modifying the Registry key `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run`. At what specific point in the system lifecycle does this malware execute?",
+    "options": ["Immediately before the BIOS hands over control to the Bootmgr.", "Before the Windows login screen appears (during the System boot phase).", "Only when the specific user who was infected logs into their desktop profile.", "When any user successfully logs into the system, during the loading of the explorer.exe desktop shell."],
+    "answer": "When any user successfully logs into the system, during the loading of the explorer.exe desktop shell.",
+    "explanation": "Step 1: The 'Run' keys are the most common registry locations for establishing autostart persistence. Step 2: Because the path begins with 'HKLM' (Local Machine), the setting applies globally to the entire computer. Step 3: However, 'Run' keys do not execute during the core boot phase. Step 4: They are parsed and executed by the Windows shell (explorer.exe) after a successful user authentication. Step 5: Thus, whoever logs in, the malware triggers as their desktop loads.",
+    "trick": "Bank/IT Trap: HKLM Run keys affect *all* users upon login. HKCU Run keys only affect the *specific* user upon login. Neither execute before the login screen.",
+    "tip": "HKLM 'Run' keys execute globally for any user immediately after desktop login."
+  },
+  {
+    "id": 99,
+    "question": "Assertion (A): Using the Command Prompt, the command `del /f /s /q C:\\*.*` is extremely dangerous as it will delete the Registry hive files located in System32\\config. Reason (R): The `/f` switch forces the deletion of read-only files, and `/s` recursively processes all subdirectories on the C: drive. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, but R is False", "A is False, but R is True"],
+    "answer": "A is False, but R is True",
+    "explanation": "Step 1: R is completely true; /f forces read-only deletion, /s is recursive (all folders), and /q is quiet mode. Step 2: However, A is false. Step 3: Even with an elevated Administrator Command Prompt, the OS Kernel locks critical system files (like the Registry hives, pagefile.sys, and active system drivers) exclusively. Step 4: Any attempt to delete an exclusively locked file using normal user-mode tools (like 'del') will result in a 'File in Use' or 'Access Denied' error. Step 5: The OS protects itself from this catastrophic command.",
+    "trick": "Trap: Administrative rights do not override Kernel-level exclusive file locks. Active registry hives cannot be deleted while Windows is running.",
+    "tip": "The Kernel exclusively locks active Registry hives, protecting them from accidental CLI deletion."
+  },
+  {
+    "id": 100,
+    "question": "In the context of the Windows PowerShell execution environment, what is the primary function of the 'Profile' script (e.g., Microsoft.PowerShell_profile.ps1)?",
+    "options": ["It securely stores the local Administrator's hashed password for remote execution.", "It acts as a startup script that runs automatically every time a PowerShell session starts, allowing users to define custom aliases, variables, and modules.", "It replaces the Windows Registry user hive (HKCU) for PowerShell-specific environmental variables.", "It defines the network firewall rules for WinRM (Windows Remote Management) protocols."],
+    "answer": "It acts as a startup script that runs automatically every time a PowerShell session starts, allowing users to define custom aliases, variables, and modules.",
+    "explanation": "Step 1: PowerShell environments are highly customizable. Step 2: Administrators often write custom functions, create shortcuts (Aliases), and load specific IT modules (like ActiveDirectory). Step 3: Doing this manually every session is inefficient. Step 4: PowerShell Profiles are essentially initialization scripts (.ps1 files). Step 5: When you launch powershell.exe, it checks for these profile scripts and executes them immediately, pre-loading your custom environment before returning the prompt to you.",
+    "trick": "Bank/IT Trap: Profiles are just startup scripts. If your Execution Policy is set to 'Restricted', your own profile will fail to load and throw an error at launch.",
+    "tip": "PowerShell Profiles are customizable startup scripts that preload aliases, modules, and variables."
+  }
+]
