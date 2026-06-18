@@ -1,0 +1,131 @@
+﻿{
+  "topic": "नियंत्रण प्रणाली (Control Systems)",
+  "description": "फीडबैक नियंत्रण प्रणालियों (feedback control systems) के गणितीय मॉडलिंग (mathematical modeling), समय-डोमेन (time-domain) और आवृत्ति-डोमेन (frequency-domain) विश्लेषण, और स्थिरता मूल्यांकन (stability evaluation) का एक व्यापक अध्ययन, जिसमें स्टेट-स्पेस डिज़ाइन (state-space design) और नियंत्रक (controllers) शामिल हैं।",
+  "path": "Technical_Engineering_Core/Electrical_Engineering/Control_Systems",
+  "sections": [
+    {
+      "section_id": "1",
+      "title": "गणितीय मॉडलिंग और ट्रांसफर फंक्शन (Mathematical Modeling and Transfer Functions)",
+      "description": "भौतिक प्रणालियों (physical systems) को अवकल समीकरणों (differential equations), ब्लॉक आरेखों (block diagrams) और सिग्नल फ्लो ग्राफ़ (signal flow graphs) का उपयोग करके गणितीय रूप से दर्शाने की तकनीकें।",
+      "key_concepts": [
+        {
+          "concept": "ट्रांसफर फंक्शन (Transfer Function)",
+          "explanation": "आउटपुट चर (output variable) के लाप्लास ट्रांसफॉर्म (Laplace transform) और इनपुट चर (input variable) के लाप्लास ट्रांसफॉर्म के अनुपात (ratio) के रूप में परिभाषित, यह मानते हुए कि सभी प्रारंभिक स्थितियाँ (initial conditions) शून्य हैं। यह केवल रैखिक समय-अपरिवर्तनीय (Linear Time-Invariant - LTI) प्रणालियों पर लागू होता है।"
+        },
+        {
+          "concept": "क्लोज्ड-लूप सिस्टम (Closed-Loop System - Feedback Control)",
+          "explanation": "एक प्रणाली जहाँ नियंत्रण क्रिया (control action) आउटपुट पर निर्भर करती है। यह वांछित इनपुट (desired input) के साथ वास्तविक आउटपुट (actual output) की तुलना करने के लिए फीडबैक (feedback) का उपयोग करता है, जिससे विचलन (deviation) को ठीक करने के लिए एक त्रुटि संकेत (error signal) उत्पन्न होता है, जो इसे बाहरी विक्षोभों (external disturbances) के प्रति कम संवेदनशील (less sensitive) बनाता है।"
+        }
+      ],
+      "formulas": [
+        {
+          "category": "मेसन का लाभ सूत्र (Mason's Gain Formula)",
+          "equations": [
+            "कुल लाभ (Overall Gain - T) = (1 / Delta) * Sum(P_k * Delta_k)",
+            "जहाँ P_k, k-वें अग्र पथ (forward path) का पथ लाभ (path gain) है, और डेल्टा (Delta) ग्राफ़ निर्धारक (graph determinant) है।"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "2",
+      "title": "समय डोमेन विश्लेषण (Time Domain Analysis)",
+      "description": "मानक परीक्षण संकेतों (standard test signals) (जैसे स्टेप, रैंप, पैराबोलिक) के लिए प्रथम और द्वितीय-क्रम प्रणालियों (first and second-order systems) की क्षणिक (transient) और स्थिर-अवस्था प्रतिक्रिया (steady-state response) का विश्लेषण करना।",
+      "formulas": [
+        {
+          "category": "द्वितीय-क्रम प्रणाली विनिर्देश (Second-Order System Specifications)",
+          "equations": [
+            "अभिलक्षणिक समीकरण (Characteristic Equation): s^2 + 2 * zeta * omega_n * s + omega_n^2 = 0",
+            "अधिकतम पीक ओवरशूट (Maximum Peak Overshoot - Mp) = e^(-(zeta * pi) / sqrt(1 - zeta^2)) * 100%",
+            "2% सहिष्णुता बैंड के लिए सेटलिंग समय (Settling Time - Ts) = 4 / (zeta * omega_n)"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "condition": "अवमंदन अनुपात को बदलना (Varying Damping Ratio - zeta)",
+          "results": [
+            "zeta = 0: अनवमंदित प्रणाली (Undamped system), मूल विशुद्ध रूप से काल्पनिक (purely imaginary) हैं, प्रतिक्रिया विशुद्ध रूप से दोलनशील (oscillatory) है।",
+            "0 < zeta < 1: अल्प-अवमंदित प्रणाली (Underdamped system), मूल जटिल संयुग्मी (complex conjugates) हैं, प्रतिक्रिया में क्षयकारी दोलन (decaying oscillations) होते हैं।",
+            "zeta = 1: क्रांतिक अवमंदित प्रणाली (Critically damped system), मूल वास्तविक और समान (real and equal) हैं, बिना ओवरशूट के सबसे तेज़ प्रतिक्रिया।",
+            "zeta > 1: अति-अवमंदित प्रणाली (Overdamped system), मूल वास्तविक और भिन्न (real and distinct) हैं, प्रतिक्रिया सुस्त (sluggish) है और चरघातांकी रूप से क्षय (exponentially decays) होती है।"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "3",
+      "title": "स्थिरता विश्लेषण और रूट लोकस (Stability Analysis and Root Locus)",
+      "description": "s-प्लेन (s-plane) में अभिलक्षणिक समीकरण (characteristic equation) के मूलों (roots) के स्थानों का विश्लेषण करके क्लोज्ड-लूप प्रणालियों की पूर्ण (absolute) और सापेक्ष स्थिरता (relative stability) निर्धारित करने के तरीके।",
+      "key_concepts": [
+        {
+          "concept": "राउथ-हर्विट्ज़ मानदंड (Routh-Hurwitz - RH Criterion)",
+          "explanation": "पूर्ण स्थिरता (absolute stability) निर्धारित करने के लिए एक बीजगणितीय विधि (algebraic method)। एक प्रणाली पूरी तरह से स्थिर है यदि और केवल यदि अभिलक्षणिक समीकरण के सभी मूल s-प्लेन के बाएँ भाग (left half) में स्थित हों। RH सरणी में, पहले कॉलम में चिन्ह परिवर्तनों (sign changes) की संख्या s-प्लेन के दाएँ भाग (right half) में मूलों की संख्या के बराबर होती है।"
+        },
+        {
+          "concept": "रूट लोकस तकनीक (Root Locus Technique)",
+          "explanation": "s-प्लेन में क्लोज्ड-लूप ध्रुवों (closed-loop poles) के बिंदुपथ (locus) को प्लॉट करने के लिए एक ग्राफिकल विधि, जब एक प्रणाली पैरामीटर (आमतौर पर ओपन-लूप लाभ 'K') शून्य से अनंत (infinity) तक भिन्न होता है।"
+        }
+      ],
+      "formulas": [
+        {
+          "category": "रूट लोकस मुख्य मानदंड (Root Locus Core Criteria)",
+          "equations": [
+            "कोण मानदंड (Angle Criterion): Angle(G(s)H(s)) = +/- (2q + 1) * 180 degrees (180 का विषम गुणज - odd multiple होना चाहिए)।",
+            "परिमाण मानदंड (Magnitude Criterion): |G(s)H(s)| = 1"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "4",
+      "title": "आवृत्ति डोमेन विश्लेषण (Frequency Domain Analysis)",
+      "description": "ग्राफिकल प्लॉट (graphical plots) का उपयोग करके विभिन्न आवृत्तियों के ज्यावक्रीय इनपुट (sinusoidal inputs) के लिए इसकी स्थिर-अवस्था प्रतिक्रिया (steady-state response) का विश्लेषण करके प्रणाली के प्रदर्शन और स्थिरता का मूल्यांकन करना।",
+      "key_concepts": [
+        {
+          "concept": "बोडे प्लॉट (Bode Plot)",
+          "explanation": "इसमें दो अर्ध-लघुगणकीय प्लॉट (semi-logarithmic plots) होते हैं: परिमाण (डेसिबल में) बनाम लघुगणकीय आवृत्ति, और फेज़ कोण (डिग्री में) बनाम लघुगणकीय आवृत्ति। गेन मार्जिन (Gain Margin - GM) और फेज़ मार्जिन (Phase Margin - PM) निर्धारित करने के लिए उत्कृष्ट।"
+        },
+        {
+          "concept": "नाइक्विस्ट स्थिरता मानदंड (Nyquist Stability Criterion)",
+          "explanation": "ओपन-लूप आवृत्ति प्रतिक्रिया (polar plot) को क्लोज्ड-लूप स्थिरता से जोड़ने वाली एक ग्राफिकल विधि। यह बताता है कि Z = N + P, जहाँ Z दाएँ भाग (Right Half) s-प्लेन में क्लोज्ड-लूप ध्रुवों की संख्या है, P दाएँ भाग s-प्लेन में ओपन-लूप ध्रुवों की संख्या है, और N महत्वपूर्ण बिंदु (-1+j0) के घेराव (encirclements) की संख्या है।"
+        }
+      ],
+      "cases": [
+        {
+          "condition": "मार्जिन का उपयोग करके स्थिरता का निर्धारण (Determining Stability using Margins)",
+          "results": [
+            "स्थिर प्रणाली (Stable System): गेन मार्जिन (GM) और फेज़ मार्जिन (PM) दोनों धनात्मक (positive) हैं। गेन क्रॉसओवर आवृत्ति (Gain Crossover Frequency - w_gc) < फेज़ क्रॉसओवर आवृत्ति (Phase Crossover Frequency - w_pc)।",
+            "सीमांत स्थिर प्रणाली (Marginally Stable System): GM और PM दोनों शून्य हैं। w_gc = w_pc।",
+            "अस्थिर प्रणाली (Unstable System): GM और PM दोनों ऋणात्मक (negative) हैं। w_gc > w_pc।"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "5",
+      "title": "स्टेट वेरिएबल विश्लेषण और नियंत्रक (State Variable Analysis and Controllers)",
+      "description": "मल्टीपल-इनपुट मल्टीपल-आउटपुट (MIMO) प्रणालियों के लिए स्टेट-स्पेस मॉडल (state-space models) का उपयोग करने वाला आधुनिक नियंत्रण सिद्धांत (Modern control theory), और औद्योगिक नियंत्रकों (industrial controllers) का अनुप्रयोग।",
+      "key_concepts": [
+        {
+          "concept": "नियंत्रणीयता (Controllability)",
+          "explanation": "एक प्रणाली पूरी तरह से नियंत्रणीय है यदि एक अप्रतिबंधित नियंत्रण वेक्टर (unconstrained control vector) का उपयोग करके एक सीमित समय अंतराल (finite time interval) में प्रणाली की स्थिति को किसी भी प्रारंभिक मान से किसी भी वांछित अंतिम मान में स्थानांतरित करना संभव है। इसका मूल्यांकन कल्मन के परीक्षण मैट्रिक्स (Kalman's test matrix) [B AB A^2B ... A^(n-1)B] का उपयोग करके किया जाता है।"
+        },
+        {
+          "concept": "अवलोकनीयता (Observability)",
+          "explanation": "एक प्रणाली पूरी तरह से अवलोकनीय है यदि हर प्रारंभिक स्थिति (initial state) को एक सीमित समय अंतराल में आउटपुट के अवलोकन से ठीक से निर्धारित किया जा सकता है।"
+        }
+      ],
+      "cases": [
+        {
+          "condition": "बुनियादी नियंत्रण क्रियाओं को जोड़ने के प्रभाव (Effects of adding basic control actions)",
+          "results": [
+            "आनुपातिक नियंत्रण (Proportional Control - P): स्थिर-अवस्था त्रुटि (steady-state error) को कम करता है लेकिन इसे कभी भी समाप्त नहीं करता है; बैंडविड्थ और प्रतिक्रिया की गति (speed of response) बढ़ाता है।",
+            "समाकल नियंत्रण (Integral Control - I): स्थिर-अवस्था त्रुटि को पूरी तरह से समाप्त कर देता है, लेकिन पूर्ण स्थिरता (absolute stability) को कम करता है और प्रणाली को सुस्त (sluggish) बनाता है।",
+            "अवकलज नियंत्रण (Derivative Control - D): भविष्य की त्रुटियों का अनुमान लगाता है; क्षणिक प्रतिक्रिया (transient response) में सुधार करता है, अवमंदन (damping) और स्थिरता बढ़ाता है, लेकिन उच्च-आवृत्ति शोर (high-frequency noise) को बढ़ाता है।"
+          ]
+        }
+      ]
+    }
+  ]
+}

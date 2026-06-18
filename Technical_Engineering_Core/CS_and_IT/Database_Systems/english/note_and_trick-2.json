@@ -1,0 +1,40 @@
+﻿
+
+{
+  "module_title": "ER Model, Normalization, and SQL Commands",
+  "difficulty_level": 2,
+  "introduction": "This level shifts to database design (ER Modeling), the strict rules for eliminating data anomalies and redundancy (Normalization), and the categorization of SQL commands.",
+  "core_concepts": [
+    {
+      "title": "Normalization Forms",
+      "description": "The systematic process of reducing data redundancy:\n1. **1NF (First Normal Form):** All attributes must be strictly Atomic. (No multi-valued attributes or nested tables).\n2. **2NF:** The table must be in 1NF AND contain **No Partial Dependencies** (i.e., every non-prime attribute must depend on the *entire* candidate key, not just a part of it).\n3. **3NF:** The table must be in 2NF AND contain **No Transitive Dependencies** (i.e., a non-prime attribute must not depend on another non-prime attribute).\n4. **BCNF (Boyce-Codd NF):** A stricter version of 3NF. For every functional dependency $X \\rightarrow Y$, $X$ must strictly be a Super Key."
+    },
+    {
+      "title": "Categorization of SQL Commands",
+      "description": "1. **DDL (Data Definition Language):** Defines or alters the database schema/structure. (e.g., CREATE, ALTER, DROP, TRUNCATE).\n2. **DML (Data Manipulation Language):** Manipulates the actual data within the tables. (e.g., INSERT, UPDATE, DELETE).\n3. **DCL (Data Control Language):** Manages security and permissions. (e.g., GRANT, REVOKE).\n4. **TCL (Transaction Control Language):** Manages transactions. (e.g., COMMIT, ROLLBACK)."
+    }
+  ],
+  "important_entities": [
+    {
+      "name": "DELETE vs. TRUNCATE",
+      "key_fact": "DML vs. DDL",
+      "significance": "Both command remove data, but **DELETE** is a DML command (it operates row-by-row, triggers can fire, it can be ROLLBACKed, and it accepts a WHERE clause). **TRUNCATE** is a DDL command (it drops and recreates the table, is significantly faster, and strictly CANNOT be ROLLBACKed)."
+    }
+  ],
+  "trap_alerts_and_exceptions": [
+    {
+      "alert_title": "The DROP Command Effect",
+      "explanation": "Exam Trap: What is the exact difference between DROP and TRUNCATE? TRUNCATE wipes the data but leaves the table's empty skeletal structure intact. **DROP** completely annihilates both the data AND the table's schema structure from the database forever."
+    }
+  ],
+  "mnemonics_and_tricks": [
+    {
+      "trick_title": "The Normalization Oath",
+      "memory_phrase": "The Key, The Whole Key, and Nothing But the Key",
+      "explanation": "1NF requires: The Key (Must have a primary key).\n2NF requires: The Whole Key (No partial dependencies).\n3NF requires: Nothing But the Key (No transitive dependencies)."
+    }
+  ],
+  "exam_strategy_tips": [
+    "A favorite ISRO and GATE database question: 'Which normal form is specifically designed to eliminate transitive dependencies?' Answer: 3NF."
+  ]
+}

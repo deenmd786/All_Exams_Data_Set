@@ -1,0 +1,44 @@
+﻿
+
+{
+  "module_title": "Memory Management, Virtual Memory, and Disk Scheduling",
+  "difficulty_level": 3,
+  "introduction": "At the advanced level, examiners heavily test the elimination of memory fragmentation, the mathematics of Page Faults, Belady's Anomaly, and disk head optimization algorithms.",
+  "core_concepts": [
+    {
+      "title": "Paging and Fragmentation",
+      "description": "1. **Internal Fragmentation:** Occurs in Paging. When a memory block (page frame) is allocated, but the process is slightly smaller, the remaining space inside that specific block is entirely wasted.\n2. **External Fragmentation:** Occurs in Segmentation. The total available free memory is sufficient to satisfy a request, but it is not contiguous (scattered). \n**Paging** was specifically invented to completely eliminate External Fragmentation."
+    },
+    {
+      "title": "Virtual Memory and Page Faults",
+      "description": "Virtual Memory is a technique allowing the execution of processes that are physically larger than the available Main Memory (RAM). \n**Page Fault:** A hardware trap that occurs when the CPU tries to access a page that is mapped in the virtual address space but is currently not loaded in physical RAM (it must be fetched from the hard disk)."
+    },
+    {
+      "title": "Disk Scheduling Algorithms",
+      "description": "Designed to minimize the physical movement (Seek Time) of the hard disk's Read/Write head.\n1. **SSTF (Shortest Seek Time First):** Services the request closest to the current head position. (Highly efficient, but causes Starvation for distant requests).\n2. **SCAN (Elevator Algorithm):** The head moves towards one end of the disk, servicing all requests, and reverses direction upon hitting the absolute end.\n3. **C-SCAN (Circular SCAN):** Moves towards one end servicing requests, but upon reaching the end, it rapidly jumps back to the absolute beginning without servicing any requests on the return trip."
+    }
+  ],
+  "important_entities": [
+    {
+      "name": "Belady's Anomaly",
+      "key_fact": "More Frames = More Page Faults",
+      "significance": "Logically, giving a process more physical memory frames should decrease page faults. However, in the **FIFO (First In First Out)** page replacement algorithm, increasing the number of allocated frames can paradoxically *increase* the number of page faults. This is Belady's Anomaly. (LRU and Optimal algorithms are mathematically immune to this)."
+    }
+  ],
+  "trap_alerts_and_exceptions": [
+    {
+      "alert_title": "Thrashing",
+      "explanation": "Advanced Exam Trap: If the degree of multiprogramming is too high, the OS spends more time violently swapping pages in and out of the disk than actually executing instructions. The CPU utilization catastrophically drops to near zero. This specific phenomenon is known as **Thrashing**."
+    }
+  ],
+  "mnemonics_and_tricks": [
+    {
+      "trick_title": "Fragmentation Mapping",
+      "memory_phrase": "P-I, S-E",
+      "explanation": "Paging strictly suffers from Internal (P-I) fragmentation. \nSegmentation strictly suffers from External (S-E) fragmentation."
+    }
+  ],
+  "exam_strategy_tips": [
+    "A highly repeated GATE and ISRO theoretical question: 'Belady's Anomaly is uniquely observed in which page replacement algorithm?' Answer: FIFO (First In First Out)."
+  ]
+}

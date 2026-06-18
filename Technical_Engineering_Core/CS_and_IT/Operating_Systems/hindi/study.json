@@ -1,0 +1,111 @@
+﻿{
+  "topic": "ऑपरेटिंग सिस्टम (Operating Systems)",
+  "description": "कंप्यूटर हार्डवेयर (computer hardware) और उपयोगकर्ता (user) के बीच एक मध्यस्थ के रूप में कार्य करने वाले सिस्टम सॉफ़्टवेयर का एक व्यापक अध्ययन, जिसमें प्रक्रिया प्रबंधन (process management), मेमोरी प्रबंधन (memory management) और डेडलॉक (deadlocks) शामिल हैं।",
+  "path": "Technical_Engineering_Core/CS_and_IT/Operating_Systems",
+  "sections": [
+    {
+      "section_id": "1",
+      "title": "प्रक्रिया प्रबंधन और धागे (Process Management and Threads)",
+      "description": "निष्पादन (execution) में एक कार्यक्रम के रूप में प्रक्रिया का अध्ययन और समवर्ती निष्पादन (concurrent execution) के लिए धागों (threads) का उपयोग।",
+      "key_concepts": [
+        {
+          "concept": "प्रक्रिया नियंत्रण ब्लॉक (Process Control Block - PCB)",
+          "explanation": "प्रत्येक प्रक्रिया को ऑपरेटिंग सिस्टम में PCB द्वारा दर्शाया जाता है, जिसमें प्रक्रिया की स्थिति (process state), प्रोग्राम काउंटर (program counter), सीपीयू रजिस्टर और मेमोरी प्रबंधन जानकारी होती है।"
+        },
+        {
+          "concept": "कॉन्टेक्स्ट स्विच (Context Switch)",
+          "explanation": "सीपीयू को एक प्रक्रिया से दूसरी प्रक्रिया में स्विच करते समय, पुरानी प्रक्रिया की स्थिति को सहेजना (saving) और नई प्रक्रिया की स्थिति को लोड (loading) करना।"
+        }
+      ]
+    },
+    {
+      "section_id": "2",
+      "title": "सीपीयू शेड्यूलिंग (CPU Scheduling)",
+      "description": "यह तय करने की प्रक्रिया कि रेडी क्यू (ready queue) में मौजूद कौन सी प्रक्रिया को निष्पादन के लिए सीपीयू आवंटित (allocated) किया जाएगा।",
+      "formulas": [
+        {
+          "category": "शेड्यूलिंग समय की गणना (Scheduling Time Calculations)",
+          "equations": [
+            "टर्नअराउंड समय (Turnaround Time - TAT) = पूर्ण होने का समय (Completion Time) - आगमन का समय (Arrival Time)",
+            "प्रतीक्षा समय (Waiting Time - WT) = टर्नअराउंड समय (TAT) - बर्स्ट समय (Burst Time)"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "condition": "विभिन्न शेड्यूलिंग एल्गोरिदम (Various Scheduling Algorithms)",
+          "results": [
+            "FCFS (First Come First Serve): जो प्रक्रिया पहले आती है, उसे पहले निष्पादित किया जाता है। यह कॉन्वॉय प्रभाव (Convoy Effect) का कारण बन सकता है।",
+            "SJF (Shortest Job First): सबसे कम बर्स्ट समय (burst time) वाली प्रक्रिया को पहले चुना जाता है। यह न्यूनतम औसत प्रतीक्षा समय देता है।",
+            "राउंड रॉबिन (Round Robin - RR): टाइम-शेयरिंग सिस्टम (time-sharing systems) के लिए डिज़ाइन किया गया है। प्रत्येक प्रक्रिया को एक निश्चित समय क्वांटम (time quantum) दिया जाता है।"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "3",
+      "title": "प्रक्रिया तुल्यकालन और डेडलॉक (Process Synchronization and Deadlocks)",
+      "description": "सहकारी प्रक्रियाओं (cooperating processes) के बीच साझा डेटा (shared data) तक पहुंच का समन्वय करना और डेडलॉक से बचना।",
+      "key_concepts": [
+        {
+          "concept": "क्रिटिकल सेक्शन (Critical Section)",
+          "explanation": "प्रोग्राम का वह भाग जहाँ साझा मेमोरी (shared memory) या संसाधनों (resources) को एक्सेस किया जाता है। एक समय में केवल एक ही प्रक्रिया अपने क्रिटिकल सेक्शन में हो सकती है।"
+        },
+        {
+          "concept": "सेमाफोर (Semaphore)",
+          "explanation": "एक पूर्णांक चर (integer variable) जिसका उपयोग wait() और signal() संचालन के माध्यम से प्रक्रियाओं को सिंक्रनाइज़ करने के लिए किया जाता है।"
+        }
+      ],
+      "cases": [
+        {
+          "condition": "डेडलॉक की आवश्यक शर्तें (Necessary Conditions for Deadlock)",
+          "results": [
+            "पारस्परिक अपवर्जन (Mutual Exclusion): कम से कम एक संसाधन गैर-साझा करने योग्य (non-shareable) मोड में होना चाहिए।",
+            "होल्ड एंड वेट (Hold and Wait): एक प्रक्रिया कम से कम एक संसाधन धारण किए हुए है और अतिरिक्त संसाधनों की प्रतीक्षा कर रही है।",
+            "नो प्रीएम्प्शन (No Preemption): संसाधनों को प्रक्रियाओं से बलपूर्वक छीना नहीं जा सकता।",
+            "सर्कुलर वेट (Circular Wait): प्रक्रियाओं की एक बंद श्रृंखला मौजूद है, जहाँ प्रत्येक प्रक्रिया अगली प्रक्रिया द्वारा धारित संसाधन की प्रतीक्षा कर रही है।"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "4",
+      "title": "मेमोरी प्रबंधन (Memory Management)",
+      "description": "मुख्य मेमोरी (main memory) का प्रबंधन करना, पतों (addresses) का अनुवाद करना और बहु-प्रोग्रामिंग (multi-programming) की अनुमति देना।",
+      "formulas": [
+        {
+          "category": "प्रभावी पहुंच समय (Effective Access Time - EAT)",
+          "equations": [
+            "EAT = p * (Page Fault Service Time) + (1 - p) * (Memory Access Time)",
+            "जहाँ p पेज फॉल्ट रेट (page fault rate) है।"
+          ]
+        }
+      ],
+      "key_concepts": [
+        {
+          "concept": "पेजिंग (Paging)",
+          "explanation": "भौतिक मेमोरी (physical memory) को निश्चित आकार के ब्लॉकों (frames) में और तार्किक मेमोरी (logical memory) को समान आकार के ब्लॉकों (pages) में विभाजित करने की एक योजना, जो बाहरी विखंडन (external fragmentation) को समाप्त करती है।"
+        },
+        {
+          "concept": "थ्रैशिंग (Thrashing)",
+          "explanation": "ऐसी स्थिति जहाँ एक सिस्टम निर्देशों को निष्पादित करने की तुलना में पेजिंग (पेज इन और पेज आउट) में अधिक समय व्यतीत करता है, जिससे सीपीयू उपयोग (CPU utilization) काफी कम हो जाता है।"
+        }
+      ]
+    },
+    {
+      "section_id": "5",
+      "title": "डिस्क शेड्यूलिंग और फ़ाइल सिस्टम (Disk Scheduling and File Systems)",
+      "description": "डिस्क तक पहुंचने (accessing disks) के समय को कम करने के लिए एल्गोरिदम और फ़ाइल भंडारण (file storage) का संगठन।",
+      "cases": [
+        {
+          "condition": "डिस्क शेड्यूलिंग एल्गोरिदम (Disk Scheduling Algorithms)",
+          "results": [
+            "SSTF (Shortest Seek Time First): उस अनुरोध (request) को चुनता है जो वर्तमान हेड स्थिति (head position) के सबसे करीब है। यह भुखमरी (starvation) का कारण बन सकता है।",
+            "SCAN (Elevator Algorithm): हेड एक सिरे से शुरू होता है, दूसरे सिरे की ओर बढ़ता है, रास्ते में सभी अनुरोधों को पूरा करता है, और फिर दिशा उलट देता है।",
+            "C-SCAN (Circular SCAN): SCAN के समान, लेकिन जब यह एक सिरे पर पहुँचता है, तो यह रास्ते के अनुरोधों को पूरा किए बिना तुरंत दूसरे सिरे (शुरुआत) पर लौट आता है और फिर से उसी दिशा में सेवा देता है।"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+﻿
+
+{
+  "module_title": "Process Synchronization and Deadlocks",
+  "difficulty_level": 2,
+  "introduction": "This level shifts to concurrent execution, focusing on preventing Race Conditions when processes share data (Synchronization) and avoiding fatal system freezes (Deadlocks).",
+  "core_concepts": [
+    {
+      "title": "The Critical Section Problem",
+      "description": "The Critical Section is the segment of code where shared memory/variables are accessed. Any valid solution MUST satisfy three absolute rules:\n1. **Mutual Exclusion:** Strictly only ONE process can execute in its critical section at a time.\n2. **Progress:** If no process is in the critical section, only processes wanting to enter can participate in deciding who goes next (no infinite delay).\n3. **Bounded Waiting:** There must be a strict limit on how many times other processes can enter their critical sections after a process has made a request to enter its own."
+    },
+    {
+      "title": "Semaphores",
+      "description": "Introduced by Dijkstra, it is an integer variable used for synchronization accessed via two indivisible (atomic) operations: Wait (P) which decrements, and Signal (V) which increments.\n- **Mutex (Binary Semaphore):** Values are strictly 0 or 1. Used exclusively for Mutual Exclusion.\n- **Counting Semaphore:** Values can range over an unrestricted domain. Used to control access to a finite pool of resources."
+    },
+    {
+      "title": "The 4 Coffman Conditions for Deadlock",
+      "description": "A deadlock occurs IF AND ONLY IF all four conditions hold **Simultaneously**:\n1. **Mutual Exclusion:** At least one resource must be held in a non-sharable mode.\n2. **Hold and Wait:** A process is holding at least one resource while waiting to acquire additional resources held by others.\n3. **No Preemption:** Resources cannot be forcibly taken away; they must be released voluntarily.\n4. **Circular Wait:** P1 is waiting for P2, P2 is waiting for P3, and P3 is waiting for P1."
+    }
+  ],
+  "important_entities": [
+    {
+      "name": "Banker's Algorithm",
+      "key_fact": "Deadlock Avoidance",
+      "significance": "An algorithm utilized by the OS to mathematically verify if granting a resource request will leave the system in an 'Unsafe State'. If the state remains 'Safe' (meaning an execution sequence exists where all processes can finish without deadlock), the request is granted."
+    }
+  ],
+  "trap_alerts_and_exceptions": [
+    {
+      "alert_title": "Safe State vs. Unsafe State",
+      "explanation": "The Biggest Exam Trap: Does an 'Unsafe State' mean the system is completely deadlocked? **Absolutely NOT.** \nA Safe State guarantees zero deadlocks. An Unsafe State simply means a deadlock *might* happen (it is no longer mathematically preventable). Deadlock is strictly a subset of the Unsafe State."
+    }
+  ],
+  "mnemonics_and_tricks": [
+    {
+      "trick_title": "Deadlock Conditions",
+      "memory_phrase": "Many Hats Need Care (M-H-N-C)",
+      "explanation": "M = Mutual Exclusion, H = Hold & Wait, N = No Preemption, C = Circular Wait."
+    }
+  ],
+  "exam_strategy_tips": [
+    "A highly frequent SSC JE IT and Placement Interview question: 'What is the primary purpose of Banker’s Algorithm in an Operating System?' Answer: Deadlock Avoidance."
+  ]
+}

@@ -1,0 +1,112 @@
+﻿{
+  "topic": "Operating Systems",
+  "description": "A comprehensive study of system software that acts as an intermediary between computer hardware and the user, encompassing process management, memory management, concurrency, and file systems.",
+  "path": "Technical_Engineering_Core/CS_and_IT/Operating_Systems",
+  "sections": [
+    {
+      "section_id": "1",
+      "title": "Process Management and Threads",
+      "description": "The study of a process as a program in execution, process state transitions, and the utilization of threads for efficient concurrent execution.",
+      "key_concepts": [
+        {
+          "concept": "Process Control Block (PCB)",
+          "explanation": "A fundamental data structure maintained by the OS for every process. It contains critical information such as the process state, program counter, CPU registers, memory limits, and accounting information."
+        },
+        {
+          "concept": "Context Switch",
+          "explanation": "The procedure of saving the state of the currently executing process (in its PCB) and loading the saved state of a new process when the CPU switches from one process to another. It represents pure overhead."
+        }
+      ]
+    },
+    {
+      "section_id": "2",
+      "title": "CPU Scheduling",
+      "description": "The mechanisms and algorithms used by the short-term scheduler to decide which process in the ready queue gets allocated to the CPU for execution.",
+      "formulas": [
+        {
+          "category": "Scheduling Metrics",
+          "equations": [
+            "Turnaround Time (TAT) = Completion Time - Arrival Time",
+            "Waiting Time (WT) = Turnaround Time - Burst Time",
+            "Response Time (RT) = First CPU Allocation Time - Arrival Time"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "condition": "Evaluating CPU Scheduling Algorithms",
+          "results": [
+            "FCFS (First Come First Serve): Non-preemptive, simple, but suffers from the Convoy Effect where short processes wait behind a long process.",
+            "SJF (Shortest Job First): Can be preemptive (SRTF) or non-preemptive. Provably gives the minimum average waiting time, but can lead to starvation of longer processes.",
+            "Round Robin (RR): Preemptive scheduling designed specifically for time-sharing systems. Each process gets a small unit of CPU time (time quantum). High context switch overhead if quantum is too small."
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "3",
+      "title": "Process Synchronization and Deadlocks",
+      "description": "Techniques to coordinate the execution of cooperating processes accessing shared data to maintain data consistency, and managing deadlock situations.",
+      "key_concepts": [
+        {
+          "concept": "Critical Section Problem",
+          "explanation": "A segment of code where a process modifies shared resources. The problem is designing a protocol ensuring that when one process is in its critical section, no other process is allowed to enter theirs (Mutual Exclusion)."
+        },
+        {
+          "concept": "Semaphores",
+          "explanation": "An integer variable used to solve synchronization problems. It can only be accessed via two indivisible (atomic) operations: wait() and signal()."
+        }
+      ],
+      "cases": [
+        {
+          "condition": "Necessary Conditions for Deadlock (Coffman Conditions)",
+          "results": [
+            "Mutual Exclusion: At least one resource must be held in a non-shareable mode.",
+            "Hold and Wait: A process must be holding at least one resource and waiting to acquire additional resources held by others.",
+            "No Preemption: Resources cannot be forcefully taken away from a process; they must be voluntarily released.",
+            "Circular Wait: A closed chain of processes exists, where each process is waiting for a resource held by the next process in the chain."
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "4",
+      "title": "Memory Management",
+      "description": "The administration of computer memory at the system level, including address translation, allocation techniques, and virtual memory implementation.",
+      "formulas": [
+        {
+          "category": "Virtual Memory Performance",
+          "equations": [
+            "Effective Access Time (EAT) = p * (Page Fault Service Time) + (1 - p) * (Memory Access Time)",
+            "Where 'p' is the Page Fault Rate (0 <= p <= 1)."
+          ]
+        }
+      ],
+      "key_concepts": [
+        {
+          "concept": "Paging",
+          "explanation": "A non-contiguous memory allocation scheme that eliminates external fragmentation. Physical memory is divided into fixed-sized blocks called 'frames', and logical memory is divided into blocks of the exact same size called 'pages'."
+        },
+        {
+          "concept": "Thrashing",
+          "explanation": "A severe performance degradation condition where a system is spending more time swapping pages in and out of the disk (page faulting) than actually executing instructions."
+        }
+      ]
+    },
+    {
+      "section_id": "5",
+      "title": "Disk Scheduling and File Systems",
+      "description": "Algorithms designed to sequence disk I/O requests to minimize seek time, and the logical organization of data into files and directories.",
+      "cases": [
+        {
+          "condition": "Disk Scheduling Algorithms",
+          "results": [
+            "SSTF (Shortest Seek Time First): Selects the request closest to the current head position. Minimizes head movement but can cause severe starvation for requests far from the current position.",
+            "SCAN (Elevator Algorithm): The disk arm starts at one end, moves toward the other servicing requests, and then reverses direction upon reaching the end.",
+            "C-SCAN (Circular SCAN): Provides a more uniform wait time than SCAN. The arm moves from one end to the other, but upon reaching the end, it immediately returns to the beginning without servicing any requests on the return trip."
+          ]
+        }
+      ]
+    }
+  ]
+}

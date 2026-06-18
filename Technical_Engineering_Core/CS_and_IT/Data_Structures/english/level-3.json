@@ -1,0 +1,454 @@
+﻿
+
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): B+ trees are vastly preferred over B-trees for implementing dynamic multilevel indexing in database management systems. Reason (R): In a B+ tree, all keys reside at the leaf nodes, which are sequentially linked, greatly enhancing the efficiency of range queries. Select the correct code: (a) Both A and R are True, and R is the correct explanation of A. (b) Both A and R are True, but R is not the correct explanation of A. (c) A is True but R is False. (d) A is False but R is True.",
+    "options": ["(a)", "(b)", "(c)", "(d)"],
+    "answer": "(a)",
+    "explanation": "Step 1: B-trees store data pointers in both internal and leaf nodes. Step 2: B+ trees store all data pointers exclusively at the leaf level. Step 3: Leaf nodes in a B+ tree are linked via pointers forming a linked list. Step 4: This linked structure allows linear traversal for range queries, skipping internal node traversals. Step 5: Both A and R are true, and R perfectly explains A.",
+    "trick": "GATE Trap: Remember that B-trees save space by not duplicating keys, but B+ trees win in databases due to disk block efficiency and linked leaves.",
+    "tip": "B+ Tree = Linked leaf nodes = Fast range queries."
+  },
+  {
+    "id": 2,
+    "question": "In an AVL tree of height H, what is the minimum number of nodes required? Let N(H) be the minimum number of nodes for height H. (Assume height of a single node tree is 0).",
+    "options": ["N(H) = N(H-1) + N(H-2) + 1", "N(H) = N(H-1) + N(H-2)", "N(H) = 2^H - 1", "N(H) = 2^(H+1) - 1"],
+    "answer": "N(H) = N(H-1) + N(H-2) + 1",
+    "explanation": "Step 1: An AVL tree is minimally populated when one subtree has height H-1 and the other has height H-2. Step 2: To find the total nodes N(H), we sum the nodes of both subtrees. Step 3: Adding the root node itself gives the '+ 1' term. Step 4: Thus, N(H) = N(H-1) + N(H-2) + 1. Step 5: This closely mimics the Fibonacci sequence.",
+    "trick": "Do not confuse this with the maximum number of nodes, which is 2^(H+1) - 1 (a perfect binary tree).",
+    "tip": "Min nodes in AVL tree roughly follows the Fibonacci sequence."
+  },
+  {
+    "id": 3,
+    "question": "Assertion (A): Dijkstra's shortest path algorithm fails strictly if the graph contains any negative edge weights, even if there are no negative weight cycles. Reason (R): Dijkstra's algorithm uses a Greedy approach, permanently finalizing the distance of a vertex once it is extracted from the priority queue. Select the correct code: (a) Both A and R are True, and R is the correct explanation of A. (b) Both A and R are True, but R is not the correct explanation of A. (c) A is True but R is False. (d) A is False but R is True.",
+    "options": ["(a)", "(b)", "(c)", "(d)"],
+    "answer": "(a)",
+    "explanation": "Step 1: Dijkstra's algorithm assumes that adding an edge to a path can only increase its length. Step 2: It extracts the minimum distance node and marks it finalized. Step 3: If a negative edge exists, a finalized node might actually be reachable via a shorter path later. Step 4: Because the algorithm is Greedy and doesn't revisit finalized nodes, it strictly fails. Step 5: Therefore, A is true, R is true, and R explains A.",
+    "trick": "GATE Trap: A negative edge without a cycle doesn't crash the program, but it yields incorrect shortest paths. Bellman-Ford is required.",
+    "tip": "Dijkstra = Greedy = Fails on negative weights."
+  },
+  {
+    "id": 4,
+    "question": "Which of the following operations safely converts a Max-Heap array into a Min-Heap array in O(N) time?",
+    "options": ["Sorting the array in descending order", "Reversing the array elements", "Calling Min-Heapify on all leaf nodes", "Calling Min-Heapify from index N/2 down to 1"],
+    "answer": "Calling Min-Heapify from index N/2 down to 1",
+    "explanation": "Step 1: Converting any array into a Min-Heap is done using the Build-Heap algorithm. Step 2: Reversing the array does not guarantee a valid Min-Heap. Step 3: Leaf nodes already satisfy the heap property individually. Step 4: We apply Min-Heapify starting from the last non-leaf node (index N/2) down to the root (index 1). Step 5: Mathematical analysis proves this bottom-up approach runs in strict O(N) time.",
+    "trick": "Top-down heap construction takes O(N log N). Bottom-up Build-Heap takes O(N).",
+    "tip": "Build-Heap is always O(N). Start Heapify from N/2 to 1."
+  },
+  {
+    "id": 5,
+    "question": "Consider a B-Tree of Order M. What is the maximum number of children and the minimum number of keys an internal node (non-root) can hold?",
+    "options": ["Max Children = M, Min Keys = ceil(M/2) - 1", "Max Children = M - 1, Min Keys = ceil(M/2)", "Max Children = M, Min Keys = floor(M/2) - 1", "Max Children = M + 1, Min Keys = ceil(M/2) - 1"],
+    "answer": "Max Children = M, Min Keys = ceil(M/2) - 1",
+    "explanation": "Step 1: In a B-Tree of order M, an internal node can have at most M children. Step 2: The maximum number of keys is M - 1. Step 3: To ensure the tree remains balanced and not too empty, non-root internal nodes must be at least half full. Step 4: The minimum number of children is ceil(M/2). Step 5: Since keys = children - 1, the minimum number of keys is ceil(M/2) - 1.",
+    "trick": "Always relate keys to children: Keys = Children - 1. Order M refers strictly to the maximum number of pointers (children).",
+    "tip": "B-Tree Order M: Max M children, Max M-1 keys."
+  },
+  {
+    "id": 6,
+    "question": "Assertion (A): In a Min-Heap, finding the maximum element takes O(N) time. Reason (R): The maximum element in a Min-Heap must reside at one of the leaf nodes, requiring a linear scan of all leaves. Select the correct code: (a) Both A and R are True, and R is the correct explanation of A. (b) Both A and R are True, but R is not the correct explanation of A. (c) A is True but R is False. (d) A is False but R is True.",
+    "options": ["(a)", "(b)", "(c)", "(d)"],
+    "answer": "(a)",
+    "explanation": "Step 1: In a Min-Heap, parent nodes are strictly smaller than their children. Step 2: Because values increase as we traverse down the tree, the maximum value is guaranteed to be a leaf node. Step 3: A heap has approximately N/2 leaf nodes located at indices floor(N/2)+1 to N. Step 4: Since there is no ordering among siblings, we must linearly scan these N/2 elements. Step 5: A linear scan of N/2 elements results in an O(N) time complexity. R perfectly explains A.",
+    "trick": "Don't assume Heap properties apply horizontally. Only vertical parent-child relationships exist.",
+    "tip": "Max in Min-Heap is at the leaves. Finding it takes O(N)."
+  },
+  {
+    "id": 7,
+    "question": "In an empty AVL tree, the keys 10, 20, 30, 40, 50, 25 are inserted sequentially. Which type of rotation resolves the imbalance caused by inserting 25?",
+    "options": ["LL Rotation", "RR Rotation", "LR Rotation", "RL Rotation"],
+    "answer": "RL Rotation",
+    "explanation": "Step 1: Insert 10, 20, 30 -> RR rotation at 10, root becomes 20. Step 2: Tree: 20(L:10, R:30). Step 3: Insert 40, 50 -> RR rotation at 30. Tree: 20(L:10, R:40(L:30, R:50)). Step 4: Insert 25. It goes to the left of 30. Step 5: The balance factor of 40 becomes +2 (Left Height = 2, Right Height = 1) wait, 25 is left of 30. 40's left child (30) has a left child (25). Step 6: The imbalance is at 40. Path from 40 is Left (30) then Left (25). This is an LL imbalance! Wait, root 20 has right child 40 (height 3). Root left is 10 (height 1). Imbalance at 20! Path: Right (40) -> Left (30). Thus, it requires an RL Rotation at the root.",
+    "trick": "Always trace the balance factor from the newly inserted node upwards. The first unbalanced node dictates the rotation.",
+    "tip": "Right-Left imbalance requires an RL Double Rotation."
+  },
+  {
+    "id": 8,
+    "question": "Which of the following graph traversal combinations correctly matches the abstract data type used for its frontier management?",
+    "options": ["BFS: Stack, DFS: Queue", "BFS: Priority Queue, DFS: Deque", "BFS: Queue, DFS: Stack", "BFS: Array, DFS: Linked List"],
+    "answer": "BFS: Queue, DFS: Stack",
+    "explanation": "Step 1: Breadth-First Search (BFS) explores nodes level by level. It must process the oldest discovered node first. Step 2: FIFO (First In First Out) behavior is required, hence a Queue is utilized. Step 3: Depth-First Search (DFS) explores as deep as possible before backtracking. Step 4: LIFO (Last In First Out) behavior is required to return to previous nodes. Step 5: Thus, DFS utilizes a Stack (often implicitly via the call stack).",
+    "trick": "GATE Trap: Never confuse the data structures! 'B'FS uses a Queue (Breadth = wide line/queue). 'D'FS uses a Stack (Deep = stack up).",
+    "tip": "BFS uses Queue (FIFO). DFS uses Stack (LIFO)."
+  },
+  {
+    "id": 9,
+    "question": "Assertion (A): Kruskal's algorithm is preferred over Prim's algorithm for highly sparse graphs. Reason (R): Kruskal's algorithm sorts edges and utilizes a Disjoint-Set (Union-Find) data structure, resulting in an O(E log E) time complexity which heavily relies on the number of edges. Select the correct code: (a) Both A and R are True, and R is the correct explanation of A. (b) Both A and R are True, but R is not the correct explanation of A. (c) A is True but R is False. (d) A is False but R is True.",
+    "options": ["(a)", "(b)", "(c)", "(d)"],
+    "answer": "(a)",
+    "explanation": "Step 1: Sparse graphs have E approaching V, making algorithms dependent on E faster. Step 2: Kruskal's algorithm operates on edges, sorting them in O(E log E). Step 3: Prim's algorithm operates on vertices using a priority queue, with standard binary heap complexity O(E log V). Step 4: Because Kruskal directly processes edges, it is extremely efficient when E is small. Step 5: Therefore, both statements are true and R accurately justifies A.",
+    "trick": "Kruskal is Edge-centric (best for sparse). Prim is Vertex-centric (best for dense graphs).",
+    "tip": "Sparse Graphs -> Kruskal. Dense Graphs -> Prim."
+  },
+  {
+    "id": 10,
+    "question": "Given an adjacency list representation of a directed graph G=(V,E), what is the time complexity to compute the in-degree of all vertices?",
+    "options": ["O(V)", "O(E)", "O(V + E)", "O(V * E)"],
+    "answer": "O(V + E)",
+    "explanation": "Step 1: An adjacency list natively stores the out-going edges for each vertex. Step 2: To find the in-degree, we cannot look at a single list; we must traverse the entire structure. Step 3: We initialize an array of size V to 0, which takes O(V) time. Step 4: We iterate through all V lists, and for every edge (E total) we increment the destination node's counter. Step 5: Total time is the initialization plus the traversal of all edges, resulting in O(V + E).",
+    "trick": "Out-degree can be found in O(V) by checking list lengths. In-degree requires scanning all E edges, hence O(V + E).",
+    "tip": "In-degree from Adjacency List requires full traversal: O(V + E)."
+  },
+  {
+    "id": 11,
+    "question": "When building a B+ tree, a node split occurs when an insertion causes a node to exceed its maximum key capacity. How are the keys distributed between the newly split leaf nodes compared to internal nodes?",
+    "options": ["Leaf nodes copy the middle key up, internal nodes push the middle key up.", "Leaf nodes push the middle key up, internal nodes copy the middle key up.", "Both leaf and internal nodes push the middle key up.", "Both leaf and internal nodes copy the middle key up."],
+    "answer": "Leaf nodes copy the middle key up, internal nodes push the middle key up.",
+    "explanation": "Step 1: In a B+ tree, ALL data keys must remain in the leaf nodes. Step 2: When a leaf node splits, the median key is copied to the parent to serve as a routing guide, but the actual key remains in the right leaf node. Step 3: Internal nodes only hold routing keys, not actual data pointers. Step 4: Therefore, when an internal node splits, its median key is pushed up entirely and removed from the current level. Step 5: This distinction is the core structural difference between B-Trees and B+ Trees.",
+    "trick": "Remember the word 'Copy' for Leaves and 'Push' for Internal nodes in B+ Trees.",
+    "tip": "B+ Tree Split: Leaves COPY up. Internal nodes PUSH up."
+  },
+  {
+    "id": 12,
+    "question": "What is the worst-case time complexity of inserting N elements into an initially empty AVL Tree?",
+    "options": ["O(N)", "O(N log N)", "O(N^2)", "O(log N)"],
+    "answer": "O(N log N)",
+    "explanation": "Step 1: Inserting a single element into an AVL tree requires locating the position, inserting it, and potentially rotating. Step 2: The height of the AVL tree is strictly bounded to O(log k) where k is the current number of elements. Step 3: Searching and rotations for one element take O(log k). Step 4: For N elements, the total time is sum(log k) from k=1 to N. Step 5: By Stirling's approximation, log(N!) is Theta(N log N). Thus, N insertions take O(N log N) time.",
+    "trick": "Unlike an unbalanced BST which can degrade to O(N^2) for N insertions, an AVL tree guarantees O(N log N) worst-case.",
+    "tip": "N insertions into an AVL tree always strictly take O(N log N)."
+  },
+  {
+    "id": 13,
+    "question": "Assertion (A): In a standard Priority Queue implemented using a Max-Heap, the Extract-Max operation takes O(log N) time. Reason (R): Extracting the maximum element requires removing the root, replacing it with the last leaf node, and performing Max-Heapify to restore the heap property. Select the correct code: (a) Both A and R are True, and R is the correct explanation of A. (b) Both A and R are True, but R is not the correct explanation of A. (c) A is True but R is False. (d) A is False but R is True.",
+    "options": ["(a)", "(b)", "(c)", "(d)"],
+    "answer": "(a)",
+    "explanation": "Step 1: In a Max-Heap, the maximum element is strictly at the root. Step 2: Popping the root directly breaks the complete binary tree structure. Step 3: We fix the structure by moving the last element of the array to the root. Step 4: This element is likely out of order, so we sink it down using Max-Heapify. Step 5: Since the tree height is log N, Max-Heapify takes O(log N). Thus, R correctly explains A.",
+    "trick": "Accessing the max is O(1) [Find-Max], but extracting it [Extract-Max] is O(log N).",
+    "tip": "Extract-Max = Replace root with last leaf + Heapify = O(log N)."
+  },
+  {
+    "id": 14,
+    "question": "If an undirected connected graph G has V vertices and E edges, what is the maximum number of edges that can be removed without disconnecting the graph?",
+    "options": ["V - 1", "E - V + 1", "E - V - 1", "E / V"],
+    "answer": "E - V + 1",
+    "explanation": "Step 1: A minimally connected graph is a spanning tree. Step 2: Every spanning tree of a graph with V vertices contains exactly V - 1 edges. Step 3: To keep the graph connected, we must preserve a spanning tree. Step 4: Any edge beyond this spanning tree creates a cycle and can be safely removed. Step 5: Total edges to remove = Total Edges - Tree Edges = E - (V - 1) = E - V + 1.",
+    "trick": "This is equivalent to finding the Cyclomatic Complexity or the number of fundamental cycles in the graph.",
+    "tip": "Max removable edges to keep connectivity = Fundamental Cycles = E - V + 1."
+  },
+  {
+    "id": 15,
+    "question": "Given an array A = [4, 10, 3, 5, 1]. What is the state of the array after completing the first iteration of the outer loop in the standard Heap Sort algorithm? (Assume array is first converted to a Max-Heap).",
+    "options": ["[1, 5, 3, 4, 10]", "[5, 4, 3, 1, 10]", "[10, 5, 3, 4, 1]", "[4, 1, 3, 5, 10]"],
+    "answer": "[5, 4, 3, 1, 10]",
+    "explanation": "Step 1: First, build a Max-Heap from the array. The array [4, 10, 3, 5, 1] becomes [10, 5, 3, 4, 1]. Step 2: Heap Sort starts. The first iteration swaps the root (10) with the last element (1). Array: [1, 5, 3, 4, 10]. Step 3: Now the array size is reduced by 1. We must Max-Heapify the root (1). Step 4: 1 swaps with its largest child 5. Array: [5, 1, 3, 4, 10]. Step 5: 1 swaps with its largest child 4. Final Array: [5, 4, 3, 1, 10].",
+    "trick": "Heap Sort dynamically shrinks the heap size. The sorted elements accumulate at the end of the array.",
+    "tip": "Heap Sort Iteration 1: Swap root with last element, then Heapify the new root."
+  },
+  {
+    "id": 16,
+    "question": "Assertion (A): Bellman-Ford algorithm can detect negative weight cycles in a directed graph. Reason (R): After relaxing all edges V-1 times, a valid shortest path tree is formed. If a V-th relaxation reduces any distance further, a negative cycle guarantees infinite shortening. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: The longest simple path in a graph with V vertices has V-1 edges. Step 2: Relaxing all edges V-1 times guarantees finding all shortest simple paths. Step 3: If there are no negative cycles, no distance can be updated on the V-th iteration. Step 4: If an update occurs on the V-th iteration, a path with V edges is shorter, which requires revisiting a vertex. Step 5: Revisiting a vertex and lowering cost means traversing a negative weight cycle. Thus, R correctly explains A.",
+    "trick": "Bellman-Ford does not fix negative cycles, it only detects them.",
+    "tip": "V-th relaxation in Bellman-Ford detects negative weight cycles."
+  },
+  {
+    "id": 17,
+    "question": "Which of the following properties uniquely distinguishes an AVL tree from a Red-Black tree?",
+    "options": ["AVL trees enforce a strict height balance factor of [-1, 0, 1], causing more frequent rotations during insertion.", "AVL trees store colour bits in every node.", "Red-Black trees provide O(log N) worst-case search time while AVL trees do not.", "AVL trees require O(1) rotations for deletion, whereas Red-Black trees require O(log N)."],
+    "answer": "AVL trees enforce a strict height balance factor of [-1, 0, 1], causing more frequent rotations during insertion.",
+    "explanation": "Step 1: AVL trees strictly balance the height difference of subtrees to at most 1. Step 2: Red-Black trees are loosely balanced (the longest path is at most twice the shortest path). Step 3: Because AVL trees are strictly balanced, searches are faster, but insertions/deletions trigger more rotations. Step 4: Deletion in AVL can cascade rotations up to the root O(log N), while RB trees guarantee max 3 rotations for deletion O(1). Step 5: Therefore, the strict balance factor uniqueness defines AVL.",
+    "trick": "AVL = Fast Search, Slow Insert/Delete. Red-Black = Balanced Insert/Delete, Slower Search.",
+    "tip": "AVL trees are strictly balanced, triggering more rotations than Red-Black trees."
+  },
+  {
+    "id": 18,
+    "question": "In a Graph, a 'Cross Edge' is discovered during a Depth-First Search (DFS). What does the presence of a Cross Edge signify?",
+    "options": ["It connects an ancestor to a descendant in the DFS tree.", "It connects a descendant to an ancestor, indicating a cycle.", "It connects a node to a previously completely visited node that is not its ancestor.", "It connects a node to an unvisited node, forming the DFS tree."],
+    "answer": "It connects a node to a previously completely visited node that is not its ancestor.",
+    "explanation": "Step 1: DFS classifies edges into four types: Tree, Back, Forward, and Cross edges. Step 2: Tree edges form the search forest. Back edges point to ancestors (cycles). Step 3: Forward edges point to non-child descendants. Step 4: Cross edges point to nodes that have already been completely explored (visited and popped from stack) and are in a different branch. Step 5: Cross edges can exist between different DFS trees or branches of the same tree, strictly going from right to left in directed graphs.",
+    "trick": "Back edges = Cycles. Cross edges = Sideways connections to already processed branches.",
+    "tip": "Cross edges link to fully explored nodes that are not ancestors."
+  },
+  {
+    "id": 19,
+    "question": "Assertion (A): Topological Sorting is only possible for Directed Acyclic Graphs (DAGs). Reason (R): Topological sorting requires a linear ordering of vertices such that for every directed edge U->V, U comes before V. A cycle would create a dependency paradox. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Topological sorting models scheduling tasks with prerequisites. Step 2: If task U must precede V, edge U->V is drawn. Step 3: If a cycle exists (e.g., U->V->W->U), U must precede V, and W must precede U, meaning U must precede itself. Step 4: This is a logical paradox making linear ordering impossible. Step 5: Hence, the graph must be Directed and Acyclic. R perfectly explains A.",
+    "trick": "Kahn's Algorithm (using in-degrees) or DFS (reverse post-order) are standard ways to find it. If Kahn's fails to process V vertices, a cycle exists.",
+    "tip": "Topological Sort = Scheduling. Requires DAG to avoid cyclic dependency paradoxes."
+  },
+  {
+    "id": 20,
+    "question": "What is the optimal algorithm to find the Minimum Spanning Tree (MST) of a highly dense graph where E is approximately V^2?",
+    "options": ["Kruskal's Algorithm using Disjoint Sets", "Prim's Algorithm using an Adjacency Matrix and Array", "Prim's Algorithm using an Adjacency List and Binary Heap", "Breadth-First Search"],
+    "answer": "Prim's Algorithm using an Adjacency Matrix and Array",
+    "explanation": "Step 1: Kruskal takes O(E log E), which for dense graphs becomes O(V^2 log V). Step 2: Prim with a Binary Heap takes O(E log V) = O(V^2 log V). Step 3: Prim implemented with an Adjacency Matrix and a simple Array for key values takes O(V^2). Step 4: Since O(V^2) is strictly better than O(V^2 log V), the Matrix+Array version of Prim's is optimal. Step 5: (Note: Fibonacci Heap achieves O(E + V log V) which is also O(V^2), but Array is simpler and equivalent).",
+    "trick": "Don't blindly choose the Priority Queue version. For dense graphs, finding the min in an array O(V) V times yields O(V^2), beating the heap's log V overhead.",
+    "tip": "Dense Graph MST: Use Prim's with Adjacency Matrix and simple Array O(V^2)."
+  },
+  {
+    "id": 21,
+    "question": "Consider a B-Tree of order 4. If keys are inserted in the sequence 10, 20, 30, 40, 50, which key gets pushed up to the root when the first node split occurs? (Assume standard left-biased median split).",
+    "options": ["20", "30", "40", "10"],
+    "answer": "20",
+    "explanation": "Step 1: Order 4 implies a node can hold a maximum of 3 keys. Step 2: Insert 10, 20, 30. The root node is [10, 20, 30]. Step 3: Insert 40. The node temporarily overflows as [10, 20, 30, 40]. Step 4: The node must split. The median elements are 20 and 30. Using left-biased median, we select 20. Step 5: 20 is pushed up to form a new root. The left child becomes [10] and the right child becomes [30, 40].",
+    "trick": "Always check if the split is left-biased (lower median) or right-biased (upper median). Standard B-tree definitions default to ceil(M/2)th key.",
+    "tip": "Node overflows at M keys. Split pushes the median key up."
+  },
+  {
+    "id": 22,
+    "question": "Assertion (A): The height of a Max-Heap containing N elements is exactly ceil(log2(N+1)) - 1. Reason (R): A Binary Heap is guaranteed to be a Complete Binary Tree, meaning all levels are fully filled except possibly the last level, which is filled from left to right. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: A Complete Binary Tree has optimal packing of nodes. Step 2: The number of nodes N at height H ranges from 2^H to 2^(H+1) - 1. Step 3: Taking the base-2 logarithm allows us to solve for H. Step 4: The mathematical relation for a complete tree strictly yields H = floor(log2(N)) which is equivalent to ceil(log2(N+1)) - 1. Step 5: The structural property (Complete Binary Tree) forces this height bound. R correctly explains A.",
+    "trick": "Heap height is purely structural. The 'Max' or 'Min' property does not affect the tree height, only the Complete Binary Tree property does.",
+    "tip": "Heap Height is mathematically floor(log2(N)) due to Complete Binary Tree structure."
+  },
+  {
+    "id": 23,
+    "question": "If you are given an undirected graph with non-negative edge weights, and you need to find the shortest path from a single source to all other vertices, but the edge weights are ONLY 0 or 1. Which algorithm is most optimal?",
+    "options": ["Dijkstra's Algorithm", "Bellman-Ford Algorithm", "0-1 BFS (Breadth-First Search using Deque)", "Floyd-Warshall Algorithm"],
+    "answer": "0-1 BFS (Breadth-First Search using Deque)",
+    "explanation": "Step 1: Dijkstra works in O(E log V). Step 2: Since weights are only 0 or 1, the priority queue is unnecessary. Step 3: We can use a Double-Ended Queue (Deque). Step 4: When relaxing an edge of weight 0, push the destination to the FRONT of the deque. If weight 1, push to the BACK. Step 5: This perfectly simulates Dijkstra's greedy choice but operates in strict O(V + E) linear time.",
+    "trick": "Whenever edge weights are highly restricted (like 0/1 or uniform), standard BFS variants beat Dijkstra.",
+    "tip": "Graph with weights 0 and 1: Use 0-1 BFS with Deque in O(V+E)."
+  },
+  {
+    "id": 24,
+    "question": "In the context of the Union-Find (Disjoint Set) data structure, combining 'Path Compression' and 'Union by Rank' yields what amortized time complexity for operations?",
+    "options": ["O(log N)", "O(1)", "O(alpha(N))", "O(N)"],
+    "answer": "O(alpha(N))",
+    "explanation": "Step 1: A naive Union-Find tree can degenerate into a linked list O(N). Step 2: Union by Rank ensures the smaller tree attaches under the larger tree, reducing depth to O(log N). Step 3: Path Compression flattens the tree during every Find operation by pointing nodes directly to the root. Step 4: Combining both optimizations reduces the amortized cost per operation to the Inverse Ackermann function, alpha(N). Step 5: For all practical values of N in the universe, alpha(N) <= 4, making it effectively O(1).",
+    "trick": "Alpha(N) is the Inverse Ackermann function. It is technically not O(1), but it grows so slowly it acts like a constant.",
+    "tip": "Path Compression + Union by Rank = Amortized O(alpha(N)) time."
+  },
+  {
+    "id": 25,
+    "question": "Assertion (A): Deleting a node from a B+ Tree only requires adjustments at the leaf nodes, unless the node acts as a routing key. Reason (R): All actual data records and pointers are securely stored at the leaf level, and internal nodes simply act as an index hierarchy. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: In a B+ Tree, keys in internal nodes are duplicates of keys in the leaves used purely for routing. Step 2: Deleting a key inherently happens at the leaf. Step 3: If the leaf underflows, we borrow or merge. Step 4: The routing keys in internal nodes only need updating if the deleted key was an upper-level boundary. Step 5: Because the data resides entirely at the bottom, internal tree topology remains relatively stable. R correctly explains A.",
+    "trick": "Unlike B-Trees, where deleting an internal key requires finding an inorder predecessor/successor, B+ tree deletions are purely leaf-driven.",
+    "tip": "B+ Tree deletions occur entirely at the leaf level. Internal nodes are just indexes."
+  },
+  {
+    "id": 26,
+    "question": "Given an initially empty AVL tree, what is the sequence of balance factors for the root node after inserting 10, 20, 30 respectively?",
+    "options": ["0, -1, 0", "0, +1, 0", "0, -1, -2", "0, 0, 0"],
+    "answer": "0, -1, 0",
+    "explanation": "Step 1: Insert 10. Root is 10. Balance Factor (BF) = Height(Left) - Height(Right) = 0 - 0 = 0. Step 2: Insert 20. 20 is right child of 10. Root BF = 0 - 1 = -1. Step 3: Insert 30. 30 is right child of 20. Root BF = 0 - 2 = -2. Step 4: The tree is imbalanced (RR case). Step 5: A Left Rotation is performed around 10. 20 becomes the new root with children 10 and 30. The new root BF = 1 - 1 = 0.",
+    "trick": "The question asks for the balance factors *after* the insertions (which includes implicit rotations). Sequence: 0, -1, then after rotation it resets to 0.",
+    "tip": "Balance Factor = L_Height - R_Height. Valid values are -1, 0, 1."
+  },
+  {
+    "id": 27,
+    "question": "Which of the following data structures is absolutely required to perform an iterative post-order traversal of a binary tree using only ONE additional data container?",
+    "options": ["A single Queue", "A single Stack", "Two Stacks", "A Priority Queue"],
+    "answer": "A single Stack",
+    "explanation": "Step 1: Post-order traversal (Left, Right, Root) is complex iteratively because the root must be processed last. Step 2: The trivial iterative method uses Two Stacks. Step 3: However, it is possible using a Single Stack by tracking the 'previously visited' node. Step 4: We peek the stack, traverse left, if no left traverse right. If returning from the right child (checked via previous node pointer), we finally pop and process the root. Step 5: Thus, a single Stack with an auxiliary pointer perfectly solves the problem.",
+    "trick": "Many textbooks teach the Two-Stack method for Post-Order, but a Single-Stack method exists and is frequently tested in GATE.",
+    "tip": "Iterative Post-Order can be achieved with a Single Stack and a tracking pointer."
+  },
+  {
+    "id": 28,
+    "question": "Assertion (A): The Floyd-Warshall algorithm can compute shortest paths for graphs with negative edges and correctly handle graphs with negative weight cycles. Reason (R): It uses Dynamic Programming to check all intermediate vertices, and a negative cycle manifests as a negative value on the main diagonal of the distance matrix. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Floyd-Warshall computes All-Pairs Shortest Paths in O(V^3). Step 2: The DP state dist[i][j] represents the shortest path from i to j. Step 3: The main diagonal dist[i][i] represents the distance from a node to itself, initially 0. Step 4: If a negative weight cycle exists containing node i, traversing the cycle and returning to i will yield a negative distance. Step 5: Therefore, checking if any dist[i][i] < 0 is a mathematically robust way to detect negative cycles.",
+    "trick": "Floyd-Warshall doesn't 'fix' negative cycles, but checking the diagonal elegantly detects them.",
+    "tip": "Floyd-Warshall detects negative cycles if any diagonal element dist[i][i] < 0."
+  },
+  {
+    "id": 29,
+    "question": "In an Array implementation of a Binary Min-Heap (1-based indexing), if a node is at index 'i', what are the indices of its left child, right child, and parent respectively?",
+    "options": ["2i + 1, 2i + 2, floor(i/2)", "2i, 2i + 1, floor(i/2)", "2i, 2i + 1, ceil(i/2)", "2i - 1, 2i, floor(i/2)"],
+    "answer": "2i, 2i + 1, floor(i/2)",
+    "explanation": "Step 1: In a 1-based index array, the root is at index 1. Step 2: The left child of the root is at index 2 (which is 2*1). Step 3: The right child is at index 3 (which is 2*1 + 1). Step 4: The parent of index 2 is 2/2 = 1. The parent of index 3 is floor(3/2) = 1. Step 5: Generalizing this mathematically, Left = 2i, Right = 2i + 1, Parent = floor(i/2).",
+    "trick": "Pay close attention to '1-based' vs '0-based' indexing. For 0-based, Left = 2i+1, Right = 2i+2, Parent = floor((i-1)/2).",
+    "tip": "1-based Heap: Left = 2i, Right = 2i+1, Parent = i/2."
+  },
+  {
+    "id": 30,
+    "question": "Consider a directed graph representing a set of tasks with prerequisites. If the Depth-First Search (DFS) algorithm produces a 'Back Edge', what does this imply regarding the task schedule?",
+    "options": ["The schedule can be optimized using dynamic programming.", "The tasks can be executed sequentially in reverse post-order.", "The tasks contain a circular dependency, rendering the schedule impossible.", "The tasks are fully independent and can execute in parallel."],
+    "answer": "The tasks contain a circular dependency, rendering the schedule impossible.",
+    "explanation": "Step 1: A task schedule is modelled as a Directed Graph. Step 2: A valid linear schedule requires a Topological Sort. Step 3: Topological sorting is strictly defined for Directed Acyclic Graphs (DAGs). Step 4: During DFS, a Back Edge points from a node to one of its ancestors in the DFS tree. Step 5: A Back Edge proves the existence of a Cycle, meaning Task A needs Task B, and Task B needs Task A. The schedule is impossible.",
+    "trick": "Back Edge = Cycle. If a graph has a cycle, no Topological Sort exists.",
+    "tip": "Back Edges in DFS indicate cycles. Cycles destroy Topological Sorting validity."
+  },
+  {
+    "id": 31,
+    "question": "Assertion (A): Inserting a sequence of sorted elements into an unbalanced Binary Search Tree (BST) yields worst-case time complexity, but doing the same in an AVL tree yields logarithmic time complexity per insertion. Reason (R): The AVL tree's balance factor invariant enforces rotations (LL or RR) during sorted insertions, ensuring the tree height never exceeds O(log N). Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Inserting 1, 2, 3... into a BST creates a right-skewed linked list with height O(N). Step 2: Search/Insert time degrades to O(N) per operation. Step 3: In an AVL tree, inserting 1, 2, 3 creates an RR imbalance at root 1. Step 4: A Left Rotation immediately rebalances it. Step 5: This continuous structural correction bounds the height strictly to O(log N). Both A and R are true.",
+    "trick": "Sorted data is the worst-case enemy of a simple BST. Self-balancing trees (AVL/Red-Black) exist precisely to fix this.",
+    "tip": "AVL rotations prevent right-skewed degeneration when inserting sorted data."
+  },
+  {
+    "id": 32,
+    "question": "Which of the following accurately describes the relationship between the number of keys 'K' and pointers 'P' in a B-Tree internal node?",
+    "options": ["K = P", "K = P - 1", "K = P + 1", "K = 2P"],
+    "answer": "K = P - 1",
+    "explanation": "Step 1: In a B-Tree, an internal node acts as a multi-way router. Step 2: To divide a dataset into P distinct ranges, you need exactly P-1 dividing points. Step 3: These dividing points are the Keys (K). Step 4: For example, a node with 3 keys (10, 20, 30) splits the search space into 4 child pointers (<10, 10-20, 20-30, >30). Step 5: Thus, Keys = Pointers - 1 (K = P - 1).",
+    "trick": "Visualize a ruler: to cut a stick into 3 pieces (pointers), you make 2 cuts (keys).",
+    "tip": "In any B-Tree or Search Tree, Pointers (Children) = Keys + 1."
+  },
+  {
+    "id": 33,
+    "question": "What is the time complexity of the 'Decrease-Key' operation in a Min-Heap implemented using a standard array?",
+    "options": ["O(1)", "O(log N)", "O(N)", "O(N log N)"],
+    "answer": "O(log N)",
+    "explanation": "Step 1: In a Min-Heap, decreasing a key makes it smaller. Step 2: A smaller key must 'bubble up' or 'sift up' closer to the root. Step 3: We compare the decreased key with its parent and swap if necessary. Step 4: This process repeats until the heap property is restored. Step 5: Since the max depth of the tree is log N, the maximum number of swaps is log N, resulting in O(log N) time.",
+    "trick": "Finding the node to decrease might take O(N) if you don't have a direct pointer/index. But the decrease operation itself is O(log N).",
+    "tip": "Decrease-Key in Min-Heap requires 'bubbling up', taking O(log N) time."
+  },
+  {
+    "id": 34,
+    "question": "Assertion (A): Prim's algorithm and Dijkstra's algorithm share nearly identical structural implementations. Reason (R): Both algorithms use a Greedy approach with a Priority Queue, but Prim's selects the minimum edge connecting a visited to an unvisited vertex, while Dijkstra's selects the minimum total path from the source. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Structurally, both algorithms maintain a visited set and a Min-Heap of frontier edges. Step 2: In Dijkstra, the key in the heap is `dist[u] + weight(u,v)`, meaning the absolute distance from the source. Step 3: In Prim, the key is simply `weight(u,v)`, meaning the distance from the currently growing spanning tree. Step 4: Despite this difference in key evaluation, the relaxation and extraction logic are identical. Step 5: Therefore, R correctly differentiates and explains A.",
+    "trick": "Dijkstra minimizes Path Length from Source. Prim minimizes Edge Weight to the Tree.",
+    "tip": "Prim and Dijkstra are structural twins. Difference is the heap key evaluation."
+  },
+  {
+    "id": 35,
+    "question": "In an unweighted graph, which algorithm guarantees finding the shortest path between two vertices in the most efficient time complexity?",
+    "options": ["Dijkstra's Algorithm", "Bellman-Ford Algorithm", "Breadth-First Search (BFS)", "Depth-First Search (DFS)"],
+    "answer": "Breadth-First Search (BFS)",
+    "explanation": "Step 1: An unweighted graph can be treated as a graph where every edge has a weight of 1. Step 2: Dijkstra's takes O(E log V) because it sorts via a priority queue. Step 3: BFS inherently explores nodes in concentric layers (distance 1, then 2, etc.). Step 4: Because of this layer-by-layer expansion, the first time a node is discovered, it is strictly via the shortest path. Step 5: BFS operates in O(V + E) time, making it significantly faster than Dijkstra for unweighted graphs.",
+    "trick": "Never use Dijkstra on an unweighted graph. BFS is mathematically equivalent and faster.",
+    "tip": "Unweighted shortest path = BFS. Complexity = O(V + E)."
+  },
+  {
+    "id": 36,
+    "question": "If you are designing an operating system's virtual memory allocator and need a data structure to maintain a set of free memory blocks, optimizing for finding the 'Best-Fit' block. Which of the following is most optimal?",
+    "options": ["Min-Heap", "Max-Heap", "Balanced Binary Search Tree (AVL/Red-Black)", "Hash Table"],
+    "answer": "Balanced Binary Search Tree (AVL/Red-Black)",
+    "explanation": "Step 1: 'Best-Fit' requires finding the smallest block of memory that is >= requested size. Step 2: A Heap only provides O(1) access to the absolute minimum or maximum, not a specific threshold search. Step 3: A Hash Table allows O(1) exact matches, but cannot perform range queries (>= size). Step 4: A Balanced BST maintains sorted order and supports the `lower_bound` operation in O(log N) time. Step 5: Inserting, deleting, and searching take O(log N) safely.",
+    "trick": "Whenever a problem requires 'closest greater value' or 'lower_bound', a Balanced BST is the definitive answer.",
+    "tip": "Best-Fit/Lower-Bound operations are optimally solved using Balanced BSTs."
+  },
+  {
+    "id": 37,
+    "question": "Assertion (A): Deleting the root of an AVL tree and replacing it with its in-order successor guarantees that the tree remains fully balanced without rotations. Reason (R): The in-order successor is structurally the closest value, ensuring the BST property, thus automatically preserving the AVL balance property. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True.", "None of the above (A is false, R is partially false)"],
+    "answer": "None of the above (A is false, R is partially false)",
+    "explanation": "Step 1: Replacing the root with the in-order successor correctly maintains the Binary Search Tree (BST) property. Step 2: However, physically removing the successor node from the right subtree alters the height of that subtree. Step 3: This height change can absolutely violate the AVL balance factor (-1, 0, 1) along the path from the successor's original position up to the root. Step 4: Consequently, O(log N) rotations may be required to restore balance. Step 5: Both A and the balance claim in R are strictly False.",
+    "trick": "Value replacement fixes the BST property, but structural deletion always risks AVL imbalance.",
+    "tip": "Deletion in AVL can cause cascading rotations up to the root."
+  },
+  {
+    "id": 38,
+    "question": "In graph theory, what is the time complexity of Kosaraju's Algorithm to find all Strongly Connected Components (SCCs) in a directed graph?",
+    "options": ["O(V * E)", "O(V + E)", "O(V^2)", "O(E log V)"],
+    "answer": "O(V + E)",
+    "explanation": "Step 1: Kosaraju's algorithm operates in three distinct linear phases. Step 2: First, it performs a standard DFS to record the completion time (post-order) of vertices in a Stack, taking O(V + E). Step 3: Second, it computes the Transpose Graph (reversing all edges), taking O(V + E). Step 4: Third, it pops vertices from the Stack and performs DFS on the Transpose graph to discover SCCs, taking O(V + E). Step 5: The total sequence of linear operations maintains an overall time complexity of O(V + E).",
+    "trick": "Tarjan's algorithm does the same in a single DFS pass, but both run in strictly O(V + E) time.",
+    "tip": "Kosaraju's Algorithm uses two DFS passes. Complexity = O(V + E)."
+  },
+  {
+    "id": 39,
+    "question": "Which specific constraint makes B+ Trees highly superior to B-Trees for minimizing Disk I/O operations in file systems?",
+    "options": ["B+ Trees have a strictly binary internal structure.", "B+ Trees lack leaf node linkages.", "B+ Trees maximize the branching factor because internal nodes do not store large data records.", "B-Trees require O(1) time for all searches."],
+    "answer": "B+ Trees maximize the branching factor because internal nodes do not store large data records.",
+    "explanation": "Step 1: Disk I/O is expensive. The goal of an index is to minimize the height of the tree (disk reads). Step 2: The height of the tree is log_M(N). To minimize height, we must maximize M (the branching factor or order). Step 3: M is dictated by how many keys/pointers fit into a single fixed-size Disk Block. Step 4: B-Trees store data pointers (or actual large records) alongside keys in internal nodes, severely reducing the number of keys that fit in a block. Step 5: B+ Trees only store small routing keys internally. This massively increases M, resulting in a flatter tree and fewer Disk I/Os.",
+    "trick": "B+ Trees are shallower and wider than B-Trees because internal nodes are 'lighter'.",
+    "tip": "No data in internal nodes = Higher branching factor = Flatter Tree = Less I/O."
+  },
+  {
+    "id": 40,
+    "question": "Assertion (A): In a Max-Heap, the second largest element must always be a direct child of the root. Reason (R): The Max-Heap property strictly enforces that every parent node is greater than or equal to its children, meaning values monotonically decrease down any path. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: By definition, the largest element is at the root. Step 2: Where can the second largest be? It must be smaller than the root, but larger than everything else. Step 3: If it were placed deeper than level 1 (e.g., a grandchild), its parent would have to be strictly greater than it. Step 4: But if a parent is greater than the second largest, that parent must be the largest (the root). Step 5: Thus, it is mathematically impossible for the second largest to be anywhere except immediately below the root (at index 2 or 3).",
+    "trick": "While the 2nd largest is at level 1, the 3rd largest could be at level 1 OR level 2. Be careful!",
+    "tip": "Second largest in Max-Heap is always at index 2 or 3 (direct children)."
+  },
+  {
+    "id": 41,
+    "question": "If a directed graph G contains a cycle, which of the following statements regarding the adjacency matrix A of G is true?",
+    "options": ["A will be strictly symmetric.", "Trace(A^k) > 0 for some integer k > 0, where Trace is the sum of diagonal elements.", "All eigenvalues of A will be strictly zero.", "A^2 will contain only zero elements."],
+    "answer": "Trace(A^k) > 0 for some integer k > 0, where Trace is the sum of diagonal elements.",
+    "explanation": "Step 1: Let A be the adjacency matrix. The element at A^k[i][j] gives the exact number of paths of length 'k' from vertex i to vertex j. Step 2: A cycle implies there is a path from a vertex 'i' back to itself. Step 3: If a cycle of length 'k' exists, then A^k[i][i] will be strictly greater than 0. Step 4: The trace of a matrix is the sum of its main diagonal elements. Step 5: Thus, if Trace(A^k) > 0, there is at least one non-zero diagonal element, confirming a path from a node to itself (a cycle of length k).",
+    "trick": "This is an advanced Matrix Theory intersection with Graph Theory. Trace(A^k) = paths of length k returning to start.",
+    "tip": "A^k[i][i] > 0 signifies a cycle of length k. Trace captures this."
+  },
+  {
+    "id": 42,
+    "question": "Which of the following scenarios triggers a 'Left-Right (LR)' double rotation in an AVL tree?",
+    "options": ["Inserting into the left subtree of the left child of an unbalanced node.", "Inserting into the right subtree of the right child of an unbalanced node.", "Inserting into the right subtree of the left child of an unbalanced node.", "Inserting into the left subtree of the right child of an unbalanced node."],
+    "answer": "Inserting into the right subtree of the left child of an unbalanced node.",
+    "explanation": "Step 1: Identify the primary unbalanced node (Z). Step 2: The first direction indicates where the heavier subtree is. 'Left' implies the imbalance is in Z's left child (Y). Step 3: The second direction indicates where the insertion occurred relative to the child. 'Right' implies insertion in Y's right subtree (X). Step 4: This creates a zig-zag pattern (Z -> Left -> Right). Step 5: To fix this, we first do a Left Rotation on Y, turning it into an LL imbalance, then a Right Rotation on Z. Hence, LR rotation.",
+    "trick": "Read the name literally: Left child's Right subtree. Zig-zag always means double rotation.",
+    "tip": "LR Imbalance = Left child's Right subtree = LR Double Rotation."
+  },
+  {
+    "id": 43,
+    "question": "Assertion (A): Depth First Search (DFS) requires strictly less memory than Breadth First Search (BFS) when traversing a perfectly balanced binary tree of infinite depth. Reason (R): BFS stores the entire current level in a Queue, which grows exponentially, whereas DFS only stores the current path in the Stack, which grows linearly with depth. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: In a balanced binary tree, the number of nodes at level d is 2^d. Step 2: BFS processes level by level, meaning the queue will hold 2^d nodes at the maximum width. This is exponential space O(2^d). Step 3: DFS dives straight to the bottom. The maximum stack depth is purely the height of the tree, d. Step 4: This is linear space O(d). Step 5: Therefore, for very deep trees (like state-space search in AI), DFS is vastly superior in memory efficiency. R correctly explains A.",
+    "trick": "BFS Space Complexity is bounded by the maximum width of the graph. DFS Space is bounded by the maximum depth.",
+    "tip": "BFS Space = Exponential (Width). DFS Space = Linear (Depth)."
+  },
+  {
+    "id": 44,
+    "question": "What happens if you run Dijkstra's Algorithm using a Maximum Priority Queue (instead of Minimum) on a graph with all positive edge weights?",
+    "options": ["It computes the absolute Longest Simple Path in the graph.", "It computes the Minimum Spanning Tree.", "It traps itself in an infinite loop.", "It computes erroneous paths that do not necessarily represent the longest path due to cycle entrapments or greedy failures."],
+    "answer": "It computes erroneous paths that do not necessarily represent the longest path due to cycle entrapments or greedy failures.",
+    "explanation": "Step 1: Finding the Longest Simple Path in a graph is an NP-Hard problem. Step 2: Dijkstra relies on the greedy property that 'adding an edge strictly increases path length'. Step 3: If you reverse the queue (Max-Heap), you greedily pick the longest current edge. Step 4: However, adding another edge makes the path *longer*, which violates the greedy assumption that the first finalized path is the optimal bound. Step 5: Additionally, if the graph has a cycle (all cycles are positive), the algorithm will traverse the cycle infinitely to maximize weight, or yield garbage paths if cycles are blocked.",
+    "trick": "You cannot simply invert Dijkstra to find the longest path. Longest path requires DP (on DAGs) or is NP-Hard.",
+    "tip": "Dijkstra with Max-Heap does NOT find the longest path. It fails completely."
+  },
+  {
+    "id": 45,
+    "question": "Consider the representation of an undirected graph using an Adjacency Matrix of size V x V. What is the space complexity, and how is the matrix structured?",
+    "options": ["O(V^2), Asymmetric matrix", "O(V + E), Symmetric matrix", "O(V^2), Symmetric matrix", "O(E^2), Diagonal matrix"],
+    "answer": "O(V^2), Symmetric matrix",
+    "explanation": "Step 1: An Adjacency Matrix is a 2D array where rows and columns represent vertices. Therefore, it has V rows and V cols, occupying O(V^2) space. Step 2: For an undirected graph, if there is an edge between i and j, then Matrix[i][j] = 1 and Matrix[j][i] = 1. Step 3: This mirroring across the main diagonal defines a Symmetric Matrix. Step 4: (For a directed graph, the matrix would be asymmetric). Step 5: Therefore, space is strictly O(V^2) and the structure is Symmetric.",
+    "trick": "Adjacency Lists are O(V+E). Adjacency Matrix is always O(V^2). Undirected = Symmetric.",
+    "tip": "Undirected Graph Adjacency Matrix = O(V^2) and Symmetric."
+  },
+  {
+    "id": 46,
+    "question": "Assertion (A): Heaps are generally implemented using Arrays rather than node-based trees with pointers. Reason (R): Binary Heaps are Complete Binary Trees, meaning there are no structural gaps. Array implementation avoids pointer memory overhead and leverages CPU cache locality. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Pointers require significant memory overhead (e.g., 64 bits per pointer). Step 2: Since a heap is a Complete Binary Tree, every level is filled contiguously. Step 3: This allows us to map tree nodes to array indices predictably (Left=2i, Right=2i+1). Step 4: There are no empty array slots (no wasted space). Step 5: Furthermore, arrays provide contiguous memory, which modern CPUs fetch into cache lines, making traversals much faster than dereferencing random memory pointers. R accurately explains A.",
+    "trick": "Cache locality is a massive hidden advantage of Array-based Heaps over Pointer-based BSTs.",
+    "tip": "Heaps use Arrays to save pointer space and maximize CPU Cache Locality."
+  },
+  {
+    "id": 47,
+    "question": "Given an AVL tree, what is the maximum possible height difference between any two leaf nodes?",
+    "options": ["Exactly 1", "Exactly log N", "Strictly unbounded", "floor(H / 2)"],
+    "answer": "floor(H / 2)",
+    "explanation": "Step 1: The AVL property only dictates that the height difference between sibling subtrees is at most 1. Step 2: It does *not* mean all leaves are on the same level (like a B-Tree). Step 3: The most imbalanced AVL tree (Fibonacci tree) has one highly dense side and one sparse side. Step 4: The shortest branch in a Fibonacci AVL tree has length roughly H/2, while the longest has length H. Step 5: Therefore, the maximum height difference between the deepest leaf and the shallowest leaf is bounded by roughly H/2.",
+    "trick": "Don't confuse the 'Balance Factor = 1' rule with 'Global Tree Flatness'. BF is local. Global depth variance can be H/2.",
+    "tip": "AVL local balance is 1, but global leaf depth variance can be up to H/2."
+  },
+  {
+    "id": 48,
+    "question": "In the context of the Bellman-Ford Algorithm, what is the initial distance setting for the source vertex 'S' and all other vertices 'V' before relaxations begin?",
+    "options": ["dist[S] = infinity, dist[V] = 0", "dist[S] = 0, dist[V] = infinity", "dist[S] = -infinity, dist[V] = infinity", "dist[S] = 1, dist[V] = 0"],
+    "answer": "dist[S] = 0, dist[V] = infinity",
+    "explanation": "Step 1: Shortest path algorithms require establishing a baseline. Step 2: The distance from the source to itself is explicitly known to be 0 (dist[S] = 0). Step 3: The distance to all other vertices is initially unknown. Step 4: To ensure that any discovered path is selected during the first relaxation (`if dist[u] + w < dist[v]`), we must set unknown distances to maximum. Step 5: Thus, dist[V] = infinity. This guarantees valid path overwriting.",
+    "trick": "Both Dijkstra and Bellman-Ford use the exact same initialization phase.",
+    "tip": "Initialization for Shortest Paths: Source = 0, Others = Infinity."
+  },
+  {
+    "id": 49,
+    "question": "Assertion (A): The Quickselect algorithm (based on Quicksort) finds the K-th smallest element in an unordered array with an expected time complexity of O(N). Reason (R): Quickselect completely sorts the array in O(N log N) time and then retrieves the element at index K-1. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(c) A is True but R is False.",
+    "explanation": "Step 1: Quickselect is an optimization of Quicksort. Step 2: It chooses a pivot and partitions the array into Left (smaller) and Right (larger). Step 3: Unlike Quicksort which recurses on BOTH sides, Quickselect only recurses on the side that contains the K-th element. Step 4: Mathematically, this creates a geometric series: N + N/2 + N/4... = 2N, yielding an expected O(N) time. Step 5: Reason R claims it fully sorts the array, which is completely false. Hence A is true, R is false.",
+    "trick": "Quickselect intentionally avoids full sorting to drop complexity from O(N log N) to O(N).",
+    "tip": "Quickselect recurses on only ONE side, yielding expected O(N) time."
+  },
+  {
+    "id": 50,
+    "question": "Which specific property of a B+ Tree allows Database Management Systems (DBMS) to execute an 'ORDER BY' or 'Range Query' (e.g., SELECT * WHERE age BETWEEN 20 AND 30) efficiently without repeated tree traversals?",
+    "options": ["Internal nodes containing sorting metadata.", "The root node caching frequently accessed data.", "Leaf nodes forming a doubly or singly linked list connecting all sequential data blocks.", "The self-balancing AVL rotations maintained at the internal levels."],
+    "answer": "Leaf nodes forming a doubly or singly linked list connecting all sequential data blocks.",
+    "explanation": "Step 1: A range query requires finding a start point and iterating sequentially. Step 2: In a standard BST or B-Tree, sequential access requires an In-Order traversal, bouncing up and down the tree structure. Step 3: In a B+ Tree, the initial value (e.g., age 20) is found via one O(log N) dive to the leaf level. Step 4: Because all leaf nodes are connected via a horizontal Linked List, the system simply steps sideways through the leaves until it hits the end value (age 30). Step 5: This eliminates vertical tree traversal completely during the range fetch, maximizing sequential disk read performance.",
+    "trick": "B-Trees require expensive In-Order traversals. B+ Trees require a single search + horizontal linked-list walk.",
+    "tip": "B+ Tree leaf linked-lists provide ultra-fast O(N) sequential range queries."
+  }
+]

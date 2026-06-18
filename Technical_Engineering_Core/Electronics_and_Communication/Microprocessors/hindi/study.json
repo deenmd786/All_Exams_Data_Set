@@ -1,0 +1,110 @@
+﻿{
+  "topic": "माइक्रोप्रोसेसर (Microprocessors)",
+  "description": "इलेक्ट्रॉनिक्स और संचार (Electronics and Communication) में 8085 और 8086 माइक्रोप्रोसेसरों की वास्तुकला (architecture), निर्देश सेट (instruction set), असेंबली भाषा प्रोग्रामिंग (assembly language programming) और परिधीय इंटरफेसिंग (peripheral interfacing) का एक व्यापक अध्ययन।",
+  "path": "Technical_Engineering_Core/Electronics_and_Communication/Microprocessors",
+  "sections": [
+    {
+      "section_id": "1",
+      "title": "8085 माइक्रोप्रोसेसर वास्तुकला (8085 Microprocessor Architecture)",
+      "description": "8-बिट 8085 माइक्रोप्रोसेसर के आंतरिक घटकों (internal components) और पिन कॉन्फ़िगरेशन (pin configuration) का अध्ययन।",
+      "key_concepts": [
+        {
+          "concept": "संचायक (Accumulator - Register A)",
+          "explanation": "यह एक 8-बिट रजिस्टर है जो ALU (Arithmetic Logic Unit) का हिस्सा है। सभी गणितीय और तार्किक संचालन (arithmetic and logical operations) के परिणाम डिफ़ॉल्ट रूप से संचायक में संग्रहीत होते हैं।"
+        },
+        {
+          "concept": "फ्लैग रजिस्टर (Flag Register)",
+          "explanation": "8085 में 5 सक्रिय फ्लैग होते हैं जो ALU संचालन के बाद डेटा की स्थिति (status) को दर्शाते हैं: साइन (Sign - S), ज़ीरो (Zero - Z), सहायक कैरी (Auxiliary Carry - AC), पैरिटी (Parity - P), और कैरी (Carry - CY)।"
+        },
+        {
+          "concept": "मल्टीप्लेक्स एड्रेस/डेटा बस (Multiplexed Address/Data Bus - AD0-AD7)",
+          "explanation": "पिन की संख्या बचाने के लिए, निचले 8-बिट पते (lower address) और 8-बिट डेटा बस (data bus) को एक साथ मल्टीप्लेक्स किया जाता है। इन्हें अलग (demultiplex) करने के लिए ALE (Address Latch Enable) सिग्नल का उपयोग किया जाता है।"
+        }
+      ]
+    },
+    {
+      "section_id": "2",
+      "title": "8086 वास्तुकला और मेमोरी सेगमेंटेशन (8086 Architecture and Memory Segmentation)",
+      "description": "16-बिट 8086 माइक्रोप्रोसेसर की उन्नत वास्तुकला, पाइपलाइनिंग (pipelining) और मेमोरी को प्रबंधित करने की तकनीक।",
+      "formulas": [
+        {
+          "category": "भौतिक पता गणना (Physical Address Calculation)",
+          "equations": [
+            "Physical Address (20-bit) = (Segment Register * 10H) + Offset Address",
+            "जहाँ 10H से गुणा करने का अर्थ हेक्साडेसिमल (hexadecimal) में एक शून्य जोड़ना है (यानी बाइनरी में 4 बिट्स बायीं ओर शिफ्ट करना)।"
+          ]
+        }
+      ],
+      "key_concepts": [
+        {
+          "concept": "पाइपलाइनिंग (Pipelining)",
+          "explanation": "8086 वास्तुकला को दो स्वतंत्र इकाइयों में विभाजित किया गया है: बस इंटरफेस यूनिट (Bus Interface Unit - BIU) और निष्पादन यूनिट (Execution Unit - EU)। BIU मेमोरी से निर्देशों को प्राप्त (fetch) करता है और 6-बाइट निर्देश कतार (instruction queue) में रखता है, जबकि EU उन्हें एक साथ निष्पादित (execute) करता है, जिससे प्रसंस्करण गति (processing speed) बढ़ जाती है।"
+        }
+      ]
+    },
+    {
+      "section_id": "3",
+      "title": "निर्देश सेट और एड्रेसिंग मोड (Instruction Set and Addressing Modes)",
+      "description": "माइक्रोप्रोसेसर द्वारा ऑपरेंड (operand) या डेटा तक पहुंचने और उसे निर्दिष्ट करने के विभिन्न तरीके।",
+      "cases": [
+        {
+          "condition": "तात्कालिक एड्रेसिंग (Immediate Addressing)",
+          "results": [
+            "डेटा या ऑपरेंड (operand) निर्देश (instruction) के भीतर ही दिया गया होता है।",
+            "उदाहरण: MVI A, 05H (05H डेटा को तुरंत रजिस्टर A में लोड करें)।"
+          ]
+        },
+        {
+          "condition": "प्रत्यक्ष एड्रेसिंग (Direct Addressing)",
+          "results": [
+            "डेटा का 16-बिट पता (address) सीधे निर्देश में प्रदान किया जाता है।",
+            "उदाहरण: LDA 2000H (मेमोरी लोकेशन 2000H से डेटा को संचायक में लोड करें)।"
+          ]
+        },
+        {
+          "condition": "अप्रत्यक्ष एड्रेसिंग (Indirect/Register Indirect Addressing)",
+          "results": [
+            "डेटा का पता एक रजिस्टर पेयर (आमतौर पर HL पेयर) में संग्रहीत होता है। निर्देश केवल उस रजिस्टर पेयर को संदर्भित करता है।",
+            "उदाहरण: MOV A, M (HL पेयर द्वारा इंगित मेमोरी लोकेशन से डेटा को रजिस्टर A में ले जाएं)।"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "4",
+      "title": "इंटरप्ट प्रणाली (Interrupt System)",
+      "description": "बाहरी या आंतरिक घटनाओं (events) द्वारा सामान्य प्रोग्राम निष्पादन (normal program execution) को रोकने और एक विशिष्ट सेवा रूटीन (Interrupt Service Routine - ISR) को कॉल करने की प्रक्रिया।",
+      "cases": [
+        {
+          "condition": "मास्केबल इंटरप्ट (Maskable Interrupts)",
+          "results": [
+            "वे इंटरप्ट जिन्हें माइक्रोप्रोसेसर द्वारा सॉफ़्टवेयर निर्देशों (जैसे DI - Disable Interrupt) का उपयोग करके अक्षम (disabled) या विलंबित (delayed) किया जा सकता है।",
+            "8085 में उदाहरण: RST 7.5, RST 6.5, RST 5.5, और INTR।"
+          ]
+        },
+        {
+          "condition": "नॉन-मास्केबल इंटरप्ट (Non-Maskable Interrupt)",
+          "results": [
+            "वे इंटरप्ट जिन्हें किसी भी स्थिति में माइक्रोप्रोसेसर द्वारा नज़रअंदाज़ या अक्षम (ignored or disabled) नहीं किया जा सकता है। ये आपातकालीन स्थितियों (emergencies) के लिए उपयोग किए जाते हैं।",
+            "8085 में TRAP (RST 4.5) एकमात्र नॉन-मास्केबल इंटरप्ट है और इसकी प्राथमिकता (priority) सबसे अधिक होती है।"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "5",
+      "title": "परिधीय इंटरफेसिंग (Peripheral Interfacing)",
+      "description": "माइक्रोप्रोसेसर को बाहरी I/O उपकरणों और मेमोरी से जोड़ने के लिए उपयोग किए जाने वाले प्रोग्रामेबल परिधीय चिप्स (programmable peripheral chips)।",
+      "key_concepts": [
+        {
+          "concept": "8255 प्रोग्रामेबल पेरिफेरल इंटरफेस (8255 Programmable Peripheral Interface - PPI)",
+          "explanation": "यह एक बहुउद्देशीय I/O डिवाइस है जिसमें तीन 8-बिट I/O पोर्ट (Port A, Port B, Port C) होते हैं। इसे विभिन्न I/O मोड (Mode 0, Mode 1, Mode 2) और बिट सेट/रीसेट मोड (BSR Mode) में प्रोग्राम किया जा सकता है।"
+        },
+        {
+          "concept": "8257 डायरेक्ट मेमोरी एक्सेस कंट्रोलर (8257 Direct Memory Access - DMA Controller)",
+          "explanation": "एक चिप जो माइक्रोप्रोसेसर के हस्तक्षेप (intervention) के बिना I/O उपकरणों और मेमोरी के बीच प्रत्यक्ष और बहुत तेज़ डेटा स्थानांतरण (direct data transfer) की अनुमति देती है। इस दौरान माइक्रोप्रोसेसर अपनी बसों का नियंत्रण 8257 को सौंप देता है (HOLD और HLDA सिग्नल का उपयोग करके)।"
+        }
+      ]
+    }
+  ]
+}

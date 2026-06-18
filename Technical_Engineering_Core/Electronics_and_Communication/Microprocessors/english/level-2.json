@@ -1,0 +1,454 @@
+﻿
+
+[
+  {
+    "id": 1,
+    "question": "Match List I (Digital Device) with List II (Common Designation). List I: P. Multiplexer, Q. Demultiplexer, R. Half Adder, S. Full Adder. List II: 1. Data Distributor, 2. Combinational circuit with 3 inputs, 3. Data Selector, 4. Combinational circuit with 2 inputs.",
+    "options": ["P-3, Q-1, R-4, S-2", "P-1, Q-3, R-2, S-4", "P-3, Q-1, R-2, S-4", "P-1, Q-3, R-4, S-2"],
+    "answer": "P-3, Q-1, R-4, S-2",
+    "explanation": "Step 1: A Multiplexer (2^n to 1) routes one of many inputs to a single output, acting as a 'Data Selector' (P-3). Step 2: A Demultiplexer routes a single input to one of many outputs, acting as a 'Data Distributor' (Q-1). Step 3: A Half Adder sums 2 bits (R-4), while a Full Adder sums 3 bits including carry-in (S-2).",
+    "trick": "Trap: Do not confuse MUX and DEMUX! MUX selects one out of many (Many to One), while DEMUX distributes one into many (One to Many).",
+    "tip": "MUX = Data Selector; DEMUX = Data Distributor."
+  },
+  {
+    "id": 2,
+    "question": "Consider Statement 1: In a K-Map, grouping a quad eliminates exactly 2 variables. Statement 2: An octet grouping eliminates exactly 4 variables. Which of the statements is/are mathematically correct?",
+    "options": ["Only Statement 1 is correct", "Only Statement 2 is correct", "Both statements are correct", "Neither statement is correct"],
+    "answer": "Only Statement 1 is correct",
+    "explanation": "Step 1: In Karnaugh Map simplification, grouping adjacent cells reduces the boolean expression. Step 2: A pair (2 cells) eliminates 1 variable. A quad (4 cells) eliminates 2 variables. This makes Statement 1 correct. Step 3: An octet (8 cells) eliminates exactly 3 variables (2^3 = 8), not 4. Thus, Statement 2 is incorrect.",
+    "trick": "Shortcut: A group of 2^N cells eliminates exactly N variables from the resulting boolean product term.",
+    "tip": "Group size 2^N eliminates N variables."
+  },
+  {
+    "id": 3,
+    "question": "Evaluate the following regarding Flip-Flops. Statement 1: The 'Race Around Condition' occurs in a JK flip-flop when J=1, K=1, and the clock pulse width is less than the propagation delay. Statement 2: A Master-Slave configuration eliminates the Race Around Condition. Which is correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: The Race Around Condition happens in level-triggered JK flip-flops when J=1, K=1 (toggle mode). Step 2: It specifically occurs when the clock pulse width is GREATER than the propagation delay, causing multiple toggles within one clock pulse. Statement 1 is false. Step 3: A Master-Slave JK flip-flop triggers on opposite clock edges, isolating input from output and curing the condition. Statement 2 is true.",
+    "trick": "Trap: Pay attention to the pulse width relationship. Race around happens if the clock stays active TOO LONG (> propagation delay).",
+    "tip": "Race around: Clock pulse width > Propagation delay."
+  },
+  {
+    "id": 4,
+    "question": "What is the strictly minimum number of 2-input NAND gates required to construct a basic Half Adder circuit?",
+    "options": ["3", "4", "5", "6"],
+    "answer": "5",
+    "explanation": "Step 1: A Half Adder requires generating a Sum (A XOR B) and a Carry (A AND B). Step 2: To generate an XOR using standard NAND logic, exactly 4 NAND gates are required. Step 3: To generate an AND gate using NAND logic, 2 NAND gates are required. Step 4: However, by sharing the intermediate NAND gate (A NAND B) used in the XOR construction, we can invert it with just 1 additional NAND gate to get the Carry. Total = 4 (for Sum) + 1 (for Carry) = 5 NAND gates.",
+    "trick": "Trap: Standard separate construction takes 6 gates. Resource sharing reduces the absolute minimum to 5.",
+    "tip": "Half Adder needs 5 NAND or 5 NOR gates minimum."
+  },
+  {
+    "id": 5,
+    "question": "Match List I (Sequential Circuit) with List II (Characteristic Equation). List I: P. D Flip-Flop, Q. T Flip-Flop, R. SR Flip-Flop, S. JK Flip-Flop. List II: 1. Q(n+1) = S + R'Q(n), 2. Q(n+1) = JQ'(n) + K'Q(n), 3. Q(n+1) = D, 4. Q(n+1) = T XOR Q(n).",
+    "options": ["P-3, Q-4, R-1, S-2", "P-3, Q-4, R-2, S-1", "P-4, Q-3, R-1, S-2", "P-4, Q-3, R-2, S-1"],
+    "answer": "P-3, Q-4, R-1, S-2",
+    "explanation": "Step 1: A D (Data) Flip-Flop directly passes input to output at the clock edge: Q(n+1) = D (P-3). Step 2: A T (Toggle) Flip-Flop toggles state when T=1: Q(n+1) = T XOR Q(n) (Q-4). Step 3: An SR Flip-Flop obeys Q(n+1) = S + R'Q(n) (R-1). Step 4: A JK Flip-Flop obeys Q(n+1) = JQ'(n) + K'Q(n) (S-2).",
+    "trick": "Trap: SR and JK equations look similar. Remember JK uses both J and K inputs with opposite Q states to avoid the invalid condition.",
+    "tip": "Memorize characteristic equations; they define next-state logic."
+  },
+  {
+    "id": 6,
+    "question": "Consider a 4-to-1 Multiplexer. If the select lines S1 and S0 are connected to boolean variables A and B respectively, and the data inputs I0, I1, I2, I3 are connected to 0, 1, 1, 0 respectively. What boolean function F(A,B) is realized?",
+    "options": ["A AND B", "A OR B", "A XOR B", "A XNOR B"],
+    "answer": "A XOR B",
+    "explanation": "Step 1: The general equation for a 4:1 MUX is F = S1'S0'I0 + S1'S0I1 + S1S0'I2 + S1S0I3. Step 2: Substitute S1=A, S0=B, and the given input values. Step 3: F = A'B'(0) + A'B(1) + AB'(1) + AB(0). Step 4: Simplify to F = A'B + AB', which is the standard boolean expression for an Exclusive-OR (XOR) gate.",
+    "trick": "Shortcut: Read the data inputs (0, 1, 1, 0) as the truth table output for the variables A, B. 0110 corresponds exactly to XOR.",
+    "tip": "MUX data inputs directly mirror truth table outputs."
+  },
+  {
+    "id": 7,
+    "question": "Statement 1: A Full Subtractor can be constructed using exactly two Half Subtractors and one OR gate. Statement 2: The Borrow output of a Half Subtractor (A - B) is defined as AB'. Which is correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Only Statement 1",
+    "explanation": "Step 1: A Full Subtractor calculates A - B - Bin. It is structurally identical to a Full Adder regarding gate count: 2 Half Subtractors and 1 OR gate (for the Borrow Out). Statement 1 is true. Step 2: For a Half Subtractor (Minuend A, Subtrahend B), the Borrow equation is A'B. Statement 2 incorrectly asserts it is AB'. Thus, Statement 2 is false.",
+    "trick": "Trap: Order matters in subtraction! Borrow is active when A=0 and B=1, hence A'B, not AB'.",
+    "tip": "Half Subtractor Borrow (A-B) is A'B."
+  },
+  {
+    "id": 8,
+    "question": "How many completely independent 2-to-1 Multiplexers are strictly necessary to construct a 16-to-1 Multiplexer?",
+    "options": ["15", "8", "16", "4"],
+    "answer": "15",
+    "explanation": "Step 1: To construct an N-to-1 MUX using 2-to-1 MUXes, a tree structure is utilized. Step 2: The first stage requires 16/2 = 8 MUXes. Step 3: The second stage requires 8/2 = 4 MUXes. The third requires 4/2 = 2 MUXes. The final stage requires 2/2 = 1 MUX. Step 4: Total = 8 + 4 + 2 + 1 = 15. Alternatively, use the formula N - 1 = 16 - 1 = 15.",
+    "trick": "Shortcut: The number of 2:1 MUXes required to build an N:1 MUX is always exactly N - 1.",
+    "tip": "Use formula (N - 1) for cascading 2:1 MUXes."
+  },
+  {
+    "id": 9,
+    "question": "Match the Canonical Form (List I) with its defining characteristic (List II). List I: P. SOP (Sum of Products), Q. POS (Product of Sums). List II: 1. Uses Maxterms and groups 0s in a K-Map, 2. Uses Minterms and groups 1s in a K-Map.",
+    "options": ["P-1, Q-2", "P-2, Q-1", "P-1, Q-1", "P-2, Q-2"],
+    "answer": "P-2, Q-1",
+    "explanation": "Step 1: SOP focuses on when the function is True (1). It logically sums Minterms, which represent the 1s grouped in a K-Map (P-2). Step 2: POS focuses on when the function is False (0). It logically multiplies Maxterms, which correspond to grouping 0s in a K-Map (Q-1).",
+    "trick": "Trap: Confusing minterms and maxterms. Minterms (m) are products, Maxterms (M) are sums.",
+    "tip": "SOP = Minterms = 1s. POS = Maxterms = 0s."
+  },
+  {
+    "id": 10,
+    "question": "In a 4-variable Karnaugh Map, grouping all 4 corner cells results in the elimination of which variables?",
+    "options": ["Both variables related to the rows", "Both variables related to the columns", "One row variable and one column variable", "No variables are eliminated"],
+    "answer": "One row variable and one column variable",
+    "explanation": "Step 1: A 4-variable K-map has rows (e.g., AB) and columns (e.g., CD). The corners are m0(0000), m2(0010), m8(1000), m10(1010). Step 2: Grouping 4 cells forms a quad, which must eliminate exactly 2 variables. Step 3: In the corners, the first row (A=0) and last row (A=1) change, eliminating A. The first column (C=0) and last column (C=1) change, eliminating C. Step 4: The resulting term (B'D') retains one row variable (B) and one column variable (D).",
+    "trick": "Conceptual trap: Corners form a quad due to map 'wrap-around' property, behaving exactly like an adjacent 2x2 square.",
+    "tip": "Corner quad in K-Map always yields B'D'."
+  },
+  {
+    "id": 11,
+    "question": "Evaluate Statement 1: An active-low Enable input on a Decoder implies the chip is operational when the pin is driven to logic 0. Statement 2: A 3-to-8 Decoder can directly function as a 1-to-8 Demultiplexer if the Enable pin is used as the data input. Which is correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Both 1 and 2",
+    "explanation": "Step 1: 'Active-low' means the asserted state is logic 0. The chip activates at 0. Statement 1 is true. Step 2: A decoder translates N select lines to 2^N outputs. If an Enable pin modulates the entire chip's output, feeding a data stream into the Enable pin routes that data to the specifically selected output line. This is the exact definition of a Demultiplexer. Statement 2 is true.",
+    "trick": "Shortcut: A Decoder with an Enable pin is structurally identical to a Demultiplexer.",
+    "tip": "Decoder + Enable Input = Demultiplexer."
+  },
+  {
+    "id": 12,
+    "question": "Which of the following circuits relies on a feedback loop connecting the inverted output (Q') directly back to the data input (D) to function as a divide-by-2 frequency counter?",
+    "options": ["SR Flip-Flop", "JK Flip-Flop", "D Flip-Flop", "T Flip-Flop"],
+    "answer": "D Flip-Flop",
+    "explanation": "Step 1: A D flip-flop passes input D to output Q on the clock edge. Step 2: If Q' is tied to D, the flip-flop loads the inverse of its current state on every active clock edge. Step 3: This forces the output to toggle (0 to 1, 1 to 0) continuously with each clock pulse. Step 4: Toggling continuously effectively halves the frequency of the input clock, turning the D flip-flop into a divide-by-2 counter (similar to a T flip-flop with T=1).",
+    "trick": "Trap: T flip-flops inherently divide frequency when T=1, but the specific wiring described (Q' to input) strictly applies to converting a D flip-flop into a toggle configuration.",
+    "tip": "Tie Q' to D to create a divide-by-2 counter."
+  },
+  {
+    "id": 13,
+    "question": "Match the Adder type (List I) with its Propagation Delay characteristic (List II). List I: P. Ripple Carry Adder, Q. Look-Ahead Carry Adder. List II: 1. Delay is independent of the number of bits (O(1) logical depth), 2. Delay increases linearly with the number of bits (O(N) logical depth).",
+    "options": ["P-1, Q-2", "P-2, Q-1", "P-1, Q-1", "P-2, Q-2"],
+    "answer": "P-2, Q-1",
+    "explanation": "Step 1: In a Ripple Carry Adder, the carry bit must sequentially pass from the least significant bit (LSB) to the most significant bit (MSB). Delay scales linearly (O(N)). (P-2). Step 2: A Look-Ahead Carry Adder uses complex combinational logic to calculate carries simultaneously based on inputs, making the theoretical gate delay constant regardless of bit width. (Q-1).",
+    "trick": "Trap: Look-Ahead is faster but requires exponentially more hardware gates for wider bit widths.",
+    "tip": "Ripple = Linear Delay. Look-Ahead = Constant Delay."
+  },
+  {
+    "id": 14,
+    "question": "If a K-Map contains a 'Don't Care' condition (represented by X or d), which of the following rules governs its usage during minimization?",
+    "options": ["It must always be grouped with 1s in SOP", "It must always be grouped with 0s in POS", "It can be treated as a 1 or a 0 depending on which yields a larger grouping", "It must be ignored and never included in any grouping"],
+    "answer": "It can be treated as a 1 or a 0 depending on which yields a larger grouping",
+    "explanation": "Step 1: 'Don't care' conditions represent input states that will never occur or output states that don't affect system operation. Step 2: In K-Map simplification, they act as wildcards. Step 3: The designer actively chooses to assign them as 1 or 0 purely to expand the size of prime implicant groups. Step 4: Expanding group size (e.g., turning a pair into a quad) eliminates more variables, yielding a simpler circuit.",
+    "trick": "Trap: Don't cares are optional. Only group them if they actively help increase the size of a group of actual 1s (in SOP) or 0s (in POS).",
+    "tip": "Use don't cares only to maximize group sizes."
+  },
+  {
+    "id": 15,
+    "question": "Consider Statement 1: A latch is an edge-triggered memory device. Statement 2: A flip-flop is a level-triggered memory device. Which of these definitions is/are accurate?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Neither 1 nor 2",
+    "explanation": "Step 1: The definitions are perfectly inverted. A latch continuously responds to inputs as long as the enable signal is active (level-triggered). Step 2: A flip-flop specifically captures the input only at the precise moment the clock signal transitions from low-to-high or high-to-low (edge-triggered). Step 3: Therefore, both statements are factually false.",
+    "trick": "Trap: Mixing up the fundamental difference between sequential components. Latches are transparent on levels; Flip-flops sample on edges.",
+    "tip": "Latch = Level-triggered. Flip-Flop = Edge-triggered."
+  },
+  {
+    "id": 16,
+    "question": "What is the boolean expression for the Carry Out (C_out) of a Full Adder, given inputs A, B, and Carry In (C_in)?",
+    "options": ["A XOR B XOR C_in", "AB + BC_in + AC_in", "(A+B)(B+C_in)(A+C_in)", "AB(C_in)"],
+    "answer": "AB + BC_in + AC_in",
+    "explanation": "Step 1: The Carry Out logic must equal 1 if any two (or all three) of the inputs are 1. Step 2: This is formally known as a Majority Function. Step 3: Writing the SOP terms for when at least two inputs are true yields AB + BC_in + AC_in. Step 4: The expression A XOR B XOR C_in represents the Sum logic, not the Carry.",
+    "trick": "Shortcut: Full Adder carry is just the sum of all two-variable combinations.",
+    "tip": "Carry out is a Majority logic gate function."
+  },
+  {
+    "id": 17,
+    "question": "Match the conversion requirement (List I) with the necessary combinational logic (List II). List I: P. Convert SR to D Flip-Flop, Q. Convert JK to T Flip-Flop. List II: 1. Tie inputs together (J=K=T), 2. Connect an inverter between the inputs (S=D, R=D').",
+    "options": ["P-1, Q-2", "P-2, Q-1", "P-1, Q-1", "P-2, Q-2"],
+    "answer": "P-2, Q-1",
+    "explanation": "Step 1: To make a D (Data) flip-flop from an SR, ensure S and R are always opposite to avoid the invalid 1,1 state. Applying D to S and D' to R achieves this (P-2). Step 2: To make a T (Toggle) flip-flop from a JK, tie J and K together. When T=1, J=K=1 (toggles). When T=0, J=K=0 (holds state) (Q-1).",
+    "trick": "Trap: D stands for Data (single input, inverse applied). T stands for Toggle (inputs tied).",
+    "tip": "D needs inverter. T needs direct short."
+  },
+  {
+    "id": 18,
+    "question": "In a 3-variable K-Map, if all 8 cells are grouped together to form a single octet, what is the resulting minimized boolean expression?",
+    "options": ["0", "1", "A + B + C", "ABC"],
+    "answer": "1",
+    "explanation": "Step 1: A 3-variable K-map contains 2^3 = 8 cells. Step 2: If all cells contain a logic 1, it means the output is 1 for every possible input combination. Step 3: An octet eliminates 3 variables. Since there are only 3 variables, all are eliminated. Step 4: The function is totally independent of inputs, resulting in a constant logic 1.",
+    "trick": "Shortcut: A fully populated K-map always evaluates to the constant 1. An empty K-map evaluates to 0.",
+    "tip": "Fully grouped K-map equals logic 1."
+  },
+  {
+    "id": 19,
+    "question": "Evaluate Statement 1: An Encoder transforms a decimal input into a binary output. Statement 2: A Priority Encoder resolves issues when multiple inputs are active simultaneously by outputting the code of the input with the highest designated priority. Which is accurate?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Both 1 and 2",
+    "explanation": "Step 1: A standard encoder reduces 2^N input lines to N output lines, effectively translating discrete active lines (like a decimal keypad) into binary code. Statement 1 is true. Step 2: Standard encoders fail unpredictably if two inputs are pressed at once. Priority encoders use extra logic gates to ignore lower-priority inputs when a higher-priority line is active. Statement 2 is true.",
+    "trick": "Trap: Standard encoders have undefined behavior for multiple HIGH inputs. Priority encoders are mandatory for robust real-world input processing.",
+    "tip": "Priority Encoders safely handle simultaneous multiple inputs."
+  },
+  {
+    "id": 20,
+    "question": "Which combinational circuit is considered a 'Universal Logic Block' because it can implement any boolean function of N variables if properly configured?",
+    "options": ["Full Adder", "Multiplexer", "Magnitude Comparator", "Parity Generator"],
+    "answer": "Multiplexer",
+    "explanation": "Step 1: A Multiplexer (MUX) is defined by select lines and data inputs. Step 2: By connecting the variables of a boolean function to the select lines, the MUX decodes every possible minterm. Step 3: The user simply ties the corresponding data input lines to Logic 1 or Logic 0 based on the desired truth table. Step 4: Because it can mechanically replicate any truth table, it acts as a universal building block.",
+    "trick": "Shortcut: A 2^N to 1 MUX directly implements ANY boolean function of N variables without external gates.",
+    "tip": "MUX is a Universal Combinational Logic Block."
+  },
+  {
+    "id": 21,
+    "question": "What is the primary operational disadvantage of an SR Latch constructed using NOR gates when inputs S=1 and R=1 are applied?",
+    "options": ["The output toggles continuously", "The circuit acts as a frequency divider", "It enters an invalid/forbidden state where both Q and Q' are 0", "It enters a high-impedance memory state"],
+    "answer": "It enters an invalid/forbidden state where both Q and Q' are 0",
+    "explanation": "Step 1: In a NOR-based SR Latch, a '1' on any input forces the gate's output to '0'. Step 2: If Set (S) = 1, Q' is forced to 0. If Reset (R) = 1, Q is forced to 0. Step 3: Thus, both Q and Q' become 0 simultaneously. Step 4: This violates the fundamental rule of complementary outputs (Q must equal NOT Q'). If inputs drop to 0 simultaneously, the final state is unpredictable (metastability).",
+    "trick": "Trap: S=1, R=1 in a NAND latch forces both to 1. In a NOR latch, it forces both to 0. Both are forbidden.",
+    "tip": "S=1, R=1 is the forbidden state for SR Latches."
+  },
+  {
+    "id": 22,
+    "question": "Match the K-Map grouping type (List I) with its definition (List II). List I: P. Prime Implicant, Q. Essential Prime Implicant. List II: 1. A maximum-sized group of 1s that covers at least one 1 not covered by any other group, 2. Any maximum-sized group of 1s that cannot be further expanded.",
+    "options": ["P-1, Q-2", "P-2, Q-1", "P-1, Q-1", "P-2, Q-2"],
+    "answer": "P-2, Q-1",
+    "explanation": "Step 1: A Prime Implicant (PI) is simply the largest possible valid grouping in a K-Map. Expanding it further is impossible (P-2). Step 2: An Essential Prime Implicant (EPI) is a PI that has exclusive 'ownership' of at least one cell (minterm). Because no other group covers that cell, this specific group MUST be included in the final boolean expression (Q-1).",
+    "trick": "Trap: All EPIs are PIs, but not all PIs are EPIs. Non-essential PIs might be redundant.",
+    "tip": "EPIs must appear in the final minimized expression."
+  },
+  {
+    "id": 23,
+    "question": "Consider Statement 1: A Half Subtractor has no provision to accept a borrow from a previous lower-order stage. Statement 2: To subtract 8-bit numbers efficiently without borrow propagation delay, a Ripple Borrow Subtractor is utilized. Which is accurate?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Only Statement 1",
+    "explanation": "Step 1: A Half Subtractor only computes X - Y. It has no Borrow-In pin. To handle cascaded borrows, a Full Subtractor (X - Y - Bin) is needed. Statement 1 is true. Step 2: A Ripple Borrow architecture (analogous to Ripple Carry) inherently SUFFERS from propagation delay. To eliminate this delay, a Look-Ahead architecture must be used. Statement 2 is false.",
+    "trick": "Trap: 'Ripple' architectures are always the slowest due to linear cascade delays, regardless of whether they are adding or subtracting.",
+    "tip": "Ripple architectures have linear O(N) propagation delay."
+  },
+  {
+    "id": 24,
+    "question": "A digital designer is tasked with implementing a 3-input logic function using a Multiplexer. If they use an 8-to-1 MUX, how many external logic gates are strictly required?",
+    "options": ["0", "1", "2", "3"],
+    "answer": "0",
+    "explanation": "Step 1: A 3-input logic function has 2^3 = 8 possible minterms (truth table rows). Step 2: An 8-to-1 MUX has exactly 3 select lines and 8 data inputs. Step 3: By applying the 3 input variables directly to the select lines, the 8 data inputs perfectly correspond to the 8 output states of the truth table. Step 4: The designer simply wires each data input directly to Logic 1 (Vcc) or Logic 0 (GND). Zero external logic gates are needed.",
+    "trick": "Shortcut: A MUX with 2^N inputs can implement ANY N-variable function directly with zero external gates.",
+    "tip": "8:1 MUX implements any 3-variable function directly."
+  },
+  {
+    "id": 25,
+    "question": "What happens when an active high level-triggered D-Latch is provided with a constant D=1 input, but the Enable (Clock) pin remains strictly at Logic 0?",
+    "options": ["The output Q immediately becomes 1", "The output Q immediately becomes 0", "The output Q toggles", "The output Q retains its previous state"],
+    "answer": "The output Q retains its previous state",
+    "explanation": "Step 1: A latch requires an active Enable signal to become transparent. Step 2: Since it is an active high latch, Enable=1 makes it transparent, and Enable=0 puts it in a hold/memory state. Step 3: Because Enable remains at 0, the latch is essentially deaf to any changes on the D input. Step 4: Consequently, it strictly retains whatever boolean value it previously held.",
+    "trick": "Trap: Reading D=1 and assuming it propagates. Control pins (Enable/Clock) always dictate when data is allowed to enter the memory cell.",
+    "tip": "Latches hold memory when Enable is inactive."
+  },
+  {
+    "id": 26,
+    "question": "Evaluate Statement 1: Converting a binary number to a Gray code prevents more than one bit from changing state during sequential counting. Statement 2: Binary to Gray code conversion can be achieved entirely using a sequence of OR gates. Which is true?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Only Statement 1",
+    "explanation": "Step 1: Gray code is a 'reflected binary code' explicitly designed so that adjacent values differ by only a single bit, eliminating multi-bit transition glitches (e.g., used in K-Maps and absolute encoders). Statement 1 is true. Step 2: The hardware conversion between binary and Gray code strictly utilizes Exclusive-OR (XOR) gates, not standard OR gates. Statement 2 is false.",
+    "trick": "Trap: Standard OR logic cannot identify differing bits. XOR acts as an inequality detector, crucial for Gray code logic.",
+    "tip": "Gray code requires XOR gates for conversion."
+  },
+  {
+    "id": 27,
+    "question": "Match the Sequential Characteristic (List I) with its definition (List II). List I: P. Setup Time, Q. Hold Time. List II: 1. Minimum time data must be stable AFTER the clock edge, 2. Minimum time data must be stable BEFORE the clock edge.",
+    "options": ["P-1, Q-2", "P-2, Q-1", "P-1, Q-1", "P-2, Q-2"],
+    "answer": "P-2, Q-1",
+    "explanation": "Step 1: Setup Time is the required temporal window where input data must be rock-solid BEFORE the active clock edge arrives, allowing internal gate capacitance to settle (P-2). Step 2: Hold Time is the brief window AFTER the active clock edge where data must remain stable to ensure successful internal capture without corruption (Q-1).",
+    "trick": "Trap: Violating either timing constraint causes the flip-flop to enter Metastability (an unstable, unpredictable voltage state).",
+    "tip": "Setup = Before edge. Hold = After edge."
+  },
+  {
+    "id": 28,
+    "question": "A combinational circuit provides an output of 1 if its 4-bit binary input represents a prime number. What is the sum of minterms representing this specific function? (Assume 0 and 1 are not prime)",
+    "options": ["Sum(2, 3, 5, 7, 11, 13)", "Sum(1, 2, 3, 5, 7, 11, 13)", "Sum(2, 3, 5, 7, 9, 11)", "Sum(3, 5, 7, 11, 13, 15)"],
+    "answer": "Sum(2, 3, 5, 7, 11, 13)",
+    "explanation": "Step 1: A 4-bit input ranges from 0000 to 1111 (Decimal 0 to 15). Step 2: Identify the mathematical prime numbers in this range. Step 3: By definition, 0 and 1 are not prime. The primes are 2, 3, 5, 7, 11, and 13. (Note: 9 and 15 are odd but not prime). Step 4: The boolean function is true for these decimal equivalents, yielding the minterm list Sum(2, 3, 5, 7, 11, 13).",
+    "trick": "Trap: Many digital logic students blindly include 1 or 9 as primes. Strictly apply mathematical definitions before writing minterms.",
+    "tip": "Primes under 16: 2, 3, 5, 7, 11, 13."
+  },
+  {
+    "id": 29,
+    "question": "Consider Statement 1: A BCD (Binary Coded Decimal) adder requires a correction factor to be added if the sum of a digit exceeds 9. Statement 2: The binary correction factor added is specifically 0110 (Decimal 6). Which is correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Both 1 and 2",
+    "explanation": "Step 1: BCD strictly uses 4 bits to represent decimal digits 0-9. Standard 4-bit binary adders naturally count up to 15 (1111). Step 2: If a sum exceeds 9 (e.g., 1010 to 1111), it falls into invalid BCD territory. A correction is mandatory. Statement 1 is true. Step 3: Because 4 bits have 16 states and BCD only uses 10, the offset is 6. Adding 0110 forces the binary adder to 'skip' the 6 invalid states and generate the correct decimal carry. Statement 2 is true.",
+    "trick": "Shortcut: BCD math uses base 10. Binary uses base 16. The difference is 6. Always add 6 to correct invalid BCD sums.",
+    "tip": "BCD addition correction factor is +6 (0110)."
+  },
+  {
+    "id": 30,
+    "question": "If a JK flip-flop's characteristic equation is Q(n+1) = JQ'(n) + K'Q(n), what happens structurally when it is configured in toggle mode?",
+    "options": ["J=1, K=0, yielding Q(n+1) = 1", "J=0, K=0, yielding Q(n+1) = Q(n)", "J=1, K=1, yielding Q(n+1) = Q'(n)", "J=0, K=1, yielding Q(n+1) = 0"],
+    "answer": "J=1, K=1, yielding Q(n+1) = Q'(n)",
+    "explanation": "Step 1: Toggle mode demands the flip-flop invert its state continuously. Step 2: This is achieved by driving both inputs high: J=1, K=1. Step 3: Substitute these into the characteristic equation: Q(n+1) = (1)Q'(n) + (1)'Q(n). Step 4: Simplify: Q(n+1) = Q'(n) + (0)Q(n) = Q'(n). The next state is mathematically proven to be the inverse of the current state.",
+    "trick": "Trap: Do not mix toggle mode up with Set (J=1, K=0) or Reset (J=0, K=1).",
+    "tip": "Toggle mode (J=K=1) forces next state to inverse."
+  },
+  {
+    "id": 31,
+    "question": "Match the combinational application (List I) with the appropriate logic circuit (List II). List I: P. Converting a physical rotary position to digital, Q. Executing binary arithmetic. List II: 1. Full Adder, 2. Priority Encoder.",
+    "options": ["P-1, Q-2", "P-2, Q-1", "P-1, Q-1", "P-2, Q-2"],
+    "answer": "P-2, Q-1",
+    "explanation": "Step 1: Rotary encoders/keypads often have multiple sensors active near transition zones. A Priority Encoder safely converts this noisy multi-line input into a clean digital binary code by ignoring lower priorities (P-2). Step 2: Binary arithmetic (addition) is the explicit domain of the Full Adder circuit (Q-1).",
+    "trick": "Trap: Regular encoders fail with physical hardware due to contact bounce/overlap. Priority encoders are essential.",
+    "tip": "Physical to Digital conversions require Priority Encoders."
+  },
+  {
+    "id": 32,
+    "question": "A digital circuit uses a Demultiplexer to route a serial data stream. If the circuit must address 32 different output channels, how many Select Lines are required?",
+    "options": ["4", "5", "6", "32"],
+    "answer": "5",
+    "explanation": "Step 1: A demultiplexer relates output channels to select lines via the formula: Outputs = 2^N, where N is the number of select lines. Step 2: The required number of outputs is 32. Step 3: Set up the equation: 2^N = 32. Step 4: Solving for N, we find 2^5 = 32. Therefore, exactly 5 select lines are necessary.",
+    "trick": "Shortcut: Just take the base-2 logarithm of the output channels. Log2(32) = 5.",
+    "tip": "Select lines = Log2(Number of Outputs)."
+  },
+  {
+    "id": 33,
+    "question": "Evaluate Statement 1: Synchronous counters suffer from cumulative propagation delay identical to ripple counters. Statement 2: In a synchronous counter, all flip-flops are triggered by the same master clock signal simultaneously. Which is true?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: Ripple (asynchronous) counters daisy-chain the clock, meaning delay accumulates sequentially. Synchronous counters trigger every flip-flop with a shared, parallel clock line, eliminating cumulative delay. Statement 1 is false. Step 2: The defining characteristic of a synchronous system is that state changes are coordinated simultaneously by a universal clock edge. Statement 2 is true.",
+    "trick": "Trap: 'Synchronous' implies synchronization to a single shared temporal event (the master clock). 'Asynchronous' implies individual, chained events.",
+    "tip": "Synchronous = Shared Clock = Fast execution."
+  },
+  {
+    "id": 34,
+    "question": "When implementing the sum of minterms f(A,B,C) = Sum(0, 2, 4, 6) using a Karnaugh Map, what visual pattern emerges, and what is the minimized expression?",
+    "options": ["A pair in the center; Expression: B", "A quad in the center; Expression: C", "Four isolated 1s; Expression: A'B'C' + ...", "A quad forming a column or covering corners/edges; Expression: C'"],
+    "answer": "A quad forming a column or covering corners/edges; Expression: C'",
+    "explanation": "Step 1: Translate the minterms to binary coordinates: m0(000), m2(010), m4(100), m6(110). Step 2: Notice a pattern: the right-most bit (C) is strictly 0 for all these minterms. Step 3: Plotting these in a 3-variable K-map fills the entire column (or edges depending on layout) where C=0. Step 4: Grouping all four creates a quad that spans all variations of A and B, eliminating them. The remaining constant variable is C=0, giving the expression C'.",
+    "trick": "Shortcut: If looking at decimal minterms, all even numbers map to a 0 in the Least Significant Bit. If the function covers exactly all even combinations, it equals LSB'.",
+    "tip": "All even minterms in a full set simplify to LSB'."
+  },
+  {
+    "id": 35,
+    "question": "Match the logic block (List I) with its typical structural inverse (List II). List I: P. Multiplexer, Q. Encoder. List II: 1. Demultiplexer, 2. Decoder.",
+    "options": ["P-1, Q-2", "P-2, Q-1", "P-1, Q-1", "P-2, Q-2"],
+    "answer": "P-1, Q-2",
+    "explanation": "Step 1: A Multiplexer combines Many-to-One. Its structural inverse separates One-to-Many, which is the Demultiplexer (P-1). Step 2: An Encoder compresses 2^N distinct lines into an N-bit code. Its inverse expands an N-bit code back into 2^N distinct lines, which is the Decoder (Q-2).",
+    "trick": "Trap: Do not mix routing (MUX) with translation (Encoder). MUX passes data; Encoders translate state to binary.",
+    "tip": "MUX inverts to DEMUX. Encoder inverts to Decoder."
+  },
+  {
+    "id": 36,
+    "question": "Which of the following describes the 'Excitation Table' of a Flip-Flop?",
+    "options": ["It shows the next state given the current inputs and current state", "It shows the required inputs to achieve a desired transition from current state to next state", "It defines the internal gate-level logic of the device", "It specifies the maximum operating frequency of the clock"],
+    "answer": "It shows the required inputs to achieve a desired transition from current state to next state",
+    "explanation": "Step 1: A Truth Table (or Characteristic Table) answers 'What happens next?' given inputs. Step 2: An Excitation Table works backwards. It answers 'What inputs do I need to force a specific change?' Step 3: Digital designers use excitation tables during state machine synthesis to determine the necessary combinational logic driving the flip-flop inputs.",
+    "trick": "Shortcut: Truth = Inputs dictate Output. Excitation = Desired Output dictates necessary Inputs.",
+    "tip": "Excitation table works backwards from desired state."
+  },
+  {
+    "id": 37,
+    "question": "Evaluate Statement 1: A parity generator is a combinational circuit used strictly for error detection. Statement 2: An even parity generator outputs a '1' if the input data stream contains an odd number of '1's. Which is correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Both 1 and 2",
+    "explanation": "Step 1: Parity bits are appended to data specifically to allow receivers to detect single-bit transmission errors. They do not have memory (combinational). Statement 1 is true. Step 2: Even parity means the TOTAL number of 1s transmitted (data + parity bit) must be an even number. Therefore, if the data has an ODD number of 1s, the generator must output a '1' to make the total sum EVEN. Statement 2 is true.",
+    "trick": "Trap: Even parity generators don't output '1' when the input is even. They output '1' to FIX an odd input.",
+    "tip": "Even parity generator is essentially an XOR tree."
+  },
+  {
+    "id": 38,
+    "question": "A digital alarm system activates (Output=1) if Door A is open (1) AND Window B is open (1), OR if the Master Override C is pressed (1). What is the minimum SOP boolean equation?",
+    "options": ["AB + C", "(A+B)C", "A+B+C", "ABC"],
+    "answer": "AB + C",
+    "explanation": "Step 1: Translate the text to logic. 'Door A is open AND Window B is open' translates to the AND term: AB. Step 2: 'OR if Master Override C is pressed' translates to the OR term: + C. Step 3: Combine them directly according to the text: Output = AB + C. Step 4: This is already in minimal Sum of Products (SOP) form.",
+    "trick": "Shortcut: Read English phrasing literally. AND equals multiplication, OR equals addition.",
+    "tip": "Directly map English logic clauses to boolean operations."
+  },
+  {
+    "id": 39,
+    "question": "Match the Flip-Flop configuration (List I) with its resulting operational behavior (List II). List I: P. JK Flip-Flop with J=0, K=1, Q. SR Latch with S=1, R=0. List II: 1. Forces output to Logic 1 (Set), 2. Forces output to Logic 0 (Reset).",
+    "options": ["P-1, Q-2", "P-2, Q-1", "P-1, Q-1", "P-2, Q-2"],
+    "answer": "P-2, Q-1",
+    "explanation": "Step 1: In a JK flip-flop, the K input acts similarly to the Reset pin. If J=0 and K=1, the device clears the memory, forcing Q to 0 (P-2). Step 2: In an SR latch, the S input acts as Set. If S=1 and R=0, the device writes a 1 to memory, forcing Q to 1 (Q-1).",
+    "trick": "Trap: K stands for 'Kill' (Reset to 0). J stands for 'Jump' (Set to 1).",
+    "tip": "K=1 forces 0. S=1 forces 1."
+  },
+  {
+    "id": 40,
+    "question": "If a 4-variable function is expressed as Product of Sums (POS): f(A,B,C,D) = Product(0, 1, 2, 3, 4, 5, 6, 7), what is the minimized boolean expression?",
+    "options": ["A", "A'", "B", "B'"],
+    "answer": "A",
+    "explanation": "Step 1: POS uses Maxterms (M). The maxterms 0 through 7 encompass the entire top half of a standard 4-variable K-map (where variable A is 0). Step 2: Grouping these 8 Maxterms in a K-map forms an octet. Step 3: The octet spans all variations of B, C, and D, eliminating them. Step 4: The only constant variable across these cells is A=0. In POS, an input of 0 is represented by the uncomplemented variable. Therefore, the result is A.",
+    "trick": "Trap: In POS, 0 maps to normal (A) and 1 maps to complemented (A'). It is the exact reverse of SOP notation.",
+    "tip": "POS notation: Logic 0 = Normal variable."
+  },
+  {
+    "id": 41,
+    "question": "Evaluate Statement 1: A combinational circuit has no feedback paths and its output depends purely on present inputs. Statement 2: An asynchronous sequential circuit relies heavily on a global clock signal. Which is correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Only Statement 1",
+    "explanation": "Step 1: By definition, combinational logic lacks memory elements and feedback loops; outputs are strictly a function of current inputs. Statement 1 is true. Step 2: 'Asynchronous' explicitly means unclocked. The circuit state changes instantly based on input propagation delays, without waiting for a global clock pulse. Statement 2 is false.",
+    "trick": "Trap: Synchronous means 'synced to a clock'. Asynchronous means 'independent of a clock'.",
+    "tip": "Asynchronous circuits lack global clock control."
+  },
+  {
+    "id": 42,
+    "question": "A digital arithmetic unit uses a 4-bit parallel adder (Ripple Carry). If the propagation delay of a single Full Adder is 10 ns, what is the worst-case time required to perform an addition?",
+    "options": ["10 ns", "20 ns", "40 ns", "80 ns"],
+    "answer": "40 ns",
+    "explanation": "Step 1: In a Ripple Carry Adder, the critical path (worst-case delay) occurs when the carry bit generated at the Least Significant Bit (LSB) must ripple through every subsequent stage to reach the Most Significant Bit (MSB). Step 2: There are 4 Full Adders connected in series for the carry path. Step 3: Total delay = (Number of stages) * (Delay per stage). Step 4: 4 * 10 ns = 40 ns.",
+    "trick": "Shortcut: Ripple carry delay scales linearly. N bits * T delay = Total Delay.",
+    "tip": "Ripple Carry worst-case delay = N * gate delay."
+  },
+  {
+    "id": 43,
+    "question": "Match the logical redundancy (List I) with its K-Map effect (List II). List I: P. Redundant Prime Implicant, Q. Static Hazard. List II: 1. A grouping that causes a temporary glitch during input transitions, 2. A valid group of 1s entirely covered by other Essential Prime Implicants.",
+    "options": ["P-1, Q-2", "P-2, Q-1", "P-1, Q-1", "P-2, Q-2"],
+    "answer": "P-2, Q-1",
+    "explanation": "Step 1: A redundant Prime Implicant is a grouping you *can* make, but shouldn't, because every '1' in it is already claimed by an Essential Prime Implicant (P-2). Step 2: A Static Hazard is a physical glitch (brief drop to 0 or spike to 1) caused by uneven propagation delays when moving between adjacent grouped minterms. Adding a redundant consensus term to bridge them cures the hazard (Q-1).",
+    "trick": "Trap: Redundant terms are bad for minimizing gate count, but structurally mandatory to cure static hazards.",
+    "tip": "Static hazards are fixed by adding overlapping redundant terms."
+  },
+  {
+    "id": 44,
+    "question": "How can a 2-input NAND gate be configured to act strictly as an Inverter (NOT gate)?",
+    "options": ["Tie both inputs to ground", "Tie one input to Vcc and apply the signal to the other", "Apply the signal to one input and leave the other floating", "Tie the output back to one input"],
+    "answer": "Tie one input to Vcc and apply the signal to the other",
+    "explanation": "Step 1: The boolean expression for a NAND gate is F = (A * B)'. Step 2: To create an inverter (F = A'), we need B to conceptually disappear from the equation without forcing it to 0. Step 3: In boolean algebra, A * 1 = A. Step 4: By tying input B permanently to Logic 1 (Vcc), the equation becomes F = (A * 1)' = A'. Alternatively, tying both inputs together (A=B) also yields (A*A)' = A'.",
+    "trick": "Shortcut: Any universal gate (NAND/NOR) becomes an inverter if you tie its inputs together, or tie the 'unused' input to the non-controlling logic state (1 for NAND, 0 for NOR).",
+    "tip": "NAND + Vcc on one pin = NOT gate."
+  },
+  {
+    "id": 45,
+    "question": "Evaluate Statement 1: A Master-Slave D Flip-Flop is constructed by cascading two D-Latches. Statement 2: The Master latch activates on the high clock level, while the Slave latch activates on the low clock level (assuming an inverter on the clock path). Which is true?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Both 1 and 2",
+    "explanation": "Step 1: The architecture of any Master-Slave flip-flop relies on two cascaded level-sensitive latches to simulate precise edge-triggering. Statement 1 is true. Step 2: The clock input is fed directly to the Master, and inverted before feeding the Slave. This ensures they are never transparent simultaneously. When the clock transitions, the Master locks its value, and the Slave opens to pass it to the output. Statement 2 is true.",
+    "trick": "Trap: Edge-triggering is an illusion created by two level-sensitive devices operating out of phase.",
+    "tip": "Master-Slave uses inverted clocks to isolate stages."
+  },
+  {
+    "id": 46,
+    "question": "A designer implements a logic function using a 4-to-1 Multiplexer. The inputs are variables X and Y on select lines S1, S0. The data lines I0 to I3 are wired as 0, 1, 0, 1. What boolean function is realized?",
+    "options": ["X AND Y", "X OR Y", "Only X", "Only Y"],
+    "answer": "Only Y",
+    "explanation": "Step 1: The MUX equation is S1'S0'I0 + S1'S0I1 + S1S0'I2 + S1S0I3. Step 2: Substitute S1=X, S0=Y. Step 3: F = X'Y'(0) + X'Y(1) + XY'(0) + XY(1). Step 4: Simplify: F = X'Y + XY. Factoring out Y gives Y(X' + X). Since X'+X=1, the final function is simply F = Y.",
+    "trick": "Shortcut: Look at the truth table outputs (0, 1, 0, 1). This perfectly matches the alternating pattern of the Least Significant Bit (variable Y), meaning the output is completely independent of X.",
+    "tip": "Truth table 0101 maps directly to the LSB."
+  },
+  {
+    "id": 47,
+    "question": "Match the Combinational Component (List I) with its functional equivalent (List II). List I: P. Data Distributor, Q. Universal Logic Gate. List II: 1. NAND Gate, 2. Decoder with an Enable pin.",
+    "options": ["P-1, Q-2", "P-2, Q-1", "P-1, Q-1", "P-2, Q-2"],
+    "answer": "P-2, Q-1",
+    "explanation": "Step 1: A Data Distributor is a Demultiplexer. Structurally, a standard Decoder chip equipped with an active Enable pin functions perfectly as a Demultiplexer, passing the Enable data to the selected line (P-2). Step 2: Universal Logic Gates are capable of constructing any other basic gate (AND, OR, NOT). NAND and NOR are the designated universal gates (Q-1).",
+    "trick": "Trap: Multiplexers are universal *combinational blocks*, but NAND/NOR are universal *gates*. Pay attention to terminology.",
+    "tip": "NAND/NOR are Universal Gates."
+  },
+  {
+    "id": 48,
+    "question": "Which specific condition defines 'Metastability' in the context of digital flip-flops?",
+    "options": ["The continuous toggling of state due to a race around condition", "An unpredictable voltage state caught between Logic 0 and Logic 1 due to timing violations", "The stable holding of memory when the clock is absent", "The intended state when J=1 and K=1"],
+    "answer": "An unpredictable voltage state caught between Logic 0 and Logic 1 due to timing violations",
+    "explanation": "Step 1: Flip-flops require input data to be stable during the Setup and Hold timing windows around the clock edge. Step 2: If data transitions exactly during this forbidden window, the internal feedback loops cannot definitively resolve to a 0 or 1. Step 3: The circuit enters a 'metastable' state, hovering near Vcc/2, which propagates unpredictable garbage data to the rest of the system until it randomly resolves.",
+    "trick": "Trap: Do not confuse metastability (voltage failure due to timing) with race around (logical toggling failure due to pulse width).",
+    "tip": "Metastability is an analog voltage failure due to Setup/Hold violations."
+  },
+  {
+    "id": 49,
+    "question": "Evaluate Statement 1: A Half Adder can calculate the sum of two variables but cannot generate a carry. Statement 2: An Exclusive-NOR (XNOR) gate outputs 1 only when both inputs are identical. Which is accurate?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both 1 and 2", "Neither 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Step 1: A Half Adder generates both a Sum (XOR) AND a Carry (AND). It is called 'Half' merely because it cannot ACCEPT a carry-in, not because it cannot generate one. Statement 1 is false. Step 2: An XNOR gate is an equivalence detector. F = AB + A'B'. It yields Logic 1 strictly when A and B match (00 or 11). Statement 2 is true.",
+    "trick": "Trap: Half Adders absolutely generate carries. They just can't process prior carries.",
+    "tip": "XNOR detects equality. XOR detects inequality."
+  },
+  {
+    "id": 50,
+    "question": "What is the primary architectural difference between a standard Ring Counter and a Johnson (Twisted Ring) Counter?",
+    "options": ["Ring connects Q to D; Johnson connects Q' to D", "Ring uses SR flip-flops; Johnson uses D flip-flops", "Ring is asynchronous; Johnson is synchronous", "Ring divides frequency by 2N; Johnson divides by N"],
+    "answer": "Ring connects Q to D; Johnson connects Q' to D",
+    "explanation": "Step 1: Both are shift-register based counters. Step 2: A Ring Counter feeds the output of the final stage (Q) directly back to the input of the first stage, circulating a single '1' through N states. Step 3: A Johnson Counter feeds the INVERTED output (Q') of the final stage back to the input, filling with 1s then emptying with 0s, creating 2N states. Step 4: Therefore, the feedback connection dictates the architecture and state count.",
+    "trick": "Shortcut: 'Twisted' refers to the inversion (crossing the wires) of the feedback loop from Q' instead of Q.",
+    "tip": "Ring uses straight feedback (Q). Johnson uses twisted feedback (Q')."
+  }
+]

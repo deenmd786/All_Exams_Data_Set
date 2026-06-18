@@ -1,0 +1,454 @@
+﻿
+
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): A Class C power amplifier is never utilized for amplifying audio frequency signals. Reason (R): The conduction angle of a Class C amplifier is strictly less than 180 degrees, which introduces severe harmonic distortion into the output waveform. Select the correct code:",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Class C amplifiers are biased below cutoff. Step 2: This biasing results in a conduction angle of less than 180 degrees, meaning the active device conducts for less than half the input cycle. Step 3: This severe clipping highly distorts the signal, generating massive harmonic content. Step 4: Audio signals require high fidelity (low distortion), making Class C entirely unsuitable. Step 5: Therefore, Class C is reserved for tuned RF amplifiers where tank circuits can filter out the harmonics.",
+    "trick": "ESE Trap: Always remember the inverse relationship in Power Amplifiers! Efficiency and Distortion go hand-in-hand. Class A is the purest but least efficient. Class C is highly efficient but highly distorted.",
+    "tip": "Class C conduction angle < 180 degrees. High efficiency, high distortion."
+  },
+  {
+    "id": 2,
+    "question": "In a Common Emitter (CE) amplifier, the presence of the parasitic capacitance C_bc (or C_gd in FETs) severely limits the high-frequency response. Which analytical concept directly explains the multiplication of this feedback capacitance at the input node?",
+    "options": ["Barkhausen Criterion", "Miller Effect", "Early Effect", "Cascode Compensation"],
+    "answer": "Miller Effect",
+    "explanation": "Step 1: The parasitic capacitance C_bc connects the input (base) to the output (collector). Step 2: An inverting voltage amplifier with gain -A_v multiplies the apparent impedance of any component bridging input and output. Step 3: By applying Kirchhoff's laws at the input node, the effective input capacitance becomes C_in = C_be + C_bc * (1 + A_v). Step 4: This massive multiplication of C_bc is defined strictly as the Miller Effect. Step 5: It dominates the input RC time constant, drastically lowering the upper cutoff frequency.",
+    "trick": "Miller capacitance is C_M = C_f * (1 + A_v). If the amplifier is non-inverting (like a common collector), the Miller effect reduces the effective capacitance instead of increasing it.",
+    "tip": "Miller Effect multiplies feedback capacitance by (1 + Voltage Gain)."
+  },
+  {
+    "id": 3,
+    "question": "A 555 timer is configured in astable multivibrator mode with external resistors R_A = 10 kOhm, R_B = 5 kOhm, and capacitor C = 10 uF. What is the precise duty cycle of the generated square wave?",
+    "options": ["50%", "66.67%", "75%", "80%"],
+    "answer": "75%",
+    "explanation": "Step 1: Identify the standard 555 astable duty cycle formula: Duty Cycle (%) = ((R_A + R_B) / (R_A + 2 * R_B)) * 100. Step 2: The capacitor charges through R_A and R_B, establishing the high time: T_high = 0.693 * (R_A + R_B) * C. Step 3: The capacitor discharges only through R_B, establishing the low time: T_low = 0.693 * R_B * C. Step 4: Substitute the given values: Duty Cycle = ((10 + 5) / (10 + 10)) * 100. Step 5: Calculate the result: (15 / 20) * 100 = 75%.",
+    "trick": "In a standard 555 astable circuit, the duty cycle can never be exactly 50% or less than 50% because T_high includes R_A + R_B, while T_low only includes R_B.",
+    "tip": "Standard 555 Astable Duty Cycle = (R_A + R_B) / (R_A + 2*R_B)."
+  },
+  {
+    "id": 4,
+    "question": "Assertion (A): A simple half-wave rectifier using a standard PN junction silicon diode cannot successfully rectify an AC signal with a peak amplitude of 200 mV. Reason (R): Precision rectifiers utilize an operational amplifier to effectively divide the diode's forward voltage drop by the op-amp's open-loop gain.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A standard silicon diode requires approximately 0.7V (700 mV) to become forward biased. Step 2: A 200 mV signal lacks the potential to overcome this barrier, meaning the diode remains off, and the signal is not rectified. Step 3: A precision rectifier places the diode within the negative feedback loop of an op-amp. Step 4: The virtual ground principle forces the op-amp output to swing to whatever voltage is necessary to maintain the input match. Step 5: The new effective turn-on voltage becomes V_d / A_ol, which is practically zero, allowing rectification of millivolt signals.",
+    "trick": "The op-amp does not eliminate the 0.7V drop physically; it compensates for it by outputting 0.7V plus the input signal. The load only sees the input signal.",
+    "tip": "Precision rectifier: Diode in feedback loop divides cut-in voltage by A_ol."
+  },
+  {
+    "id": 5,
+    "question": "Which specific parameter of a BJT defines the frequency at which the common-emitter short-circuit current gain drops to unity (0 dB)?",
+    "options": ["Beta Cutoff Frequency (f_beta)", "Alpha Cutoff Frequency (f_alpha)", "Unity-Gain Bandwidth / Transit Frequency (f_T)", "Maximum Oscillation Frequency (f_max)"],
+    "answer": "Unity-Gain Bandwidth / Transit Frequency (f_T)",
+    "explanation": "Step 1: The high-frequency short-circuit current gain of a BJT is denoted as h_fe(jf). Step 2: Due to internal parasitic capacitances (C_pi and C_mu), h_fe drops at 20 dB/decade at high frequencies. Step 3: The frequency where the magnitude of h_fe reaches 1 (or 0 dB) is defined as the transit frequency, f_T. Step 4: Mathematically, f_T = g_m / (2 * pi * (C_pi + C_mu)). Step 5: It serves as the absolute upper frequency limit for using the BJT as a current amplifier.",
+    "trick": "Do not confuse f_T with f_beta. The beta cutoff frequency (f_beta) is where the gain drops by 3 dB from its midband value, whereas f_T is where the gain is exactly 1.",
+    "tip": "f_T is the transit frequency where short-circuit current gain equals 1."
+  },
+  {
+    "id": 6,
+    "question": "A theoretical Class B push-pull power amplifier is supplied by a V_cc of 20 V. It drives an 8 Ohm load. What is the maximum theoretical average power dissipation of a single individual transistor in this configuration?",
+    "options": ["10.13 W", "5.06 W", "20.26 W", "25.00 W"],
+    "answer": "5.06 W",
+    "explanation": "Step 1: In a Class B push-pull amplifier, maximum power dissipation per transistor occurs when the peak output voltage V_p = (2 / pi) * V_cc. Step 2: The formula for total maximum power dissipation of the entire amplifier is P_D(max_total) = (2 * V_cc^2) / (pi^2 * R_L). Step 3: Calculate total dissipation: 2 * (20^2) / (pi^2 * 8) = (2 * 400) / (9.869 * 8) = 800 / 78.95 = 10.13 W. Step 4: The question specifically asks for the dissipation of a SINGLE individual transistor. Step 5: Therefore, divide the total by 2: 10.13 W / 2 = 5.06 W.",
+    "trick": "Examiners constantly trap students by asking for the 'single transistor' dissipation and providing the 'total' dissipation as an option (10.13 W). Always divide by 2 for push-pull components.",
+    "tip": "Max dissipation per Class B transistor = V_cc^2 / (pi^2 * R_L)."
+  },
+  {
+    "id": 7,
+    "question": "Assertion (A): In a logarithmic amplifier utilizing a BJT in the feedback loop, the output voltage is highly dependent on ambient temperature. Reason (R): The reverse saturation current (I_s) and the thermal voltage (V_T) of the BJT are heavily temperature-dependent parameters.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A basic log amplifier places a BJT (base grounded) in the feedback path of an op-amp. Step 2: The output voltage follows the Ebers-Moll equation: V_out = -V_T * ln(V_in / (R * I_s)). Step 3: V_T is the thermal voltage (kT/q), which increases linearly with absolute temperature. Step 4: I_s is the reverse saturation current, which approximately doubles for every 10 degree Celsius rise. Step 5: Because both V_T and I_s fluctuate wildly with temperature, the uncompensated log amplifier drifts significantly, confirming both A and R.",
+    "trick": "Practical log amps fix this by using matched transistor pairs to cancel out the I_s term and a temperature-dependent resistor (PTC) to cancel out the V_T variation.",
+    "tip": "Log amp output V_out = -V_T * ln(V_in / (R * I_s)). Both V_T and I_s cause thermal drift."
+  },
+  {
+    "id": 8,
+    "question": "Which circuit topology completely eliminates the Miller capacitance multiplication effect, thereby drastically improving the high-frequency bandwidth of an amplifier system?",
+    "options": ["Darlington Pair", "Push-Pull Configuration", "Cascode Amplifier", "Differential Amplifier"],
+    "answer": "Cascode Amplifier",
+    "explanation": "Step 1: The Miller effect occurs when there is high voltage gain across an inverting stage bridging a parasitic capacitance. Step 2: A cascode amplifier consists of a Common Emitter (CE) stage directly driving a Common Base (CB) stage. Step 3: The input CE stage sees a load equivalent to the input impedance of the CB stage, which is very low (approx 1/g_m). Step 4: This low load impedance forces the voltage gain of the CE stage to be approximately -1. Step 5: With unity voltage gain, the Miller multiplier (1 + A_v) is minimized, effectively neutralizing the Miller effect and vastly extending bandwidth.",
+    "trick": "While Darlington pairs increase current gain, they do not neutralize Miller capacitance. Cascode is strictly used for high-frequency bandwidth extension.",
+    "tip": "Cascode = CE drives CB. Minimizes voltage gain on CE, eliminating Miller effect."
+  },
+  {
+    "id": 9,
+    "question": "A 555 timer is used to create a monostable multivibrator. If the timing resistor is 100 kOhm and the timing capacitor is 10 nF, what is the duration of the output pulse when triggered?",
+    "options": ["1.1 ms", "1.0 ms", "0.693 ms", "1.44 ms"],
+    "answer": "1.1 ms",
+    "explanation": "Step 1: Identify the operating mode: Monostable (one-shot). Step 2: Recall the formula for the output pulse width (T) of a 555 timer in monostable mode: T = 1.1 * R * C. Step 3: Substitute the provided values into the formula. R = 100,000 Ohms, C = 10 * 10^-9 Farads. Step 4: Calculate the RC time constant: 100,000 * 0.00000001 = 0.001 seconds. Step 5: Multiply by the constant 1.1: T = 1.1 * 0.001 = 0.0011 seconds, or 1.1 milliseconds.",
+    "trick": "Do not confuse the monostable formula (1.1 * RC) with the astable half-cycle formula (0.693 * RC). The constants represent charging to 2/3 V_cc vs charging from 1/3 to 2/3 V_cc.",
+    "tip": "555 Monostable pulse width = 1.1 * R * C."
+  },
+  {
+    "id": 10,
+    "question": "Assertion (A): Class AB amplifiers use diodes or V_be multiplier circuits in their biasing networks to eliminate crossover distortion. Reason (R): Crossover distortion occurs in Class B amplifiers because neither transistor conducts when the input signal falls within the dead-band of -0.7V to +0.7V.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Class B amplifiers have complementary transistors biased exactly at zero base current. Step 2: An input signal must exceed the base-emitter cut-in voltage (~0.7V) to turn the transistor on. Step 3: During the zero-crossing transition of an AC signal, both transistors are completely off, causing a 'flat spot' or crossover distortion. Step 4: Class AB biasing adds a slight forward voltage (via diodes or a V_be multiplier) to keep both transistors barely conducting at zero input. Step 5: This eliminates the dead-band, smoothing the transition and removing the distortion. R clearly explains A.",
+    "trick": "The biasing network must be thermally coupled to the power transistors. If the output transistors heat up, their V_be drops, which could lead to thermal runaway if the bias voltage doesn't compensate.",
+    "tip": "Class AB eliminates Class B crossover distortion via slight forward biasing."
+  },
+  {
+    "id": 11,
+    "question": "In the context of the high-frequency Hybrid-Pi model of a BJT, the transconductance parameter (g_m) is primarily dependent on which operational factor?",
+    "options": ["High-frequency parasitic capacitance C_pi", "Quiescent DC collector current I_CQ", "Early Voltage V_A", "Base spreading resistance r_x"],
+    "answer": "Quiescent DC collector current I_CQ",
+    "explanation": "Step 1: In the Hybrid-Pi model, transconductance g_m relates the small-signal collector current to the small-signal base-emitter voltage. Step 2: The fundamental definition of g_m is the partial derivative of I_C with respect to V_BE evaluated at the quiescent operating point. Step 3: Using the active region Ebers-Moll equation, I_C = I_s * exp(V_BE / V_T). Step 4: Taking the derivative yields g_m = I_CQ / V_T. Step 5: Since the thermal voltage V_T is a constant at a given temperature (~26mV at 300K), g_m is directly proportional to the DC collector current I_CQ.",
+    "trick": "Never mistake small-signal AC parameters for fixed constants. The AC gain (tied to g_m) can be directly tuned by altering the DC bias current.",
+    "tip": "BJT Transconductance g_m = I_CQ / V_T. Directly controlled by DC bias."
+  },
+  {
+    "id": 12,
+    "question": "What is the theoretical maximum conversion efficiency of a Class A power amplifier that utilizes a perfectly ideal transformer to couple the load to the collector?",
+    "options": ["25%", "50%", "78.5%", "100%"],
+    "answer": "50%",
+    "explanation": "Step 1: A series-fed (RC coupled) Class A amplifier has a maximum theoretical efficiency of exactly 25% because half the DC power is wasted as heat in the collector resistor. Step 2: Replacing the collector resistor with an ideal transformer eliminates DC power loss in the primary winding because a pure inductor has zero DC resistance. Step 3: The DC load line becomes vertical, while the AC load line allows output voltage to swing from 0 to 2*V_cc. Step 4: Integrating the maximum possible AC output power over the steady DC input power yields a ratio of exactly 0.5. Step 5: Therefore, transformer coupling doubles the theoretical limit to 50%.",
+    "trick": "If the question says 'Series-Fed' Class A, it's 25%. If it says 'Transformer-Coupled' Class A, it's 50%. Pay close attention to the topology.",
+    "tip": "Class A Series-Fed Efficiency = 25%. Transformer-Coupled = 50%."
+  },
+  {
+    "id": 13,
+    "question": "Assertion (A): In an operational amplifier precision half-wave rectifier, the slew rate of the op-amp heavily limits the high-frequency performance of the circuit. Reason (R): When the input signal crosses zero and the diode turns off, the op-amp's feedback loop is broken, forcing the op-amp output to heavily saturate and eventually requiring significant time to slew back when the signal reverses.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: In a basic precision half-wave rectifier, during the non-conducting half-cycle, the diode blocks current to the load. Step 2: Because the diode is off, the negative feedback path of the op-amp is broken. Step 3: With open-loop gain, the slightest input forces the op-amp output to slam into the negative supply rail (saturation). Step 4: When the input goes positive again, the op-amp output must recover from the negative rail all the way to +0.7V to turn the diode back on. Step 5: This recovery takes time determined by the op-amp's slew rate (V/us), severely degrading high-frequency rectification. R correctly explains A.",
+    "trick": "To fix this issue, an 'improved' or 'super' precision rectifier uses a second diode to keep the feedback loop closed even during the blocking half-cycle, preventing saturation.",
+    "tip": "Basic precision rectifiers saturate during off-cycles, making slew rate the main bottleneck."
+  },
+  {
+    "id": 14,
+    "question": "In a 555 timer IC, what is the specific internal architectural purpose of the three matched 5 kOhm resistors connected in series between V_cc and Ground?",
+    "options": ["To limit the maximum output current to the load.", "To establish the internal timing constant independent of external components.", "To generate precise 1/3 V_cc and 2/3 V_cc reference voltages for the internal comparators.", "To pull down the discharge transistor when the reset pin is triggered."],
+    "answer": "To generate precise 1/3 V_cc and 2/3 V_cc reference voltages for the internal comparators.",
+    "explanation": "Step 1: The block diagram of a 555 timer includes a voltage divider network consisting of three identically valued resistors (typically 5 kOhm, giving the IC its name). Step 2: These resistors are connected in series from the positive supply rail (V_cc) to Ground. Step 3: By applying the voltage divider rule, the node between the top and middle resistor sits at exactly (2/3)*V_cc. Step 4: The node between the middle and bottom resistor sits at exactly (1/3)*V_cc. Step 5: These two reference voltages are directly fed into the inverting and non-inverting inputs of the Threshold and Trigger comparators, respectively.",
+    "trick": "Because the references are generated internally by a divider, the timer's operation is highly immune to supply voltage variations. If V_cc changes, the 1/3 and 2/3 thresholds scale proportionally.",
+    "tip": "Three 5k resistors create the 1/3 V_cc trigger and 2/3 V_cc threshold references."
+  },
+  {
+    "id": 15,
+    "question": "A fully compensated operational amplifier exhibits a single dominant pole response with an open-loop DC gain of 10^5 and a dominant pole frequency of 10 Hz. What is the Unity-Gain Bandwidth (UGB) of this op-amp?",
+    "options": ["100 kHz", "1 MHz", "10 MHz", "100 MHz"],
+    "answer": "1 MHz",
+    "explanation": "Step 1: For an amplifier with a single dominant pole, the Gain-Bandwidth Product (GBW) is constant at high frequencies. Step 2: The GBW is calculated by multiplying the open-loop DC gain (A_0) by the dominant pole cutoff frequency (f_p). Step 3: GBW = A_0 * f_p = 10^5 * 10 Hz = 10^6 Hz. Step 4: The Unity-Gain Bandwidth (UGB) is the frequency at which the open-loop gain drops to 1 (0 dB). Step 5: Since GBW is constant, UGB = GBW = 10^6 Hz = 1 MHz.",
+    "trick": "The relationship UGB = GBW ONLY holds true if the op-amp is 'internally compensated' (has a single dominant pole rolling off at -20 dB/decade until unity gain).",
+    "tip": "For single-pole systems, Unity-Gain Bandwidth = DC Gain * Pole Frequency."
+  },
+  {
+    "id": 16,
+    "question": "Assertion (A): To use a 555 timer as a Voltage Controlled Oscillator (VCO), the modulating signal must be applied to Pin 5 (Control Voltage). Reason (R): Applying a voltage to Pin 5 overrides the internal 2/3 V_cc reference voltage, dynamically altering the capacitor's upper threshold level and changing the output frequency.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate A. Pin 5 on a standard 555 timer is designated as the Control Voltage pin. Applying an external voltage here shifts the operating frequency, acting as a VCO. A is True. Step 2: Evaluate R. Pin 5 is directly tied to the internal resistor divider node that normally sits at 2/3 V_cc. Step 3: An external voltage applied here effectively clamps this node to the new external voltage. Step 4: Since this node is the reference for the Threshold comparator, the external voltage changes the voltage level the capacitor must reach to trigger a discharge. Step 5: Altering the upper charge limit directly modulates the charging time, thereby changing the frequency. R correctly explains A.",
+    "trick": "When Pin 5 is not used for modulation, it is best practice to tie it to ground through a 10 nF capacitor to bypass high-frequency noise that could cause false triggering.",
+    "tip": "Pin 5 overrides the 2/3 V_cc threshold, controlling astable frequency (VCO operation)."
+  },
+  {
+    "id": 17,
+    "question": "An Antilogarithmic (Exponential) amplifier is constructed by placing a BJT at the input stage of an op-amp and a resistor in the feedback path. To yield a mathematically exact antilog function, the input voltage must directly stimulate which parameter of the BJT?",
+    "options": ["Collector Current", "Base-Emitter Voltage", "Collector-Emitter Voltage", "Base Current"],
+    "answer": "Base-Emitter Voltage",
+    "explanation": "Step 1: The core of logarithmic/antilogarithmic computation relies on the nonlinear exponential relationship of a PN junction. Step 2: According to the active-region Ebers-Moll equation, I_C = I_s * exp(V_BE / V_T). Step 3: To construct an antilog (exponential) amplifier, the input voltage (V_in) is applied directly across the Base-Emitter junction (V_BE). Step 4: This causes the collector current I_C to vary exponentially with the input voltage. Step 5: The op-amp and feedback resistor simply convert this exponentially varying collector current into an output voltage (V_out = -I_C * R_f), completing the antilog operation.",
+    "trick": "In a Log amp, the transistor is in the feedback loop (Current drives V_BE). In an Antilog amp, the transistor is at the input (V_BE drives Current). Know the positional difference.",
+    "tip": "Antilog Amp: V_in drives Base-Emitter voltage to produce exponential current."
+  },
+  {
+    "id": 18,
+    "question": "Which specific class of Power Amplifier employs a tuned L-C tank circuit to reconstruct a full sine wave from narrow, high-current pulses?",
+    "options": ["Class A", "Class AB", "Class C", "Class D"],
+    "answer": "Class C",
+    "explanation": "Step 1: Class C amplifiers are biased heavily into cutoff, resulting in conduction angles less than 180 degrees. Step 2: Consequently, the output current is a sequence of narrow, highly distorted pulses rather than a continuous waveform. Step 3: To make this usable for RF transmission, the amplifier must be connected to a parallel resonant L-C tank circuit. Step 4: The tank circuit is tuned to the fundamental frequency of the pulses. Step 5: The high Q-factor of the tank acts as a narrow bandpass filter, suppressing the harmonics and 'ringing' to reconstruct a clean sine wave from the impulsive excitation.",
+    "trick": "You will never see a Class C amplifier used for broadband audio precisely because it relies on a narrow-band tuned tank circuit to clean up its output.",
+    "tip": "Class C uses tuned LC tank circuits to reconstruct sine waves from pulses."
+  },
+  {
+    "id": 19,
+    "question": "Assertion (A): The open-circuit time constant method is primarily utilized to estimate the lower 3-dB cutoff frequency (f_L) of a multi-stage amplifier. Reason (R): The open-circuit time constant method calculates the equivalent resistance seen by each internal high-frequency parasitic capacitance while assuming all other parasitic capacitances are open circuits.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "A is False, R is True",
+    "explanation": "Step 1: Evaluate A. The open-circuit time constant (OCTC) method is specifically designed to estimate the UPPER 3-dB cutoff frequency (f_H), not the lower cutoff. The lower cutoff is estimated using the short-circuit time constant method. Therefore, A is False. Step 2: Evaluate R. The OCTC algorithm involves selecting one high-frequency parasitic capacitance at a time, calculating the Thevenin resistance it sees, and strictly assuming all other high-frequency parasitic capacitors are open circuits (zero capacitance). Step 3: This summation of individual time constants gives an approximation of the dominant high-frequency pole. R is True. Step 4: Since A is False and R is True, the code is standard.",
+    "trick": "Memorize the pairing: High-frequency = Parasitic Caps = Open-Circuit Time Constant. Low-frequency = Coupling/Bypass Caps = Short-Circuit Time Constant.",
+    "tip": "Open-Circuit Time Constant method estimates UPPER cutoff frequency (f_H)."
+  },
+  {
+    "id": 20,
+    "question": "A true RMS-to-DC converter circuit utilizes an implicit computational loop topology rather than an explicit one to achieve higher dynamic range. Which mathematical progression perfectly describes the sequence of operations in an implicit true-RMS converter?",
+    "options": ["Square -> Mean -> Square Root", "Square -> Divide by Output -> Mean", "Absolute Value -> Logarithm -> Antilogarithm", "Integrate -> Differentiate -> Square"],
+    "answer": "Square -> Divide by Output -> Mean",
+    "explanation": "Step 1: The explicit mathematical definition of RMS is the square root of the mean of the square of the signal: V_rms = sqrt(Mean(V_in^2)). Step 2: Implementing a direct squarer followed by a square-rooter (explicit method) severely limits dynamic range because a 10V signal becomes 100V internally. Step 3: The implicit method solves the equation V_out = sqrt(Mean(V_in^2)) by algebraic manipulation: V_out^2 = Mean(V_in^2), therefore V_out = Mean(V_in^2 / V_out). Step 4: The topology forces this feedback relationship using an analog multiplier/divider IC. Step 5: The sequence physically performed by the circuit is: Square the input, Divide by the feedback output voltage, then take the Mean (using a low-pass filter).",
+    "trick": "Implicit RMS converters avoid the large internal voltage swings of explicit squarers by utilizing feedback division before the averaging stage.",
+    "tip": "Implicit RMS topology computes Mean(V_in^2 / V_out) using feedback division."
+  },
+  {
+    "id": 21,
+    "question": "If a symmetrical square wave with zero DC bias is fed into a perfect analog integrator (implemented via an op-amp with capacitive feedback), what is the definitive shape of the steady-state output waveform?",
+    "options": ["Sine wave", "Triangular wave", "Sawtooth wave", "Impulse train"],
+    "answer": "Triangular wave",
+    "explanation": "Step 1: The mathematical integral of a constant is a linear ramp (y = mx + c). Step 2: A square wave alternates between a constant positive voltage and a constant negative voltage. Step 3: Integrating the positive constant yields a steady linearly increasing ramp. Step 4: Integrating the negative constant yields a steady linearly decreasing ramp. Step 5: Connecting these alternating positive and negative linear slopes produces a continuous triangular wave.",
+    "trick": "If the square wave was NOT symmetrical (e.g., had a DC offset), the integrator output would eventually drift into saturation. Symmetrical input guarantees a stable triangular output.",
+    "tip": "Integral of a square wave is a triangular wave."
+  },
+  {
+    "id": 22,
+    "question": "Assertion (A): In an operational amplifier, Phase Margin is defined as the absolute phase angle of the loop gain measured at the frequency where the open-loop magnitude drops to zero. Reason (R): A phase margin of less than 0 degrees indicates that the negative feedback loop has inherently converted into a positive feedback loop, guaranteeing instability.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "A is False, R is True",
+    "explanation": "Step 1: Evaluate A. Phase Margin is NOT the absolute phase angle. It is the additional phase lag required to reach -180 degrees at the unity-gain frequency (0 dB magnitude). Formula: PM = 180 + Phase(at f_unity). Therefore, A is False. Step 2: Evaluate R. If the phase lag reaches or exceeds -180 degrees while the gain is still 1 or greater, the fed-back signal is perfectly in phase with the input. Step 3: This transforms negative feedback into positive feedback. Step 4: According to the Barkhausen criterion, unity gain and zero/360 degree phase shift causes sustained oscillation (instability). R is True.",
+    "trick": "Phase Margin measures 'how far away' you are from oscillating (-180 deg). An absolute phase of -135 degrees gives a phase margin of 45 degrees, which is stable.",
+    "tip": "Phase Margin = 180 + Phase Angle at Unity Gain Frequency."
+  },
+  {
+    "id": 23,
+    "question": "A practical power amplifier produces a fundamental output frequency component of 10V amplitude. It also inadvertently produces a second harmonic at 1V amplitude, and a third harmonic at 0.5V amplitude. What is the approximate Total Harmonic Distortion (THD) of this amplifier?",
+    "options": ["11.1%", "15.0%", "11.2%", "5.0%"],
+    "answer": "11.2%",
+    "explanation": "Step 1: THD is mathematically defined as the ratio of the RMS voltage of all harmonics combined to the RMS voltage of the fundamental frequency. Step 2: THD = sqrt(V_2^2 + V_3^2 + ... + V_n^2) / V_1. Step 3: Here, V_1 = 10, V_2 = 1, V_3 = 0.5. Step 4: Calculate the numerator: sqrt(1^2 + 0.5^2) = sqrt(1 + 0.25) = sqrt(1.25) = 1.118 V. Step 5: Divide by the fundamental: THD = 1.118 / 10 = 0.1118, which is 11.18%, or approximately 11.2%.",
+    "trick": "You don't need to convert peak amplitudes to RMS individually because the conversion factor (divide by sqrt(2)) cancels out in the ratio. Just use the raw amplitudes.",
+    "tip": "THD = sqrt(Sum of squared harmonics) / Fundamental amplitude."
+  },
+  {
+    "id": 24,
+    "question": "Which operational mode is strictly defined by an amplifier where the output transistors conduct for exactly 180 degrees of the input signal cycle?",
+    "options": ["Class A", "Class B", "Class AB", "Class C"],
+    "answer": "Class B",
+    "explanation": "Step 1: Class A conducts for the full 360 degrees. Step 2: Class B is biased exactly at the cutoff point (zero quiescent current). Step 3: As a result, a Class B transistor only conducts when the input signal is on the positive half of its cycle (assuming an NPN). Step 4: A half-cycle represents exactly 180 degrees. Step 5: Two complementary transistors are needed in push-pull to reconstruct the full 360-degree wave.",
+    "trick": "Class AB conducts for slightly MORE than 180 degrees (usually 190 to 200) to eliminate crossover distortion. Class B is strictly mathematically 180 degrees.",
+    "tip": "Class B conduction angle = strictly 180 degrees."
+  },
+  {
+    "id": 25,
+    "question": "Assertion (A): Placing an active BJT inside a standard diode-bridge full-wave rectifier creates a precision rectifier immune to voltage drops. Reason (R): Precision full-wave rectification utilizes absolute value circuits built with operational amplifiers and feedback diodes to bypass the standard 1.4V drop of a diode bridge.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "A is False, R is True",
+    "explanation": "Step 1: Evaluate A. Inserting a BJT into a passive diode bridge does not create a precision rectifier; it merely creates an active load or switch. Precision rectifiers intrinsically require operational amplifiers with high open-loop gain. A is False. Step 2: Evaluate R. A standard diode bridge drops 2*V_d (~1.4V), destroying low-voltage signals. Step 3: Precision full-wave rectifiers (often called absolute value circuits) use multiple op-amps and diodes in the feedback loop. Step 4: The virtual ground and high gain of the op-amp actively compensate for the diode drops, enabling flawless rectification of millivolt signals. R is True.",
+    "trick": "Don't be fooled by technical-sounding word salad in assertions. A 'BJT inside a diode bridge' is nonsense in the context of precision rectification.",
+    "tip": "Precision rectifiers use Op-Amps, not simple BJTs, to bypass diode voltage drops."
+  },
+  {
+    "id": 26,
+    "question": "In a basic 555 timer configured as an Astable Multivibrator, a designer connects a diode in parallel with the timing resistor R_B, with its anode facing R_A and cathode facing the capacitor C. What specific design restriction does this modification overcome?",
+    "options": ["It prevents the capacitor from charging past 2/3 V_cc.", "It permits the circuit to achieve duty cycles equal to or strictly less than 50%.", "It regulates the temperature drift of the internal comparators.", "It converts the circuit into a monostable configuration."],
+    "answer": "It permits the circuit to achieve duty cycles equal to or strictly less than 50%.",
+    "explanation": "Step 1: In a standard 555 astable, Duty Cycle = (R_A + R_B) / (R_A + 2*R_B). This value is inherently always > 50% because charge time (R_A + R_B) is strictly greater than discharge time (R_B). Step 2: By placing a diode in parallel with R_B (pointing downwards), the charging current bypasses R_B entirely. Step 3: The new charge time becomes dependent ONLY on R_A: T_high = 0.693 * R_A * C. Step 4: The discharge path remains through R_B, so T_low = 0.693 * R_B * C. Step 5: Duty cycle becomes R_A / (R_A + R_B). If R_A = R_B, duty cycle is exactly 50%. If R_A < R_B, duty cycle is < 50%.",
+    "trick": "This is a classic analog design interview question. The 'steering diode' routes charging current around R_B to break the inherent >50% limitation of the 555 timer.",
+    "tip": "Steering diode across R_B allows 555 duty cycles <= 50%."
+  },
+  {
+    "id": 27,
+    "question": "A typical Operational Amplifier has an open-loop voltage gain of 10^5 and an output voltage swing clamped at +/- 15V. What is the maximum possible differential input voltage that guarantees the op-amp operates strictly within its linear region?",
+    "options": ["150 mV", "1.5 mV", "150 uV", "15 uV"],
+    "answer": "150 uV",
+    "explanation": "Step 1: The linear region of an op-amp exists exclusively before the output voltage hits the power supply rails (saturation). Step 2: The transfer equation is V_out = A_ol * V_id (differential input voltage). Step 3: Maximum linear output is V_out(max) = 15V. Step 4: Rearranging the formula to find input limit: V_id(max) = V_out(max) / A_ol. Step 5: V_id(max) = 15V / 100,000 = 0.00015 Volts = 150 microvolts (uV). Anything larger pushes the op-amp into non-linear saturation.",
+    "trick": "Virtual ground relies on this. Because the input limit is only 150 microvolts, for all practical purposes in negative feedback analysis, we assume V_id is exactly 0 Volts.",
+    "tip": "Linear input range = Saturation Voltage / Open-Loop Gain."
+  },
+  {
+    "id": 28,
+    "question": "Assertion (A): In an operational transconductance amplifier (OTA), the output voltage is proportional to the differential input voltage. Reason (R): An OTA fundamentally acts as a voltage-controlled current source (VCCS), where the transconductance gain is programmed by an external bias current.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "A is False, R is True",
+    "explanation": "Step 1: Evaluate A. A standard op-amp outputs a voltage proportional to input voltage (VCVS). An OTA outputs a CURRENT proportional to the input voltage. Therefore, A is False. Step 2: Evaluate R. The core defining feature of an OTA is that it is a Voltage-Controlled Current Source (VCCS). Step 3: Furthermore, its fundamental transconductance parameter (g_m) is not fixed; it is directly linearly proportional to a user-supplied external bias current (I_abc). Step 4: This makes the OTA highly versatile as an analog multiplier or variable gain amplifier. R is True.",
+    "trick": "Standard Op-Amp = VCVS (Voltage out). OTA = VCCS (Current out). Know the distinction; it entirely changes how feedback loops are designed.",
+    "tip": "OTA is a Voltage-Controlled Current Source. Output is Current, not Voltage."
+  },
+  {
+    "id": 29,
+    "question": "For a Class A power amplifier operating under ideal maximum signal swing conditions, how much of the supplied DC power is transferred to the load if the topology is series-fed, and how much is transferred if it is transformer-coupled?",
+    "options": ["25% Series-Fed, 50% Transformer-Coupled", "50% Series-Fed, 78.5% Transformer-Coupled", "25% Series-Fed, 78.5% Transformer-Coupled", "10% Series-Fed, 25% Transformer-Coupled"],
+    "answer": "25% Series-Fed, 50% Transformer-Coupled",
+    "explanation": "Step 1: Efficiency is AC Power Out / DC Power In. Step 2: In a series-fed Class A, the DC bias current flows through the load resistor at all times. Max AC swing yields a theoretical maximum efficiency of 25%. Step 3: In a transformer-coupled Class A, the primary coil replaces the load resistor in the DC path. Step 4: An ideal inductor drops 0 Volts DC, wasting no bias power as heat in the collector circuit. Step 5: The AC voltage can swing symmetrically up to 2*Vcc across the transformer, raising the theoretical maximum efficiency limit to 50%.",
+    "trick": "Do not mix up Class A transformer-coupled (50%) with Class B push-pull (78.5%). Transformer coupling improves Class A, but it still operates 360 degrees, limiting it to 50%.",
+    "tip": "Class A max efficiencies: 25% (Resistor fed), 50% (Transformer fed)."
+  },
+  {
+    "id": 30,
+    "question": "Assertion (A): A peak detector circuit must employ an extremely small capacitor to ensure it accurately holds the peak voltage without decaying. Reason (R): A large capacitor increases the RC discharge time constant, severely limiting the circuit's ability to track rapid negative-going changes in the input signal's envelope.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "A is False, R is True",
+    "explanation": "Step 1: Evaluate A. A peak detector's primary job is to hold the maximum voltage. A small capacitor will discharge too quickly (droop) between peaks, ruining the hold function. A larger capacitor is preferred for a long hold time. A is False. Step 2: Evaluate R. While a large capacitor is good for holding, it has a drawback. Step 3: If the peak detector is used as an envelope detector (like in AM demodulation), a capacitor that is too large will not discharge fast enough. Step 4: It will fail to track the downward slope of the modulation envelope, causing 'diagonal clipping' distortion. R is a true statement regarding tracking limitations.",
+    "trick": "Peak detectors face a fundamental trade-off: large C prevents droop but causes diagonal clipping. Small C tracks fast changes but suffers massive ripple.",
+    "tip": "Large capacitor in peak detector holds voltage well but ruins fast envelope tracking."
+  },
+  {
+    "id": 31,
+    "question": "What is the primary function of a cross-coupled differential pair (Gilbert Cell) in high-frequency analog circuit design?",
+    "options": ["High-fidelity audio power amplification", "Precision half-wave rectification", "Four-quadrant analog multiplication and mixing", "Logarithmic voltage compression"],
+    "answer": "Four-quadrant analog multiplication and mixing",
+    "explanation": "Step 1: The Gilbert Cell is the fundamental building block of analog multipliers. Step 2: It consists of a lower differential pair that converts an input voltage into a differential current. Step 3: These currents feed two upper cross-coupled differential pairs. Step 4: The upper pairs are controlled by a second input voltage. Step 5: The cross-coupling allows the output current to be precisely proportional to the product of both input voltages, irrespective of their polarities (four-quadrant operation). This is universally used for RF mixing and modulation.",
+    "trick": "Standard log-antilog multipliers only work in one quadrant (positive inputs only). The Gilbert Cell natively handles positive and negative signals simultaneously (four-quadrant).",
+    "tip": "Gilbert Cell = Four-quadrant analog multiplier / RF mixer."
+  },
+  {
+    "id": 32,
+    "question": "In a complementary symmetry Class B push-pull amplifier, if the load resistance is strictly defined as R_L and the power supply is +/- V_cc, what is the exact formula for the maximum theoretical AC output power to the load?",
+    "options": ["V_cc^2 / (2 * R_L)", "V_cc^2 / (pi * R_L)", "2 * V_cc^2 / (pi^2 * R_L)", "V_cc^2 / (8 * R_L)"],
+    "answer": "V_cc^2 / (2 * R_L)",
+    "explanation": "Step 1: Maximum AC output power occurs when the output voltage swings all the way to the supply rails. Step 2: The peak AC output voltage is V_p = V_cc. Step 3: AC output power in a resistor is P_out = V_rms^2 / R_L. Step 4: Convert peak voltage to RMS: V_rms = V_p / sqrt(2) = V_cc / sqrt(2). Step 5: Substitute and square: P_out = (V_cc / sqrt(2))^2 / R_L = V_cc^2 / (2 * R_L).",
+    "trick": "Do not confuse Maximum AC Output Power with Maximum Transistor Dissipation. Output Power = V_cc^2 / 2R_L. Dissipation = 2V_cc^2 / pi^2 R_L.",
+    "tip": "Max AC Output Power for Class B = V_cc^2 / 2R_L."
+  },
+  {
+    "id": 33,
+    "question": "Assertion (A): The dominant pole in a multi-stage operational amplifier limits its high-frequency bandwidth but is absolutely essential for stability. Reason (R): The dominant pole ensures that the open-loop gain drops below unity (0 dB) before the accumulation of higher-order poles can push the phase margin past -180 degrees.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate A. High-frequency bandwidth is fundamentally restricted by the dominant pole, which initiates a -20 dB/decade roll-off early. Yet, designers intentionally add this pole (frequency compensation). A is True. Step 2: Evaluate R. An uncompensated op-amp has multiple poles that quickly sum up to -180 degrees of phase shift while the gain is still > 1, causing violent oscillation. Step 3: The intentional dominant pole artificially drops the gain at a constant -20 dB/dec. Step 4: By the time the second and third poles take effect and push the phase to -180, the dominant pole has already reduced the gain to < 1. Step 5: This satisfies Barkhausen criteria for stability. R explains A perfectly.",
+    "trick": "This is called 'dominant pole compensation'. It sacrifices raw speed (bandwidth) to guarantee closed-loop stability across all feedback configurations.",
+    "tip": "Dominant pole compensation guarantees stability by forcing unity gain before -180 deg phase shift."
+  },
+  {
+    "id": 34,
+    "question": "A typical LM317 adjustable voltage regulator uses an internal reference voltage applied across an external resistor R1. What is the standard predetermined magnitude of this internal reference voltage?",
+    "options": ["0.7 V", "1.25 V", "2.5 V", "5.0 V"],
+    "answer": "1.25 V",
+    "explanation": "Step 1: The LM317 is a universally utilized 3-terminal adjustable linear voltage regulator. Step 2: It maintains a strict, constant internal reference voltage between its Output pin and its Adjust pin. Step 3: This internal bandgap reference voltage is precisely calibrated to 1.25 V. Step 4: This voltage is dropped across programming resistor R1, generating a constant current. Step 5: This current flows through R2 to ground, defining the final output voltage via the formula V_out = 1.25 * (1 + R2/R1).",
+    "trick": "1.25V is the magic number for the LM317. Do not confuse it with the standard logic level 5.0V or the diode drop 0.7V. It relies on a bandgap reference.",
+    "tip": "LM317 internal reference voltage = strictly 1.25 V."
+  },
+  {
+    "id": 35,
+    "question": "Assertion (A): When calculating the high-frequency response of a Common Source JFET amplifier, the Miller capacitance usually dominates over the gate-to-source capacitance. Reason (R): The gate-to-drain parasitic capacitance (C_gd) is multiplied by the voltage gain of the amplifier, appearing much larger at the input node.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate A. In high-frequency modeling, the input RC network dictates the upper cutoff frequency. The input capacitance consists of C_gs + Miller_Capacitance. A is true. Step 2: Evaluate R. The Miller theorem states that an impedance bridging input to output on an inverting amplifier is divided by (1 - Gain). Step 3: For capacitance, this manifests as multiplication: C_M = C_gd * (1 - (-A_v)) = C_gd * (1 + A_v). Step 4: Because the voltage gain (A_v) is typically large, the reflected C_gd becomes massive, completely dwarfing the intrinsic C_gs. R perfectly explains A.",
+    "trick": "The Miller effect applies identically to BJTs (C_bc) and FETs (C_gd). It always targets the capacitance bridging the input and the inverting output.",
+    "tip": "Miller effect multiplies feedback capacitance C_gd by (1 + Av)."
+  },
+  {
+    "id": 36,
+    "question": "In the context of power amplifier architectures, which class operates entirely as a non-linear switching topology, achieving theoretical efficiencies approaching 100% through the use of Pulse Width Modulation (PWM)?",
+    "options": ["Class AB", "Class C", "Class D", "Class S"],
+    "answer": "Class D",
+    "explanation": "Step 1: Classes A, B, AB, and C act as linear amplifiers or tuned resonators where transistors operate in the active/saturation regions. Step 2: Operating in the active region implies the transistor simultaneously has non-zero voltage across it and current flowing through it, generating heat (loss). Step 3: Class D operates the transistors strictly as high-speed electronic switches (ON or OFF). Step 4: When ON, voltage is zero. When OFF, current is zero. Power dissipation (P = V*I) is theoretically zero. Step 5: It encodes analog audio via high-frequency Pulse Width Modulation (PWM), filtered at the output, achieving ~100% efficiency.",
+    "trick": "Class S is also a switching class but is historically associated with distinct delta-sigma topologies. Class D is the universal standard for PWM-based switching audio amplifiers.",
+    "tip": "Class D = Switching Amplifier using PWM = ~100% efficiency."
+  },
+  {
+    "id": 37,
+    "question": "What specifically happens to the overall closed-loop bandwidth of an operational amplifier circuit when negative feedback is applied, assuming a constant Gain-Bandwidth Product (GBW)?",
+    "options": ["It decreases proportionally to the feedback factor.", "It remains entirely unchanged.", "It increases by a factor of (1 + A_ol * Beta).", "It oscillates between zero and the open-loop pole."],
+    "answer": "It increases by a factor of (1 + A_ol * Beta).",
+    "explanation": "Step 1: Without feedback, an op-amp has an open-loop gain A_ol and a small open-loop bandwidth f_ol. Step 2: Negative feedback reduces the overall gain to a closed-loop value A_cl = A_ol / (1 + A_ol * Beta), where Beta is the feedback factor. Step 3: For internally compensated op-amps, the Gain-Bandwidth Product (GBW) is constant. Step 4: Therefore, A_ol * f_ol = A_cl * f_cl. Step 5: Substituting A_cl yields f_cl = f_ol * (1 + A_ol * Beta). The bandwidth increases by the exact same desensitivity factor that reduces the gain.",
+    "trick": "Gain and Bandwidth trade off perfectly in linear systems. If you cut the gain by a factor of 100 via negative feedback, the bandwidth extends by exactly a factor of 100.",
+    "tip": "Negative feedback decreases gain and increases bandwidth by the same factor (1 + AB)."
+  },
+  {
+    "id": 38,
+    "question": "Assertion (A): A super-diode (precision rectifier) can seamlessly rectify high-frequency MHz AC signals without any distortion. Reason (R): The operational amplifier inside a super-diode topology uses extreme open-loop gain to completely nullify the 0.7V forward drop of the diode.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "A is False, R is True",
+    "explanation": "Step 1: Evaluate A. Precision rectifiers are severely limited at high frequencies (MHz range). Slew rate limitations cause massive distortion when the op-amp has to jump over the 0.7V dead zone. A is False. Step 2: Evaluate R. The core operational principle of a super-diode is indeed utilizing the op-amp's high open-loop gain to divide the effective diode drop to near zero (V_effective = 0.7 / A_ol). Step 3: This makes R a completely true statement. Step 4: Because A is false and R is true, the answer is defined.",
+    "trick": "Never assume 'precision' means 'high speed'. In op-amp circuits, precision (low offset, high gain) usually comes at the strict cost of speed (slew rate, bandwidth).",
+    "tip": "Precision rectifiers fail at high frequencies due to Op-Amp slew rate limits."
+  },
+  {
+    "id": 39,
+    "question": "In a Schmitt Trigger circuit configured around an operational amplifier, positive feedback is utilized to create two distinct switching thresholds. What is this phenomenon strictly referred to as?",
+    "options": ["Phase Margin", "Hysteresis", "Crossover Distortion", "Thermal Runaway"],
+    "answer": "Hysteresis",
+    "explanation": "Step 1: A standard comparator triggers at a single reference voltage. Noisy input signals hovering near this reference cause erratic multiple output switches. Step 2: A Schmitt Trigger applies positive feedback from the output back to the non-inverting input. Step 3: This generates a high threshold voltage (V_TH) when the output is high, and a low threshold voltage (V_TL) when the output is low. Step 4: The system now has 'memory'. The input must travel entirely across the gap between V_TL and V_TH to cause a state change. Step 5: This path-dependence or gap between switching thresholds is universally defined as Hysteresis.",
+    "trick": "Hysteresis acts as an electronic shock absorber, preventing high-frequency noise from causing false logic state transitions.",
+    "tip": "Schmitt Trigger uses positive feedback to create Hysteresis (noise immunity)."
+  },
+  {
+    "id": 40,
+    "question": "A monolithic 555 timer incorporates an active-low 'Reset' pin (Pin 4). To ensure normal uninterrupted operation of the timer in an astable circuit, what must physically be done with this pin?",
+    "options": ["It must be connected to Ground.", "It must be connected to Pin 3 (Output).", "It must be connected to V_cc.", "It must be left floating."],
+    "answer": "It must be connected to V_cc.",
+    "explanation": "Step 1: The Reset pin on a 555 timer is designated as active-low. Step 2: An active-low pin performs its specified function (resetting the internal flip-flop and killing the output) when driven to Logic 0 (Ground). Step 3: If left floating, internal parasitic leakages or ambient noise might pull it low, causing random resets. Step 4: To completely disable the reset function and ensure normal timer operation, the pin must be forcefully held at a high logic state. Step 5: Connecting it directly to the positive supply rail (V_cc) guarantees the reset function remains inactive.",
+    "trick": "Never leave active-low pins floating in analog/digital design! If you don't need the reset function, tie it to the opposite rail (V_cc) to guarantee stability.",
+    "tip": "Active-low Reset (Pin 4) must be tied to V_cc for normal 555 operation."
+  },
+  {
+    "id": 41,
+    "question": "Assertion (A): The common-base (CB) amplifier configuration provides significantly higher bandwidth compared to the common-emitter (CE) configuration. Reason (R): In a common-base amplifier, the parasitic capacitance between the input and output nodes is physically grounded, completely averting the Miller effect.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate A. CE amplifiers suffer from heavy high-frequency roll-off. CB amplifiers are routinely used in RF applications specifically because of their superior bandwidth. A is True. Step 2: Evaluate R. The input node in a CB amplifier is the emitter, and the output is the collector. The base is grounded. Step 3: The parasitic capacitance bridging the input and output would be C_ce, which is astronomically small and usually ignored. Step 4: The primary capacitance C_bc sits between the collector and the grounded base. It does not bridge input to output. Step 5: Because there is no bridging capacitance, the Miller multiplication effect cannot occur, which is the direct mathematical reason for the wide bandwidth in A.",
+    "trick": "This is precisely why Cascode amplifiers (CE driving CB) are used. The CB stage provides the high voltage gain without the Miller effect penalty.",
+    "tip": "Common-Base has high bandwidth because a grounded base averts the Miller Effect."
+  },
+  {
+    "id": 42,
+    "question": "An ideal operational amplifier is configured as an integrator with R = 100 kOhm and C = 10 uF. A constant DC voltage of +2V is applied to the input at t=0. Assuming the initial capacitor voltage is 0V, what is the output voltage at t = 2 seconds?",
+    "options": ["-2 V", "-4 V", "+4 V", "-0.4 V"],
+    "answer": "-4 V",
+    "explanation": "Step 1: Identify the standard inverting integrator output equation: V_out = -(1 / RC) * Integral(V_in dt). Step 2: Calculate the RC time constant: 100 * 10^3 * 10 * 10^-6 = 1.0 second. Step 3: Setup the integral for a constant DC input: V_out = -(1/1) * Integral(2 dt) from 0 to t. Step 4: Execute the integration: V_out = -2t. Step 5: Substitute t = 2 seconds: V_out = -2 * 2 = -4 Volts.",
+    "trick": "Remember the negative sign! A standard op-amp integrator uses the inverting input, so a positive DC input yields a negative-going ramp.",
+    "tip": "Inverting Integrator V_out = -(1/RC) * Integral(V_in dt). Don't forget the minus sign."
+  },
+  {
+    "id": 43,
+    "question": "Which specific condition directly instigates 'Thermal Runaway' in a bipolar junction power amplifier?",
+    "options": ["Excessive negative feedback causing high frequency oscillations.", "A rise in temperature decreasing V_be, which exponentially increases collector current, generating more heat.", "A short circuit at the load causing the transformer to saturate.", "The Miller capacitance exceeding the bypass capacitance."],
+    "answer": "A rise in temperature decreasing V_be, which exponentially increases collector current, generating more heat.",
+    "explanation": "Step 1: Power amplifiers deal with large currents, generating inherent heat. Step 2: In a BJT, the base-emitter cut-in voltage (V_be) has a negative temperature coefficient (drops by ~2.5 mV per degree C). Step 3: If temperature rises, V_be drops. If the external bias voltage remains constant, the effective forward bias on the junction increases. Step 4: This causes the collector current (I_c) to exponentially increase. Step 5: Higher I_c generates more internal heat, further dropping V_be. This creates a destructive positive feedback loop known strictly as Thermal Runaway, melting the device.",
+    "trick": "To prevent this, 'bias stabilization' techniques are used. Diodes or thermistors are thermally coupled to the heat sink to actively lower the bias voltage as temperature rises.",
+    "tip": "Thermal Runaway: Temp goes up, V_be goes down, I_c goes up, causing more heat."
+  },
+  {
+    "id": 44,
+    "question": "Assertion (A): A differential amplifier heavily rejects common-mode noise signals superimposed simultaneously on both of its input terminals. Reason (R): The Common Mode Rejection Ratio (CMRR) is physically implemented by ensuring the emitter-coupled tail current source has an exceptionally high internal impedance.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate A. The fundamental purpose of a diff-amp is to amplify the difference between inputs and ignore noise common to both. A is True. Step 2: Evaluate R. When a common-mode signal is applied, both emitters attempt to follow the input voltage. Step 3: This causes a voltage swing across the tail current source. Step 4: The common-mode gain (A_cm) is mathematically proportional to 1 / (2 * R_tail). Step 5: By utilizing an active current mirror instead of a resistor for the tail, R_tail approaches infinity. This forces A_cm to zero, driving the CMRR (A_d / A_cm) toward infinity. R is the exact design reason for A.",
+    "trick": "An ideal tail current source has infinite resistance, meaning a common-mode input cannot change the tail current at all, perfectly zeroing the common-mode gain.",
+    "tip": "Infinite tail resistance in a diff-amp guarantees zero common-mode gain (Infinite CMRR)."
+  },
+  {
+    "id": 45,
+    "question": "What is the primary function of the 'flywheel' effect provided by the L-C tank circuit in a Class C RF power amplifier?",
+    "options": ["To step up the DC power supply voltage.", "To restore the missing portions of the sine wave deleted by the <180 degree conduction angle.", "To eliminate the Miller effect at high frequencies.", "To automatically bias the transistor into cutoff."],
+    "answer": "To restore the missing portions of the sine wave deleted by the <180 degree conduction angle.",
+    "explanation": "Step 1: A Class C amplifier operates in extreme cutoff, conducting for only a tiny fraction of the input cycle. Step 2: The output of the transistor is a series of violent, narrow current spikes. Step 3: These spikes 'ping' or excite the parallel L-C tank circuit. Step 4: The tank circuit naturally oscillates (resonates) at its resonant frequency, swapping energy back and forth between the inductor and capacitor. Step 5: This natural harmonic oscillation fills in the massive gaps between the current spikes, recreating a full, continuous sine wave. This is termed the 'flywheel effect', similar to a mechanical engine.",
+    "trick": "Without the flywheel effect of the tank circuit, a Class C amplifier output is utterly unusable distortion. The tank is mandatory.",
+    "tip": "Class C Tank Circuit acts as a flywheel, reconstructing sine waves from current pulses."
+  },
+  {
+    "id": 46,
+    "question": "Assertion (A): Adding an emitter degeneration resistor (R_E) to a common-emitter amplifier drastically reduces its overall voltage gain. Reason (R): The degeneration resistor acts as a form of negative series feedback, increasing the input impedance and stabilizing the gain against variations in the transistor's beta.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate A. Without R_E, gain is roughly -g_m * R_C. With R_E, it drops to roughly -R_C / R_E. The gain is severely reduced. A is True. Step 2: Evaluate R. R_E introduces local negative feedback. Step 3: If collector current increases unexpectedly (due to thermal shift in beta), the voltage drop across R_E increases. Step 4: This pinches off the base-emitter voltage, counteracting the current increase. Step 5: Furthermore, the gain formula (-R_C / R_E) is now solely dependent on external passive resistors, making it completely independent of the highly unpredictable internal beta parameter. R correctly explains the trade-off in A.",
+    "trick": "Negative feedback ALWAYS trades raw performance (Gain) for stability, predictability, and wider bandwidth.",
+    "tip": "Emitter degeneration decreases voltage gain but increases stability and input impedance."
+  },
+  {
+    "id": 47,
+    "question": "A typical LM741 operational amplifier has a specified Slew Rate of 0.5 V/us. If the amplifier is driven to output a pure sine wave with a peak amplitude of 10V, what is the maximum frequency it can reproduce without inducing slew-rate limiting distortion?",
+    "options": ["7.95 kHz", "15.9 kHz", "31.8 kHz", "50.0 kHz"],
+    "answer": "7.95 kHz",
+    "explanation": "Step 1: Slew rate limiting occurs when the maximum rate of change of the output signal exceeds the physical slewing capability of the op-amp. Step 2: For a sine wave V(t) = V_p * sin(2*pi*f*t), the maximum rate of change is the derivative at zero crossing: dV/dt(max) = 2*pi*f*V_p. Step 3: Equate this to the Slew Rate (SR): SR = 2*pi*f_max*V_p. Step 4: Rearrange for f_max: f_max = SR / (2*pi*V_p). Step 5: Substitute the values (ensure units match, SR = 500,000 V/s): f_max = 500000 / (2 * 3.1415 * 10) = 500000 / 62.83 = 7957 Hz, or approximately 7.95 kHz.",
+    "trick": "This is called the 'Full Power Bandwidth'. Notice that if you decrease the peak amplitude (V_p), the maximum frequency increases. Slew rate distortion is amplitude-dependent!",
+    "tip": "Full Power Bandwidth f_max = Slew Rate / (2 * pi * V_peak)."
+  },
+  {
+    "id": 48,
+    "question": "In analog multiplier design, what is the fundamental mathematical relationship exploited by a 'Quarter-Square' multiplier circuit to achieve multiplication?",
+    "options": ["(x + y)^2 - (x - y)^2 = 4xy", "exp(ln(x) + ln(y)) = xy", "sin(x)cos(y) = 0.5(sin(x+y) + sin(x-y))", "d/dx(x^2 * y) = 2xy"],
+    "answer": "(x + y)^2 - (x - y)^2 = 4xy",
+    "explanation": "Step 1: Analog multiplication is difficult to implement linearly. Step 2: The Quarter-Square technique utilizes simpler analog squarer circuits (often built with piecewise linear diode arrays or FETs). Step 3: It uses summing amplifiers to generate (x + y) and (x - y). Step 4: It passes these through the squarer circuits to get (x + y)^2 and (x - y)^2. Step 5: A differential amplifier subtracts them: (x^2 + 2xy + y^2) - (x^2 - 2xy + y^2) = 4xy. Dividing by 4 (quartering) yields pure multiplication x*y.",
+    "trick": "The Log/Antilog multiplier uses exp(ln(x)+ln(y)), but it only works for positive signals (one quadrant). Quarter-Square handles all polarities (four quadrants) flawlessly.",
+    "tip": "Quarter-Square multiplier uses the algebraic identity: (x+y)^2 - (x-y)^2 = 4xy."
+  },
+  {
+    "id": 49,
+    "question": "Assertion (A): In a heavily heavily bypassed Common Emitter amplifier, the bypass capacitor C_E creates a zero at the origin (DC) in the overall transfer function. Reason (R): At extremely low frequencies, the bypass capacitor acts as an open circuit, placing the emitter resistor R_E fully into the AC path and drastically dropping the gain.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "A is False, R is True",
+    "explanation": "Step 1: Evaluate A. A bypass capacitor C_E acts in parallel with R_E. The impedance is R_E || (1/sC_E). A pole is created when the denominator goes to zero. A zero is created when the numerator goes to zero. Step 2: The zero of a bypass network occurs at w_z = 1 / (R_E * C_E). This is NOT at the origin (DC). Coupling capacitors create zeros at the origin, but bypass capacitors do not. A is False. Step 3: Evaluate R. At DC (f=0), a capacitor is an infinite impedance (open). The AC current must flow through R_E. Step 4: This introduces negative feedback (-R_C / R_E), severely dropping the low-frequency AC gain. R is True.",
+    "trick": "Coupling caps (series) block DC completely, putting a zero exactly at the origin. Bypass caps (parallel) just drop the gain to a flat lower value at DC; their zero is not at the origin.",
+    "tip": "Bypass capacitors create non-origin zeros. Coupling capacitors create origin zeros."
+  },
+  {
+    "id": 50,
+    "question": "A monolithic precision voltage reference utilizes a 'Bandgap' circuit architecture. What two opposing temperature coefficients are meticulously balanced to achieve a temperature-independent output voltage?",
+    "options": ["Positive TC of V_be and Negative TC of Thermal Voltage (V_T)", "Negative TC of V_be and Positive TC of Thermal Voltage (V_T)", "Positive TC of Early Voltage and Negative TC of Beta", "Negative TC of Collector Current and Positive TC of Base Resistance"],
+    "answer": "Negative TC of V_be and Positive TC of Thermal Voltage (V_T)",
+    "explanation": "Step 1: Achieving a stable reference voltage regardless of ambient temperature is critical in analog design. Step 2: The base-emitter voltage (V_be) of a BJT naturally has a Negative Temperature Coefficient (NTC), decreasing by about -2.2 mV/C. Step 3: The thermal voltage, V_T = kT/q, has a inherently Positive Temperature Coefficient (PTC), increasing at about +0.085 mV/C. Step 4: A bandgap circuit takes the difference in V_be between two transistors running at different current densities (proportional to V_T) and amplifies it to match the NTC slope. Step 5: By adding the amplified PTC to the NTC of a standard V_be, the slopes perfectly cancel out, yielding a flat zero-TC voltage of approximately 1.25V (the silicon bandgap).",
+    "trick": "This is the fundamental mechanism inside the LM317 (1.25V reference) and almost every modern ADC/DAC reference. PTC (thermal voltage) + NTC (junction voltage) = Flat.",
+    "tip": "Bandgap references balance NTC of V_be with PTC of thermal voltage (V_T)."
+  }
+]

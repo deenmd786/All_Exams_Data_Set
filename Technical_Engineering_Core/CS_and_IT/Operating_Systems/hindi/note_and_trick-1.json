@@ -1,0 +1,44 @@
+﻿
+
+{
+  "module_title": "OS के मूल सिद्धांत, प्रोसेस और CPU शेड्यूलिंग (Process & Scheduling)",
+  "difficulty_level": 1,
+  "introduction": "इस स्तर पर हम समझेंगे कि ऑपरेटिंग सिस्टम क्या है, प्रोग्राम और प्रोसेस के बीच का अंतर क्या है, और CPU एक समय में कई प्रोसेस को कैसे संभालता है (Scheduling)।",
+  "core_concepts": [
+    {
+      "title": "ऑपरेटिंग सिस्टम और प्रोसेस (Process)",
+      "description": "OS हार्डवेयर और उपयोगकर्ता (User) के बीच एक इंटरफेस (Interface) है। \n**प्रोसेस (Process):** यह निष्पादन (Execution) की अवस्था में एक प्रोग्राम है। (प्रोग्राम हार्ड डिस्क में पैसिव होता है, प्रोसेस RAM में एक्टिव होता है)। \n**प्रोसेस स्टेट्स:** New $\\rightarrow$ Ready $\\rightarrow$ Running $\\rightarrow$ Terminated. (I/O की आवश्यकता होने पर Running से Block/Wait स्टेट में जाता है)।"
+    },
+    {
+      "title": "कॉन्टेक्स्ट स्विचिंग (Context Switching)",
+      "description": "CPU द्वारा एक प्रोसेस को रोककर (उसकी स्टेट को PCB - Process Control Block में सेव करके) दूसरे प्रोसेस को लोड करने की प्रक्रिया। यह एक विशुद्ध 'ओवरहेड (Overhead)' है, क्योंकि इस दौरान CPU कोई उपयोगी काम नहीं कर रहा होता है।"
+    },
+    {
+      "title": "CPU शेड्यूलिंग एल्गोरिदम (CPU Scheduling Algorithms)",
+      "description": "1. **FCFS (First Come First Serve):** जो पहले आया, वह पहले चलेगा। (नॉन-प्रिएम्प्टिव)। 'Convoy Effect' की समस्या होती है।\n2. **SJF (Shortest Job First):** जिसका बर्स्ट टाइम (Burst Time) सबसे कम है, वह पहले चलेगा। यह न्यूनतम औसत वेटिंग टाइम (Minimum Avg Waiting Time) देता है।\n3. **Round Robin (RR):** प्रत्येक प्रोसेस को एक निश्चित समय (Time Quantum) दिया जाता है। यह टाइम-शेयरिंग सिस्टम (Time-sharing systems) के लिए सबसे अच्छा है।"
+    }
+  ],
+  "important_entities": [
+    {
+      "name": "प्रिएम्प्टिव बनाम नॉन-प्रिएम्प्टिव (Preemptive vs Non-Preemptive)",
+      "key_fact": "CPU को जबरदस्ती छीनना",
+      "significance": "**नॉन-प्रिएम्प्टिव:** एक बार प्रोसेस CPU में चला गया, तो वह स्वेच्छा से ही बाहर आएगा। \n**प्रिएम्प्टिव:** यदि कोई उच्च प्राथमिकता (High priority) वाला प्रोसेस आता है, तो OS वर्तमान प्रोसेस से CPU छीन (Preempt) सकता है। (उदा: SRTF - Shortest Remaining Time First)।"
+    }
+  ],
+  "trap_alerts_and_exceptions": [
+    {
+      "alert_title": "कॉन्वॉय इफेक्ट (Convoy Effect)",
+      "explanation": "परीक्षा का जाल: कॉन्वॉय इफेक्ट FCFS में होता है। यदि एक बहुत बड़ा (CPU intensive) प्रोसेस पहले आ जाए, तो उसके पीछे के सभी छोटे (I/O intensive) प्रोसेस को बहुत लंबा इंतज़ार करना पड़ता है, जिससे सिस्टम का प्रदर्शन गिर जाता है।"
+    }
+  ],
+  "mnemonics_and_tricks": [
+    {
+      "trick_title": "प्रोसेस स्टेट ट्रांज़िशन",
+      "memory_phrase": "Ready से Running (Dispatch), Running से Ready (Interrupt)",
+      "explanation": "प्रोसेस को Ready कतार से Running अवस्था में ले जाने का काम 'डिस्पैचर (Dispatcher)' करता है। टाइम क्वांटम खत्म होने पर टाइमर 'इंटरप्ट (Interrupt)' भेजकर उसे वापस Ready में भेजता है।"
+    }
+  ],
+  "exam_strategy_tips": [
+    "GATE और ISRO का पेटेंट प्रश्न: 'टाइम-शेयरिंग ऑपरेटिंग सिस्टम (Time-Sharing OS) के लिए कौन सा शेड्यूलिंग एल्गोरिदम सबसे उपयुक्त है?' उत्तर: राउंड रॉबिन (Round Robin)।"
+  ]
+}

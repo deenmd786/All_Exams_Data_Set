@@ -1,0 +1,454 @@
+﻿
+
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): The insertion of a lead compensator in a control system increases the speed of its transient response. Reason (R): A lead compensator effectively reduces the bandwidth of the closed-loop system. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is True but R is False",
+    "explanation": "Step 1: A lead compensator provides a positive phase angle contribution to the system. Step 2: This positive phase addition increases the phase margin and pulls the root locus further to the left half of the s-plane. Step 3: Roots located further left correspond to a faster transient response. Step 4: Because a lead compensator acts mathematically as a high-pass filter, it actually increases the bandwidth of the system, not decreases it. Thus, Reason R is totally false.",
+    "trick": "ESE Trap: Always map compensators to electronic filters! Lead equals High-pass filter (allows fast transients, high bandwidth). Lag equals Low-pass filter (slows things down).",
+    "tip": "Lead compensators increase system bandwidth and transient speed."
+  },
+  {
+    "id": 2,
+    "question": "Which of the following describes the initial slope of the Bode magnitude plot for a system with the open-loop transfer function G(s)H(s) = K / (s^2 * (s + 2) * (s + 5))?",
+    "options": ["-20 dB/decade", "-40 dB/decade", "-60 dB/decade", "+40 dB/decade"],
+    "answer": "-40 dB/decade",
+    "explanation": "Step 1: Identify the Type of the system by looking at the number of poles located exactly at the origin (s = 0). Step 2: The given transfer function has an s^2 term in the denominator, indicating it is a Type 2 system (two poles at the origin). Step 3: In a Bode plot, each pole at the origin contributes an initial slope of -20 dB/decade. Step 4: Therefore, two poles at the origin yield an initial slope of 2 * (-20) = -40 dB/decade.",
+    "trick": "GATE Trap: Do not count the finite poles (at s=-2 or s=-5) for the INITIAL slope. Initial slope is purely dictated by poles or zeros strictly at the origin.",
+    "tip": "Initial Bode slope is -20N dB/dec, where N is the system Type."
+  },
+  {
+    "id": 3,
+    "question": "Assertion (A): According to the Nyquist stability criterion, a feedback system is stable if the Nyquist contour of G(s)H(s) encircles the -1+j0 point exactly P times in the counter-clockwise direction. Reason (R): The Nyquist equation is N = P - Z, where Z must strictly be zero for absolute closed-loop stability. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: The Nyquist criterion maps the s-plane right-half to the G(s)H(s) plane. Step 2: The equation is N = P - Z, where N is counter-clockwise encirclements, P is open-loop right-half-plane poles, and Z is closed-loop right-half-plane poles. Step 3: For closed-loop stability, there must be no closed-loop RHP poles, so Z must equal 0. Step 4: Substituting Z = 0 into the equation gives N = P. Thus, for stability, the contour must encircle -1+j0 counter-clockwise exactly P times.",
+    "trick": "ESE Trap: Watch the direction! N is specifically defined as COUNTER-CLOCKWISE encirclements when using N = P - Z. If defined as clockwise, the formula reverses to N = Z - P.",
+    "tip": "For stability, Counter-Clockwise encirclements (N) must equal Open-Loop RHP poles (P)."
+  },
+  {
+    "id": 4,
+    "question": "If Phi(t) is the state transition matrix of a linear time-invariant system, which of the following mathematical properties is strictly FALSE?",
+    "options": ["Phi(0) = Identity Matrix", "Phi(t)^(-1) = Phi(-t)", "Phi(t1 + t2) = Phi(t1) * Phi(t2)", "Phi(t) = sI - A"],
+    "answer": "Phi(t) = sI - A",
+    "explanation": "Step 1: The state transition matrix is defined as Phi(t) = e^(At). Step 2: At t=0, e^0 equals the Identity Matrix I. Step 3: By exponential properties, the inverse of e^(At) is e^(-At), which equals Phi(-t). Step 4: Similarly, e^(A(t1+t2)) = e^(At1) * e^(At2). Step 5: The expression (sI - A) is used in the Laplace domain to find the resolvent matrix (sI - A)^(-1), whose inverse Laplace transform gives Phi(t), but it does not equal Phi(t) directly.",
+    "trick": "GATE Trap: The state transition matrix is a time-domain entity. Do not confuse it with the frequency-domain matrix (sI - A).",
+    "tip": "State transition matrix Phi(t) is the inverse Laplace of (sI - A)^(-1)."
+  },
+  {
+    "id": 5,
+    "question": "Assertion (A): A minimum phase system cannot have any zeros located in the right-half of the s-plane. Reason (R): Non-minimum phase systems exhibit an initial undershoot in their step response due to right-half-plane zeros. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True but R is NOT the correct explanation of A",
+    "explanation": "Step 1: A minimum phase system is strictly defined as having all its poles and zeros in the left-half of the s-plane. Thus, Assertion A is true. Step 2: A system with RHP zeros is termed a non-minimum phase system. Step 3: RHP zeros mathematically cause the step response to initially dip below zero (undershoot) before rising to the steady state value. Thus, Reason R is also true. Step 4: However, the definition of minimum phase (A) is a mathematical classification, while undershoot (R) is a time-domain consequence, meaning R does not causally EXPLAIN A.",
+    "trick": "ESE Trap: Both statements are factual, but you must ask 'Does R define A?' No. A is true simply by the pure definition of minimum phase transfer functions.",
+    "tip": "RHP zeros classify a system as non-minimum phase and cause step-response undershoot."
+  },
+  {
+    "id": 6,
+    "question": "In the design of a Lead compensator with the transfer function Gc(s) = (s + z) / (s + p), what is the mandatory relationship between the pole (p) and the zero (z)?",
+    "options": ["The pole must be closer to the origin than the zero", "The zero must be closer to the origin than the pole", "The pole and zero must be identically placed", "The pole must be located in the right half plane"],
+    "answer": "The zero must be closer to the origin than the pole",
+    "explanation": "Step 1: A lead compensator is defined by Gc(s) = (s + z) / (s + p) where alpha = z / p. Step 2: For it to provide phase lead, the value of alpha must be strictly less than 1. Step 3: If alpha < 1, then z must be less than p (assuming both are positive absolute distances from the origin). Step 4: Geometrically in the s-plane, this means the zero (at -z) is located closer to the origin (j omega axis) than the pole (at -p).",
+    "trick": "State PSC Trap: Lead = Zero first (closest to j omega axis). Lag = Pole first. The component you hit first moving left from the origin dictates its name!",
+    "tip": "For Lead compensators, the zero is closer to the origin. For Lag, the pole is closer."
+  },
+  {
+    "id": 7,
+    "question": "A continuous-time LTI system is described by state space matrices A, B, C, and D. If the system is transformed using a non-singular similarity transformation matrix P, which of the following system properties remains strictly invariant?",
+    "options": ["The State Transition Matrix", "The Controllability Matrix", "The Transfer Function Matrix", "The internal State Vector trajectory"],
+    "answer": "The Transfer Function Matrix",
+    "explanation": "Step 1: A similarity transformation x = Pz changes the internal state representation coordinates. Step 2: The new matrices become A_new = P^(-1)AP, B_new = P^(-1)B, C_new = CP, and D_new = D. Step 3: Evaluating the new transfer function: C_new * (sI - A_new)^(-1) * B_new + D_new. Step 4: Substituting yields CP * (sI - P^(-1)AP)^(-1) * P^(-1)B + D. The P matrices cancel out perfectly during inversion. Step 5: The external input-output behavior (Transfer Function Matrix) remains absolutely invariant.",
+    "trick": "GATE Trap: Similarity transformations alter the internal view (state vectors, observability/controllability matrices) but NEVER alter external realities (eigenvalues, transfer function, stability).",
+    "tip": "Transfer functions and eigenvalues are strictly invariant under similarity transformations."
+  },
+  {
+    "id": 8,
+    "question": "Assertion (A): Introducing a pure transport delay e^(-sT) into an open-loop system decreases the Phase Margin. Reason (R): Transport delay adds a linear negative phase shift of -omega*T without altering the magnitude plot. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: A pure transport delay is represented mathematically by G_delay(s) = e^(-sT). Step 2: In the frequency domain, setting s = j omega gives a magnitude of exactly 1 (0 dB) and a phase angle of -omega*T radians. Step 3: Because the magnitude is 1, the gain crossover frequency remains entirely unchanged. Step 4: However, the added negative phase angle lowers the overall phase curve at the gain crossover frequency, thereby directly reducing the Phase Margin and degrading stability.",
+    "trick": "ESE Trap: Delay only hurts phase, never gain! It pushes the system closer to instability without changing the crossover frequencies.",
+    "tip": "Transport delay adds -omega*T phase shift, strictly reducing Phase Margin."
+  },
+  {
+    "id": 9,
+    "question": "What is the theoretical Gain Margin (GM) of a standard linear second-order system characterized by the open-loop transfer function G(s)H(s) = K / (s * (s + p))?",
+    "options": ["0 dB", "20 dB", "Infinite", "Negative"],
+    "answer": "Infinite",
+    "explanation": "Step 1: Gain Margin is evaluated at the phase crossover frequency (omega_pc), where the phase angle is exactly -180 degrees. Step 2: The phase angle for G(j omega) = K / (j omega * (j omega + p)) is -90 - arctan(omega/p). Step 3: To reach -180 degrees, arctan(omega/p) must equal 90 degrees. Step 4: The arctan function reaches 90 degrees only as omega approaches infinity. Step 5: At omega = infinity, the magnitude |G(j omega)| becomes perfectly zero. GM = 20 log10(1/0) = Infinity.",
+    "trick": "GATE Trap: A pure Type-1, second-order system can never cross the -180 degree line at any finite frequency. Therefore, its Gain Margin is inherently infinite.",
+    "tip": "Pure Type-1 second-order systems have an infinite Gain Margin."
+  },
+  {
+    "id": 10,
+    "question": "A system's state matrix A has eigenvalues located at -2 and -3. What can be definitively concluded about the unforced zero-input response of this system?",
+    "options": ["It will oscillate with a natural frequency of 6 rad/s", "It is marginally stable", "It is asymptotically stable and responses decay exponentially", "It requires state feedback to prevent instability"],
+    "answer": "It is asymptotically stable and responses decay exponentially",
+    "explanation": "Step 1: The eigenvalues of the state matrix A perfectly correspond to the poles of the closed-loop system transfer function. Step 2: The given eigenvalues are -2 and -3. Step 3: Because both eigenvalues are purely real and strictly negative (located in the left-half of the s-plane), the system contains no oscillatory imaginary parts. Step 4: Real, negative eigenvalues dictate that any initial state perturbations will decay to zero purely exponentially, guaranteeing asymptotic stability.",
+    "trick": "State PSC Trap: Do not multiply the eigenvalues to find a frequency! Pure real eigenvalues mean strictly zero oscillation (overdamped or critically damped dynamics).",
+    "tip": "Real negative eigenvalues guarantee purely exponential decay (asymptotic stability)."
+  },
+  {
+    "id": 11,
+    "question": "Assertion (A): A Proportional-Derivative (PD) controller behaves analytically identically to a Lead compensator. Reason (R): Both the PD controller and the Lead compensator introduce a dominant open-loop zero into the system forward path. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: A PD controller has the transfer function Gc(s) = Kp + Kd*s = Kd*(s + Kp/Kd). It physically introduces a single zero at s = -Kp/Kd. Step 2: A Lead compensator has Gc(s) = (s + z)/(s + p) where z < p. It introduces a dominant zero and a far-off pole. Step 3: Because the pole in a Lead compensator is placed far to the left to attenuate high-frequency noise, its primary dominant effect is driven by the zero. Step 4: Thus, both devices primarily act by introducing a dominant zero to increase phase margin and speed up transients.",
+    "trick": "ESE Trap: PD = Lead (Speed, Bandwidth, Zero). PI = Lag (Steady state, Pole). PID = Lead-Lag. Memorize these direct equivalencies.",
+    "tip": "PD controllers act like Lead compensators by introducing a dominant zero."
+  },
+  {
+    "id": 12,
+    "question": "For a strictly proper open-loop transfer function G(s)H(s), the Nyquist contour maps the infinite semi-circle in the right half of the s-plane to which precise location in the G(s)H(s) complex plane?",
+    "options": ["An infinite circle enclosing the entire plane", "The point -1+j0", "The exact origin (0+j0)", "The real axis from 0 to infinity"],
+    "answer": "The exact origin (0+j0)",
+    "explanation": "Step 1: The Nyquist contour includes a massive semi-circle taking s = R*e^(j theta) where R approaches infinity. Step 2: A 'strictly proper' transfer function has more poles in its denominator than zeros in its numerator (degree of denominator > degree of numerator). Step 3: As R approaches infinity, the denominator grows exponentially faster than the numerator. Step 4: The overall magnitude of G(s)H(s) mathematically collapses to exactly zero. Therefore, the entire infinite s-plane boundary maps to a single point at the origin (0+j0).",
+    "trick": "GATE Trap: If the system were 'proper' but not 'strictly proper' (equal number of poles and zeros), the infinite contour would map to a finite non-zero constant point, not the origin.",
+    "tip": "For strictly proper systems, the infinite Nyquist boundary maps perfectly to the origin."
+  },
+  {
+    "id": 13,
+    "question": "Assertion (A): The phase angle of an all-pass filter varies continuously from 0 degrees to -360 degrees, while its magnitude remains strictly constant at all frequencies. Reason (R): An all-pass filter has poles and zeros symmetrically located strictly as mirror images across the j-omega axis. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: An all-pass filter transfer function typically looks like G(s) = (s - a) / (s + a). Step 2: Substituting s = j omega yields |G(j omega)| = sqrt(omega^2 + a^2) / sqrt(omega^2 + a^2) = 1.0 at all frequencies. Step 3: The phase is Angle = 180 - arctan(omega/a) - arctan(omega/a) = 180 - 2*arctan(omega/a). Step 4: The geometrical symmetry of placing zeros in the RHP directly opposite to LHP poles perfectly balances the magnitude to 1 while doubling the phase lag.",
+    "trick": "State PSC Trap: All-pass filters do not alter gain, they purely add phase lag (delay). This mirror-image pole-zero geometry is the strict definition of an all-pass network.",
+    "tip": "All-pass filters feature RHP zeros mirroring LHP poles, altering phase but not magnitude."
+  },
+  {
+    "id": 14,
+    "question": "Which of the following conditions is an absolute mathematical requirement for a linear continuous-time state-space system to be fully controllable?",
+    "options": ["The state matrix A must be diagonalized", "The observability matrix must have full rank", "The controllability matrix Qc = [B  AB  A^2B ... A^(n-1)B] must have a determinant strictly equal to zero", "The controllability matrix Qc must have full row rank 'n'"],
+    "answer": "The controllability matrix Qc must have full row rank 'n'",
+    "explanation": "Step 1: Controllability dictates whether external inputs can drive the internal states to any desired value in finite time. Step 2: Kalman's controllability test requires constructing the matrix Qc = [B  AB  A^2B ... A^(n-1)B]. Step 3: The system is fully controllable if and only if all 'n' state variables can be independently influenced. Step 4: Mathematically, this mandates that the 'n x n' matrix Qc must possess linearly independent rows/columns, meaning it must have full rank 'n' (its determinant must strictly be NON-zero).",
+    "trick": "ESE Trap: Determinant = 0 means the matrix is singular (rank < n), meaning the system is UNCONTROLLABLE. Full rank 'n' is the golden rule for controllability.",
+    "tip": "Full controllability requires the controllability matrix Qc to have full rank 'n'."
+  },
+  {
+    "id": 15,
+    "question": "Assertion (A): The steady-state error of a Type 1 system subjected to a parabolic input is mathematically infinite. Reason (R): A parabolic input requires a Type 2 system to achieve a finite, non-zero steady-state error. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: A Type 1 system has exactly one pole at the origin (one integrator). Step 2: The acceleration error constant Ka = limit(s->0) [s^2 * G(s)]. For a Type 1 system, s^2 * (K/s) evaluates to zero. Step 3: Steady-state error for parabolic input is e_ss = 1 / Ka. Since Ka = 0, e_ss = Infinity. Step 4: A Type 2 system (two integrators) yields a finite Ka = K, making e_ss = 1 / K, which is a finite non-zero value. Thus, Reason R perfectly explains the system type requirements.",
+    "trick": "GATE Trap: Match the inputs to the Type! Step input -> Type 0 (finite error). Ramp input -> Type 1 (finite error). Parabolic -> Type 2 (finite error). If input exceeds system type, error is infinite.",
+    "tip": "To achieve finite steady-state error, the system Type must perfectly match the input order."
+  },
+  {
+    "id": 16,
+    "question": "In the construction of a root locus, what is the theoretical angle of departure from a complex open-loop pole with multiplicity 1?",
+    "options": ["180 - sum of angles from other poles + sum of angles from zeros", "180 + sum of angles from other poles - sum of angles from zeros", "90 - sum of angles from other poles", "Zero degrees always"],
+    "answer": "180 - sum of angles from other poles + sum of angles from zeros",
+    "explanation": "Step 1: The root locus exists strictly where the angle criterion is satisfied: Angle(G(s)H(s)) = an odd multiple of 180 degrees. Step 2: For a point s test location infinitesimally close to a complex pole, the angle contribution from that specific pole is the angle of departure, theta_d. Step 3: Setting the total phase sum to 180 degrees: (Sum of zero angles) - (Sum of other pole angles) - theta_d = 180. Step 4: Rearranging yields theta_d = 180 - (Sum of other pole angles) + (Sum of zero angles).",
+    "trick": "State PSC Trap: Do not confuse the departure angle formula with the arrival angle formula at a complex zero (theta_a = 180 - sum of zero angles + sum of pole angles). The signs are perfectly swapped.",
+    "tip": "Departure Angle = 180 - (sum of angles from poles) + (sum of angles from zeros)."
+  },
+  {
+    "id": 17,
+    "question": "Assertion (A): The phase crossover frequency is defined as the exact frequency where the magnitude of the open-loop transfer function is 0 dB (unity gain). Reason (R): Gain Margin is calculated by measuring the magnitude strictly at the phase crossover frequency. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: The frequency where the magnitude is 0 dB is called the GAIN crossover frequency, not the phase crossover frequency. Thus, Assertion A is completely false. Step 2: The phase crossover frequency is defined where the phase angle is exactly -180 degrees. Step 3: Gain Margin mathematically dictates how much the gain can be increased before the system hits -1+j0. This is evaluated precisely at the phase crossover frequency. Thus, Reason R is perfectly true.",
+    "trick": "ESE Trap: Gain margin is measured at the PHASE crossover frequency. Phase margin is measured at the GAIN crossover frequency. They cross-pollinate! Do not mix them up.",
+    "tip": "Gain Margin is measured at the Phase Crossover Frequency (-180 degrees)."
+  },
+  {
+    "id": 18,
+    "question": "A closed-loop system characteristic equation is given as s^3 + 6s^2 + 11s + K = 0. According to the Routh-Hurwitz criterion, what is the exact value of K that renders the system marginally stable?",
+    "options": ["K = 0", "K = 11", "K = 66", "K = 6"],
+    "answer": "K = 66",
+    "explanation": "Step 1: Construct the Routh array. Row s^3: 1, 11. Row s^2: 6, K. Step 2: Evaluate the s^1 row: (6 * 11 - 1 * K) / 6 = (66 - K) / 6. Step 3: For marginal stability, an entire row must strictly become zero to form auxiliary roots on the j-omega axis. Step 4: Setting the s^1 row to zero yields (66 - K) / 6 = 0. Solving this algebraically gives K = 66. Step 5: For stability, K must be strictly greater than 0 and less than 66.",
+    "trick": "GATE Trap: The shortcut for a 3rd order polynomial s^3 + a*s^2 + b*s + c = 0 to be marginally stable is simply a * b = c. Here, 6 * 11 = 66. Solved in 2 seconds!",
+    "tip": "Shortcut for 3rd order marginal stability: Inner product equals outer product (ab = c)."
+  },
+  {
+    "id": 19,
+    "question": "Assertion (A): Increasing the proportional gain (Kp) in a simple second-order position control system strictly decreases the steady-state error but increases the maximum overshoot. Reason (R): Higher proportional gain aggressively decreases the damping ratio of the closed-loop system. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: In a second-order system, steady-state error is inversely proportional to Kp (e_ss = 1 / (1 + Kp)), so a larger Kp yields a smaller error. Step 2: The natural frequency omega_n is proportional to sqrt(Kp). Step 3: The damping ratio zeta is mathematically proportional to 1 / sqrt(Kp). Step 4: As Kp increases, zeta strictly decreases. A lower damping ratio yields a more oscillatory transient response, causing an increase in maximum peak overshoot.",
+    "trick": "State PSC Trap: Kp is a double-edged sword. It fixes steady-state sluggishness but introduces violent transient ringing. You must add Derivative action (Kd) to restore damping.",
+    "tip": "Increasing Proportional Gain (Kp) strictly decreases damping ratio and increases overshoot."
+  },
+  {
+    "id": 20,
+    "question": "Which of the following specific continuous-time controller topologies is mathematically equivalent to introducing a dominant low-frequency pole and a higher-frequency zero into the open-loop transfer function?",
+    "options": ["Lead Compensator", "Lag Compensator", "Pure Proportional Controller", "Pure Derivative Controller"],
+    "answer": "Lag Compensator",
+    "explanation": "Step 1: A Lag compensator transfer function is Gc(s) = (s + z) / (s + p) where beta = z/p > 1. Step 2: Since beta > 1, the pole magnitude 'p' is strictly less than the zero magnitude 'z'. Step 3: Geometrically, the pole is placed closer to the origin (lower frequency) than the zero. Step 4: The low-frequency pole provides immense low-frequency gain (acting like an integrator) to erase steady-state error, perfectly defining a Lag network.",
+    "trick": "ESE Trap: Lag = Pole first = Integrator effect (PI). Lead = Zero first = Derivative effect (PD).",
+    "tip": "Lag compensators place a pole closer to the origin than the zero."
+  },
+  {
+    "id": 21,
+    "question": "Assertion (A): A system with an open-loop transfer function containing a zero located strictly in the Right Half Plane (RHP) cannot be stabilized by any linear constant-gain feedback. Reason (R): RHP zeros aggressively attract the root locus branches, forcing closed-loop poles into the right half plane at high gain values. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Reason R is mathematically perfect: root locus branches always start at open-loop poles and terminate at open-loop zeros as K approaches infinity. If a zero is in the RHP, a branch MUST cross into the RHP at high gain. Step 2: However, Assertion A is false. The root locus starts at the poles. If the poles are in the LHP, the system starts stable at low gain and only becomes unstable at HIGH gain when the root approaches the RHP zero. Thus, it CAN be stabilized by keeping the constant gain strictly low.",
+    "trick": "GATE Trap: RHP zeros limit the MAXIMUM allowable gain, but they do not make stabilization impossible. RHP poles limit the MINIMUM allowable gain.",
+    "tip": "Systems with RHP zeros are conditionally stable and require strictly limited low gain."
+  },
+  {
+    "id": 22,
+    "question": "For a standard state-space model x_dot = Ax + Bu and y = Cx, what is the exact mathematical form of the characteristic equation?",
+    "options": ["det(sI - B) = 0", "det(sI - A) = 0", "det(C(sI - A)B) = 0", "det(A - sI) = 1"],
+    "answer": "det(sI - A) = 0",
+    "explanation": "Step 1: The transfer function is derived from taking the Laplace transform of the state equations, yielding Y(s)/U(s) = C(sI - A)^(-1)B. Step 2: The inverse matrix (sI - A)^(-1) is calculated algebraically as Adjugate(sI - A) / determinant(sI - A). Step 3: The poles of a transfer function occur precisely where the denominator equals zero. Step 4: Setting the denominator to zero yields the absolute characteristic equation: det(sI - A) = 0. The roots of this equation are the eigenvalues of matrix A.",
+    "trick": "State PSC Trap: The characteristic equation is solely a property of the system dynamics (Matrix A). The input (B) and output (C) matrices do not alter the system poles.",
+    "tip": "The characteristic equation of a state space system is strictly det(sI - A) = 0."
+  },
+  {
+    "id": 23,
+    "question": "Assertion (A): Controllability of a linear state-space system is absolutely preserved even after discretization via a Zero-Order Hold (ZOH) under any sampling period T. Reason (R): Discretization strictly maps continuous eigenvalues into discrete eigenvalues without altering the fundamental rank of the input matrix. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: A continuous controllable system can become completely UNCONTROLLABLE after sampling. Step 2: If the sampling frequency is exactly equal to a multiple of the system's natural oscillatory frequency (or difference between complex eigenvalues), 'hidden oscillations' occur between samples. Step 3: The discrete controller becomes mathematically blind to these states, dropping the rank of the discrete controllability matrix. Thus, both statements are patently false.",
+    "trick": "ESE Trap: This is a classic digital control trap. Pathological sampling frequencies literally destroy controllability and observability. Never sample at exactly the system's resonant frequency.",
+    "tip": "Discretization at pathological sampling frequencies destroys system controllability and observability."
+  },
+  {
+    "id": 24,
+    "question": "Calculate the exact number of separate root locus branches that terminate strictly at mathematical infinity for the open-loop transfer function G(s)H(s) = K(s + 4) / (s(s + 1)(s + 2)(s + 3)).",
+    "options": ["1", "2", "3", "4"],
+    "answer": "3",
+    "explanation": "Step 1: Count the number of open-loop poles (P). The denominator has s, s+1, s+2, s+3, totaling P = 4 poles. Step 2: Count the number of open-loop zeros (Z). The numerator has s+4, totaling Z = 1 zero. Step 3: By the rules of root locus, every pole branch must terminate at a zero. Step 4: If there are fewer finite zeros than poles, the remaining branches must terminate at theoretical infinite zeros. Number of infinite branches = P - Z = 4 - 1 = 3.",
+    "trick": "GATE Trap: Asymptotes literally guide the branches to infinity. The number of infinite branches is exactly equal to the number of asymptotes, which is always P - Z.",
+    "tip": "Number of branches terminating at infinity strictly equals Poles minus Zeros (P - Z)."
+  },
+  {
+    "id": 25,
+    "question": "Assertion (A): An uncompensated system with a Phase Margin of 60 degrees exhibits significantly higher resonant peaking (Mr) in the frequency domain than a system with a Phase Margin of 30 degrees. Reason (R): Phase Margin is inversely proportional to the damping ratio of the system. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are False",
+    "explanation": "Step 1: The mathematical approximation linking Phase Margin (PM) and damping ratio (zeta) is PM approximately equals 100 * zeta. Therefore, PM is DIRECTLY proportional to damping ratio. (Reason is False). Step 2: A PM of 60 degrees implies a higher damping ratio (zeta approx 0.6) compared to a PM of 30 degrees (zeta approx 0.3). Step 3: Higher damping severely suppresses oscillation and resonant peaking (Mr). Therefore, the 60-degree system has LOWER resonant peaking. (Assertion A is False).",
+    "trick": "ESE Trap: High Phase Margin = High Damping = Sluggish Response = Low Overshoot = Low Resonant Peak. They are all mathematically tied together.",
+    "tip": "Phase Margin is directly proportional to damping ratio (PM approx 100 * zeta)."
+  },
+  {
+    "id": 26,
+    "question": "In the state-space representation, if a physical system is entirely Observable but absolutely NOT Controllable, what is the strict mathematical structure of its Diagonalized Canonical Matrix?",
+    "options": ["The input matrix B contains at least one row of entirely zeros", "The output matrix C contains at least one column of entirely zeros", "Both the B and C matrices consist exclusively of non-zero elements", "The state matrix A must be singular"],
+    "answer": "The input matrix B contains at least one row of entirely zeros",
+    "explanation": "Step 1: In the diagonal canonical form, controllability and observability can be inspected purely by looking at the B and C matrices. Step 2: If a state is uncontrollable, the input u(t) has absolutely no mathematical pathway to influence it. Step 3: This manifests in the input matrix B having a row of absolute zeros corresponding to that specific state variable. Step 4: Since the system IS observable, the output matrix C must have NO columns of all zeros.",
+    "trick": "State PSC Trap: Diagonal form is magic. Row of zeros in B = Uncontrollable state. Column of zeros in C = Unobservable state. Instant identification without matrix multiplication!",
+    "tip": "In diagonal form, uncontrollable states correspond strictly to zero rows in matrix B."
+  },
+  {
+    "id": 27,
+    "question": "Assertion (A): The intersection of the root locus asymptotes on the real axis (the centroid) can never be located in the right-half of the s-plane. Reason (R): The centroid is calculated strictly as the sum of real parts of poles minus the sum of real parts of zeros, divided by (P - Z). Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: The centroid formula (sigma_A) is exactly as described in Reason R: (Sum of Poles - Sum of Zeros) / (P - Z). Thus, Reason R is True. Step 2: If a system has open-loop poles dominating in the right-half plane (e.g., unstable poles at +2, +4), the arithmetic sum becomes positive. Step 3: A positive sum yields a positive centroid coordinate. Step 4: Therefore, the centroid physically can and will exist in the right-half plane. Assertion A is completely false.",
+    "trick": "GATE Trap: There is no mathematical law banning the centroid from the RHP. It purely depends on the algebraic sum. Unstable open-loop systems frequently have RHP centroids.",
+    "tip": "Centroid = (Sum of Poles - Sum of Zeros) / (P - Z). It can exist in the RHP."
+  },
+  {
+    "id": 28,
+    "question": "A generic feedback control system is mapped via the Nyquist contour. The open-loop transfer function has exactly one pole situated in the Right Half Plane (RHP). If the resulting Nyquist plot encircles the critical point (-1+j0) exactly once in the counter-clockwise direction, what is the stability status of the closed-loop system?",
+    "options": ["Marginally stable", "Unstable with one closed-loop RHP pole", "Absolutely stable", "Unstable with two closed-loop RHP poles"],
+    "answer": "Absolutely stable",
+    "explanation": "Step 1: Apply the strict Nyquist criterion formula: N = P - Z. Step 2: P represents the number of open-loop RHP poles. The problem states P = 1. Step 3: N represents the number of counter-clockwise encirclements of -1+j0. The problem states N = 1. Step 4: Substituting into the formula: 1 = 1 - Z. Step 5: Solving algebraically for Z yields Z = 0. Step 6: Z represents closed-loop RHP poles. Since Z = 0, the closed-loop system is completely devoid of unstable poles and is thus absolutely stable.",
+    "trick": "ESE Trap: Counter-clockwise encirclement acts to mathematically CANCEL out the instability caused by open-loop RHP poles. One CW encirclement (-1) would mean Z=2 (highly unstable).",
+    "tip": "Stability demands Z = 0. Using N = P - Z, counter-clockwise encirclements cancel open-loop unstable poles."
+  },
+  {
+    "id": 29,
+    "question": "Assertion (A): The steady-state error of any feedback control system can be completely eliminated by increasing the open-loop DC gain to a theoretically infinite value. Reason (R): Steady-state error coefficients (Kp, Kv, Ka) are strictly directly proportional to the open-loop DC gain. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: It is true that error coefficients depend directly on system gain. Kp = limit(s->0) G(s) = DC Gain. (Reason R is True). Step 2: High gain minimizes error (e_ss = 1/(1+Kp)). Step 3: However, attempting to set gain to absolute infinity will violently force the roots of the characteristic equation into the Right Half Plane for almost all systems of order 3 or higher. Step 4: The system will become catastrophic and unstable, rendering the concept of 'steady-state error' physically meaningless. Thus, Assertion A is practically and theoretically false due to stability constraints.",
+    "trick": "State PSC Trap: Gain is the eternal compromise. High gain fixes steady-state error but destroys transient stability. You cannot rely on infinite gain; you must use an integrator (Type increase).",
+    "tip": "Infinite gain destroys closed-loop stability; use Integrators (Lag) to eliminate steady-state error safely."
+  },
+  {
+    "id": 30,
+    "question": "What is the exact maximum achievable phase lead angle provided by a Lead compensator designed with an attenuation parameter alpha exactly equal to 0.1?",
+    "options": ["45.0 degrees", "54.9 degrees", "60.0 degrees", "90.0 degrees"],
+    "answer": "54.9 degrees",
+    "explanation": "Step 1: The maximum phase lead angle (phi_m) for a single-stage lead compensator is dictated geometrically by the parameter alpha. Step 2: The analytical formula is sin(phi_m) = (1 - alpha) / (1 + alpha). Step 3: Substitute alpha = 0.1 into the formula: sin(phi_m) = (1 - 0.1) / (1 + 0.1) = 0.9 / 1.1 = 9 / 11. Step 4: Calculate the arcsine: phi_m = arcsin(0.8181). Step 5: arcsin(0.8181) is mathematically approximately 54.9 degrees.",
+    "trick": "GATE Trap: The theoretical absolute limit for a single passive lead stage is roughly 60 degrees. If an exam requires 80 degrees of lead, you must cascade two identical compensators.",
+    "tip": "Max phase lead formula: sin(phi_m) = (1 - alpha) / (1 + alpha)."
+  },
+  {
+    "id": 31,
+    "question": "Assertion (A): The Separation Principle allows the pole-placement state feedback controller and the full-order state observer to be designed entirely independently of each other. Reason (R): The closed-loop characteristic equation mathematically factors cleanly into the product of the controller poles and the observer poles. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: In state-space design, adding an observer introduces estimation error dynamics. Step 2: However, because the system is linear, the estimation error physically decays independently of the control law. Step 3: Mathematically, the overall block matrix determinant factors perfectly into det(sI - A + BK) * det(sI - A + LC) = 0. Step 4: Because the sets of poles do not mathematically interact or shift each other, you can design the optimal controller (K) and the optimal observer (L) completely separately. This is the definition of the Separation Principle.",
+    "trick": "ESE Trap: Observer poles must be placed 5 to 10 times further to the left than controller poles so the estimator converges faster than the controller reacts.",
+    "tip": "Separation principle proves observer poles and controller poles are mathematically decoupled."
+  },
+  {
+    "id": 32,
+    "question": "In a Bode magnitude plot, the intersection of the low-frequency asymptote and the high-frequency asymptote of a simple first-order system occurs exactly at the corner frequency. What is the precise magnitude error between this asymptotic approximation and the true exact magnitude curve at this corner frequency?",
+    "options": ["0 dB", "1 dB", "3 dB", "6 dB"],
+    "answer": "3 dB",
+    "explanation": "Step 1: A simple first-order pole has the transfer function G(s) = 1 / (1 + s/omega_c). Step 2: At the exact corner frequency, s = j*omega_c. The transfer function evaluates to 1 / (1 + j1). Step 3: The exact magnitude is 1 / sqrt(1^2 + 1^2) = 1 / sqrt(2). Step 4: Converting to decibels: 20*log10(1/sqrt(2)) = -3.01 dB. Step 5: The asymptotic approximation plots this point exactly at 0 dB (the intersection of the flat line and the slope). Thus, the absolute error is exactly 3 dB.",
+    "trick": "State PSC Trap: The error is 3 dB for a simple pole/zero. For a quadratic pole pair (second order) exactly at damping ratio 0.5, the error happens to be 0 dB. But for standard first-order, it is always 3 dB.",
+    "tip": "Asymptotic Bode plot error at a simple first-order corner frequency is exactly 3 dB."
+  },
+  {
+    "id": 33,
+    "question": "Assertion (A): Integrating a plant in the forward path (adding a pole at the origin) mathematically improves the relative stability (Phase Margin) of the closed-loop system. Reason (R): An integrator acts purely as a low-pass filter, heavily attenuating high-frequency noise and disturbances. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: An integrator has the transfer function G(s) = 1/s. Step 2: In the frequency domain, it contributes a permanent, unyielding phase lag of exactly -90 degrees at all frequencies. Step 3: This massive negative phase shift pulls the entire phase plot downwards, drastically REDUCING the Phase Margin and degrading relative stability. Thus, Assertion A is completely false. Step 4: It does act as a low-pass filter (slope -20dB/dec), so Reason R is true, but it sacrifices stability to achieve steady-state accuracy.",
+    "trick": "GATE Trap: Never confuse steady-state accuracy with relative stability. Integrators (Type + 1) PERFECT steady-state error but DESTROY transient stability (Phase Margin).",
+    "tip": "Adding an integrator degrades Phase Margin by injecting a permanent -90 degree phase shift."
+  },
+  {
+    "id": 34,
+    "question": "Which specific Nyquist contour path modification must be analytically employed when the open-loop transfer function G(s)H(s) contains poles situated exactly on the j-omega axis (e.g., at the origin)?",
+    "options": ["The contour must terminate at the origin", "The contour must bypass the poles via an infinitesimally small semi-circle into the right-half plane", "The contour must bypass the poles via an infinitesimally small semi-circle into the left-half plane", "The contour must encompass the entire left-half plane instead"],
+    "answer": "The contour must bypass the poles via an infinitesimally small semi-circle into the right-half plane",
+    "explanation": "Step 1: The Nyquist criterion requires mapping the entire right-half of the s-plane to check for closed-loop stability. Step 2: The standard contour travels straight up the j-omega axis. Step 3: If an open-loop pole exists exactly on the j-omega axis (like an integrator at s=0), the function G(s) mathematically explodes to infinity, breaking the conformal mapping. Step 4: To preserve the mapping, the contour must detour around the pole. Step 5: By indenting with a tiny semi-circle into the RIGHT-half plane, the pole is strictly left outside the mapped RHP zone, preserving the N = P - Z equation integrity.",
+    "trick": "ESE Trap: Bypassing through the RHP means the pole is NOT counted in 'P'. The infinite mapping of this tiny detour creates the massive semi-circles at infinity in the Nyquist plot.",
+    "tip": "j-omega poles are bypassed via tiny RHP semi-circles to keep them out of the stability contour."
+  },
+  {
+    "id": 35,
+    "question": "Assertion (A): The root locus of a physical control system will always strictly possess perfect symmetry with respect to the real axis. Reason (R): The characteristic equation coefficients for all physically realizable systems are composed entirely of real numbers. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: For any physical engineering system, parameters like mass, resistance, inductance, and capacitance are strictly real numbers. Step 2: Consequently, the transfer function and characteristic polynomials have exclusively real coefficients. Step 3: By the Fundamental Theorem of Algebra, any polynomial with strictly real coefficients must yield complex roots in perfect conjugate pairs (e.g., a+jb and a-jb). Step 4: Plotting conjugate pairs in the complex s-plane inherently creates perfect mirror symmetry across the real horizontal axis.",
+    "trick": "State PSC Trap: If you ever see a root locus plot that lacks real-axis symmetry, it is either mathematically flawed or describes a non-physical system with imaginary mass/resistance.",
+    "tip": "Real coefficients guarantee complex roots occur in conjugate pairs, ensuring real-axis symmetry."
+  },
+  {
+    "id": 36,
+    "question": "A system's state space transition matrix is evaluated at t = 0. Which fundamental matrix property is strictly mathematically guaranteed for this specific evaluation?",
+    "options": ["It is a Null Matrix", "It is the State Matrix A", "It is an Identity Matrix", "It is the Resolvent Matrix"],
+    "answer": "It is an Identity Matrix",
+    "explanation": "Step 1: The state transition matrix is defined analytically as the matrix exponential Phi(t) = e^(At). Step 2: The mathematical power series expansion for a matrix exponential is e^(At) = I + At + (A^2 * t^2)/2! + ... Step 3: If we evaluate this expression strictly at time t = 0, all terms containing 't' algebraically vanish. Step 4: The only surviving term is the Identity matrix 'I'. Therefore, Phi(0) = I.",
+    "trick": "GATE Trap: This is conceptually identical to the scalar exponential e^(0) = 1. In matrix algebra, the scalar '1' is the Identity Matrix 'I'.",
+    "tip": "The state transition matrix evaluated at t = 0 is strictly the Identity Matrix."
+  },
+  {
+    "id": 37,
+    "question": "Assertion (A): In frequency domain design, cascading a Lag compensator directly reduces the crossover frequency of the system. Reason (R): The Lag compensator provides high-frequency attenuation which shifts the gain magnitude curve downwards. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: A Lag compensator is fundamentally a low-pass filter. Step 2: While it boosts low-frequency gain to reduce steady-state error, its high-frequency magnitude is attenuated (gain is strictly less than 0 dB at high frequencies). Step 3: When cascaded with the plant, this high-frequency attenuation mathematically drags the entire system's Bode magnitude plot downwards. Step 4: Dragging the curve down forces it to cross the 0 dB line earlier, strictly reducing the gain crossover frequency and lowering system bandwidth.",
+    "trick": "ESE Trap: This reduction in crossover frequency is precisely why a Lag compensator makes a system slower and more sluggish, but improves stability margins by crossing over before phase drops too low.",
+    "tip": "Lag compensators attenuate high frequencies, shifting crossover frequency lower and reducing bandwidth."
+  },
+  {
+    "id": 38,
+    "question": "In a unity feedback control loop, the open-loop transfer function is G(s) = 10 / (s*(s+2)). What is the exact steady-state velocity error when subjected to a unit ramp input r(t) = t?",
+    "options": ["0.0", "0.2", "0.5", "Infinity"],
+    "answer": "0.2",
+    "explanation": "Step 1: A unit ramp input corresponds to velocity. The steady state error is e_ss = 1 / Kv. Step 2: The velocity error constant is mathematically defined as Kv = limit(s->0) [s * G(s)]. Step 3: Substitute G(s): Kv = limit(s->0) [s * (10 / (s*(s+2)))]. Step 4: The 's' in the numerator and denominator cancel perfectly. Kv = 10 / (0 + 2) = 5. Step 5: The steady-state error is strictly e_ss = 1 / 5 = 0.2.",
+    "trick": "GATE Trap: Do not mix up position (Kp), velocity (Kv), and acceleration (Ka). Ramp input uniquely requires Kv. The 's' cancellation is the defining feature of a Type 1 system yielding finite error.",
+    "tip": "Steady-state velocity error is exactly 1 / Kv for a unit ramp input."
+  },
+  {
+    "id": 39,
+    "question": "Assertion (A): The polar plot of a Type-2 system always commences exactly at an angle of -180 degrees at omega = 0. Reason (R): Each integration (pole at the origin) in the transfer function contributes a strict -90 degree phase shift at all frequencies. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: A Type-2 system possesses exactly two poles strictly at the origin (1/s^2). Step 2: Substituting s = j omega yields 1/(j omega)^2 = 1/(-omega^2). Step 3: The phase angle of this term is 1/(e^j90 * e^j90) = e^-j180. Therefore, it provides a permanent, invariant -180 degree phase shift regardless of frequency. Step 4: As omega approaches 0, the finite poles and zeros contribute 0 phase, leaving the plot to commence at precisely -180 degrees at infinite magnitude.",
+    "trick": "State PSC Trap: Type dictates the START angle (-90*Type). Order dictates the END angle (-90*Order). A Type 2, 3rd Order system starts at -180 and ends at -270.",
+    "tip": "Polar plots start at an angle of -90 multiplied by the system Type."
+  },
+  {
+    "id": 40,
+    "question": "For a specific linear system, the open-loop transfer function has exactly one zero located in the Right Half Plane (RHP). What is the strict technical classification of this control system?",
+    "options": ["Conditionally Stable System", "Minimum Phase System", "Non-minimum Phase System", "Marginally Stable System"],
+    "answer": "Non-minimum Phase System",
+    "explanation": "Step 1: A minimum phase system is rigorously defined as having absolutely ALL poles and ALL zeros located strictly in the Left Half Plane (LHP). Step 2: Any transfer function containing at least one pole or zero in the Right Half Plane (RHP) mathematically violates this condition. Step 3: Such systems exhibit delayed responses or reverse initial actions (undershoot) and are explicitly classified in control theory as Non-minimum Phase systems.",
+    "trick": "ESE Trap: Do not confuse stability with phase classification. A system can be absolutely stable (all closed-loop poles in LHP) but still be Non-minimum phase because of an open-loop RHP zero.",
+    "tip": "Any RHP pole or zero rigorously classifies a system as Non-minimum Phase."
+  },
+  {
+    "id": 41,
+    "question": "Assertion (A): Controllability and Observability are completely dual concepts in modern state-space control theory. Reason (R): The controllability of the pair (A, B) is mathematically perfectly equivalent to the observability of the pair (A transposed, B transposed). Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: The Principle of Duality connects controllability and observability. Step 2: The controllability matrix is Qc = [B  AB  A^2B]. Step 3: The observability matrix is Qo = [C  CA  CA^2]^T. Step 4: If we transpose the system matrices, making A_new = A^T and C_new = B^T, substituting these into the observability equation mathematically yields the exact transpose of the original controllability matrix. Thus, studying the observability of the dual system is identical to studying the controllability of the original.",
+    "trick": "GATE Trap: The dual of (A, B, C) is strictly (A^T, C^T, B^T). Note that B and C swap roles completely during transposition to maintain matrix dimensional integrity.",
+    "tip": "Controllability of (A, B) is mathematically the exact dual of Observability of (A^T, C^T)."
+  },
+  {
+    "id": 42,
+    "question": "In a standard second-order feedback system, if the damping ratio (zeta) is algebraically increased from 0.4 to 0.8, what is the exact physical effect on the resonant frequency (omega_r) and the resonant peak magnitude (Mr) in the frequency domain?",
+    "options": ["Both omega_r and Mr increase", "omega_r increases, Mr decreases", "omega_r decreases, Mr decreases", "Both omega_r and Mr decrease"],
+    "answer": "Both omega_r and Mr decrease",
+    "explanation": "Step 1: The resonant frequency formula is omega_r = omega_n * sqrt(1 - 2*zeta^2). Step 2: As zeta increases from 0.4 to 0.8, the term (1 - 2*zeta^2) becomes smaller (eventually hitting 0 at zeta=0.707). Thus, omega_r strictly decreases. Step 3: The resonant peak formula is Mr = 1 / (2*zeta * sqrt(1 - zeta^2)). Step 4: As damping (zeta) increases, the denominator grows, forcefully suppressing the peak height. Thus, Mr strictly decreases.",
+    "trick": "State PSC Trap: For zeta > 0.707, there is mathematically no resonant peak at all! The curve simply drops off monotonically like a first-order system. So increasing zeta strictly kills resonance.",
+    "tip": "Increasing damping ratio strictly lowers both resonant frequency and resonant peak magnitude."
+  },
+  {
+    "id": 43,
+    "question": "Assertion (A): The breakaway points on a symmetric root locus plot must mathematically strictly lie on the real axis. Reason (R): Breakaway points are geometrically located exactly where the roots of the characteristic polynomial transition from purely real to complex conjugates. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: A breakaway point is where two branches meet and split. Reason R accurately describes this transition from real roots (on the axis) to complex roots (leaving the axis). Step 2: However, Assertion A is completely false. While most elementary breakaway points occur on the real axis, complex breakaway points (where two complex branches meet in free space and split in perpendicular directions) are entirely mathematically possible in higher-order systems.",
+    "trick": "ESE Trap: The standard dK/ds = 0 formula finds ALL breakaway/break-in points. If the solution yields complex roots, and those roots satisfy the angle criterion, they are valid complex breakaway points.",
+    "tip": "Breakaway points are not restricted to the real axis; complex breakaway points mathematically exist."
+  },
+  {
+    "id": 44,
+    "question": "A control system compensator has the transfer function Gc(s) = (s + 2) / (s + 10). What is the exact analytical value of the maximum phase angle provided by this network, and at what precise frequency does it occur?",
+    "options": ["Phase = 41.8 degrees at omega = 4.47 rad/s", "Phase = 41.8 degrees at omega = 20 rad/s", "Phase = 54.9 degrees at omega = 4.47 rad/s", "Phase = 54.9 degrees at omega = 20 rad/s"],
+    "answer": "Phase = 41.8 degrees at omega = 4.47 rad/s",
+    "explanation": "Step 1: Identify the compensator. Since the zero (2) is less than the pole (10), it is a Lead compensator. Step 2: Calculate alpha = z / p = 2 / 10 = 0.2. Step 3: Maximum phase phi_m is found via sin(phi_m) = (1 - alpha)/(1 + alpha) = (1 - 0.2)/(1 + 0.2) = 0.8/1.2 = 0.667. Arcsin(0.667) is exactly 41.8 degrees. Step 4: The frequency of maximum phase is the geometric mean of the pole and zero: omega_m = sqrt(z * p) = sqrt(2 * 10) = sqrt(20) = 4.47 rad/s.",
+    "trick": "GATE Trap: The peak phase frequency is always the logarithmic midpoint (geometric mean) of the corner frequencies on a Bode plot, NEVER the arithmetic mean.",
+    "tip": "Max phase frequency is the geometric mean of pole and zero: omega_m = sqrt(z*p)."
+  },
+  {
+    "id": 45,
+    "question": "Assertion (A): For a state-space system to be fully Observable, the determinant of the observability matrix must be strictly equal to zero. Reason (R): Observability physically guarantees that the initial internal states of the system can be uniquely determined by observing the output over a finite time interval. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is False but R is True", "Both A and R are False"],
+    "answer": "A is False but R is True",
+    "explanation": "Step 1: Reason R is the exact, perfect definition of Observability in control theory. Step 2: To achieve this, the mathematical observability matrix Qo = [C  CA  CA^2 ... CA^(n-1)]^T must have linearly independent rows/columns. Step 3: Linear independence strictly dictates that the matrix must have full rank, which requires its determinant to be strictly NON-ZERO. Step 4: Assertion A states the determinant must be zero (which means singular/unobservable), making it completely false.",
+    "trick": "State PSC Trap: Determinant = 0 means Matrix is Singular = Rank Deficient = UNCONTROLLABLE / UNOBSERVABLE. Do not flip this fundamental linear algebra rule.",
+    "tip": "Full observability strictly requires a non-zero determinant for the observability matrix."
+  },
+  {
+    "id": 46,
+    "question": "Which of the following matrices mathematically links the input variables directly to the output variables in a state-space model without passing through the internal state integrators?",
+    "options": ["State Matrix (A)", "Input Matrix (B)", "Output Matrix (C)", "Direct Transmission Matrix (D)"],
+    "answer": "Direct Transmission Matrix (D)",
+    "explanation": "Step 1: The standard state-space equations are x_dot = Ax + Bu and y = Cx + Du. Step 2: The output 'y' is formed by two parts. 'Cx' represents how internal states map to the output. Step 3: 'Du' represents a mathematical path where the external input 'u' feeds instantly and directly into the output 'y'. Step 4: This entirely bypasses the internal differential dynamics (integrators). For strictly proper physical systems, D is almost always a zero matrix.",
+    "trick": "ESE Trap: If D is non-zero, the transfer function is 'proper' but not 'strictly proper', meaning the numerator and denominator have the exact same degree of 's'.",
+    "tip": "Direct Transmission Matrix (D) provides an instant feed-forward path from input to output."
+  },
+  {
+    "id": 47,
+    "question": "Assertion (A): In the root locus technique, the sum of the closed-loop poles remains strictly constant for all values of the proportional gain K. Reason (R): The coefficient of the s^(n-1) term in the characteristic equation is completely independent of the gain K. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: The sum of the roots of an n-th order polynomial s^n + a*s^(n-1) + ... = 0 is strictly given by the negative coefficient of the s^(n-1) term (-a). Step 2: In root locus, the characteristic equation is 1 + K*G(s)H(s) = 0. Step 3: Since G(s)H(s) is typically strictly proper (denominator degree > numerator degree by at least 2), adding K to the numerator polynomial does absolutely nothing to alter the s^(n-1) coefficient of the overall polynomial. Step 4: Because the s^(n-1) coefficient is invariant with respect to K, the arithmetic sum of the roots must mathematically remain completely constant.",
+    "trick": "GATE Trap: This rule ONLY holds if the number of poles exceeds the number of zeros by at least 2. If P - Z = 1, then K DOES affect the s^(n-1) term, and the sum shifts.",
+    "tip": "Sum of closed-loop poles is strictly constant if (Poles - Zeros) is greater than or equal to 2."
+  },
+  {
+    "id": 48,
+    "question": "A unity feedback system has an open-loop transfer function G(s) = K / (s*(s+1)*(s+5)). What is the exact geometric coordinate on the real axis where the root locus asymptotes intersect?",
+    "options": ["-2.0", "-3.0", "-6.0", "0.0"],
+    "answer": "-2.0",
+    "explanation": "Step 1: The intersection of asymptotes is called the centroid. Step 2: The analytical formula is Centroid = (Sum of open-loop poles - Sum of open-loop zeros) / (P - Z). Step 3: The poles are located at 0, -1, and -5. Sum of poles = 0 + (-1) + (-5) = -6. Step 4: There are absolutely zero finite zeros. Sum of zeros = 0. Step 5: P = 3, Z = 0. Therefore, (P - Z) = 3. Step 6: Centroid = (-6 - 0) / 3 = -2.0.",
+    "trick": "State PSC Trap: The centroid is simply the arithmetic average of the pole-zero geometry. Always include the pole at the origin (0) in your counting for 'P'.",
+    "tip": "Centroid geometry is the exact arithmetic mean of poles minus zeros: (-6/3 = -2)."
+  },
+  {
+    "id": 49,
+    "question": "Assertion (A): The operational addition of a pure derivative control action (Kd) vastly improves the transient damping and stability margin of a closed-loop system. Reason (R): Derivative control mathematically predicts the future trajectory of the error signal by evaluating its current rate of change. Select the correct code:",
+    "options": ["Both A and R are True and R is the correct explanation of A", "Both A and R are True but R is NOT the correct explanation of A", "A is True but R is False", "A is False but R is True"],
+    "answer": "Both A and R are True and R is the correct explanation of A",
+    "explanation": "Step 1: Proportional control reacts only to present error. Step 2: Derivative control calculates the slope (de/dt) of the error. Step 3: By measuring the slope, it mathematically anticipates where the error will be in the near future. Step 4: If the error is falling rapidly towards zero, the derivative term acts as an aggressive braking force, heavily suppressing overshoot. This anticipatory braking physically adds damping and greatly increases the overall system stability margins.",
+    "trick": "ESE Trap: Derivative control acts as a braking mechanism. While it improves stability, it also mathematically amplifies high-frequency measurement noise, which is its primary real-world drawback.",
+    "tip": "Derivative control predicts future error using slope, strictly adding damping and stability."
+  },
+  {
+    "id": 50,
+    "question": "In a Polar Plot, the overall complex magnitude of the transfer function G(j omega) traces a curve as frequency sweeps from 0 to infinity. For a stable minimum phase system, which direction does this vector geometrically rotate?",
+    "options": ["Strictly Counter-Clockwise", "Strictly Clockwise", "It oscillates randomly", "It remains perfectly stationary"],
+    "answer": "Strictly Clockwise",
+    "explanation": "Step 1: The total phase angle of a minimum phase system transfer function is the sum of angles from zeros minus the sum of angles from poles. Step 2: Since poles dominate at higher frequencies (strictly proper system), the negative phase contribution from LHP poles grows continuously as omega increases. Step 3: This continuous addition of negative phase shift mathematically forces the resulting polar vector to constantly lag further behind. Step 4: A continuously increasing negative angle geometrically dictates a strict Clockwise rotation sweeping across the complex plane.",
+    "trick": "GATE Trap: LHP poles add negative phase (lag), driving the curve clockwise. LHP zeros add positive phase (lead), which would push counter-clockwise, but poles always outnumber zeros in physical systems.",
+    "tip": "LHP poles generate increasing phase lag, geometrically forcing polar plots to rotate strictly clockwise."
+  }
+]

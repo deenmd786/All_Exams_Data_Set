@@ -1,0 +1,44 @@
+﻿
+
+{
+  "module_title": "OS Basics, Processes, and CPU Scheduling",
+  "difficulty_level": 1,
+  "introduction": "At this foundational level, we cover the core definition of an operating system, the lifecycle of a process, and how the CPU decides which process to execute next (Scheduling).",
+  "core_concepts": [
+    {
+      "title": "Operating Systems and Processes",
+      "description": "An OS is the crucial resource allocator and interface between hardware and the user. \n**Process:** A program currently in execution. (A program on a disk is passive; a process in RAM is active). \n**Process States:** New $\\rightarrow$ Ready $\\rightarrow$ Running $\\rightarrow$ Terminated. (If it needs I/O, it moves from Running to a Blocked/Waiting state)."
+    },
+    {
+      "title": "Context Switching",
+      "description": "The procedure where the CPU stops executing one process, saves its state (in the Process Control Block - PCB), and loads the saved state of a new process. This is considered pure **Overhead** because the system performs absolutely no useful computational work while switching."
+    },
+    {
+      "title": "CPU Scheduling Algorithms",
+      "description": "1. **FCFS (First Come First Serve):** The process that arrives first gets the CPU. (Strictly Non-Preemptive). Suffers from the 'Convoy Effect'.\n2. **SJF (Shortest Job First):** The process with the smallest Burst Time executes next. It mathematically guarantees the Minimum Average Waiting Time.\n3. **Round Robin (RR):** Every process gets a fixed time slice (Time Quantum). It is the absolute best algorithm for Time-Sharing and interactive systems."
+    }
+  ],
+  "important_entities": [
+    {
+      "name": "Preemptive vs. Non-Preemptive",
+      "key_fact": "Forcefully Seizing the CPU",
+      "significance": "**Non-Preemptive:** Once a process enters the Running state, it cannot be interrupted; it only leaves voluntarily. \n**Preemptive:** The OS can forcibly seize (preempt) the CPU from a currently running process if a higher-priority process arrives in the Ready queue (e.g., SRTF - Shortest Remaining Time First)."
+    }
+  ],
+  "trap_alerts_and_exceptions": [
+    {
+      "alert_title": "The Convoy Effect",
+      "explanation": "Exam Trap: The Convoy Effect occurs specifically in FCFS scheduling. If one massive, CPU-intensive process arrives first, all the short, I/O-intensive processes behind it must wait an agonizingly long time, severely dragging down system performance and CPU utilization."
+    }
+  ],
+  "mnemonics_and_tricks": [
+    {
+      "trick_title": "Process State Transitions",
+      "memory_phrase": "Ready to Run is Dispatch, Run to Ready is Interrupt",
+      "explanation": "The 'Dispatcher' moves a process from Ready to Running. A hardware 'Interrupt' (like a time quantum expiring) forcibly moves it from Running back to Ready."
+    }
+  ],
+  "exam_strategy_tips": [
+    "A patent GATE and ISRO theoretical question: 'Which CPU scheduling algorithm is most highly suited for Time-Sharing operating systems?' Answer: Round Robin."
+  ]
+}

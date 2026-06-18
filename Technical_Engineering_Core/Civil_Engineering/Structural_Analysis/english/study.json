@@ -1,0 +1,125 @@
+﻿{
+"topic": "Structural Analysis",
+"description": "A comprehensive study of the behavior of solid structures subjected to various loads, focusing on determinacy, internal forces, deflection analysis, and advanced matrix methods.",
+"path": "Technical_Engineering_Core/Civil_Engineering/Structural_Analysis",
+"sections": [
+{
+"section_id": "1",
+"title": "Static and Kinematic Indeterminacy",
+"description": "Evaluating the structural stability and identifying the number of unknown forces or displacements required to analyze a structure.",
+"formulas": [
+{
+"category": "Static Indeterminacy (Ds) for 2D Structures",
+"equations": [
+"Rigid Jointed Plane Frame: Ds = (3 * m + r) - 3 * j",
+"Pin Jointed Plane Frame (Truss): Ds = (m + r) - 2 * j",
+"General Formula: Ds = Dse (External) + Dsi (Internal)"
+]
+},
+{
+"category": "Kinematic Indeterminacy (Dk) or Degrees of Freedom",
+"equations": [
+"Rigid Jointed Plane Frame: Dk = 3 * j - re",
+"Pin Jointed Plane Frame: Dk = 2 * j - re",
+"Note: Subtract the number of inextensible members from Dk if axial deformation is neglected."
+]
+}
+]
+},
+{
+"section_id": "2",
+"title": "Shear Force and Bending Moment",
+"description": "Understanding internal resisting forces and moments developed in structural members under transverse loading.",
+"key_concepts": [
+{
+"concept": "Differential Relationships",
+"explanation": "The rate of change of shear force equals the negative of the load intensity (dV/dx = -w). The rate of change of bending moment equals the shear force (dM/dx = V). Maximum bending moment occurs where shear force is zero or changes sign."
+},
+{
+"concept": "Point of Contraflexure",
+"explanation": "The specific point on a bending moment diagram where the bending moment changes sign (transitions from positive/sagging to negative/hogging, or vice versa)."
+}
+],
+"cases": [
+{
+"condition": "Simply Supported Beam with a Uniformly Distributed Load (UDL) of 'w' over span 'L'",
+"results": [
+"Maximum Bending Moment (at center) = (w * L^2) / 8",
+"Maximum Shear Force (at supports) = (w * L) / 2",
+"Bending Moment Diagram shape is a Parabola (2nd degree curve)"
+]
+}
+]
+},
+{
+"section_id": "3",
+"title": "Deflection of Beams",
+"description": "Methods and standard formulas for calculating the maximum slope and deflection in flexural members.",
+"steps": [
+{
+"step_number": 1,
+"title": "Moment Area Method - Theorem I",
+"detail": "The change in slope between any two points on the elastic curve equals the area of the M/EI diagram between those two points."
+},
+{
+"step_number": 2,
+"title": "Moment Area Method - Theorem II",
+"detail": "The vertical deviation of the tangent at point A with respect to the tangent at point B equals the moment of the M/EI diagram area between A and B, taken about point A."
+},
+{
+"step_number": 3,
+"title": "Conjugate Beam Method",
+"detail": "An imaginary beam with the same length as the real beam, loaded with the M/EI diagram. The shear force in the conjugate beam gives the slope in the real beam, and the bending moment gives the deflection."
+}
+],
+"cases": [
+{
+"condition": "Cantilever Beam of length 'L' with a Point Load 'P' at the free end",
+"results": [
+"Maximum Slope (at free end) = (P * L^2) / (2 * E * I)",
+"Maximum Deflection (at free end) = (P * L^3) / (3 * E * I)"
+]
+},
+{
+"condition": "Simply Supported Beam of length 'L' with a central Point Load 'P'",
+"results": [
+"Maximum Slope (at supports) = (P * L^2) / (16 * E * I)",
+"Maximum Deflection (at center) = (P * L^3) / (48 * E * I)"
+]
+}
+]
+},
+{
+"section_id": "4",
+"title": "Influence Line Diagrams (ILD)",
+"description": "Graphical representations showing the variation of a reaction, shear, moment, or deflection at a specific point as a unit concentrated load moves across the structure.",
+"key_concepts": [
+{
+"concept": "Muller-Breslau Principle",
+"explanation": "The absolute governing principle for drawing ILDs. It states that the ILD for any stress function (reaction, shear, moment) in a structure is directly proportional to the deflected shape of the structure obtained by removing the restraint corresponding to that function and introducing a unit displacement in its direction."
+},
+{
+"concept": "Rolling Loads",
+"explanation": "To find the maximum bending moment under a specific wheel load in a train of moving loads, position the load train such that the resultant of all loads and the specific wheel load are equidistant from the center of the beam span."
+}
+]
+},
+{
+"section_id": "5",
+"title": "Matrix Methods of Structural Analysis",
+"description": "Advanced computational methods used to solve highly indeterminate structures using matrix algebra.",
+"key_concepts": [
+{
+"concept": "Stiffness Method (Displacement Method)",
+"notation_or_symbol": "[P] = [K][Delta]",
+"explanation": "The primary unknowns are joint displacements. Kinematic indeterminacy dictates the size of the stiffness matrix [K]. It is the preferred method for computer applications because the formulation is straightforward even for highly redundant structures."
+},
+{
+"concept": "Flexibility Method (Force Method)",
+"notation_or_symbol": "[Delta] = [F][P]",
+"explanation": "The primary unknowns are redundant forces. Static indeterminacy dictates the size of the flexibility matrix [F]. The flexibility matrix is the inverse of the stiffness matrix ([F] = [K]^-1)."
+}
+]
+}
+]
+}

@@ -1,0 +1,110 @@
+﻿{
+  "topic": "Microprocessors",
+  "description": "A comprehensive study of the architecture, instruction set, assembly language programming, and peripheral interfacing of 8085 and 8086 microprocessors in Electronics and Communication.",
+  "path": "Technical_Engineering_Core/Electronics_and_Communication/Microprocessors",
+  "sections": [
+    {
+      "section_id": "1",
+      "title": "8085 Microprocessor Architecture",
+      "description": "Study of the internal components and pin configuration of the 8-bit 8085 microprocessor.",
+      "key_concepts": [
+        {
+          "concept": "Accumulator (Register A)",
+          "explanation": "An 8-bit register that is part of the Arithmetic Logic Unit (ALU). The results of all arithmetic and logical operations are stored in the accumulator by default."
+        },
+        {
+          "concept": "Flag Register",
+          "explanation": "The 8085 has 5 active flags that indicate the status of data after an ALU operation: Sign (S), Zero (Z), Auxiliary Carry (AC), Parity (P), and Carry (CY)."
+        },
+        {
+          "concept": "Multiplexed Address/Data Bus (AD0-AD7)",
+          "explanation": "To save pin count, the lower 8-bit address bus and the 8-bit data bus are multiplexed together. The Address Latch Enable (ALE) signal is used to demultiplex them during execution."
+        }
+      ]
+    },
+    {
+      "section_id": "2",
+      "title": "8086 Architecture and Memory Segmentation",
+      "description": "Advanced architecture of the 16-bit 8086 microprocessor, featuring pipelining and memory management techniques.",
+      "formulas": [
+        {
+          "category": "Physical Address Calculation",
+          "equations": [
+            "Physical Address (20-bit) = (Segment Register * 10H) + Offset Address",
+            "Multiplying by 10H in hexadecimal is equivalent to adding a zero at the end (shifting 4 bits to the left in binary) to convert the 16-bit segment base to a 20-bit address."
+          ]
+        }
+      ],
+      "key_concepts": [
+        {
+          "concept": "Pipelining",
+          "explanation": "The 8086 architecture is divided into two independent units: the Bus Interface Unit (BIU) and the Execution Unit (EU). The BIU fetches instructions from memory and places them in a 6-byte instruction queue, while the EU executes them concurrently, significantly increasing processing speed."
+        }
+      ]
+    },
+    {
+      "section_id": "3",
+      "title": "Instruction Set and Addressing Modes",
+      "description": "Various methods by which the microprocessor accesses and specifies operands or data for execution.",
+      "cases": [
+        {
+          "condition": "Immediate Addressing",
+          "results": [
+            "The data or operand is provided directly within the instruction itself.",
+            "Example: MVI A, 05H (Load the 8-bit data 05H immediately into the accumulator)."
+          ]
+        },
+        {
+          "condition": "Direct Addressing",
+          "results": [
+            "The precise 16-bit memory address of the data is provided directly in the instruction.",
+            "Example: LDA 2000H (Load the data from memory location 2000H into the accumulator)."
+          ]
+        },
+        {
+          "condition": "Indirect Addressing",
+          "results": [
+            "The memory address of the data is stored in a register pair (usually the HL pair). The instruction refers only to the register pair.",
+            "Example: MOV A, M (Move data from the memory location pointed to by the HL pair into the accumulator)."
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "4",
+      "title": "Interrupt System",
+      "description": "The mechanism to halt normal program execution temporarily to execute a specific Interrupt Service Routine (ISR) triggered by external or internal events.",
+      "cases": [
+        {
+          "condition": "Maskable Interrupts",
+          "results": [
+            "Interrupts that can be disabled, ignored, or delayed by the microprocessor using specific software instructions (like DI - Disable Interrupt).",
+            "Examples in 8085: RST 7.5, RST 6.5, RST 5.5, and INTR."
+          ]
+        },
+        {
+          "condition": "Non-Maskable Interrupts (NMI)",
+          "results": [
+            "Interrupts that cannot be ignored or disabled under any circumstances. They are strictly reserved for extreme system emergencies like power failure.",
+            "In the 8085, TRAP (RST 4.5) is the only non-maskable interrupt and possesses the absolute highest priority."
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "5",
+      "title": "Peripheral Interfacing",
+      "description": "Programmable peripheral chips utilized to connect the microprocessor to external I/O devices, sensors, and memory units.",
+      "key_concepts": [
+        {
+          "concept": "8255 Programmable Peripheral Interface (PPI)",
+          "explanation": "A multipurpose I/O device containing three 8-bit I/O ports (Port A, Port B, Port C). It can be programmed dynamically in various modes (Mode 0, Mode 1, Mode 2) and features a specific Bit Set/Reset (BSR) mode for Port C."
+        },
+        {
+          "concept": "8257 Direct Memory Access (DMA) Controller",
+          "explanation": "A dedicated chip that allows direct, ultra-high-speed data transfer between I/O devices and memory without any microprocessor intervention. During this transfer, the microprocessor relinquishes control of its buses to the 8257 using HOLD and HLDA signals."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,454 @@
+﻿
+
+[
+  {
+    "id": 1,
+    "question": "What is the primary fundamental purpose of an Operating System?",
+    "options": ["To compile source code into machine code", "To provide a user-friendly environment and manage computer hardware resources", "To provide internet connectivity to the system", "To act as an antivirus software"],
+    "answer": "To provide a user-friendly environment and manage computer hardware resources",
+    "explanation": "An Operating System (OS) is system software that acts as an intermediary between the user and the computer hardware, managing hardware resources efficiently while providing a convenient interface for running applications.",
+    "trick": "Trick: Think of the OS as the 'Government' of a country. It doesn't do the physical work itself, but it perfectly manages all resources, roads, and laws so the citizens (applications) can work smoothly.",
+    "tip": "The OS is the ultimate resource manager of a computer system."
+  },
+  {
+    "id": 2,
+    "question": "In which type of operating system are jobs with similar requirements grouped and executed together without user interaction?",
+    "options": ["Real-Time Operating System", "Time-Sharing Operating System", "Batch Operating System", "Multiprocessing Operating System"],
+    "answer": "Batch Operating System",
+    "explanation": "In a Batch Operating System, users do not interact directly with the computer. Jobs with similar needs are grouped into a 'batch' by the operator and executed sequentially to speed up processing.",
+    "trick": "Trick: Like baking a 'batch' of cookies. You prepare them all, put them in the oven together, and wait until the whole batch is done without interrupting.",
+    "tip": "Batch OS lacks direct user interaction during job execution."
+  },
+  {
+    "id": 3,
+    "question": "Which operating system concept strictly provides the illusion that multiple users are interacting with the system simultaneously by rapidly switching the CPU between them?",
+    "options": ["Batch Processing", "Time-Sharing", "Distributed System", "Real-Time System"],
+    "answer": "Time-Sharing",
+    "explanation": "Time-Sharing (or Multitasking) operating systems rapidly switch the CPU among multiple users or tasks. The switching is so fast that each user gets the illusion of having a dedicated computer.",
+    "trick": "Trick: Think of a chess grandmaster playing against 50 beginners at once. The master walks table to table rapidly; each beginner feels they have a dedicated opponent.",
+    "tip": "Time-sharing prioritises quick response time for interactive users."
+  },
+  {
+    "id": 4,
+    "question": "By technical definition, what exactly is a 'Process' in an operating system?",
+    "options": ["A program stored on the hard disk", "A program in execution", "A section of memory reserved for the OS", "A hardware component managing the CPU"],
+    "answer": "A program in execution",
+    "explanation": "A program is a passive entity (just files on a disk). When it is loaded into the main memory and the CPU starts executing its instructions, it becomes an active entity known as a 'Process'.",
+    "trick": "Trick: A recipe book on the shelf is a 'Program'. Actually cooking the recipe in the kitchen is the 'Process'!",
+    "tip": "Process = Program Code + Execution Context (Registers, PC, Memory)."
+  },
+  {
+    "id": 5,
+    "question": "When a process requests an I/O event (like reading from a file), it immediately transitions from the 'Running' state to which of the following states?",
+    "options": ["Ready", "Terminated", "Wait/Block", "New"],
+    "answer": "Wait/Block",
+    "explanation": "If a process executing in the CPU requests an I/O operation or waits for a specific event, it transitions to the 'Wait/Block' state so that the CPU is not kept idle. It stays there until the I/O is complete.",
+    "trick": "Trick: If you are driving (Running) and hit a red traffic light (I/O request), you must stop and 'Wait' until it turns green before you can be 'Ready' to drive again.",
+    "tip": "CPU never executes a process sitting in the Wait/Block queue."
+  },
+  {
+    "id": 6,
+    "question": "Which specific OS component is strictly responsible for physically moving a process from the 'Ready' state to the 'Running' state?",
+    "options": ["Compiler", "Dispatcher", "Linker", "Interrupt Handler"],
+    "answer": "Dispatcher",
+    "explanation": "While the CPU Scheduler selects which process should run next, it is the 'Dispatcher' that actually performs the context switch and gives control of the CPU to the process, moving it to the Running state.",
+    "trick": "Trick: The Scheduler is the 'Manager' who decides who works next. The Dispatcher is the 'Security Guard' who actually unlocks the door to let them into the CPU room.",
+    "tip": "Dispatcher latency is the time taken to switch processes."
+  },
+  {
+    "id": 7,
+    "question": "In a multithreaded environment, which of the following is NOT shared among different threads belonging to the same process?",
+    "options": ["Code Section", "Data Section", "Open Files", "Stack and Program Counter"],
+    "answer": "Stack and Program Counter",
+    "explanation": "Threads belonging to the same process share the code section, data section, and OS resources. However, each thread must have its own unique Stack (for local variables) and Program Counter (to track its own execution point).",
+    "trick": "Trick: Think of a Process as a 'House' and Threads as the 'Rooms'. All rooms share the same electricity and address (Code/Data), but every room has its own privacy (Stack/PC)!",
+    "tip": "Independent execution requires independent Program Counters and Stacks."
+  },
+  {
+    "id": 8,
+    "question": "Which system call is explicitly utilised in UNIX/Linux environments to create a new child process?",
+    "options": ["exec()", "fork()", "wait()", "exit()"],
+    "answer": "fork()",
+    "explanation": "The fork() system call creates a new process by duplicating the calling process. The new process is called the child process, and the original is called the parent process.",
+    "trick": "Trick: A fork in a road splits one path into two. The fork() system call splits one running process into two identical processes!",
+    "tip": "fork() returns 0 to the child process and the child's PID to the parent."
+  },
+  {
+    "id": 9,
+    "question": "What is the primary data structure used by the operating system to store all vital information about a specific process?",
+    "options": ["Process Control Block (PCB)", "Memory Management Unit (MMU)", "File Allocation Table (FAT)", "Interrupt Vector Table (IVT)"],
+    "answer": "Process Control Block (PCB)",
+    "explanation": "A Process Control Block (PCB) is a data structure used by the OS to store all information about a process, including its state, program counter, CPU registers, memory management information, and I/O status.",
+    "trick": "Trick: Think of a PCB as a process's 'Passport and ID Card'. It contains all the personal details the OS needs to identify and manage it.",
+    "tip": "Each process has exactly one unique Process Control Block."
+  },
+  {
+    "id": 10,
+    "question": "Which thread type is generally considered faster to create and manage because it does not require intervention from the Operating System kernel?",
+    "options": ["Kernel-level threads", "Hardware threads", "User-level threads", "Virtual threads"],
+    "answer": "User-level threads",
+    "explanation": "User-level threads are managed entirely by a thread library in the user space. Since creating and switching them does not require OS kernel system calls, they are significantly faster than kernel-level threads.",
+    "trick": "Trick: 'User' rules in their own house (User-space), making decisions instantly without asking the 'Government' (Kernel) for permission.",
+    "tip": "A blocking system call in a user-level thread blocks the entire process."
+  },
+  {
+    "id": 11,
+    "question": "What is the very first state a newly created process enters before it is admitted to the main memory?",
+    "options": ["Ready", "Wait", "Running", "New"],
+    "answer": "New",
+    "explanation": "When a process is first created but not yet admitted to the pool of executable processes by the OS, it resides in the 'New' state.",
+    "trick": "Trick: Before a baby can crawl (Ready) or walk (Running), it is simply 'New'born.",
+    "tip": "The Long-Term Scheduler admits processes from New to Ready."
+  },
+  {
+    "id": 12,
+    "question": "Fill in the blank: The process of saving the state of an old running process and loading the saved state for a new process is known as a ________.",
+    "options": ["System Call", "Context Switch", "Thread Dispatch", "Process Fork"],
+    "answer": "Context Switch",
+    "explanation": "A context switch involves saving the context (registers, PC, state) of the currently running process into its PCB and restoring the context of the next process to run. This is pure overhead for the OS.",
+    "trick": "Trick: Like a substitute teacher taking over a class. They must look at the lesson plan (save state) and start teaching exactly where the last teacher left off (load state).",
+    "tip": "Context switching time is considered absolute overhead in an OS."
+  },
+  {
+    "id": 13,
+    "question": "Which of the following is an absolute characteristic of a Hard Real-Time Operating System?",
+    "options": ["It aims for maximum throughput over time", "It guarantees that critical tasks complete on time, and missing a deadline causes total system failure", "It provides a highly interactive Graphical User Interface", "It executes batch jobs continuously"],
+    "answer": "It guarantees that critical tasks complete on time, and missing a deadline causes total system failure",
+    "explanation": "A Hard Real-Time OS is designed for critical applications (like missile guidance or medical pacemakers) where missing a processing deadline is completely unacceptable and causes total system failure.",
+    "trick": "Trick: 'Hard' means a strict, unbreakable rule. Miss the deadline, and the system is fundamentally broken.",
+    "tip": "Soft Real-Time systems tolerate occasional missed deadlines without failing."
+  },
+  {
+    "id": 14,
+    "question": "What specifically happens to a process when it transitions to the 'Terminated' state?",
+    "options": ["It is temporarily suspended to disk", "Its execution has finished, and the OS reclaims its memory and resources", "It requests a highly privileged I/O operation", "It is waiting for the user to press a key"],
+    "answer": "Its execution has finished, and the OS reclaims its memory and resources",
+    "explanation": "A process reaches the 'Terminated' state when it completes its execution (normally or forcefully). The OS then deallocates its memory, closes its files, and destroys its PCB.",
+    "trick": "Trick: 'Terminated' = 'The End'. The movie is over, and the cinema staff (OS) cleans out the theatre (Memory) for the next show.",
+    "tip": "The exit() system call officially terminates a process."
+  },
+  {
+    "id": 15,
+    "question": "Which component of the Process Control Block (PCB) points to the precise address of the next instruction to be executed by the process?",
+    "options": ["Process State", "Program Counter", "CPU Registers", "Memory Limits"],
+    "answer": "Program Counter",
+    "explanation": "The Program Counter (PC) holds the exact memory address of the next machine instruction that the CPU needs to fetch and execute for that specific process.",
+    "trick": "Trick: The Program Counter is like a 'Bookmark' in a book. It perfectly remembers which line you need to read next when you return.",
+    "tip": "Each thread inherently possesses its own unique Program Counter."
+  },
+  {
+    "id": 16,
+    "question": "What does a process become if its parent process terminates but the child process continues to execute?",
+    "options": ["Zombie Process", "Daemon Process", "Orphan Process", "Blocked Process"],
+    "answer": "Orphan Process",
+    "explanation": "If a parent process finishes execution or is killed while its child process is still running, the child becomes an 'Orphan'. Typically, the 'init' process (PID 1) officially adopts these orphan processes.",
+    "trick": "Trick: Just like in real life, a child left without a parent is termed an 'Orphan'.",
+    "tip": "The init process periodically reaps adopted orphan processes."
+  },
+  {
+    "id": 17,
+    "question": "What is a 'Zombie Process' in the context of operating systems?",
+    "options": ["A process that consumes all CPU resources maliciously", "A process that has completed execution but still has an entry in the process table", "A process that automatically restarts when killed", "A process executing completely in the kernel space"],
+    "answer": "A process that has completed execution but still has an entry in the process table",
+    "explanation": "A Zombie process is one that has terminated but its parent has not yet called wait() to collect its exit status. It releases its memory but leaves a lingering entry in the OS process table.",
+    "trick": "Trick: A zombie is 'undead'. It is physically dead (finished execution) but its ghost (PCB entry) still haunts the system's process table!",
+    "tip": "Too many zombies can exhaust the system's PID space."
+  },
+  {
+    "id": 18,
+    "question": "When an I/O operation completely finishes, a blocked process strictly transitions from the 'Wait/Block' state to which state?",
+    "options": ["Running", "Ready", "Terminated", "New"],
+    "answer": "Ready",
+    "explanation": "A process cannot jump directly from Wait/Block to Running. When the I/O event finishes, it must go to the 'Ready' queue to wait for the CPU Scheduler to allocate it time again.",
+    "trick": "Trick: When your broken car is fixed (I/O complete), you don't instantly teleport onto the highway (Running). You go to the driveway (Ready) and wait for a safe chance to merge.",
+    "tip": "Only the Dispatcher moves a process directly to the Running state."
+  },
+  {
+    "id": 19,
+    "question": "Which of the following describes a 'System Call'?",
+    "options": ["A mechanism used by application programs to request a service from the OS kernel", "A phone call made via VoIP software", "A hardware interrupt generated by a keyboard", "A user function defined in a C program"],
+    "answer": "A mechanism used by application programs to request a service from the OS kernel",
+    "explanation": "A System Call provides the programmatic interface between a user application and the operating system. It allows a user program to request privileged operations (like reading a file or creating a process) from the kernel safely.",
+    "trick": "Trick: A system call is like a 'Service Bell' at a hotel desk. You (the user app) ring the bell (system call) to ask the hotel staff (OS Kernel) to do something you aren't allowed to do yourself.",
+    "tip": "System calls cause a switch from user mode to kernel mode."
+  },
+  {
+    "id": 20,
+    "question": "The primary objective of 'Multiprogramming' in an Operating System is to:",
+    "options": ["Provide an interactive graphical user interface", "Allow multiple programs to be written in different languages", "Keep the CPU as busy as possible by having multiple jobs available in memory", "Execute a single process faster using multiple CPUs"],
+    "answer": "Keep the CPU as busy as possible by having multiple jobs available in memory",
+    "explanation": "Multiprogramming keeps multiple processes in the main memory simultaneously. If one process needs to wait for I/O, the OS seamlessly switches the CPU to another process, ensuring the CPU is never idle.",
+    "trick": "Trick: Multi(Many) + Programming(Jobs in memory). The goal is zero free time for the CPU!",
+    "tip": "Multiprogramming strictly maximizes overall CPU utilization."
+  },
+  {
+    "id": 21,
+    "question": "What is the technical term for the core part of an Operating System that always resides in the main memory and manages all system resources?",
+    "options": ["Shell", "Kernel", "Compiler", "Assembler"],
+    "answer": "Kernel",
+    "explanation": "The Kernel is the central, foundational component of the OS. It is the first program loaded on startup, remains in memory constantly, and manages memory, processes, and hardware communication.",
+    "trick": "Trick: The 'Kernel' of a popcorn seed is the very centre. The OS Kernel is the very heart and centre of the entire computer system.",
+    "tip": "The Shell is merely the user interface around the Kernel."
+  },
+  {
+    "id": 22,
+    "question": "What does a Dual-Mode Operating System fundamentally separate to ensure system protection?",
+    "options": ["Network access and Local access", "User Mode and Kernel Mode", "GUI and Command Line Interface", "Single-threading and Multi-threading"],
+    "answer": "User Mode and Kernel Mode",
+    "explanation": "Dual-mode operation provides hardware-level protection. 'User Mode' restricts what applications can do, while 'Kernel Mode' provides unrestricted access to hardware. An OS switches to kernel mode to safely execute system calls.",
+    "trick": "Trick: User Mode is a 'Guest Pass' (limited access). Kernel Mode is the 'Admin Master Key' (full access).",
+    "tip": "The mode bit in hardware distinguishes user (1) and kernel (0) mode."
+  },
+  {
+    "id": 23,
+    "question": "Which specific OS scheduler physically controls the 'Degree of Multiprogramming' (the total number of processes in memory)?",
+    "options": ["Short-term Scheduler", "Long-term Scheduler", "Medium-term Scheduler", "CPU Scheduler"],
+    "answer": "Long-term Scheduler",
+    "explanation": "The Long-term Scheduler (or Job Scheduler) selects which newly created processes should be brought into the 'Ready' queue in main memory. By doing this, it strictly controls the degree of multiprogramming.",
+    "trick": "Trick: The 'Long-term' planner decides exactly how many guests (processes) to invite to the party (memory) in the first place.",
+    "tip": "Short-term scheduler executes far more frequently than Long-term."
+  },
+  {
+    "id": 24,
+    "question": "In the context of threads, what is typically meant by a 'Lightweight Process'?",
+    "options": ["A process that takes up very little hard drive space", "Another exact name for a Thread", "A process running purely in a command-line interface", "An operating system utility script"],
+    "answer": "Another exact name for a Thread",
+    "explanation": "Threads are often referred to as Lightweight Processes (LWPs) because they require significantly less overhead to create, destroy, and context switch compared to heavy traditional processes.",
+    "trick": "Trick: A traditional process carries a heavy backpack of resources. A thread travels 'light' because it shares the backpack with other threads.",
+    "tip": "Threads share process memory, reducing creation overhead greatly."
+  },
+  {
+    "id": 25,
+    "question": "Identify the OS component that serves as a command interpreter, reading user commands and executing them.",
+    "options": ["Kernel", "Device Driver", "Shell", "API"],
+    "answer": "Shell",
+    "explanation": "The Shell is a user interface program that acts as a command interpreter. It captures user inputs (like bash commands or GUI clicks) and securely passes them to the Kernel for execution.",
+    "trick": "Trick: The 'Shell' wraps around the 'Kernel' (like a nut). Users touch the hard outer Shell, which then protects and talks to the inner Kernel.",
+    "tip": "Bash, Zsh, and PowerShell are common examples of Shells."
+  },
+  {
+    "id": 26,
+    "question": "Fill in the blank: A system with more than one physically independent CPU executing multiple processes truly simultaneously is known as a ________ system.",
+    "options": ["Multiprogramming", "Multitasking", "Multiprocessing", "Multithreading"],
+    "answer": "Multiprocessing",
+    "explanation": "Multiprocessing systems have multiple physical CPUs (or cores) sharing the same memory and peripherals. This allows true parallel execution of processes, vastly improving computational throughput.",
+    "trick": "Trick: 'Processor' means CPU. Multi+Processing literally translates to Multiple CPUs doing physical work at the exact same time.",
+    "tip": "Multitasking is rapid switching on a single CPU; Multiprocessing uses many CPUs."
+  },
+  {
+    "id": 27,
+    "question": "Which specific queue holds all processes that currently reside in main memory and are actively waiting to be assigned to the CPU?",
+    "options": ["Device Queue", "Job Queue", "Ready Queue", "Wait Queue"],
+    "answer": "Ready Queue",
+    "explanation": "The Ready Queue is a data structure (often a linked list) containing the PCBs of all processes that are currently in the 'Ready' state, just waiting for the CPU Scheduler to pick them.",
+    "trick": "Trick: Think of the Ready Queue as the 'Waiting Room' right outside the doctor's (CPU) office. Everyone here is fully 'Ready' for their turn.",
+    "tip": "The Short-Term Scheduler picks processes directly from the Ready Queue."
+  },
+  {
+    "id": 28,
+    "question": "In the 5-state process model, what specific action causes a process to transition from the 'Running' state straight back to the 'Ready' state?",
+    "options": ["Requesting user input", "A timer interrupt (time quantum expiration)", "Calling the exit() system call", "Opening a massive file"],
+    "answer": "A timer interrupt (time quantum expiration)",
+    "explanation": "In preemptive time-sharing systems, a process is given a time slice (quantum). If it does not finish within this slice, a hardware timer interrupt strictly preempts it, forcing it from Running back to Ready.",
+    "trick": "Trick: Your turn on the playground swing is up! The timer rings, and you are forced to go back to the 'Ready' line to wait your turn again.",
+    "tip": "I/O requests move processes to Blocked, not Ready."
+  },
+  {
+    "id": 29,
+    "question": "Which of the following system calls is uniquely used to seamlessly replace the memory space of a currently running process with a brand new program?",
+    "options": ["fork()", "wait()", "exec()", "kill()"],
+    "answer": "exec()",
+    "explanation": "The exec() family of system calls completely replaces the current process's code, data, heap, and stack with a new program from disk, while retaining the same Process ID (PID).",
+    "trick": "Trick: fork() makes a clone. exec() 'executes' an identity theft, completely replacing the clone's brain with a brand new personality!",
+    "tip": "Normally, fork() is called immediately followed by exec()."
+  },
+  {
+    "id": 30,
+    "question": "What is the primary role of the 'Medium-term Scheduler' in memory management?",
+    "options": ["To select processes from the disk to load into memory initially", "To allocate CPU time to ready processes", "To dynamically swap processes in and out of main memory to disk", "To permanently terminate frozen processes"],
+    "answer": "To dynamically swap processes in and out of main memory to disk",
+    "explanation": "The Medium-term Scheduler handles 'Swapping'. If main memory gets too full, it swaps out partially executed processes to the disk (virtual memory) and swaps them back in later when memory is free.",
+    "trick": "Trick: The Medium-term scheduler is the 'Bouncer'. If the club (Memory) gets too crowded, it temporarily kicks some people out to the parking lot (Disk).",
+    "tip": "Swapping improves overall system mix and frees up RAM."
+  },
+  {
+    "id": 31,
+    "question": "Inter-Process Communication (IPC) is fundamentally implemented using which two primary models?",
+    "options": ["Shared Memory and Message Passing", "Threads and Forks", "Paging and Segmentation", "Batching and Spooling"],
+    "answer": "Shared Memory and Message Passing",
+    "explanation": "Because processes run in isolated memory spaces, they cannot simply share variables. OS provides IPC via 'Shared Memory' (a mapped common memory region) or 'Message Passing' (OS routes messages between them).",
+    "trick": "Trick: To talk to a neighbor, you can either share a common notice board on the fence (Shared Memory) or send them a letter via the postman (Message Passing).",
+    "tip": "Message passing is safer but slower; shared memory is faster but requires synchronization."
+  },
+  {
+    "id": 32,
+    "question": "What exactly is 'Spooling' in the context of operating systems and hardware devices?",
+    "options": ["Allocating CPU time to multiple threads rapidly", "Simultaneous Peripheral Operations On-Line (buffering data to disk for slow devices)", "Preventing unauthorized users from logging in", "Rebooting the operating system securely"],
+    "answer": "Simultaneous Peripheral Operations On-Line (buffering data to disk for slow devices)",
+    "explanation": "Spooling writes data to a temporary disk buffer instead of sending it directly to a slow peripheral (like a printer). This allows the CPU to quickly dump the data and continue working without waiting for the printer.",
+    "trick": "Trick: A printer 'Spool' acts like a holding area. You throw all your print jobs into the holding bin, and the slow printer takes them one by one while you walk away.",
+    "tip": "Spooling overlaps the I/O of one job with the computation of another."
+  },
+  {
+    "id": 33,
+    "question": "In a strictly non-preemptive CPU scheduling algorithm, what happens once the CPU is actively allocated to a process?",
+    "options": ["The OS can forcefully take the CPU away at any moment", "The process keeps the CPU until it voluntarily releases it (terminates or waits)", "The process is automatically suspended every 10 milliseconds", "Other processes can steal the CPU if they have higher priority"],
+    "answer": "The process keeps the CPU until it voluntarily releases it (terminates or waits)",
+    "explanation": "In non-preemptive scheduling, once a process begins running, the OS cannot forcefully interrupt or pause it. The process will run continuously until it explicitly yields the CPU by terminating or requesting I/O.",
+    "trick": "Trick: Non-preemptive means 'No Interruptions Allowed'. Once you have the microphone, nobody can snatch it from you until you choose to sit down.",
+    "tip": "FCFS (First Come First Serve) is a classic non-preemptive algorithm."
+  },
+  {
+    "id": 34,
+    "question": "What is the technical term for the total time elapsed between the submission of a process and its ultimate completion?",
+    "options": ["Waiting Time", "Response Time", "Turnaround Time", "Throughput"],
+    "answer": "Turnaround Time",
+    "explanation": "Turnaround Time (TAT) is the absolute total time a process spends in the system. It is calculated as Completion Time minus Arrival Time, accounting for all waiting, I/O, and execution times.",
+    "trick": "Trick: How long does it take you to enter a store, shop, wait in line, pay, and physically 'Turnaround' to leave? That's Turnaround Time!",
+    "tip": "TAT = Waiting Time + Burst (Execution) Time."
+  },
+  {
+    "id": 35,
+    "question": "Which system metric specifically measures 'the total number of processes completed per unit of time'?",
+    "options": ["Turnaround Time", "Throughput", "Response Time", "CPU Utilisation"],
+    "answer": "Throughput",
+    "explanation": "Throughput is a measure of system productivity. It strictly defines the number of processes or jobs completely finished and exited the system within a given time frame (e.g., jobs per second).",
+    "trick": "Trick: A factory's 'Throughput' is how many fully built cars roll off the assembly line every single hour.",
+    "tip": "A primary goal of CPU scheduling is to maximize throughput."
+  },
+  {
+    "id": 36,
+    "question": "Which of the following is a direct consequence of a process waiting indefinitely for a resource that is continuously given to other processes?",
+    "options": ["Deadlock", "Thrashing", "Starvation", "Segmentation Fault"],
+    "answer": "Starvation",
+    "explanation": "Starvation occurs when a low-priority process is perpetually denied CPU time or resources because a constant stream of higher-priority processes keeps jumping ahead in the queue.",
+    "trick": "Trick: Imagine standing in a buffet line, but VIPs keep cutting in front of you forever. You will literally 'Starve' waiting for food!",
+    "tip": "Aging (gradually increasing priority) is the ultimate solution to starvation."
+  },
+  {
+    "id": 37,
+    "question": "In the process state diagram, which fundamental transition is explicitly initiated by a 'System Call'?",
+    "options": ["Ready to Running", "Wait to Ready", "Running to Wait/Block", "Terminated to New"],
+    "answer": "Running to Wait/Block",
+    "explanation": "When a process needs OS assistance (like reading a file or waiting for input), it executes a system call. This voluntarily pauses its execution, transitioning it immediately from Running to Wait/Block.",
+    "trick": "Trick: You are working (Running), but you need a tool. You call the boss (System Call) and must 'Wait' until the tool arrives before you can work again.",
+    "tip": "Interrupts move processes to Ready; System Calls move them to Wait."
+  },
+  {
+    "id": 38,
+    "question": "What is the unique integer identifier assigned strictly by the OS to every active process upon creation?",
+    "options": ["Thread ID (TID)", "Process Identifier (PID)", "Port Number", "MAC Address"],
+    "answer": "Process Identifier (PID)",
+    "explanation": "The OS assigns a unique Process Identifier (PID) to every new process. This integer is used by the kernel to internally track and index the process's PCB.",
+    "trick": "Trick: A PID is exactly like your student roll number or employee ID, used to specifically identify you among hundreds of others.",
+    "tip": "In Linux, PID 1 is always the 'init' or 'systemd' process."
+  },
+  {
+    "id": 39,
+    "question": "If a process consists of multiple threads, what critically happens if one user-level thread encounters a blocking I/O operation?",
+    "options": ["Only that specific thread blocks", "The entire process and all its other threads are blocked", "The thread is automatically terminated", "The kernel promotes the thread to kernel-level"],
+    "answer": "The entire process and all its other threads are blocked",
+    "explanation": "Because user-level threads are completely invisible to the OS kernel, the kernel only sees the parent process. If one thread makes a blocking system call, the OS blocks the whole process, halting all other threads within it.",
+    "trick": "Trick: If the kernel doesn't know threads exist inside the house, it locks the whole front door when one person inside misbehaves!",
+    "tip": "This is a primary disadvantage of Many-to-One threading models."
+  },
+  {
+    "id": 40,
+    "question": "Which basic operating system architecture embeds almost all essential OS services (file system, CPU scheduling, memory management) into a single large kernel space?",
+    "options": ["Microkernel Architecture", "Monolithic Architecture", "Layered Architecture", "Client-Server Architecture"],
+    "answer": "Monolithic Architecture",
+    "explanation": "In a Monolithic kernel architecture, the entire operating system runs as a single, massive program in kernel space. This makes it highly efficient and fast, but very difficult to debug or extend.",
+    "trick": "Trick: 'Mono' means One. 'Lithic' means Stone. A Monolithic OS is carved from one giant, unbreakable block of code.",
+    "tip": "Linux and traditional UNIX are prime examples of Monolithic kernels."
+  },
+  {
+    "id": 41,
+    "question": "In a Microkernel architecture, where do non-essential OS services like device drivers and file systems typically execute?",
+    "options": ["Inside the core kernel memory", "In the user space as regular system processes", "On a separate dedicated hardware chip", "In the BIOS memory"],
+    "answer": "In the user space as regular system processes",
+    "explanation": "A Microkernel aims to keep the kernel as small as possible. It moves traditional OS services (like file systems and drivers) out of the kernel and runs them as standard background processes in User space.",
+    "trick": "Trick: 'Micro' means tiny. The kernel throws all the heavy luggage (drivers, file systems) out into the 'User Space' to travel as light as possible.",
+    "tip": "Microkernels are highly stable because driver crashes do not crash the kernel."
+  },
+  {
+    "id": 42,
+    "question": "Which of the following best defines the 'Response Time' of a process?",
+    "options": ["The total time taken to finish execution entirely", "The time a process spends waiting in the ready queue", "The time from the submission of a request until the very first response is produced", "The time a process takes to complete an I/O operation"],
+    "answer": "The time from the submission of a request until the very first response is produced",
+    "explanation": "Response time is the duration between submitting a job and the OS outputting the very first piece of feedback. It is a critical metric for interactive and time-sharing systems.",
+    "trick": "Trick: You click a website button. 'Response Time' is how fast the loading spinner appears, not how long the whole page takes to load!",
+    "tip": "Time-sharing systems heavily optimize for low response times."
+  },
+  {
+    "id": 43,
+    "question": "What specifically does the 'Waiting Time' of a process measure?",
+    "options": ["The total time spent waiting strictly in the Ready Queue", "The time spent waiting for an I/O operation to complete", "The time spent executing inside the CPU", "The total turnaround time minus response time"],
+    "answer": "The total time spent waiting strictly in the Ready Queue",
+    "explanation": "In CPU scheduling metrics, 'Waiting Time' exclusively refers to the cumulative amount of time a process spends sitting in the Ready queue, waiting for its turn on the CPU.",
+    "trick": "Trick: Waiting time only counts the 'Waiting Room' (Ready Queue). It does not count the time you spend getting an X-Ray (I/O Blocked).",
+    "tip": "Waiting Time = Turnaround Time - Burst Time."
+  },
+  {
+    "id": 44,
+    "question": "When an application program attempts to execute a highly privileged machine instruction directly in User Mode, what is the immediate consequence?",
+    "options": ["The instruction executes normally", "The OS throws a hardware trap and immediately terminates the program", "The CPU temporarily switches to Kernel Mode automatically", "The OS skips the instruction and continues"],
+    "answer": "The OS throws a hardware trap and immediately terminates the program",
+    "explanation": "Privileged instructions (like halting the CPU or managing memory directly) can only be executed in Kernel Mode. If an application in User Mode tries this, the hardware generates a trap/exception, and the OS kills the process.",
+    "trick": "Trick: If a guest (User Mode) tries to open the bank vault (Privileged Instruction), the alarms (Trap) go off and security (OS) kicks them out immediately!",
+    "tip": "Dual-mode prevents malicious apps from destroying the OS."
+  },
+  {
+    "id": 45,
+    "question": "Which of the following data structures maintains a list of all processes that are waiting for a specific hardware device, like a printer or hard disk?",
+    "options": ["Ready Queue", "Job Queue", "Device Queue", "Interrupt Queue"],
+    "answer": "Device Queue",
+    "explanation": "Each physical hardware device attached to the system has its own 'Device Queue'. When multiple processes request an I/O operation from the same device, they are placed in this queue until the device is free.",
+    "trick": "Trick: A literal queue of digital documents standing in line, waiting to get printed by the specific printer machine.",
+    "tip": "A process moves from the Device Queue to the Ready Queue after I/O."
+  },
+  {
+    "id": 46,
+    "question": "What is the primary physical constraint that fundamentally dictates why we need a 'Ready Queue' in the first place?",
+    "options": ["There is not enough Hard Disk space", "There are more active runnable processes than available physical CPUs", "Processes refuse to run concurrently", "The OS limits the number of open files"],
+    "answer": "There are more active runnable processes than available physical CPUs",
+    "explanation": "Because a single CPU core can strictly execute only one instruction stream at a time, any system with more active processes than CPU cores must place the waiting runnable processes into a Ready Queue.",
+    "trick": "Trick: If there are 5 kids but only 1 swing set, a 'Ready Queue' (a line) is physically necessary to maintain order.",
+    "tip": "Multiprocessor systems have either shared or private ready queues."
+  },
+  {
+    "id": 47,
+    "question": "Fill in the blank: The ________ provides a standard high-level programming interface, abstracting away the complex assembly code needed to invoke a System Call.",
+    "options": ["Hardware Abstraction Layer", "Graphical User Interface", "Application Programming Interface (API)", "Command Line Interface"],
+    "answer": "Application Programming Interface (API)",
+    "explanation": "Instead of writing complex, architecture-specific assembly instructions to trigger system calls directly, programmers use an API (like POSIX for Linux or Win32 for Windows). The API securely wraps the system call.",
+    "trick": "Trick: The API is a 'Translator'. You speak simple English (printf), and the API translates it into the complex alien language (system call) the hardware understands.",
+    "tip": "glibc is a widely used API library in Linux systems."
+  },
+  {
+    "id": 48,
+    "question": "Which operating system component is fundamentally responsible for dynamically allocating main memory space to a newly admitted process?",
+    "options": ["Memory Management Unit (MMU) Software Module", "Short-term Scheduler", "File System Manager", "Device Driver"],
+    "answer": "Memory Management Unit (MMU) Software Module",
+    "explanation": "The Memory Management module tracks all free and occupied memory. When a process transitions from New to Ready, the memory manager allocates physical RAM and configures the hardware MMU to load the process.",
+    "trick": "Trick: The Memory Manager is the 'Hotel Receptionist', checking the ledger for empty rooms and assigning one to the new guest (process).",
+    "tip": "It translates logical virtual addresses to physical RAM addresses."
+  },
+  {
+    "id": 49,
+    "question": "Which of the following strictly belongs to the 'Process Context' that is saved during a Context Switch?",
+    "options": ["The source code of the operating system", "The user's password", "The current state of CPU registers and Program Counter", "The physical keyboard layout"],
+    "answer": "The current state of CPU registers and Program Counter",
+    "explanation": "The 'context' of a process represents its exact execution state at a frozen point in time. This strictly includes the CPU general-purpose registers, the Program Counter (PC), and condition code flags.",
+    "trick": "Trick: Saving a video game state involves recording exactly where your character is standing and their health points, not the game's original source code!",
+    "tip": "Context is saved securely inside the process's PCB."
+  },
+  {
+    "id": 50,
+    "question": "What is the specific fundamental difference between a 'Program' and a 'Process'?",
+    "options": ["A program runs in memory, while a process sits on a disk", "A program is a passive entity on a disk, while a process is an active entity executing in memory", "A process is compiled source code, while a program is interpreted code", "They are completely identical terms in OS architecture"],
+    "answer": "A program is a passive entity on a disk, while a process is an active entity executing in memory",
+    "explanation": "A program is just a static file containing instructions (passive). It only transforms into a process (active) when the OS explicitly loads those instructions into the RAM and allocates a Program Counter to execute them.",
+    "trick": "Trick: A sheet of sheet music is the 'Program' (passive). A musician actually playing that music out loud is the 'Process' (active).",
+    "tip": "One single program can spawn multiple independent processes."
+  }
+]

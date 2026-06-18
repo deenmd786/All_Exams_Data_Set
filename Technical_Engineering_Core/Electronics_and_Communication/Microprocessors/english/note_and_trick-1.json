@@ -1,0 +1,44 @@
+﻿
+
+{
+  "module_title": "8085 Architecture, Pins, and Registers",
+  "difficulty_level": 1,
+  "introduction": "At this foundational level, we cover the architectural layout of the Intel 8085 microprocessor, its register organization, and pin configurations. Preliminary exams frequently test the exact bit-sizes of its buses and registers.",
+  "core_concepts": [
+    {
+      "title": "Basic Features of 8085",
+      "description": "1. It is an **8-bit** microprocessor (it processes 8 bits of data simultaneously).\n2. It has 40 pins and operates on a single +5V DC supply.\n3. **Data Bus:** 8-bit bidirectional (D0-D7).\n4. **Address Bus:** 16-bit unidirectional (A0-A15). It can access a maximum of $2^{16} = 65,536$ bytes, which equals exactly **64 KB** of memory."
+    },
+    {
+      "title": "Register Organization",
+      "description": "1. **Accumulator (A):** The primary 8-bit register. One operand of an ALU operation and the final result are ALWAYS stored here.\n2. **General Purpose Registers:** B, C, D, E, H, L (All are 8-bit). They can be paired to form 16-bit registers: BC, DE, and HL. (The HL pair acts as the default memory pointer 'M').\n3. **Program Counter (PC):** A 16-bit register that holds the memory address of the 'Next Instruction to be fetched and executed'."
+    },
+    {
+      "title": "The Flag Register",
+      "description": "The 8085 has 5 active flags that indicate the status of the ALU after an operation: \n1. **Sign (S):** Set to 1 if the result is negative (MSB is 1).\n2. **Zero (Z):** Set to 1 if the final result is exactly zero.\n3. **Auxiliary Carry (AC):** Set to 1 if a carry is generated from bit D3 to D4 (crucial for BCD arithmetic).\n4. **Parity (P):** Set to 1 if the result has an Even number of 1s (Even Parity).\n5. **Carry (CY):** Set to 1 if a carry is generated out of the MSB (D7 bit)."
+    }
+  ],
+  "important_entities": [
+    {
+      "name": "ALE (Address Latch Enable)",
+      "key_fact": "Demultiplexing the Bus",
+      "significance": "In the 8085, the lower order address bus and the data bus are multiplexed (combined) on the same pins (AD0-AD7) to save space. The ALE signal demultiplexes them. \n- When ALE = 1: The pins carry the Address (A0-A7). \n- When ALE = 0: The pins carry the Data (D0-D7)."
+    }
+  ],
+  "trap_alerts_and_exceptions": [
+    {
+      "alert_title": "The Stack Pointer (SP) Bit-Size Trap",
+      "explanation": "Exam Trap: Examiners frequently ask for the size of the Stack Pointer in an 8-bit microprocessor. Remember, the Stack Pointer holds the *memory address* of the top of the stack. Since memory addresses in 8085 are 16-bit, the **Stack Pointer is strictly a 16-bit register**, NOT 8-bit."
+    }
+  ],
+  "mnemonics_and_tricks": [
+    {
+      "trick_title": "Flag Sequence in the Register",
+      "memory_phrase": "S-Z-X-AC-X-P-X-CY",
+      "explanation": "Out of the 8 bits in the flag register, only 5 are used (3 are 'Don't Care' denoted by X). The sequence from D7 to D0 is: S, Z, X, AC, X, P, X, CY."
+    }
+  ],
+  "exam_strategy_tips": [
+    "A patent SSC JE and RRB JE question: 'What is the maximum memory addressing capacity of an 8085 microprocessor?' Answer: 64 KB."
+  ]
+}

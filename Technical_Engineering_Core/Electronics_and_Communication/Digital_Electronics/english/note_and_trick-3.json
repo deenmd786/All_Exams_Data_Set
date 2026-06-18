@@ -1,0 +1,44 @@
+﻿
+
+{
+  "module_title": "Sequential Circuits and Flip-Flops",
+  "difficulty_level": 3,
+  "introduction": "At the advanced level, examiners focus entirely on circuits with 'memory'. They test the excitation tables of Flip-Flops, the Race Around Condition in JK flip-flops, and the design classification of Counters.",
+  "core_concepts": [
+    {
+      "title": "Sequential Circuits",
+      "description": "Circuits whose output depends not only on the present input but also on the **Past Output (Memory)**. They strictly contain feedback loops and memory elements like flip-flops. (Examples: Flip-Flops, Counters, Registers)."
+    },
+    {
+      "title": "Types of Flip-Flops (1-Bit Memory)",
+      "description": "1. **SR Flip-Flop:** The basic latch, but when S=1 and R=1, the output becomes Invalid/Indeterminate.\n2. **D Flip-Flop (Data/Delay):** Follows the input exactly. Whatever you put in 'D' comes out at 'Q' after a clock pulse ($Q_{n+1} = D$).\n3. **T Flip-Flop (Toggle):** If T=1, the output toggles (0 becomes 1, 1 becomes 0) on every clock pulse.\n4. **JK Flip-Flop:** Overcomes the SR invalid state, but introduces the 'Race Around Condition'."
+    },
+    {
+      "title": "Counters",
+      "description": "A cascade of flip-flops used to count clock pulses.\n1. **Asynchronous (Ripple) Counter:** The clock pulse is only applied to the first flip-flop; the subsequent ones are triggered by the output of the previous flip-flop (Slower operation).\n2. **Synchronous Counter:** A single clock pulse triggers ALL flip-flops simultaneously (Faster, high-speed operation)."
+    }
+  ],
+  "important_entities": [
+    {
+      "name": "Race Around Condition",
+      "key_fact": "The JK Flip-Flop Glitch",
+      "significance": "In a level-triggered JK flip-flop, when J=1 and K=1, and the clock pulse width is longer than the propagation delay of the flip-flop, the output toggles multiple times (0 to 1, 1 to 0) within a single clock pulse. This rapid, uncontrollable toggling is the 'Race Around Condition'."
+    }
+  ],
+  "trap_alerts_and_exceptions": [
+    {
+      "alert_title": "Fixing the Race Around (Master-Slave JK)",
+      "explanation": "Advanced Exam Trap: How do you eliminate the Race Around Condition? The standard answer is to use a **Master-Slave JK Flip-Flop**, which operates on edge-triggering rather than level-triggering, ensuring the state changes only once per clock cycle."
+    }
+  ],
+  "mnemonics_and_tricks": [
+    {
+      "trick_title": "MOD Number Definition",
+      "memory_phrase": "Mod-N = N states = $2^n$ Flip-Flops",
+      "explanation": "If a counter has $n$ flip-flops, the maximum number of unique states it can count is $2^n$. This is called a MOD-$2^n$ counter. (e.g., 3 flip-flops = MOD-8 counter)."
+    }
+  ],
+  "exam_strategy_tips": [
+    "A frequent ESE and SSC JE Tier-2 theoretical question: 'In which flip-flop does the Race Around Condition occur, and under what inputs?' Answer: In a JK Flip-Flop, specifically when J=1 and K=1."
+  ]
+}

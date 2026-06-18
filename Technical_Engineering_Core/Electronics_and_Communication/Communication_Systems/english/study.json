@@ -1,0 +1,127 @@
+﻿{
+  "topic": "Communication Systems",
+  "description": "A comprehensive study of the fundamental principles of analog and digital communication, modulation techniques, noise analysis, and information theory.",
+  "path": "Technical_Engineering_Core/Electronics_and_Communication/Communication_Systems",
+  "sections": [
+    {
+      "section_id": "1",
+      "title": "Amplitude Modulation (AM)",
+      "description": "An analog modulation technique where the amplitude of a high-frequency carrier wave is varied in accordance with the instantaneous amplitude of the modulating message signal.",
+      "formulas": [
+        {
+          "category": "AM Power and Modulation Index",
+          "equations": [
+            "Modulation Index (m): m = Am / Ac",
+            "Total Power (Pt): Pt = Pc * (1 + m^2 / 2)",
+            "Where Pc is the unmodulated carrier power."
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "condition": "Values of Modulation Index (m)",
+          "results": [
+            "m < 1: Under-modulation - No envelope distortion occurs; this is the ideal operating condition.",
+            "m = 1: Critical modulation - The envelope just touches the zero axis.",
+            "m > 1: Over-modulation - Causes envelope distortion and phase reversal, leading to severe loss of data and adjacent channel interference."
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "2",
+      "title": "Angle Modulation (FM and PM)",
+      "description": "Analysis of Frequency Modulation (FM) and Phase Modulation (PM), where the phase angle of the carrier wave is varied proportionately with the message signal.",
+      "formulas": [
+        {
+          "category": "Bandwidth of FM (Carson's Rule)",
+          "equations": [
+            "BW = 2 * (delta_f + fm)",
+            "Where delta_f is the maximum frequency deviation and fm is the highest modulating frequency."
+          ]
+        }
+      ],
+      "key_concepts": [
+        {
+          "concept": "Modulation Index for FM",
+          "notation_or_symbol": "beta",
+          "explanation": "Defined as the ratio of maximum frequency deviation to the modulating frequency (beta = delta_f / fm). Unlike AM, the modulation index in FM can be much greater than 1 (Wideband FM)."
+        },
+        {
+          "concept": "Pre-emphasis and De-emphasis",
+          "explanation": "Pre-emphasis is used at the transmitter to artificially boost the power of higher-frequency message signals to improve the Signal-to-Noise Ratio (SNR). De-emphasis is used at the receiver to attenuate these frequencies back to their original levels, thereby suppressing high-frequency noise."
+        }
+      ]
+    },
+    {
+      "section_id": "3",
+      "title": "Sampling and Pulse Modulation",
+      "description": "The fundamental process of converting a continuous-time analog signal into a discrete-time, discrete-amplitude digital signal (Pulse Code Modulation).",
+      "key_concepts": [
+        {
+          "concept": "Nyquist Sampling Theorem",
+          "notation_or_symbol": "fs >= 2 * fm",
+          "explanation": "States that a band-limited continuous-time signal can be perfectly recovered from its samples if the sampling frequency (fs) is at least twice the highest frequency component (fm) present in the signal."
+        },
+        {
+          "concept": "Aliasing",
+          "explanation": "A distortion phenomenon that occurs when the sampling rate is less than the Nyquist rate (fs < 2*fm). High-frequency components fold back and overlap onto low-frequency components, making original signal recovery impossible. Prevented by using a low-pass Anti-Aliasing Filter before sampling."
+        }
+      ],
+      "steps": [
+        {
+          "step_number": 1,
+          "title": "Sampling",
+          "detail": "Discretizing the analog signal in the time domain at regular intervals (Ts)."
+        },
+        {
+          "step_number": 2,
+          "title": "Quantization",
+          "detail": "Rounding off the sampled amplitudes to the nearest pre-determined discrete quantization level. This unavoidable approximation introduces Quantization Noise."
+        },
+        {
+          "step_number": 3,
+          "title": "Encoding",
+          "detail": "Converting the quantized discrete values into a sequence of binary bits (0s and 1s) for digital transmission."
+        }
+      ]
+    },
+    {
+      "section_id": "4",
+      "title": "Digital Modulation Techniques",
+      "description": "Techniques used to map discrete digital data (binary sequences) onto an analog carrier wave for efficient transmission over bandpass channels.",
+      "cases": [
+        {
+          "condition": "Key Digital Passband Modulation Schemes",
+          "results": [
+            "ASK (Amplitude Shift Keying): The carrier is present for binary '1' and absent for binary '0' (ON-OFF Keying). It is highly susceptible to noise.",
+            "FSK (Frequency Shift Keying): Two distinct carrier frequencies are used to represent binary '1' and binary '0'. Constant envelope makes it more robust than ASK.",
+            "BPSK (Binary Phase Shift Keying): The phase of the carrier is shifted by 180 degrees to represent transitions between '1' and '0'. Highly robust and widely used.",
+            "QPSK (Quadrature Phase Shift Keying): Uses four distinct phase shifts (separated by 90 degrees) to transmit 2 bits per symbol, effectively doubling the bandwidth efficiency compared to BPSK."
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "5",
+      "title": "Information Theory and Channel Capacity",
+      "description": "The mathematical framework that defines the fundamental limits of signal processing and communication operations such as data compression and error-free transmission.",
+      "formulas": [
+        {
+          "category": "Shannon-Hartley Channel Capacity Theorem",
+          "equations": [
+            "C = B * log2(1 + S/N)",
+            "Where C is the maximum Channel Capacity in bits/sec, B is the channel bandwidth in Hz, and S/N is the linear (non-logarithmic) Signal-to-Noise power ratio."
+          ]
+        }
+      ],
+      "key_concepts": [
+        {
+          "concept": "Amount of Information",
+          "notation_or_symbol": "I = log2(1/P)",
+          "explanation": "The information content of a message is inversely proportional to its probability of occurrence (P). A highly unlikely event carries significantly more information than a highly probable one."
+        }
+      ]
+    }
+  ]
+}

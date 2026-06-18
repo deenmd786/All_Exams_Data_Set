@@ -1,0 +1,131 @@
+﻿{
+  "topic": "Control Systems",
+  "description": "A comprehensive study of the mathematical modeling, time-domain and frequency-domain analysis, and stability evaluation of feedback control systems, including state-space design and controllers.",
+  "path": "Technical_Engineering_Core/Electrical_Engineering/Control_Systems",
+  "sections": [
+    {
+      "section_id": "1",
+      "title": "Mathematical Modeling and Transfer Functions",
+      "description": "Techniques for representing physical systems mathematically using differential equations, block diagrams, and signal flow graphs.",
+      "key_concepts": [
+        {
+          "concept": "Transfer Function",
+          "explanation": "Defined as the ratio of the Laplace transform of the output variable to the Laplace transform of the input variable, assuming all initial conditions are zero. It is strictly applicable only to Linear Time-Invariant (LTI) systems."
+        },
+        {
+          "concept": "Closed-Loop System (Feedback Control)",
+          "explanation": "A system where the control action is dependent on the output. It utilizes feedback to compare the actual output with the desired input, generating an error signal to correct the deviation, making it highly accurate and less sensitive to external disturbances."
+        }
+      ],
+      "formulas": [
+        {
+          "category": "Mason's Gain Formula",
+          "equations": [
+            "Overall Gain (T) = (1 / Delta) * Sum(P_k * Delta_k)",
+            "Where P_k is the path gain of the k-th forward path, and Delta is the graph determinant."
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "2",
+      "title": "Time Domain Analysis",
+      "description": "Analyzing the transient and steady-state response of first and second-order systems to standard test signals (step, ramp, parabolic).",
+      "formulas": [
+        {
+          "category": "Second-Order System Specifications",
+          "equations": [
+            "Characteristic Equation: s^2 + 2 * zeta * omega_n * s + omega_n^2 = 0",
+            "Maximum Peak Overshoot (Mp) = e^(-(zeta * pi) / sqrt(1 - zeta^2)) * 100%",
+            "Settling Time (Ts) for 2% tolerance band = 4 / (zeta * omega_n)"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "condition": "Varying Damping Ratio (zeta)",
+          "results": [
+            "zeta = 0: Undamped system, roots are purely imaginary, response is purely oscillatory.",
+            "0 < zeta < 1: Underdamped system, roots are complex conjugates, response has decaying oscillations.",
+            "zeta = 1: Critically damped system, roots are real and equal, fastest response without overshooting.",
+            "zeta > 1: Overdamped system, roots are real and distinct, response is sluggish and exponentially decays."
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "3",
+      "title": "Stability Analysis and Root Locus",
+      "description": "Methods to determine the absolute and relative stability of closed-loop systems by analyzing the locations of characteristic equation roots in the s-plane.",
+      "key_concepts": [
+        {
+          "concept": "Routh-Hurwitz (RH) Criterion",
+          "explanation": "An algebraic method to determine absolute stability. A system is strictly stable if and only if all the roots of the characteristic equation lie in the left half of the s-plane. In the RH array, the number of sign changes in the first column equals the number of roots in the right half of the s-plane."
+        },
+        {
+          "concept": "Root Locus Technique",
+          "explanation": "A graphical method to plot the locus of the closed-loop poles (roots of the characteristic equation) in the s-plane as a system parameter (usually open-loop gain 'K') is varied from zero to infinity."
+        }
+      ],
+      "formulas": [
+        {
+          "category": "Root Locus Core Criteria",
+          "equations": [
+            "Angle Criterion: Angle(G(s)H(s)) = +/- (2q + 1) * 180 degrees (must be an odd multiple of 180).",
+            "Magnitude Criterion: |G(s)H(s)| = 1"
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "4",
+      "title": "Frequency Domain Analysis",
+      "description": "Evaluating system performance and stability by analyzing its steady-state response to sinusoidal inputs of varying frequencies using graphical plots.",
+      "key_concepts": [
+        {
+          "concept": "Bode Plot",
+          "explanation": "Consists of two semi-logarithmic plots: magnitude (in decibels) vs. logarithmic frequency, and phase angle (in degrees) vs. logarithmic frequency. Excellent for determining Gain Margin (GM) and Phase Margin (PM)."
+        },
+        {
+          "concept": "Nyquist Stability Criterion",
+          "explanation": "A graphical method relating the open-loop frequency response (polar plot) to closed-loop stability. It states that Z = N + P, where Z is the number of closed-loop poles in the Right Half s-plane, P is the open-loop poles in the Right Half s-plane, and N is the number of encirclements of the critical point (-1+j0)."
+        }
+      ],
+      "cases": [
+        {
+          "condition": "Determining Stability using Margins",
+          "results": [
+            "Stable System: Both Gain Margin (GM) and Phase Margin (PM) are positive. Gain Crossover Frequency (w_gc) < Phase Crossover Frequency (w_pc).",
+            "Marginally Stable System: Both GM and PM are zero. w_gc = w_pc.",
+            "Unstable System: Both GM and PM are negative. w_gc > w_pc."
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "5",
+      "title": "State Variable Analysis and Controllers",
+      "description": "Modern control theory using state-space models for multiple-input multiple-output (MIMO) systems, and the application of industrial controllers.",
+      "key_concepts": [
+        {
+          "concept": "Controllability",
+          "explanation": "A system is entirely controllable if it is possible to transfer the system state from any initial value to any desired final value in a finite time interval using an unconstrained control vector. Evaluated using Kalman's test matrix [B AB A^2B ... A^(n-1)B]."
+        },
+        {
+          "concept": "Observability",
+          "explanation": "A system is completely observable if every initial state can be exactly determined from the observation of the output over a finite time interval."
+        }
+      ],
+      "cases": [
+        {
+          "condition": "Effects of adding basic control actions",
+          "results": [
+            "Proportional (P) Control: Reduces steady-state error but never eliminates it; increases bandwidth and speed of response.",
+            "Integral (I) Control: Eliminates steady-state error completely, but decreases absolute stability and makes the system sluggish.",
+            "Derivative (D) Control: Anticipates future errors; improves transient response, increases damping and stability, but amplifies high-frequency noise."
+          ]
+        }
+      ]
+    }
+  ]
+}

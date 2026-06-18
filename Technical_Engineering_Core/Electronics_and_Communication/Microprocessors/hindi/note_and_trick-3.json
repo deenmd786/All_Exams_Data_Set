@@ -1,0 +1,44 @@
+﻿
+
+{
+  "module_title": "8086 माइक्रोप्रोसेसर और पाइपलाइनिंग (8086 & Pipelining)",
+  "difficulty_level": 3,
+  "introduction": "एडवांस्ड स्तर पर, परीक्षक 16-बिट माइक्रोप्रोसेसर (8086) की वास्तुकला, इसकी मेमोरी सेगमेंटेशन (Memory Segmentation) और भौतिक एड्रेस (Physical Address) की गणना से जुड़े न्यूमेरिकल पूछते हैं।",
+  "core_concepts": [
+    {
+      "title": "8086 की बुनियादी विशेषताएं",
+      "description": "1. यह एक **16-बिट** माइक्रोप्रोसेसर है।\n2. **डेटा बस:** 16-बिट (D0-D15)।\n3. **एड्रेस बस:** 20-बिट (A0-A19)। यह अधिकतम $2^{20}$ बाइट्स यानी **1 MB** मेमोरी को एक्सेस कर सकता है।\n4. यह दो भागों में बंटा होता है: बस इंटरफेस यूनिट (BIU) और निष्पादन यूनिट (EU)।"
+    },
+    {
+      "title": "पाइपलाइनिंग (Pipelining)",
+      "description": "8085 में, प्रोसेसर पहले निर्देश लाता है (Fetch) फिर चलाता है (Execute)। 8086 में पाइपलाइनिंग होती है। \n**BIU (Bus Interface Unit):** मेमोरी से निर्देश लाकर 6-बाइट की 'इंस्ट्रक्शन क्यू (Instruction Queue)' में भरता रहता है।\n**EU (Execution Unit):** बिना रुके उस क्यू (Queue) से निर्देश लेकर उन्हें चलाता रहता है। इससे प्रोसेसर की गति (Speed) बहुत बढ़ जाती है।"
+    },
+    {
+      "title": "मेमोरी सेगमेंटेशन और फिजिकल एड्रेस (Memory Segmentation)",
+      "description": "8086 की 1 MB मेमोरी को 64 KB के 4 सेगमेंट (CS, DS, SS, ES) में बांटा गया है। 20-बिट का भौतिक पता (Physical Address) निकालने के लिए 16-बिट के सेगमेंट एड्रेस और 16-बिट के ऑफसेट (Offset) का उपयोग किया जाता है।\nसूत्र: **Physical Address = (Segment Address $\\times$ 10H) + Offset Address**"
+    }
+  ],
+  "important_entities": [
+    {
+      "name": "मिनिमम और मैक्सिमम मोड (Min/Max Mode)",
+      "key_fact": "पिन 33 (MN/MX')",
+      "significance": "8086 दो मोड में काम कर सकता है। \n1. **Minimum Mode (MN/MX' = 1):** सिस्टम में केवल एक 8086 प्रोसेसर होता है (Single Processor System)।\n2. **Maximum Mode (MN/MX' = 0):** सिस्टम में 8086 के साथ को-प्रोसेसर (जैसे 8087 Math coprocessor) भी जुड़े होते हैं (Multi-processor System)।"
+    }
+  ],
+  "trap_alerts_and_exceptions": [
+    {
+      "alert_title": "फिजिकल एड्रेस गणना का जाल",
+      "explanation": "एडवांस्ड परीक्षा जाल: यदि CS (Code Segment) = 1000H और IP (Instruction Pointer / Offset) = 1234H है, तो फिजिकल एड्रेस क्या होगा? \n$1000H \\times 10H = 10000H$ \nअब इसमें Offset जोड़ें: $10000H + 1234H = 11234H$ (यह 20-बिट का पता है)।"
+    }
+  ],
+  "mnemonics_and_tricks": [
+    {
+      "trick_title": "8086 के सेगमेंट रजिस्टर्स",
+      "memory_phrase": "C-D-S-E",
+      "explanation": "C = Code Segment (CS), D = Data Segment (DS), S = Stack Segment (SS), E = Extra Segment (ES)। सभी 64 KB के होते हैं।"
+    }
+  ],
+  "exam_strategy_tips": [
+    "ESE और SSC JE Tier-2 का फेवरेट न्यूमेरिकल: '8086 माइक्रोप्रोसेसर का एड्रेस बस कितने बिट का होता है और यह कितनी मेमोरी एक्सेस कर सकता है?' उत्तर: 20-बिट, 1 MB."
+  ]
+}

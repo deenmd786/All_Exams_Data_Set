@@ -1,0 +1,140 @@
+﻿{
+  "topic": "Digital Electronics",
+  "description": "A comprehensive study of the design, analysis, and application of digital circuits in Electronics and Communication, encompassing number systems, logic gates, combinational circuits, and sequential circuits.",
+  "path": "Technical_Engineering_Core/Electronics_and_Communication/Digital_Electronics",
+  "sections": [
+    {
+      "section_id": "1",
+      "title": "Number Systems and Boolean Algebra",
+      "description": "Representation of digital data, binary arithmetic, and the mathematical foundation for analyzing and simplifying logic circuits.",
+      "formulas": [
+        {
+          "category": "De Morgan's Laws",
+          "equations": [
+            "(A + B)' = A' . B'",
+            "(A . B)' = A' + B'"
+          ]
+        },
+        {
+          "category": "Key Boolean Identities",
+          "equations": [
+            "A + A'B = A + B",
+            "A(A + B) = A",
+            "A + AB = A"
+          ]
+        }
+      ],
+      "key_concepts": [
+        {
+          "concept": "2's Complement",
+          "explanation": "The standard method used in computing to represent negative integers. It is obtained by taking the 1's complement of the binary number and adding 1 to the Least Significant Bit (LSB). It simplifies hardware by allowing subtraction to be performed using addition circuitry."
+        },
+        {
+          "concept": "Gray Code",
+          "explanation": "A non-weighted, unweighted unit-distance code where successive values differ by only a single bit. It is extensively used in Karnaugh Maps (K-maps) for logic simplification and in rotary encoders to prevent spurious output during transitions."
+        }
+      ]
+    },
+    {
+      "section_id": "2",
+      "title": "Combinational Logic Circuits",
+      "description": "Digital circuits where the present output depends exclusively on the present input values, completely devoid of any memory elements or feedback loops.",
+      "formulas": [
+        {
+          "category": "Full Adder Output Equations",
+          "equations": [
+            "Sum = A XOR B XOR Cin",
+            "Cout = (A AND B) + (Cin AND (A XOR B))"
+          ]
+        }
+      ],
+      "key_concepts": [
+        {
+          "concept": "Multiplexer (MUX)",
+          "notation_or_symbol": "2^n : 1",
+          "explanation": "A combinational circuit that selects one of 2^n input data lines and routes it to a single output line, determined by 'n' select lines. It functions as a digital switch or data selector and can be used to implement any boolean function."
+        },
+        {
+          "concept": "Decoder",
+          "notation_or_symbol": "n to 2^n",
+          "explanation": "A circuit that converts binary information from 'n' input lines to a maximum of 2^n unique output lines. It is widely used for memory address decoding and data routing."
+        }
+      ]
+    },
+    {
+      "section_id": "3",
+      "title": "Sequential Logic Circuits",
+      "description": "Circuits where the output depends on both the present inputs and the past state of the circuit, thereby requiring memory storage elements.",
+      "key_concepts": [
+        {
+          "concept": "Flip-Flop vs. Latch",
+          "explanation": "A flip-flop is an edge-triggered fundamental memory element capable of storing 1-bit of data, changing state only at the rising or falling edge of a clock signal. A latch serves the same purpose but is level-triggered, making it sensitive to input changes as long as the clock level is active."
+        }
+      ],
+      "cases": [
+        {
+          "condition": "Race Around Condition in JK Flip-Flop",
+          "results": [
+            "Occurs specifically when inputs are J=1, K=1, and the clock pulse width is significantly greater than the propagation delay of the flip-flop.",
+            "Causes the output to toggle unpredictably multiple times during a single active clock pulse.",
+            "Resolved by using a Master-Slave JK Flip-Flop configuration or by utilizing strictly edge-triggered flip-flops."
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "4",
+      "title": "Counters and Registers",
+      "description": "Sequential circuits utilized for counting events, measuring time intervals, generating delays, and storing or shifting multi-bit data.",
+      "cases": [
+        {
+          "condition": "Synchronous vs. Asynchronous (Ripple) Counters",
+          "results": [
+            "Synchronous Counter: All flip-flops are triggered simultaneously by the exact same clock pulse, making the circuit significantly faster and free from cumulative propagation delay.",
+            "Asynchronous Counter: The output of one flip-flop acts as the clock input for the next successive stage, causing propagation delays to accumulate (ripple effect), which restricts the maximum operating frequency."
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "step_number": 1,
+          "title": "Determine the Modulus (States)",
+          "detail": "Identify the number of distinct states the counter needs to sequence through. Calculate the required number of flip-flops 'n' using the relation 2^n >= Modulus."
+        },
+        {
+          "step_number": 2,
+          "title": "State Transition Diagram and Table",
+          "detail": "Draw the state diagram showing the desired counting sequence and map it to a state transition table detailing present states and required next states."
+        },
+        {
+          "step_number": 3,
+          "title": "Derive Logic Expressions using Excitation Tables",
+          "detail": "Utilize the excitation table of the chosen flip-flop (e.g., JK or T type) and Karnaugh Maps (K-maps) to derive the simplified boolean expressions for the flip-flop inputs."
+        }
+      ]
+    },
+    {
+      "section_id": "5",
+      "title": "Data Converters (ADC and DAC)",
+      "description": "Essential interfacing circuits that translate continuous analog signals from the real world into discrete digital formats, and vice versa.",
+      "formulas": [
+        {
+          "category": "Digital-to-Analog Converter (DAC) Specifications",
+          "equations": [
+            "Resolution (Step Size) = V_ref / ((2^n) - 1)",
+            "Analog Output = Decimal Equivalent of Digital Input * Resolution"
+          ]
+        }
+      ],
+      "cases": [
+        {
+          "condition": "Selecting an Analog-to-Digital Converter (ADC)",
+          "results": [
+            "Flash ADC: Provides the absolute fastest conversion time, but is highly complex, power-hungry, and expensive as it requires exactly (2^n - 1) comparators for an n-bit conversion.",
+            "Successive Approximation Register (SAR) ADC: Provides an excellent balance between conversion speed and hardware complexity. The conversion time is fixed at exactly 'n' clock cycles regardless of the magnitude of the analog input voltage."
+          ]
+        }
+      ]
+    }
+  ]
+}

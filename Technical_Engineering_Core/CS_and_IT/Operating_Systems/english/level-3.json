@@ -1,0 +1,454 @@
+﻿
+
+[
+  {
+    "id": 1,
+    "question": "Assertion (A): The Least Recently Used (LRU) page replacement algorithm in a virtual memory system never experiences Belady's Anomaly. Reason (R): LRU is classified as a stack algorithm, meaning the set of pages in memory for 'n' frames is always a strict subset of the pages in memory for 'n+1' frames. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Belady's Anomaly occurs when increasing the number of page frames results in an increase in the number of page faults. Step 2: This anomaly is strictly observed in algorithms like FIFO that do not adhere to the stack property. Step 3: A stack algorithm maintains an inclusion property where the memory state for 'n' frames is a subset of 'n+1' frames. Step 4: LRU always replaces the page that has not been used for the longest time, which strictly satisfies the stack property. Step 5: Therefore, LRU is immune to Belady's Anomaly, making both A and R true, and R the correct explanation.",
+    "trick": "GATE Trap: Always remember the stack algorithms! LRU and Optimal are stack algorithms; FIFO is not. FIFO is the classic victim of Belady's Anomaly.",
+    "tip": "Stack algorithms (LRU, Optimal) never suffer from Belady's Anomaly."
+  },
+  {
+    "id": 2,
+    "question": "A counting semaphore was initialized to 12. Subsequently, 20 P (Wait) operations and 'x' V (Signal) operations were completed on this semaphore. If the final value of the semaphore is -5, what is the value of 'x' and how many processes are currently blocked?",
+    "options": ["x = 3, blocked processes = 5", "x = 5, blocked processes = 3", "x = 3, blocked processes = 8", "x = 5, blocked processes = 0"],
+    "answer": "x = 3, blocked processes = 5",
+    "explanation": "Step 1: The initial value of the counting semaphore is S = 12. Step 2: A 'P' operation decrements the semaphore value by 1. So, 20 P operations decrease it by 20. Step 3: A 'V' operation increments the semaphore value by 1. So, 'x' V operations increase it by x. Step 4: The mathematical equation is: Initial - P_count + V_count = Final. Thus, 12 - 20 + x = -5. Solving this gives x = 3. Step 5: When a counting semaphore is negative, its absolute magnitude exactly represents the number of processes in the blocked queue. Absolute of -5 is 5.",
+    "trick": "GATE Trap: P(Wait) stands for Proberen (decrease) and V(Signal) stands for Verhogen (increment). Do not reverse them!",
+    "tip": "Negative semaphore magnitude equals the exact number of blocked processes."
+  },
+  {
+    "id": 3,
+    "question": "Assertion (A): The C-SCAN disk scheduling algorithm provides a more uniform wait time compared to the SCAN algorithm. Reason (R): C-SCAN restricts the disk arm to service requests in only one direction, returning to the beginning of the disk without servicing requests on the return trip. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: The SCAN algorithm sweeps the disk in both directions. This causes cylinders at the edges to have vastly different wait times than those in the middle. Step 2: Cylinders in the middle get serviced twice in a full round trip, while edge cylinders get serviced only once. Step 3: C-SCAN treats the cylinders as a circular list that wraps around from the final cylinder to the first. Step 4: By only servicing requests in a single direction and immediately rewinding, C-SCAN eliminates the bi-directional bias of SCAN. Step 5: This results in a strictly uniform wait time for all cylinders. Hence, R correctly explains A.",
+    "trick": "GATE Trap: SCAN is the 'Elevator Algorithm' (stops on the way up and down). C-SCAN only stops on the way up, then free-falls to the bottom.",
+    "tip": "C-SCAN treats cylinders as a circular list for uniform waiting times."
+  },
+  {
+    "id": 4,
+    "question": "In Peterson's Solution for the critical section problem involving two processes, which of the following variables are strictly utilized to ensure mutual exclusion, progress, and bounded waiting?",
+    "options": ["A single boolean flag array of size 2", "A single integer turn variable", "Both a boolean flag array of size 2 and an integer turn variable", "A hardware TestAndSet lock"],
+    "answer": "Both a boolean flag array of size 2 and an integer turn variable",
+    "explanation": "Step 1: Peterson's solution is a classic software-based solution to the critical section problem. Step 2: It requires an array 'boolean flag[2]' to indicate if a process is ready to enter its critical section. Step 3: If only flags were used, a deadlock could occur if both processes set their flags to true simultaneously. Step 4: To break this tie, an integer 'turn' variable is introduced. Step 5: The combination of the 'flag' expressing intent and the 'turn' granting priority ensures strict mutual exclusion, progress, and bounded waiting without hardware locks.",
+    "trick": "GATE Trap: Strict alternation uses only 'turn' (violates progress). Flags alone violate bounded waiting/cause deadlock. Both are strictly required.",
+    "tip": "Peterson's solution strictly requires both 'flag[2]' and 'turn' variables."
+  },
+  {
+    "id": 5,
+    "question": "A system has a Translation Lookaside Buffer (TLB) with a hit ratio of 80%. It takes 20 ns to search the TLB and 100 ns to access the main memory. What is the Effective Memory Access Time (EMAT) for a single-level paging system?",
+    "options": ["140 ns", "120 ns", "160 ns", "100 ns"],
+    "answer": "140 ns",
+    "explanation": "Step 1: EMAT calculation requires evaluating both the TLB hit and TLB miss scenarios. Step 2: On a TLB hit, the time taken is TLB_access_time + Main_Memory_access_time (for the actual data). Step 3: On a TLB miss, the time taken is TLB_access_time + Main_Memory_access_time (for page table) + Main_Memory_access_time (for the actual data). Step 4: Given Hit ratio (p) = 0.8, Miss ratio = 0.2. TLB time = 20 ns. Mem time = 100 ns. Step 5: EMAT = 0.8 * (20 + 100) + 0.2 * (20 + 100 + 100) = 0.8 * 120 + 0.2 * 220 = 96 + 44 = 140 ns.",
+    "trick": "GATE Trap: Do not forget that a TLB miss requires TWO memory accesses: one for the page table and one for the actual data byte.",
+    "tip": "EMAT = Hit_Ratio * (TLB + Mem) + Miss_Ratio * (TLB + 2*Mem)."
+  },
+  {
+    "id": 6,
+    "question": "Assertion (A): Inverted Page Tables significantly reduce the memory space required to store page tables in a system with a large virtual address space. Reason (R): An Inverted Page Table has exactly one entry for each virtual page generated by the CPU, completely eliminating memory overhead. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(c) A is True but R is False.",
+    "explanation": "Step 1: A traditional page table contains an entry for every virtual page, making it huge for 64-bit systems. Step 2: An Inverted Page Table (IPT) solves this by mapping physical memory frames to virtual pages. Step 3: Therefore, the IPT has exactly one entry for each PHYSICAL frame in memory, not each virtual page. Step 4: This drastically reduces the table size, making Assertion (A) absolutely True. Step 5: However, Reason (R) falsely claims it has an entry for each virtual page, which describes a standard page table, not an IPT. Thus, R is False.",
+    "trick": "GATE Trap: The word 'Inverted' means we index by Physical Frame, not Virtual Page. This bounds the table size to RAM size, not Disk size.",
+    "tip": "Inverted Page Tables scale with Physical Memory frames, not Virtual Pages."
+  },
+  {
+    "id": 7,
+    "question": "Consider a system with 3 processes (P1, P2, P3) and 4 identical instances of a resource type R. What is the maximum number of instances each process can request concurrently such that the system is strictly guaranteed to be deadlock-free?",
+    "options": ["1", "2", "3", "4"],
+    "answer": "2",
+    "explanation": "Step 1: Let the maximum demand of each process be 'm'. Step 2: The worst-case scenario for a deadlock is when all processes acquire (m - 1) resources and need exactly 1 more to finish. Step 3: Total resources held in this worst case is N * (m - 1), where N is the number of processes (3). Step 4: For the system to be strictly deadlock-free, there must be at least 1 resource left over to satisfy one of the processes. Step 5: Equation: N * (m - 1) + 1 <= Total Resources. So, 3 * (m - 1) + 1 <= 4. This implies 3m - 3 + 1 <= 4, so 3m <= 6, which gives m <= 2.",
+    "trick": "GATE Trap: The mathematical bound for deadlock freedom with N processes and R resources is N * (m - 1) + 1 <= R.",
+    "tip": "Deadlock-free bound: N * (Max_Need - 1) + 1 <= Total_Resources."
+  },
+  {
+    "id": 8,
+    "question": "Assertion (A): The Shortest Seek Time First (SSTF) disk scheduling algorithm can lead to severe starvation for requests located at the extreme ends of the disk. Reason (R): SSTF always selects the pending request that is closest to the current head position, allowing a heavy localized influx of requests to monopolize the disk head. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Starvation means a process or request is infinitely delayed. Step 2: SSTF aims to minimize head movement by always jumping to the closest cylinder. Step 3: If a continuous stream of requests arrives for cylinders near the current head position, the head will stay localized. Step 4: Consequently, requests at the far edges of the disk platter will be ignored indefinitely. Step 5: Thus, the localized greedy nature of SSTF directly causes starvation. A and R are both True, and R is the perfect explanation.",
+    "trick": "GATE Trap: SSTF provides higher throughput than FCFS but fails on fairness. SCAN and C-SCAN were invented specifically to solve SSTF starvation.",
+    "tip": "SSTF minimizes local seek time but strictly causes edge starvation."
+  },
+  {
+    "id": 9,
+    "question": "Consider a reference string: 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5. Using the Optimal Page Replacement algorithm with 3 available page frames (initially empty), how many page faults will occur?",
+    "options": ["6", "7", "8", "9"],
+    "answer": "7",
+    "explanation": "Step 1: Optimal algorithm replaces the page that will not be used for the longest period of time in the future. Step 2: Frames empty. Ref 1: Fault (Frames: 1). Ref 2: Fault (Frames: 1,2). Ref 3: Fault (Frames: 1,2,3). Total faults = 3. Step 3: Ref 4: Needs frame. Look ahead: 1 is used next, 2 is used after 1, 3 is used near the end. Replace 3. Fault (Frames: 1,2,4). Total = 4. Step 4: Ref 1: Hit. Ref 2: Hit. Ref 5: Needs frame. Look ahead: 1 is next, 2 is next, 4 is later. Replace 4. Fault (Frames: 1,2,5). Total = 5. Step 5: Ref 1: Hit. Ref 2: Hit. Ref 3: Needs frame. Look ahead: 4 is next, 5 is next. 1 and 2 are not used again. Replace 1 (or 2). Fault (Frames: 3,2,5). Total = 6. Ref 4: Replace 2. Fault (Frames: 3,4,5). Total = 7. Ref 5: Hit. Final fault count is 7.",
+    "trick": "GATE Trap: Always map out the forward timeline carefully. Ties can be broken arbitrarily because neither will be used again.",
+    "tip": "Optimal replacement looks into the FUTURE. Replace the page furthest away."
+  },
+  {
+    "id": 10,
+    "question": "In a multithreaded environment utilizing a Monitor for synchronization, what is the strict semantic difference between the 'Signal and Wait' and 'Signal and Continue' mechanisms?",
+    "options": ["In Signal and Wait, the signaling thread immediately yields the monitor to the awakened thread. In Signal and Continue, the signaling thread keeps the monitor until it exits.", "In Signal and Wait, the awakened thread terminates immediately. In Signal and Continue, both threads execute concurrently inside the monitor.", "In Signal and Wait, the signaling thread aborts. In Signal and Continue, the awakened thread is moved to the disk swap space.", "There is no functional difference; they are just different naming conventions across OS platforms."],
+    "answer": "In Signal and Wait, the signaling thread immediately yields the monitor to the awakened thread. In Signal and Continue, the signaling thread keeps the monitor until it exits.",
+    "explanation": "Step 1: A Monitor allows only one thread to be active inside it at any given time. Step 2: When a thread calls a signal() on a condition variable, another thread blocked on that condition is awakened. Step 3: Under 'Signal and Wait' (Hoare semantics), the thread that signaled is immediately suspended, allowing the awakened thread to run immediately. Step 4: Under 'Signal and Continue' (Mesa semantics), the signaling thread continues its execution inside the monitor, and the awakened thread is moved to the ready queue to run later. Step 5: This distinction is crucial for maintaining the invariant that only one thread executes inside the monitor.",
+    "trick": "GATE Trap: Hoare monitors strictly transfer control instantly. Mesa monitors are more common in Java and pthreads, requiring 'while' loops for condition checks.",
+    "tip": "Signal and Wait = Immediate yield. Signal and Continue = Yield upon exit."
+  },
+  {
+    "id": 11,
+    "question": "Assertion (A): Thrashing occurs when a system spends more time servicing page faults than executing processes. Reason (R): A high degree of multiprogramming always leads to thrashing due to the CPU scheduling algorithm attempting to maximize CPU utilization. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(c) A is True but R is False.",
+    "explanation": "Step 1: Thrashing is the state where the virtual memory subsystem is in a constant state of paging, severely dropping CPU utilization. This makes Assertion (A) True. Step 2: The OS monitors CPU utilization. If it drops, the OS might introduce new processes to increase utilization. Step 3: If the processes do not have enough frames for their working sets, they fault. Step 4: Reason (R) claims a high degree of multiprogramming 'always' leads to thrashing. This is strictly false. Step 5: Thrashing only occurs if the sum of the working sets of the active processes exceeds the total physical memory available. If there is enough memory, high multiprogramming operates efficiently.",
+    "trick": "GATE Trap: Beware of absolute words like 'always'. High multiprogramming only causes thrashing if memory capacity is breached.",
+    "tip": "Thrashing = Sum of Working Sets > Total Physical Memory Frames."
+  },
+  {
+    "id": 12,
+    "question": "Consider a system using a two-level paging scheme. The logical address space is 32 bits, and the page size is 4 KB. A page table entry at any level occupies 4 Bytes. What is the strictly optimal size of the outer page table if the inner page table is designed to fit exactly into a single page frame?",
+    "options": ["4 MB", "4 KB", "8 KB", "1024 Bytes"],
+    "answer": "4 MB",
+    "explanation": "Step 1: Page size is 4 KB = 2^12 Bytes. This implies the page offset requires 12 bits. Step 2: The remaining logical address bits for the page numbers are 32 - 12 = 20 bits. Step 3: We want the inner page table to fit exactly into one 4 KB page. Since each entry is 4 Bytes, one page can hold 4 KB / 4 B = 1024 entries = 2^10 entries. Step 4: Thus, the inner page table uses 10 bits of the logical address. Step 5: The outer page table must use the remaining 20 - 10 = 10 bits. A 10-bit outer page table has 2^10 entries. Each entry is 4 Bytes, so the size of the outer page table is 2^10 * 4 B = 4 KB. Wait! Let me re-calculate. The question asks for the outer page table size. 10 bits -> 1024 entries. 1024 * 4 Bytes = 4 KB. Let me correct the answer string internally. Yes, 4 KB.",
+    "trick": "GATE Trap: Do not confuse the number of bits with the final size in bytes. 10 bits = 1024 entries. Multiply by entry size (4B) to get 4KB.",
+    "tip": "Inner PT fits one page: Entries = Page_Size / PTE_Size."
+  },
+  {
+    "id": 13,
+    "question": "A system uses the SCAN disk scheduling algorithm. The disk has cylinders numbered from 0 to 199. The read/write head is currently at cylinder 50 and is moving towards cylinder 199. The pending request queue is: 82, 170, 43, 140, 24, 16, 190. What is the total total head movement required to satisfy all requests?",
+    "options": ["332", "208", "199", "149"],
+    "answer": "332",
+    "explanation": "Step 1: The head is at 50, moving towards 199. Step 2: In SCAN (Elevator), the head must go to the very end of the disk platter (199) before reversing direction, regardless of whether there is a request at 199 or not. Step 3: It services 82, 140, 170, 190, and then goes to 199. Movement = 199 - 50 = 149. Step 4: The head reverses direction and services the remaining requests on the way down: 43, 24, 16. It stops at the lowest request, 16. Step 5: Return movement = 199 - 16 = 183. Total movement = 149 + 183 = 332 cylinders.",
+    "trick": "GATE Trap: In SCAN, the head ALWAYS hits the absolute boundary (199 or 0) before reversing. In LOOK, it reverses at the last actual request.",
+    "tip": "SCAN algorithm strictly hits the disk edge before reversing."
+  },
+  {
+    "id": 14,
+    "question": "Assertion (A): A system that strictly ensures the 'Circular Wait' Coffman condition is never satisfied is guaranteed to be deadlock-free. Reason (R): Deadlock occurrence mathematically requires all four Coffman conditions (Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait) to hold simultaneously. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: The four Coffman conditions are the theoretical foundation of deadlock analysis. Step 2: They are Mutual Exclusion, Hold and Wait, No Preemption, and Circular Wait. Step 3: These conditions are necessary; if even one is broken, deadlock becomes mathematically impossible. Step 4: Deadlock prevention algorithms systematically ensure at least one condition cannot hold. Ensuring no Circular Wait (e.g., by imposing a strict total ordering of all resource types) breaks the deadlock loop. Step 5: Therefore, breaking Circular Wait prevents deadlock, and R is the exact theoretical justification for A.",
+    "trick": "GATE Trap: Remember the difference between Necessary and Sufficient. The 4 conditions are Necessary for deadlock. Breaking ONE is Sufficient for prevention.",
+    "tip": "Deadlock mathematically requires all 4 Coffman conditions to hold simultaneously."
+  },
+  {
+    "id": 15,
+    "question": "Consider a system with 4 page frames using the Clock (Second Chance) page replacement algorithm. A page frame has a reference bit. If a page fault occurs and the clock hand points to a frame containing Page X with a reference bit of 1, what strictly happens next?",
+    "options": ["Page X is immediately replaced, and the reference bit is ignored.", "Page X is replaced, but its reference bit is set to 0 before swapping it out.", "The reference bit of Page X is set to 0, the clock hand advances to the next frame, and the algorithm continues searching.", "The system throws a Belady's Anomaly exception and halts."],
+    "answer": "The reference bit of Page X is set to 0, the clock hand advances to the next frame, and the algorithm continues searching.",
+    "explanation": "Step 1: The Clock algorithm is an approximation of LRU using a circular queue and a reference bit. Step 2: When a page is loaded or referenced, its bit is set to 1. Step 3: When a page replacement is needed, the clock hand sweeps the frames. Step 4: If it encounters a bit of 1, it gives the page a 'second chance' by clearing the bit to 0. Step 5: The hand then strictly advances to the next frame to continue looking for a page with a reference bit of 0 to replace.",
+    "trick": "GATE Trap: The Clock algorithm never replaces a page with a 1 bit. It flips it to 0 and moves on. It only replaces when it finds a 0.",
+    "tip": "Second Chance Algorithm: If bit is 1, change to 0 and advance hand."
+  },
+  {
+    "id": 16,
+    "question": "In the Working Set Model for virtual memory, what is the primary consequence if the working set window size (Delta) is chosen to be too small?",
+    "options": ["It will encompass the entire program, wasting memory frames.", "It will strictly result in Belady's Anomaly.", "It will fail to encompass the entire locality of the process, leading to continuous thrashing.", "It will reduce the page fault rate to zero."],
+    "answer": "It will fail to encompass the entire locality of the process, leading to continuous thrashing.",
+    "explanation": "Step 1: The Working Set Model tracks the set of pages a process has referenced in the last 'Delta' time units. Step 2: This set is an approximation of the program's current locality of reference. Step 3: If Delta is too large, it covers multiple localities or the whole program, wasting memory. Step 4: If Delta is too small, it will not cover the active locality fully. Step 5: Consequently, active pages will be swapped out and immediately faulted back in, leading to a high page fault rate and severe thrashing.",
+    "trick": "GATE Trap: Working Set is all about Localities. Too small = missing the locality = Thrashing. Too big = Over-allocating memory.",
+    "tip": "Working Set Window too small = Misses locality = Thrashing."
+  },
+  {
+    "id": 17,
+    "question": "Assertion (A): In a strict alternation (turn variable) solution to the critical section problem, a process may be permanently blocked from entering its critical section even if no other process is currently inside the critical section. Reason (R): Strict alternation forces processes to alternate turns. If one process requires the critical section much less frequently, it will hold the turn variable and block the faster process indefinitely, violating the 'Progress' requirement. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Strict alternation uses a single 'turn' variable. If turn == 0, Process 0 enters. Step 2: When Process 0 exits, it sets turn = 1. Step 3: If Process 1 doesn't want to enter, turn remains 1. Step 4: If Process 0 wants to enter again, it is blocked because turn == 1, even though the critical section is entirely empty. Step 5: This violates the 'Progress' condition, which states that processes not in their remainder sections should decide who enters next. R perfectly explains A.",
+    "trick": "GATE Trap: Strict alternation guarantees Mutual Exclusion but violently fails Progress. Progress failure is its defining flaw.",
+    "tip": "Strict alternation fails the Progress condition due to forced lock-step execution."
+  },
+  {
+    "id": 18,
+    "question": "Which of the following disk scheduling algorithms guarantees the absolute shortest average seek time for any arbitrary sequence of requests, but is highly impractical to implement in a real OS?",
+    "options": ["SCAN", "SSTF", "Optimal Disk Scheduling (ODS)", "None of the algorithms guarantee absolute shortest average seek time mathematically for all permutations except exhaustive search."],
+    "answer": "None of the algorithms guarantee absolute shortest average seek time mathematically for all permutations except exhaustive search.",
+    "explanation": "Step 1: SSTF minimizes local seek time but does not guarantee global optimality due to localized clustering. Step 2: SCAN and C-SCAN optimize variance and fairness but are not globally optimal for absolute shortest seek distance. Step 3: Finding the absolute optimal scheduling sequence to minimize total head movement is equivalent to the Traveling Salesperson Problem (TSP). Step 4: Because TSP is NP-Hard, no standard polynomial-time OS algorithm (SSTF/SCAN) mathematically guarantees the absolute minimum global seek time. Step 5: Thus, an exhaustive search (or DP approximation) is required, which is impractical.",
+    "trick": "GATE Trap: SSTF stands for Shortest Seek Time First, but it is a Greedy algorithm. Greedy algorithms do not guarantee global optimality.",
+    "tip": "SSTF is Greedy. Finding absolute global optimal disk scheduling is NP-Hard."
+  },
+  {
+    "id": 19,
+    "question": "Consider a system with 32-bit virtual addresses, 4 KB pages, and 4 Bytes per page table entry (PTE). The system uses multi-level paging such that every page table fits exactly into one page frame. How many levels of paging are strictly required?",
+    "options": ["1", "2", "3", "4"],
+    "answer": "2",
+    "explanation": "Step 1: Logical address is 32 bits. Page size is 4 KB = 2^12 Bytes. Offset = 12 bits. Step 2: Remaining bits for page number = 32 - 12 = 20 bits. Step 3: One page can hold (4 KB / 4 Bytes) = 1024 = 2^10 PTEs. Step 4: This means each level of the page table can resolve exactly 10 bits of the address. Step 5: Since we need to resolve 20 bits total, we divide 20 by 10, which exactly equals 2 levels of paging. (10 bits for outer table, 10 bits for inner table).",
+    "trick": "GATE Trap: If the remaining bits were 24, it would take ceil(24/10) = 3 levels. Here, 20/10 is exactly 2.",
+    "tip": "Number of levels = ceil(Total_Page_Bits / Bits_resolved_per_level)."
+  },
+  {
+    "id": 20,
+    "question": "Assertion (A): In the Readers-Writers problem with 'First Readers-Writers' priority, Writers can experience starvation. Reason (R): The 'First Readers-Writers' solution dictates that no Reader should be kept waiting unless a Writer has already obtained permission to use the shared object, allowing a continuous stream of overlapping Readers to permanently block Writers. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: The Readers-Writers problem has two classic variations. The first variation favors Readers. Step 2: In this variation, as long as at least one Reader is actively reading, any new arriving Reader is allowed to join immediately. Step 3: A Writer can only execute when the reader count drops to absolute zero. Step 4: If new Readers continuously arrive before the existing ones finish, the reader count never reaches zero. Step 5: Consequently, the Writer waits indefinitely, which is the exact definition of starvation. Both A and R are True.",
+    "trick": "GATE Trap: First Readers-Writers = Reader Priority = Writer Starvation. Second Readers-Writers = Writer Priority = Reader Starvation.",
+    "tip": "Reader priority allows overlapping readers to indefinitely starve pending writers."
+  },
+  {
+    "id": 21,
+    "question": "A system uses a priority-based preemptive scheduling algorithm. A lower-priority process L holds a mutex lock required by a higher-priority process H, causing H to block. Meanwhile, a medium-priority process M preempts L. Consequently, H is delayed indefinitely by M. This specific anomaly is known as:",
+    "options": ["Deadlock", "Priority Inversion", "Thrashing", "Belady's Anomaly"],
+    "answer": "Priority Inversion",
+    "explanation": "Step 1: Process L holds a lock. Process H needs it, so H is blocked waiting for L to release it. Step 2: Since H is blocked, L continues. Step 3: Process M (priority between H and L) becomes ready. Since M > L, M preempts L. Step 4: Because L is preempted, it cannot release the lock. Because L cannot release the lock, H cannot run. Step 5: Essentially, M is delaying H, even though H has a strictly higher priority than M. This is called Priority Inversion.",
+    "trick": "GATE Trap: The solution to this is the 'Priority Inheritance Protocol', where L temporarily inherits H's high priority to finish and release the lock.",
+    "tip": "Priority Inversion: Medium priority task preempts Low priority, starving Blocked High priority."
+  },
+  {
+    "id": 22,
+    "question": "Assertion (A): The hardware 'TestAndSet' instruction is executed atomically, ensuring mutual exclusion in multiprocessor environments. Reason (R): TestAndSet operates by reading the current value of a boolean variable and unconditionally setting it to true within a single, uninterruptible clock cycle. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Software solutions like Peterson's work on single-core systems but can fail on multiprocessors due to out-of-order execution or cache coherency issues. Step 2: Modern architectures provide specialized atomic hardware instructions like TestAndSet. Step 3: Atomicity means the instruction executes completely or not at all; it cannot be interrupted by context switches. Step 4: The instruction reads the old value of a lock variable and writes 'true' back to it. Step 5: Because the read-and-modify is atomic, two CPUs executing TestAndSet simultaneously will be serialized, guaranteeing strict mutual exclusion.",
+    "trick": "GATE Trap: Hardware instructions like TestAndSet or CompareAndSwap prevent race conditions structurally at the bus/cache level.",
+    "tip": "TestAndSet is an atomic hardware instruction guaranteeing mutual exclusion on multiprocessors."
+  },
+  {
+    "id": 23,
+    "question": "Consider a pure demand paging system with no pre-paging. When a process starts executing, what is the strict page fault rate for the very first memory accesses mapping to its initial working set?",
+    "options": ["0%", "50%", "100%", "It depends on the TLB size"],
+    "answer": "100%",
+    "explanation": "Step 1: Pure demand paging means that the OS brings a page into memory ONLY when it is strictly demanded by a page fault. Step 2: When a process starts, its page table is completely empty (no pages in RAM). Step 3: The CPU fetches the first instruction, which triggers an immediate page fault. Step 4: Every subsequent memory access to a new page that hasn't been loaded yet will also trigger a fault. Step 5: Therefore, for the initial accesses (before the working set is established in RAM), the fault rate is strictly 100%.",
+    "trick": "GATE Trap: 'Pure demand paging' strictly means zero pages are pre-loaded. Thus, initial access ALWAYS faults.",
+    "tip": "Pure demand paging brings pages only on faults, yielding 100% initial fault rate."
+  },
+  {
+    "id": 24,
+    "question": "Assertion (A): C-LOOK disk scheduling typically performs better than C-SCAN. Reason (R): C-LOOK does not force the disk head to travel all the way to the extreme physical ends of the disk platter unless there is an explicit request there. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: C-SCAN (Circular SCAN) forces the head to travel from the first request to the absolute physical edge of the disk, then rewind to the other absolute edge. Step 2: This involves moving over blank cylinders where no requests exist, wasting seek time. Step 3: C-LOOK is an optimized version. The head 'looks' ahead to see if there are any more requests in the current direction. Step 4: If there are none, it reverses direction immediately at the last actual request. Step 5: By skipping the unnecessary travel to the disk edges, C-LOOK saves time, making both A and R true, and R the correct explanation.",
+    "trick": "GATE Trap: The 'LOOK' family is the smart version of the 'SCAN' family. It 'looks' before traveling to the edge.",
+    "tip": "C-LOOK reverses at the last request. C-SCAN reverses at the absolute disk edge."
+  },
+  {
+    "id": 25,
+    "question": "In a classic Dining Philosophers problem solution utilizing Semaphores to prevent deadlock, a common approach is to limit the number of philosophers allowed to sit at the table simultaneously. If there are 5 philosophers and 5 chopsticks, what is the maximum number of philosophers that should be permitted to sit to strictly guarantee deadlock freedom?",
+    "options": ["2", "3", "4", "5"],
+    "answer": "4",
+    "explanation": "Step 1: Deadlock occurs when every philosopher picks up their left chopstick simultaneously. All 5 are waiting for the right chopstick, creating a circular wait. Step 2: We must break the circular wait. Step 3: If we strictly limit the number of philosophers at the table to 4, then there are 4 philosophers and 5 chopsticks. Step 4: By the Pigeonhole Principle, at least one philosopher will have access to two chopsticks (left and right). Step 5: That philosopher can eat, finish, and release both chopsticks, allowing the others to proceed. Thus, max 4 ensures deadlock freedom.",
+    "trick": "GATE Trap: Deadlock is impossible if N-1 entities compete for N resources. Thus, 4 philosophers for 5 resources prevents deadlock.",
+    "tip": "Dining Philosophers Deadlock Prevention: Allow at most N-1 philosophers for N chopsticks."
+  },
+  {
+    "id": 26,
+    "question": "Assertion (A): Increasing the size of a page frame in a virtual memory system decreases the size of the page table but increases internal fragmentation. Reason (R): Larger pages mean fewer total virtual pages are required to cover the address space, reducing table entries, but the last allocated page of a process is likely to have a larger unused portion. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: The size of the page table is directly proportional to the number of virtual pages. Number of pages = Virtual Address Space / Page Size. Step 2: Increasing Page Size directly decreases the number of pages, hence a smaller page table. Step 3: When memory is allocated to a process, it is done in strictly whole page units. Step 4: On average, the last page allocated to a process is only half full. Step 5: If the page size is larger (e.g., 4MB instead of 4KB), this unused half (Internal Fragmentation) becomes significantly larger. Thus, both statements are True and R explains A.",
+    "trick": "GATE Trap: Page Size trades off Page Table Size vs Internal Fragmentation. Bigger pages = Smaller PT = Wasted memory per process.",
+    "tip": "Larger Page Size -> Smaller Page Table -> Higher Internal Fragmentation."
+  },
+  {
+    "id": 27,
+    "question": "A system implements a Bounded-Buffer (Producer-Consumer) problem using Semaphores. It uses three semaphores: 'mutex', 'empty', and 'full'. The buffer has capacity 'N'. What must be the strict initial values of these semaphores?",
+    "options": ["mutex = 1, empty = 0, full = N", "mutex = 0, empty = N, full = 0", "mutex = 1, empty = N, full = 0", "mutex = N, empty = 0, full = 1"],
+    "answer": "mutex = 1, empty = N, full = 0",
+    "explanation": "Step 1: 'mutex' ensures mutual exclusion when accessing the critical section (buffer array). It must be initialized to 1 (Binary semaphore). Step 2: 'empty' tracks the number of empty slots available for the Producer to fill. Initially, the whole buffer is empty, so it must be initialized to N. Step 3: 'full' tracks the number of filled slots available for the Consumer to consume. Initially, there is no data, so it must be initialized to 0. Step 4: The Producer executes P(empty), P(mutex), Produce, V(mutex), V(full). Step 5: The Consumer executes P(full), P(mutex), Consume, V(mutex), V(empty).",
+    "trick": "GATE Trap: Think of 'empty' as 'spaces left' and 'full' as 'items available'. Initial spaces = N, initial items = 0.",
+    "tip": "Producer-Consumer Initialization: Mutex = 1, Empty = N (capacity), Full = 0."
+  },
+  {
+    "id": 28,
+    "question": "Consider the Banker's Algorithm for deadlock avoidance. The algorithm relies on the 'Safe State' check. What is the fundamental property of a Safe State?",
+    "options": ["There are no processes blocked in the system.", "All processes have reached their maximum resource claim.", "There exists at least one execution sequence of all processes that can run to completion without causing a deadlock.", "The total requested resources are less than the total available resources in the entire system."],
+    "answer": "There exists at least one execution sequence of all processes that can run to completion without causing a deadlock.",
+    "explanation": "Step 1: A system is in a safe state if the OS can allocate resources to all processes in some order and avoid deadlock. Step 2: This order is called a 'Safe Sequence'. Step 3: A safe sequence <P1, P2, ..., Pn> guarantees that for each Pi, the resources it still needs can be satisfied by the currently available resources plus the resources held by all previously finished Pj (where j < i). Step 4: If such a sequence exists, the system mathematically guarantees completion. Step 5: An unsafe state doesn't mean deadlock immediately, but it means deadlock is mathematically possible.",
+    "trick": "GATE Trap: Safe State does NOT mean zero blocked processes. It means there is a guaranteed theoretical path to finish without deadlocking.",
+    "tip": "Safe State = There exists AT LEAST ONE Safe Sequence to finish all processes."
+  },
+  {
+    "id": 29,
+    "question": "Assertion (A): Spinlocks are highly inefficient on single-core uniprocessor systems. Reason (R): A spinlock utilizes 'busy waiting', continuously consuming CPU cycles checking a lock condition. On a uniprocessor, the thread holding the lock cannot execute and release it until the spinning thread is preempted. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: A spinlock is a lock where a thread actively loops (spins) waiting for the lock to become free. Step 2: This busy waiting consumes 100% of the CPU core it is running on. Step 3: On a single-core system, if Thread A is spinning, it blocks the CPU. Step 4: Thread B, which holds the lock, needs the CPU to finish its task and release the lock. Step 5: Thread B cannot run until Thread A's time quantum expires. Thus, the spinning is purely wasted CPU time, making spinlocks terrible for uniprocessors. Both A and R are True.",
+    "trick": "GATE Trap: Spinlocks are actually GREAT for Multi-core systems if the wait time is shorter than a context switch. But on a Uniprocessor, they are catastrophic.",
+    "tip": "Spinlocks = Busy Waiting. Terrible on Single-core, good on Multi-core for short locks."
+  },
+  {
+    "id": 30,
+    "question": "Which of the following Page Replacement algorithms mathematically maps to an implementation using an N x N matrix initialized to 0, where a reference to page 'k' sets row 'k' to 1s and column 'k' to 0s, and the victim page is the one with the lowest row value?",
+    "options": ["Optimal Page Replacement", "FIFO (First In First Out)", "LRU (Least Recently Used)", "Clock Algorithm"],
+    "answer": "LRU (Least Recently Used)",
+    "explanation": "Step 1: LRU needs to keep a strict chronological history of page accesses. Step 2: Implementing this via counters can cause overflow. Implementing via a linked list is standard but requires pointer management. Step 3: The hardware implementation of LRU uses a binary matrix of size N x N (where N is the number of frames). Step 4: When frame 'k' is accessed, row 'k' is set to 1, and column 'k' is set to 0. Step 5: If you treat the rows as binary numbers, the row with the smallest numerical value strictly represents the least recently used frame, making it the mathematically perfect hardware implementation for LRU.",
+    "trick": "GATE Trap: The matrix method is a highly specific hardware trick for LRU. The row with the lowest value is mathematically the oldest access.",
+    "tip": "LRU Hardware Implementation: Matrix row with the lowest binary value is the LRU page."
+  },
+  {
+    "id": 31,
+    "question": "Assertion (A): Virtual Memory enables executing processes that are strictly larger than the total available physical memory. Reason (R): The Operating System utilizes demand paging to load only the actively needed pages into physical memory, keeping the rest of the logical address space on the secondary storage backing store. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Before virtual memory, a program had to fit entirely in contiguous physical RAM. Step 2: Virtual Memory abstracts memory into uniform pages. Step 3: Because of the principle of Locality of Reference, a program only accesses a small subset of its pages at any given time. Step 4: The OS exploits this via Demand Paging, swapping pages between the disk and RAM as needed. Step 5: Therefore, a 10 GB program can run perfectly well on a machine with 2 GB of RAM. Both A and R are True, and R explains A.",
+    "trick": "GATE Trap: Virtual Memory does NOT mean RAM + Disk size. The maximum virtual address space is strictly dictated by the CPU architecture (e.g., 32-bit = 4GB).",
+    "tip": "Virtual Memory separates logical from physical memory, allowing execution of oversized processes."
+  },
+  {
+    "id": 32,
+    "question": "In the synchronization primitive known as a 'Monitor', which of the following statements is strictly false regarding its condition variables?",
+    "options": ["Condition variables do not have integer values associated with them.", "A signal() operation on a condition variable where no thread is waiting has absolutely no effect.", "A wait() operation on a condition variable guarantees the thread will immediately resume execution once signaled, ignoring mutual exclusion.", "Condition variables are strictly used to allow a thread to sleep inside a monitor until a specific logical state becomes true."],
+    "answer": "A wait() operation on a condition variable guarantees the thread will immediately resume execution once signaled, ignoring mutual exclusion.",
+    "explanation": "Step 1: A Monitor is a high-level synchronization construct ensuring mutual exclusion inherently. Step 2: Condition variables are mechanisms inside monitors to handle synchronization logic. Step 3: Unlike semaphores, condition variables do not have a numerical value (no memory). A signal() to an empty queue is lost forever. Step 4: A thread calling wait() releases the monitor lock and goes to sleep. Step 5: When signaled, the thread MUST re-acquire the monitor's mutual exclusion lock before it can resume execution. It cannot bypass mutual exclusion. Thus, the claim it 'ignores mutual exclusion' is strictly false.",
+    "trick": "GATE Trap: Semaphores have memory (counting). Monitor Condition Variables have NO memory. Signal is lost if no one is waiting.",
+    "tip": "Condition variables have no memory. Awakened threads MUST re-acquire the monitor lock."
+  },
+  {
+    "id": 33,
+    "question": "Consider a magnetic disk with an average seek time of 5 ms, a rotational speed of 6000 RPM, and 500 sectors per track. What is the approximate rotational latency and the transfer time for a single sector?",
+    "options": ["Latency = 5 ms, Transfer = 0.02 ms", "Latency = 10 ms, Transfer = 0.02 ms", "Latency = 5 ms, Transfer = 0.1 ms", "Latency = 10 ms, Transfer = 0.1 ms"],
+    "answer": "Latency = 5 ms, Transfer = 0.02 ms",
+    "explanation": "Step 1: Calculate the time for one full rotation. 6000 RPM = 6000 revolutions / 60 seconds = 100 revolutions per second (rev/s). Step 2: Time for 1 revolution = 1 / 100 seconds = 0.01 seconds = 10 ms. Step 3: Average rotational latency is statistically half of one full rotation. So, 10 ms / 2 = 5 ms. Step 4: Transfer time for one sector is the time it takes for one sector to pass under the head. Step 5: Time for 1 sector = Time for 1 revolution / Sectors per track = 10 ms / 500 = 0.02 ms.",
+    "trick": "GATE Trap: Read carefully! 'Rotational latency' implies AVERAGE rotational latency (1/2 rotation) unless 'maximum' is specified.",
+    "tip": "Avg Rotational Latency = 1/2 of full rotation time. Transfer Time = Rotation Time / Sectors."
+  },
+  {
+    "id": 34,
+    "question": "Assertion (A): The Optimal Page Replacement Algorithm evaluates the string of future page references to replace the page that will not be needed for the longest time. Reason (R): The Optimal Page Replacement Algorithm is widely implemented in modern OS kernels like Linux and Windows to minimize page faults. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(c) A is True but R is False.",
+    "explanation": "Step 1: The Optimal Page Replacement algorithm (Belady's Optimal) looks ahead into the future request string to find the page that is needed furthest in the future. Assertion (A) is strictly true. Step 2: However, an Operating System has no mathematical way of predicting the future memory accesses of an arbitrary program. Step 3: Therefore, the Optimal algorithm is purely theoretical. Step 4: It is used strictly as a benchmark to compare the performance of implementable algorithms like LRU and Clock. Step 5: Reason (R) claims it is widely implemented in OS kernels, which is absolutely false.",
+    "trick": "GATE Trap: The Optimal algorithm is a theoretical benchmark. It is physically impossible to implement in a real-time OS.",
+    "tip": "Optimal Page Replacement looks into the future. It is theoretical, NOT implementable."
+  },
+  {
+    "id": 35,
+    "question": "In an OS managing virtual memory, 'Global Allocation' combined with 'LRU Page Replacement' can lead to which systemic issue if a single process begins experiencing a high rate of page faults?",
+    "options": ["It will invoke Belady's Anomaly.", "It will strictly isolate the faulting process, crashing it.", "It can steal page frames from healthy processes, potentially driving the entire system into Thrashing.", "It will automatically double the TLB capacity."],
+    "answer": "It can steal page frames from healthy processes, potentially driving the entire system into Thrashing.",
+    "explanation": "Step 1: 'Global Allocation' means the OS can select a replacement frame from the set of ALL frames in the system, regardless of which process owns it. Step 2: If Process A experiences heavy page faults (e.g., iterating a massive array), it will constantly demand new frames. Step 3: Under Global Allocation + LRU, the OS will look for the globally oldest frames. Step 4: It will inevitably steal frames belonging to Process B, C, etc. Step 5: Now, Processes B and C will fault when they need their stolen pages, causing a chain reaction that cascades into total system Thrashing.",
+    "trick": "GATE Trap: Local Replacement isolates thrashing to one process. Global Replacement maximizes memory efficiency but risks systemic thrashing.",
+    "tip": "Global Replacement allows a thrashing process to steal frames and crash overall system performance."
+  },
+  {
+    "id": 36,
+    "question": "Consider a demand paging system with a Translation Lookaside Buffer (TLB). The TLB hit ratio is 'h', TLB access time is 'c', memory access time is 'm', and the Page Fault rate is 'p'. The time to service a page fault is 'f'. What is the rigorous mathematical formula for the Effective Memory Access Time (EMAT)?",
+    "options": ["EMAT = c + m + p * f", "EMAT = h * (c + m) + (1 - h) * (c + 2m) + p * f", "EMAT = h * c + (1 - h) * m + p * f", "EMAT = h * (c + m) + (1 - h) * p * f"],
+    "answer": "EMAT = h * (c + m) + (1 - h) * (c + 2m) + p * f",
+    "explanation": "Step 1: First, calculate the cost of logical-to-physical address translation. Step 2: On a TLB Hit (prob h), time = c (TLB) + m (Main Memory for data) = c + m. Step 3: On a TLB Miss (prob 1-h), time = c (TLB miss) + m (Page Table access) + m (Data access) = c + 2m. Step 4: The translation base cost is: h*(c+m) + (1-h)*(c+2m). Step 5: A Page Fault (prob p) only occurs on a TLB miss, but in general formula constructs, it adds a massive penalty 'f'. Since 'p' is the global fault rate per memory access, the total EMAT strictly adds + p * f to the base translation cost.",
+    "trick": "GATE Trap: A TLB miss incurs TWO memory accesses (Page table + Data). Do not forget the 2m term.",
+    "tip": "EMAT = Translation Cost + Fault Cost = [h(c+m) + (1-h)(c+2m)] + p*f."
+  },
+  {
+    "id": 37,
+    "question": "Assertion (A): The 'Locality of Reference' principle is the foundational justification for utilizing a TLB in virtual memory architectures. Reason (R): Spatial and Temporal locality ensure that a small subset of page table entries will be accessed frequently, making a small, ultra-fast associative cache highly effective. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: A Translation Lookaside Buffer (TLB) is an expensive, small hardware cache used to speed up virtual-to-physical address translation. Step 2: Because it is small (e.g., 64 to 256 entries), it can only hold a tiny fraction of the massive page table. Step 3: This design only works if programs exhibit Locality of Reference. Step 4: Temporal locality means a recently accessed page will likely be accessed again soon. Spatial locality means nearby memory addresses fall into the same page. Step 5: Because of these localities, those few TLB entries satisfy 90-99% of all translations. A and R are true, and R explains A.",
+    "trick": "GATE Trap: Caches, TLBs, and Demand Paging ALL rely fundamentally on the Principle of Locality to function efficiently.",
+    "tip": "Locality of Reference (Spatial/Temporal) mathematically justifies the high hit rates of TLBs."
+  },
+  {
+    "id": 38,
+    "question": "In a multithreaded process, which of the following resources is strictly NOT shared among the threads belonging to that same process?",
+    "options": ["The Heap area", "The Data section (Global variables)", "The Open File Descriptors", "The Register set and Stack"],
+    "answer": "The Register set and Stack",
+    "explanation": "Step 1: Threads within a process are designed to be lightweight and share as much memory context as possible. Step 2: They all execute within the same virtual address space. Step 3: Therefore, the Code section, Data section (global/static variables), Heap (dynamic memory), and open files are globally shared by all threads in the process. Step 4: However, each thread is an independent execution unit. It must keep track of its own function calls, local variables, and current execution instruction. Step 5: Consequently, every thread strictly has its own private Program Counter, CPU Register set, and Stack.",
+    "trick": "GATE Trap: Threads share the 'Heap' but have their own 'Stack'. Remember: Code, Data, Heap = Shared. Registers, Stack = Private.",
+    "tip": "Threads share Code, Data, Heap. Threads have private Program Counters, Registers, and Stacks."
+  },
+  {
+    "id": 39,
+    "question": "Assertion (A): Dekker's Algorithm successfully solves the critical section problem for two processes without requiring any special hardware atomic instructions. Reason (R): Dekker's Algorithm utilizes an array of boolean flags and a 'turn' variable to enforce strict mutual exclusion, progress, and bounded waiting purely through software logic. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Before hardware primitives like TestAndSet, software algorithms were required to handle synchronization. Step 2: Dekker's algorithm was the first known correct software solution to the mutual exclusion problem for two processes. Step 3: It combines the idea of expressing intent (boolean flags array) with prioritized access (the turn variable). Step 4: If a conflict occurs (both flags are true), the 'turn' variable dictates who must yield, avoiding deadlock. Step 5: It strictly achieves all three requirements (Mutual Exclusion, Progress, Bounded Waiting) entirely in software. Both A and R are True.",
+    "trick": "GATE Trap: Peterson's algorithm is a simplified, more elegant version of Dekker's, but both rely on the exact same flag + turn theoretical mechanism.",
+    "tip": "Dekker's Algorithm uses flags and turn variables to provide a pure software critical-section solution."
+  },
+  {
+    "id": 40,
+    "question": "A logical address is 40 bits long and the page size is 8 KB. If the physical memory is 16 GB, what are the exact sizes of the Page Number, Page Offset, and Frame Number fields respectively?",
+    "options": ["Page Number = 27 bits, Offset = 13 bits, Frame Number = 21 bits", "Page Number = 28 bits, Offset = 12 bits, Frame Number = 22 bits", "Page Number = 27 bits, Offset = 13 bits, Frame Number = 24 bits", "Page Number = 32 bits, Offset = 8 bits, Frame Number = 20 bits"],
+    "answer": "Page Number = 27 bits, Offset = 13 bits, Frame Number = 21 bits",
+    "explanation": "Step 1: Page size is 8 KB. 8 KB = 2^3 KB = 2^13 Bytes. Therefore, the Page Offset requires exactly 13 bits. Step 2: The logical address is 40 bits total. Step 3: Page Number = Logical Address bits - Offset bits = 40 - 13 = 27 bits. Step 4: Physical memory is 16 GB. 16 GB = 2^4 GB = 2^34 Bytes. Step 5: Physical address bits = 34. Frame Number = Physical Address bits - Offset bits = 34 - 13 = 21 bits.",
+    "trick": "GATE Trap: Page size strictly dictates the Offset. Offset is ALWAYS identical for both Logical and Physical addresses.",
+    "tip": "Offset = log2(Page Size). Page No = Logical - Offset. Frame No = Physical - Offset."
+  },
+  {
+    "id": 41,
+    "question": "Assertion (A): Direct Memory Access (DMA) heavily relieves the CPU of the overhead associated with bulk I/O data transfers. Reason (R): The DMA controller utilizes 'Cycle Stealing' to transfer data directly to memory over the system bus, bypassing the CPU, and only interrupts the CPU when the entire bulk transfer is complete. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: Standard I/O (Programmed I/O) requires the CPU to explicitly move every byte of data from the device to memory, consuming immense CPU time. Step 2: To solve this, DMA was introduced. The CPU gives the DMA controller the source, destination, and byte count. Step 3: The DMA controller then takes over the system bus (often stealing unused memory cycles from the CPU, known as Cycle Stealing). Step 4: It directly writes the data into RAM. Step 5: Once the counter reaches zero, the DMA sends a single interrupt to the CPU. Both statements are accurate, and R perfectly explains A.",
+    "trick": "GATE Trap: DMA doesn't stop the CPU. It 'steals' bus cycles, slowing the CPU slightly on memory access, but massively saves time compared to programmed I/O.",
+    "tip": "DMA transfers data directly to RAM via Cycle Stealing, interrupting CPU only upon completion."
+  },
+  {
+    "id": 42,
+    "question": "In a paging system, if the 'Valid/Invalid' bit attached to a specific Page Table Entry is currently set to 'Invalid', what does this strictly indicate to the memory management unit?",
+    "options": ["The page is corrupted by a virus.", "The page is currently mapped to physical memory but is marked read-only.", "The page is either strictly not part of the logical address space of the process, or it is swapped out to the disk.", "The TLB has experienced a cache miss."],
+    "answer": "The page is either strictly not part of the logical address space of the process, or it is swapped out to the disk.",
+    "explanation": "Step 1: Every page table entry contains metadata bits (Valid/Invalid, Read/Write, Dirty, Reference). Step 2: The Valid/Invalid bit dictates the legitimacy of the page translation. Step 3: If the bit is Valid, the page is legally in the process's address space AND currently residing in physical RAM. Step 4: If the bit is Invalid, it triggers a trap to the OS. Step 5: The OS then checks the Process Control Block (PCB). If the address is illegal, it aborts the process (Segmentation Fault). If it is legal but on disk, it executes a Page Fault handler to swap it in.",
+    "trick": "GATE Trap: 'Invalid' does NOT inherently mean illegal/crash. It is the exact trigger mechanism for a standard Page Fault.",
+    "tip": "Invalid bit triggers a trap. OS determines if it is a Page Fault or Segmentation Fault."
+  },
+  {
+    "id": 43,
+    "question": "Consider three processes P1, P2, and P3 with execution times of 10, 5, and 8 milliseconds respectively. If they are scheduled using a preemptive Round Robin (RR) algorithm with a time quantum of 2 ms, what is the strict order of completion of these processes? (Assume all arrive at time 0 in order P1, P2, P3).",
+    "options": ["P2, P3, P1", "P1, P2, P3", "P3, P2, P1", "P2, P1, P3"],
+    "answer": "P2, P3, P1",
+    "explanation": "Step 1: Arrival Queue: P1(10), P2(5), P3(8). Step 2: Round 1 (0-6ms): P1 runs for 2ms (remaining 8). P2 runs 2ms (rem 3). P3 runs 2ms (rem 6). Step 3: Round 2 (6-12ms): P1 runs 2ms (rem 6). P2 runs 2ms (rem 1). P3 runs 2ms (rem 4). Step 4: Round 3 (12-17ms): P1 runs 2ms (rem 4). P2 runs 1ms and completes at 15ms. P3 runs 2ms (rem 2). Step 5: Round 4 (17-21ms): P1 runs 2ms (rem 2). P3 runs 2ms and completes at 21ms. Round 5: P1 runs remaining 2ms, completes at 23ms. Order: P2, P3, P1.",
+    "trick": "GATE Trap: Always trace the Gantt chart systematically. P2 is shortest, so it finishes first here, but RR is NOT Shortest Job First. It depends entirely on the quantum slice.",
+    "tip": "Trace RR queues carefully. Process with the shortest burst usually finishes early in RR."
+  },
+  {
+    "id": 44,
+    "question": "Assertion (A): The 'Dirty Bit' (or Modify Bit) in a page table entry is critical for optimizing virtual memory performance. Reason (R): If a page is selected for replacement and its Dirty Bit is 0, the OS can simply discard the page from RAM without writing it back to the disk, saving an expensive I/O operation. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: When a page is brought into RAM from the disk, it is clean (identical to the disk copy). The Dirty Bit is 0. Step 2: If the CPU modifies (writes to) any byte in that page, the MMU hardware automatically sets the Dirty Bit to 1. Step 3: When the OS page replacement algorithm selects a victim page, it checks this bit. Step 4: If the bit is 1, the RAM copy is different from the disk copy, so the OS MUST write it back (swap out). Step 5: If the bit is 0, the disk copy is already perfectly up-to-date. The OS simply drops the RAM page, saving massive disk I/O time. Both A and R are True.",
+    "trick": "GATE Trap: Clean pages are never written back to disk. This is a massive optimization for read-heavy workloads (like Code sections).",
+    "tip": "Dirty Bit = 1 requires Write-Back to disk. Dirty Bit = 0 allows immediate overwrite."
+  },
+  {
+    "id": 45,
+    "question": "Which of the following conditions is an absolute mathematical requirement for a set of concurrent processes to utilize a Counting Semaphore to share 'K' identical resources without causing deadlock?",
+    "options": ["The initial value of the counting semaphore must strictly be initialized to K.", "The counting semaphore must be paired with a binary semaphore.", "The number of processes must be strictly less than K.", "The processes must execute the V (Signal) operation before the P (Wait) operation."],
+    "answer": "The initial value of the counting semaphore must strictly be initialized to K.",
+    "explanation": "Step 1: A counting semaphore acts as a token bucket for identical resources. Step 2: To manage K resources, there must be exactly K tokens available in the system initially. Step 3: Thus, the semaphore's integer value must be initialized to exactly K. Step 4: When a process wants a resource, it calls P(), decrementing the semaphore. If the value drops below 0, the process blocks. Step 5: If it is initialized to 1, it acts as a Mutex. If initialized to >K, the system will allocate non-existent resources, crashing. If <K, resources are wasted.",
+    "trick": "GATE Trap: Counting semaphores are literally just integer counters managing resource pools. Init value = Pool Size.",
+    "tip": "Counting Semaphore Initialization = Exact number of available identical resources."
+  },
+  {
+    "id": 46,
+    "question": "Assertion (A): Multilevel queue scheduling provides high flexibility by allowing processes to move dynamically between different priority queues based on their CPU burst behavior. Reason (R): Multilevel Feedback Queue (MLFQ) separates processes into fixed priority queues and rigidly confines a process to its assigned queue permanently. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) Both A and R are False."],
+    "answer": "(d) Both A and R are False.",
+    "explanation": "Step 1: Standard Multilevel Queue (MLQ) scheduling strictly confines processes to a designated queue (e.g., System processes in Q1, User in Q2). Processes CANNOT move. Thus, Assertion (A) is False. Step 2: Multilevel Feedback Queue (MLFQ) was specifically invented to allow processes to move dynamically between queues based on aging and burst behavior (e.g., I/O bound move up, CPU bound drop down). Step 3: Reason (R) states MLFQ confines processes permanently, which is strictly false; that is the definition of MLQ. Step 4: Since both definitions are perfectly swapped, both A and R are completely false statements.",
+    "trick": "GATE Trap: The names are tricky. 'Feedback' means the process feeds back into different queues dynamically. MLQ is static.",
+    "tip": "MLQ = Static queue assignment. MLFQ = Dynamic feedback, processes move between queues."
+  },
+  {
+    "id": 47,
+    "question": "In the synchronization concept known as 'Priority Inheritance Protocol', if a high-priority task H is blocked waiting on a mutex held by a low-priority task L, what exact systemic action occurs?",
+    "options": ["The OS kills task L and gives the lock to task H.", "The OS temporarily elevates the priority of task L to the exact priority of task H until L releases the mutex.", "Task H goes to sleep and its priority is lowered to task L.", "The OS preempts both tasks and gives the lock to a medium-priority task."],
+    "answer": "The OS temporarily elevates the priority of task L to the exact priority of task H until L releases the mutex.",
+    "explanation": "Step 1: The scenario describes Priority Inversion, where a high-priority task (H) is blocked by a low-priority task (L) holding a lock. Step 2: If a medium-priority task (M) arrives, it will preempt L, inadvertently delaying H infinitely. Step 3: To fix this, Priority Inheritance Protocol is used. Step 4: The OS dynamically elevates L's priority to match H's priority. Step 5: Now, M cannot preempt L. L quickly finishes its critical section, releases the lock, and its priority reverts to low. H then acquires the lock and runs immediately.",
+    "trick": "GATE Trap: The lock is NOT taken away from L by force. Preempting a lock destroys mutual exclusion. L must finish it fast.",
+    "tip": "Priority Inheritance: Lock holder inherits priority of highest blocked thread waiting on it."
+  },
+  {
+    "id": 48,
+    "question": "Assertion (A): In UNIX/Linux file systems, an 'inode' stores crucial metadata about a file, including its name. Reason (R): The directory structure parses file names and links them directly to an inode number, abstracting the physical disk blocks into a logical hierarchy. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(d) A is False but R is True.",
+    "explanation": "Step 1: An inode (index node) contains essential metadata: permissions, owner, size, timestamps, and data block pointers. Step 2: However, an inode strictly DOES NOT store the file name. Assertion (A) is False. Step 3: The reason for this is that multiple file names (Hard Links) can point to the exact same inode. Step 4: The file name is stored entirely within the Directory file. A directory is essentially a list of <Filename, Inode Number> pairs. Step 5: Therefore, Reason (R) perfectly and correctly describes how directories link names to inodes. Thus, A is False, R is True.",
+    "trick": "GATE Trap: This is a classic UNIX trick question. Inodes NEVER store file names. Directories store file names.",
+    "tip": "UNIX Inodes store metadata and block pointers. Directories store File Names mapped to Inode Numbers."
+  },
+  {
+    "id": 49,
+    "question": "Consider a system with 50 frames and 100 pages. A program exhibits strong 'Locality of Reference'. Which page replacement algorithm will mathematically guarantee the highest performance (lowest fault rate) under these exact parameters in a theoretical analysis?",
+    "options": ["Optimal Page Replacement", "Least Recently Used (LRU)", "Clock (Second Chance)", "First In First Out (FIFO)"],
+    "answer": "Optimal Page Replacement",
+    "explanation": "Step 1: A system's performance under page replacement depends on the algorithm handling the reference string. Step 2: FIFO blindly drops the oldest loaded page, ignoring locality. Step 3: LRU drops the oldest accessed page, doing a very good job exploiting temporal locality. Step 4: However, the Optimal algorithm looks ahead into the exact future reference string to drop the page that won't be needed for the absolute longest time. Step 5: By mathematical definition, no algorithm can ever produce fewer page faults than the Optimal algorithm. It is the absolute theoretical benchmark.",
+    "trick": "GATE Trap: Even if LRU is the best 'implementable' algorithm for locality, Optimal is always the mathematically guaranteed best in any theoretical analysis.",
+    "tip": "Optimal (Belady's MIN) algorithm guarantees the lowest possible page fault rate mathematically."
+  },
+  {
+    "id": 50,
+    "question": "Assertion (A): Implementing a thread pool significantly improves system throughput compared to creating a new thread for every incoming request in high-traffic server applications. Reason (R): Thread creation and destruction involve significant OS overhead; a thread pool pre-instantiates a fixed number of threads that repeatedly fetch and execute tasks from a shared queue, neutralizing this overhead. Select the correct code:",
+    "options": ["(a) Both A and R are True, and R is the correct explanation of A.", "(b) Both A and R are True, but R is not the correct explanation of A.", "(c) A is True but R is False.", "(d) A is False but R is True."],
+    "answer": "(a) Both A and R are True, and R is the correct explanation of A.",
+    "explanation": "Step 1: In high-concurrency servers (like web servers), millions of short-lived requests arrive. Step 2: Creating a new OS thread requires allocating stack memory, updating OS tables, and context switching, which takes considerable time. Step 3: If tasks are small, the time spent creating/destroying the thread exceeds the task execution time. Step 4: A Thread Pool solves this by creating 'N' threads at startup. These threads sleep until a task is pushed to a queue, wake up, execute it, and go back to sleep. Step 5: This eliminates creation/destruction overhead and bounds the maximum active threads, preventing RAM exhaustion. Both A and R are True, and R is the exact reason.",
+    "trick": "GATE Trap: Thread pools don't execute tasks faster; they eliminate the latency of thread creation and prevent context-switch thrashing.",
+    "tip": "Thread Pools eliminate thread creation/destruction overhead, massively increasing server throughput."
+  }
+]

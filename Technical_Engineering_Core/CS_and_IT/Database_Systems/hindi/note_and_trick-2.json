@@ -1,0 +1,40 @@
+﻿
+
+{
+  "module_title": "ईआर मॉडल, नॉर्मलाइज़ेशन और एसक्यूएल (ER Model, Normalization & SQL)",
+  "difficulty_level": 2,
+  "introduction": "इस स्तर पर हम डेटाबेस को डिज़ाइन करना (ER Model), डेटा में होने वाली विसंगतियों (Anomalies) को दूर करना (Normalization), और डेटाबेस से बात करने की भाषा (SQL) का अध्ययन करेंगे।",
+  "core_concepts": [
+    {
+      "title": "सामान्यीकरण (Normalization)",
+      "description": "डेटा रिडंडेंसी (डुप्लीकेसी) को कम करने की प्रक्रिया:\n1. **1NF (First Normal Form):** सभी एट्रिब्यूट्स एटॉमिक (Atomic / अविभाज्य) होने चाहिए। (कोई मल्टी-वैल्यूड एट्रिब्यूट नहीं)।\n2. **2NF:** 1NF में होना चाहिए + **आंशिक निर्भरता (Partial Dependency)** नहीं होनी चाहिए (अर्थात नॉन-प्राइम एट्रिब्यूट पूरी कैंडिडेट की पर निर्भर होना चाहिए, केवल उसके एक हिस्से पर नहीं)।\n3. **3NF:** 2NF में होना चाहिए + **सकर्मक निर्भरता (Transitive Dependency)** नहीं होनी चाहिए (नॉन-प्राइम एट्रिब्यूट, दूसरे नॉन-प्राइम एट्रिब्यूट पर निर्भर नहीं होना चाहिए)।\n4. **BCNF (Boyce-Codd NF):** 3NF से अधिक सख्त। हर डिपेंडेंसी $X \\rightarrow Y$ के लिए, $X$ को एक सुपर की होना चाहिए।"
+    },
+    {
+      "title": "SQL कमांड्स के प्रकार (Types of SQL Commands)",
+      "description": "1. **DDL (Data Definition Language):** डेटाबेस की संरचना (Structure) को परिभाषित करता है। (उदा: CREATE, ALTER, DROP, TRUNCATE)।\n2. **DML (Data Manipulation Language):** डेटा को प्रबंधित करता है। (उदा: INSERT, UPDATE, DELETE)।\n3. **DCL (Data Control Language):** सुरक्षा और अनुमति। (उदा: GRANT, REVOKE)।\n4. **TCL (Transaction Control):** लेनदेन को प्रबंधित करता है। (उदा: COMMIT, ROLLBACK)।"
+    }
+  ],
+  "important_entities": [
+    {
+      "name": "TRUNCATE बनाम DELETE",
+      "key_fact": "टेबल खाली करना",
+      "significance": "दोनों का उपयोग डेटा को हटाने के लिए होता है, लेकिन **DELETE** एक DML कमांड है (इसे ROLLBACK किया जा सकता है, और यह WHERE क्लॉज के साथ काम करता है)। **TRUNCATE** एक DDL कमांड है (यह बहुत तेज़ है, पूरी टेबल खाली कर देता है, और इसे ROLLBACK नहीं किया जा सकता)।"
+    }
+  ],
+  "trap_alerts_and_exceptions": [
+    {
+      "alert_title": "DROP कमांड का प्रभाव",
+      "explanation": "परीक्षा का जाल: DROP और TRUNCATE में क्या अंतर है? TRUNCATE केवल डेटा (Rows) को हटाता है, टेबल का ढांचा (Structure) बचा रहता है। **DROP** टेबल के डेटा के साथ-साथ उसकी पूरी संरचना (Schema) को भी डेटाबेस से हमेशा के लिए नष्ट कर देता है।"
+    }
+  ],
+  "mnemonics_and_tricks": [
+    {
+      "trick_title": "नॉर्मलाइज़ेशन याद रखने की ट्रिक",
+      "memory_phrase": "Key, Whole Key, Nothing But the Key",
+      "explanation": "1NF: The Key (प्राइमरी की होनी चाहिए)।\n2NF: The Whole Key (पूरी की पर निर्भरता, आंशिक नहीं)।\n3NF: Nothing But the Key (केवल की पर निर्भरता, किसी अन्य नॉन-प्राइम एट्रिब्यूट पर नहीं)।"
+    }
+  ],
+  "exam_strategy_tips": [
+    "GATE और ISRO का फेवरेट प्रश्न: 'कौन सा नॉर्मल फॉर्म ट्रांजिटिव डिपेंडेंसी (Transitive Dependency) को हटाता है?' उत्तर: 3NF."
+  ]
+}

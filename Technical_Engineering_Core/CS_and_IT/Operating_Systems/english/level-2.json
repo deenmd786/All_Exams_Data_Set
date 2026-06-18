@@ -1,0 +1,454 @@
+﻿
+
+[
+  {
+    "id": 1,
+    "question": "Consider the following statements regarding CPU scheduling: Statement 1: Shortest Job First (SJF) scheduling always provides the mathematically minimum average waiting time for any given set of stationary processes. Statement 2: In Round Robin scheduling, as the time quantum grows towards infinity, the performance asymptotically approaches First-Come First-Served (FCFS) scheduling. Which of the following is correct?",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both Statement 1 and Statement 2 are true", "Neither Statement 1 nor Statement 2 is true"],
+    "answer": "Both Statement 1 and Statement 2 are true",
+    "explanation": "Statement 1 is true because executing the shortest burst time first minimizes the accumulation of waiting time for subsequent tasks. Statement 2 is true because if the time quantum is larger than the longest burst time, no process is preempted, making it behave exactly like FCFS.",
+    "trick": "Trap: Watch out for 'stationary' or 'simultaneous' arrival conditions in SJF statements. Non-preemptive SJF might fail if arrival times vary, but for simultaneous arrivals, it is always optimal.",
+    "tip": "SJF gives minimum average waiting time. Large RR quantum equals FCFS."
+  },
+  {
+    "id": 2,
+    "question": "Match the memory management concepts with their distinct structural fragmentation profiles: List I: [P. Paging, Q. Segmentation, R. Dynamic Contiguous Partitioning] List II: [1. Suffers strictly from External Fragmentation, 2. Suffers strictly from Internal Fragmentation, 3. Suffers from External Fragmentation due to alternating allocations and deallocations]. Which is the correct combination?",
+    "options": ["P-2, Q-1, R-3", "P-1, Q-2, R-3", "P-2, Q-3, R-1", "P-3, Q-1, R-2"],
+    "answer": "P-2, Q-1, R-3",
+    "explanation": "Paging splits physical memory into fixed-size frames, which creates internal fragmentation within the final allocated page. Segmentation allocates variable-sized blocks based on logical segments, leaving external gaps between memory blocks. Dynamic partitioning continuously segments physical memory, accumulating unallocated external fragments over time.",
+    "trick": "Trap: Do not mix up fragmentation types. Use the PI and SE acronyms: Paging = Internal (PI), and Segmentation = External (SE).",
+    "tip": "Paging causes internal fragmentation. Segmentation causes external fragmentation."
+  },
+  {
+    "id": 3,
+    "question": "Consider three processes P1, P2, and P3 with arrival times 0ms, 1ms, and 2ms, and CPU burst times 6ms, 4ms, and 2ms respectively. If the system uses Shortest Remaining Time First (SRTF) scheduling, what is the average turnaround time for these processes?",
+    "options": ["7.33 ms", "6.33 ms", "5.00 ms", "5.66 ms"],
+    "answer": "6.33 ms",
+    "explanation": "At time t=0, P1 arrives with burst 6. At t=1, P2 arrives with burst 4. P1 remaining is 5, so P2 preempts P1. At t=2, P3 arrives with burst 2. P2 remaining is 3, so P3 preempts P2. P3 finishes at t=4. P2 resumes and finishes at t=7. P1 resumes and finishes at t=12. Turnaround times: P1 = 12-0 = 12ms; P2 = 7-1 = 6ms; P3 = 4-2 = 2ms. Average Turnaround Time = (12 + 6 + 2) / 3 = 20 / 3 = 6.33 ms.",
+    "trick": "Trap: Remember that Turnaround Time is Completion Time minus Arrival Time, not Completion Time alone.",
+    "tip": "TAT = Completion Time - Arrival Time. Track remaining burst times at each step."
+  },
+  {
+    "id": 4,
+    "question": "Consider the following statements regarding Coffman conditions for deadlocks: Statement 1: The 'Hold and Wait' condition implies a process must be holding at least one resource while waiting to acquire additional resources. Statement 2: The four conditions (Mutual Exclusion, Hold and Wait, No Preemption, and Circular Wait) must occur concurrently for a deadlock to happen. Which of the following is correct?",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both Statements are true", "Neither Statement is true"],
+    "answer": "Both Statements are true",
+    "explanation": "All four Coffman conditions are strictly necessary and must exist simultaneously for a deadlock state to manifest within a system. If even one condition is prevented, a deadlock cannot occur.",
+    "trick": "Trap: Do not confuse 'necessary' with 'sufficient'. The conditions are necessary for deadlock, but their presence does not guarantee an immediate active lock unless a resource bottleneck occurs.",
+    "tip": "All four Coffman conditions must hold simultaneously for a deadlock."
+  },
+  {
+    "id": 5,
+    "question": "A system has three processes (P1, P2, P3) and a single resource type with 10 total instances. The current state is: P1 holds 3, needs 4 more; P2 holds 2, needs 1 more; P3 holds 2, needs 4 more. Using the Banker's Algorithm, determine if the system is safe, and find the correct execution sequence.",
+    "options": ["Unsafe state, no valid sequence", "Safe state with sequence: P2, P1, P3", "Safe state with sequence: P2, P3, P1", "Safe state with sequence: P1, P2, P3"],
+    "answer": "Safe state with sequence: P2, P1, P3",
+    "explanation": "Total allocated instances = 3 + 2 + 2 = 7. Available instances = 10 - 7 = 3. P2 requires 1 more instance, which is less than or equal to the available 3. P2 executes, finishes, and releases its resources. New Available = 3 + 2 = 5. Now P1 requires 4 more, which is less than or equal to 5. P1 executes and finishes. New Available = 5 + 3 = 8. Finally, P3 executes. The system is safe with sequence P2, P1, P3.",
+    "trick": "Trap: Ensure you subtract allocated resources from total resources to find the correct initial 'Available' count.",
+    "tip": "Available resources grow as each process completes successfully."
+  },
+  {
+    "id": 6,
+    "question": "A system utilizes a 32-bit virtual address space with a 4 KB page size. If each page table entry (PTE) requires exactly 4 bytes of storage, what is the total size of a single-level page table?",
+    "options": ["4 MB", "1 MB", "2 MB", "8 MB"],
+    "answer": "4 MB",
+    "explanation": "Number of pages = Virtual Address Space / Page Size = 2^32 / 2^12 = 2^20 pages. Total size of the single-level page table = Number of pages * Size of each PTE = 2^20 * 4 bytes = 4 MB.",
+    "trick": "Shortcut: Logarithmic subtraction makes this easy: 32 (address bits) - 12 (page offset bits) = 20 bits for the page number. 2^20 elements * 2^2 bytes = 2^22 bytes = 4 MB.",
+    "tip": "Page Table Size = (Total Pages) * (Page Table Entry Size)."
+  },
+  {
+    "id": 7,
+    "question": "Match the CPU scheduling terms with their performance behaviors: List I: [P. Convoy Effect, Q. Starvation, R. Priority Inversion] List II: [1. High-priority task blocked by low-priority task holding a lock, 2. Long processes block short processes in FCFS, 3. Low-priority processes wait indefinitely in strict priority scheduling]. Which is the correct combination?",
+    "options": ["P-2, Q-3, R-1", "P-1, Q-2, R-3", "P-2, Q-1, R-3", "P-3, Q-2, R-1"],
+    "answer": "P-2, Q-3, R-1",
+    "explanation": "The Convoy Effect occurs in FCFS when short processes wait behind a long, CPU-bound process. Starvation happens in priority scheduling when higher-priority tasks continually arrive, preventing lower-priority tasks from executing. Priority Inversion happens when a low-priority task holds a resource needed by a high-priority task, often while a medium-priority task preempts the low-priority one.",
+    "trick": "Trap: Priority Inversion requires three tasks of different priorities to manifest. It is not a simple starvation problem.",
+    "tip": "Convoy is FCFS. Starvation is Priority. Inversion involves resource locks."
+  },
+  {
+    "id": 8,
+    "question": "Consider a paging system equipped with an inverted page table. Statement 1: The size of an inverted page table is proportional to the size of physical memory rather than the virtual address space. Statement 2: Inverted page tables completely eliminate internal fragmentation. Which of the following is correct?",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both Statements are true", "Neither Statement is true"],
+    "answer": "Only Statement 1 is true",
+    "explanation": "Statement 1 is true because an inverted page table contains exactly one entry per physical frame, meaning its size scales with physical memory. Statement 2 is false because inverted page tables still use fixed-size pages, which means they still suffer from internal fragmentation.",
+    "trick": "Trap: Do not assume that 'inverted' changes how a frame stores data. It only modifies the look-up tracking architecture, not the allocation boundary.",
+    "tip": "Inverted page tables scale with physical frames but still have internal fragmentation."
+  },
+  {
+    "id": 9,
+    "question": "In a Round Robin scheduling environment, if the context switch time is denoted by 'S' and the time quantum allocation is denoted by 'q', what condition causes the CPU efficiency to drop below 50%?",
+    "options": ["q > S", "q = S", "q < S", "q = 2S"],
+    "answer": "q < S",
+    "explanation": "CPU efficiency is calculated as Useful Work / Total Time = q / (q + S). For this efficiency to fall below 50%, the time spent on context switching must exceed the useful work time, meaning S > q, or q < S.",
+    "trick": "Shortcut: Set the efficiency equation to less than 0.5: q/(q+S) < 0.5 implies q < 0.5q + 0.5S, which simplifies to 0.5q < 0.5S, or q < S.",
+    "tip": "Context switch overhead dominates when the time quantum is very small."
+  },
+  {
+    "id": 10,
+    "question": "Consider a system with 4 processes and a single resource type with 'm' identical instances. If each process requires a maximum of 3 instances of this resource, what is the minimum value of 'm' that guarantees the system will never experience a deadlock?",
+    "options": ["9", "12", "8", "13"],
+    "answer": "9",
+    "explanation": "To find the maximum safe resource boundary, use the formula: sum(Max_Need_i) - n + 1, where n is the number of processes. Here, we calculate: (3 + 3 + 3 + 3) - 4 + 1 = 12 - 4 + 1 = 9 instances.",
+    "trick": "Shortcut: To cause a worst-case deadlock, give each process one less instance than its maximum need: 4 processes * (3 - 1) = 8 instances. Adding just 1 more instance breaks the deadlock loop, so m = 9.",
+    "tip": "Minimum resources to avoid deadlock = n * (MaxNeed - 1) + 1."
+  },
+  {
+    "id": 11,
+    "question": "Statement 1: Multilevel Feedback Queue (MLFQ) scheduling requires prior knowledge of a process's total CPU burst time to perform optimally. Statement 2: MLFQ dynamically adjusts a process's priority based on its execution history and behavior. Evaluate the correctness of these statements.",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both statements are true", "Neither statement is true"],
+    "answer": "Only Statement 2 is true",
+    "explanation": "Statement 1 is false because MLFQ is specifically designed to work without knowing a process's burst time in advance. It dynamically evaluates tasks as they run. Statement 2 is true because MLFQ lowers the priority of CPU-bound processes and raises the priority of I/O-bound processes based on their time quantum utilization.",
+    "trick": "Trap: Shortest Job First requires explicit burst time prediction, but MLFQ handles unknown workloads by adapting dynamically.",
+    "tip": "MLFQ learns process behavior over time without needing explicit burst predictions."
+  },
+  {
+    "id": 12,
+    "question": "A logical segment of a program is mapped to a physical address using a segmentation table. If the segment base address is 0x2000, the segment limit is 0x0500, and the logical address offset is 0x04A0, what is the resulting physical address?",
+    "options": ["0x24A0", "0x2500", "0x2000", "Trap condition: Segment Fault occurs"],
+    "answer": "0x24A0",
+    "explanation": "Step 1: Check if the offset is valid by verifying if Offset < Limit. Here, 0x04A0 < 0x0500, which is true. Step 2: Compute the physical address by adding the base to the offset: 0x2000 + 0x04A0 = 0x24A0.",
+    "trick": "Trap: Always check the limit first. If the offset is greater than or equal to the limit, the operation will trigger a segmentation fault.",
+    "tip": "Physical Address = Base + Offset, provided Offset < Limit."
+  },
+  {
+    "id": 13,
+    "question": "Match the Deadlock Management Strategies with their operational mechanics: List I: [P. Deadlock Prevention, Q. Deadlock Avoidance, R. Deadlock Detection] List II: [1. Employs the Banker's Algorithm to maintain a safe state, 2. Uses a Wait-For Graph to identify cycles, 3. Eliminates one of the four Coffman conditions structurally]. Which is the correct match?",
+    "options": ["P-3, Q-1, R-2", "P-1, Q-2, R-3", "P-2, Q-3, R-1", "P-3, Q-2, R-1"],
+    "answer": "P-3, Q-1, R-2",
+    "explanation": "Deadlock prevention breaks the structural requirements of deadlock, such as disabling 'hold and wait'. Deadlock avoidance uses current resource needs and availability to bypass unsafe states. Deadlock detection allows deadlocks to occur, then identifies them by searching for loops in a Wait-For Graph.",
+    "trick": "Prevention works statically before resource allocation; Avoidance works dynamically during execution.",
+    "tip": "Prevention breaks conditions. Avoidance tracks safe states. Detection spots active cycles."
+  },
+  {
+    "id": 14,
+    "question": "A paging system uses a Translation Lookaside Buffer (TLB) with a hit ratio of 80%. If a TLB lookup takes 20 ns and a primary memory access takes 100 ns, what is the effective memory access time (EMAT)?",
+    "options": ["140 ns", "120 ns", "180 ns", "220 ns"],
+    "answer": "140 ns",
+    "explanation": "Formula for Effective Memory Access Time: EMAT = Hit_Ratio * (TLB_Time + Memory_Time) + (1 - Hit_Ratio) * (TLB_Time + 2 * Memory_Time). Plugging in the values: 0.80 * (20 + 100) + 0.20 * (20 + 200) = 0.80 * 120 + 0.20 * 220 = 96 + 44 = 140 ns.",
+    "trick": "Trap: Remember that a TLB miss requires two memory accesses: one to read the page table entry and another to read the actual data.",
+    "tip": "EMAT = Hit*(TLB + Mem) + Miss*(TLB + 2*Mem)."
+  },
+  {
+    "id": 15,
+    "question": "Consider a system running five processes under First-Come First-Served (FCFS) scheduling. If all processes arrive simultaneously at time t=0 in a specific order, which performance characteristic is guaranteed?",
+    "options": ["The average waiting time is minimized", "The system throughput is maximized", "The turnaround time of the last process matches the sum of all burst times", "No context switching overhead occurs between any processes"],
+    "answer": "The turnaround time of the last process matches the sum of all burst times",
+    "explanation": "Because FCFS runs without idle time when tasks are ready, the final process will finish exactly when the total workload is complete. This means its completion time (and turnaround time, since arrival is 0) equals the sum of all burst times.",
+    "trick": "Trap: Simultaneous arrival does not mean the average waiting time is minimized; that only happens if the processes are sorted by shortest burst time first.",
+    "tip": "The total execution time for non-preemptive workloads equals the sum of all bursts."
+  },
+  {
+    "id": 16,
+    "question": "Statement 1: A system in an unsafe state will immediately experience a deadlock. Statement 2: A safe state guarantees that at least one deadlock-free allocation sequence exists for all current processes. Evaluate these statements.",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both statements are true", "Neither statement is true"],
+    "answer": "Only Statement 2 is true",
+    "explanation": "Statement 1 is false because an unsafe state means there is a risk of deadlock, but it is not guaranteed. A deadlock only happens if processes actually request their maximum resources in an unfavorable order. Statement 2 is true because a safe state means the system has verified a valid path for all processes to finish without locking up.",
+    "trick": "Unsafe state does not equal deadlock; it simply means the system cannot guarantee avoidance if maximum demands are made.",
+    "tip": "Safe implies deadlock-free. Unsafe implies a risk of deadlock, not a certainty."
+  },
+  {
+    "id": 17,
+    "question": "A system uses 16 KB pages and a 48-bit virtual address space. How many bits are allocated for the page number, and how many are allocated for the page offset?",
+    "options": ["34 bits for page number, 14 bits for offset", "32 bits for page number, 16 bits for offset", "36 bits for page number, 12 bits for offset", "30 bits for page number, 18 bits for offset"],
+    "answer": "34 bits for page number, 14 bits for offset",
+    "explanation": "Page size = 16 KB = 2^14 bytes, which requires 14 bits for the page offset. The remaining bits in the 48-bit virtual address are used for the page number: 48 - 14 = 34 bits.",
+    "trick": "Shortcut: Convert the page size to a power of 2 to find the offset bits: 16 KB = 16 * 1024 = 16384 = 2^14, so the offset is 14 bits.",
+    "tip": "Offset Bits = log2(Page Size). Page Bits = Total Bits - Offset Bits."
+  },
+  {
+    "id": 18,
+    "question": "Which CPU scheduling algorithm can result in starvation for longer processes but guarantees optimal average waiting times?",
+    "options": ["First-Come First-Served", "Round Robin with a small quantum", "Preemptive Shortest Job First (SRTF)", "Highest Response Ratio Next (HRRN)"],
+    "answer": "Preemptive Shortest Job First (SRTF)",
+    "explanation": "SRTF minimizes average waiting times by always prioritizing the job closest to completion. However, if short processes continuously arrive, longer processes will be repeatedly preempted and starve.",
+    "trick": "Trap: HRRN prevents starvation by factoring age into its priority equation, but it does not guarantee the minimum average waiting time like SRTF.",
+    "tip": "SRTF is mathematically optimal for waiting times but can cause process starvation."
+  },
+  {
+    "id": 19,
+    "question": "Consider a resource allocation graph containing a cycle. Statement 1: If all resource types have only a single instance, the cycle indicates a deadlock. Statement 2: If any resource type has multiple instances, the cycle does not guarantee a deadlock. Which of the following is correct?",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both Statements are true", "Neither Statement is true"],
+    "answer": "Both Statements are true",
+    "explanation": "In a single-instance resource graph, a cycle is a necessary and sufficient condition for a deadlock. In a multi-instance resource graph, a cycle is necessary but not sufficient, because an external instance could be released to break the loop.",
+    "trick": "Single instance cycle = Deadlock confirmed. Multi-instance cycle = Deadlock possible but not guaranteed.",
+    "tip": "Cycles guarantee deadlocks only when all resources have a single instance."
+  },
+  {
+    "id": 20,
+    "question": "A paging system maps logical addresses using a page table stored in main memory. If a memory access takes 80 ns, and the system does not use a TLB, how long does it take to fetch an instruction from memory?",
+    "options": "160 ns",
+    "answer": "160 ns",
+    "explanation": "Without a TLB, every logical memory access requires two separate trips to main memory: the first access reads the page table to get the physical frame address, and the second access reads the actual data. Total Time = 80 ns + 80 ns = 160 ns.",
+    "trick": "Trap: Do not assume that page lookup is free. Without a TLB cache, the page table lookup requires a full memory access cycle.",
+    "tip": "No TLB means memory access time is doubled."
+  },
+  {
+    "id": 21,
+    "question": "Match the following memory allocation techniques with their corresponding fragmentation characteristics: List I: [P. Fixed-size Partitioning, Q. Segmentation, R. Compaction] List II: [1. Completely eliminates External Fragmentation by shifting memory contents, 2. Suffers from Internal Fragmentation within static zones, 3. Leaves dynamic External gaps between logical segments]. Which is correct?",
+    "options": ["P-2, Q-3, R-1", "P-1, Q-2, R-3", "P-2, Q-1, R-3", "P-3, Q-2, R-1"],
+    "answer": "P-2, Q-3, R-1",
+    "explanation": "Fixed partitioning uses static boundaries that cause internal fragmentation when programs do not fill the slot. Segmentation uses variable-sized blocks that leave external gaps between allocations. Compaction moves memory contents to group all free blocks together, eliminating external fragmentation.",
+    "trick": "Compaction is a solution for external fragmentation, but it requires significant CPU overhead to copy memory.",
+    "tip": "Compaction removes external gaps by rearranging allocated blocks in memory."
+  },
+  {
+    "id": 22,
+    "question": "Consider three processes executing under a Priority Scheduling algorithm. Process P1 (Priority 3) arrives at t=0 with burst 5. P2 (Priority 1, highest) arrives at t=2 with burst 2. P3 (Priority 2) arrives at t=3 with burst 3. If scheduling is preemptive, what is the completion time of P1?",
+    "options": ["10 ms", "5 ms", "7 ms", "9 ms"],
+    "answer": "10 ms",
+    "explanation": "From t=0 to t=2, P1 executes (3ms remaining). At t=2, P2 arrives with higher priority and preempts P1. P2 runs for 2ms, finishing at t=4. At t=4, P3 (Priority 2) and P1 (Priority 3) are ready. P3 runs for 3ms, finishing at t=7. Finally, P1 resumes at t=7 and runs for its remaining 3ms, completing at t=10.",
+    "trick": "Track the timeline carefully: higher-priority tasks preempt lower-priority ones immediately upon arrival.",
+    "tip": "Preemptive priority scheduling switches tasks immediately when a higher priority arrives."
+  },
+  {
+    "id": 23,
+    "question": "In the context of deadlock avoidance, what is the primary difference between the Resource-Allocation Graph scheme and the Banker's Algorithm?",
+    "options": ["Banker's Algorithm is used for single-instance resource types", "Resource-Allocation Graph is only applicable to multi-instance resource types", "Resource-Allocation Graph works only for single-instance resource types, while Banker's scales to multi-instance resources", "Banker's Algorithm operates entirely offline before process creation"],
+    "answer": "Resource-Allocation Graph works only for single-instance resource types, while Banker's scales to multi-instance resources",
+    "explanation": "The Resource-Allocation Graph uses cycle detection via claim edges, which only works reliably for single-instance resources. The Banker's Algorithm uses matrix arrays to track and verify safety across multi-instance resource systems.",
+    "trick": "Trap: Graphs cannot easily show deadlocks with multi-instance resources because a cycle does not guarantee a locked state.",
+    "tip": "Use graphs for single-instance resources; use Banker's for multi-instance resources."
+  },
+  {
+    "id": 24,
+    "question": "A 32-bit virtual address system uses two-level paging. The virtual address is divided into a 10-bit outer page directory, a 10-bit inner page table, and a 12-bit page offset. What is the total number of bytes in a physical page frame?",
+    "options": ["4 KB", "2 KB", "1 MB", "4 MB"],
+    "answer": "4 KB",
+    "explanation": "The size of a page frame is determined entirely by the number of bits in the page offset. With a 12-bit offset, the frame size is 2^12 bytes = 4096 bytes = 4 KB.",
+    "trick": "Shortcut: Ignore the directory and table bits if you only need the page size. The offset bits give the answer directly: 2^12 = 4 KB.",
+    "tip": "Page offset bits determine the size of the physical frame."
+  },
+  {
+    "id": 25,
+    "question": "Statement 1: Highest Response Ratio Next (HRRN) scheduling is non-preemptive and balances short jobs and long jobs. Statement 2: The response ratio increases as a process waits, preventing starvation. Which of the following is correct?",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both Statements are true", "Neither Statement is true"],
+    "answer": "Both Statements are true",
+    "explanation": "HRRN calculates priority using the formula: (Waiting Time + Burst Time) / Burst Time. As waiting time increases, the response ratio grows, ensuring that long-waiting processes eventually get prioritized to prevent starvation.",
+    "trick": "Shortcut: The response ratio formula can be rewritten as 1 + (Waiting Time / Burst Time). This shows that priority grows over time even for large burst values.",
+    "tip": "HRRN balances tasks and avoids starvation using a time-weighted response ratio."
+  },
+  {
+    "id": 26,
+    "question": "A system has 3 instances of resource R1, 2 instances of R2, and 4 instances of R3. Process P1 needs a maximum of (2, 2, 2) and currently holds (1, 0, 1). Can a new allocation request for (1, 1, 1) by P1 be granted immediately if it is the only active process?",
+    "options": ["Yes, because it is within available limits and maintains a safe state", "No, because it exceeds available system resources", "No, because it violates the process's declared maximum need", "Yes, but it immediately triggers a deadlock condition"],
+    "answer": "No, because it violates the process's declared maximum need",
+    "explanation": "P1 currently holds (1, 0, 1) and has a maximum need of (2, 2, 2). Its remaining need is (2-1, 2-0, 2-1) = (1, 2, 1). The request is (1, 1, 1). This matches the available resources but let's check the total allocation: if P1 holds (1,0,1) and requests (1,1,1), its total allocation would become (2,1,2). This is safe. Let's re-verify available resource limits: total instances are (3,2,4). If P1 holds (1,0,1), available instances are (2,2,3). The request for (1,1,1) is less than the available resources, so it can be granted safely.",
+    "trick": "Trap: Always check both the process's remaining need and the system's available resources before granting a Banker's allocation.",
+    "tip": "Requests are granted if they are within remaining needs and available resources."
+  },
+  {
+    "id": 27,
+    "question": "Consider a system with a multi-level page table setup. Statement 1: Multi-level page tables reduce the total memory required to store page tables for partially filled address spaces. Statement 2: Multi-level page tables decrease the total number of memory accesses required to resolve a logical address. Evaluate these statements.",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both statements are true", "Neither statement is true"],
+    "answer": "Only Statement 1 is true",
+    "explanation": "Statement 1 is true because multi-level paging allows the system to omit page tables for unallocated address spaces. Statement 2 is false because adding tiers to the page table hierarchy increases the number of lookups needed to resolve an address.",
+    "trick": "Multi-level paging saves memory space but introduces a time penalty by requiring more lookups.",
+    "tip": "Multi-level paging trades lookup speed to save memory space."
+  },
+  {
+    "id": 28,
+    "question": "Two processes, A and B, are running in a system using Round Robin scheduling with a time quantum of 4ms. Process A has a burst time of 10ms and Process B has a burst time of 3ms. Both arrive at time t=0. What is the total number of context switches required to finish both jobs?",
+    "options": ["3", "4", "2", "5"],
+    "answer": "3",
+    "explanation": "Timeline: t=0 to t=4: Process A runs (6ms remaining). Context Switch 1 happens to switch to B. t=4 to t=7: Process B runs and completes. Context Switch 2 happens to switch back to A. t=7 to t=11: Process A runs (2ms remaining). Context Switch 3 happens as the quantum expires. t=11 to t=13: Process A runs and completes. Total context switches between the processes = 3.",
+    "trick": "Trap: Count context switches carefully. Do not count the initial start or the final exit unless explicitly asked by the problem.",
+    "tip": "Track the timeline to count context switches as one process replaces another."
+  },
+  {
+    "id": 29,
+    "question": "Match the following memory management terms with their operational definitions: List I: [P. Page Table Base Register (PTBR), Q. Frame Table, R. Segment Table] List II: [1. Tracks the allocation status of all physical memory frames, 2. Points directly to the start of the page table in physical memory, 3. Contains base and limit data for logical segments]. Which match is correct?",
+    "options": ["P-2, Q-1, R-3", "P-1, Q-2, R-3", "P-2, Q-3, R-1", "P-3, Q-1, R-2"],
+    "answer": "P-2, Q-1, R-3",
+    "explanation": "The PTBR holds the physical memory address of the root page table. The Frame Table is a global system structure that tracks whether physical memory frames are free or allocated. The Segment Table stores the base address and length limit for each logical segment.",
+    "trick": "Registers hold pointer base links, while tables store individual mapping rows.",
+    "tip": "PTBR holds the table address; frame tables track physical memory allocation."
+  },
+  {
+    "id": 30,
+    "question": "A deadlock avoidance system evaluates a request. If the system determines that granting the resource request leads to an unsafe state, what action does the OS take?",
+    "options": ["The process is terminated immediately", "The request is denied, and the process is suspended until it can be safely granted", "The system enters a deadlock recovery routine", "The resource is preempted from another running process"],
+    "answer": "The request is denied, and the process is suspended until it can be safely granted",
+    "explanation": "In deadlock avoidance, if a request leads to an unsafe state, the system delays granting the resource. The process is placed in a wait state until other tasks release enough resources to make the allocation safe.",
+    "trick": "Avoidance does not kill processes; it simply delays requests to keep the system in a safe state.",
+    "tip": "Unsafe requests are delayed to maintain system stability."
+  },
+  {
+    "id": 31,
+    "question": "Consider a system with a 36-bit physical address space and a 32-bit virtual address space. If the page size is 8 KB, how many entries are required in a standard single-level page table, and how many bits are used for the physical frame number?",
+    "options": ["2^19 entries, 23 bits", "2^20 entries, 24 bits", "2^19 entries, 24 bits", "2^20 entries, 23 bits"],
+    "answer": "2^19 entries, 23 bits",
+    "explanation": "Page size = 8 KB = 2^13 bytes, so the offset is 13 bits. Page table entries = Virtual Address Space / Page Size = 2^32 / 2^13 = 2^19 entries. Physical frame bits = Physical Address Bits - Offset Bits = 36 - 13 = 23 bits.",
+    "trick": "Shortcut: Logarithmic subtraction handles this easily: Entries = 32 - 13 = 19 bits (2^19 entries). Frame Bits = 36 - 13 = 23 bits.",
+    "tip": "Page entries depend on virtual address space. Frame bits depend on physical address space."
+  },
+  {
+    "id": 32,
+    "question": "Which of the following CPU scheduling algorithms is non-preemptive by definition?",
+    "options": ["Round Robin", "Shortest Remaining Time First (SRTF)", "First-Come First-Served (FCFS)", "Multilevel Feedback Queue"],
+    "answer": "First-Come First-Served (FCFS)",
+    "explanation": "FCFS is inherently non-preemptive. Once a process gets the CPU, it keeps it until it either finishes or blocks for I/O. Round Robin, SRTF, and MLFQ use clock ticks or event arrivals to preempt running tasks.",
+    "trick": "Trap: Standard SJF can be non-preemptive, but SRTF is explicitly preemptive. FCFS is always structurally non-preemptive.",
+    "tip": "FCFS cannot preempt a running process."
+  },
+  {
+    "id": 33,
+    "question": "Statement 1: A process can be allocated non-contiguous frames in physical memory under a paging architecture. Statement 2: Paging requires the programmer to explicitly manage logical memory blocks during code compilation. Evaluate these statements.",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both statements are true", "Neither statement is true"],
+    "answer": "Only Statement 1 is true",
+    "explanation": "Statement 1 is true because paging decouples logical addresses from physical locations, allowing frames to be scattered across physical memory. Statement 2 is false because paging is handled entirely by the hardware and operating system, making it completely invisible to the programmer.",
+    "trick": "Paging is a hardware-driven memory abstraction that is transparent to the user application.",
+    "tip": "Paging is automatic and maps non-contiguous physical memory frames transparently."
+  },
+  {
+    "id": 34,
+    "question": "A system contains 3 identical instances of a resource type. There are 'n' processes, and each process requires at most 2 instances. What is the maximum number of processes the system can support without risking a deadlock?",
+    "options": ["2", "3", "4", "1"],
+    "answer": "2",
+    "explanation": "Using the deadlock prevention formula: sum(Max_Need_i) - n + 1 <= m. Here, each process needs 2 instances, so: 2n - n + 1 <= 3, which simplifies to n + 1 <= 3, or n <= 2 processes.",
+    "trick": "Shortcut: To cause a worst-case deadlock, give each process one less instance than its maximum need: 2 processes * (2 - 1) = 2 instances. Adding 1 more process would require 3 instances total, which uses up all resources and causes a deadlock. Therefore, the system can safely support at most 2 processes.",
+    "tip": "To prevent deadlock, ensure total allocated instances in the worst case is less than available resources."
+  },
+  {
+    "id": 35,
+    "question": "Consider a system using a Translation Lookaside Buffer (TLB). If a page translation is found in the TLB (a TLB hit), how many memory accesses are required to read the data value from physical memory?",
+    "options": ["1", "2", "0", "3"],
+    "answer": "1",
+    "explanation": "When a TLB hit occurs, the hardware reads the physical frame number directly from the high-speed TLB cache. The system then makes a single access to main memory to read the actual data value.",
+    "trick": "Trap: A TLB miss requires 2 memory accesses, but a TLB hit bypasses the main memory page table entirely, requiring only 1 access.",
+    "tip": "A TLB hit requires exactly one access to main memory."
+  },
+  {
+    "id": 36,
+    "question": "Match the following CPU scheduling optimization goals with their definitions: List I: [P. Turnaround Time, Q. Throughput, R. Response Time] List II: [1. The number of completed processes per unit of time, 2. The total time from process submission to its completion, 3. The time from submission to the first observed output or execution step]. Which match is correct?",
+    "options": ["P-2, Q-1, R-3", "P-1, Q-2, R-3", "P-2, Q-3, R-1", "P-3, Q-1, R-2"],
+    "answer": "P-2, Q-1, R-3",
+    "explanation": "Turnaround time measures the complete life span of a process in the system. Throughput counts how many tasks finish per time unit. Response time tracks how quickly a process starts running after submission.",
+    "trick": "Trap: Do not confuse Response Time with Waiting Time. Response time only measures the delay until execution begins, not the total idle time.",
+    "tip": "Throughput is a rate. Turnaround is a duration. Response is an initial delay."
+  },
+  {
+    "id": 37,
+    "question": "In a page-based virtual memory system, when does a page fault occur?",
+    "options": ["When the page table entry is corrupt", "When a process attempts to access a page whose valid-invalid bit is set to invalid, indicating it is not currently loaded into physical memory", "When the TLB cache becomes completely full", "When a process references an out-of-bounds segment offset"],
+    "answer": "When a process attempts to access a page whose valid-invalid bit is set to invalid, indicating it is not currently loaded into physical memory",
+    "explanation": "A page fault is a hardware interrupt triggered when a process references a virtual address whose page is not currently mapped into physical RAM. This status is indicated by an 'invalid' bit in the page table entry.",
+    "trick": "Page faults are normal virtual memory events handled by loading the missing page from disk, not application errors.",
+    "tip": "An invalid bit in the page table triggers a page fault interrupt."
+  },
+  {
+    "id": 38,
+    "question": "Statement 1: Disabling interrupts is an effective way to implement CPU scheduling preemption in a symmetric multiprocessing (SMP) core environment. Statement 2: Preemptive scheduling algorithms can introduce race conditions if shared kernel structures are accessed concurrently. Evaluate these statements.",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both statements are true", "Neither statement is true"],
+    "answer": "Only Statement 2 is true",
+    "explanation": "Statement 1 is false because disabling interrupts on one core does not prevent other cores in an SMP system from accessing shared data. Statement 2 is true because preemptive scheduling can interrupt a process while it is modifying shared structures, potentially causing data corruption unless protected by locks.",
+    "trick": "Disabling interrupts only works reliably on single-core systems; multi-core architectures require advanced tools like spinlocks.",
+    "tip": "Symmetric multiprocessing requires explicit locking mechanisms to prevent race conditions."
+  },
+  {
+    "id": 39,
+    "question": "A system has 12 resource units of a single type shared among 3 processes with maximum requirements of 5, 6, and 7 units respectively. What is the state of the system if the current allocations are 3, 3, and 4 units?",
+    "options": ["Safe state", "Unsafe state", "Deadlocked state", "Throttled state"],
+    "answer": "Safe state",
+    "explanation": "Total allocated units = 3 + 3 + 4 = 10 units. Available units = 12 - 10 = 2 units. The remaining needs for the processes are: P1 = 5 - 3 = 2; P2 = 6 - 3 = 3; P3 = 7 - 4 = 3. P1 requires 2 units, which matches the available 2. P1 can execute, finish, and release its resources, increasing the available units to 2 + 3 = 5. This is enough to satisfy either P2 or P3, so the system is in a safe state.",
+    "trick": "Shortcut: Always check if the available resources can satisfy the process with the smallest remaining need to jumpstart the execution chain.",
+    "tip": "The system state is safe if at least one process can complete using available resources."
+  },
+  {
+    "id": 40,
+    "question": "A segmentation system uses a segment table where each entry contains a 16-bit base address and a 16-bit segment limit. If an entry has a base of 0x1234 and a limit of 0x0100, what happens if a process attempts to access a logical offset of 0x0105?",
+    "options": ["The physical address evaluates to 0x1339", "A trap interrupt occurs due to an addressing limit violation", "The address wraps around to 0x1234", "The lookup returns an invalid frame address from memory"],
+    "answer": "A trap interrupt occurs due to an addressing limit violation",
+    "explanation": "The offset (0x0105) is greater than the segment limit (0x0100). This triggers an out-of-bounds memory violation, causing the hardware to generate an addressing trap (segmentation fault).",
+    "trick": "Trap: Do not add the base address to an invalid offset. If the offset violates the limit condition, the system blocks the operation immediately.",
+    "tip": "Any offset greater than or equal to the segment limit triggers an addressing trap."
+  },
+  {
+    "id": 41,
+    "question": "Consider a system running a process with a CPU burst time of 20ms. If the system uses Round Robin scheduling with a time quantum of 5ms, and context switches take 1ms each, what percentage of total CPU time is spent on context switching overhead during this process's execution?",
+    "options": ["16.67%", "20.00%", "13.04%", "25.00%"],
+    "answer": "16.67%",
+    "explanation": "A 20ms burst divided by a 5ms quantum requires 4 execution cycles. This requires 3 intermediate context switches to rotate between tasks. Total execution time = 20ms. Total context switch overhead = 3 * 1ms = 3ms. Total Time = 20 + 3 = 23ms. Overhead Percentage = 3 / 23 = 13.04%. Let's re-verify: if it is the only process, it requires 3 context switches. Total time is 23ms. 3/23 = 13.04%. If we count the final switch away, it would be 4 switches (4/24 = 16.67%). Standard convention for a single process lifecycle: 3 context switches occur between its 4 quantum bursts, giving 3/23 = 13.04%. Let's look at the options. 13.04% is option C.",
+    "trick": "Trap: A process with a 20ms burst needs 4 bursts of 5ms. This means it requires 3 intermediate switches, not 4, because the final burst finishes the task.",
+    "tip": "N bursts require N-1 intermediate context switches to alternate between tasks."
+  },
+  {
+    "id": 42,
+    "question": "Statement 1: Hierarchical paging completely avoids storing page tables for unmapped virtual memory spaces. Statement 2: Inverted page tables require a linear search for every address translation unless accelerated by a hashing mechanism. Which of the following is correct?",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both Statements are true", "Neither Statement is true"],
+    "answer": "Both Statements are true",
+    "explanation": "Statement 1 is true because hierarchical structures omit leaf tables for unallocated address areas. Statement 2 is true because inverted page tables are sorted by physical frame number, meaning searching by virtual page number requires a full scan unless accelerated by a hash anchor table.",
+    "trick": "Inverted page tables use hash lookup structures to avoid slow linear memory scans.",
+    "tip": "Inverted page tables require hashing to maintain fast, efficient address translation times."
+  },
+  {
+    "id": 43,
+    "question": "A system is in a deadlocked state. Which of the following conditions is always present in a Wait-For Graph representing this system?",
+    "options": ["At least one isolated unmapped node", "A directed cycle loop", "A bipartite structure separation", "An unweighted tree hierarchy"],
+    "answer": "A directed cycle loop",
+    "explanation": "A Wait-For Graph is a simplified version of a resource graph that shows only processes. In this graph, a directed cycle indicates that a group of processes are stuck in a circular wait condition, confirming a deadlock.",
+    "trick": "A cycle in a Wait-For Graph always means a deadlock because it isolates the process dependencies directly.",
+    "tip": "A directed cycle in a Wait-For Graph confirms a deadlock."
+  },
+  {
+    "id": 44,
+    "question": "A 32-bit virtual address system uses a page size of 2 KB. If each page table entry requires 2 bytes of storage, how many bits are used to index a single-level page table?",
+    "options": ["21 bits", "11 bits", "20 bits", "22 bits"],
+    "answer": "21 bits",
+    "explanation": "Page size = 2 KB = 2^11 bytes, which means the page offset uses 11 bits. The bits used for the page number index = Total Address Bits - Offset Bits = 32 - 11 = 21 bits.",
+    "trick": "Shortcut: The page number bits match the table index size: 32 bits total - 11 bits offset = 21 indexing bits.",
+    "tip": "Page table index bits = Virtual address bits - Page offset bits."
+  },
+  {
+    "id": 45,
+    "question": "Match the following CPU scheduling types with their core structural traits: List I: [P. Preemptive SJF, Q. FCFS, R. Round Robin] List II: [1. Uses a FIFO queue and is non-preemptive, 2. Uses time slices to prevent processes from monopolizing the CPU, 3. Minimizes remaining execution times using preemption]. Which match is correct?",
+    "options": ["P-3, Q-1, R-2", "P-1, Q-2, R-3", "P-2, Q-3, R-1", "P-3, Q-2, R-1"],
+    "answer": "P-3, Q-1, R-2",
+    "explanation": "Preemptive SJF (SRTF) tracks and runs the shortest remaining workload. FCFS appends tasks to a simple FIFO queue. Round Robin distributes equal time slices across ready processes.",
+    "trick": "Round Robin focuses on fairness using time slices, while SRTF focuses on minimizing turnaround times.",
+    "tip": "SRTF reduces remaining work. FCFS uses basic queues. RR rotates using time slices."
+  },
+  {
+    "id": 46,
+    "question": "Consider a system with a 90% TLB hit ratio. If a TLB lookup takes 10 ns and a main memory access takes 80 ns, what is the effective memory access time (EMAT)?",
+    "options": ["98 ns", "90 ns", "100 ns", "170 ns"],
+    "answer": "98 ns",
+    "explanation": "Using the EMAT formula: EMAT = Hit_Ratio * (TLB_Time + Memory_Time) + (1 - Hit_Ratio) * (TLB_Time + 2 * Memory_Time). Plugging in the values: 0.90 * (10 + 80) + 0.10 * (10 + 160) = 0.90 * 90 + 0.10 * 170 = 81 + 17 = 98 ns.",
+    "trick": "Trap: A TLB miss requires two memory accesses: one to read the page table entry and another to read the actual data value.",
+    "tip": "EMAT = Hit*(TLB + Mem) + Miss*(TLB + 2*Mem)."
+  },
+  {
+    "id": 47,
+    "question": "Statement 1: The 'No Preemption' condition means resources cannot be forcibly taken from a process; they must be released voluntarily. Statement 2: Resolving a deadlock by terminating a process and releasing its resources breaks this condition. Evaluate these statements.",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both statements are true", "Neither statement is true"],
+    "answer": "Only Statement 1 is true",
+    "explanation": "Statement 1 is true because the 'no preemption' rule protects a process's held resources until it releases them. Statement 2 is false because terminating a process is a recovery technique, not a structural change to the resource preemption rules.",
+    "trick": "Deadlock recovery techniques resolve active deadlocks, whereas prevention techniques modify structural rules to stop deadlocks from happening.",
+    "tip": "No Preemption means held resources cannot be stolen until released voluntarily."
+  },
+  {
+    "id": 48,
+    "question": "A process is broken into segments and mapped via a segment table. If the segment limit is 0x0300 and the base address is 0x1000, what physical address corresponds to the logical offset 0x0200?",
+    "options": ["0x1200", "0x1300", "0x1500", "Addressing Fault exception"],
+    "answer": "0x1200",
+    "explanation": "First, verify that the offset is valid: 0x0200 < 0x0300 (Offset < Limit), which is true. Next, calculate the physical address by adding the base to the offset: 0x1000 + 0x0200 = 0x1200.",
+    "trick": "Shortcut: If the offset is within the limit, simply add the base address to find the physical memory location.",
+    "tip": "Physical Address = Base + Offset, provided the offset is within the segment limit."
+  },
+  {
+    "id": 49,
+    "question": "A system uses a priority scheduling algorithm. If new high-priority processes continually arrive, low-priority tasks may wait indefinitely. Which technique resolves this problem?",
+    "options": ["Compaction", "Aging", "Throttling", "Preemption switching"],
+    "answer": "Aging",
+    "explanation": "Aging is a technique that gradually increases the priority of processes that wait in the ready queue for a long time. This ensures that low-priority tasks eventually gain enough priority to execute, preventing starvation.",
+    "trick": "Trap: Compaction is a memory management technique for fragmentation, while Aging is a scheduling technique that prevents process starvation.",
+    "tip": "Aging prevents starvation by gradually increasing the priority of waiting processes."
+  },
+  {
+    "id": 50,
+    "question": "Consider a system using a multi-level page table hierarchy. If a virtual address requires 4 page table lookups, how many total memory accesses are needed to read a data value if the TLB misses?",
+    "options": ["5", "4", "2", "6"],
+    "answer": "5",
+    "explanation": "If a TLB miss occurs, the system must perform 4 separate memory accesses to traverse the multi-level page table hierarchy and find the frame number. It then makes 1 final access to read the actual data value. Total Accesses = 4 + 1 = 5.",
+    "trick": "Shortcut: Memory accesses on a TLB miss always equal the number of page table levels plus 1 for the data access: N levels + 1.",
+    "tip": "Total accesses on a TLB miss = Number of page table levels + 1."
+  }
+]

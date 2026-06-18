@@ -1,0 +1,44 @@
+﻿
+
+{
+  "module_title": "Addressing Modes and Hardware Interrupts",
+  "difficulty_level": 2,
+  "introduction": "This level targets how instructions locate their operands (Addressing Modes) and how external devices halt the microprocessor's normal execution sequence (Interrupts).",
+  "core_concepts": [
+    {
+      "title": "Addressing Modes",
+      "description": "The method by which the microprocessor locates the data (operand): \n1. **Immediate:** The actual data is provided directly inside the instruction (e.g., `MVI A, 32H` - Move 32H into Accumulator).\n2. **Register:** Data is located in a register (e.g., `MOV A, B` - Copy B to A).\n3. **Direct:** The exact memory address of the data is given in the instruction (e.g., `LDA 2000H`).\n4. **Indirect:** The address of the data is hidden inside the HL register pair 'M' (e.g., `MOV A, M`).\n5. **Implied/Implicit:** The instruction itself specifies the data implicitly; no operand is given (e.g., `CMA` - Complement Accumulator)."
+    },
+    {
+      "title": "Hardware Interrupts & Priority",
+      "description": "The 8085 has 5 hardware interrupts. Their decreasing order of priority is:\n1. **TRAP (RST 4.5):** Highest Priority (Edge and Level Triggered).\n2. **RST 7.5:** (Positive Edge Triggered).\n3. **RST 6.5:** (Level Triggered).\n4. **RST 5.5:** (Level Triggered).\n5. **INTR:** Lowest Priority (Level Triggered)."
+    },
+    {
+      "title": "Vector Address Calculation",
+      "description": "When an interrupt occurs, the Program Counter jumps to a specific memory location called the Vector Address.\nFormula: **Vector Address of RST 'n' = $n \\times 8$ (Convert the result to Hexadecimal).** \n(Example: For RST 7.5, the address = $7.5 \\times 8 = 60_{10} = 003C H$)."
+    }
+  ],
+  "important_entities": [
+    {
+      "name": "Non-Maskable Interrupt (NMI)",
+      "key_fact": "TRAP Cannot Be Ignored",
+      "significance": "Most interrupts (RST 7.5, 6.5, 5.5, INTR) can be ignored or disabled by the programmer using software instructions (like the `DI` instruction). However, **TRAP is a Non-Maskable Interrupt**. The microprocessor CANNOT ignore it; it is used exclusively for absolute emergencies like power failure."
+    }
+  ],
+  "trap_alerts_and_exceptions": [
+    {
+      "alert_title": "HLT vs. NOP Instructions",
+      "explanation": "Exam Trap: Do not confuse these two! \n- **HLT (Halt):** The microprocessor stops executing and enters a wait state until an external interrupt arrives. \n- **NOP (No Operation):** The microprocessor does absolutely nothing but *moves on* to fetch the next instruction. It simply wastes a few clock cycles (used for creating time delays)."
+    }
+  ],
+  "mnemonics_and_tricks": [
+    {
+      "trick_title": "Interrupt Priority Hierarchy",
+      "memory_phrase": "TRAP the Highest, then Descend the Numbers",
+      "explanation": "Priority is easy to remember: TRAP (RST 4.5) is supreme. Then, simply follow the numerical order downwards: 7.5 > 6.5 > 5.5 > INTR."
+    }
+  ],
+  "exam_strategy_tips": [
+    "A highly frequent GATE and State AE theoretical question: 'Which hardware interrupt in the 8085 microprocessor has the highest priority?' Answer: TRAP."
+  ]
+}

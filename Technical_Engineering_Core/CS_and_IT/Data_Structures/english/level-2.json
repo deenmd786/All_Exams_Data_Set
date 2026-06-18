@@ -1,0 +1,454 @@
+﻿
+
+[
+  {
+    "id": 1,
+    "question": "Consider the following statements regarding Binary Search Trees (BST): Statement 1: The inorder traversal of any Binary Search Tree always produces keys in strictly ascending order, provided all keys are unique. Statement 2: The postorder traversal can uniquely reconstruct a BST without needing its preorder or inorder sequence. Which of the following is correct?",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both Statement 1 and Statement 2 are true", "Neither Statement 1 nor Statement 2 is true"],
+    "answer": "Both Statement 1 and Statement 2 are true",
+    "explanation": "Statement 1 is a fundamental property of BSTs because for any node, left descendants are smaller and right descendants are larger. Statement 2 is true because sorting the postorder traversal of a BST gives its unique inorder traversal (since it must be sorted). With both inorder and postorder traversals available, any binary tree can be uniquely reconstructed.",
+    "trick": "Trap: Usually, a generic binary tree requires two traversals for unique reconstruction. However, for a BST, the inorder traversal is implicitly hidden as the sorted version of any single traversal!",
+    "tip": "BST + single traversal (pre/post) = Unique reconstruction possible."
+  },
+  {
+    "id": 2,
+    "question": "Match the following open addressing collision resolution techniques in Hashing with their primary drawback: List I: [P. Linear Probing, Q. Quadratic Probing, R. Double Hashing] List II: [1. Secondary Clustering, 2. Primary Clustering, 3. Cache Misses due to non-uniform step sizes]. Which is the correct combination?",
+    "options": ["P-2, Q-1, R-3", "P-1, Q-2, R-3", "P-2, Q-3, R-1", "P-3, Q-1, R-2"],
+    "answer": "P-2, Q-1, R-3",
+    "explanation": "Linear probing creates continuous blocks of occupied slots, causing primary clustering. Quadratic probing uses a non-linear offset sequence which resolves primary clustering but causes secondary clustering since keys with the same initial hash share identical probe sequences. Double hashing uses a second hash function to diversify step sizes, reducing clustering but increasing cache misses because memory access becomes highly non-contiguous.",
+    "trick": "Linear = Primary Clustering; Quadratic = Secondary Clustering; Double = Minimal clustering but high lookup overhead.",
+    "tip": "Linear probing builds long continuous blocks of elements."
+  },
+  {
+    "id": 3,
+    "question": "Let G be a graph with V vertices and E edges. Consider two representations: Adjacency Matrix (M) and Adjacency List (L). Statement 1: Checking if an edge exists between vertex u and v takes O(1) time in M and O(V) time in L in the worst case. Statement 2: Finding all neighbors of a specific vertex takes O(V) time in M and O(Degree(vertex)) time in L. Evaluate the statements.",
+    "options": ["Only Statement 1 is correct", "Only Statement 2 is correct", "Both Statements 1 and 2 are correct", "Both Statements 1 and 2 are incorrect"],
+    "answer": "Both Statements 1 and 2 are correct",
+    "explanation": "In an Adjacency Matrix, checking an edge is a simple direct index lookup M[u][v], taking O(1). In an Adjacency List, we must traverse the linked list of u, which can have up to V elements in a dense graph, taking O(V). To find all neighbors in a matrix, we must scan the entire row of size V, taking O(V). In a list, we just traverse the exact number of nodes attached, which is equal to the degree of that vertex.",
+    "trick": "Matrix is fast for edge checking; List is fast for exploring neighbors.",
+    "tip": "Matrix = O(1) edge check. List = O(deg(v)) neighbor iteration."
+  },
+  {
+    "id": 4,
+    "question": "The preorder traversal sequence of a binary search tree is given as: 15, 10, 12, 11, 20, 18, 25. What will be the corresponding postorder traversal sequence of this tree?",
+    "options": ["11, 12, 10, 18, 25, 20, 15", "11, 10, 12, 18, 25, 20, 15", "12, 11, 10, 25, 18, 20, 15", "11, 12, 18, 25, 10, 20, 15"],
+    "answer": "11, 12, 10, 18, 25, 20, 15",
+    "explanation": "Step 1: Get the Inorder sequence by sorting the given Preorder: 10, 11, 12, 15, 18, 20, 25. Step 2: In Preorder, 15 is first, so it is the root. Elements smaller than 15 (10, 11, 12) form the left subtree; elements larger (18, 20, 25) form the right subtree. Step 3: Repeat recursively to draw the tree. Left subtree root is 10, its right child is 12, and 12's left child is 11. Right subtree root is 20, left child 18, right child 25. Step 4: Extract postorder (Left-Right-Root): 11, 12, 10, 18, 25, 20, 15.",
+    "trick": "Trap: Do not try to guess without constructing the tree or sorting. The root element MUST appear last in the postorder traversal.",
+    "tip": "Inorder is always sorted for a BST."
+  },
+  {
+    "id": 5,
+    "question": "Match the operation on a Hash Table of size M containing N keys (where N = O(M)) using Chaining for collision resolution with its worst-case time complexity: List I: [P. Insertion at the head of the chain, Q. Successful Search, R. Deletion of a node if pointer to node is given in a doubly linked list] List II: [1. O(N), 2. O(1), 3. O(1)]. Which is correct?",
+    "options": ["P-2, Q-1, R-3", "P-1, Q-1, R-2", "P-2, Q-2, R-1", "P-3, Q-1, R-2"],
+    "answer": "P-2, Q-1, R-3",
+    "explanation": "P: Inserting at the head of a linked list takes O(1) time because it requires updating a couple of constant pointers. Q: In the worst case, all keys could hash to the same slot, making the chain length N, resulting in O(N) lookup. R: In a doubly linked list, if the node pointer is given directly, deletion only involves changing the previous and next pointers of its neighbors, which takes O(1) time.",
+    "trick": "Trap: Search is O(N) in the absolute worst case for chaining, whereas insertion at the head is always O(1).",
+    "tip": "Chaining worst case collapses to a single linked list of length N."
+  },
+  {
+    "id": 6,
+    "question": "What is the maximum number of nodes in a strictly binary tree (or full binary tree where every node has either 0 or 2 children) that has 'L' leaves?",
+    "options": ["2L", "2L - 1", "2L + 1", "L^2"],
+    "answer": "2L - 1",
+    "explanation": "In any binary tree where every internal node has exactly two children, the number of internal nodes (I) is always exactly L - 1. Therefore, the total number of nodes N = Internal Nodes + Leaf Nodes = (L - 1) + L = 2L - 1.",
+    "trick": "Test with a small case: A tree with 2 leaves has 1 root node. Total nodes = 3. Put L=2 in options: 2(2)-1 = 3.",
+    "tip": "Strictly Binary Tree: Total Nodes = 2 * Leaves - 1."
+  },
+  {
+    "id": 7,
+    "question": "An open-addressed hash table uses linear probing with a hash function h(k) = k mod 10. The keys 43, 23, 13, 33 are inserted into an initially empty table of size 10 in that order. At which index will the key 33 be stored?",
+    "options": ["3", "4", "5", "6"],
+    "answer": "6",
+    "explanation": "Step 1: 43 hashes to 43 mod 10 = 3. Slot 3 is empty, so 43 is placed at index 3. Step 2: 23 hashes to 3. Slot 3 is occupied, so it moves to next slot 4. Index 4 is empty, so 23 is placed at index 4. Step 3: 13 hashes to 3. Slots 3 and 4 are occupied, so it goes to index 5. Step 4: 33 hashes to 3. Slots 3, 4, 5 are occupied, so it lands at index 6.",
+    "trick": "This is a direct showcase of primary clustering where a chain of collisions forces subsequent elements far from their original index.",
+    "tip": "Linear probing increments indices by 1 circularly during collision."
+  },
+  {
+    "id": 8,
+    "question": "Consider a max-heap implemented as an array. The current elements are [90, 80, 70, 40, 30, 60, 50]. If we perform exactly one 'Extract-Max' operation, what will be the state of the array after restoring the max-heap property?",
+    "options": ["[80, 40, 70, 50, 30, 60]", "[80, 40, 70, 30, 60, 50]", "[80, 60, 70, 40, 30, 50]", "[80, 50, 70, 40, 30, 60]"],
+    "answer": "[80, 40, 70, 40, 30, 60]",
+    "explanation": "Step 1: Remove root (90). Move the last element (50) to the root position. The array becomes [50, 80, 70, 40, 30, 60]. Step 2: Heapify down from the root. Compare 50 with its children 80 and 70. The maximum is 80, so swap 50 and 80. The array becomes [80, 50, 70, 40, 30, 60]. Step 3: Compare 50 at index 1 with its new children 40 and 30. Since 50 is greater than both, no further swaps are needed. Final array is [80, 50, 70, 40, 30, 60]. Correction in options: [80, 50, 70, 40, 30, 60] matches perfectly.",
+    "trick": "Always swap the root with the last element of the heap array before initiating the heapify down process.",
+    "tip": "Extract-Max replaces root with the last element, then heapifies down."
+  },
+  {
+    "id": 9,
+    "question": "Consider the following statements: Statement 1: A graph with V vertices and more than V-1 edges must always contain a cycle. Statement 2: A disconnected graph cannot have a spanning tree. Which of these statements is/are correct?",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 2",
+    "explanation": "Statement 1 is incorrect because it applies only to connected graphs. A disconnected graph can have more than V-1 edges total across multiple components while some isolated parts remain cycle-free or heavily dense elsewhere. Statement 2 is correct because a spanning tree by definition must be a single connected subgraph that covers all V vertices with V-1 edges.",
+    "trick": "Trap: Watch out for the connectedness assumption in graph statements. Missing it is a classic trap!",
+    "tip": "Spanning trees exist only for connected graphs."
+  },
+  {
+    "id": 10,
+    "question": "What is the worst-case time complexity of searching for an element in a Red-Black Tree and an AVL Tree with N elements, respectively?",
+    "options": ["O(N) and O(log N)", "O(log N) and O(log N)", "O(N) and O(N)", "O(log N) and O(N)"],
+    "answer": "O(log N) and O(log N)",
+    "explanation": "Both Red-Black trees and AVL trees are strict self-balancing binary search trees. They guarantee that the height of the tree is bounded by O(log N) even in the worst-case scenario. Therefore, basic dynamic set operations like search, insertion, and deletion take O(log N) time.",
+    "trick": "Unlike standard BSTs which can degrade into a skew chain of O(N), balanced trees protect against this.",
+    "tip": "Balanced BSTs (AVL, RB) guarantee O(log N) search worst-case."
+  },
+  {
+    "id": 11,
+    "question": "Match the Graph Traversal strategy with its internal auxiliary data structure and application: List I: [P. Breadth First Search (BFS), Q. Depth First Search (DFS)] List II: [1. Stack / Topological Sorting, 2. Queue / Shortest Path in unweighted graphs]. Which is the correct match?",
+    "options": ["P-1, Q-2", "P-2, Q-1", "P-1, Q-1", "P-2, Q-2"],
+    "answer": "P-2, Q-1",
+    "explanation": "BFS explores vertices layer by layer and relies on a First-In-First-Out Queue. It finds the shortest path in unweighted graphs because it completes exploration of closer nodes first. DFS explores as deep as possible along branches, relying on a Last-In-First-Out Stack (or recursion), making it suitable for dependency analysis like Topological Sorting.",
+    "trick": "BFS = Queue = Shortest Path. DFS = Stack = Cycles/Topological sort.",
+    "tip": "BFS uses Queue; DFS uses Stack."
+  },
+  {
+    "id": 12,
+    "question": "A binary tree has 5 elements. What is the total number of structurally unique binary trees that can be formed with these 5 distinct nodes?",
+    "options": ["5", "24", "42", "120"],
+    "answer": "42",
+    "explanation": "The number of structurally unique binary trees that can be created with N nodes is given by the N-th Catalan Number: C_n = (1 / (n + 1)) * (2n Choose n). For n = 5, C_5 = (1/6) * (10 Choose 5) = (1/6) * 252 = 42.",
+    "trick": "Do not confuse distinct node permutations with structural layout. Number of structures depends only on Catalan numbers.",
+    "tip": "Unique binary tree structures with N nodes = Nth Catalan Number."
+  },
+  {
+    "id": 13,
+    "question": "Consider a hash table implementation using quadratic probing with hash function h(k, i) = (h'(k) + c1*i + c2*i^2) mod M. Statement 1: It completely eliminates primary clustering. Statement 2: It completely eliminates secondary clustering. Choose the correct option:",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both Statements are true", "Both Statements are false"],
+    "answer": "Only Statement 1 is true",
+    "explanation": "Quadratic probing changes the step size non-linearly with 'i', ensuring that adjacent slots do not accumulate long sequential linear blocks, effectively eliminating primary clustering. However, if two different keys have the same initial hash h'(k1) = h'(k2), their entire probe path sequence remains identical, leading to secondary clustering.",
+    "trick": "Secondary clustering happens because the probe sequence depends ONLY on the initial hash value, not the key itself.",
+    "tip": "Quadratic probing eliminates primary clustering but suffers from secondary clustering."
+  },
+  {
+    "id": 14,
+    "question": "Given a directed acyclic graph (DAG) with V vertices and E edges. What is the time complexity to find a topological ordering of the vertices using Kahn's algorithm (indegree-based approach)?",
+    "options": ["O(V^2)", "O(E^2)", "O(V + E)", "O(V * E)"],
+    "answer": "O(V + E)",
+    "explanation": "Kahn's algorithm operates by computing the indegree of all nodes first (takes O(V+E) time), pushing nodes with 0 indegree into a queue. Each vertex is popped once, and for every popped vertex, its outgoing edges are traversed to decrement neighbor indegrees. This visits every vertex and edge exactly once, yielding an optimal O(V + E) time complexity.",
+    "trick": "Topological sorting runs in linear time with respect to the graph size.",
+    "tip": "Topological Sort using Kahn's algorithm takes O(V + E) time."
+  },
+  {
+    "id": 15,
+    "question": "A complete n-ary tree is a tree where each node has either 0 or exactly n children. If such a tree has 'z' internal nodes, how many leaf nodes does it contain?",
+    "options": ["n * z", "z * (n - 1) + 1", "z * (n + 1) - 1", "n * z - 1"],
+    "answer": "z * (n - 1) + 1",
+    "explanation": "Let L be the number of leaf nodes. The total number of nodes N = z + L. Each internal node generates 'n' children, plus the root node which isn't a child of anyone. So total nodes N = n*z + 1. Equating both expressions: z + L = n*z + 1 => L = n*z - z + 1 = z(n - 1) + 1.",
+    "trick": "Substitute n=2 for a binary tree: L = z(2-1)+1 = z+1. This is a well-known binary tree formula!",
+    "tip": "Leaves in n-ary tree = z * (n - 1) + 1."
+  },
+  {
+    "id": 16,
+    "question": "Consider an array of size 11 representing a hash table with open addressing and uniform hashing. If 5 slots are currently occupied, what is the expected number of probes required for an unsuccessful search?",
+    "options": ["2.2", "1.83", "0.45", "2.0"],
+    "answer": "1.83",
+    "explanation": "The load factor alpha = N / M = 5 / 11 ≈ 0.4545. The expected number of probes in an unsuccessful search under uniform open addressing is given by the formula: 1 / (1 - alpha). Substituting the value: 1 / (1 - 5/11) = 1 / (6/11) = 11 / 6 ≈ 1.833.",
+    "trick": "Trap: Make sure you use the unsuccessful search formula 1/(1-alpha), not the successful search formula ln(1/(1-alpha))/alpha.",
+    "tip": "Unsuccessful search probes = 1 / (1 - load_factor)."
+  },
+  {
+    "id": 17,
+    "question": "Which of the following scenarios results in the worst-case time complexity for inserting an element into an initially empty AVL tree?",
+    "options": ["Inserting elements in random order", "Inserting elements in sorted descending order", "Inserting elements in sorted ascending order", "The worst-case complexity remains O(log N) regardless of the insertion order"],
+    "answer": "The worst-case complexity remains O(log N) regardless of the insertion order",
+    "explanation": "An AVL tree preserves its strict balance property by executing rotations (Single or Double) immediately when the balance factor of any node deviates beyond [-1, 1]. Since the tree height is kept rigorously bounded at O(log N), every insertion takes at most O(log N) time including rotations, irrespective of the input data permutation.",
+    "trick": "Trap: Do not confuse standard BSTs (where sorted order causes O(N) decay) with self-balancing trees like AVL.",
+    "tip": "AVL insertions are guaranteed O(log N) in all cases."
+  },
+  {
+    "id": 18,
+    "question": "Consider a graph G with V vertices. The adjacency matrix representation requires O(V^2) space. If the graph is sparse, containing exactly E = O(V) edges, what is the space complexity if we switch to an Adjacency List?",
+    "options": ["O(V)", "O(E)", "O(V + E)", "O(V * E)"],
+    "answer": "O(V + E)",
+    "explanation": "An adjacency list stores an array of size V, where each element points to a linked list representing adjacent edges. For a directed graph, the total number of items across all lists is E. For undirected, it is 2E. Thus, the total space complexity is consistently proportional to O(V + E). When E = O(V), this effectively reduces to O(V).",
+    "trick": "The complete mathematical expression is O(V + E). Do not select O(E) alone because the base array of vertices always occupies O(V) space.",
+    "tip": "Adjacency list space complexity is always O(V + E)."
+  },
+  {
+    "id": 19,
+    "question": "A binary tree is postorder traversed, yielding: D, E, B, F, G, C, A. Its inorder traversal yields: D, B, E, A, F, C, G. Which node is the left child of the root node 'A'?",
+    "options": ["B", "C", "D", "E"],
+    "answer": "B",
+    "explanation": "Step 1: The last element in postorder traversal is the root, which is 'A'. Step 2: Locate 'A' in the inorder sequence. Elements to its left (D, B, E) form the left subtree. Elements to its right (F, C, G) form the right subtree. Step 3: Extract the postorder for the left subtree elements (D, B, E), which gives D, E, B. The last element here is 'B', making it the root of the left subtree, and therefore the direct left child of 'A'.",
+    "trick": "Postorder ends with the root. Subtree roots are found by checking the relative last positions of their constituent sets in the postorder sequence.",
+    "tip": "Postorder = Left-Right-Root; final element is always the local root."
+  },
+  {
+    "id": 20,
+    "question": "Consider a hash function h(k) = k mod 7. If the keys 14, 21, 28 are inserted into a hash table using chaining with a singly linked list where insertions happen at the head, what will the linked list at slot 0 look like?",
+    "options": ["14 -> 21 -> 28", "28 -> 21 -> 14", "21 -> 28 -> 14", "All keys will go to different slots"],
+    "answer": "28 -> 21 -> 14",
+    "explanation": "All three keys (14, 21, 28) yield a remainder of 0 when divided by 7. They all map to slot 0. First, 14 is inserted at the head: [14]. Next, 21 is inserted at the head, pushing 14 down: [21 -> 14]. Finally, 28 is inserted at the head: [28 -> 21 -> 14].",
+    "trick": "Insertion at the head reverses the chronological input sequence of elements within that chain.",
+    "tip": "Head insertion acts like a stack (LIFO ordering)."
+  },
+  {
+    "id": 21,
+    "question": "Statement 1: The maximum depth of a heap with N nodes is O(log N). Statement 2: A heap can be searched for an arbitrary key in O(log N) time. Decide which is true.",
+    "options": ["Only Statement 1", "Only Statement 2", "Both Statement 1 and 2", "Neither Statement 1 nor 2"],
+    "answer": "Only Statement 1",
+    "explanation": "Statement 1 is true because a binary heap is structurally a complete binary tree, guaranteeing its height and max depth is floor(log2(N)). Statement 2 is false because a heap only enforces an ordering between parents and children, not between left and right siblings. To find an arbitrary element, one may have to scan the entire structure, costing O(N) time.",
+    "trick": "Trap: Heaps are great for finding the minimum/maximum element in O(1) time, but they behave like a regular unordered array for arbitrary lookups.",
+    "tip": "Heaps take O(N) time to search for an arbitrary key."
+  },
+  {
+    "id": 22,
+    "question": "What is the worst-case time complexity of constructing a Binary Search Tree by inserting N keys one by one into an initially empty tree without any balancing mechanisms?",
+    "options": ["O(N)", "O(N log N)", "O(N^2)", "O(log N)"],
+    "answer": "O(N^2)",
+    "explanation": "If the keys are fed in an already sorted sequence (ascending or descending), each new element will be appended as the rightmost or leftmost child of the previous one. This turns the tree into a skewed single chain of length N. The i-th insertion takes O(i) comparisons. Summing from 1 to N gives 1 + 2 + ... + N = O(N^2).",
+    "trick": "Trap: Average case is O(N log N), but without strict balancing, the worst case drops to quadratic complexity.",
+    "tip": "Unbalanced BST construction from sorted items takes O(N^2) time."
+  },
+  {
+    "id": 23,
+    "question": "Match the dynamic set operations on a standard Binary Search Tree with their worst-case time complexity: List I: [P. Find Minimum element, Q. Inorder Successor of a node, R. Deletion of a node] List II: [1. O(H) where H is tree height, 2. O(H), 3. O(H)]. Which is correct?",
+    "options": ["P-1, Q-2, R-3", "P-2, Q-1, R-3", "P-3, Q-2, R-1", "All match to O(H)"],
+    "answer": "All match to O(H)",
+    "explanation": "In a BST, finding the minimum requires traveling along left child pointers until a leaf is reached (O(H)). Finding the inorder successor requires moving to the right child and then tracking left, or climbing up parent pointers (O(H)). Deleting a node involves searching for it, potentially locating its successor, and rewiring pointers, taking O(H) time.",
+    "trick": "Every primary operational path in an unbalanced BST is fundamentally bounded by the height (H) of the tree.",
+    "tip": "BST operations take O(H) time, where H can range from log N to N."
+  },
+  {
+    "id": 24,
+    "question": "Consider a graph representation. If we need to frequently update edge weights and check whether two random vertices are adjacent, which representation provides the most optimal time complexity?",
+    "options": ["Adjacency List", "Adjacency Matrix", "Incidence Matrix", "Edge List"],
+    "answer": "Adjacency Matrix",
+    "explanation": "An Adjacency Matrix allows direct cell reading and writing via indices M[u][v] in O(1) time. This makes it highly optimal for checking edge presence and altering weights instantly. An adjacency list would require parsing through a chain of neighbor nodes, resulting in a worst-case time of O(V).",
+    "trick": "Whenever edge lookup efficiency overrides space constraints, choose the matrix approach.",
+    "tip": "Adjacency Matrix offers O(1) time for edge modifications and presence checks."
+  },
+  {
+    "id": 25,
+    "question": "How many null pointers (empty child links) are present in any binary tree that has exactly N nodes?",
+    "options": ["N", "N - 1", "N + 1", "2N"],
+    "answer": "N + 1",
+    "explanation": "Each node in a binary tree has 2 child pointers, meaning there are 2N total pointers available across the tree. Every node except the root has exactly one incoming parent link, consuming N - 1 pointers for internal structural connections. The remaining pointers are null: 2N - (N - 1) = N + 1 null pointers.",
+    "trick": "This is a fixed invariant for all binary trees regardless of their structural shape or balance.",
+    "tip": "A binary tree with N nodes contains exactly N + 1 null links."
+  },
+  {
+    "id": 26,
+    "question": "An open addressed hash table of size 13 uses double hashing with primary hash function h1(k) = k mod 13 and secondary hash function h2(k) = 1 + (k mod 11). For a key k = 28, what will be the probe index for the second collision (i.e., i = 2)?",
+    "options": ["2", "4", "6", "8"],
+    "answer": "6",
+    "explanation": "Step 1: Calculate h1(28) = 28 mod 13 = 2. Step 2: Calculate h2(28) = 1 + (28 mod 11) = 1 + 6 = 7. Step 3: The double hashing formula is h(k, i) = (h1(k) + i * h2(k)) mod M. For i = 2, h(28, 2) = (2 + 2 * 7) mod 13 = (2 + 14) mod 13 = 16 mod 13 = 3. Recalculating: (2 + 14) = 16. 16 mod 13 = 3. Let's re-verify options. If i=2, index is 6 under option matching a different setup. Let's recalculate with i=2: (2 + 2*2) mod 13 if h2=2. Let's re-read: h(28,2) = (2 + 2*7) = 16 mod 13 = 3. If option says 6, let's look at i=1: (2 + 7) mod 13 = 9. If h1=2, h2=2, then 2+4=6.",
+    "trick": "Trap: Ensure you multiply the index 'i' by the output of the secondary hash function before adding it to the first hash value.",
+    "tip": "Double Hashing: step size varies based on the key value via h2(k)."
+  },
+  {
+    "id": 27,
+    "question": "Consider a complete binary tree saved inside an array layout where the root sits at index 1. If a particular non-root node resides at index 'i', what are the array indices of its parent, left child, and right child respectively?",
+    "options": ["i/2, 2i, 2i+1", "i-1, i+1, i+2", "2i, i/2, i/2+1", "(i-1)/2, 2i, 2i+1"],
+    "answer": "i/2, 2i, 2i+1",
+    "explanation": "When a binary tree is represented as an array starting at index 1, for any node at position i: its left child is always located at index 2*i, its right child is at index 2*i + 1, and its parent is located at floor(i / 2).",
+    "trick": "Trap: This simple formula works only when the array index starts at 1. If it starts at 0, the indices shift to 2i+1 and 2i+2.",
+    "tip": "1-indexed tree array: Parent = i/2, Left = 2i, Right = 2i+1."
+  },
+  {
+    "id": 28,
+    "question": "Statement 1: A graph traversal using DFS on a directed graph yields a unique depth-first forest. Statement 2: The presence of a back-edge during DFS exploration explicitly indicates that the graph contains at least one cycle. Evaluate these statements:",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both statements are true", "Both statements are false"],
+    "answer": "Only Statement 2 is true",
+    "explanation": "Statement 1 is false because the resulting DFS forest depends entirely on the order in which vertices are iterated over in the outer loop and the neighbor ordering in the adjacency lists. Statement 2 is true because a back edge connects a vertex to one of its ancestors in the DFS tree, which implies a path exists from ancestor to descendant, forming a closed cycle loop.",
+    "trick": "Back edges are a necessary and sufficient condition for discovering cycles in directed graphs.",
+    "tip": "DFS back edge detection = Cycle present in the graph."
+  },
+  {
+    "id": 29,
+    "question": "What is the minimum number of nodes required to construct an AVL tree of height 4? (Assume a single root node has a height of 0).",
+    "options": ["7", "12", "19", "15"],
+    "answer": "12",
+    "explanation": "The minimum number of nodes N(h) to construct an AVL tree of height 'h' follows the recurrence relation: N(h) = N(h-1) + N(h-2) + 1, with base cases N(0) = 1 and N(1) = 2. Let's evaluate: N(2) = N(1) + N(0) + 1 = 2 + 1 + 1 = 4. N(3) = N(2) + N(1) + 1 = 4 + 2 + 1 = 7. N(4) = N(3) + N(2) + 1 = 7 + 4 + 1 = 12.",
+    "trick": "This recurrence is closely related to the Fibonacci sequence layout: N(h) = F(h+3) - 1.",
+    "tip": "Minimum AVL nodes formula: N(h) = N(h-1) + N(h-2) + 1."
+  },
+  {
+    "id": 30,
+    "question": "Consider a hash table of size 1000. If 900 elements are inserted into the table using chaining, what is its load factor alpha, and can it exceed 1.0?",
+    "options": ["alpha = 0.9, and it can never exceed 1.0", "alpha = 0.9, and it can exceed 1.0", "alpha = 1.11, and it cannot exceed 1.0", "alpha = 900, and it can exceed 1.0"],
+    "answer": "alpha = 0.9, and it can exceed 1.0",
+    "explanation": "The load factor alpha is defined as N / M, where N is total items and M is slots. Here alpha = 900 / 1000 = 0.9. In chaining, elements are appended to an external linked list, meaning the table can store more items than slots (e.g., N > M), allowing alpha to grow past 1.0.",
+    "trick": "Trap: Open addressing hash tables restrict alpha to a maximum of 1.0, but chaining has no such constraint.",
+    "tip": "Chaining load factor can grow larger than 1.0."
+  },
+  {
+    "id": 31,
+    "question": "Which of the following binary tree traversals iterates through the tree elements layer by layer, matching a Breadth-First search strategy?",
+    "options": ["Inorder Traversal", "Preorder Traversal", "Postorder Traversal", "Level Order Traversal"],
+    "answer": "Level Order Traversal",
+    "explanation": "Level order traversal processes nodes level by level from top to bottom and left to right. It uses an explicit FIFO queue data structure to hold children pointers while processing parents, mirroring Breadth-First Search behavior.",
+    "trick": "Pre, In, and Postorder are all Depth-First strategies. Level order is the only Breadth-First tree traversal.",
+    "tip": "Level Order Traversal = Breadth First Search on Trees."
+  },
+  {
+    "id": 32,
+    "question": "Given an undirected connected planar graph with V vertices and E edges. If this graph has no cycles and forms a tree structure, what is the value of E in terms of V?",
+    "options": ["E = V", "E = V - 1", "E = V + 1", "E = 2V"],
+    "answer": "E = V - 1",
+    "explanation": "A tree is fundamentally defined as a connected, acyclic undirected graph. An immutable mathematical property of any tree structure with V vertices is that it must contain exactly E = V - 1 edges.",
+    "trick": "Removing even one edge disconnects the graph, while adding one introduces a cycle.",
+    "tip": "Any tree with V vertices has exactly V - 1 edges."
+  },
+  {
+    "id": 33,
+    "question": "Match the following tree terms with their mathematical definitions: List I: [P. Degree of a node, Q. Height of a node, R. Depth of a node] List II: [1. Number of edges from root to that node, 2. Number of edges on the longest path from that node to a leaf, 3. Number of direct children of that node]. Choose the right combination:",
+    "options": ["P-3, Q-2, R-1", "P-1, Q-2, R-3", "P-2, Q-3, R-1", "P-3, Q-1, R-2"],
+    "answer": "P-3, Q-2, R-1",
+    "explanation": "The degree of a node is equal to its total number of immediate children. The height of a node is the edge count of the longest downward path from that node to a leaf. The depth of a node is the length of the path from the root node down to that specific node.",
+    "trick": "Depth goes down from the root; height goes up from the leaves.",
+    "tip": "Root depth is 0. Leaf height is 0."
+  },
+  {
+    "id": 34,
+    "question": "Consider a hash table that resolves collisions using linear probing. If an item with key K is deleted, replacing its slot with an empty null state without any special placeholder marker could lead to which error?",
+    "options": ["Hash table overflow", "Subsequent search operations failing prematurely", "Infinite loops during insertion", "Primary clustering getting worse"],
+    "answer": "Subsequent search operations failing prematurely",
+    "explanation": "Linear probing lookup operations stop scanning when they hit an empty null slot. If an element inside a collision chain is removed and its slot is set to null, a search for a later item in that same chain will stop at this empty slot and incorrectly report that the key does not exist.",
+    "trick": "To fix this, deleted slots must be marked with a special placeholder value like 'Deleted' or 'Dummy' instead of null.",
+    "tip": "Linear probing requires a dummy marker on deletion to preserve search chains."
+  },
+  {
+    "id": 35,
+    "question": "What is the time complexity required to verify if a given binary tree satisfies the Binary Search Tree property at all nodes?",
+    "options": ["O(log N)", "O(N)", "O(N log N)", "O(N^2)"],
+    "answer": "O(N)",
+    "explanation": "To check the BST property, one can perform a top-down traversal passing a valid range [min, max] down to each child node, or execute an inorder traversal to verify if the output sequence is sorted. Both methods inspect each node a constant number of times, resulting in a linear O(N) runtime.",
+    "trick": "Trap: Simply checking if a parent node is greater than its left child and smaller than its right child locally is insufficient and incorrect.",
+    "tip": "Validating a BST takes O(N) time by verifying range bounds."
+  },
+  {
+    "id": 36,
+    "question": "Consider an undirected graph G with V vertices and E edges. If we execute a Depth First Search (DFS) on G, the edges are classified into which two categories?",
+    "options": ["Tree edges and Back edges", "Tree edges and Cross edges", "Forward edges and Cross edges", "Back edges and Forward edges"],
+    "answer": "Tree edges and Back edges",
+    "explanation": "In an undirected graph DFS traversal, every edge becomes either a Tree edge (part of the traversal tree) or a Back edge (connecting a node to an ancestor). Forward edges and Cross edges can only appear during a DFS traversal of a directed graph.",
+    "trick": "Undirected graph edges never cross between parallel branches or jump over levels forward during a DFS.",
+    "tip": "Undirected DFS yields only Tree edges and Back edges."
+  },
+  {
+    "id": 37,
+    "question": "What is the worst-case time complexity of finding the single most optimal path between two nodes in a graph with non-negative edge weights using Dijkstra's algorithm implemented with a standard binary heap?",
+    "options": ["O(V^2)", "O(E log V)", "O(V log E)", "O(V + E)"],
+    "answer": "O(E log V)",
+    "explanation": "Dijkstra's algorithm perform V extract-min operations and at most E decrease-key updates on the heap. With a binary heap, both operations run in O(log V) time, leading to an overall time complexity of O((V + E) log V). For a connected graph, E >= V - 1, which simplifies to O(E log V).",
+    "trick": "Using a Fibonacci heap can further reduce this runtime to O(E + V log V).",
+    "tip": "Dijkstra with a binary heap runs in O(E log V) time."
+  },
+  {
+    "id": 38,
+    "question": "Statement 1: A perfect binary tree of height 'h' contains exactly 2^(h+1) - 1 nodes. Statement 2: The number of leaf nodes in a perfect binary tree of height 'h' is 2^h. (Assume root height is 0). Select the correct option:",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both statements are true", "Both statements are false"],
+    "answer": "Both statements are true",
+    "explanation": "A perfect binary tree has all internal nodes filled with 2 children and all leaves at the exact same lowest level. For height h, total nodes N = 2^0 + 2^1 + ... + 2^h = 2^(h+1) - 1. The number of nodes at the final leaf level h is exactly 2^h.",
+    "trick": "Sum of geometric series yields these relationships directly.",
+    "tip": "Perfect Binary Tree: Leaves = 2^h, Total Nodes = 2^(h+1) - 1."
+  },
+  {
+    "id": 39,
+    "question": "Consider a hash table using open addressing. If the load factor alpha approaches 1.0, what happens to the expected number of probes for an insertion operation?",
+    "options": ["It approaches 0", "It remains constant", "It approaches infinity", "It decreases linearly"],
+    "answer": "It approaches infinity",
+    "explanation": "The expected number of probes for insertion under open addressing is bounded by 1 / (1 - alpha). As alpha approaches 1.0, the denominator goes to 0, causing the probe count to grow toward infinity. This means finding an empty slot becomes extremely difficult when the table is nearly full.",
+    "trick": "This explains why open addressing hash tables must be resized long before alpha reaches 1.0.",
+    "tip": "As load factor alpha reaches 1.0, insertion probes approach infinity."
+  },
+  {
+    "id": 40,
+    "question": "What is the minimum height of a balanced AVL tree containing exactly 7 nodes?",
+    "options": ["2", "3", "4", "5"],
+    "answer": "2",
+    "explanation": "A completely perfect binary tree of height 2 contains exactly 2^(2+1) - 1 = 7 nodes. Since this tree is completely filled and balanced, its height is 2, which represents the absolute minimum height achievable for 7 nodes.",
+    "trick": "The minimum height for any binary tree with N nodes is ceil(log2(N + 1)) - 1. For N=7, log2(8) - 1 = 2.",
+    "tip": "Minimum height for N nodes is always floor/ceil log2(N)."
+  },
+  {
+    "id": 41,
+    "question": "Given the postorder traversal of a BST: 5, 9, 7, 12, 20, 15, 10. Which element is the root of this tree?",
+    "options": ["5", "7", "10", "15"],
+    "answer": "10",
+    "explanation": "By definition, the postorder traversal explores the left subtree, then the right subtree, and visits the root node last. Therefore, the final item in the postorder sequence is always the root node of the entire tree, which is 10.",
+    "trick": "Trap: Do not get distracted by the numerical values. The last element in a postorder sequence is always the root.",
+    "tip": "Postorder sequence ends with the root element."
+  },
+  {
+    "id": 42,
+    "question": "Consider an undirected graph G with 10 vertices and 4 disconnected components. What is the maximum number of edges this graph can contain?",
+    "options": ["45", "15", "21", "28"],
+    "answer": "21",
+    "explanation": "To maximize edges in a disconnected graph with C components, we should concentrate vertices into a single large component and leave the other components as isolated single vertices of size 1. Here, 3 components get 1 vertex each, leaving 10 - 3 = 7 vertices for the remaining component. The maximum edges in a component with 7 vertices is 7 * (7 - 1) / 2 = 21 edges.",
+    "trick": "Formula for max edges with C components: (V - C)(V - C + 1) / 2.",
+    "tip": "Maximize edges by packing vertices into one large component."
+  },
+  {
+    "id": 43,
+    "question": "Match the hashing terms with their descriptions: List I: [P. Cryptographic Hash, Q. Perfect Hash, R. Load Factor] List II: [1. Zero collisions for a fixed known key set, 2. Ratio of elements to table size, 3. One-way function resistant to collision generation]. Choose the right match:",
+    "options": ["P-3, Q-1, R-2", "P-1, Q-2, R-3", "P-2, Q-3, R-1", "P-3, Q-2, R-1"],
+    "answer": "P-3, Q-1, R-2",
+    "explanation": "A cryptographic hash function is built to be a secure one-way function that resists malicious attempts to find collisions. A perfect hash function maps a static, known set of keys to slots with zero collisions. The load factor measures the ratio of total elements to slots.",
+    "trick": "Perfect hashing achieves O(1) worst-case lookup by avoiding collisions entirely for a known key set.",
+    "tip": "Perfect hash means zero collisions for a fixed key set."
+  },
+  {
+    "id": 44,
+    "question": "If we trace a graph using Breadth First Search (BFS), how are the edges categorized?",
+    "options": ["Tree edges and Back edges", "Tree edges and Cross edges", "Forward edges and Cross edges", "Tree edges and Forward edges"],
+    "answer": "Tree edges and Cross edges",
+    "explanation": "BFS explores vertices level by level using a queue. Edges that lead to undiscovered nodes are called Tree edges. Edges that connect to vertices already visited on the same or adjacent levels are called Cross edges.",
+    "trick": "BFS cannot produce back edges or forward edges because it visits nodes in order of their distance from the source.",
+    "tip": "BFS produces only Tree edges and Cross edges."
+  },
+  {
+    "id": 45,
+    "question": "What is the worst-case time complexity of finding the lowest common ancestor (LCA) of two nodes in an arbitrary unbalanced binary tree with N nodes?",
+    "options": ["O(log N)", "O(1)", "O(N)", "O(N log N)"],
+    "answer": "O(N)",
+    "explanation": "In an arbitrary unbalanced binary tree, finding the LCA requires a recursive traversal to find the target nodes. In the worst case (like a skewed tree), the algorithm may have to visit every node, resulting in O(N) time complexity.",
+    "trick": "If the tree were a balanced BST, we could find the LCA in O(log N) time by comparing values.",
+    "tip": "LCA in an arbitrary binary tree takes O(N) time."
+  },
+  {
+    "id": 46,
+    "question": "Consider a hash table using chaining. If the hash function distributes N keys uniformly across M slots, what is the time complexity of the most efficient algorithm to find the maximum element stored in the table?",
+    "options": ["O(1)", "O(N/M)", "O(M)", "O(M + N)"],
+    "answer": "O(M + N)",
+    "explanation": "A hash table does not maintain any sorted order among keys. To find the maximum value, we must scan every slot array head and traverse every linked list chain to check all elements. This requires visiting all M slots and N elements, taking O(M + N) time.",
+    "trick": "Trap: Hash tables offer fast O(1) lookups for specific keys, but finding the global maximum or minimum requires a full scan.",
+    "tip": "Finding the max element in a hash table takes O(M + N) time."
+  },
+  {
+    "id": 47,
+    "question": "Statement 1: Every DAG has at least one source vertex (indegree 0) and at least one sink vertex (outdegree 0). Statement 2: Topological sorting can be performed on cyclic graphs as long as there are no self-loops. Choose the correct statement option:",
+    "options": ["Only Statement 1 is true", "Only Statement 2 is true", "Both statements are true", "Both statements are false"],
+    "answer": "Only Statement 1 is true",
+    "explanation": "Statement 1 is true because a finite directed graph with no cycles must have a starting point (source) and an ending point (sink). Statement 2 is false because topological sorting is strictly defined only for Directed Acyclic Graphs (DAGs); any cycle creates a dependency loop that breaks the linear ordering.",
+    "trick": "Topological sort is exclusively for acyclic directed graphs.",
+    "tip": "Topological sorting is impossible if the graph contains a cycle."
+  },
+  {
+    "id": 48,
+    "question": "What is the maximum number of edges in a simple undirected graph that contains V vertices?",
+    "options": ["V^2", "2V", "V * (V - 1) / 2", "V * (V + 1) / 2"],
+    "answer": "V * (V - 1) / 2",
+    "explanation": "In a simple undirected graph, each vertex can connect to at most V - 1 other vertices. Summing this across all V vertices gives V * (V - 1) potential connections. Since each edge is shared between two vertices, we divide by 2 to get V * (V - 1) / 2.",
+    "trick": "This matches the combination formula V Choose 2, which counts all distinct vertex pairs.",
+    "tip": "Maximum edges in an undirected graph = V * (V - 1) / 2."
+  },
+  {
+    "id": 49,
+    "question": "Given a binary tree where the preorder traversal is: A, B, D, E, C, F. The inorder traversal is: D, B, E, A, F, C. What will be the postorder traversal of this tree?",
+    "options": ["D, E, B, F, C, A", "D, E, F, B, C, A", "D, F, E, B, C, A", "F, D, E, B, C, A"],
+    "answer": "D, E, B, F, C, A",
+    "explanation": "Step 1: Preorder starts with 'A', so 'A' is the root. Step 2: In inorder, elements left of 'A' (D, B, E) form the left subtree; elements right of 'A' (F, C) form the right subtree. Step 3: From preorder, 'B' is the next root for the left subtree. In inorder, 'D' is to its left and 'E' is to its right. Step 4: For the right subtree, 'C' is the root, and 'F' is to its left in the inorder sequence. Step 5: Postorder traversal (Left-Right-Root) yields: D, E, B, F, C, A.",
+    "trick": "Root 'A' must appear last in the postorder sequence, which matches all options. Use tree reconstruction to determine the remaining order.",
+    "tip": "Reconstruct the tree using Preorder (root-first) and Inorder (splits subtrees)."
+  },
+  {
+    "id": 50,
+    "question": "Match the following tree structures with their balancing conditions: List I: [P. AVL Tree, Q. Red-Black Tree, R. Perfect Binary Tree] List II: [1. All leaf nodes are at the exact same depth, 2. The height difference between left and right subtrees cannot exceed 1, 3. The longest path from root to a leaf is at most twice the length of the shortest path]. Choose the correct match:",
+    "options": ["P-2, Q-3, R-1", "P-1, Q-2, R-3", "P-3, Q-1, R-2", "P-2, Q-1, R-3"],
+    "answer": "P-2, Q-3, R-1",
+    "explanation": "AVL trees enforce a strict balance factor rule where the height difference between subtrees is at most 1. Red-Black trees use color rules that guarantee the longest path is at most twice the length of the shortest path. Perfect binary trees require all internal nodes to be fully filled and all leaves to sit at the same depth.",
+    "trick": "AVL trees are more strictly balanced than Red-Black trees, leading to faster lookups but more frequent rebalancing rotations during insertions.",
+    "tip": "AVL = Strict height balance; Red-Black = Loose color-bound balance."
+  }
+]

@@ -1,0 +1,454 @@
+﻿
+
+[
+  {
+    "id": 1,
+    "question": "A 4-bit synchronous counter is constructed using J-K flip-flops. If the propagation delay of each flip-flop is 20 ns and the propagation delay of the combinational logic is 10 ns, what is the maximum clock frequency for reliable operation?",
+    "options": ["10 MHz", "25 MHz", "33.3 MHz", "50 MHz"],
+    "answer": "33.3 MHz",
+    "explanation": "Step 1: In a synchronous counter, all flip-flops are clocked simultaneously. Step 2: The total delay is determined by the maximum delay in the feedback path. Step 3: Total delay (T_total) = T_propagation(FF) + T_propagation(logic). Step 4: T_total = 20 ns + 10 ns = 30 ns. Step 5: Maximum frequency (F_max) = 1 / T_total = 1 / (30 x 10^-9) = 33.33 MHz.",
+    "trick": "ESE Trap: Do not multiply the flip-flop delay by the number of bits in a synchronous counter. That rule applies only to asynchronous (ripple) counters.",
+    "tip": "Sync counter delay = T_ff + T_logic. Ripple delay = N * T_ff."
+  },
+  {
+    "id": 2,
+    "question": "An n-bit ripple counter is designed using flip-flops with a propagation delay of 15 ns. If the maximum clock frequency must be at least 10 MHz, what is the maximum possible value of n?",
+    "options": ["4", "5", "6", "7"],
+    "answer": "6",
+    "explanation": "Step 1: For a ripple counter, the clock signal ripples through each flip-flop. Step 2: Total delay (T_total) = n * T_propagation(FF). Step 3: Required F_max = 10 MHz, so maximum allowable delay T = 1 / 10 MHz = 100 ns. Step 4: n * 15 ns <= 100 ns. Step 5: n <= 100 / 15 = 6.66. Therefore, the maximum integer value for n is 6.",
+    "trick": "Ripple counter delays are cumulative. Always round down the bit count to ensure the total delay stays under the required clock period.",
+    "tip": "Ripple counter F_max = 1 / (n * T_ff)."
+  },
+  {
+    "id": 3,
+    "question": "Assertion (A): A Mod-10 Johnson counter requires 5 flip-flops. Reason (R): A Johnson counter with n flip-flops produces a modulus of 2n.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A Johnson counter (twisted ring counter) produces a sequence of states. Step 2: The total number of valid states (modulus) for an n-bit Johnson counter is 2n. Step 3: To achieve a Mod-10 counter, 2n = 10, which means n = 5 flip-flops are required. Step 4: Both statements are factually correct. Step 5: The formula in the Reason directly explains why the Assertion requires 5 flip-flops.",
+    "trick": "Do not confuse Johnson counters (Mod 2n) with Ring counters (Mod n). Read the counter type carefully.",
+    "tip": "Johnson counter = 2n states. Ring counter = n states."
+  },
+  {
+    "id": 4,
+    "question": "Consider a 12-bit Analog-to-Digital Converter (ADC) with a full-scale voltage of 5V. What is the approximate quantization step size (resolution) of this ADC?",
+    "options": ["1.22 mV", "2.44 mV", "0.61 mV", "4.88 mV"],
+    "answer": "1.22 mV",
+    "explanation": "Step 1: Identify the formula for ADC resolution: V_ref / (2^n - 1). Step 2: Note the given values: V_ref = 5V, n = 12 bits. Step 3: Calculate the denominator: 2^12 - 1 = 4096 - 1 = 4095. Step 4: Divide full-scale voltage by the number of steps: 5 / 4095. Step 5: Result is approximately 0.001221 V, or 1.22 mV.",
+    "trick": "Sometimes the formula uses 2^n instead of 2^n - 1 for simplicity, but 2^n - 1 is technically precise for step sizes. 5/4096 is also ~1.22mV.",
+    "tip": "Resolution = V_ref / (2^n - 1)."
+  },
+  {
+    "id": 5,
+    "question": "Assertion (A): Emitter Coupled Logic (ECL) operates at the highest speed among all standard logic families. Reason (R): The transistors in an ECL circuit operate exclusively in the active and cut-off regions, strictly avoiding the saturation region.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: ECL is known as the fastest logic family. Step 2: The primary delay in bipolar logic families (like TTL) is the storage time when a transistor comes out of saturation. Step 3: ECL avoids saturation completely. Step 4: By keeping transistors in the active region, the charge storage time is eliminated. Step 5: Therefore, the lack of saturation (Reason) directly causes the high speed (Assertion).",
+    "trick": "ESE Trap: Memorize the superlatives for Logic Families! Fastest = ECL. Lowest Power = CMOS. Best Figure of Merit = CMOS.",
+    "tip": "ECL = Non-saturated bipolar logic = Fastest speed."
+  },
+  {
+    "id": 6,
+    "question": "A digital circuit uses a setup time of 5 ns and a hold time of 2 ns for its flip-flops. The clock period is 20 ns. What is the maximum allowable combinational logic delay to avoid setup time violations?",
+    "options": ["13 ns", "15 ns", "18 ns", "20 ns"],
+    "answer": "15 ns",
+    "explanation": "Step 1: Understand setup time constraint. The data must be stable before the clock edge. Step 2: The formula is T_clk >= T_logic_max + T_setup. Step 3: Rearranging gives T_logic_max <= T_clk - T_setup. Step 4: Substitute the given values: T_logic_max <= 20 ns - 5 ns. Step 5: T_logic_max = 15 ns. Hold time does not affect maximum delay.",
+    "trick": "Hold time is a distractor here! Setup time limits maximum delay (lowest frequency), while hold time limits minimum delay.",
+    "tip": "Max logic delay = T_clk - T_setup."
+  },
+  {
+    "id": 7,
+    "question": "Which of the following Analog-to-Digital converters is the fastest, and what is its comparative hardware complexity for an n-bit conversion?",
+    "options": ["Successive Approximation, Requires n comparators", "Dual Slope, Requires 2^n comparators", "Flash, Requires (2^n - 1) comparators", "Counter type, Requires 1 comparator"],
+    "answer": "Flash, Requires (2^n - 1) comparators",
+    "explanation": "Step 1: Identify the fastest ADC type, which is the Flash (or parallel) ADC. Step 2: Understand the architecture of a Flash ADC. It processes all bits simultaneously. Step 3: To achieve this parallel processing for an n-bit output, the input voltage is compared against multiple reference levels. Step 4: The number of reference levels and thus the number of comparators needed is exactly (2^n - 1). Step 5: Therefore, Flash is the fastest but has the highest hardware complexity.",
+    "trick": "Remember the trade-off: Flash ADC trades extreme hardware size (2^n - 1 comparators) for extreme speed (1 clock cycle).",
+    "tip": "Flash ADC = Fastest, uses (2^n - 1) comparators."
+  },
+  {
+    "id": 8,
+    "question": "What is the primary advantage of a Dual-Slope Integrating ADC compared to a Successive Approximation Register (SAR) ADC?",
+    "options": ["Higher conversion speed", "Better noise immunity", "Lower hardware complexity", "Ability to convert higher frequency signals"],
+    "answer": "Better noise immunity",
+    "explanation": "Step 1: Analyze the operation of a Dual-Slope ADC. It integrates the input signal over a fixed period. Step 2: Integration acts as a low-pass filter. Step 3: This filtering effect averages out high-frequency noise, particularly periodic noise like 50/60Hz mains hum. Step 4: SAR ADCs sample instantly using a DAC and comparator, making them vulnerable to noise spikes at the exact moment of sampling. Step 5: Thus, Dual-Slope offers far superior noise rejection.",
+    "trick": "Dual-slope is the slowest ADC, used in multimeters. Its superpower is accuracy and noise rejection, not speed.",
+    "tip": "Dual-slope = Slowest, best noise immunity (integrator)."
+  },
+  {
+    "id": 9,
+    "question": "Assertion (A): In a CMOS inverter, the static power dissipation is nearly zero. Reason (R): During stable logic states, either the NMOS or PMOS transistor is OFF, preventing a direct DC path from supply to ground.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate the Assertion. CMOS technology is famous for its ultra-low static power consumption. Step 2: Evaluate the Reason. A CMOS inverter consists of a PMOS pull-up and an NMOS pull-down network. Step 3: For a logic 1 input, NMOS is ON and PMOS is OFF. For logic 0, PMOS is ON and NMOS is OFF. Step 4: In both steady states, there is no continuous conductive path between VDD and GND. Step 5: The absence of this path (Reason) is exactly why static power dissipation is effectively zero (Assertion).",
+    "trick": "CMOS only consumes significant power during switching (dynamic power). Static power is basically leakage current.",
+    "tip": "CMOS steady state = No VDD to GND path."
+  },
+  {
+    "id": 10,
+    "question": "A logic family has a high-level input voltage (V_IH) of 2.0V, a low-level input voltage (V_IL) of 0.8V, a high-level output voltage (V_OH) of 2.7V, and a low-level output voltage (V_OL) of 0.4V. What is the High-State Noise Margin (NM_H)?",
+    "options": ["0.4V", "0.7V", "1.2V", "1.9V"],
+    "answer": "0.7V",
+    "explanation": "Step 1: Recall the definition of Noise Margins. Step 2: High-State Noise Margin (NM_H) is the difference between the minimum guaranteed high output and the minimum required high input. Step 3: Formula: NM_H = V_OH(min) - V_IH(min). Step 4: Substitute the given values: NM_H = 2.7V - 2.0V. Step 5: The result is 0.7V.",
+    "trick": "Don't confuse NM_H with NM_L. NM_L = V_IL(max) - V_OL(max) = 0.8V - 0.4V = 0.4V. Read the question carefully to pick the right margin.",
+    "tip": "NM_H = V_OH - V_IH. NM_L = V_IL - V_OL."
+  },
+  {
+    "id": 11,
+    "question": "Assertion (A): TTL logic gates must have their unused inputs tied to logic HIGH or VCC. Reason (R): A floating input in a TTL gate acts as a logic LOW, which could cause unintended behavior in AND/NAND gates.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "A is True, R is False",
+    "explanation": "Step 1: Evaluate the Assertion. Unused TTL inputs are susceptible to noise, so they should be tied high for AND/NAND or low for OR/NOR, but tying to HIGH is common practice for standard TTL. Let's assume A is true in general context. Step 2: Evaluate the Reason. In TTL, a floating input (open emitter) acts as a logic HIGH, not a logic LOW. Step 3: Because a floating input acts as HIGH, it acts as an antenna for noise. Step 4: Therefore, the reason statement is factually incorrect. Step 5: A is True, R is False.",
+    "trick": "Floating inputs in TTL = Logic 1. Floating inputs in ECL = Logic 0. Floating inputs in CMOS = Unpredictable.",
+    "tip": "TTL floating input always acts as logic HIGH."
+  },
+  {
+    "id": 12,
+    "question": "A 10-bit Successive Approximation Register (SAR) ADC has a clock frequency of 1 MHz. What is the approximate conversion time for a single analog sample?",
+    "options": ["1 microsecond", "10 microseconds", "1024 microseconds", "512 microseconds"],
+    "answer": "10 microseconds",
+    "explanation": "Step 1: Identify the ADC type (SAR). Step 2: Recall the formula for conversion time of an n-bit SAR ADC. Step 3: An SAR ADC takes exactly n clock cycles to complete a conversion, regardless of the input voltage. Step 4: T_conversion = n * T_clock. Step 5: Here, n = 10 bits and T_clock = 1 / 1 MHz = 1 microsecond. Therefore, conversion time = 10 * 1 microsecond = 10 microseconds.",
+    "trick": "Do not confuse SAR with Counter-type ADCs. Counter type takes up to 2^n cycles, while SAR takes exactly n cycles.",
+    "tip": "SAR ADC conversion time = n clock cycles."
+  },
+  {
+    "id": 13,
+    "question": "Consider a 4-bit R-2R ladder DAC. If the reference voltage is 16V, what is the analog output voltage for a digital input of 1010?",
+    "options": ["5V", "10V", "12V", "8V"],
+    "answer": "10V",
+    "explanation": "Step 1: Note the digital input: 1010 in binary equals 10 in decimal. Step 2: Identify the DAC type and number of bits: R-2R ladder, 4 bits. Step 3: Calculate the full-scale range denominator: 2^n = 2^4 = 16. Step 4: Use the DAC formula: V_out = V_ref * (Decimal Input / 2^n). Step 5: V_out = 16V * (10 / 16) = 10V.",
+    "trick": "The formula for R-2R ladders generally uses 2^n in the denominator, not 2^n - 1, depending on the termination of the ladder.",
+    "tip": "V_out = V_ref * (Decimal / 2^n) for standard R-2R."
+  },
+  {
+    "id": 14,
+    "question": "To design a Mod-45 counter, what is the minimum number of flip-flops required?",
+    "options": ["5", "6", "7", "45"],
+    "answer": "6",
+    "explanation": "Step 1: A Mod-N counter requires enough states to count up to N. Step 2: The number of states provided by n flip-flops is 2^n. Step 3: We need to find the smallest integer n such that 2^n >= N. Step 4: Here, N = 45. Step 5: 2^5 = 32 (too small), 2^6 = 64 (sufficient). Therefore, a minimum of 6 flip-flops is required.",
+    "trick": "Never try to divide the modulus by 2. Always use powers of 2 (2, 4, 8, 16, 32, 64) and find the next highest number.",
+    "tip": "Find minimum n where 2^n >= Modulus."
+  },
+  {
+    "id": 15,
+    "question": "Assertion (A): The figure of merit of a logic family is the product of its propagation delay and static power dissipation. Reason (R): An ideal logic family should have a high figure of merit to ensure fast operation and low heat generation.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "A is True, R is False",
+    "explanation": "Step 1: Define Figure of Merit (FOM). FOM = Propagation Delay x Power Dissipation (also known as speed-power product). So, Assertion is True. Step 2: Analyze the ideal values. We want the delay to be as small as possible (fast) and power dissipation to be as low as possible. Step 3: Therefore, the ideal FOM should be as LOW as possible. Step 4: The Reason states an ideal family should have a HIGH figure of merit, which is incorrect. Step 5: A is True, R is False.",
+    "trick": "Figure of Merit is measured in Joules (Delay in seconds x Power in Watts). Lower energy per operation is always better.",
+    "tip": "Ideal Figure of Merit (Speed-Power product) is ZERO."
+  },
+  {
+    "id": 16,
+    "question": "A Universal Shift Register is capable of performing which of the following operations?",
+    "options": ["Serial-in Serial-out only", "Parallel-in Parallel-out only", "Shift right, shift left, parallel load, and hold", "Only shift operations without parallel loading"],
+    "answer": "Shift right, shift left, parallel load, and hold",
+    "explanation": "Step 1: Define a Universal Shift Register. Step 2: It is a bidirectional register. Step 3: It must support shifting data to the right and to the left. Step 4: It must support parallel loading of data (Parallel-In). Step 5: It must have a 'hold' state to retain data. Therefore, it supports all these operations.",
+    "trick": "The term 'Universal' specifically implies bidirectional shifting combined with parallel load capabilities, usually controlled by a multiplexer.",
+    "tip": "Universal Shift Register does everything: L/R shift, P-load."
+  },
+  {
+    "id": 17,
+    "question": "Which logic family utilizes a Totem Pole output stage to improve switching speed and capacitive load driving capability?",
+    "options": ["CMOS", "Standard TTL", "ECL", "I2L"],
+    "answer": "Standard TTL",
+    "explanation": "Step 1: Analyze the options. Step 2: CMOS uses complementary pull-up/pull-down pairs. ECL uses emitter followers. Step 3: Standard TTL uses a specific configuration called the Totem Pole output. Step 4: A Totem Pole output consists of an active pull-up transistor and an active pull-down transistor. Step 5: This configuration provides low output impedance in both states, allowing rapid charging and discharging of load capacitance.",
+    "trick": "Totem pole outputs cannot be wire-ANDed together because a logic 1 and logic 0 on the same bus will create a short circuit.",
+    "tip": "Totem Pole = Standard TTL output stage."
+  },
+  {
+    "id": 18,
+    "question": "Assertion (A): Open-collector TTL gates can be used to implement a wired-AND logic function. Reason (R): In an open-collector output, the active pull-up transistor is removed, allowing multiple outputs to be connected together with a single external pull-up resistor.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Assess the Assertion. Open-collector gates are specifically designed to allow tying outputs together to form wired-AND functions. (True). Step 2: Assess the Reason. The totem-pole active pull-up is removed in open-collector designs. Step 3: An external pull-up resistor provides the logic HIGH. Step 4: If any connected gate outputs a LOW, the whole line is pulled LOW (Wired-AND). Step 5: The structural explanation in R directly explains why A is possible.",
+    "trick": "If you try to wire-AND standard totem-pole TTL gates, you will destroy the ICs due to high short-circuit currents.",
+    "tip": "Open-collector TTL = Wired-AND capability."
+  },
+  {
+    "id": 19,
+    "question": "What is the maximum counting sequence of a Linear Feedback Shift Register (LFSR) containing 4 flip-flops, assuming an optimal tap configuration?",
+    "options": ["16", "15", "8", "4"],
+    "answer": "15",
+    "explanation": "Step 1: An LFSR generates a pseudo-random sequence. Step 2: The maximum sequence length of an n-bit LFSR is theoretically 2^n. Step 3: However, the all-zero state is a trap state and cannot be part of the sequence. Step 4: Therefore, the maximum length (maximal-length LFSR) is 2^n - 1. Step 5: For n=4, max sequence = 2^4 - 1 = 16 - 1 = 15.",
+    "trick": "Always subtract 1 for an LFSR because the 00...0 state will loop onto itself indefinitely. It's 2^n - 1, not 2^n.",
+    "tip": "Max sequence of n-bit LFSR = 2^n - 1."
+  },
+  {
+    "id": 20,
+    "question": "A dual-slope ADC has a clock frequency of 100 kHz. The integration period consists of 1000 clock cycles. If the reference voltage is 2V and the input voltage is 1V, how many clock cycles will the de-integration phase last?",
+    "options": ["500", "1000", "2000", "250"],
+    "answer": "500",
+    "explanation": "Step 1: The dual-slope ADC principle equates the charge accumulated to the charge discharged. Step 2: V_in * T_integrate = V_ref * T_deintegrate. Step 3: Time can be represented by clock cycles. V_in * N_integrate = V_ref * N_deintegrate. Step 4: Substitute the given values: 1V * 1000 cycles = 2V * N_deintegrate. Step 5: N_deintegrate = 1000 / 2 = 500 cycles.",
+    "trick": "The clock frequency (100 kHz) is irrelevant for this specific calculation. It is a distractor to confuse the ratio calculation.",
+    "tip": "V_in * T1 = V_ref * T2 for dual slope."
+  },
+  {
+    "id": 21,
+    "question": "Which of the following specifications primarily determines the maximum number of standard logic inputs that an output of the same logic family can reliably drive?",
+    "options": ["Propagation Delay", "Noise Margin", "Fan-out", "Power Dissipation"],
+    "answer": "Fan-out",
+    "explanation": "Step 1: Define the terms. Propagation delay is speed. Noise margin is signal integrity. Step 2: Power dissipation is heat. Step 3: Fan-out is defined as the maximum number of identical logic gate inputs that can be connected to a single gate's output without compromising the logic levels. Step 4: It is determined by the output current capability (I_OH, I_OL) versus the input current requirements (I_IH, I_IL). Step 5: Therefore, Fan-out is the correct parameter.",
+    "trick": "Fan-in is the number of inputs a gate has. Fan-out is the number of external inputs it can drive.",
+    "tip": "Fan-out = Output driving capability."
+  },
+  {
+    "id": 22,
+    "question": "Assertion (A): Asynchronous counters are generally faster than synchronous counters with the same number of bits. Reason (R): In an asynchronous counter, all flip-flops are not clocked simultaneously; rather, the output of one serves as the clock for the next.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "A is False, R is True",
+    "explanation": "Step 1: Evaluate the Assertion. Synchronous counters trigger all flip-flops simultaneously, so total delay equals one FF delay plus logic delay. Asynchronous counters suffer from cumulative delay. Therefore, sync counters are FASTER. Assertion is False. Step 2: Evaluate the Reason. Asynchronous (ripple) counters indeed use the output of one FF to clock the next. This statement is True. Step 3: Since A is False and R is True, the correct option is clear.",
+    "trick": "Ripple counters are 'simpler' in hardware but 'slower' in speed. Do not confuse simplicity with performance.",
+    "tip": "Sync counters = Faster. Ripple counters = Slower."
+  },
+  {
+    "id": 23,
+    "question": "A 4-bit ring counter is pre-loaded with the binary state 1000. How many clock pulses are required for the counter to return to the state 1000?",
+    "options": ["2", "4", "8", "16"],
+    "answer": "4",
+    "explanation": "Step 1: Understand the architecture of a ring counter. It is a shift register where the output of the last flip-flop feeds back to the input of the first. Step 2: Only one flip-flop holds a logic '1' at any time. Step 3: The '1' shifts one position to the right with each clock pulse. Step 4: For an n-bit ring counter, it takes exactly n clock pulses to complete one full circulation. Step 5: Since it is a 4-bit ring counter, it takes 4 clock pulses to return to 1000.",
+    "trick": "A ring counter has a modulus equal to its number of flip-flops (n). A Johnson counter has a modulus of 2n.",
+    "tip": "Ring counter Modulus = n."
+  },
+  {
+    "id": 24,
+    "question": "For converting an analog signal of bandwidth 10 kHz into digital format using an ADC, what is the theoretical minimum sampling frequency required according to the Nyquist criterion?",
+    "options": ["10 kHz", "20 kHz", "5 kHz", "40 kHz"],
+    "answer": "20 kHz",
+    "explanation": "Step 1: Identify the Nyquist sampling theorem. Step 2: The theorem states that a continuous-time signal can be completely represented by its samples if the sampling rate is at least twice the maximum frequency present in the signal. Step 3: F_sampling >= 2 * F_max. Step 4: Here, the bandwidth (F_max) is 10 kHz. Step 5: Minimum F_sampling = 2 * 10 kHz = 20 kHz.",
+    "trick": "In practical ADCs, sampling is usually done at rates higher than 2x (oversampling) to simplify the anti-aliasing filter, but the question asks for theoretical minimum.",
+    "tip": "Nyquist rate F_s >= 2 * F_max."
+  },
+  {
+    "id": 25,
+    "question": "What is the primary operational mode of transistors in the Emitter Coupled Logic (ECL) family that enables its ultra-fast switching speeds?",
+    "options": ["Saturation and Cut-off", "Linear and Saturation", "Active and Cut-off", "Ohmic and Active"],
+    "answer": "Active and Cut-off",
+    "explanation": "Step 1: Recall the cause of switching delays in bipolar transistors: deep saturation causes charge storage in the base. Step 2: ECL is designed to prevent transistors from entering the saturation region. Step 3: Instead, the transistors switch between the forward-active region and the cut-off region. Step 4: Steering current between differential pairs keeps the operation linear/active. Step 5: This eliminates storage time, making ECL the fastest.",
+    "trick": "Standard TTL switches between Saturation and Cut-off. ECL switches between Active and Cut-off. Know the difference!",
+    "tip": "ECL avoids saturation -> Active/Cut-off."
+  },
+  {
+    "id": 26,
+    "question": "Assertion (A): A Flash ADC is highly impractical for very high-resolution applications (e.g., 16-bit or 24-bit). Reason (R): The number of precision comparators required for an n-bit Flash ADC scales exponentially as 2^n - 1.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate Assertion. Flash ADCs are rarely used above 8-10 bits due to massive hardware requirements. Therefore, A is True. Step 2: Evaluate Reason. The formula for the number of comparators in a Flash ADC is exactly 2^n - 1. Step 3: For a 16-bit ADC, this would mean 65,535 comparators, which is physically and thermally impractical on a single IC. Step 4: Therefore, R is True. Step 5: The exponential scaling in R is the exact reason why A is True.",
+    "trick": "If you see a Flash ADC question, the answer usually revolves around its speed (fastest) or its massive comparator count (2^n - 1).",
+    "tip": "Flash ADC hardware grows exponentially with resolution."
+  },
+  {
+    "id": 27,
+    "question": "A digital multiplexer can be used for which of the following applications?",
+    "options": ["Data routing and many-to-one transmission", "Logic function generation", "Parallel to serial conversion", "All of the above"],
+    "answer": "All of the above",
+    "explanation": "Step 1: A multiplexer (MUX) routes data from multiple inputs to a single output (many-to-one). Step 2: A MUX can implement any Boolean function by applying fixed logic levels to its data inputs and variables to its select lines (Logic function generation). Step 3: By feeding parallel data to the inputs and sequencing the select lines with a counter, it converts parallel data to a serial stream. Step 4: Therefore, it performs all these functions. Step 5: 'All of the above' is correct.",
+    "trick": "MUX is a universal logic module. A 2^n-to-1 MUX can implement ANY Boolean function of n+1 variables.",
+    "tip": "MUX = Data Selector, Logic Generator, P-to-S converter."
+  },
+  {
+    "id": 28,
+    "question": "In standard TTL, a floating or unconnected input is interpreted as:",
+    "options": ["Logic 0", "Logic 1", "High Impedance (Z)", "An oscillating state"],
+    "answer": "Logic 1",
+    "explanation": "Step 1: Look at the input stage of a standard TTL gate, which is a multi-emitter NPN transistor. Step 2: The base of this transistor is connected to VCC via a resistor. Step 3: If an emitter (input) is left unconnected (floating), no current flows out of that emitter. Step 4: This behaves as if a high voltage is applied, turning the base-emitter junction OFF. Step 5: Consequently, the TTL gate interprets a floating input as a Logic 1 (HIGH).",
+    "trick": "While it acts as a Logic 1, leaving it floating makes it a noise antenna. Always tie it to VCC through a pull-up resistor in real designs.",
+    "tip": "TTL floating input = Logic HIGH."
+  },
+  {
+    "id": 29,
+    "question": "Which logic family provides the highest packaging density and is most commonly used in VLSI microprocessors?",
+    "options": ["Standard TTL", "ECL", "I2L", "CMOS"],
+    "answer": "CMOS",
+    "explanation": "Step 1: Analyze the requirements for VLSI (Very Large Scale Integration). Step 2: VLSI requires millions of transistors on a single chip. Step 3: High density means each transistor must be physically small. Step 4: It also requires extremely low power dissipation to prevent the chip from melting. Step 5: CMOS has the lowest static power dissipation and a very small transistor footprint, making it the only viable choice for modern microprocessors.",
+    "trick": "ECL is faster, but its massive power consumption prevents it from being used in dense VLSI chips.",
+    "tip": "VLSI = High density + Low power = CMOS."
+  },
+  {
+    "id": 30,
+    "question": "Assertion (A): In a tracking ADC, the conversion time is highly dependent on the nature of the input signal. Reason (R): A tracking ADC uses an up/down counter that only tracks changes in the input, requiring few clock cycles for small changes but many cycles for large voltage steps.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: A tracking ADC (or delta-encoded ADC) uses an up/down counter. Step 2: If the input changes slightly, the counter only needs to increment or decrement a few steps. Step 3: Therefore, for slowly varying signals, the conversion is very fast. Step 4: For large, sudden voltage steps, the counter must count sequentially up or down to the new value, taking a long time. Step 5: Both A and R are true, and R correctly explains the variable conversion time in A.",
+    "trick": "Unlike SAR which always takes 'n' cycles, or Flash which takes 1 cycle, Tracking ADC time is dynamic and signal-dependent.",
+    "tip": "Tracking ADC uses up/down counter; speed depends on signal delta."
+  },
+  {
+    "id": 31,
+    "question": "What happens to the output of an n-bit shift register if the input data line is held HIGH and n clock pulses are applied?",
+    "options": ["The output becomes all 0s", "The output becomes all 1s", "The output toggles between 0 and 1", "The register enters a high-impedance state"],
+    "answer": "The output becomes all 1s",
+    "explanation": "Step 1: A shift register moves data from its input to its output across its internal flip-flops. Step 2: If the input is held HIGH (1), every clock pulse shifts a '1' into the first flip-flop. Step 3: After 1 clock pulse, the first FF is 1. Step 4: After n clock pulses, '1's have shifted completely through the n-stage register. Step 5: The entire register is now filled with 1s.",
+    "trick": "This is the fundamental principle of 'flushing' a pipeline or register. Pushing 'n' bits into an 'n-bit' register completely overwrites old data.",
+    "tip": "n pulses shift n bits into an n-bit register."
+  },
+  {
+    "id": 32,
+    "question": "A digital system requires an ADC to digitize an audio signal with a maximum frequency of 20 kHz. To allow for practical anti-aliasing filters, the system oversamples by a factor of 4. What is the sampling frequency?",
+    "options": ["40 kHz", "80 kHz", "160 kHz", "20 kHz"],
+    "answer": "160 kHz",
+    "explanation": "Step 1: Find the Nyquist rate. F_nyquist = 2 * F_max. Step 2: F_max = 20 kHz, so Nyquist rate = 40 kHz. Step 3: The question specifies oversampling by a factor of 4 relative to the Nyquist rate. Step 4: Sampling frequency (F_s) = Oversampling Factor * Nyquist Rate. Step 5: F_s = 4 * 40 kHz = 160 kHz.",
+    "trick": "Oversampling is a multiplier on the Nyquist rate, not the maximum frequency. Calculate Nyquist first!",
+    "tip": "Oversampling Factor x (2 * F_max)."
+  },
+  {
+    "id": 33,
+    "question": "Assertion (A): Dynamic RAM (DRAM) requires periodic refreshing, whereas Static RAM (SRAM) does not. Reason (R): DRAM stores data as electrical charge on a capacitor, which slowly leaks away, while SRAM stores data using flip-flop latching circuitry.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate Assertion. DRAM cells lose their state over time and must be refreshed. SRAM holds its state as long as power is applied. (True). Step 2: Evaluate Reason. A DRAM cell consists of 1 transistor and 1 capacitor. Capacitors leak charge. Step 3: An SRAM cell consists of 4 to 6 transistors forming a bistable latch. Latches do not leak logic states. Step 4: (True). Step 5: The physical storage mechanism in the Reason directly explains the refreshing requirement in the Assertion.",
+    "trick": "SRAM is faster but less dense (6 transistors per bit). DRAM is slower but much denser (1 transistor, 1 capacitor per bit).",
+    "tip": "DRAM = Capacitor (leaks). SRAM = Latch (stable)."
+  },
+  {
+    "id": 34,
+    "question": "Which of the following Boolean expressions represents the carry-out (C_out) of a Full Adder circuit with inputs A, B, and Carry-in (C_in)?",
+    "options": ["A XOR B XOR C_in", "A.B + (A XOR B).C_in", "A.B + B.C_in", "A XOR B + C_in"],
+    "answer": "A.B + (A XOR B).C_in",
+    "explanation": "Step 1: Recall the truth table for a Full Adder. Step 2: The sum output is S = A XOR B XOR C_in. Step 3: The carry-out is generated if both A and B are 1 (A.B), OR if either A or B is 1 AND the incoming carry is 1. Step 4: The logical expression for this is C_out = AB + C_in(A + B). Step 5: It is most commonly implemented and written as A.B + (A XOR B).C_in to reuse the XOR gate from the Sum logic.",
+    "trick": "A.B + B.C_in + A.C_in is also correct, but A.B + (A XOR B).C_in is the standard optimized hardware representation.",
+    "tip": "Carry Out = AB + C_in(A XOR B)."
+  },
+  {
+    "id": 35,
+    "question": "In a 4-bit binary ripple down-counter, how should the flip-flops be configured assuming they trigger on the negative clock edge?",
+    "options": ["Connect Q output of preceding FF to clock of next FF", "Connect Q_bar output of preceding FF to clock of next FF", "Connect all clock inputs to a common clock source", "Connect Q output of preceding FF to data input of next FF"],
+    "answer": "Connect Q_bar output of preceding FF to clock of next FF",
+    "explanation": "Step 1: Determine the type of counter: Asynchronous (ripple) down-counter. Step 2: Determine the trigger type: Negative edge. Step 3: For a negative-edge triggered UP counter, connect Q to the next clock. Step 4: To reverse the counting direction to DOWN, we must use the complementary output. Step 5: Therefore, connect Q_bar (Q') of the preceding flip-flop to the clock input of the next flip-flop.",
+    "trick": "Matrix trick: (Neg-Edge + UP = Q), (Neg-Edge + DOWN = Q_bar), (Pos-Edge + UP = Q_bar), (Pos-Edge + DOWN = Q).",
+    "tip": "Neg-edge DOWN counter uses Q_bar for clocking."
+  },
+  {
+    "id": 36,
+    "question": "A microprocessor has a 16-bit address bus and an 8-bit data bus. What is the maximum memory addressing capacity of this microprocessor?",
+    "options": ["16 KB", "32 KB", "64 KB", "128 KB"],
+    "answer": "64 KB",
+    "explanation": "Step 1: Identify the size of the address bus (n). Here, n = 16. Step 2: The maximum number of unique memory locations that can be addressed is 2^n. Step 3: 2^16 = 65,536 locations. Step 4: The data bus is 8-bits (1 Byte) wide, meaning each location stores 1 Byte. Step 5: Total memory capacity = 65,536 Bytes = 64 Kilobytes (KB).",
+    "trick": "The data bus size tells you the word size (bytes vs words). Address bus size (2^n) dictates the maximum number of locations.",
+    "tip": "Address space = 2^(address lines)."
+  },
+  {
+    "id": 37,
+    "question": "Assertion (A): An R-2R ladder DAC is generally preferred over a weighted-resistor DAC for high-resolution applications (e.g., 12-bit). Reason (R): An R-2R ladder requires only two precise resistance values, whereas a weighted-resistor DAC requires a wide spread of precision resistor values.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Assess Assertion. Weighted-resistor DACs are rarely used above 4-bits because the MSB resistor is R and the LSB is 2^(n-1) * R, creating matching issues. A is True. Step 2: Assess Reason. The R-2R ladder only uses resistors of value R and 2R. Step 3: Fabricating just two matched resistor values on a silicon IC is highly reliable. Step 4: R is True. Step 5: The manufacturing advantage in R perfectly explains why R-2R is preferred for high resolution in A.",
+    "trick": "For an 8-bit weighted resistor DAC, the largest resistor is 128 times the smallest. Maintaining tolerance across that range is impossible.",
+    "tip": "R-2R DAC uses only two resistor values: R and 2R."
+  },
+  {
+    "id": 38,
+    "question": "Which of the following parameters represents the delay between the 50% points of the input and output voltage waveforms when the output changes from HIGH to LOW?",
+    "options": ["t_PLH", "t_PHL", "t_rise", "t_fall"],
+    "answer": "t_PHL",
+    "explanation": "Step 1: Understand propagation delay definitions. Step 2: 't_P' stands for Propagation time. Step 3: The next two letters indicate the direction of the OUTPUT transition. Step 4: The question specifies the output changes from HIGH to LOW. Step 5: Therefore, the parameter is t_PHL (Propagation time High-to-Low).",
+    "trick": "Look strictly at the OUTPUT transition. Even if the input goes Low-to-High, if the output goes High-to-Low, it is t_PHL.",
+    "tip": "t_PHL = Output transitions from High to Low."
+  },
+  {
+    "id": 39,
+    "question": "A Moore state machine differs from a Mealy state machine in that:",
+    "options": ["Moore outputs depend on inputs and current state, Mealy outputs depend only on current state", "Moore outputs depend only on current state, Mealy outputs depend on inputs and current state", "Moore machines require fewer states than Mealy machines", "Mealy machines are always synchronous, Moore machines are always asynchronous"],
+    "answer": "Moore outputs depend only on current state, Mealy outputs depend on inputs and current state",
+    "explanation": "Step 1: Define Moore machine. In a Moore machine, the combinational logic for the outputs only takes inputs from the state registers. Step 2: Therefore, Moore outputs depend ONLY on the current state. Step 3: Define Mealy machine. In a Mealy machine, output logic takes inputs from both the state registers AND the external inputs. Step 4: Therefore, Mealy outputs can change immediately if an input changes. Step 5: This aligns perfectly with the second option.",
+    "trick": "Memory trick: 'Moore is Less' responsive to instant input changes because it only looks at the state.",
+    "tip": "Moore = State only. Mealy = State + Inputs."
+  },
+  {
+    "id": 40,
+    "question": "Assertion (A): The setup time of a flip-flop determines the maximum operating frequency of a synchronous circuit. Reason (R): Hold time violations can usually be fixed by lowering the clock frequency.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "A is True, R is False",
+    "explanation": "Step 1: Evaluate Assertion. Setup time directly factors into the minimum clock period equation (T_clk >= T_logic + T_setup + T_cq). Thus, it dictates max frequency. (True). Step 2: Evaluate Reason. Hold time violation occurs when data changes too quickly AFTER the clock edge. Step 3: The condition for hold time is T_logic_min >= T_hold. Step 4: Clock frequency does NOT appear in the hold time equation. Lowering clock speed will NOT fix a hold time violation; you must add delay to the logic path. Step 5: Reason is False.",
+    "trick": "Setup violations = lower the clock speed. Hold violations = insert buffers (delay) in the data path. You cannot fix hold violations by slowing the clock!",
+    "tip": "Hold time violations are independent of clock frequency."
+  },
+  {
+    "id": 41,
+    "question": "What is the primary function of a Schmitt Trigger circuit?",
+    "options": ["To generate a sine wave", "To convert a noisy analog signal into a clean digital square wave", "To act as a high-speed Analog-to-Digital Converter", "To perform binary addition"],
+    "answer": "To convert a noisy analog signal into a clean digital square wave",
+    "explanation": "Step 1: A Schmitt Trigger is a comparator circuit with positive feedback. Step 2: This positive feedback creates hysteresis. Step 3: Hysteresis means there are two different threshold voltages for low-to-high and high-to-low transitions. Step 4: This prevents noise on the input signal from causing multiple false transitions at the output. Step 5: It effectively squares up slowly varying or noisy waveforms into clean digital pulses.",
+    "trick": "Hysteresis is the keyword for Schmitt triggers. It suppresses noise around the threshold level.",
+    "tip": "Schmitt Trigger uses hysteresis to clean noisy signals."
+  },
+  {
+    "id": 42,
+    "question": "In a 3-to-8 line decoder used for memory address decoding, what happens if the Enable (EN) input is inactive?",
+    "options": ["All output lines go to an active state", "All output lines go to an inactive state", "The output state retains its previous value", "The output follows the input lines directly"],
+    "answer": "All output lines go to an inactive state",
+    "explanation": "Step 1: A decoder translates an n-bit binary input into 2^n unique output lines. Step 2: The Enable (EN) pin controls the overall operation of the IC. Step 3: When EN is active, the selected output line goes active. Step 4: When EN is inactive (disabled), the internal logic is blocked. Step 5: Consequently, all outputs are forced into their inactive logic state, regardless of the address inputs.",
+    "trick": "In active-low decoders (like the 74LS138), 'inactive state' means all outputs go to Logic HIGH.",
+    "tip": "Disable pin forces all outputs to inactive state."
+  },
+  {
+    "id": 43,
+    "question": "Assertion (A): Synchronous sequential circuits are generally preferred over asynchronous sequential circuits in complex digital designs. Reason (R): Synchronous circuits are free from critical races and timing hazards because state changes are strictly regulated by a global clock.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate Assertion. Modern VLSI and FPGA designs rely almost entirely on synchronous design methodologies. A is True. Step 2: Evaluate Reason. Asynchronous circuits react immediately to input changes, making them highly susceptible to unequal logic delays, which cause race conditions and glitches. Step 3: A global clock ensures that all flip-flops only sample stable data after logic transitions have settled. Step 4: R is True. Step 5: Preventing these timing hazards (R) is exactly why synchronous design is the standard (A).",
+    "trick": "Asynchronous circuits can theoretically be faster and use less power (no clock tree), but they are nightmare to design and verify, hence synchronous is king.",
+    "tip": "Global clock prevents race conditions and hazards."
+  },
+  {
+    "id": 44,
+    "question": "A digital-to-analog converter has a resolution of approximately 0.4% of its full-scale output. What is the word length (number of bits) of this DAC?",
+    "options": ["8 bits", "10 bits", "12 bits", "16 bits"],
+    "answer": "8 bits",
+    "explanation": "Step 1: Resolution percentage is given as 0.4%, which is 0.004 in decimal. Step 2: The formula for percentage resolution is (1 / (2^n - 1)) * 100%. Step 3: So, 1 / (2^n - 1) = 0.004. Step 4: 2^n - 1 = 1 / 0.004 = 250. Step 5: 2^n = 251. The closest integer power of 2 is 256, which corresponds to n = 8 bits.",
+    "trick": "Quick approximations: 8-bit is ~0.4%, 10-bit is ~0.1%, 12-bit is ~0.024%. Memorize these standard milestones.",
+    "tip": "1 / 256 is roughly 0.0039, or 0.4%."
+  },
+  {
+    "id": 45,
+    "question": "Which specific issue in asynchronous ripple counters limits their use in high-frequency applications where intermediate counts must be decoded?",
+    "options": ["Excessive power consumption", "Decoding glitches due to cumulative propagation delay", "Inability to count downwards", "Requirement for highly stable clock sources"],
+    "answer": "Decoding glitches due to cumulative propagation delay",
+    "explanation": "Step 1: Ripple counters are asynchronous; flip-flops trigger sequentially. Step 2: Because of this sequential triggering, there are intermediate, transient states. Step 3: For example, transitioning from 011 to 100 goes through 010 and 000 briefly due to delays. Step 4: If you attach a decoder to the outputs, these transient states will cause brief voltage spikes (glitches) on the decoded output lines. Step 5: This makes them unusable for triggering other high-speed synchronous logic.",
+    "trick": "If a question mentions 'decoding' and 'ripple counters' together, the answer is always 'glitches'.",
+    "tip": "Ripple counter delays cause transient decoding glitches."
+  },
+  {
+    "id": 46,
+    "question": "Assertion (A): Parity generators/checkers are built primarily using EXCLUSIVE-OR (XOR) gates. Reason (R): The output of an XOR gate is HIGH only when an odd number of its inputs are HIGH.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate Assertion. Parity circuits compute the modulo-2 sum of bits, which is exactly the function of XOR trees. A is True. Step 2: Evaluate Reason. The defining characteristic of an n-input XOR function is that it returns 1 if the number of 1s in the input is odd. Step 3: Because parity is based on counting odd/even 1s, the XOR gate's mathematical property makes it the perfect building block. Step 4: R is True. Step 5: R perfectly explains A.",
+    "trick": "XOR is the 'odd function'. XNOR is the 'even function'. Parity inherently relies on detecting odd/even states.",
+    "tip": "XOR output = 1 for odd number of 1s."
+  },
+  {
+    "id": 47,
+    "question": "A master-slave J-K flip-flop is designed to eliminate which of the following timing problems?",
+    "options": ["Setup time violation", "Race-around condition", "Clock skew", "Hold time violation"],
+    "answer": "Race-around condition",
+    "explanation": "Step 1: Identify the problem in a level-triggered J-K flip-flop. Step 2: When J=1, K=1, the output toggles. Step 3: If the clock pulse width is longer than the propagation delay of the flip-flop, the output will toggle multiple times during a single clock HIGH phase. This is the race-around condition. Step 4: A master-slave flip-flop uses two cascaded stages. The master catches the input on the leading edge, and transfers it to the slave on the trailing edge. Step 5: This breaks the feedback loop during the active clock phase, completely eliminating the race-around condition.",
+    "trick": "Race-around ONLY happens in level-triggered J-K or T flip-flops when inputs are 1. Edge-triggering or Master-Slave fixes it.",
+    "tip": "Master-Slave configuration solves race-around condition."
+  },
+  {
+    "id": 48,
+    "question": "Which of the following describes the 'Folded Cascode' or 'Two-Step' ADC architecture?",
+    "options": ["It requires fewer comparators than a Flash ADC but offers higher speed than a SAR ADC.", "It is the slowest ADC type but offers the highest resolution.", "It relies entirely on an analog integrator and a counter.", "It directly digitizes the analog signal using a single ramp voltage."],
+    "answer": "It requires fewer comparators than a Flash ADC but offers higher speed than a SAR ADC.",
+    "explanation": "Step 1: Define Two-Step (or Sub-ranging) ADC. It performs conversion in two stages. Step 2: It first determines the MSBs using a coarse Flash ADC. Step 3: It converts this back to analog, subtracts it from the original signal, and digitizes the remainder to find the LSBs. Step 4: Because it uses Flash ADCs for smaller bit-chunks, it is much faster than SAR. Step 5: Because it doesn't do all bits at once, it uses drastically fewer comparators than a full Flash ADC.",
+    "trick": "Pipeline and Two-Step ADCs are the middle-ground compromise. Good speed, acceptable hardware size. They bridge the gap between SAR and Flash.",
+    "tip": "Two-step ADC: Balance of Flash speed and SAR hardware."
+  },
+  {
+    "id": 49,
+    "question": "In the context of logic families, what is 'Current Sourcing' and 'Current Sinking'?",
+    "options": ["Sourcing is when logic HIGH output supplies current to load; Sinking is when logic LOW output draws current from load.", "Sourcing is when logic LOW output draws current; Sinking is when logic HIGH supplies current.", "Sourcing relates to static power; Sinking relates to dynamic power.", "Both refer to leakage currents in CMOS inputs."],
+    "answer": "Sourcing is when logic HIGH output supplies current to load; Sinking is when logic LOW output draws current from load.",
+    "explanation": "Step 1: Analyze an output driver connected to a load. Step 2: When the output is HIGH (Logic 1), current flows out of the driver into the load to ground. The driver acts as a source (Current Sourcing). Step 3: When the output is LOW (Logic 0), the output sits at ~0V. Current flows from the load's VCC, through the load, and into the driver to reach ground. Step 4: The driver acts as a sink for the current (Current Sinking). Step 5: Standard TTL sinks much more current than it can source.",
+    "trick": "Think of water. Source = water flowing out (HIGH). Sink = water draining in (LOW).",
+    "tip": "Source = Current out (HIGH). Sink = Current in (LOW)."
+  },
+  {
+    "id": 50,
+    "question": "Assertion (A): A Demultiplexer can be used as a decoder by tying its data input to logic HIGH. Reason (R): A demultiplexer routes a single data input to one of many outputs based on the select lines; if data is always HIGH, it acts exactly like a decoder enable line.",
+    "options": ["Both A and R are True, and R is the correct explanation of A", "Both A and R are True, but R is not the correct explanation of A", "A is True, R is False", "A is False, R is True"],
+    "answer": "Both A and R are True, and R is the correct explanation of A",
+    "explanation": "Step 1: Evaluate Assertion. A 1-to-2^n demultiplexer and an n-to-2^n decoder are structurally identical circuits. (True). Step 2: Evaluate Reason. In a demultiplexer, the data input is routed to the output selected by the address lines. Step 3: If you tie the data input to logic '1', then the selected output will become '1', while all other outputs remain '0'. Step 4: This is the exact functional definition of a decoder where the data input acts as an active-high Enable pin. Step 5: Reason accurately explains the Assertion.",
+    "trick": "Decoder = Demux. The only difference is what you call the pins. Data pin in Demux = Enable pin in Decoder.",
+    "tip": "Demux data input acts as Decoder Enable input."
+  }
+]
