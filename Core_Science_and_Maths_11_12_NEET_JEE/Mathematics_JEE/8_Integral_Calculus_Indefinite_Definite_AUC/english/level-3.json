@@ -1,0 +1,1402 @@
+[
+    {
+        "id": 1,
+        "question": "Evaluate $\\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{r=1}^{2n} \\frac{r}{\\sqrt{n^2 + r^2}}$.",
+        "options": [
+            "$\\sqrt{5} - 1$",
+            "$\\sqrt{5} + 1$",
+            "$1 - \\sqrt{2}$",
+            "$\\sqrt{2} - 1$"
+        ],
+        "answer": "$\\sqrt{5} - 1$",
+        "explanation": "Divide numerator and denominator by $n$. The general term is $\\frac{1}{n} \\frac{r/n}{\\sqrt{1 + (r/n)^2}}$. Let $x = r/n$, $dx = 1/n$. The limits are $r=1 \\implies x \\to 0$, $r=2n \\implies x \to 2$. The integral is $\\int_0^2 \\frac{x}{\\sqrt{1+x^2}} dx$. Let $1+x^2=t^2 \\implies x dx = t dt$. Limits: $t=1$ to $t=\\sqrt{5}$. Integral is $\\int_1^{\\sqrt{5}} dt = \\sqrt{5} - 1$.",
+        "trick": "JEE Advanced Trap: Forgetting that the upper limit $2n$ changes the definite integral's upper bound from 1 to 2.",
+        "tip": "Always check both the lower and upper limits in sum-to-integral conversions."
+    },
+    {
+        "id": 2,
+        "question": "Find the value of $\\lim_{n \\to \\infty} \\left( \\prod_{r=1}^n \\left( 1 + \\frac{r^2}{n^2} \\right) \\right)^{1/n}$.",
+        "options": [
+            "$2 e^{\\pi/2 - 2}$",
+            "$2 e^{2 - \\pi/2}$",
+            "$e^{\\pi/2 - 2}$",
+            "$2 e^{\\pi/4 - 1}$"
+        ],
+        "answer": "$2 e^{\\pi/2 - 2}$",
+        "explanation": "Let $L$ be the limit. $\\ln L = \\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{r=1}^n \\ln(1 + (r/n)^2)$. This converts to $\\int_0^1 \\ln(1+x^2) dx$. Using integration by parts: $[x \\ln(1+x^2)]_0^1 - \\int_0^1 x \\cdot \\frac{2x}{1+x^2} dx = \\ln 2 - 2\\int_0^1 (1 - \\frac{1}{1+x^2}) dx = \\ln 2 - 2[x - \\tan^{-1} x]_0^1 = \\ln 2 - 2(1 - \\pi/4) = \\ln 2 - 2 + \\pi/2$. Thus, $L = e^{\\ln 2 - 2 + \\pi/2} = 2e^{\\pi/2 - 2}$.",
+        "trick": "JEE Advanced Trap: Applying the integral directly to the product instead of taking the natural logarithm first.",
+        "tip": "For products tending to infinity, always take $\\ln$ to convert to a sum."
+    },
+    {
+        "id": 3,
+        "question": "Evaluate $\\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{r=1}^n \\sin^2\\left(\\frac{r\\pi}{2n}\\right)$.",
+        "options": [
+            "$1$",
+            "$\\frac{1}{2}$",
+            "$\\frac{\\pi}{4}$",
+            "$\\frac{2}{\\pi}$"
+        ],
+        "answer": "$\\frac{1}{2}$",
+        "explanation": "Convert to integral: $\\int_0^1 \\sin^2(\\frac{\\pi x}{2}) dx$. Use the identity $\\sin^2 \\theta = \\frac{1 - \\cos 2\\theta}{2}$. The integral becomes $\\int_0^1 \\frac{1 - \\cos(\\pi x)}{2} dx = \\frac{1}{2} [x - \\frac{\\sin(\\pi x)}{\\pi}]_0^1 = \\frac{1}{2}(1 - 0) = \\frac{1}{2}$.",
+        "trick": "JEE Advanced Trap: Misinterpreting the domain transformation. $r/n = x$, so the argument must retain the $\\pi/2$ factor.",
+        "tip": "Use linear trigonometric identities to evaluate powers of sine/cosine."
+    },
+    {
+        "id": 4,
+        "question": "Find the limit: $\\lim_{n \\to \\infty} \\sum_{r=1}^{n-1} \\frac{1}{\\sqrt{n^2 - r^2}}$.",
+        "options": [
+            "$1$",
+            "$\\frac{\\pi}{2}$",
+            "$\\pi$",
+            "$\\infty$"
+        ],
+        "answer": "$\\frac{\\pi}{2}$",
+        "explanation": "Rewrite as $\\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{r=1}^{n-1} \\frac{1}{\\sqrt{1 - (r/n)^2}}$. This becomes $\\int_0^1 \\frac{1}{\\sqrt{1-x^2}} dx = [\\sin^{-1} x]_0^1 = \\sin^{-1}(1) - \\sin^{-1}(0) = \\frac{\\pi}{2}$.",
+        "trick": "JEE Advanced Trap: Worrying about the upper index being $n-1$ instead of $n$. The single missing term goes to 0 as $n \\to \\infty$.",
+        "tip": "A missing finite number of boundary terms in infinite sums doesn't affect the limit."
+    },
+    {
+        "id": 5,
+        "question": "Calculate $\\lim_{n \\to \\infty} \\frac{((n+1)(n+2)\\dots(n+n))^{1/n}}{n}$.",
+        "options": [
+            "$e$",
+            "$4/e$",
+            "$e/4$",
+            "$1/e$"
+        ],
+        "answer": "$4/e$",
+        "explanation": "Let the sequence be $a_n$. $a_n = (\\frac{n+1}{n} \\cdot \\frac{n+2}{n} \\dots \\frac{n+n}{n})^{1/n}$. Taking $\\ln L = \\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{r=1}^n \\ln(1 + r/n) = \\int_0^1 \\ln(1+x) dx$. Let $1+x = t$, integral is $\\int_1^2 \\ln t dt = [t \\ln t - t]_1^2 = (2\\ln 2 - 2) - (0 - 1) = 2\\ln 2 - 1 = \\ln 4 - 1$. Thus $L = e^{\\ln 4 - 1} = 4/e$.",
+        "trick": "JEE Advanced Trap: Failing to correctly distribute the denominator $n$ into the product roots before taking logs.",
+        "tip": "Distribute $1/n$ from the outside into the products before taking logarithm."
+    },
+    {
+        "id": 6,
+        "question": "Evaluate $\\lim_{x \\to 0} \\frac{\\int_0^{x^2} \\cos(t^2) dt}{x \\sin x}$.",
+        "options": [
+            "$0$",
+            "$1$",
+            "$1/2$",
+            "$-1$"
+        ],
+        "answer": "$1$",
+        "explanation": "Form $0/0$. Apply L'Hopital's rule. Differentiate numerator using Leibnitz rule: $\\frac{d}{dx} \\int_0^{x^2} \\cos(t^2) dt = \\cos((x^2)^2) \\cdot 2x = 2x \\cos(x^4)$. Differentiate denominator: $\\sin x + x \\cos x$. Limit becomes $\\lim_{x \\to 0} \\frac{2x \\cos(x^4)}{\\sin x + x \\cos x}$. Divide numerator and denominator by $x$: $\\lim_{x \\to 0} \\frac{2 \\cos(x^4)}{\\frac{\\sin x}{x} + \\cos x} = \\frac{2(1)}{1 + 1} = 1$.",
+        "trick": "JEE Advanced Trap: Attempting to integrate $\\cos(t^2)$ directly. It is non-integrable in elementary terms. L'Hopital is mandatory.",
+        "tip": "Use Leibnitz Rule + L'Hopital for $0/0$ limits involving integrals."
+    },
+    {
+        "id": 7,
+        "question": "If $f(x) = \\int_0^x t \\sin t dt$, find the value of $f''(\\pi/2)$.",
+        "options": [
+            "$0$",
+            "$1$",
+            "$\\pi/2$",
+            "$-\\pi/2$"
+        ],
+        "answer": "$1$",
+        "explanation": "First derivative using Leibnitz rule: $f'(x) = x \\sin x$. Second derivative: $f''(x) = \\sin x + x \\cos x$. Evaluate at $\\pi/2$: $f''(\\pi/2) = \\sin(\\pi/2) + (\\pi/2)\\cos(\\pi/2) = 1 + 0 = 1$.",
+        "trick": "JEE Advanced Trap: Integrating $t \\sin t$ by parts first. It's valid but wastes critical exam time compared to direct Leibnitz.",
+        "tip": "Successive differentiation via Leibnitz is faster than integrating and differentiating."
+    },
+    {
+        "id": 8,
+        "question": "Let $F(x) = \\int_1^x \\frac{e^t}{t} dt$ for $x > 0$. Determine $F'(x^2)$",
+        "options": [
+            "$\\frac{e^{x^2}}{x^2}$",
+            "$\\frac{2e^{x^2}}{x}$",
+            "$\\frac{e^x}{x}$",
+            "$\\frac{2xe^{x^2}}{x^2}$"
+        ],
+        "answer": "$\\frac{e^{x^2}}{x^2}$",
+        "explanation": "By Fundamental Theorem of Calculus, $F'(x) = \\frac{e^x}{x}$. We are asked for $F'(x^2)$, which simply means substituting $x^2$ into the derivative function $F'$. So $F'(x^2) = \\frac{e^{x^2}}{x^2}$.",
+        "trick": "JEE Advanced Trap: Confusing $F'(x^2)$ with $\\frac{d}{dx} F(x^2)$. The latter requires chain rule (Leibnitz with variable bound), giving $2x \\cdot \\frac{e^{x^2}}{x^2} = \\frac{2e^{x^2}}{x}$.",
+        "tip": "$F'(g(x))$ substitutes $g(x)$ into $F'$. $\\frac{d}{dx}[F(g(x))]$ uses chain rule."
+    },
+    {
+        "id": 9,
+        "question": "Determine the critical points of $f(x) = \\int_0^x e^{t^2} (t^2 - 3t + 2) dt$.",
+        "options": [
+            "$x = 0, 1$",
+            "$x = 1, 2$",
+            "$x = 0, 2$",
+            "No critical points"
+        ],
+        "answer": "$x = 1, 2$",
+        "explanation": "Critical points occur where $f'(x) = 0$. By Leibnitz rule, $f'(x) = e^{x^2}(x^2 - 3x + 2)$. Set $f'(x) = 0$. Since $e^{x^2} > 0$ for all real $x$, we solve $x^2 - 3x + 2 = 0 \\implies (x-1)(x-2) = 0 \\implies x = 1, 2$.",
+        "trick": "JEE Advanced Trap: Trying to expand or bound the integral. Just differentiate and equate to zero.",
+        "tip": "Critical points of integral functions directly map to roots of the integrand."
+    },
+    {
+        "id": 10,
+        "question": "Find $\\lim_{x \\to \\infty} \\frac{\\int_0^x e^{t^2} dt}{x e^{x^2}}$.",
+        "options": [
+            "$0$",
+            "$1$",
+            "$\\infty$",
+            "Does not exist"
+        ],
+        "answer": "$0$",
+        "explanation": "Form is $\\infty/\\infty$. Apply L'Hopital's rule. $f'(x)$ of numerator = $e^{x^2}$. $f'(x)$ of denominator = $1 \\cdot e^{x^2} + x(2x)e^{x^2} = e^{x^2}(1 + 2x^2)$. The limit becomes $\\lim_{x \\to \\infty} \\frac{e^{x^2}}{e^{x^2}(1+2x^2)} = \\lim_{x \\to \\infty} \\frac{1}{1+2x^2} = 0$.",
+        "trick": "JEE Advanced Trap: Thinking L'Hopital fails for $e^{x^2}$ and stopping. The $e^{x^2}$ gracefully cancels out.",
+        "tip": "For $\\infty/\\infty$ with integrals, L'Hopital often cancels rapid growth factors."
+    },
+    {
+        "id": 11,
+        "question": "If $\\int_0^{x^2} f(t) dt = x^2 \\sin x + x^3$, find $f(1)$ given $f$ is continuous.",
+        "options": [
+            "$\\sin 1 + \\frac{1}{2} \\cos 1 + 1$",
+            "$\\sin 1 + \\cos 1 + \\frac{3}{2}$",
+            "$\\sin 1 + \\frac{1}{2} \\cos 1 + \\frac{3}{2}$",
+            "$\\cos 1 + \\frac{3}{2}$"
+        ],
+        "answer": "$\\sin 1 + \\frac{1}{2} \\cos 1 + \\frac{3}{2}$",
+        "explanation": "Differentiate both sides with respect to $x$: $f(x^2) \\cdot 2x = 2x \\sin x + x^2 \\cos x + 3x^2$. Divide by $2x$: $f(x^2) = \\sin x + \\frac{x}{2} \\cos x + \\frac{3x}{2}$. To find $f(1)$, set $x^2=1 \\implies x=1$ (assuming domain $x>0$). $f(1) = \\sin 1 + \\frac{1}{2} \\cos 1 + \\frac{3}{2}$.",
+        "trick": "JEE Advanced Trap: Forgetting to apply the chain rule $2x$ when differentiating the upper bound $x^2$.",
+        "tip": "Differentiate both sides of integral equations using Leibnitz rule."
+    },
+    {
+        "id": 12,
+        "question": "Solve the integral equation for $y(x)$: $y(x) = 1 + \\int_0^x y(t) dt$.",
+        "options": [
+            "$y(x) = e^{-x}$",
+            "$y(x) = x + 1$",
+            "$y(x) = e^x$",
+            "$y(x) = e^{2x}$"
+        ],
+        "answer": "$y(x) = e^x$",
+        "explanation": "Differentiate both sides using Leibnitz rule: $y'(x) = y(x)$. This is a simple differential equation $\\frac{dy}{dx} = y \\implies \\frac{dy}{y} = dx \\implies \\ln y = x + C \\implies y = k e^x$. From original equation, $y(0) = 1 + 0 = 1$. So $k e^0 = 1 \\implies k=1$. Hence $y(x) = e^x$.",
+        "trick": "JEE Advanced Trap: Trying to solve it as a series or guessing functions without differentiating.",
+        "tip": "Volterra integral equations map directly to differential equations."
+    },
+    {
+        "id": 13,
+        "question": "Find the area bounded by $y = \\min(x, x^2)$ and the x-axis from $x=0$ to $x=2$.",
+        "options": [
+            "$\\frac{5}{6}$",
+            "$\\frac{11}{6}$",
+            "$\\frac{7}{6}$",
+            "$\\frac{4}{3}$"
+        ],
+        "answer": "$\\frac{11}{6}$",
+        "explanation": "The curves $y=x$ and $y=x^2$ intersect at $x=0$ and $x=1$. For $0\\le x\\le1$, we have $x^2\\le x$, so $\\min(x,x^2)=x^2$. For $1\\le x\\le2$, we have $x\\le x^2$, so $\\min(x,x^2)=x$. Therefore,\n$$A=\\int_0^1 x^2\\,dx+\\int_1^2 x\\,dx.$$ Evaluating,\n$$A=\\left[\\frac{x^3}{3}\\right]_0^1+\\left[\\frac{x^2}{2}\\right]_1^2=\\frac13+\\frac32=\\frac{11}{6}.$$",
+        "trick": "For min/max functions, first locate all intersection points and split the interval there.",
+        "tip": "Never integrate a min/max function without determining which branch is active on each subinterval."
+    },
+    {
+        "id": 14,
+        "question": "Evaluate $\\int_0^3 [x] x dx$, where $[x]$ is the greatest integer function.",
+        "options": [
+            "$3$",
+            "$6$",
+            "$\\frac{13}{2}$",
+            "$\\frac{15}{2}$"
+        ],
+        "answer": "$\\frac{13}{2}$",
+        "explanation": "Split at integers: $\\int_0^1 0 \\cdot x dx + \\int_1^2 1 \\cdot x dx + \\int_2^3 2 \\cdot x dx = 0 + (\\frac{4}{2} - \\frac{1}{2}) + 2(\\frac{9}{2} - \\frac{4}{2}) = \\frac{3}{2} + 5 = \\frac{13}{2}$.",
+        "trick": "JEE Advanced Trap: Treating $[x]$ as $x-1/2$ or integrating normally. $[x]$ acts as a discrete constant in each integer step.",
+        "tip": "Split integrals involving GIF exactly at integers."
+    },
+    {
+        "id": 15,
+        "question": "Find $\\int_0^{\\sqrt{3}} [x^2] dx$, where $[x]$ denotes the greatest integer function.",
+        "options": [
+            "$2\\sqrt{3} - \\sqrt{2} - 1$",
+            "$\\sqrt{3} - \\sqrt{2}$",
+            "$\\sqrt{3} + \\sqrt{2} - 1$",
+            "$3 - \\sqrt{2} - \\sqrt{3}$"
+        ],
+        "answer": "$2\\sqrt{3} - \\sqrt{2} - 1$",
+        "explanation": "Critical points occur where $x^2 \\in \\mathbb{Z} \\implies x \\in \\{1, \\sqrt{2}, \\sqrt{3}\\}$. Thus, $\\int_0^1 0 dx + \\int_1^{\\sqrt{2}} 1 dx + \\int_{\\sqrt{2}}^{\\sqrt{3}} 2 dx = 0 + (\\sqrt{2}-1) + 2(\\sqrt{3}-\\sqrt{2}) = 2\\sqrt{3} - \\sqrt{2} - 1$.",
+        "trick": "JEE Advanced Trap: Splitting at integer values of $x$ (like $x=1, 2$) instead of integer values of the inner function $x^2$.",
+        "tip": "For $[f(x)]$, split the interval where $f(x)$ yields an integer."
+    },
+    {
+        "id": 16,
+        "question": "Evaluate $\\int_{-\\pi/2}^{\\pi/2} \\sqrt{1 - \\cos 2x} dx$.",
+        "options": [
+            "$2$",
+            "$\\sqrt{2}$",
+            "$2\\sqrt{2}$",
+            "$0$"
+        ],
+        "answer": "$2\\sqrt{2}$",
+        "explanation": "$1 - \\cos 2x = 2 \\sin^2 x$. The integral becomes $\\int_{-\\pi/2}^{\\pi/2} \\sqrt{2} |\\sin x| dx$. Since $|\\sin x|$ is an even function, it equals $2\\sqrt{2} \\int_0^{\\pi/2} \\sin x dx = 2\\sqrt{2} [-\\cos x]_0^{\\pi/2} = 2\\sqrt{2} (0 - (-1)) = 2\\sqrt{2}$.",
+        "trick": "JEE Advanced Trap: Writing $\\sqrt{\\sin^2 x} = \\sin x$ globally, which incorrectly yields 0 due to negative values in $(-\\pi/2, 0)$. Modulus is mandatory.",
+        "tip": "$\\sqrt{x^2} = |x|$. Never drop the absolute value bars."
+    },
+    {
+        "id": 17,
+        "question": "Find the value of $\\int_0^{100\\pi} |\\sin x| dx$.",
+        "options": [
+            "$100$",
+            "$200$",
+            "$0$",
+            "$100\\pi$"
+        ],
+        "answer": "$200$",
+        "explanation": "The function $f(x) = |\\sin x|$ is periodic with period $T = \\pi$. Using the property $\\int_0^{nT} f(x) dx = n \\int_0^T f(x) dx$, we get $100 \\int_0^\\pi \\sin x dx = 100 [-\\cos x]_0^\\pi = 100(1 - (-1)) = 200$.",
+        "trick": "JEE Advanced Trap: Assuming the period is $2\\pi$, leading to complex modulus splitting. Modulus shrinks the period to $\\pi$.",
+        "tip": "Periodic integral bound shortcuts: $\\int_0^{nT} = n\\int_0^T$."
+    },
+    {
+        "id": 18,
+        "question": "Evaluate $\\int_0^{10} (x - [x]) dx$.",
+        "options": [
+            "$10$",
+            "$5$",
+            "$0$",
+            "$20$"
+        ],
+        "answer": "$5$",
+        "explanation": "The function $x - [x] = \\{x\\}$ (fractional part) is periodic with period $T = 1$. The integral is $10 \\int_0^1 x dx$ (since $[x]=0$ in $[0,1)$). $10 [\\frac{x^2}{2}]_0^1 = 10 (\\frac{1}{2}) = 5$.",
+        "trick": "JEE Advanced Trap: Integrating $[x]$ term-by-term up to 10. While correct ($50 - 45 = 5$), utilizing periodicity is $10\\times$ faster.",
+        "tip": "Fractional part function $\\{x\\}$ is periodic with period 1."
+    },
+    {
+        "id": 19,
+        "question": "Compute $\\int_0^{400\\pi} \\sqrt{1+\\cos 2x} dx$.",
+        "options": [
+            "$800\\sqrt{2}$",
+            "$400\\sqrt{2}$",
+            "$0$",
+            "$1600\\sqrt{2}$"
+        ],
+        "answer": "$800\\sqrt{2}$",
+        "explanation": "$\\sqrt{1+\\cos 2x} = \\sqrt{2\\cos^2 x} = \\sqrt{2}|\\cos x|$. The period of $|\\cos x|$ is $\\pi$. Integral becomes $400\\sqrt{2} \\int_0^\\pi |\\cos x| dx$. $\\int_0^\\pi |\\cos x| dx = 2 \\int_0^{\\pi/2} \\cos x dx = 2(1) = 2$. Total value $= 400\\sqrt{2} \\times 2 = 800\\sqrt{2}$.",
+        "trick": "JEE Advanced Trap: Forgetting the modulus and integrating $\\cos x$ over $0$ to $\\pi$, which incorrectly yields 0.",
+        "tip": "$|\\cos x|$ has a period of $\\pi$."
+    },
+    {
+        "id": 20,
+        "question": "Evaluate $\\int_{-1}^1 \\max(x, x^3)\\,dx$.",
+        "options": [
+            "$\\frac{1}{4}$",
+            "$\\frac{1}{2}$",
+            "$\\frac{3}{4}$",
+            "$0$"
+        ],
+        "answer": "$\\frac{1}{4}$",
+        "explanation": "For $x\\in[-1,0]$, we have $x^3>x$ (e.g., at $x=-0.5$, $-0.125>-0.5$), so $\\max(x,x^3)=x^3$. For $x\\in[0,1]$, we have $x>x^3$, so $\\max(x,x^3)=x$. Therefore,\n$$\\int_{-1}^{1}\\max(x,x^3)\\,dx=\\int_{-1}^{0}x^3\\,dx+\\int_{0}^{1}x\\,dx.$$ Evaluating,\n$$\\left[\\frac{x^4}{4}\\right]_{-1}^{0}+\\left[\\frac{x^2}{2}\\right]_{0}^{1}=-\\frac14+\\frac12=\\frac14.$$",
+        "trick": "For max/min functions, test representative points in each interval determined by intersections.",
+        "tip": "Compare $x$ and $x^3$ separately on negative and positive intervals before integrating."
+    },
+    {
+        "id": 21,
+        "question": "If $I_n = \\int_0^{\\pi/4} \\tan^n x dx$, find the value of $n(I_{n+1} + I_{n-1})$.",
+        "options": [
+            "$1$",
+            "$n$",
+            "$1/n$",
+            "$0$"
+        ],
+        "answer": "$1$",
+        "explanation": "$I_{n+1} + I_{n-1} = \\int_0^{\\pi/4} (\\tan^{n+1} x + \\tan^{n-1} x) dx = \\int_0^{\\pi/4} \\tan^{n-1} x (\\tan^2 x + 1) dx = \\int_0^{\\pi/4} \\tan^{n-1} x \\sec^2 x dx$. Let $\\tan x = t$, $dt = \\sec^2 x dx$. Limits $0$ to $1$. $\\int_0^1 t^{n-1} dt = [\\frac{t^n}{n}]_0^1 = \\frac{1}{n}$. Thus $n(I_{n+1} + I_{n-1}) = n(1/n) = 1$.",
+        "trick": "JEE Advanced Trap: Attempting to integrate $\\tan^n x$ iteratively. The pairing $I_n + I_{n-2}$ is the fundamental identity to memorize.",
+        "tip": "$I_n + I_{n-2} = \\frac{1}{n-1}$ for $\\tan^n x$ over $0$ to $\\pi/4$."
+    },
+    {
+        "id": 22,
+        "question": "Evaluate $\\int_0^{\\pi/2} \\sin^6 x \\cos^4 x dx$ using Wallis' formula.",
+        "options": [
+            "$\\frac{3\\pi}{512}$",
+            "$\\frac{3\\pi}{256}$",
+            "$\\frac{\\pi}{512}$",
+            "$\\frac{5\\pi}{256}$"
+        ],
+        "answer": "$\\frac{3\\pi}{512}$",
+        "explanation": "Wallis' formula for $\\int_0^{\\pi/2} \\sin^m x \\cos^n x dx$: Numerator is product of odds below $m$ and $n$: $(5 \\cdot 3 \\cdot 1) \\times (3 \\cdot 1) = 45$. Denominator is $(m+n) \\dots$ decreasing by 2: $10 \\cdot 8 \\cdot 6 \\cdot 4 \\cdot 2 = 3840$. Multiply by $\\pi/2$ (since both $m, n$ are even). Value = $\\frac{45}{3840} \\cdot \\frac{\\pi}{2} = \\frac{3}{256} \\cdot \\frac{\\pi}{2} = \\frac{3\\pi}{512}$.",
+        "trick": "JEE Advanced Trap: Forgetting the final $\\pi/2$ multiplier which is strictly required when both powers are even.",
+        "tip": "Wallis: Multiply by $\\pi/2$ ONLY if both $m$ and $n$ are even integers."
+    },
+    {
+        "id": 23,
+        "question": "Find the definite integral: $\\int_{-\\pi/2}^{\\pi/2} \\ln\\left(\\frac{2 - \\sin x}{2 + \\sin x}\\right) dx$.",
+        "options": [
+            "$\\pi$",
+            "$2\\pi$",
+            "$0$",
+            "$\\ln 2$"
+        ],
+        "answer": "$0$",
+        "explanation": "Let $f(x) = \\ln\\left(\\frac{2 - \\sin x}{2 + \\sin x}\\right)$. Check for odd/even properties. $f(-x) = \\ln\\left(\\frac{2 - \\sin(-x)}{2 + \\sin(-x)}\\right) = \\ln\\left(\\frac{2 + \\sin x}{2 - \\sin x}\\right) = -\\ln\\left(\\frac{2 - \\sin x}{2 + \\sin x}\\right) = -f(x)$. Since $f(x)$ is an odd function, $\\int_{-a}^a f(x) dx = 0$.",
+        "trick": "JEE Advanced Trap: Applying integration by parts to the logarithm. Always check $f(-x)$ for limits $[-a, a]$.",
+        "tip": "$\\int_{-a}^a f(x) dx = 0$ for odd functions. $\\ln(a/b) = -\\ln(b/a)$."
+    },
+    {
+        "id": 24,
+        "question": "Evaluate using King's Rule: $\\int_0^{\\pi} \\frac{x \\sin x}{1 + \\cos^2 x} dx$.",
+        "options": [
+            "$\\frac{\\pi^2}{4}$",
+            "$\\frac{\\pi^2}{2}$",
+            "$\\pi^2$",
+            "$\\frac{\\pi}{4}$"
+        ],
+        "answer": "$\\frac{\\pi^2}{4}$",
+        "explanation": "Let $I = \\int_0^{\\pi} \\frac{x \\sin x}{1 + \\cos^2 x} dx$. Apply $x \to \\pi - x$: $I = \\int_0^{\\pi} \\frac{(\\pi - x) \\sin x}{1 + \\cos^2 x} dx$. Add equations: $2I = \\pi \\int_0^{\\pi} \\frac{\\sin x}{1 + \\cos^2 x} dx$. Let $\\cos x = t, -\\sin x dx = dt$. Limits $1$ to $-1$. $2I = \\pi \\int_{-1}^1 \\frac{dt}{1+t^2} = \\pi [\\tan^{-1} t]_{-1}^1 = \\pi (\\pi/4 - (-\\pi/4)) = \\frac{\\pi^2}{2}$. Thus $I = \\frac{\\pi^2}{4}$.",
+        "trick": "JEE Advanced Trap: Attempting complex substitution without isolating $x$ first. King's rule removes the polynomial $x$ term elegantly.",
+        "tip": "King's rule strips the $x$ multiplier in $\\int_0^\\pi x f(\\sin x, \\cos^2 x) dx$."
+    },
+    {
+        "id": 25,
+        "question": "Evaluate $\\int_0^1 \\frac{\\ln(1+x)}{1+x^2} dx$.",
+        "options": [
+            "$\\frac{\\pi}{8} \\ln 2$",
+            "$\\frac{\\pi}{4} \\ln 2$",
+            "$\\frac{\\pi}{8}$",
+            "$\\frac{\\ln 2}{4}$"
+        ],
+        "answer": "$\\frac{\\pi}{8} \\ln 2$",
+        "explanation": "Substitute $x = \\tan \\theta$, $dx = \\sec^2 \\theta d\\theta$. Limits: $0$ to $\\pi/4$. $I = \\int_0^{\\pi/4} \\frac(\\ln(1+\\tan \\theta)){1+\\tan^2 \\theta} \\sec^2 \\theta d\\theta = \\int_0^{\\pi/4} \\ln(1+\\tan \\theta) d\\theta$. Apply King's Rule $\\theta \\to \\pi/4 - \\theta$: $I = \\int_0^{\\pi/4} \\ln(1+\\tan(\\pi/4-\\theta)) d\\theta = \\int_0^{\\pi/4} \\ln(1 + \\frac{1-\\tan \\theta}{1+\\tan \\theta}) d\\theta = \\int_0^{\\pi/4} \\ln(\\frac{2}{1+\\tan \\theta}) d\\theta$. $I = \\int_0^{\\pi/4} \\ln 2 d\\theta - I \\implies 2I = \\frac{\\pi}{4} \\ln 2 \\implies I = \\frac{\\pi}{8} \\ln 2$.",
+        "trick": "JEE Advanced Trap: Relying on integration by parts. The inverse trig substitution uniquely bridges algebraic logs to periodic properties.",
+        "tip": "$\\int_0^1 f(x)/(1+x^2) dx$ implies substituting $x = \\tan \\theta$ immediately."
+    },
+    {
+        "id": 26,
+        "question": "Find the limit: $\\lim_{n \\to \\infty} \\left( \\frac{1}{n+1} + \\frac{1}{n+2} + \\dots + \\frac{1}{2n} \\right)$.",
+        "options": [
+            "$1$",
+            "$\\ln 2$",
+            "$e$",
+            "$\\infty$"
+        ],
+        "answer": "$\\ln 2$",
+        "explanation": "Rewrite as limit of sum: $\\lim_{n \\to \\infty} \\sum_{r=1}^n \\frac{1}{n+r} = \\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{r=1}^n \\frac{1}{1 + r/n}$. This is the Riemann sum for $\\int_0^1 \\frac{1}{1+x} dx = [\\ln(1+x)]_0^1 = \\ln 2 - \\ln 1 = \\ln 2$.",
+        "trick": "JEE Advanced Trap: Misinterpreting the bound $2n$ as an upper limit of $2$. The $r$ index strictly maps from 1 to $n$, hence bound 0 to 1.",
+        "tip": "Factor out $1/n$ strictly to set up the Riemann integration bounds."
+    },
+    {
+        "id": 27,
+        "question": "Evaluate the definite integral $\\int_0^{\\pi} [\\cot x] dx$, where $[.]$ is GIF.",
+        "options": [
+            "$\\pi/2$",
+            "$-\\pi/2$",
+            "$0$",
+            "$-\\pi$"
+        ],
+        "answer": "$-\\pi/2$",
+        "explanation": "Let $I = \\int_0^{\\pi} [\\cot x] dx$. Apply King's Rule ($x \\to \\pi-x$): $I = \\int_0^{\\pi} [\\cot(\\pi-x)] dx = \\int_0^{\\pi} [-\\cot x] dx$. Add equations: $2I = \\int_0^{\\pi} ([\\cot x] + [-\\cot x]) dx$. Property of GIF: $[x] + [-x] = -1$ if $x \\notin \\mathbb{Z}$, and $0$ if $x \\in \\mathbb{Z}$. Since $\\cot x$ is non-integer almost everywhere, the integral becomes $\\int_0^{\\pi} -1 dx = -\\pi$. Thus $2I = -\\pi \\implies I = -\\pi/2$.",
+        "trick": "JEE Advanced Trap: Manually breaking points at $\\pi/4, \\pi/2, 3\\pi/4$. It involves an infinite number of integer transitions. King's rule bypasses it entirely.",
+        "tip": "Use $[f(x)] + [-f(x)] = -1$ for non-integer domain functions."
+    },
+    {
+        "id": 28,
+        "question": "Compute $\\int_0^{\\infty} \\frac{\\ln x}{1+x^2} dx$.",
+        "options": [
+            "$\\pi/2$",
+            "$1$",
+            "$0$",
+            "$\\infty$"
+        ],
+        "answer": "$0$",
+        "explanation": "Split the integral into $\\int_0^1 + \\int_1^{\\infty}$. For the second integral, substitute $x = 1/t \\implies dx = -1/t^2 dt$. Limits change to $1$ to $0$. $\\int_1^{\\infty} \\frac{\\ln x}{1+x^2} dx = \\int_1^0 \\frac{\\ln(1/t)}{1+(1/t)^2} (-\\frac{1}{t^2}) dt = \\int_0^1 \\frac{-\\ln t}{t^2+1} dt = -\\int_0^1 \\frac{\\ln x}{1+x^2} dx$. Thus, $I_2 = -I_1$, making the sum exactly 0.",
+        "trick": "JEE Advanced Trap: Assuming divergence because $\\ln x \\to -\\infty$ at 0. The inverse cancellation maps the $(0,1)$ area identically to $(1, \\infty)$.",
+        "tip": "Substitute $x = 1/t$ for limits involving $\\infty$ in algebraic logs."
+    },
+    {
+        "id": 29,
+        "question": "What is the area under $f(x) = \\max(\\sin x, \\cos x)$ between $x=0$ and $x=2\\pi$?",
+        "options": [
+            "$2\\sqrt{2}$",
+            "$2$",
+            "$4\\sqrt{2}$",
+            "$4$"
+        ],
+        "answer": "$2\\sqrt{2}$",
+        "explanation": "Intersection points where $\\sin x = \\cos x$ are $\\pi/4$ and $5\\pi/4$. Max function splits as: $\\cos x$ in $[0, \\pi/4]$, $\\sin x$ in $[\\pi/4, 5\\pi/4]$, $\\cos x$ in $[5\\pi/4, 2\\pi]$. Area = $\\int_0^{\\pi/4} \\cos x dx + \\int_{\\pi/4}^{5\\pi/4} \\sin x dx + \\int_{5\\pi/4}^{2\\pi} \\cos x dx$. Eval: $[\\sin x]_0^{\\pi/4} + [-\\cos x]_{\\pi/4}^{5\\pi/4} + [\\sin x]_{5\\pi/4}^{2\\pi} = (1/\\sqrt{2} - 0) + (-(-1/\\sqrt{2}) - (-1/\\sqrt{2})) + (0 - (-1/\\sqrt{2})) = 1/\\sqrt{2} + 2/\\sqrt{2} + 1/\\sqrt{2} = 4/\\sqrt{2} = 2\\sqrt{2}$.",
+        "trick": "JEE Advanced Trap: Ignoring negative areas. Definite integration calculates net area, but the problem explicitly implies integrating the raw max function, which naturally spans both positive and negative values. 'Area under curve' algebraically corresponds to the definite integral here unless modulus is specified.",
+        "tip": "Sine and Cosine intersect at $n\\pi + \\pi/4$."
+    },
+    {
+        "id": 30,
+        "question": "Find the value of $I = \\int_0^{\\pi/2} \\frac{\\sqrt{\\sin x}}{\\sqrt{\\sin x} + \\sqrt{\\cos x}} dx$.",
+        "options": [
+            "$\\pi/2$",
+            "$\\pi/4$",
+            "$\\pi/8$",
+            "$0$"
+        ],
+        "answer": "$\\pi/4$",
+        "explanation": "Apply King's Rule ($x \\to \\pi/2 - x$). $I = \\int_0^{\\pi/2} \\frac{\\sqrt{\\cos x}}{\\sqrt{\\cos x} + \\sqrt{\\sin x}} dx$. Adding both equations: $2I = \\int_0^{\\pi/2} \\frac{\\sqrt{\\sin x} + \\sqrt{\\cos x}}{\\sqrt{\\sin x} + \\sqrt{\\cos x}} dx = \\int_0^{\\pi/2} 1 dx = \\pi/2$. Thus, $I = \\pi/4$.",
+        "trick": "JEE Advanced Trap: Rationalizing the denominator. This creates a messy trigonometric nightmare. Symmetry is intended.",
+        "tip": "Standard $f(x)/(f(x)+f(a-x))$ form always evaluates to $(b-a)/2$."
+    },
+    {
+        "id": 31,
+        "question": "If $f(x) = \\int_{1/x}^x e^{-t^2} dt$, what is $f'(1)$?",
+        "options": [
+            "$e^{-1}$",
+            "$2e^{-1}$",
+            "$0$",
+            "$e$"
+        ],
+        "answer": "$2e^{-1}$",
+        "explanation": "Apply Leibnitz rule: $f'(x) = e^{-x^2} \\cdot 1 - e^{-(1/x)^2} \\cdot (-\\frac{1}{x^2}) = e^{-x^2} + \\frac{1}{x^2} e^{-1/x^2}$. Evaluate at $x=1$: $f'(1) = e^{-1} + 1 \\cdot e^{-1} = 2e^{-1}$.",
+        "trick": "JEE Advanced Trap: Dropping the derivative of the lower limit. The lower limit $1/x$ generates a negative which flips the subtraction to addition.",
+        "tip": "Leibnitz general form: $f(v)v' - f(u)u'$."
+    },
+    {
+        "id": 32,
+        "question": "Find the limit: $\\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{r=1}^n \\frac{n}{n^2 + r^2}$.",
+        "options": [
+            "$\\pi/2$",
+            "$\\pi/4$",
+            "$1$",
+            "$\\ln 2$"
+        ],
+        "answer": "$\\pi/4$",
+        "explanation": "Divide numerator and denominator by $n^2$: $\\frac{1}{n} \\frac{1/n}{1 + (r/n)^2}$. Wait, it's just $\\frac{n}{n^2+r^2} = \\frac{1}{n} \\frac{1}{1 + (r/n)^2}$. So the sum translates perfectly to $\\int_0^1 \\frac{1}{1+x^2} dx = [\\tan^{-1} x]_0^1 = \\pi/4$.",
+        "trick": "JEE Advanced Trap: Setting $n$ to infinity early yielding 0. Never evaluate partial limits inside an infinite sum.",
+        "tip": "Transform to $1/n$ outside and $r/n$ inside."
+    },
+    {
+        "id": 33,
+        "question": "Evaluate $\\int_{-\\pi}^\\pi \\frac{\\sin^2 x}{1 + 2^x} dx$.",
+        "options": [
+            "$\\pi/2$",
+            "$\\pi$",
+            "$\\pi/4$",
+            "$0$"
+        ],
+        "answer": "$\\pi/2$",
+        "explanation": "Let $I = \\int_{-\\pi}^\\pi \\frac{\\sin^2 x}{1 + 2^x} dx$. Apply property $\\int_{-a}^a f(x) dx = \\int_0^a (f(x) + f(-x)) dx$. $f(x) + f(-x) = \\frac{\\sin^2 x}{1 + 2^x} + \\frac{\\sin^2(-x)}{1 + 2^{-x}} = \\sin^2 x \\left( \\frac{1}{1+2^x} + \\frac{2^x}{2^x+1} \\right) = \\sin^2 x \\left( \\frac{1+2^x}{1+2^x} \\right) = \\sin^2 x$. Thus $I = \\int_0^\\pi \\sin^2 x dx = \\int_0^\\pi \\frac{1 - \\cos 2x}{2} dx = [\\frac{x}{2} - \\frac{\\sin 2x}{4}]_0^\\pi = \\pi/2$.",
+        "trick": "JEE Advanced Trap: Assuming the non-symmetric denominator $1+2^x$ breaks integration. It elegantly collapses in symmetric bounds.",
+        "tip": "For $\\int_{-a}^a \\frac{\\text{even}(x)}{1 + a^x} dx$, the denominator vanishes to $\\int_0^a \\text{even}(x) dx$."
+    },
+    {
+        "id": 34,
+        "question": "Compute the area bounded by $y = e^{-|x|}$ and the x-axis.",
+        "options": [
+            "$1$",
+            "$2$",
+            "$e$",
+            "$\\infty$"
+        ],
+        "answer": "$2$",
+        "explanation": "The region is from $-\\infty$ to $\\infty$. Area = $\\int_{-\\infty}^{\\infty} e^{-|x|} dx$. Because $e^{-|x|}$ is an even function, this is $2 \\int_0^{\\infty} e^{-x} dx$. Evaluating: $2 [-e^{-x}]_0^{\\infty} = 2 (0 - (-1)) = 2$.",
+        "trick": "JEE Advanced Trap: Fearing the improper bounds. The exponential decay guarantees a finite area despite infinite x-limits.",
+        "tip": "Integrate even functions symmetrically: $2\\int_0^{\\infty}$."
+    },
+    {
+        "id": 35,
+        "question": "Determine the value of $\\int_{0}^{2\\pi} x \\sin^4 x dx$.",
+        "options": [
+            "$\\frac{3\\pi^2}{4}$",
+            "$\\frac{3\\pi^2}{8}$",
+            "$\\frac{\\pi^2}{4}$",
+            "$\\frac{3\\pi^2}{16}$"
+        ],
+        "answer": "$\\frac{3\\pi^2}{4}$",
+        "explanation": "Use King's rule $I = \\int_0^{2\\pi} (2\\pi - x) \\sin^4 x dx$. Add them: $2I = 2\\pi \\int_0^{2\\pi} \\sin^4 x dx$. Since $\\sin^4(\\pi - x) = \\sin^4 x$, period properties imply $\\int_0^{2\\pi} \\sin^4 x dx = 4 \\int_0^{\\pi/2} \\sin^4 x dx$. Using Wallis: $4 \\times \\frac{3 \\cdot 1}{4 \\cdot 2} \\times \\frac{\\pi}{2} = \\frac{3\\pi}{4}$. Thus $2I = 2\\pi \\times \\frac{3\\pi}{4} = \\frac{3\\pi^2}{2} \\implies I = \\frac{3\\pi^2}{4}$.",
+        "trick": "JEE Advanced Trap: Doing integration by parts directly on $x \\sin^4 x$. Always remove $x$ using King's rule.",
+        "tip": "King's Rule removes algebraic multipliers from trigonometric integrals."
+    },
+    {
+        "id": 36,
+        "question": "Evaluate $\\int_{-2}^2 |1 - x^2| dx$.",
+        "options": [
+            "$4$",
+            "$8/3$",
+            "$4/3$",
+            "$8$"
+        ],
+        "answer": "$4$",
+        "explanation": "The roots of $1 - x^2 = 0$ are $x = \\pm 1$. In $[-1, 1]$, $1-x^2 \\ge 0$. In $[-2, -1]$ and $[1, 2]$, $1-x^2 \\le 0$. Due to even symmetry, $I = 2 \\int_0^2 |1 - x^2| dx = 2 \\left( \\int_0^1 (1 - x^2) dx + \\int_1^2 (x^2 - 1) dx \\right) = 2 \\left( [x - x^3/3]_0^1 + [x^3/3 - x]_1^2 \\right) = 2 \\left( 2/3 + (8/3 - 2) - (1/3 - 1) \right) = 2(2/3 + 2/3 + 2/3) = 4$.",
+        "trick": "JEE Advanced Trap: Integrating directly without flipping signs between boundaries, leading to an incorrect net area of $-4/3$.",
+        "tip": "Break modulus integration exactly at inner function roots."
+    },
+    {
+        "id": 37,
+        "question": "If $\\int_0^x f(t) dt = e^x - 1$, find the value of $\\int_0^1 f(x) f'(x) dx$.",
+        "options": [
+            "$\\frac{e^2 - 1}{2}$",
+            "$\\frac{e^2 - 2e}{2}$",
+            "$\\frac{e^2 + 1}{2}$",
+            "$\\frac{e^2 - 2e + 1}{2}$"
+        ],
+        "answer": "$\\frac{e^2 - 1}{2}$",
+        "explanation": "Differentiate the given equation using Leibnitz rule: $f(x) = e^x$. The requested integral is $\\int_0^1 e^x (e^x) dx = \\int_0^1 e^{2x} dx = [\\frac{e^{2x}}{2}]_0^1 = \\frac{e^2 - 1}{2}$. Alternatively, $\\int f(x) f'(x) dx = \\frac{f(x)^2}{2}$. $f(1) = e, f(0) = 1$. $\\frac{e^2 - 1}{2}$.",
+        "trick": "JEE Advanced Trap: Attempting integration by parts before identifying $f(x)$ through differentiation.",
+        "tip": "$f(x) f'(x) dx$ integrates directly to $f(x)^2 / 2$."
+    },
+    {
+        "id": 38,
+        "question": "What is the limit of the sum: $\\lim_{n \\to \\infty} \\frac{1^4 + 2^4 + 3^4 + \\dots + n^4}{n^5}$?",
+        "options": [
+            "$1/4$",
+            "$1/5$",
+            "$1/6$",
+            "$0$"
+        ],
+        "answer": "$1/5$",
+        "explanation": "Rewrite as $\\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{r=1}^n (r/n)^4$. This transforms to the definite integral $\\int_0^1 x^4 dx = [\\frac{x^5}{5}]_0^1 = \\frac{1}{5}$.",
+        "trick": "JEE Advanced Trap: Using finite difference formulas ($n(n+1)...$). The Riemann sum conversion is instantaneous.",
+        "tip": "$\\lim_{n \\to \\infty} \\frac{\\sum r^k}{n^{k+1}} = \\frac{1}{k+1}$."
+    },
+    {
+        "id": 39,
+        "question": "Calculate $\\int_{-\\pi/4}^{\\pi/4} \\frac{x^7 - 3x^5 + 7x^3 - x + 1}{\\cos^2 x} dx$.",
+        "options": [
+            "$2$",
+            "$1$",
+            "$0$",
+            "$4$"
+        ],
+        "answer": "$2$",
+        "explanation": "Split the numerator. Let $O(x) = x^7 - 3x^5 + 7x^3 - x$. $O(x)$ is an odd function, and $\\cos^2 x$ is even, so $O(x)/\\cos^2 x$ is odd. Its integral from $-\\pi/4$ to $\\pi/4$ is 0. The remaining integral is $\\int_{-\\pi/4}^{\\pi/4} \\frac{1}{\\cos^2 x} dx = \\int_{-\\pi/4}^{\\pi/4} \\sec^2 x dx = [\\tan x]_{-\\pi/4}^{\\pi/4} = 1 - (-1) = 2$.",
+        "trick": "JEE Advanced Trap: Panicking over polynomial long division. Separate symmetric polynomial structures to cancel odd terms.",
+        "tip": "Eliminate odd powers instantly in symmetric integration bounds."
+    },
+    {
+        "id": 40,
+        "question": "Evaluate $\\int_0^1 \\{3x\\} dx$ where $\\{x\\}$ denotes the fractional part function.",
+        "options": [
+            "$1/2$",
+            "$1/3$",
+            "$1/6$",
+            "$1$"
+        ],
+        "answer": "$1/2$",
+        "explanation": "The period of $\\{3x\\}$ is $1/3$. The interval length is 1, which contains $3$ complete periods. Integral = $3 \\int_0^{1/3} \\{3x\\} dx$. In $[0, 1/3)$, $\\{3x\\} = 3x$. $3 \\int_0^{1/3} 3x dx = 9 [x^2/2]_0^{1/3} = 9 (1/18) = 1/2$. Alternatively, substitution $u = 3x \\implies du = 3dx$. $\\frac{1}{3} \\int_0^3 \\{u\\} du = \\frac{1}{3} \\times 3 \\int_0^1 u du = 1/2$.",
+        "trick": "JEE Advanced Trap: Integrating directly assuming $\\{3x\\} = 3\\{x\\}$, which is mathematically incorrect.",
+        "tip": "Period of $\\{nx\\}$ is $1/n$. Substitute $nx = u$ for simplicity."
+    },
+    {
+        "id": 41,
+        "question": "If $\\int \\sin^n x dx = \\frac{-\\sin^{n-1} x \\cos x}{n} + A \\int \\sin^{n-2} x dx$, what is $A$?",
+        "options": [
+            "$\\frac{n-1}{n}$",
+            "$\\frac{1}{n}$",
+            "$\\frac{n-2}{n}$",
+            "$n-1$"
+        ],
+        "answer": "$\\frac{n-1}{n}$",
+        "explanation": "This is the standard reduction formula for $\\sin^n x$. It's derived via integration by parts: $\\int \\sin^{n-1} x \\sin x dx$. $u = \\sin^{n-1} x, dv = \\sin x dx$. Result yields $A = \\frac{n-1}{n}$.",
+        "trick": "JEE Advanced Trap: Trying to derive it under time pressure. The $\\frac{n-1}{n}$ coefficient is a foundational reduction constant.",
+        "tip": "Memorize the reduction multiplier $\\frac{n-1}{n}$ for $\\sin^n x$ and $\\cos^n x$."
+    },
+    {
+        "id": 42,
+        "question": "Find the limit: $\\lim_{n \\to \\infty} \\sum_{r=1}^n \\frac{n}{(n+r)^2}$.",
+        "options": [
+            "$1/2$",
+            "$1/4$",
+            "$1$",
+            "$\\ln 2$"
+        ],
+        "answer": "$1/2$",
+        "explanation": "Factor $n^2$ from denominator: $\\frac{1}{n} \\sum_{r=1}^n \\frac{1}{(1 + r/n)^2}$. Riemann sum translates to $\\int_0^1 \\frac{1}{(1+x)^2} dx = [-\\frac{1}{1+x}]_0^1 = -1/2 - (-1) = 1/2$.",
+        "trick": "JEE Advanced Trap: Erroneously pulling out $n$ instead of $n^2$, leading to an unintegrable diverging sum.",
+        "tip": "Balance powers of $n$ to strictly form $(r/n)$ and one $1/n$ outside."
+    },
+    {
+        "id": 43,
+        "question": "What is the global minimum of $F(x) = \\int_0^x (t^2 - t - 2) dt$ on $[0, 3]$?",
+        "options": [
+            "$-10/3$",
+            "$-4/3$",
+            "$-2$",
+            "$0$"
+        ],
+        "answer": "$-10/3$",
+        "explanation": "$F'(x) = x^2 - x - 2 = (x-2)(x+1)$. Critical point in interval is $x=2$. Evaluate at boundaries and critical points: $F(0) = 0$. $F(2) = \\int_0^2 (t^2 - t - 2) dt = [t^3/3 - t^2/2 - 2t]_0^2 = 8/3 - 2 - 4 = 8/3 - 6 = -10/3$. $F(3) = [t^3/3 - t^2/2 - 2t]_0^3 = 9 - 4.5 - 6 = -1.5 = -3/2$. Minimum is $-10/3$.",
+        "trick": "JEE Advanced Trap: Forgetting to evaluate the critical point via the definite integral polynomial.",
+        "tip": "Critical point implies evaluating definite integral up to that point."
+    },
+    {
+        "id": 44,
+        "question": "Evaluate $\\int_0^1 |5x - 3| dx$.",
+        "options": [
+            "$17/10$",
+            "$13/10$",
+            "$1/2$",
+            "$1$"
+        ],
+        "answer": "$13/10$",
+        "explanation": "Root is $x = 3/5$. Split integral: $\\int_0^{3/5} (3 - 5x) dx + \\int_{3/5}^1 (5x - 3) dx$. Using area of triangles: Left triangle base $= 3/5$, height $= 3$, Area $= \\frac{1}{2}(3/5)(3) = 9/10$. Right triangle base $= 2/5$, height at $x=1$ is $2$, Area $= \\frac{1}{2}(2/5)(2) = 4/10$. Total area $= 13/10$.",
+        "trick": "JEE Advanced Trap: Doing full algebraic integration when computing area of two triangles is visually robust and faster.",
+        "tip": "Linear absolute value integrals are just sums of triangle areas."
+    },
+    {
+        "id": 45,
+        "question": "Determine $I = \\int_0^{\\pi} \\frac{x}{1 + \\sin x} dx$.",
+        "options": [
+            "$\\pi$",
+            "$\\pi/2$",
+            "$2\\pi$",
+            "$0$"
+        ],
+        "answer": "$\\pi$",
+        "explanation": "Apply King's Rule: $I = \\int_0^{\\pi} \\frac{\\pi - x}{1 + \\sin x} dx$. Add: $2I = \\pi \\int_0^{\\pi} \\frac{1}{1 + \\sin x} dx$. Multiply by conjugate: $\\frac{1 - \\sin x}{\\cos^2 x} = \\sec^2 x - \\sec x \\tan x$. Integral is $[\\tan x - \\sec x]_0^\\pi = (0 - (-1)) - (0 - 1) = 1 - (-1) = 2$. Thus $2I = 2\\pi \\implies I = \\pi$.",
+        "trick": "JEE Advanced Trap: Failing to multiply by the conjugate $1-\\sin x$ after King's rule.",
+        "tip": "Conjugate multiplication perfectly solves $1/(1\\pm \\sin x)$ forms."
+    },
+    {
+        "id": 46,
+        "question": "Assertion (A): $\\lim_{n \\to \\infty} \\sum_{r=1}^n \\frac{1}{n} e^{r/n} = e - 1$. Reason (R): Limit of a sum equals definite integral $\\int_0^1 e^x dx$.",
+        "options": [
+            "Both A and R are true, R is correct explanation",
+            "Both A and R are true, R is NOT correct explanation",
+            "A is true, R is false",
+            "A is false, R is true"
+        ],
+        "answer": "Both A and R are true, R is correct explanation",
+        "explanation": "The limit precisely converts to the Riemann sum representing $\\int_0^1 e^x dx$, which integrates to $e^x|_0^1 = e - 1$. The reason perfectly dictates the assertion.",
+        "trick": "JEE Advanced Trap: None, this tests fundamental knowledge of Riemann summation definition.",
+        "tip": "Riemann sum is the definition of the definite integral."
+    },
+    {
+        "id": 47,
+        "question": "Assertion (A): $\\frac{d}{dx} \\int_x^{x^2} \\ln t dt = 2x \\ln(x^2) - \\ln x$. Reason (R): Leibnitz rule is $\\frac{d}{dx} \\int_{u(x)}^{v(x)} f(t) dt = f(v(x))v'(x) - f(u(x))u'(x)$.",
+        "options": [
+            "Both A and R are true, R is correct explanation",
+            "Both A and R are true, R is NOT correct explanation",
+            "A is true, R is false",
+            "A is false, R is true"
+        ],
+        "answer": "Both A and R are true, R is correct explanation",
+        "explanation": "Applying R: $f(x^2) \\cdot 2x - f(x) \\cdot 1 = \\ln(x^2) \\cdot 2x - \\ln x = 4x \\ln x - \\ln x$. This matches A exactly. R is the fundamental theorem enabling this.",
+        "trick": "JEE Advanced Trap: Forgetting to chain-rule differentiate the upper bound $x^2$ into $2x$.",
+        "tip": "Always remember the $v'(x)$ and $u'(x)$ chain rule components in Leibnitz."
+    },
+    {
+        "id": 48,
+        "question": "Assertion (A): $\\int_0^4 [x] dx = 6$. Reason (R): $\\int_a^b [x] dx$ can be evaluated as $\\frac{b-a}{2}$ for integers.",
+        "options": [
+            "Both A and R are true, R is correct explanation",
+            "Both A and R are true, R is NOT correct explanation",
+            "A is true, R is false",
+            "A is false, R is true"
+        ],
+        "answer": "A is true, R is false",
+        "explanation": "A is true: $\\int_0^4 [x] dx = 0 + 1 + 2 + 3 = 6$. R is false: The proposed formula $(4-0)/2 = 2$ is incorrect. For an interval $[0, n]$, the integral is $\\frac{n(n-1)}{2}$.",
+        "trick": "JEE Advanced Trap: Assuming generic polynomial integral logic applies to GIF. GIF forms discrete staircase rectangles.",
+        "tip": "$\\int_0^n [x] dx$ is the sum of integers from $0$ to $n-1$."
+    },
+    {
+        "id": 49,
+        "question": "Assertion (A): $\\int_{-2}^2 x^3 \\cos x dx = 0$. Reason (R): $x^3 \\cos x$ is an odd function.",
+        "options": [
+            "Both A and R are true, R is correct explanation",
+            "Both A and R are true, R is NOT correct explanation",
+            "A is true, R is false",
+            "A is false, R is true"
+        ],
+        "answer": "Both A and R are true, R is correct explanation",
+        "explanation": "$f(-x) = (-x)^3 \\cos(-x) = -x^3 \\cos x = -f(x)$. Since it's an odd function, integration over symmetric bounds $[-a, a]$ is strictly 0. Reason clearly explains A.",
+        "trick": "JEE Advanced Trap: Applying integration by parts blindly on symmetric bounds.",
+        "tip": "Symmetric bounds $[-a, a]$ demand an immediate odd/even check."
+    },
+    {
+        "id": 50,
+        "question": "Assertion (A): $\\int_0^{\\pi} |\\cos x| dx = 0$. Reason (R): $\\int_0^{\\pi} \\cos x dx = 0$.",
+        "options": [
+            "Both A and R are true, R is correct explanation",
+            "Both A and R are true, R is NOT correct explanation",
+            "A is true, R is false",
+            "A is false, R is true"
+        ],
+        "answer": "A is false, R is true",
+        "explanation": "A is false because $|\\cos x|$ is strictly positive except at root, so its area cannot be 0 (it's 2). R is true because the integral of $\\cos x$ cancels out (positive area in first quad, negative in second).",
+        "trick": "JEE Advanced Trap: Conflating the integral of a function with the integral of its absolute value. Absolute value forces cumulative positive area.",
+        "tip": "Definite integrals of absolute values are strictly positive."
+    },
+    {
+        "id": 51,
+        "question": "Evaluate $\\lim_{x \\to 0} \\frac{\\int_0^{x^2} \\sin\\sqrt{t} dt}{x^3}$.",
+        "options": [
+            "$0$",
+            "$2/3$",
+            "$1/3$",
+            "$1$"
+        ],
+        "answer": "$2/3$",
+        "explanation": "Form $0/0$. Apply L'Hopital's rule and Leibnitz rule. Numerator derivative: $\\sin(\\sqrt{x^2}) \\cdot 2x = 2x \\sin|x|$. For $x > 0$, this is $2x \\sin x$. Denominator derivative: $3x^2$. Limit is $\\lim_{x \\to 0} \\frac{2x \\sin x}{3x^2} = \\frac{2}{3} \\lim_{x \\to 0} \\frac{\\sin x}{x} = \\frac{2}{3}$.",
+        "trick": "JEE Advanced Trap: Forgetting the upper limit chain rule derivative ($2x$) when applying Leibnitz rule.",
+        "tip": "Leibnitz rule: $\\frac{d}{dx}\\int_a^{v(x)} f(t) dt = f(v(x))v'(x)$."
+    },
+    {
+        "id": 52,
+        "question": "Find the value of $\\lim_{n \\to \\infty} \\sum_{r=1}^n \\frac{n}{n^2 + r^2 x^2}$ for $x > 0$.",
+        "options": [
+            "$\\frac{\\pi}{2x}$",
+            "$\\frac{\\tan^{-1} x}{x}$",
+            "$\\frac{\\ln(1+x^2)}{2x}$",
+            "$x \\tan^{-1} x$"
+        ],
+        "answer": "$\\frac{\\tan^{-1} x}{x}$",
+        "explanation": "Factor out $n^2$ from the denominator: $\\frac{1}{n} \\sum \\frac{1}{1 + (r/n)^2 x^2}$. As $n \\to \\infty$, Riemann sum becomes $\\int_0^1 \\frac{1}{1 + (tx)^2} dt$. Let $tx = u$, $dt = du/x$. Integral is $\\frac{1}{x} \\int_0^x \\frac{du}{1+u^2} = \\frac{\\tan^{-1} x}{x}$.",
+        "trick": "JEE Advanced Trap: Treating $x$ as the integration variable instead of a constant multiplier of the index ratio $(r/n)$.",
+        "tip": "Convert sum limits: $r/n \\to t$, $1/n \\to dt$, $\\sum \\to \\int_0^1$."
+    },
+    {
+        "id": 53,
+        "question": "If $I_n = \\int_0^{\\pi/2} \\sin^n x dx$, which of the following reduction relations is true for $n \\ge 2$?",
+        "options": [
+            "$I_n = \\frac{n}{n-1} I_{n-2}$",
+            "$I_n = \\frac{n-1}{n} I_{n-2}$",
+            "$I_n = \\frac{n-2}{n} I_{n-1}$",
+            "$I_n = \\frac{n-1}{n+1} I_{n-2}$"
+        ],
+        "answer": "$I_n = \\frac{n-1}{n} I_{n-2}$",
+        "explanation": "Use integration by parts on $\\int \\sin^{n-1} x \\sin x dx$. Let $u = \\sin^{n-1} x$, $dv = \\sin x dx$. $I_n = [-\\sin^{n-1} x \\cos x]_0^{\\pi/2} + (n-1) \\int_0^{\\pi/2} \\sin^{n-2} x \\cos^2 x dx$. Substitute $\\cos^2 x = 1 - \\sin^2 x$ to get $I_n = (n-1)(I_{n-2} - I_n)$. Rearranging yields $n I_n = (n-1)I_{n-2}$.",
+        "trick": "JEE Advanced Trap: Mixing up the indices and coefficients, especially distinguishing between $I_{n-1}$ and $I_{n-2}$ dependencies.",
+        "tip": "Wallis formula core relation: $I_n = \\frac{n-1}{n} I_{n-2}$."
+    },
+    {
+        "id": 54,
+        "question": "Evaluate $\\int_0^{100\\pi} \\sqrt{1 - \\cos 2x} dx$.",
+        "options": [
+            "$100\\sqrt{2}$",
+            "$200\\sqrt{2}$",
+            "$0$",
+            "$100$"
+        ],
+        "answer": "$200\\sqrt{2}$",
+        "explanation": "$\\sqrt{1 - \\cos 2x} = \\sqrt{2\\sin^2 x} = \\sqrt{2}|\\sin x|$. The function $|\\sin x|$ is periodic with period $\\pi$. Integral becomes $100 \\int_0^{\\pi} \\sqrt{2} \\sin x dx = 100\\sqrt{2} [-\\cos x]_0^{\\pi} = 100\\sqrt{2} (1 - (-1)) = 200\\sqrt{2}$.",
+        "trick": "JEE Advanced Trap: Forgetting the absolute value $|\\sin x|$, which would incorrectly yield 0 if integrated blindly over $2\\pi$ cycles.",
+        "tip": "$\\sqrt{x^2} = |x|$. Period of $|\\sin x|$ is $\\pi$."
+    },
+    {
+        "id": 55,
+        "question": "Find the area bounded by the curve $y = |x-1| + |x-3|$ and the x-axis, between $x=0$ and $x=4$.",
+        "options": [
+            "$6$",
+            "$8$",
+            "$10$",
+            "$12$"
+        ],
+        "answer": "$10$",
+        "explanation": "Break the interval at critical points $x=1, 3$. For $x \\in [0,1]$, $y = 4-2x$, area = $\\int_0^1 (4-2x)dx = 3$. For $x \\in [1,3]$, $y = 2$, area = $\\int_1^3 2 dx = 4$. For $x \\in [3,4]$, $y = 2x-4$, area = $\\int_3^4 (2x-4)dx = 3$. Total area = $3 + 4 + 3 = 10$.",
+        "trick": "JEE Advanced Trap: Integrating without splitting limits incorrectly cancels out the slopes and yields false geometric areas.",
+        "tip": "Split modulus integrals exactly at their internal roots."
+    },
+    {
+        "id": 56,
+        "question": "If $f(x) = \\int_0^x (x-t) \\sin t dt$, find $f''(x)$.",
+        "options": [
+            "$\\cos x$",
+            "$-\\sin x$",
+            "$\\sin x$",
+            "$x \\sin x$"
+        ],
+        "answer": "$\\sin x$",
+        "explanation": "$f(x) = x \\int_0^x \\sin t dt - \\int_0^x t \\sin t dt$. First derivative: $f'(x) = 1 \\cdot \\int_0^x \\sin t dt + x \\sin x - x \\sin x = \\int_0^x \\sin t dt$. Second derivative: $f''(x) = \\sin x$.",
+        "trick": "JEE Advanced Trap: Applying Leibnitz directly without separating the independent variable $x$ from the dummy variable $t$ first.",
+        "tip": "Always pull $x$ outside the integral before differentiating wrt $x$."
+    },
+    {
+        "id": 57,
+        "question": "Evaluate $\\lim_{n \\to \\infty} \\left( \\frac{n!}{n^n} \\right)^{1/n}$.",
+        "options": [
+            "$e$",
+            "$1/e$",
+            "$e/2$",
+            "$2/e$"
+        ],
+        "answer": "$1/e$",
+        "explanation": "Let $L$ be the limit. $\\ln L = \\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{r=1}^n \\ln(\\frac{r}{n})$. Converting to an integral, this is $\\int_0^1 \\ln x dx$. Using by-parts, $[x \\ln x - x]_0^1$. Limit as $x \\to 0^+$ of $x \\ln x$ is 0. Value is $1 \\ln 1 - 1 - 0 = -1$. Thus $\\ln L = -1 \\implies L = 1/e$.",
+        "trick": "JEE Advanced Trap: Failing to recognize the limit of $x \\ln x$ as $x \\to 0$ evaluates to 0 using L'Hopital.",
+        "tip": "For product limits, take $\\ln$ to map it to a Riemann sum."
+    },
+    {
+        "id": 58,
+        "question": "Given $I_n = \\int_0^1 x^n e^{-x} dx$. Which is the correct reduction formula?",
+        "options": [
+            "$I_n = -e^{-1} + n I_{n-1}$",
+            "$I_n = e^{-1} - n I_{n-1}$",
+            "$I_n = -e^{-1} - n I_{n-1}$",
+            "$I_n = 1 - n I_{n-1}$"
+        ],
+        "answer": "$I_n = -e^{-1} + n I_{n-1}$",
+        "explanation": "Integration by parts. Let $u = x^n$, $dv = e^{-x} dx$. $du = n x^{n-1} dx$, $v = -e^{-x}$. $I_n = [-x^n e^{-x}]_0^1 - \\int_0^1 (-e^{-x}) n x^{n-1} dx = -e^{-1} - 0 + n \\int_0^1 x^{n-1} e^{-x} dx = -e^{-1} + n I_{n-1}$.",
+        "trick": "JEE Advanced Trap: Ignoring the evaluated boundary term $[-x^n e^{-x}]_0^1$ which strictly contributes $-e^{-1}$ to the relation.",
+        "tip": "Always evaluate boundary terms fully in definite reduction formulas."
+    },
+    {
+        "id": 59,
+        "question": "Determine the value of $\\int_0^{10} \\{x\\}^2 dx$, where $\\{x\\}$ is the fractional part of $x$.",
+        "options": [
+            "$10/3$",
+            "$5$",
+            "$10$",
+            "$1/3$"
+        ],
+        "answer": "$10/3$",
+        "explanation": "The function $\\{x\\}^2$ is periodic with period 1. The integral from 0 to 10 is $10 \\times \\int_0^1 \\{x\\}^2 dx$. In $[0, 1)$, $\\{x\\} = x$. So, $10 \\int_0^1 x^2 dx = 10 [x^3/3]_0^1 = 10(1/3) = 10/3$.",
+        "trick": "JEE Advanced Trap: Assuming $\\int \\{x\\}^2 = \\frac{\\{x\\}^3}{3}$ globally. Fractional part properties strictly reset at every integer.",
+        "tip": "$\\int_0^{nT} f(x) dx = n \\int_0^T f(x) dx$ for periodic functions."
+    },
+    {
+        "id": 60,
+        "question": "Assertion (A): $\\frac{d}{dx} \\int_0^x |t| dt = |x|$ for all $x \\in \\mathbb{R}$. Reason (R): Leibnitz rule allows differentiation under the integral sign for continuous functions.",
+        "options": [
+            "Both A and R are true, R is correct explanation",
+            "Both A and R are true, R is NOT correct explanation",
+            "A is true, R is false",
+            "A is false, R is true"
+        ],
+        "answer": "Both A and R are true, R is correct explanation",
+        "explanation": "The integrand $|t|$ is a continuous function everywhere. By the Fundamental Theorem of Calculus (a specific case of Leibnitz), the derivative of $\\int_0^x f(t) dt$ is $f(x)$ if $f$ is continuous. Thus A is true and R is the precise mathematical reason.",
+        "trick": "JEE Advanced Trap: Doubting differentiability due to the modulus. The *integral* of $|t|$ is differentiable everywhere.",
+        "tip": "Integration increases differentiability class by one level."
+    },
+    {
+        "id": 61,
+        "question": "Evaluate $\\int_0^2 [x^2] dx$, where $[.]$ represents the greatest integer function.",
+        "options": [
+            "$5 - \\sqrt{2} - \\sqrt{3}$",
+            "$3 - \\sqrt{2}$",
+            "$5 + \\sqrt{2} + \\sqrt{3}$",
+            "$2 - \\sqrt{2} - \\sqrt{3}$"
+        ],
+        "answer": "$5 - \\sqrt{2} - \\sqrt{3}$",
+        "explanation": "Critical points occur where $x^2 \\in \\mathbb{Z} \\implies x = 1, \\sqrt{2}, \\sqrt{3}, 2$. Split integral: $\\int_0^1 0 dx + \\int_1^{\\sqrt{2}} 1 dx + \\int_{\\sqrt{2}}^{\\sqrt{3}} 2 dx + \\int_{\\sqrt{3}}^2 3 dx = 0 + (\\sqrt{2}-1) + 2(\\sqrt{3}-\\sqrt{2}) + 3(2-\\sqrt{3}) = \\sqrt{2} - 1 + 2\\sqrt{3} - 2\\sqrt{2} + 6 - 3\\sqrt{3} = 5 - \\sqrt{2} - \\sqrt{3}$.",
+        "trick": "JEE Advanced Trap: Splitting intervals only at integers $1, 2$ instead of mapping the inner function $x^2$ to integer thresholds.",
+        "tip": "Find roots of $f(x) = k$ (integer) for $[f(x)]$ AUC splits."
+    },
+    {
+        "id": 62,
+        "question": "Find the local minima of $f(x) = \\int_0^x (t^2 - 5t + 6) dt$.",
+        "options": [
+            "$x=2$",
+            "$x=3$",
+            "$x=2, 3$",
+            "No local minima"
+        ],
+        "answer": "$x=3$",
+        "explanation": "$f'(x) = x^2 - 5x + 6 = (x-2)(x-3)$. $f''(x) = 2x - 5$. Critical points at $x=2, 3$. $f''(2) = -1 < 0$ (Maxima). $f''(3) = 1 > 0$ (Minima). Thus, local minimum strictly at $x=3$.",
+        "trick": "JEE Advanced Trap: Identifying roots correctly but swapping the min/max conditions by not checking the second derivative or sign change.",
+        "tip": "Minima occurs when $f'(x)$ changes from negative to positive."
+    },
+    {
+        "id": 63,
+        "question": "Solve $\\lim_{n \\to \\infty} \\sum_{r=1}^n \\frac{1}{\\sqrt{4n^2 - r^2}}$.",
+        "options": [
+            "$\\pi/2$",
+            "$\\pi/4$",
+            "$\\pi/6$",
+            "$\\pi/3$"
+        ],
+        "answer": "$\\pi/6$",
+        "explanation": "Factor $n$ from denominator: $\\frac{1}{n} \\sum \\frac{1}{\\sqrt{4 - (r/n)^2}}$. Convert to integral: $\\int_0^1 \\frac{1}{\\sqrt{2^2 - x^2}} dx = [\\sin^{-1}(x/2)]_0^1 = \\sin^{-1}(1/2) - \\sin^{-1}(0) = \\pi/6$.",
+        "trick": "JEE Advanced Trap: Forgetting the $a$ constant in $\\sin^{-1}(x/a)$ leading to an incorrect bound evaluation of $\\pi/2$.",
+        "tip": "$\\int \\frac{dx}{\\sqrt{a^2-x^2}} = \\sin^{-1}(x/a) + C$."
+    },
+    {
+        "id": 64,
+        "question": "Let $I_{m,n} = \\int \\sin^m x \\cos^n x dx$. Which term relates $I_{m,n}$ with $I_{m-2,n}$?",
+        "options": [
+            "$\\frac{\\sin^{m-1} x \\cos^{n+1} x}{m+n}$",
+            "$-\\frac{\\sin^{m-1} x \\cos^{n+1} x}{m+n}$",
+            "$\\frac{m-1}{m+n} I_{m-2,n}$",
+            "$\\frac{m+1}{m+n} I_{m-2,n}$"
+        ],
+        "answer": "$\\frac{m-1}{m+n} I_{m-2,n}$",
+        "explanation": "Standard reduction derivation uses parts with $u = \\sin^{m-1} x$, $dv = \\sin x \\cos^n x dx$. Evaluating this iteratively yields the strict coefficient relation term $\\frac{m-1}{m+n} I_{m-2,n}$.",
+        "trick": "JEE Advanced Trap: Confusing the numerator index. It strictly draws from the reduced exponent $m-1$, not $m+1$.",
+        "tip": "Coefficient for $I_{m-2,n}$ is always $\\frac{m-1}{m+n}$."
+    },
+    {
+        "id": 65,
+        "question": "Evaluate $\\int_{-\\pi/4}^{\\pi/4} \\frac{x^7 \\sin^2 x + x^3 \\cos x}{1+x^2} dx$.",
+        "options": [
+            "$\\pi/2$",
+            "$1$",
+            "$0$",
+            "$\\pi/4$"
+        ],
+        "answer": "$0$",
+        "explanation": "Let $f(x) = \\frac{x^7 \\sin^2 x + x^3 \\cos x}{1+x^2}$. Replace $x$ with $-x$. Numerator becomes $(-x)^7 \\sin^2(-x) + (-x)^3 \\cos(-x) = -x^7 \\sin^2 x - x^3 \\cos x = -f(x)$. Since the function is strictly odd, the integral over symmetric limits $[-a, a]$ is $0$.",
+        "trick": "JEE Advanced Trap: Attempting complex partial fractions or trig identities. Check odd/even parity first for symmetric bounds.",
+        "tip": "$\\int_{-a}^a f(x) dx = 0$ if $f(-x) = -f(x)$."
+    },
+    {
+        "id": 66,
+        "question": "Find $\\lim_{n \\to \\infty} \\frac{1^3 + 2^3 + 3^3 + \\dots + n^3}{n^4}$.",
+        "options": [
+            "$1/2$",
+            "$1/3$",
+            "$1/4$",
+            "$1/5$"
+        ],
+        "answer": "$1/4$",
+        "explanation": "Rewrite as $\\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{r=1}^n (r/n)^3$. Riemann integral equivalent is $\\int_0^1 x^3 dx = [x^4/4]_0^1 = 1/4$.",
+        "trick": "JEE Advanced Trap: Expanding via the algebraic sum formula $\\left[\\frac{n(n+1)}{2}\\right]^2$ is valid but much slower than direct Riemann integration.",
+        "tip": "$\\lim_{n \\to \\infty} \\frac{\\sum r^k}{n^{k+1}} = \\frac{1}{k+1}$."
+    },
+    {
+        "id": 67,
+        "question": "Calculate the value of $\\int_0^{10\\pi} (|\\sin x| + |\\cos x|) dx$.",
+        "options": [
+            "$10$",
+            "$20$",
+            "$40$",
+            "$80$"
+        ],
+        "answer": "$40$",
+        "explanation": "The function $f(x) = |\\sin x| + |\\cos x|$ is periodic with period $\\pi/2$. The integral is $10\\pi / (\\pi/2) = 20$ periods. $20 \\int_0^{\\pi/2} (\\sin x + \\cos x) dx = 20 [-\\cos x + \\sin x]_0^{\\pi/2} = 20 [ (0+1) - (-1+0) ] = 20(2) = 40$.",
+        "trick": "JEE Advanced Trap: Assuming the period is $\\pi$ (true for individual mod functions, but their sum compresses to $\\pi/2$).",
+        "tip": "$|\\sin x| + |\\cos x|$ has a fundamental period of $\\pi/2$."
+    },
+    {
+        "id": 68,
+        "question": "If $\\int_0^{f(x)} t^2 dt = x^2 \\sin x$, what is the value of $f'(x)$ at $x=\\pi$?",
+        "options": [
+            "$\\pi^2$",
+            "$-\\pi^2/f(\\pi)^2$",
+            "$0$",
+            "$-\\pi/f(\\pi)^2$"
+        ],
+        "answer": "$-\\pi^2/f(\\pi)^2$",
+        "explanation": "Differentiate both sides wrt $x$: $f(x)^2 \\cdot f'(x) = x^2 \\cos x + 2x \\sin x$. At $x=\\pi$, $f(\\pi)^2 f'(\\pi) = \\pi^2(-1) + 0 = -\\pi^2$. Thus $f'(\\pi) = -\\pi^2 / f(\\pi)^2$.",
+        "trick": "JEE Advanced Trap: Neglecting to apply the chain rule $f'(x)$ when differentiating the upper bound $f(x)$.",
+        "tip": "Leibnitz chain rule: outer evaluated bound times inner derivative."
+    },
+    {
+        "id": 69,
+        "question": "Evaluate $\\int_0^1 \\min(x, 1-x) dx$.",
+        "options": [
+            "$1/2$",
+            "$1/4$",
+            "$1/8$",
+            "$1$"
+        ],
+        "answer": "$1/4$",
+        "explanation": "The functions $y=x$ and $y=1-x$ intersect at $x = 1-x \\implies 2x=1 \\implies x=1/2$. For $[0, 1/2]$, $\\min$ is $x$. For $[1/2, 1]$, $\\min$ is $1-x$. Area = $\\int_0^{1/2} x dx + \\int_{1/2}^1 (1-x) dx = [x^2/2]_0^{1/2} + [x - x^2/2]_{1/2}^1 = 1/8 + (1/2 - 3/8) = 1/8 + 1/8 = 1/4$.",
+        "trick": "JEE Advanced Trap: Guessing the minimum function behaves uniformly. Geometrically, it's a triangle with base 1 and height $1/2$. Area = $\\frac{1}{2}(1)(1/2) = 1/4$.",
+        "tip": "Use geometry for linear $\\min/\\max$ piecewise areas."
+    },
+    {
+        "id": 70,
+        "question": "Assertion (A): $\\lim_{n \\to \\infty} \\sum_{r=1}^n \\frac{1}{n+r} = \\ln 2$. Reason (R): The sum converts to the definite integral $\\int_0^1 \\frac{1}{1+x} dx$.",
+        "options": [
+            "Both A and R are true, R is correct explanation",
+            "Both A and R are true, R is NOT correct explanation",
+            "A is true, R is false",
+            "A is false, R is true"
+        ],
+        "answer": "Both A and R are true, R is correct explanation",
+        "explanation": "Rewrite as $\\frac{1}{n} \\sum \\frac{1}{1+(r/n)}$. Limit of sum maps $r/n \\to x$, bound $0$ to $1$. Integral is $\\int_0^1 \\frac{1}{1+x} dx = \\ln(2) - \\ln(1) = \\ln 2$. Both statements are rigorous.",
+        "trick": "JEE Advanced Trap: Conflating the denominator $n+r$ bounds with an integral limit up to $x=2$ directly. Transformation requires normalized base 1.",
+        "tip": "Always factor $n$ fully to expose the normalized $r/n$."
+    },
+    {
+        "id": 71,
+        "question": "Find $I_4$ if $I_n = \\int_0^{\\pi/4} \\tan^n x\\,dx$, given that $I_n + I_{n-2} = \\frac{1}{n-1}$.",
+        "options": [
+            "$\\frac{\\pi}{4} - \\frac{2}{3}$",
+            "$\\frac{1}{3} - \\frac{\\pi}{4}$",
+            "$\\frac{\\pi}{4} - 1$",
+            "$1 - \\frac{\\pi}{4}$"
+        ],
+        "answer": "$\\frac{\\pi}{4} - \\frac{2}{3}$",
+        "explanation": "Using the recurrence relation for $n=2$,\n$$I_2 + I_0 = 1.$$ Since\n$$I_0 = \\int_0^{\\pi/4} 1\\,dx = \\frac{\\pi}{4},$$\nwe get\n$$I_2 = 1 - \\frac{\\pi}{4}.$$ Next, for $n=4$,\n$$I_4 + I_2 = \\frac{1}{3}.$$ Therefore,\n$$I_4 = \\frac{1}{3} - \\left(1 - \\frac{\\pi}{4}\\right) = \\frac{\\pi}{4} - \\frac{2}{3}.$$",
+        "trick": "Reduction formulas for trigonometric integrals usually terminate at $I_0$ or $I_1$. Compute these base cases carefully.",
+        "tip": "Always evaluate $I_0$ explicitly before using the recurrence."
+    },
+    {
+        "id": 72,
+        "question": "Evaluate $\\lim_{x \\to 0} \\frac{\\int_0^{x^2} (e^t - 1) dt}{x^4}$.",
+        "options": [
+            "$1/4$",
+            "$1/2$",
+            "$1$",
+            "$0$"
+        ],
+        "answer": "$1/2$",
+        "explanation": "Apply L'Hopital. $\\lim_{x \\to 0} \\frac{(e^{x^2} - 1) 2x}{4x^3} = \\lim_{x \\to 0} \\frac{e^{x^2} - 1}{2x^2}$. As $x \\to 0$, $(e^{x^2}-1)/x^2 \\to 1$. Limit = $1/2$.",
+        "trick": "JEE Advanced Trap: Over-differentiating up to 4 times. Factoring out $2x$ and reducing powers early simplifies it immensely.",
+        "tip": "Cancel matching powers of $x$ between numerator and denominator mid-limit."
+    },
+    {
+        "id": 73,
+        "question": "What is the area under $f(x) = \\max(\\sin x, \\cos x)$ from $x=0$ to $x=\\pi/2$?",
+        "options": [
+            "$1$",
+            "$\\sqrt{2}$",
+            "$2$",
+            "$\\sqrt{2}-1$"
+        ],
+        "answer": "$\\sqrt{2}$",
+        "explanation": "Intersection at $\\pi/4$. Max is $\\cos x$ on $[0, \\pi/4]$ and $\\sin x$ on $[\\pi/4, \\pi/2]$. Area = $\\int_0^{\\pi/4} \\cos x dx + \\int_{\\pi/4}^{\\pi/2} \\sin x dx = [\\sin x]_0^{\\pi/4} + [-\\cos x]_{\\pi/4}^{\\pi/2} = 1/\\sqrt{2} + 1/\\sqrt{2} = 2/\\sqrt{2} = \\sqrt{2}$.",
+        "trick": "JEE Advanced Trap: Assuming total symmetry allows $2 \\times \\int_0^{\\pi/4} \\cos x dx$. This works here, but strictly verifying intervals is safer.",
+        "tip": "Graph piecewise functions to find symmetry before duplicating integrals."
+    },
+    {
+        "id": 74,
+        "question": "Given $f(x) = \\int_{x^2}^{x^3} \\frac{1}{\\ln t} dt$. Find $f'(e)$.",
+        "options": [
+            "$\\frac{3e^2 - 2e}{3}$",
+            "$e^2 - e$",
+            "$\\frac{e^2 - 1}{e}$",
+            "$e^2 - 2e$"
+        ],
+        "answer": "$e^2 - e$",
+        "explanation": "Leibnitz Rule: $f'(x) = \\frac{1}{\\ln(x^3)} (3x^2) - \\frac{1}{\\ln(x^2)} (2x) = \\frac{3x^2}{3\\ln x} - \\frac{2x}{2\\ln x} = \\frac{x^2 - x}{\\ln x}$. At $x=e$, $\\ln e = 1$. $f'(e) = e^2 - e$.",
+        "trick": "JEE Advanced Trap: Leaving logarithmic powers unsimplified. $\\ln(x^3) = 3\\ln x$ perfectly cancels the chain rule coefficient.",
+        "tip": "Always simplify $\\ln(x^n) = n\\ln x$ inside integrand evaluations."
+    },
+    {
+        "id": 75,
+        "question": "Evaluate $\\lim_{n \\to \\infty} \\frac{1}{n} \\sum_{r=1}^{2n} e^{r/n}$.",
+        "options": [
+            "$e-1$",
+            "$e^2-1$",
+            "$e^2-e$",
+            "$e(e-1)$"
+        ],
+        "answer": "$e^2-1$",
+        "explanation": "The sum runs to $2n$. This sets the upper limit of the integral to $2n/n = 2$. Integral is $\\int_0^2 e^x dx = [e^x]_0^2 = e^2 - e^0 = e^2 - 1$.",
+        "trick": "JEE Advanced Trap: Blindly setting the upper bound of the integral to 1. The index $2n$ dictates the upper bound is strictly 2.",
+        "tip": "Upper bound of integral = $\\lim (\\text{upper index} / n)$."
+    },
+    {
+        "id": 76,
+        "question": "Evaluate $\\int_0^{20\\pi} |\\cos x| dx$.",
+        "options": [
+            "$20$",
+            "$40$",
+            "$0$",
+            "$10$"
+        ],
+        "answer": "$40$",
+        "explanation": "The period of $|\\cos x|$ is $\\pi$. Area over one period is $\\int_0^{\\pi} |\\cos x| dx = 2 \\int_0^{\\pi/2} \\cos x dx = 2(1) = 2$. For $20\\pi$, there are 20 periods. $20 \\times 2 = 40$.",
+        "trick": "JEE Advanced Trap: Evaluating normally without Modulus gives 0. Absolute value mirrors negative regions strictly upward.",
+        "tip": "Area under one lobe of sine/cosine is strictly 2."
+    },
+    {
+        "id": 77,
+        "question": "Which of the following is equivalent to $\\int_0^a f(x) dx$ if $f(x)$ is periodic with period $T$?",
+        "options": [
+            "$\\int_T^{a+T} f(x) dx$",
+            "$\\int_0^{a+T} f(x) dx$",
+            "$T \\int_0^a f(x) dx$",
+            "$\\int_a^{a+T} f(x) dx$"
+        ],
+        "answer": "$\\int_T^{a+T} f(x) dx$",
+        "explanation": "By definition of periodicity, shifting both boundaries by exactly one period $T$ yields the exact same area window. Thus $\\int_0^a f(x) dx = \\int_{0+T}^{a+T} f(x) dx$.",
+        "trick": "JEE Advanced Trap: Confusing area of a period $\\int_0^T f(x)$ with shifting bounds $\\int_T^{a+T} f(x)$.",
+        "tip": "Integrals of periodic functions are translationally invariant."
+    },
+    {
+        "id": 78,
+        "question": "Assertion (A): $\\int_{-2}^2 (x^3 + x \\cos x) dx = 0$. Reason (R): The integrand is an odd function.",
+        "options": [
+            "Both A and R are true, R is correct explanation",
+            "Both A and R are true, R is NOT correct explanation",
+            "A is true, R is false",
+            "A is false, R is true"
+        ],
+        "answer": "Both A and R are true, R is correct explanation",
+        "explanation": "Let $f(x) = x^3 + x \\cos x$. $f(-x) = (-x)^3 + (-x)\\cos(-x) = -x^3 - x\\cos x = -f(x)$. Since it's strictly odd, the integral on symmetric bounds vanishes. R properly validates A.",
+        "trick": "JEE Advanced Trap: Attempting integration by parts on $x\\cos x$ wasting time, symmetric bounds imply parity check.",
+        "tip": "Symmetric bounds $[-a, a]$ trigger an immediate odd/even check."
+    },
+    {
+        "id": 79,
+        "question": "Evaluate $\\int_0^{\\infty} x^3 e^{-x} dx$ using reduction forms.",
+        "options": [
+            "$3$",
+            "$6$",
+            "$2$",
+            "$0$"
+        ],
+        "answer": "$6$",
+        "explanation": "This maps directly to the Gamma function $\\Gamma(n+1) = \\int_0^{\\infty} x^n e^{-x} dx = n!$. For $n=3$, the value is $3! = 6$.",
+        "trick": "JEE Advanced Trap: Applying integration by parts three times sequentially. Memorize the Gamma function identity for infinite exponent bounds.",
+        "tip": "$\\int_0^{\\infty} x^n e^{-x} dx = n!$ for integers."
+    },
+    {
+        "id": 80,
+        "question": "Find the area bounded by $y = \\text{sgn}(x-2)$ between $x=0$ and $x=4$.",
+        "options": [
+            "$0$",
+            "$2$",
+            "$4$",
+            "$-2$"
+        ],
+        "answer": "$0$",
+        "explanation": "The signum function $\\text{sgn}(x-2)$ is $-1$ for $x < 2$ and $+1$ for $x > 2$. Area = $\\int_0^2 (-1) dx + \\int_2^4 (1) dx = -2 + 2 = 0$. (Note: Definite integral represents algebraic net area).",
+        "trick": "JEE Advanced Trap: Calculating absolute geometric area (which is 4) instead of the algebraic definite integral (which is 0). Question phrasing 'evaluate integral' implies net.",
+        "tip": "Signum integrals on symmetric displaced bounds cancel out."
+    },
+    {
+        "id": 81,
+        "question": "Solve the Volterra equation $y(x) = x + \\int_0^x y(t)\\,dt$.",
+        "options": [
+            "$y = e^x - 1$",
+            "$y = 2e^x - 1$",
+            "$y = e^x + 1$",
+            "$y = e^x - x$"
+        ],
+        "answer": "$y = e^x - 1$",
+        "explanation": "Differentiate both sides with respect to $x$:\n$$y'(x)=1+y(x),$$\nusing the Fundamental Theorem of Calculus. Thus,\n$$y'-y=1.$$ This is a linear first-order differential equation. Using the integrating factor $e^{-x}$,\n$$\\frac{d}{dx}(ye^{-x})=e^{-x}.$$ Integrating,\n$$ye^{-x}=-e^{-x}+C,$$\nwhich gives\n$$y=Ce^x-1.$$ From the original equation,\n$$y(0)=0,$$\nso\n$$C-1=0 \\Rightarrow C=1.$$ Therefore,\n$$y(x)=e^x-1.$$",
+        "trick": "Differentiate Volterra integral equations to convert them into ordinary differential equations.",
+        "tip": "Use the original integral equation at $x=0$ to determine the constant of integration."
+    },
+    {
+        "id": 82,
+        "question": "Evaluate $\\int_0^{\\pi/2} \\frac{dx}{1 + \\sqrt{\\tan x}}$.",
+        "options": [
+            "$\\pi/2$",
+            "$\\pi/4$",
+            "$\\pi/8$",
+            "$0$"
+        ],
+        "answer": "$\\pi/4$",
+        "explanation": "Convert to $\\int \\frac{\\sqrt{\\cos x}}{\\sqrt{\\cos x} + \\sqrt{\\sin x}} dx$. Use King's Rule ($x \\to \\pi/2 - x$). Numerator becomes $\\sqrt{\\sin x}$. Add both integrals: $2I = \\int_0^{\\pi/2} 1 dx = \\pi/2$. Thus $I = \\pi/4$.",
+        "trick": "JEE Advanced Trap: Applying complex substitution like $u = \\tan x$. Symmetry annihilates the radical perfectly.",
+        "tip": "Standard $f(x)/(f(x)+f(a-x))$ form evaluates to $(b-a)/2$."
+    },
+    {
+        "id": 83,
+        "question": "Evaluate $\\lim_{n \\to \\infty} \\sum_{r=1}^n \\frac{1}{n} \\cos\\left(\\frac{r\\pi}{2n}\\right)$.",
+        "options": [
+            "$\\pi/2$",
+            "$2/\\pi$",
+            "$1$",
+            "$1/\\pi$"
+        ],
+        "answer": "$2/\\pi$",
+        "explanation": "Limit sum transforms to integral $\\int_0^1 \\cos(\\pi x / 2) dx$. Evaluation yields $[\\frac{\\sin(\\pi x / 2)}{\\pi/2}]_0^1 = \\frac{2}{\\pi}(1 - 0) = \\frac{2}{\\pi}$.",
+        "trick": "JEE Advanced Trap: Neglecting to divide by the inner chain rule derivative $\\pi/2$ upon integration.",
+        "tip": "Integration chain rule: divide by the constant multiplier of $x$."
+    },
+    {
+        "id": 84,
+        "question": "Find the limit: $\\lim_{n \\to \\infty} \\left( \\frac{1^2}{n^3} + \\frac{2^2}{n^3} + \\dots + \\frac{n^2}{n^3} \\right)$.",
+        "options": [
+            "$1/2$",
+            "$1/3$",
+            "$1/4$",
+            "$1$"
+        ],
+        "answer": "$1/3$",
+        "explanation": "Rewrite as $\\frac{1}{n} \\sum (r/n)^2$. Integral mapping is $\\int_0^1 x^2 dx = [x^3/3]_0^1 = 1/3$.",
+        "trick": "JEE Advanced Trap: Missing the power balancing. $n^3$ splits strictly into $n^2$ for the inner fraction and $n^1$ for the outer Riemann width $dx$.",
+        "tip": "Ensure the sum dictates exactly one $1/n$ exterior multiplier."
+    },
+    {
+        "id": 85,
+        "question": "Evaluate $\\int_0^5 |x-3| dx$.",
+        "options": [
+            "$3$",
+            "$13/2$",
+            "$7/2$",
+            "$5$"
+        ],
+        "answer": "$13/2$",
+        "explanation": "Root is $x=3$. Area of two triangles. Left triangle: base 3, height 3, Area = $9/2$. Right triangle (3 to 5): base 2, height 2, Area = $4/2 = 2$. Total area = $9/2 + 4/2 = 13/2$.",
+        "trick": "JEE Advanced Trap: Standard algebraic integration is prone to sign errors. Triangle areas are visually foolproof.",
+        "tip": "Absolute linear functions strictly form triangles on the axis."
+    },
+    {
+        "id": 86,
+        "question": "If $I_n = \\int (\\ln x)^n dx$, find the relation for $I_n$.",
+        "options": [
+            "$I_n = x(\\ln x)^n + n I_{n-1}$",
+            "$I_n = x(\\ln x)^n - n I_{n-1}$",
+            "$I_n = (\\ln x)^n - n x I_{n-1}$",
+            "$I_n = x(\\ln x)^n - I_{n-1}$"
+        ],
+        "answer": "$I_n = x(\\ln x)^n - n I_{n-1}$",
+        "explanation": "Integration by parts: $u = (\\ln x)^n$, $dv = dx$. $du = n(\\ln x)^{n-1} (1/x) dx$, $v = x$. $I_n = x(\\ln x)^n - \\int x \\cdot n(\\ln x)^{n-1} (1/x) dx = x(\\ln x)^n - n \\int (\\ln x)^{n-1} dx = x(\\ln x)^n - n I_{n-1}$.",
+        "trick": "JEE Advanced Trap: Choosing $u$ and $dv$ incorrectly. $dx$ is universally the $dv$ component for inverse/logarithmic single terms.",
+        "tip": "For lone transcendental functions, $dv = dx$."
+    },
+    {
+        "id": 87,
+        "question": "Assertion (A): $\\int_0^{\\pi/2} \\sin^4 x \\cos^5 x dx$ can be solved via Wallis formula. Reason (R): Wallis formula requires bounds strictly from 0 to $\\pi/2$.",
+        "options": [
+            "Both A and R are true, R is correct explanation",
+            "Both A and R are true, R is NOT correct explanation",
+            "A is true, R is false",
+            "A is false, R is true"
+        ],
+        "answer": "Both A and R are true, R is correct explanation",
+        "explanation": "Wallis formula strictly operates on bounds $[0, \\pi/2]$. Since the parameters align perfectly, A is evaluated instantly. R is a required baseline condition for Wallis application.",
+        "trick": "JEE Advanced Trap: Attempting to apply Wallis on full $[0, \\pi]$ bounds without folding symmetries first.",
+        "tip": "Wallis formula is locked exclusively to bounds $[0, \\pi/2]$."
+    },
+    {
+        "id": 88,
+        "question": "Evaluate $\\int_0^2 [x]^2 dx$, where $[.]$ is GIF.",
+        "options": [
+            "$1$",
+            "$2$",
+            "$5$",
+            "$0$"
+        ],
+        "answer": "$1$",
+        "explanation": "Split at integer $1$. $\\int_0^1 0^2 dx + \\int_1^2 1^2 dx = 0 + [x]_1^2 = 2 - 1 = 1$.",
+        "trick": "JEE Advanced Trap: Conflating $[x^2]$ with $[x]^2$. Here the squaring happens after the integer step, yielding smaller bounds.",
+        "tip": "$[x]^2$ squares the integer step. $[x^2]$ steps at fractional roots."
+    },
+    {
+        "id": 89,
+        "question": "Find the value of $\\int_{-2}^2 (x^3 + |x|) dx$.",
+        "options": [
+            "$0$",
+            "$4$",
+            "$8$",
+            "$2$"
+        ],
+        "answer": "$4$",
+        "explanation": "Split into two integrals. $\\int x^3 dx$ is odd, so it evaluates to $0$ on symmetric bounds. $\\int |x| dx$ is even. $2 \\int_0^2 x dx = 2 [x^2/2]_0^2 = 2(2) = 4$.",
+        "trick": "JEE Advanced Trap: Integrating the whole chunk. Decoupling odd and even segments instantly cuts the workload in half.",
+        "tip": "Isolate and annihilate odd components immediately on symmetric bounds."
+    },
+    {
+        "id": 90,
+        "question": "Evaluate $\\lim_{n \\to \\infty} \\sum_{r=1}^n \\frac{1}{n} \\sqrt{\\frac{n-r}{n+r}}$.",
+        "options": [
+            "$\\pi/2 - 1$",
+            "$\\pi/2$",
+            "$\\pi - 1$",
+            "$1 - \\pi/2$"
+        ],
+        "answer": "$\\pi/2 - 1$",
+        "explanation": "Converts to $\\int_0^1 \\sqrt{\\frac{1-x}{1+x}} dx$. Rationalize: $\\int_0^1 \\frac{1-x}{\\sqrt{1-x^2}} dx = \\int_0^1 \\frac{1}{\\sqrt{1-x^2}} dx - \\int_0^1 \\frac{x}{\\sqrt{1-x^2}} dx$. First part is $[\\sin^{-1} x]_0^1 = \\pi/2$. Second part: let $1-x^2=t^2$, yields $[- \\sqrt{1-x^2}]_0^1 = 0 - (-1) = 1$. Result is $\\pi/2 - 1$.",
+        "trick": "JEE Advanced Trap: Attempting complex trig substitution early. Algebraic rationalization splits it into standard known forms.",
+        "tip": "Multiply by conjugate $\\sqrt{1-x}$ to split complex roots."
+    },
+    {
+        "id": 91,
+        "question": "Assertion (A): $\\int_0^1 \\{x\\} dx = 1/2$. Reason (R): $\\{x\\} = x - [x]$, and on $[0,1)$, $[x]=0$.",
+        "options": [
+            "Both A and R are true, R is correct explanation",
+            "Both A and R are true, R is NOT correct explanation",
+            "A is true, R is false",
+            "A is false, R is true"
+        ],
+        "answer": "Both A and R are true, R is correct explanation",
+        "explanation": "The reason provides the exact mapping function that turns the fractional part into the linear integration $x$, yielding $x^2/2 = 1/2$.",
+        "trick": "JEE Advanced Trap: None, evaluates fundamental definition of fractional parts.",
+        "tip": "Fractional part $\\{x\\}$ simplifies to $x$ in interval $[0,1)$."
+    },
+    {
+        "id": 92,
+        "question": "What is the global minimum of $f(x) = \\int_0^x t(t-1)(t-2) \\, dt$ on $[0, 3]$?",
+        "options": [
+            "$0$",
+            "$-1/4$",
+            "$-2/3$",
+            "$-1/2$"
+        ],
+        "answer": "$0$",
+        "explanation": "Let $f(x)=\\int_0^x t(t-1)(t-2)\\,dt$. By the Fundamental Theorem of Calculus, $f'(x)=x(x-1)(x-2)$. Critical points occur at $x=0,1,2$. Sign analysis gives: $f'(x)>0$ on $(0,1)$, $f'(x)<0$ on $(1,2)$, and $f'(x)>0$ on $(2,3)$. Hence $f$ increases on $(0,1)$, decreases on $(1,2)$, and increases on $(2,3)$. Now evaluate at the critical points and endpoints:\n\n$f(0)=0$,\n\n$f(1)=\\int_0^1 (t^3-3t^2+2t)dt=\\left[\\frac{t^4}{4}-t^3+t^2\\right]_0^1=\\frac14$,\n\n$f(2)=\\left[\\frac{t^4}{4}-t^3+t^2\\right]_0^2=4-8+4=0$,\n\n$f(3)=\\left[\\frac{t^4}{4}-t^3+t^2\\right]_0^3=\\frac{81}{4}-27+9=\\frac94$.\n\nTherefore, the global minimum value on $[0,3]$ is $0$, attained at $x=0$ and $x=2$.",
+        "trick": "JEE Advanced Trap: Finding critical points correctly but forgetting to compare function values at the endpoints. Global extrema on a closed interval require checking both critical points and boundaries.",
+        "tip": "For global maxima/minima on a closed interval, evaluate the function at all critical points and endpoints."
+    },
+    {
+        "id": 93,
+        "question": "Evaluate $\\lim_{n \\to \\infty} n \\left( \\frac{1}{(n+1)^2} + \\frac{1}{(n+2)^2} + \\dots + \\frac{1}{(2n)^2} \\right)$.",
+        "options": [
+            "$1/2$",
+            "$1$",
+            "$1/4$",
+            "$0$"
+        ],
+        "answer": "$1/2$",
+        "explanation": "Factor out $n^2$ from denominators: $n \\sum \\frac{1}{n^2(1 + r/n)^2} = \\frac{1}{n} \\sum \\frac{1}{(1+r/n)^2}$. Integral is $\\int_0^1 (1+x)^{-2} dx = [-(1+x)^{-1}]_0^1 = -1/2 - (-1) = 1/2$.",
+        "trick": "JEE Advanced Trap: Over-factoring the $n$ outside yielding an unintegrable infinite limit form.",
+        "tip": "Balance $n$ powers to leave exactly $1/n$ outside the limit sum."
+    },
+    {
+        "id": 94,
+        "question": "If $\\int_0^x f(t) dt = e^x - x - 1$, find the value of $f''(0)$.",
+        "options": [
+            "$0$",
+            "$1$",
+            "$e$",
+            "$-1$"
+        ],
+        "answer": "$1$",
+        "explanation": "Differentiate once: $f(x) = e^x - 1$. Differentiate twice: $f'(x) = e^x$. Differentiate thrice (to get $f''$): $f''(x) = e^x$. At $x=0$, $f''(0) = e^0 = 1$.",
+        "trick": "JEE Advanced Trap: Differentiating only once and plugging in zero. The target is the second derivative of the derived function.",
+        "tip": "Leibnitz yields $f(x)$; strictly differentiate further for derivatives."
+    },
+    {
+        "id": 95,
+        "question": "Assertion (A): $\\int_0^a f(x) dx = \\int_0^a f(a-x) dx$. Reason (R): This is known as King's property of definite integrals.",
+        "options": [
+            "Both A and R are true, R is correct explanation",
+            "Both A and R are true, R is NOT correct explanation",
+            "A is true, R is false",
+            "A is false, R is true"
+        ],
+        "answer": "Both A and R are true, R is correct explanation",
+        "explanation": "A is the mathematical statement of King's rule. R explicitly names it as the validating property. Both are true and linked.",
+        "trick": "JEE Advanced Trap: None, this confirms fundamental theoretical knowledge of standard properties.",
+        "tip": "King's property reflects the function horizontally across $a/2$."
+    },
+    {
+        "id": 96,
+        "question": "Find $\\int_0^{\\pi} \\sin^3 x \\cos^3 x dx$.",
+        "options": [
+            "$\\pi/2$",
+            "$1$",
+            "$0$",
+            "$\\pi/4$"
+        ],
+        "answer": "$0$",
+        "explanation": "Use the property $\\int_0^{2a} f(x) dx = 0$ if $f(2a-x) = -f(x)$. Here, $2a = \\pi$. $f(\\pi-x) = \\sin^3(\\pi-x) \\cos^3(\\pi-x) = \\sin^3 x (-\\cos x)^3 = -\\sin^3 x \\cos^3 x = -f(x)$. Thus, the integral is 0.",
+        "trick": "JEE Advanced Trap: Attempting complex reduction formulas when a simple reflection symmetry annihilates the integral immediately.",
+        "tip": "If $f(\\pi-x) = -f(x)$, integral from $0$ to $\\pi$ is zero."
+    },
+    {
+        "id": 97,
+        "question": "Evaluate the limit sum: $\\lim_{n \\to \\infty} \\sum_{r=1}^n \\frac{1}{n} \\sec^2\\left(\\frac{r\\pi}{4n}\\right)$.",
+        "options": [
+            "$4/\\pi$",
+            "$1$",
+            "$2/\\pi$",
+            "$\\pi/4$"
+        ],
+        "answer": "$4/\\pi$",
+        "explanation": "Converts to $\\int_0^1 \\sec^2(\\frac{\\pi x}{4}) dx = \\frac{4}{\\pi} [\\tan(\\frac{\\pi x}{4})]_0^1 = \\frac{4}{\\pi}(1 - 0) = 4/\\pi$.",
+        "trick": "JEE Advanced Trap: Failing to multiply by the reciprocal of the inner constant $\\pi/4$ during integration.",
+        "tip": "Chain rule inverse: divide by the scalar inside trig functions."
+    },
+    {
+        "id": 98,
+        "question": "Evaluate $\\int_0^{2\\pi} \\{\\sin x\\} \\, dx$, where $\\{\\cdot\\}$ denotes the fractional part function.",
+        "options": [
+            "$\\pi$",
+            "$2$",
+            "$2+\\pi$",
+            "$0$"
+        ],
+        "answer": "$\\pi$",
+        "explanation": "Since $\\sin x \\in [-1,1]$, we split the interval into two parts.\n\nFor $0 \\le x \\le \\pi$, we have $\\sin x \\ge 0$, so\n$\\{\\sin x\\}=\\sin x$.\n\nFor $\\pi < x < 2\\pi$, we have $\\sin x<0$. Since $-1<\\sin x<0$, the fractional part is\n$\\{\\sin x\\}=\\sin x+1$.\n\nTherefore,\n$$\n\\int_0^{2\\pi} \\{\\sin x\\}dx\n= \\int_0^{\\pi} \\sin x\\,dx + \\int_{\\pi}^{2\\pi}(\\sin x+1)\\,dx.\n$$\nNow,\n$$\n\\int_0^{\\pi} \\sin x\\,dx = 2,\n$$\nand\n$$\n\\int_{\\pi}^{2\\pi}(\\sin x+1)\\,dx\n= \\int_{\\pi}^{2\\pi}\\sin x\\,dx + \\int_{\\pi}^{2\\pi}1\\,dx\n= (-2)+\\pi.\n$$\nHence,\n$$\n\\int_0^{2\\pi} \\{\\sin x\\}dx\n= 2+(-2+\\pi)=\\pi.\n$$",
+        "trick": "JEE Advanced Trap: Forgetting that for $-1<x<0$, the fractional part is $\\{x\\}=x+1$, not $x$.",
+        "tip": "Whenever a fractional-part function appears, first determine where the expression inside becomes negative."
+    },
+    {
+        "id": 99,
+        "question": "Assertion (A): $\\frac{d}{dx} \\int_{x}^{c} f(t) dt = -f(x)$. Reason (R): Reversing the integral bounds negates the function, enabling standard Leibnitz rule.",
+        "options": [
+            "Both A and R are true, R is correct explanation",
+            "Both A and R are true, R is NOT correct explanation",
+            "A is true, R is false",
+            "A is false, R is true"
+        ],
+        "answer": "Both A and R are true, R is correct explanation",
+        "explanation": "$\\int_{x}^{c} = -\\int_{c}^{x}$. Derivative of $-\\int_{c}^{x} f(t) dt$ is $-f(x)$. R explains the algebraic inversion perfectly.",
+        "trick": "JEE Advanced Trap: Applying positive $f(x)$ mechanically without realizing the variable $x$ is on the lower bound.",
+        "tip": "Lower bound variables yield negative derivatives in Leibnitz."
+    },
+    {
+        "id": 100,
+        "question": "What is the result of $\\lim_{n \\to \\infty} \\sum_{r=1}^n \\frac{1}{\\sqrt{n^2 - r^2/4}}$?",
+        "options": [
+            "$\\pi/3$",
+            "$\\pi/2$",
+            "$2\\pi/3$",
+            "$\\pi/6$"
+        ],
+        "answer": "$\\pi/3$",
+        "explanation": "Rewrite the summand as\n$$\n\\frac{1}{\\sqrt{n^2-r^2/4}}\n= \\frac{1}{n}\\cdot\\frac{1}{\\sqrt{1-(r/2n)^2}}.\n$$\nHence,\n$$\n\\sum_{r=1}^{n}\\frac{1}{\\sqrt{n^2-r^2/4}}\n=\n\\frac{1}{n}\n\\sum_{r=1}^{n}\n\\frac{1}{\\sqrt{1-(r/2n)^2}}.\n$$\nAs $n\\to\\infty$, this is the Riemann sum for\n$$\n\\int_0^1 \\frac{dx}{\\sqrt{1-x^2/4}}.\n$$\nLet $x=2\\sin\\theta$. Then $dx=2\\cos\\theta\\,d\\theta$ and\n$$\n\\sqrt{1-\\frac{x^2}{4}}=\\cos\\theta.\n$$\nTherefore,\n$$\n\\int_0^1 \\frac{dx}{\\sqrt{1-x^2/4}}\n=\n\\int_0^{\\pi/6} 2\\,d\\theta\n=2\\left[\\theta\\right]_0^{\\pi/6}\n=\\frac{\\pi}{3}.\n$$\nThus,\n$$\n\\boxed{\\lim_{n\\to\\infty}\\sum_{r=1}^{n}\\frac{1}{\\sqrt{n^2-r^2/4}}=\\frac{\\pi}{3}}.\n$$",
+        "trick": "JEE Advanced Trap: Converting the Riemann sum correctly but forgetting the factor of 2 after substituting $x=2\\sin\\theta$.",
+        "tip": "Whenever the denominator is of the form $\\sqrt{1-(x/a)^2}$, try the substitution $x=a\\sin\\theta$ and track the constant carefully."
+    }
+]
