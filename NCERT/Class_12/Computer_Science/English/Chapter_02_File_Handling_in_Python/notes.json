@@ -1,0 +1,66 @@
+{
+    "chapter_number": 2,
+    "chapter_name": "File Handling in Python",
+    "learning_objective": "🎯 Learn how to read, write, append, and manipulate persistent data across Text Files, CSV Files, and Binary Files using Python.",
+    "key_vocabulary": [
+        {
+            "word": "Stream",
+            "definition": "A sequence of bytes or characters flowing into (input) or out of (output) a Python program."
+        },
+        {
+            "word": "Pickling",
+            "definition": "The process of serializing (converting) a Python object hierarchy into a byte stream for binary file storage."
+        },
+        {
+            "word": "Unpickling",
+            "definition": "The inverse process of converting a stored byte stream back into the original Python object."
+        },
+        {
+            "word": "Delimiter",
+            "definition": "A character (like a comma, tab, or pipe) used to separate individual data fields in a structured text file like CSV."
+        }
+    ],
+    "main_concepts": [
+        {
+            "concept_title": "📄 Text Files (.txt)",
+            "simple_explanation": "Text files store data as human-readable ASCII/Unicode characters where each line ends with an EOL (End-Of-Line, `\\n`) character. Opened using modes: 'r' (read), 'w' (write - overwrites), 'a' (append - adds to end), and 'r+' (read and write)."
+        },
+        {
+            "concept_title": "💾 Binary Files (.dat) & The pickle Module",
+            "simple_explanation": "Binary files store data in exactly the same format as it is held in memory (0s and 1s), making access faster and unreadable to text editors. Using `import pickle`, we use `pickle.dump(object, file_handle)` to write (serialize) and `pickle.load(file_handle)` to read (deserialize)."
+        },
+        {
+            "concept_title": "📊 CSV Files (.csv) & The csv Module",
+            "simple_explanation": "Comma-Separated Values (CSV) files store tabular data in plain text. Using `import csv`, we use `csv.reader(file_handle)` to read rows as lists, and `csv.writer(file_handle)` with `.writerow()` or `.writerows()` to export data."
+        },
+        {
+            "concept_title": "📍 File Pointers & Positioning (seek / tell)",
+            "simple_explanation": "Python tracks where it is reading/writing using a file pointer. `file.tell()` returns the current byte position of the pointer. `file.seek(offset, whence)` moves the pointer to a specific byte location (whence: 0=beginning, 1=current, 2=end)."
+        }
+    ],
+    "cs_keywords": [
+        "open()",
+        "close()",
+        "read()",
+        "readline()",
+        "readlines()",
+        "write()",
+        "writelines()",
+        "pickle.dump()",
+        "pickle.load()",
+        "csv.reader()",
+        "csv.writer()",
+        "seek()",
+        "tell()"
+    ],
+    "exam_tips": [
+        "📌 When writing CSV files in Windows, always specify `newline=''` in `open()` to prevent an unwanted blank line from appearing between rows.",
+        "📌 In Binary file programs, `pickle.load()` throws an `EOFError` when it reaches the end of the file — always wrap binary reading loops inside a `try-except EOFError` block.",
+        "📌 Know the difference between `.read()` (reads entire file as a single string), `.readline()` (reads one line at a time), and `.readlines()` (reads all lines into a list of strings)."
+    ],
+    "quick_recap": [
+        "⭐ Using the `with open(...) as f:` syntax is best practice because it automatically closes the file even if an exception occurs.",
+        "⭐ Opening a file in `'w'` or `'wb'` mode immediately truncates (erases) the existing contents of the file if it already exists.",
+        "⭐ Text files automatically perform line-ending translation across operating systems, whereas binary files read and write raw bytes untouched."
+    ]
+}

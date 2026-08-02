@@ -1,0 +1,73 @@
+{
+    "chapter_number": 2,
+    "chapter_name": "पायथन में फाइल हैंडलिंग (File Handling in Python)",
+    "learning_objective": "🎯 इस अध्याय में हम सीखेंगे कि डेटा को स्थायी रूप से सहेजने के लिए टेक्स्ट फाइल (.txt), बाइनरी फाइल (.dat), और CSV फाइल (.csv) को कैसे पढ़ा, लिखा और संशोधित किया जाता है!",
+    "key_vocabulary": [
+        {
+            "word": "फाइल हैंडलर",
+            "english_meaning": "File Handle / Pointer",
+            "emoji": "🔗"
+        },
+        {
+            "word": "पिकलिंग (Pickling)",
+            "english_meaning": "Serialization",
+            "emoji": "📦"
+        },
+        {
+            "word": "अनपिकलिंग (Unpickling)",
+            "english_meaning": "Deserialization",
+            "emoji": "📂"
+        },
+        {
+            "word": "डेलीमीटर",
+            "english_meaning": "Delimiter",
+            "emoji": "🔣"
+        }
+    ],
+    "main_concepts": [
+        {
+            "concept_title": "📄 टेक्स्ट फाइलें (.txt) और मोड (Text Files & Modes)",
+            "simple_explanation": "टेक्स्ट फाइलें डेटा को वर्णों (Characters) के रूप में सहेजती हैं जहाँ हर पंक्ति EOL (`\\n`) पर समाप्त होती है। मुख्य मोड: `'r'` (पढ़ना), `'w'` (लिखना - पुराना डेटा मिटा देता है), `'a'` (अंत में जोड़ना - append), और `'r+'` (पढ़ना और लिखना)। पढ़ने के लिए `read()`, `readline()`, और `readlines()` का उपयोग होता है।"
+        },
+        {
+            "concept_title": "📦 बाइनरी फाइलें (.dat) और pickle मॉड्यूल",
+            "simple_explanation": "बाइनरी फाइलें डेटा को मेमोरी के वास्तविक 0 और 1 प्रारूप में सहेजती हैं। `pickle` मॉड्यूल का उपयोग करके हम पायथन ऑब्जेक्ट्स (लिस्ट, डिक्शनरी) को बाइनरी में बदलते हैं (`pickle.dump()`) और वापस पढ़ते हैं (`pickle.load()`)। अंत तक पहुँचने पर `EOFError` आता है।"
+        },
+        {
+            "concept_title": "📊 CSV फाइलें (.csv) और csv मॉड्यूल",
+            "simple_explanation": "CSV (Comma Separated Values) फाइलें सारणीबद्ध (Tabular) डेटा को plain text के रूप में सहेजती हैं। `csv` मॉड्यूल का उपयोग करके `csv.reader()` से डेटा पढ़ा जाता है और `csv.writer()` के साथ `writerow()` या `writerows()` से डेटा लिखा जाता है।"
+        },
+        {
+            "concept_title": "📍 फाइल पॉइंटर की स्थिति (seek() एवं tell())",
+            "simple_explanation": "`tell()` मेथड फाइल में फाइल पॉइंटर की वर्तमान बाइट स्थिति (Byte position) बताता है। `seek(offset, whence)` मेथड फाइल पॉइंटर को किसी निर्दिष्ट स्थान पर भेजने के लिए उपयोग किया जाता है।"
+        }
+    ],
+    "cs_keywords": [
+        "open()",
+        "close()",
+        "read()",
+        "readline()",
+        "readlines()",
+        "write()",
+        "pickle.dump()",
+        "pickle.load()",
+        "csv.reader()",
+        "csv.writer()",
+        "seek()",
+        "tell()"
+    ],
+    "fun_activity": {
+        "title": "📝 डिजिटल डायरी बनाएं (Digital Diary Creator)",
+        "instructions": "पायथन का उपयोग करके एक ऐसा प्रोग्राम बनाएं जो यूजर से उसकी दैनिक डायरी का एंट्री इनपुट ले और उसे `my_diary.txt` नाम की टेक्स्ट फाइल में `'a'` (append) मोड में सुरक्षित सेव करे, ताकि हर दिन की पुरानी एंट्री सुरक्षित रहे और नई एंट्री नीचे जुड़ती जाए!"
+    },
+    "exam_tips": [
+        "📌 विंडोज पर CSV फाइल में लिखते समय `open()` फ़ंक्शन में `newline=''` जोड़ना न भूलें, अन्यथा हर रो के बाद एक खाली लाइन आ जाएगी।",
+        "📌 बाइनरी फाइल पढ़ते समय `pickle.load()` जब फाइल के अंत तक पहुँचता है तो `EOFError` आता है; इसे हमेशा `try-except EOFError` ब्लॉक में रखें।",
+        "📌 `read()` पूरे कंटेंट को एक स्ट्रिंग के रूप में लौटाता है, जबकि `readlines()` फाइल की सभी लाइनों की एक लिस्ट (List of strings) लौटाता है।"
+    ],
+    "quick_recap": [
+        "⭐ `with open(...) as f:` का उपयोग करना सबसे अच्छा माना जाता है क्योंकि यह काम पूरा होने पर फाइल को अपने आप बंद (close) कर देता है।",
+        "⭐ किसी फाइल को `'w'` या `'wb'` मोड में खोलने पर यदि वह फाइल पहले से मौजूद है तो उसका पुराना डेटा तुरंत मिट जाता है।",
+        "⭐ बाइनरी फाइलों में डेटा रूपांतरण में समय कम लगता है क्योंकि इसमें कैरेक्टर ट्रांसलेशन की आवश्यकता नहीं होती।"
+    ]
+}
